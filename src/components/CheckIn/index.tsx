@@ -1,5 +1,3 @@
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import { FC, MouseEventHandler } from "react";
 import {
   SignedInUserCheckIn,
