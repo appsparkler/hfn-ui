@@ -15,7 +15,14 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   onClickHelpOthersCheckIn,
 }) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        alignItems: "center",
+      }}
+    >
       <Typography variant="h3">Kanha Shanti Vanam</Typography>
       <Typography variant="h5" color="InfoText">
         Youth Seminar
@@ -24,7 +31,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
         Check In
       </Button>
       <Button
-        variant="contained"
+        variant="outlined"
         type="button"
         onClick={onClickHelpOthersCheckIn}
       >
