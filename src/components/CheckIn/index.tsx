@@ -1,3 +1,23 @@
-export const CheckIn = () => {
-  return <div>Check In</div>;
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { FC, MouseEventHandler } from "react";
+import {
+  SignedInUserCheckIn,
+  SignedInUserCheckInProps,
+} from "../SignedInUserCheckIn";
+
+export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
+
+export type CheckInProps = SignedInUserCheckInProps & {};
+
+export const CheckIn: FC<CheckInProps> = ({
+  onClickCheckIn,
+  onClickHelpOthersCheckIn,
+}) => {
+  return (
+    <SignedInUserCheckIn
+      onClickCheckIn={onClickCheckIn}
+      onClickHelpOthersCheckIn={onClickHelpOthersCheckIn}
+    />
+  );
 };
