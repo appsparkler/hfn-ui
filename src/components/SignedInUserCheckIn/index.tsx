@@ -8,6 +8,28 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 
+export type EventNameAndLocationProps = {
+  eventName: string;
+  eventLocation: string;
+};
+
+export const EventNameAndLocation: FC<EventNameAndLocationProps> = ({
+  eventName,
+  eventLocation,
+}) => {
+  return (
+    <>
+      <Typography variant="h4" mt={2}>
+        {eventName}
+      </Typography>
+      <Typography variant="h5" color="InactiveCaptionText">
+        <PersonPinCircleIcon />
+        {eventLocation}
+      </Typography>
+    </>
+  );
+};
+
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type SignedInUserCheckInProps = {
@@ -46,13 +68,10 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
           alignItems: "center",
         }}
       >
-        <Typography variant="h4" mt={2}>
-          Youth Seminar
-        </Typography>
-        <Typography variant="h5" color="InactiveCaptionText">
-          <PersonPinCircleIcon />
-          Kanha Shanti Vanam
-        </Typography>
+        <EventNameAndLocation
+          eventName="Youth Seminar"
+          eventLocation="Kanha Shanti Vanam"
+        />
         <Button variant="contained" type="button" onClick={onClickCheckIn}>
           Check In
         </Button>
