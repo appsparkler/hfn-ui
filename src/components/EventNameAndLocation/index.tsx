@@ -13,10 +13,10 @@ export const EventNameAndLocation: FC<EventNameAndLocationProps> = ({
 }) => {
   return (
     <>
-      <Typography variant="h4" mt={2}>
+      <Typography variant="h4" mt={2} align="center">
         {eventName}
       </Typography>
-      <Typography variant="h5" color="InactiveCaptionText">
+      <Typography variant="h5" color="InactiveCaptionText" align="center">
         <PersonPinCircleIcon />
         {eventLocation}
       </Typography>

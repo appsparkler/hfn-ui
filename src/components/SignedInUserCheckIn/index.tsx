@@ -53,10 +53,12 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
           alignItems: "center",
         }}
       >
-        <EventNameAndLocation
-          eventName="Youth Seminar"
-          eventLocation="Kanha Shanti Vanam"
-        />
+        <Box>
+          <EventNameAndLocation
+            eventName="Youth Seminar"
+            eventLocation="Kanha Shanti Vanam"
+          />
+        </Box>
         <Button variant="contained" type="button" onClick={onClickCheckIn}>
           Check In
         </Button>
