@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useCallback } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -18,6 +18,9 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   onClickCheckIn,
   onClickHelpOthersCheckIn,
 }) => {
+  const onClickBackButton = useCallback<ClickHandler>(() => {
+    alert("lets go back");
+  }, []);
   return (
     <>
       <AppBar position="static">
@@ -28,6 +31,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={onClickBackButton}
           >
             <ArrowBackIcon />
           </IconButton>
