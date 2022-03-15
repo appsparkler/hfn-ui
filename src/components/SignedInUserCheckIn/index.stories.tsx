@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SignedInUserCheckIn, SignedInUserCheckInProps } from "./index";
 
 export default {
-  title: "Components/SignedIn User Check In",
+  title: "Components/Signed In User Check In",
   component: SignedInUserCheckIn,
 } as ComponentMeta<typeof SignedInUserCheckIn>;
 

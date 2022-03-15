@@ -1,34 +1,11 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { FC, MouseEventHandler, useCallback } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
-
-export type EventNameAndLocationProps = {
-  eventName: string;
-  eventLocation: string;
-};
-
-export const EventNameAndLocation: FC<EventNameAndLocationProps> = ({
-  eventName,
-  eventLocation,
-}) => {
-  return (
-    <>
-      <Typography variant="h4" mt={2}>
-        {eventName}
-      </Typography>
-      <Typography variant="h5" color="InactiveCaptionText">
-        <PersonPinCircleIcon />
-        {eventLocation}
-      </Typography>
-    </>
-  );
-};
+import { EventNameAndLocation } from "../EventNameAndLocation";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 

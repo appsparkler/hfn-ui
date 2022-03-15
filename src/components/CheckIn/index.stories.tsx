@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CheckIn } from "./index";
 
 export default {
-  title: "Components/Check In",
+  title: "Apps/Check In",
   component: CheckIn,
 } as ComponentMeta<typeof CheckIn>;
 
