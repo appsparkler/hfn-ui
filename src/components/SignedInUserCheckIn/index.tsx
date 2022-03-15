@@ -6,6 +6,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
@@ -45,9 +46,12 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
           alignItems: "center",
         }}
       >
-        <Typography variant="h3">Kanha Shanti Vanam</Typography>
-        <Typography variant="h5" color="InfoText">
+        <Typography variant="h4" mt={2}>
           Youth Seminar
+        </Typography>
+        <Typography variant="h5" color="InactiveCaptionText">
+          <PersonPinCircleIcon />
+          Kanha Shanti Vanam
         </Typography>
         <Button variant="contained" type="button" onClick={onClickCheckIn}>
           Check In
