@@ -13,6 +13,7 @@ import React, {
   FC,
   MouseEventHandler,
   useCallback,
+  useMemo,
   useState,
 } from "react";
 import Button from "@mui/material/Button";
@@ -27,13 +28,24 @@ import map from "lodash/fp/map";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
-export type GenericCheckInProps = EventNameAndLocationProps & {};
+export type GenericCheckInProps = EventNameAndLocationProps & {
+  onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
+};
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
   eventLocation,
   eventName,
+  onCheckInUser,
 }) => {
   const [userInfo, setUserInfo] = useState<string>("");
+
+  const [addToFavorite, setAddToFavorite] = useState<boolean>(false);
+
+  const isCheckInButtonDisabled = useMemo<boolean>(
+    () => userInfo.trim().length === 0,
+    [userInfo]
+  );
+
   const onClickBackButton = useCallback<
     AppBarProps["onClickBackButton"]
   >(() => {
@@ -47,7 +59,13 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     []
   );
 
-  const onCheckInUser = useCallback<ClickHandler>(() => {}, []);
+  const handleChangeAddToFavourite = useCallback(() => {
+    setAddToFavorite((prevValue) => !prevValue);
+  }, [setAddToFavorite]);
+
+  const handleCheckInUser = useCallback<ClickHandler>(() => {
+    onCheckInUser(userInfo, addToFavorite);
+  }, [onCheckInUser, userInfo, addToFavorite]);
 
   return (
     <Box
@@ -78,11 +96,19 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       </Box>
       <FormControlLabel
         label="Add To Favorites"
+        onChange={handleChangeAddToFavourite}
+        checked={addToFavorite}
         control={
           <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
         }
       />
-      <Button variant="contained" size="large" type="button">
+      <Button
+        variant="contained"
+        size="large"
+        type="button"
+        onClick={handleCheckInUser}
+        disabled={isCheckInButtonDisabled}
+      >
         Check In
       </Button>
       <List
