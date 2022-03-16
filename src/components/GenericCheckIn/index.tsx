@@ -1,8 +1,16 @@
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { Avatar, Divider, ListItemText, ListSubheader } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  ListItemText,
+  ListSubheader,
+  Typography,
+} from "@mui/material";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControlLabel, {
+  FormControlLabelProps,
+} from "@mui/material/FormControlLabel";
 import IconButton from "@mui/material/IconButton/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -28,13 +36,30 @@ import map from "lodash/fp/map";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
+export type InputChangeEventHandler = ChangeEventHandler<HTMLInputElement>;
+
+export type IdType = { id: string };
+
+export type IdNameType = IdType & {
+  name: string;
+};
+
+export type Favourite =
+  | (IdNameType & {
+      mobileNumber: string;
+    })
+  | (IdNameType & { email: string })
+  | (IdNameType & { abhyasiId: string });
+
 export type GenericCheckInProps = EventNameAndLocationProps & {
+  favourites: Favourite[];
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
   eventLocation,
   eventName,
+  favourites = [],
   onCheckInUser,
 }) => {
   const [userInfo, setUserInfo] = useState<string>("");
@@ -46,22 +71,39 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     [userInfo]
   );
 
+  const { hasFavourites, noFavourites } = useMemo<{
+    hasFavourites: boolean;
+    noFavourites: boolean;
+  }>(() => {
+    const hasFavourites = favourites.length > 0;
+    const noFavourites = !hasFavourites;
+    return {
+      hasFavourites,
+      noFavourites,
+    };
+  }, [favourites]);
+
   const onClickBackButton = useCallback<
     AppBarProps["onClickBackButton"]
   >(() => {
     alert("lets go back");
   }, []);
 
-  const onChangeUserInfo = useCallback<ChangeEventHandler<HTMLInputElement>>(
+  const onChangeUserInfo = useCallback<InputChangeEventHandler>(
     ({ currentTarget: { value } }) => {
       setUserInfo(value);
     },
     []
   );
 
-  const handleChangeAddToFavourite = useCallback(() => {
-    setAddToFavorite((prevValue) => !prevValue);
-  }, [setAddToFavorite]);
+  const handleChangeAddToFavourite = useCallback<
+    FormControlLabelProps["onChange"]
+  >(
+    (evt) => {
+      setAddToFavorite((prevValue) => !prevValue);
+    },
+    [setAddToFavorite]
+  );
 
   const handleCheckInUser = useCallback<ClickHandler>(() => {
     onCheckInUser(userInfo, addToFavorite);
@@ -119,29 +161,35 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           </ListSubheader>
         }
       >
-        {map<string, JSX.Element>((name) => (
-          <React.Fragment>
-            <ListItem
-              key={name}
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              }
-            >
-              <ListItemAvatar>
-                <Avatar>
-                  <PersonIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={name} />
-              <Button variant="outlined" size="small" sx={{ ml: 1 }}>
-                Check In
-              </Button>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </React.Fragment>
-        ))(["Prakash Mishra", "Gayathri Devaswami"])}
+        {hasFavourites &&
+          map<Favourite, JSX.Element>(({ name, id }) => (
+            <React.Fragment>
+              <ListItem
+                key={id}
+                secondaryAction={
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar>
+                    <PersonIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={name} />
+                <Button variant="outlined" size="small" sx={{ ml: 1 }}>
+                  Check In
+                </Button>
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </React.Fragment>
+          ))(favourites)}
+        {noFavourites && (
+          <Typography color="InactiveCaptionText" variant="body2">
+            <i>No farourites</i>
+          </Typography>
+        )}
       </List>
     </Box>
   );
