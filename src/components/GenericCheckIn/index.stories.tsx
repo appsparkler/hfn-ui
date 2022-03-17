@@ -48,4 +48,16 @@ genericCheckIn.args = {
       }, 600);
     });
   },
+  onDeleteFavourite: (...args) => {
+    action("onDeleteFavourite")(...args);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (random(1)(2) === 1) resolve("user deleted");
+        else
+          reject(
+            new Error("couldn't delete the favourite.  Please try again.")
+          );
+      }, 600);
+    });
+  },
 } as GenericCheckInProps;
