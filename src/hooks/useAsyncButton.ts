@@ -3,7 +3,7 @@ import { SnackbarProps } from "@mui/material/Snackbar";
 import { useCallback, useState } from "react";
 import { ClickHandler } from "../types";
 
-export const useAsyncButton = (onClick) => {
+export const useAsyncButton = (onClick, disabled) => {
   const [snackbar, setSnackbar] = useState<{
     isOpen: boolean;
     message?: string;
@@ -48,5 +48,6 @@ export const useAsyncButton = (onClick) => {
     handleSnackbarClose,
     handleClick,
     isProcessing,
+    isDisabled: disabled || Boolean(isProcessing),
   };
 };

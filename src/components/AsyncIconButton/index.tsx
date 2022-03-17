@@ -20,13 +20,13 @@ export function CircularIntegration({
   size,
   onClick,
 }: CircularInegrationProps) {
-  const { isProcessing, snackbar, handleClick, handleSnackbarClose } =
-    useAsyncButton(onClick);
-
-  const isFabDisabled = useMemo(
-    () => isProcessing || disabled,
-    [isProcessing, disabled]
-  );
+  const {
+    isProcessing,
+    snackbar,
+    handleClick,
+    handleSnackbarClose,
+    isDisabled,
+  } = useAsyncButton(onClick, disabled);
 
   const circularProgressSize = useMemo<number>(() => {
     switch (size) {
@@ -46,7 +46,7 @@ export function CircularIntegration({
         color="default"
         onClick={handleClick}
         size={size}
-        disabled={isFabDisabled}
+        disabled={isDisabled}
       >
         <CheckIcon />
       </IconButton>

@@ -29,14 +29,19 @@ export const AsyncButton = ({
   variant,
   ...restProps
 }: AsyncButtonProps) => {
-  const { snackbar, handleSnackbarClose, handleClick, isProcessing } =
-    useAsyncButton(onClick);
+  const {
+    snackbar,
+    handleSnackbarClose,
+    handleClick,
+    isProcessing,
+    isDisabled,
+  } = useAsyncButton(onClick, disabled);
   return (
     <Box sx={{ position: "relative", display: "inline-block" }}>
       <Button
         type="button"
         onClick={handleClick}
-        disabled={disabled || Boolean(isProcessing)}
+        disabled={isDisabled}
         size={size}
         variant={variant}
         {...restProps}
