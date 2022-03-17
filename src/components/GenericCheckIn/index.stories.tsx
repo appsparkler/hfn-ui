@@ -34,7 +34,7 @@ genericCheckIn.args = {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (random(1)(2) === 1) resolve("checked in fav user");
-        else reject(new Error("user not checked in"));
+        else reject(new Error("couldn't check-in fav user"));
       }, 600);
     });
   },

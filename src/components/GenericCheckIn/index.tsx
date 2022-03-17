@@ -29,6 +29,7 @@ import React, {
   MouseEventHandler,
   useCallback,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import Button from "@mui/material/Button";
@@ -73,6 +74,8 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   onCheckInUser,
   onCheckInFavourite,
 }) => {
+  const userInfoRef = useRef<HTMLInputElement>();
+
   const [userInfo, setUserInfo] = useState<string>("");
 
   const [snackbar, setSnackbar] = useState<{
@@ -127,7 +130,10 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
 
   const handleCheckInUser = useCallback<ClickHandler>(async () => {
     try {
-      return await onCheckInUser(userInfo, addToFavorite);
+      const successMessage = await onCheckInUser(userInfo, addToFavorite);
+      setUserInfo("");
+      userInfoRef.current.focus();
+      return successMessage;
     } catch (error) {
       throw error;
     }
@@ -135,12 +141,13 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
 
   const handleCheckInFavouriteUser = useCallback<ClickHandler>(
     async ({ currentTarget: { dataset } }) => {
-      const { id } = dataset;
       try {
-        await onCheckInFavourite(id);
+        const { id } = dataset;
+        const successMessage = await onCheckInFavourite(id);
         setCheckedInFavourites((prevItems) => [...prevItems, id]);
+        return successMessage;
       } catch (e) {
-        throw new Error(e.message);
+        throw e;
       }
     },
     [onCheckInFavourite]
@@ -181,6 +188,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           value={userInfo}
           fullWidth
           onChange={handleChangeUserInfo}
+          inputRef={userInfoRef}
         />
       </Box>
       <FormControlLabel

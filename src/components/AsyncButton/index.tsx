@@ -10,7 +10,7 @@ import { ClickHandler } from "../../types";
 export type AsyncButtonProps = ButtonProps & {
   onClick: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => string | void;
+  ) => Promise<string> | void;
   disabled?: boolean;
   errorMessage: string;
   successMessage: string;

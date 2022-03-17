@@ -15,7 +15,6 @@ const AsyncButtonTemplate: ComponentStory<typeof AsyncButton> = (args) => (
     <AsyncButton {...args} />
   </Box>
 );
-
 export const asyncButton = AsyncButtonTemplate.bind({});
 asyncButton.args = {
   label: "Check In",
@@ -23,13 +22,11 @@ asyncButton.args = {
     action("onClick")(...args);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (random(1)(2) === 1) resolve("success");
-        else reject();
+        if (random(1)(2) === 1) resolve("Yay! Success!");
+        else reject(new Error("Oops! Not lookin' good"));
       }, 600);
     });
   },
   size: "small",
   variant: "contained",
-  successMessage: "Prakash is checked in",
-  errorMessage: "Prakash Mishra not checked in",
 } as AsyncButtonProps;
