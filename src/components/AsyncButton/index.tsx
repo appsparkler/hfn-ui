@@ -7,8 +7,10 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import noop from "lodash/fp/noop";
 import { ClickHandler } from "../../types";
 
-export type AsyncButtonProps = {
-  onClick: ClickHandler;
+export type AsyncButtonProps = ButtonProps & {
+  onClick: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => string | void;
   disabled?: boolean;
   errorMessage: string;
   successMessage: string;
@@ -25,10 +27,11 @@ export const AsyncButton = ({
   errorMessage = "Oops! Something went wrong!",
   size,
   variant,
+  ...restProps
 }: AsyncButtonProps) => {
   const [snackbar, setSnackbar] = useState<{
     isOpen: boolean;
-    message: string;
+    message?: string;
     severity: AlertColor;
   }>({
     isOpen: false,
@@ -40,23 +43,23 @@ export const AsyncButton = ({
     async (evt) => {
       setIsProcessing(true);
       try {
-        await onClick(evt);
+        const successMessage = await onClick(evt);
         setSnackbar({
           isOpen: true,
-          message: successMessage,
+          message: String(successMessage),
           severity: "success",
         });
       } catch (e) {
         setSnackbar({
           isOpen: true,
-          message: errorMessage,
+          message: e.message,
           severity: "error",
         });
       } finally {
         setIsProcessing(false);
       }
     },
-    [errorMessage, onClick, successMessage]
+    [onClick]
   );
   const handleSnackbarClose = useCallback<SnackbarProps["onClose"]>(() => {
     setSnackbar((prev) => ({
@@ -68,12 +71,12 @@ export const AsyncButton = ({
   return (
     <Box sx={{ position: "relative", display: "inline-block" }}>
       <Button
-        variant="contained"
         type="button"
         onClick={handleClick}
         disabled={disabled || Boolean(isProcessing)}
         size={size}
         variant={variant}
+        {...restProps}
       >
         {label}
       </Button>

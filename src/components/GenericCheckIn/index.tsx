@@ -41,6 +41,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import DeleteIcon from "@mui/icons-material/Delete";
 import map from "lodash/fp/map";
 import { find, some } from "lodash/fp";
+import { AsyncButton } from "../AsyncButton";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
@@ -105,13 +106,13 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     };
   }, [favourites]);
 
-  const onClickBackButton = useCallback<
+  const handleClickBackButton = useCallback<
     AppBarProps["onClickBackButton"]
   >(() => {
     alert("lets go back");
   }, []);
 
-  const onChangeUserInfo = useCallback<InputChangeEventHandler>(
+  const handleChangeUserInfo = useCallback<InputChangeEventHandler>(
     ({ currentTarget: { value } }) => {
       setUserInfo(value);
     },
@@ -124,33 +125,25 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     setAddToFavorite((prevValue) => !prevValue);
   }, [setAddToFavorite]);
 
-  const handleCheckInUser = useCallback<ClickHandler>(() => {
-    onCheckInUser(userInfo, addToFavorite);
+  const handleCheckInUser = useCallback<ClickHandler>(async () => {
+    try {
+      return await onCheckInUser(userInfo, addToFavorite);
+    } catch (error) {
+      throw error;
+    }
   }, [onCheckInUser, userInfo, addToFavorite]);
 
   const handleCheckInFavouriteUser = useCallback<ClickHandler>(
     async ({ currentTarget: { dataset } }) => {
       const { id } = dataset;
-      const findWithId = (idToFind: string) =>
-        find<Favourite>(({ id }) => id === idToFind);
-      const { name } = findWithId(id)(favourites);
       try {
         await onCheckInFavourite(id);
         setCheckedInFavourites((prevItems) => [...prevItems, id]);
-        setSnackbar({
-          isOpen: true,
-          message: `${name} is checked in`,
-          severity: "success",
-        });
       } catch (e) {
-        setSnackbar({
-          isOpen: true,
-          message: `Couldn't check-in ${name}`,
-          severity: "error",
-        });
+        throw new Error(e.message);
       }
     },
-    [onCheckInFavourite, favourites]
+    [onCheckInFavourite]
   );
 
   const handleSnackbarClose = useCallback(() => {
@@ -173,7 +166,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       }}
       gap={3}
     >
-      <AppBar onClickBackButton={onClickBackButton} />
+      <AppBar onClickBackButton={handleClickBackButton} />
       <Box>
         <EventNameAndLocation
           eventLocation={eventLocation}
@@ -187,7 +180,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           label="Abhyasi ID, Email or Mobile Number"
           value={userInfo}
           fullWidth
-          onChange={onChangeUserInfo}
+          onChange={handleChangeUserInfo}
         />
       </Box>
       <FormControlLabel
@@ -198,7 +191,16 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           <Checkbox icon={<FavoriteBorder />} checkedIcon={<FavouriteIcon />} />
         }
       />
-      <Button
+      <AsyncButton
+        variant="contained"
+        size="large"
+        onClick={handleCheckInUser}
+        disabled={isCheckInButtonDisabled}
+        errorMessage={`Checkin unsuccessful with ${userInfo}.`}
+        successMessage={`CheckedIn with ${userInfo}.`}
+        label="Check In"
+      />
+      {/* <Button
         variant="contained"
         size="large"
         type="button"
@@ -206,7 +208,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         disabled={isCheckInButtonDisabled}
       >
         Check In
-      </Button>
+      </Button> */}
       <List
         dense={false}
         sx={{ width: ["100%", 400], maxWidth: 400 }}
@@ -234,16 +236,26 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
                 </ListItemAvatar>
                 <ListItemText primary={name} />
                 {!isFavouriteCheckInDisabled(id) && (
-                  <Button
+                  <AsyncButton
                     data-id={id}
                     variant="outlined"
                     size="small"
                     sx={{ ml: 1 }}
                     onClick={handleCheckInFavouriteUser}
-                    disabled={isFavouriteCheckInDisabled(id)}
-                  >
-                    Check In
-                  </Button>
+                    label="Check In"
+                    successMessage={`${name} is checked in.`}
+                    errorMessage={`Checkin unsuccessful for ${name}`}
+                  />
+                  // <Button
+                  //   data-id={id}
+                  //   variant="outlined"
+                  //   size="small"
+                  //   sx={{ ml: 1 }}
+                  //   onClick={handleCheckInFavouriteUser}
+                  //   disabled={isFavouriteCheckInDisabled(id)}
+                  // >
+                  //   Check In
+                  // </Button>
                 )}
                 {isFavouriteCheckInDisabled(id) && (
                   <Box marginLeft={2}>

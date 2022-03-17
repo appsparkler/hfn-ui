@@ -29,8 +29,22 @@ genericCheckIn.args = {
       email: "ookla@dribble.com",
     },
   ],
-  onCheckInFavourite: (id) => {
-    action("onCheckInFavourite")(id);
-    if (random(1)(2) === 1) throw new Error("Oops! something went wrong");
+  onCheckInFavourite: (...args) => {
+    action("onCheckInFavourite")(...args);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (random(1)(2) === 1) resolve("checked in fav user");
+        else reject(new Error("user not checked in"));
+      }, 600);
+    });
+  },
+  onCheckInUser: (...args) => {
+    action("onCheckInUser")(...args);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (random(1)(2) === 1) resolve("checked in user");
+        else reject(new Error("user not registered"));
+      }, 600);
+    });
   },
 } as GenericCheckInProps;
