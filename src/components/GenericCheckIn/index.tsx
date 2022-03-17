@@ -35,8 +35,8 @@ import { AppBar, AppBarProps } from "../SignedInUserCheckIn";
 import PersonIcon from "@mui/icons-material/Person";
 import DeleteIcon from "@mui/icons-material/Delete";
 import map from "lodash/fp/map";
-import { some } from "lodash/fp";
 import { AsyncButton } from "../AsyncButton";
+import { someStringsMatch } from "../../utils";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
@@ -149,8 +149,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   }, []);
 
   const isFavouriteCheckInDisabled = useCallback(
-    (id) =>
-      some<Favourite>((checkedInId) => checkedInId === id)(checkedInFavourites),
+    (id) => someStringsMatch(id)(checkedInFavourites),
     [checkedInFavourites]
   );
 
@@ -202,15 +201,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         successMessage={`CheckedIn with ${userInfo}.`}
         label="Check In"
       />
-      {/* <Button
-        variant="contained"
-        size="large"
-        type="button"
-        onClick={handleCheckInUser}
-        disabled={isCheckInButtonDisabled}
-      >
-        Check In
-      </Button> */}
       <List
         dense={false}
         sx={{ width: ["100%", 400], maxWidth: 400 }}
