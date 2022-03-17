@@ -26,11 +26,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  EventNameAndLocation,
-  EventNameAndLocationProps,
-} from "../EventNameAndLocation";
-import { AppBar, AppBarProps } from "../SignedInUserCheckIn";
+import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import PersonIcon from "@mui/icons-material/Person";
 import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
@@ -100,12 +96,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       noFavourites,
     };
   }, [favourites]);
-
-  const handleClickBackButton = useCallback<
-    AppBarProps["onClickBackButton"]
-  >(() => {
-    alert("lets go back");
-  }, []);
 
   const handleChangeUserInfo = useCallback<InputChangeEventHandler>(
     ({ currentTarget: { value } }) => {
