@@ -4,7 +4,7 @@ import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
 import Box from "@mui/material/Box";
 import React, { useCallback, useState } from "react";
 import Button from "@mui/material/Button";
-import random from "lodash/fp/random";
+import noop from "lodash/fp/noop";
 import { ClickHandler } from "../../types";
 
 export type AsyncButtonProps = {
@@ -16,14 +16,7 @@ export type AsyncButtonProps = {
 };
 
 export const AsyncButton = ({
-  onClick = async () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (random(1)(2) === 1) resolve();
-        else reject("API failed");
-      }, 500);
-    });
-  },
+  onClick = noop,
   disabled,
   label = "Sign In",
   successMessage = "Done!",
