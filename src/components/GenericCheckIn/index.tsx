@@ -238,16 +238,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
                     successMessage={`${name} is checked in.`}
                     errorMessage={`Checkin unsuccessful for ${name}`}
                   />
-                  // <Button
-                  //   data-id={id}
-                  //   variant="outlined"
-                  //   size="small"
-                  //   sx={{ ml: 1 }}
-                  //   onClick={handleCheckInFavouriteUser}
-                  //   disabled={isFavouriteCheckInDisabled(id)}
-                  // >
-                  //   Check In
-                  // </Button>
                 )}
                 {isFavouriteCheckInDisabled(id) && (
                   <Box marginLeft={2}>

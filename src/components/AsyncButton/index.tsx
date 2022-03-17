@@ -1,11 +1,10 @@
-import Alert, { AlertColor } from "@mui/material/Alert";
+import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
-import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
+import Snackbar from "@mui/material/Snackbar";
 import Box from "@mui/material/Box";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import Button, { ButtonProps } from "@mui/material/Button";
 import noop from "lodash/fp/noop";
-import { ClickHandler } from "../../types";
 import { useAsyncButton } from "../../hooks/useAsyncButton";
 
 export type AsyncButtonProps = ButtonProps & {
