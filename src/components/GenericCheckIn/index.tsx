@@ -131,13 +131,18 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   const handleCheckInFavouriteUser = useCallback<ClickHandler>(
     async ({ currentTarget: { dataset } }) => {
       const { id } = dataset;
+      const findWithId = (idToFind: string) =>
+        find<Favourite>(({ id }) => id === idToFind);
+      const { name } = findWithId(id)(favourites);
       try {
         await onCheckInFavourite(id);
         setCheckedInFavourites((prevItems) => [...prevItems, id]);
+        setSnackbar({
+          isOpen: true,
+          message: `${name} is checked in`,
+          severity: "success",
+        });
       } catch (e) {
-        const findWithId = (idToFind: string) =>
-          find<Favourite>(({ id }) => id === idToFind);
-        const { name } = findWithId(id)(favourites);
         setSnackbar({
           isOpen: true,
           message: `Couldn't check-in ${name}`,
@@ -260,7 +265,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
       >
-        <Alert severity="error" sx={{ width: "100%" }}>
+        <Alert severity={snackbar.severity} sx={{ width: "100%" }}>
           {snackbar.message}
         </Alert>
       </Snackbar>
