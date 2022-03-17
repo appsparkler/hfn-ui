@@ -181,13 +181,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       }}
       gap={3}
     >
-      <AppBar onClickBackButton={handleClickBackButton} />
-      <Box>
-        <EventNameAndLocation
-          eventLocation={eventLocation}
-          eventName={eventName}
-        />
-      </Box>
       <Box width={[300, 400]} display="flex">
         <TextField
           required
