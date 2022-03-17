@@ -1,25 +1,23 @@
-import * as React from "react";
+import { useMemo } from "react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { FabProps } from "@mui/material/Fab";
 import CheckIcon from "@mui/icons-material/Check";
-import { useMemo } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import { useAsyncButton } from "../../hooks/useAsyncButton";
 import Alert from "@mui/material/Alert";
-import { IconButton } from "@mui/material";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 
-export type CircularInegrationProps = {
+export type AsyncIconButtonProps = {
   disabled?: boolean;
   onClick: (evt: React.MouseEvent<HTMLInputElement>) => Promise<string> | void;
-  size: FabProps["size"];
+  size: IconButtonProps["size"];
 };
 
-export function CircularIntegration({
+export const AsyncIconButton = ({
   disabled,
   size,
   onClick,
-}: CircularInegrationProps) {
+}: AsyncIconButtonProps) => {
   const {
     isProcessing,
     snackbar,
@@ -72,4 +70,4 @@ export function CircularIntegration({
       </Snackbar>
     </Box>
   );
-}
+};
