@@ -1,9 +1,16 @@
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import {
+  Favorite as FavouriteIcon,
+  FavoriteBorder,
+  CheckCircle as CheckCircleIcon,
+} from "@mui/icons-material";
+import {
+  Alert,
+  AlertColor,
   Avatar,
   Divider,
   ListItemText,
   ListSubheader,
+  Snackbar,
   Typography,
 } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -33,6 +40,7 @@ import { AppBar, AppBarProps } from "../SignedInUserCheckIn";
 import PersonIcon from "@mui/icons-material/Person";
 import DeleteIcon from "@mui/icons-material/Delete";
 import map from "lodash/fp/map";
+import { find, some } from "lodash/fp";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
@@ -44,16 +52,17 @@ export type IdNameType = IdType & {
   name: string;
 };
 
-export type Favourite =
-  | (IdNameType & {
-      mobileNumber: string;
-    })
-  | (IdNameType & { email: string })
-  | (IdNameType & { abhyasiId: string });
+export type MobileNumberOrEmailOrAbhyasiId =
+  | { mobileNumber: string }
+  | { email: string }
+  | { abhyasiId: string };
+
+export type Favourite = IdNameType & MobileNumberOrEmailOrAbhyasiId;
 
 export type GenericCheckInProps = EventNameAndLocationProps & {
   favourites: Favourite[];
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
+  onCheckInFavourite: (favouriteUserId: string) => void;
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
@@ -61,10 +70,23 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   eventName,
   favourites = [],
   onCheckInUser,
+  onCheckInFavourite,
 }) => {
   const [userInfo, setUserInfo] = useState<string>("");
 
+  const [snackbar, setSnackbar] = useState<{
+    isOpen: boolean;
+    message: string;
+    severity: AlertColor;
+  }>({
+    isOpen: false,
+    message: "",
+    severity: "error",
+  });
+
   const [addToFavorite, setAddToFavorite] = useState<boolean>(false);
+
+  const [checkedInFavourites, setCheckedInFavourites] = useState<string[]>([]);
 
   const isCheckInButtonDisabled = useMemo<boolean>(
     () => userInfo.trim().length === 0,
@@ -98,16 +120,43 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
 
   const handleChangeAddToFavourite = useCallback<
     FormControlLabelProps["onChange"]
-  >(
-    (evt) => {
-      setAddToFavorite((prevValue) => !prevValue);
-    },
-    [setAddToFavorite]
-  );
+  >(() => {
+    setAddToFavorite((prevValue) => !prevValue);
+  }, [setAddToFavorite]);
 
   const handleCheckInUser = useCallback<ClickHandler>(() => {
     onCheckInUser(userInfo, addToFavorite);
   }, [onCheckInUser, userInfo, addToFavorite]);
+
+  const handleCheckInFavouriteUser = useCallback<ClickHandler>(
+    async ({ currentTarget: { dataset } }) => {
+      const { id } = dataset;
+      try {
+        await onCheckInFavourite(id);
+        setCheckedInFavourites((prevItems) => [...prevItems, id]);
+      } catch (e) {
+        const findWithId = (idToFind: string) =>
+          find<Favourite>(({ id }) => id === idToFind);
+        const { name } = findWithId(id)(favourites);
+        setSnackbar({
+          isOpen: true,
+          message: `Couldn't check-in ${name}`,
+          severity: "error",
+        });
+      }
+    },
+    [onCheckInFavourite, favourites]
+  );
+
+  const handleSnackbarClose = useCallback(() => {
+    setSnackbar({ isOpen: false, message: "", severity: "error" });
+  }, []);
+
+  const isFavouriteCheckInDisabled = useCallback(
+    (id) =>
+      some<Favourite>((checkedInId) => checkedInId === id)(checkedInFavourites),
+    [checkedInFavourites]
+  );
 
   return (
     <Box
@@ -126,7 +175,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           eventName={eventName}
         />
       </Box>
-      <Box width={300}>
+      <Box width={[300, 400]} display="flex">
         <TextField
           required
           id="outlined-required"
@@ -141,7 +190,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         onChange={handleChangeAddToFavourite}
         checked={addToFavorite}
         control={
-          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+          <Checkbox icon={<FavoriteBorder />} checkedIcon={<FavouriteIcon />} />
         }
       />
       <Button
@@ -155,6 +204,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       </Button>
       <List
         dense={false}
+        sx={{ width: ["100%", 400], maxWidth: 400 }}
         subheader={
           <ListSubheader component="div" id="nested-list-subheader">
             Checkin from your favourites list
@@ -178,9 +228,23 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={name} />
-                <Button variant="outlined" size="small" sx={{ ml: 1 }}>
-                  Check In
-                </Button>
+                {!isFavouriteCheckInDisabled(id) && (
+                  <Button
+                    data-id={id}
+                    variant="outlined"
+                    size="small"
+                    sx={{ ml: 1 }}
+                    onClick={handleCheckInFavouriteUser}
+                    disabled={isFavouriteCheckInDisabled(id)}
+                  >
+                    Check In
+                  </Button>
+                )}
+                {isFavouriteCheckInDisabled(id) && (
+                  <Box marginLeft={2}>
+                    <CheckCircleIcon color="success" />
+                  </Box>
+                )}
               </ListItem>
               <Divider variant="inset" component="li" />
             </React.Fragment>
@@ -191,6 +255,15 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           </Typography>
         )}
       </List>
+      <Snackbar
+        open={snackbar.isOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert severity="error" sx={{ width: "100%" }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
