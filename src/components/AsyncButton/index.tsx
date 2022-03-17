@@ -6,11 +6,10 @@ import React from "react";
 import Button, { ButtonProps } from "@mui/material/Button";
 import noop from "lodash/fp/noop";
 import { useAsyncButton } from "../../hooks/useAsyncButton";
+import { ClickHandler } from "../../types";
 
 export type AsyncButtonProps = ButtonProps & {
-  onClick: (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => Promise<string> | void;
+  onClick: ClickHandler;
   disabled?: boolean;
   errorMessage: string;
   successMessage: string;

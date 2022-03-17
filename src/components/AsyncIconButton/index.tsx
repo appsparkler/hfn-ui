@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import CheckIcon from "@mui/icons-material/Check";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Snackbar from "@mui/material/Snackbar";
 import { useAsyncButton } from "../../hooks/useAsyncButton";
 import Alert from "@mui/material/Alert";
 import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 
-export type AsyncIconButtonProps = {
+export type AsyncIconButtonProps = IconButtonProps & {
   disabled?: boolean;
   onClick: (evt: React.MouseEvent<HTMLInputElement>) => Promise<string> | void;
   size: IconButtonProps["size"];
@@ -17,6 +17,8 @@ export const AsyncIconButton = ({
   disabled,
   size,
   onClick,
+  children = <DeleteIcon />,
+  ...iconBtnProps
 }: AsyncIconButtonProps) => {
   const {
     isProcessing,
@@ -38,27 +40,30 @@ export const AsyncIconButton = ({
   }, [size]);
 
   return (
-    <Box sx={{ m: 1, position: "relative" }}>
-      <IconButton
-        aria-label="save"
-        color="default"
-        onClick={handleClick}
-        size={size}
-        disabled={isDisabled}
-      >
-        <CheckIcon />
-      </IconButton>
-      {isProcessing && (
-        <CircularProgress
-          size={circularProgressSize}
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: 1,
-          }}
-        />
-      )}
+    <>
+      <Box sx={{ m: 1, position: "relative" }}>
+        <IconButton
+          aria-label="save"
+          color="default"
+          onClick={handleClick}
+          size={size}
+          disabled={isDisabled}
+          {...iconBtnProps}
+        >
+          {children}
+        </IconButton>
+        {isProcessing && (
+          <CircularProgress
+            size={circularProgressSize}
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: 1,
+            }}
+          />
+        )}
+      </Box>
       <Snackbar
         open={snackbar.isOpen}
         autoHideDuration={6000}
@@ -68,6 +73,6 @@ export const AsyncIconButton = ({
           {snackbar.message}
         </Alert>
       </Snackbar>
-    </Box>
+    </>
   );
 };

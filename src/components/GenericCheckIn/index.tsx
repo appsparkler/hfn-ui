@@ -13,7 +13,6 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel, {
   FormControlLabelProps,
 } from "@mui/material/FormControlLabel";
-import IconButton from "@mui/material/IconButton/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -33,10 +32,10 @@ import {
 } from "../EventNameAndLocation";
 import { AppBar, AppBarProps } from "../SignedInUserCheckIn";
 import PersonIcon from "@mui/icons-material/Person";
-import DeleteIcon from "@mui/icons-material/Delete";
 import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
+import { AsyncIconButton } from "../AsyncIconButton";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
@@ -56,6 +55,7 @@ export type GenericCheckInProps = EventNameAndLocationProps & {
   favourites: Favourite[];
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
   onCheckInFavourite: (favouriteUserId: string) => void;
+  onDeleteFavourite: (favouriteUserId: string) => void;
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
@@ -64,6 +64,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   favourites = [],
   onCheckInUser,
   onCheckInFavourite,
+  onDeleteFavourite,
 }) => {
   const userInfoRef = useRef<HTMLInputElement>();
 
@@ -153,6 +154,23 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     [checkedInFavourites]
   );
 
+  const handleClickDeleteButton = useCallback<ClickHandler>(
+    async (evt) => {
+      const {
+        currentTarget: { dataset },
+      } = evt;
+      try {
+        const { id } = dataset;
+        const successMessage = await onDeleteFavourite(id);
+
+        return successMessage;
+      } catch (error) {
+        throw error;
+      }
+    },
+    [onDeleteFavourite]
+  );
+
   return (
     <Box
       sx={{
@@ -213,14 +231,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         {hasFavourites &&
           map<Favourite, JSX.Element>(({ name, id }) => (
             <React.Fragment>
-              <ListItem
-                key={id}
-                secondaryAction={
-                  <IconButton edge="end" aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                }
-              >
+              <ListItem key={id}>
                 <ListItemAvatar>
                   <Avatar>
                     <PersonIcon />
@@ -244,6 +255,13 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
                     <CheckCircleIcon color="success" />
                   </Box>
                 )}
+                <AsyncIconButton
+                  data-id={id}
+                  edge="end"
+                  aria-label="delete"
+                  onClick={handleClickDeleteButton}
+                  size="medium"
+                />
               </ListItem>
               <Divider variant="inset" component="li" />
             </React.Fragment>
