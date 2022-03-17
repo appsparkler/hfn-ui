@@ -14,6 +14,7 @@ export type AsyncButtonProps = {
   successMessage: string;
   label: string;
   size?: ButtonProps["size"];
+  variant?: ButtonProps["variant"];
 };
 
 export const AsyncButton = ({
@@ -23,6 +24,7 @@ export const AsyncButton = ({
   successMessage = "Done!",
   errorMessage = "Oops! Something went wrong!",
   size,
+  variant,
 }: AsyncButtonProps) => {
   const [snackbar, setSnackbar] = useState<{
     isOpen: boolean;
@@ -71,6 +73,7 @@ export const AsyncButton = ({
         onClick={handleClick}
         disabled={disabled || Boolean(isProcessing)}
         size={size}
+        variant={variant}
       >
         {label}
       </Button>
