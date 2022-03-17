@@ -6,6 +6,7 @@ import React, { useCallback, useState } from "react";
 import Button, { ButtonProps } from "@mui/material/Button";
 import noop from "lodash/fp/noop";
 import { ClickHandler } from "../../types";
+import { useAsyncButton } from "../../hooks/useAsyncButton";
 
 export type AsyncButtonProps = ButtonProps & {
   onClick: (
@@ -29,45 +30,8 @@ export const AsyncButton = ({
   variant,
   ...restProps
 }: AsyncButtonProps) => {
-  const [snackbar, setSnackbar] = useState<{
-    isOpen: boolean;
-    message?: string;
-    severity: AlertColor;
-  }>({
-    isOpen: false,
-    message: "",
-    severity: "error",
-  });
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const handleClick = useCallback<ClickHandler>(
-    async (evt) => {
-      setIsProcessing(true);
-      try {
-        const successMessage = await onClick(evt);
-        setSnackbar({
-          isOpen: true,
-          message: String(successMessage),
-          severity: "success",
-        });
-      } catch (e) {
-        setSnackbar({
-          isOpen: true,
-          message: e.message,
-          severity: "error",
-        });
-      } finally {
-        setIsProcessing(false);
-      }
-    },
-    [onClick]
-  );
-  const handleSnackbarClose = useCallback<SnackbarProps["onClose"]>(() => {
-    setSnackbar((prev) => ({
-      ...prev,
-      isOpen: false,
-    }));
-  }, []);
-
+  const { snackbar, handleSnackbarClose, handleClick, isProcessing } =
+    useAsyncButton(onClick);
   return (
     <Box sx={{ position: "relative", display: "inline-block" }}>
       <Button
