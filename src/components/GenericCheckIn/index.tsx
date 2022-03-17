@@ -26,7 +26,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import PersonIcon from "@mui/icons-material/Person";
 import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
@@ -47,7 +46,7 @@ export type Favourite = {
   name: string;
 } & MobileNumberOrEmailOrAbhyasiId;
 
-export type GenericCheckInProps = EventNameAndLocationProps & {
+export type GenericCheckInProps = {
   favourites: Favourite[];
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
   onCheckInFavourite: (favouriteUserId: string) => void;
@@ -55,8 +54,6 @@ export type GenericCheckInProps = EventNameAndLocationProps & {
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
-  eventLocation,
-  eventName,
   favourites = [],
   onCheckInUser,
   onCheckInFavourite,

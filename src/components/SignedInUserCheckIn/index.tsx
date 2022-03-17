@@ -5,9 +5,11 @@ import MUIAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { EventNameAndLocation } from "../EventNameAndLocation";
-import { Slide } from "@mui/material";
-import { GenericCheckIn } from "../GenericCheckIn";
+import {
+  EventNameAndLocation,
+  EventNameAndLocationProps,
+} from "../EventNameAndLocation";
+import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 
 export type AppBarProps = {
   onClickBackButton: ClickHandler;
@@ -66,8 +68,8 @@ export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type SignedInUserCheckInProps = {
   onClickCheckIn: ClickHandler;
-  onClickHelpOthersCheckIn: ClickHandler;
-};
+} & GenericCheckInProps &
+  EventNameAndLocationProps;
 
 export enum SignedInUserScreen {
   MAIN_PAGE,
@@ -75,15 +77,17 @@ export enum SignedInUserScreen {
 }
 
 export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
+  favourites,
+  eventLocation,
+  eventName,
   onClickCheckIn,
-  onClickHelpOthersCheckIn,
+  onCheckInFavourite,
+  onDeleteFavourite,
+  onCheckInUser,
 }) => {
   const [currentPage, setCurrentPage] = useState<SignedInUserScreen>(
     SignedInUserScreen.MAIN_PAGE
   );
-  const onClickBackButton = useCallback<ClickHandler>(() => {
-    alert("lets go back");
-  }, []);
 
   const { showMainPage, showGenericCheckInPage } = useMemo<{
     showMainPage: boolean;
@@ -98,43 +102,43 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
         SignedInUserScreen.GENERIC_CHECKIN_PAGE.toString(),
     };
   }, [currentPage]);
+
   const handleClickHelpOthersCheckIn = useCallback(() => {
     setCurrentPage(SignedInUserScreen.GENERIC_CHECKIN_PAGE);
   }, []);
 
+  const handleClickBackButton = useCallback<ClickHandler>(() => {
+    if (showMainPage) {
+    } else if (showGenericCheckInPage) {
+      setCurrentPage(SignedInUserScreen.MAIN_PAGE);
+    }
+  }, [showGenericCheckInPage, showMainPage]);
+
   return (
     <>
-      <AppBar onClickBackButton={onClickBackButton} />
-      <Box>
-        <EventNameAndLocation
-          eventName="Youth Seminar"
-          eventLocation="Kanha Shanti Vanam"
-        />
+      <AppBar onClickBackButton={handleClickBackButton} />
+      <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
+        <Box>
+          <EventNameAndLocation
+            eventName={eventName}
+            eventLocation={eventLocation}
+          />
+        </Box>
+        {showMainPage && (
+          <SignedUserCheckInMainScreen
+            onClickCheckIn={onClickCheckIn}
+            onClickHelpOthersCheckIn={handleClickHelpOthersCheckIn}
+          />
+        )}
+        {showGenericCheckInPage && (
+          <GenericCheckIn
+            favourites={favourites}
+            onCheckInFavourite={onCheckInFavourite}
+            onCheckInUser={onCheckInUser}
+            onDeleteFavourite={onDeleteFavourite}
+          />
+        )}
       </Box>
-      {showMainPage && (
-        <Slide in={showMainPage} direction="left">
-          <Box sx={{ padding: 5 }}>
-            <SignedUserCheckInMainScreen
-              onClickCheckIn={onClickCheckIn}
-              onClickHelpOthersCheckIn={handleClickHelpOthersCheckIn}
-            />
-          </Box>
-        </Slide>
-      )}
-      {showGenericCheckInPage && (
-        <Slide in={showGenericCheckInPage} direction="left">
-          <Box sx={{ padding: 5 }}>
-            <GenericCheckIn
-              eventLocation="Kanha Shanti Vanam"
-              eventName="Youth Seminar"
-              favourites={[]}
-              onCheckInFavourite={console.log}
-              onCheckInUser={console.log}
-              onDeleteFavourite={console.log}
-            />
-          </Box>
-        </Slide>
-      )}
     </>
   );
 };
