@@ -1,7 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { GenericCheckIn, GenericCheckInProps } from "./index";
-import { random, uniqueId } from "lodash/fp";
+import random from "lodash/fp/random";
+import uniqueId from "lodash/uniqueId";
 import { action } from "@storybook/addon-actions";
 
 export default {

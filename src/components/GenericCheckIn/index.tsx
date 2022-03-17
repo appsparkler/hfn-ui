@@ -1,18 +1,13 @@
-import {
-  Favorite as FavouriteIcon,
-  FavoriteBorder,
-  CheckCircle as CheckCircleIcon,
-} from "@mui/icons-material";
-import {
-  Alert,
-  AlertColor,
-  Avatar,
-  Divider,
-  ListItemText,
-  ListSubheader,
-  Snackbar,
-  Typography,
-} from "@mui/material";
+import FavouriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Alert, { AlertColor } from "@mui/material/Alert";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import Snackbar from "@mui/material/Snackbar";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel, {
@@ -32,7 +27,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Button from "@mui/material/Button";
 import {
   EventNameAndLocation,
   EventNameAndLocationProps,
@@ -41,7 +35,7 @@ import { AppBar, AppBarProps } from "../SignedInUserCheckIn";
 import PersonIcon from "@mui/icons-material/Person";
 import DeleteIcon from "@mui/icons-material/Delete";
 import map from "lodash/fp/map";
-import { find, some } from "lodash/fp";
+import { some } from "lodash/fp";
 import { AsyncButton } from "../AsyncButton";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
@@ -196,7 +190,10 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         onChange={handleChangeAddToFavourite}
         checked={addToFavorite}
         control={
-          <Checkbox icon={<FavoriteBorder />} checkedIcon={<FavouriteIcon />} />
+          <Checkbox
+            icon={<FavoriteBorderIcon />}
+            checkedIcon={<FavouriteIcon />}
+          />
         }
       />
       <AsyncButton
