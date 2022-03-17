@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { GenericCheckIn, GenericCheckInProps } from "./index";
-import { noop, random, uniqueId } from "lodash/fp";
+import { random, uniqueId } from "lodash/fp";
 import { action } from "@storybook/addon-actions";
 
 export default {
@@ -33,5 +33,4 @@ example.args = {
     action("onCheckInFavourite")(id);
     if (random(1)(2) === 1) throw new Error("Oops! something went wrong");
   },
-  onCheckInUser: noop,
 } as GenericCheckInProps;
