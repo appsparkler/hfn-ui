@@ -42,18 +42,15 @@ export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type InputChangeEventHandler = ChangeEventHandler<HTMLInputElement>;
 
-export type IdType = { id: string };
-
-export type IdNameType = IdType & {
-  name: string;
-};
-
 export type MobileNumberOrEmailOrAbhyasiId =
   | { mobileNumber: string }
   | { email: string }
   | { abhyasiId: string };
 
-export type Favourite = IdNameType & MobileNumberOrEmailOrAbhyasiId;
+export type Favourite = {
+  id: string;
+  name: string;
+} & MobileNumberOrEmailOrAbhyasiId;
 
 export type GenericCheckInProps = EventNameAndLocationProps & {
   favourites: Favourite[];
