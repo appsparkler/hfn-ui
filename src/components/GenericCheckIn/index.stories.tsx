@@ -1,11 +1,22 @@
 import React, { useCallback, useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { GenericCheckIn, GenericCheckInProps } from "./index";
+import {
+  AsyncButton,
+  AsyncButtonProps,
+  GenericCheckIn,
+  GenericCheckInProps,
+} from "./index";
 import { random, uniqueId } from "lodash/fp";
 import { action } from "@storybook/addon-actions";
 import Button from "@mui/material/Button";
 import { ClickHandler } from "../SignedInUserCheckIn";
-import { Box, CircularProgress } from "@mui/material";
+import {
+  Alert,
+  AlertColor,
+  Box,
+  CircularProgress,
+  Snackbar,
+} from "@mui/material";
 
 export default {
   title: "Components/Generic Check In",
@@ -20,31 +31,57 @@ const label = "Sign In";
 
 export const SignInSignOutButton = ({
   onClick = async () => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve();
+        if (random(1)(2) === 1) resolve();
+        else reject("API failed");
       }, 500);
     });
   },
   disabled,
+  successMessage = "Done!",
+  errorMessage = "Oops! Something went wrong!",
 }: {
   onClick: ClickHandler;
   disabled?: boolean;
+  errorMessage: string;
+  successMessage: string;
 }) => {
+  const [snackbar, setSnackbar] = useState<{
+    isOpen: boolean;
+    message: string;
+    severity: AlertColor;
+  }>({
+    isOpen: false,
+    message: "",
+    severity: "error",
+  });
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const handleClick = useCallback<ClickHandler>(
     async (evt) => {
       setIsProcessing(true);
       try {
         await onClick(evt);
+        setSnackbar({
+          isOpen: true,
+          message: successMessage,
+          severity: "success",
+        });
       } catch (e) {
-        throw new Error(e);
+        setSnackbar({
+          isOpen: true,
+          message: errorMessage,
+          severity: "error",
+        });
       } finally {
         setIsProcessing(false);
       }
     },
-    [onClick]
+    [errorMessage, onClick, successMessage]
   );
+  const handleSnackbarClose = useCallback(() => {
+    setSnackbar({ isOpen: false, message: "", severity: undefined });
+  }, []);
   return (
     <Box sx={{ position: "relative", display: "inline-block" }}>
       <Button
@@ -65,11 +102,25 @@ export const SignInSignOutButton = ({
           size={20}
         />
       )}
+      <Snackbar
+        open={snackbar.isOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+          onClose={handleSnackbarClose}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
 
 export const example = Template.bind({});
+
 example.args = {
   eventName: "Youth Seminar",
   eventLocation: "Kanha Shanti Vanam",
@@ -90,3 +141,21 @@ example.args = {
     if (random(1)(2) === 1) throw new Error("Oops! something went wrong");
   },
 } as GenericCheckInProps;
+
+const AsyncButtonTemplate: ComponentStory<typeof AsyncButton> = (args) => (
+  <AsyncButton {...args} />
+);
+
+export const asyncButton = AsyncButtonTemplate.bind({});
+asyncButton.args = {
+  label: "Check In",
+  onClick: () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (random(1)(2) === 1) resolve("success");
+        else reject();
+      }, 600);
+    }),
+  successMessage: "Prakash is checked in",
+  errorMessage: "Prakash Mishra not checked in",
+} as AsyncButtonProps;
