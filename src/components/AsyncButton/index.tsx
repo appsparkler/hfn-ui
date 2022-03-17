@@ -3,7 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
 import Box from "@mui/material/Box";
 import React, { useCallback, useState } from "react";
-import Button from "@mui/material/Button";
+import Button, { ButtonProps } from "@mui/material/Button";
 import noop from "lodash/fp/noop";
 import { ClickHandler } from "../../types";
 
@@ -13,6 +13,7 @@ export type AsyncButtonProps = {
   errorMessage: string;
   successMessage: string;
   label: string;
+  size?: ButtonProps["size"];
 };
 
 export const AsyncButton = ({
@@ -21,6 +22,7 @@ export const AsyncButton = ({
   label = "Sign In",
   successMessage = "Done!",
   errorMessage = "Oops! Something went wrong!",
+  size,
 }: AsyncButtonProps) => {
   const [snackbar, setSnackbar] = useState<{
     isOpen: boolean;
@@ -68,6 +70,7 @@ export const AsyncButton = ({
         type="button"
         onClick={handleClick}
         disabled={disabled || Boolean(isProcessing)}
+        size={size}
       >
         {label}
       </Button>

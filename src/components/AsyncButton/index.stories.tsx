@@ -28,6 +28,7 @@ asyncButton.args = {
       }, 600);
     });
   },
+  size: "small",
   successMessage: "Prakash is checked in",
   errorMessage: "Prakash Mishra not checked in",
 } as AsyncButtonProps;
