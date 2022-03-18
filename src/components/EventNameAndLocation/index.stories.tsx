@@ -16,3 +16,4 @@ example.args = {
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
 } as EventNameAndLocationProps;
+example.storyName = "Event Name And Location";

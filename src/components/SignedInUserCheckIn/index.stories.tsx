@@ -60,3 +60,4 @@ example.args = {
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
 } as SignedInUserCheckInProps;
+example.storyName = "Signed In User Check In";
