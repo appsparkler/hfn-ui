@@ -1,10 +1,17 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, { AutocompleteProps } from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { locations, CityStateCountryLocation } from "./locations";
+import {
+  // locations,
+  RefinedCityStateCountryLocation,
+  getUniqLocations,
+  CityStateCountryLocation,
+} from "./locations";
 import { TextFieldProps } from "@mui/material";
+import { debounce } from "lodash/fp";
+import some from "lodash/fp/some";
 
 const getApi = () => localStorage.getItem("cities-api");
 
@@ -14,14 +21,47 @@ function sleep(delay = 0) {
   });
 }
 
-export const LocationInputField = () => {
+const debounceGetAndSetLocationOptions = debounce(500)(
+  (
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setOptions: React.Dispatch<
+      React.SetStateAction<readonly RefinedCityStateCountryLocation[]>
+    >,
+    firstLetter: string
+  ): void => {
+    try {
+      setLoading(true);
+      fetch(`${getApi()}/${firstLetter}.json`)
+        .then((res) => res.json())
+        .then((json) => json.results)
+        .then((results: CityStateCountryLocation[]) => {
+          const uniqeLocations = getUniqLocations(results);
+          setOptions((prevOptions) => [...uniqeLocations, ...prevOptions]);
+          // setLoading(false);
+        })
+        .catch(() => {
+          // setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } catch (e) {}
+  }
+);
+
+export type LocationInputFieldProps = {
+  onChange: (value: RefinedCityStateCountryLocation) => void;
+};
+
+export const LocationInputField = ({ onChange }) => {
   const api = React.useMemo<string>(() => getApi(), []);
 
   const [loading, setLoading] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState<boolean>(false);
   const [options, setOptions] = React.useState<
-    readonly CityStateCountryLocation[]
+    readonly RefinedCityStateCountryLocation[]
   >([]);
+  // const dispalyedOptions = React.useMemo(() => options.slice(0, 20), [options]);
   // const loading = open && options.length === 0;
 
   // React.useEffect(() => {
@@ -44,24 +84,40 @@ export const LocationInputField = () => {
   //     active = false;
   //   };
   // }, [loading]);
+  const [searchedAlphabets, setSearchedAlphabets] = React.useState<string[]>(
+    []
+  );
 
   const handleInputChange = React.useCallback<TextFieldProps["onChange"]>(
-    async ({ currentTarget: { value } }) => {
-      try {
-        setLoading(true);
-        const firstLetter = (value as string).substr(0, 1).toLowerCase();
-        const res = await fetch(`${api}/${firstLetter}.json`);
-        console.log(res);
-        const resJson = await res.json();
-        console.log(resJson.length);
-        setOptions(resJson.results);
-      } catch (e) {
-      } finally {
-        setLoading(false);
+    ({ currentTarget: { value } }) => {
+      const firstLetter = (value as string).substr(0, 1).toLowerCase();
+      const isPreviouslySearched = some<string>((item) => item === firstLetter)(
+        searchedAlphabets
+      );
+      if (!isPreviouslySearched && Boolean(firstLetter))
+        debounceGetAndSetLocationOptions(setLoading, setOptions, firstLetter);
+      setSearchedAlphabets((prev) => [...prev, firstLetter]);
+    },
+    [searchedAlphabets]
+  );
+
+  const handleChangeCityStateCountry = React.useCallback<
+    AutocompleteProps<
+      RefinedCityStateCountryLocation,
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    >["onChange"]
+  >(
+    (evt, selectedItem) => {
+      if (typeof selectedItem !== "string") {
+        onChange(selectedItem);
       }
     },
-    [api]
+    [onChange]
   );
+
   // React.useEffect(() => {
   //   if (!open) {
   //     setOptions([]);
@@ -73,6 +129,8 @@ export const LocationInputField = () => {
       <Autocomplete
         id="asynchronous-demo"
         sx={{ width: 300 }}
+        autoComplete
+        autoHighlight
         open={open}
         onOpen={() => {
           setOpen(true);
@@ -80,10 +138,13 @@ export const LocationInputField = () => {
         onClose={() => {
           setOpen(false);
         }}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
-        getOptionLabel={(option) => option.name}
+        isOptionEqualToValue={(option, value) =>
+          option.cityStateCountry === value.cityStateCountry
+        }
+        getOptionLabel={(option) => option.cityStateCountry}
         options={options}
         loading={loading}
+        onChange={handleChangeCityStateCountry}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -108,7 +169,7 @@ export const LocationInputField = () => {
 };
 
 // // Top films as rated by IMDb users. http://www.imdb.com/chart/top
-// const locations: CityStateCountryLocation[] = uniq([
+// const locations: RefinedCityStateCountryLocation[] = uniq([
 //   {
 //     id: 87504,
 //     name: 'C',

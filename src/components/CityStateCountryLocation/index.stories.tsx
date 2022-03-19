@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { LocationInputField } from "./index";
+import { LocationInputField, LocationInputFieldProps } from "./index";
 import Box from "@mui/material/Box";
 
 export default {
@@ -16,4 +16,4 @@ const AsyncButtonTemplate: ComponentStory<typeof LocationInputField> = (
   </Box>
 );
 export const asyncButton = AsyncButtonTemplate.bind({});
-asyncButton.args = {};
+asyncButton.args = {} as LocationInputFieldProps;

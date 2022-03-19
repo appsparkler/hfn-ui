@@ -12,20 +12,51 @@ export type CityStateCountryLocation = {
   active: boolean;
 };
 
-const findWithId = (id: number) =>
-  find<CityStateCountryLocation>((location) => id === location.id);
+export type RefinedCityStateCountryLocation = CityStateCountryLocation & {
+  cityStateCountry: string;
+};
 
-const getUniqLocations = (allLocations: CityStateCountryLocation[]) =>
-  pipe<
-    [CityStateCountryLocation[]],
+const mapCityStateCountryLocationToRefined = map<
+  CityStateCountryLocation,
+  RefinedCityStateCountryLocation
+>((location) => ({
+  ...location,
+  cityStateCountry: (({ name, country, state }: CityStateCountryLocation) => {
+    return `${name}, ${country}, ${state}`;
+  })(location),
+}));
+
+const findWithId = <T extends { id: number }>(id: number) =>
+  find<T>((location) => id === location.id);
+
+const findWithCityStateCountry = (cityStateCountryToFind: string) =>
+  find<RefinedCityStateCountryLocation>(
+    (item) => item.cityStateCountry === cityStateCountryToFind
+  );
+
+export const getUniqLocations = (allLocations: CityStateCountryLocation[]) => {
+  const refinedLocations = mapCityStateCountryLocationToRefined(allLocations);
+  return pipe<
+    [RefinedCityStateCountryLocation[]],
     number[],
     number[],
-    CityStateCountryLocation[]
+    RefinedCityStateCountryLocation[],
+    string[],
+    string[],
+    readonly RefinedCityStateCountryLocation[]
   >(
     map((location) => location.id),
     uniq,
-    map((id) => findWithId(id)(allLocations))
-  );
+    map((id) =>
+      findWithId<RefinedCityStateCountryLocation>(id)(refinedLocations)
+    ),
+    map((location) => location.cityStateCountry),
+    uniq,
+    map((cityStateCountry) =>
+      findWithCityStateCountry(cityStateCountry)(refinedLocations)
+    )
+  )(refinedLocations);
+};
 
 const allLocations: CityStateCountryLocation[] = [
   {
@@ -129,4 +160,6 @@ const allLocations: CityStateCountryLocation[] = [
   },
 ];
 
-export const locations = getUniqLocations(allLocations)(allLocations);
+// const refinedLocations = mapCityStateCountryLocationToRefined()
+
+// export const locations = getUniqLocations(allLocations)(allLocations);
