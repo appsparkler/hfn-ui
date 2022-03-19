@@ -16,4 +16,7 @@ const AsyncButtonTemplate: ComponentStory<typeof LocationInputField> = (
   </Box>
 );
 export const asyncButton = AsyncButtonTemplate.bind({});
-asyncButton.args = {} as LocationInputFieldProps;
+asyncButton.args = {
+  error: false,
+  helperText: "Helper text for the user.",
+} as LocationInputFieldProps;

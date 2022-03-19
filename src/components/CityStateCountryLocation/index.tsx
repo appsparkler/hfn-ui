@@ -8,7 +8,7 @@ import {
   getUniqLocations,
   CityStateCountryLocation,
 } from "./locations";
-import { TextFieldProps } from "@mui/material";
+import { FormControl, FormHelperText, TextFieldProps } from "@mui/material";
 import debounce from "lodash/fp/debounce";
 
 const getApi = () => localStorage.getItem("cities-api");
@@ -40,10 +40,16 @@ const debounceGetAndSetLocationOptions = debounce(500)(
 );
 
 export type LocationInputFieldProps = {
+  error?: boolean;
+  helperText?: string;
   onChange: (value: RefinedCityStateCountryLocation) => void;
 };
 
-export const LocationInputField = ({ onChange }) => {
+export const LocationInputField = ({
+  error,
+  helperText,
+  onChange,
+}: LocationInputFieldProps) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState<boolean>(false);
   const [options, setOptions] = React.useState<
@@ -88,46 +94,51 @@ export const LocationInputField = ({ onChange }) => {
 
   return (
     <Box>
-      <pre>{query}</pre>
-      <Autocomplete
-        id="asynchronous-demo"
-        sx={{ width: 300 }}
-        autoComplete
-        autoHighlight
-        open={open}
-        onOpen={() => {
-          if (!query) setOpen(false);
-          setOpen(true);
-        }}
-        onClose={() => {
-          setOpen(false);
-        }}
-        isOptionEqualToValue={(option, value) =>
-          option.cityStateCountry === value.cityStateCountry
-        }
-        getOptionLabel={(option) => option.cityStateCountry}
-        options={options}
-        loading={loading}
-        onChange={handleChangeCityStateCountry}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Asynchronous"
-            onChange={handleInputChange}
-            InputProps={{
-              ...params.InputProps,
-              endAdornment: (
-                <React.Fragment>
-                  {loading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
-                  {params.InputProps.endAdornment}
-                </React.Fragment>
-              ),
-            }}
-          />
+      <FormControl>
+        <Autocomplete
+          id="asynchronous-demo"
+          sx={{ width: 300 }}
+          autoComplete
+          autoHighlight
+          open={open}
+          onOpen={() => {
+            if (!query) setOpen(false);
+            setOpen(true);
+          }}
+          onClose={() => {
+            setOpen(false);
+          }}
+          isOptionEqualToValue={(option, value) =>
+            option.cityStateCountry === value.cityStateCountry
+          }
+          getOptionLabel={(option) => option.cityStateCountry}
+          options={options}
+          loading={loading}
+          onChange={handleChangeCityStateCountry}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              error={error}
+              label="Asynchronous"
+              onChange={handleInputChange}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <React.Fragment>
+                    {loading ? (
+                      <CircularProgress color="inherit" size={20} />
+                    ) : null}
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                ),
+              }}
+            />
+          )}
+        />
+        {helperText && (
+          <FormHelperText error={error}>{helperText}</FormHelperText>
         )}
-      />
+      </FormControl>
     </Box>
   );
 };
