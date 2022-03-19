@@ -1,31 +1,67 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
+import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select, { SelectProps } from "@mui/material/Select";
+import map from "lodash/fp/map";
+import { useCallback } from "react";
 
-export const SelectField = () => {
-  const [age, setAge] = React.useState("");
+export type OptionValue = string | number;
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
+export type SelectFieldOption = {
+  value: OptionValue;
+  label: MenuItemProps["children"];
+};
+
+export type SelectFieldProps = Omit<
+  SelectProps,
+  "value" | "onChange" | "defaultValue" | "label"
+> & {
+  label: string;
+  labelId: string;
+  options: SelectFieldOption[];
+  value: OptionValue;
+  wrapperProps: BoxProps;
+  onChange: (newValue: OptionValue) => void;
+};
+
+export const SelectField = ({
+  labelId,
+  label,
+  options = [
+    { value: 1, label: <em>Select Age</em> },
+    { value: 10, label: "Ten" },
+    { value: 20, label: "Twenty" },
+    { value: 30, label: "Thirty" },
+  ],
+  value,
+  onChange,
+  wrapperProps = {},
+  ...restSelectProps
+}: SelectFieldProps) => {
+  const handleChange = useCallback<SelectProps<OptionValue>["onChange"]>(
+    ({ target: { value } }) => {
+      onChange(value);
+    },
+    [onChange]
+  );
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ width: "100%" }} {...wrapperProps}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
+        <InputLabel id={labelId}>{label}</InputLabel>
+        <Select<OptionValue>
+          labelId={labelId}
+          value={value}
           onChange={handleChange}
+          label={label}
+          {...restSelectProps}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {map<SelectFieldOption, JSX.Element>(({ value, label }) => (
+            <MenuItem value={value} key={value}>
+              {label}
+            </MenuItem>
+          ))(options)}
         </Select>
       </FormControl>
     </Box>
