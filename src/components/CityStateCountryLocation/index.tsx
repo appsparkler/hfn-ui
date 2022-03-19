@@ -3,7 +3,9 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { uniq, pipe, map, find } from "lodash/fp";
 import { locations, CityStateCountryLocation } from "./locations";
+import { TextFieldProps } from "@mui/material";
 
 const getApi = () => localStorage.getItem("cities-api");
 
@@ -14,12 +16,14 @@ function sleep(delay = 0) {
 }
 
 export const LocationInputField = () => {
-  const api = React.useMemo(() => getApi(), []);
-  const [open, setOpen] = React.useState(false);
+  const api = React.useMemo<string>(() => getApi(), []);
+
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [open, setOpen] = React.useState<boolean>(false);
   const [options, setOptions] = React.useState<
     readonly CityStateCountryLocation[]
   >([]);
-  const loading = open && options.length === 0;
+  // const loading = open && options.length === 0;
 
   React.useEffect(() => {
     let active = true;
@@ -29,6 +33,7 @@ export const LocationInputField = () => {
     }
 
     (async () => {
+      console.log(1e4);
       await sleep(1e3); // For demo purposes.
 
       if (active) {
@@ -41,6 +46,15 @@ export const LocationInputField = () => {
     };
   }, [loading]);
 
+  const handleInputChange = React.useCallback<TextFieldProps["onChange"]>(
+    async ({ currentTarget: { value } }) => {
+      const firstLetter = (value as string).substr(0, 1);
+      const res = await fetch(`${api}/${firstLetter}.json`);
+      const resJson = await res.json();
+      console.log(resJson);
+    },
+    []
+  );
   // React.useEffect(() => {
   //   if (!open) {
   //     setOptions([]);
@@ -67,6 +81,7 @@ export const LocationInputField = () => {
           <TextField
             {...params}
             label="Asynchronous"
+            onChange={handleInputChange}
             InputProps={{
               ...params.InputProps,
               endAdornment: (
