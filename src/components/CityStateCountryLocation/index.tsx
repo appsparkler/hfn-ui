@@ -47,14 +47,18 @@ export const LocationInputField = () => {
 
   const handleInputChange = React.useCallback<TextFieldProps["onChange"]>(
     async ({ currentTarget: { value } }) => {
-      setLoading(true);
-      const firstLetter = (value as string).substr(0, 1).toLowerCase();
-      const res = await fetch(`${api}/${firstLetter}.json`);
-      console.log(res);
-      const resJson = await res.json();
-      console.log(resJson.length);
-      setOptions(resJson.results);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const firstLetter = (value as string).substr(0, 1).toLowerCase();
+        const res = await fetch(`${api}/${firstLetter}.json`);
+        console.log(res);
+        const resJson = await res.json();
+        console.log(resJson.length);
+        setOptions(resJson.results);
+      } catch (e) {
+      } finally {
+        setLoading(false);
+      }
     },
     [api]
   );
