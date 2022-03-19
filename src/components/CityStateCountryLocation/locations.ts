@@ -1,4 +1,4 @@
-import { uniq, pipe, map, find } from "lodash/fp";
+import { uniq, pipe, map, find, filter, remove } from "lodash/fp";
 
 export type CityStateCountryLocation = {
   id: number;
@@ -34,8 +34,25 @@ const findWithCityStateCountry = (cityStateCountryToFind: string) =>
     (item) => item.cityStateCountry === cityStateCountryToFind
   );
 
-export const getUniqLocations = (allLocations: CityStateCountryLocation[]) => {
-  const refinedLocations = mapCityStateCountryLocationToRefined(allLocations);
+const removeWhichDoNotStartWithQuery = (query: string) =>
+  remove<RefinedCityStateCountryLocation>(
+    (item) => item.cityStateCountry.indexOf(query) > 0
+  );
+
+export const getUniqLocations = (
+  allLocations: CityStateCountryLocation[],
+  query: string
+) => {
+  const removeItemsThatDonotstartWithQuery = filter<CityStateCountryLocation>(
+    (item) =>
+      `${item.name}, ${item.state}, ${item.country}`
+        .toLowerCase()
+        .indexOf(query.toLowerCase()) === 0
+  );
+
+  const refinedLocations = mapCityStateCountryLocationToRefined(
+    removeItemsThatDonotstartWithQuery(allLocations)
+  );
   return pipe<
     [RefinedCityStateCountryLocation[]],
     number[],
@@ -43,6 +60,7 @@ export const getUniqLocations = (allLocations: CityStateCountryLocation[]) => {
     RefinedCityStateCountryLocation[],
     string[],
     string[],
+    // string[],
     readonly RefinedCityStateCountryLocation[]
   >(
     map((location) => location.id),
@@ -52,6 +70,7 @@ export const getUniqLocations = (allLocations: CityStateCountryLocation[]) => {
     ),
     map((location) => location.cityStateCountry),
     uniq,
+    // filter((item) => item.indexOf(queryString) === 0),
     map((cityStateCountry) =>
       findWithCityStateCountry(cityStateCountry)(refinedLocations)
     )

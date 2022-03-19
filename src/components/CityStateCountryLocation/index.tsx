@@ -10,8 +10,9 @@ import {
   CityStateCountryLocation,
 } from "./locations";
 import { TextFieldProps } from "@mui/material";
-import { debounce } from "lodash/fp";
+import { debounce, remove } from "lodash/fp";
 import some from "lodash/fp/some";
+import { filter } from "lodash";
 
 const getApi = () => localStorage.getItem("cities-api");
 
@@ -27,7 +28,8 @@ const debounceGetAndSetLocationOptions = debounce(500)(
     setOptions: React.Dispatch<
       React.SetStateAction<readonly RefinedCityStateCountryLocation[]>
     >,
-    firstLetter: string
+    firstLetter: string,
+    query: string
   ): void => {
     try {
       setLoading(true);
@@ -35,8 +37,8 @@ const debounceGetAndSetLocationOptions = debounce(500)(
         .then((res) => res.json())
         .then((json) => json.results)
         .then((results: CityStateCountryLocation[]) => {
-          const uniqeLocations = getUniqLocations(results);
-          setOptions((prevOptions) => [...uniqeLocations, ...prevOptions]);
+          const uniqeLocations = getUniqLocations(results, query);
+          setOptions(uniqeLocations);
           // setLoading(false);
         })
         .catch(() => {
@@ -53,6 +55,11 @@ export type LocationInputFieldProps = {
   onChange: (value: RefinedCityStateCountryLocation) => void;
 };
 
+const removeWhichDoNotStartWithQuery = (query: string) =>
+  remove<RefinedCityStateCountryLocation>(
+    (item) => item.cityStateCountry.indexOf(query) > 0
+  );
+
 export const LocationInputField = ({ onChange }) => {
   const api = React.useMemo<string>(() => getApi(), []);
 
@@ -61,7 +68,13 @@ export const LocationInputField = ({ onChange }) => {
   const [options, setOptions] = React.useState<
     readonly RefinedCityStateCountryLocation[]
   >([]);
-  // const dispalyedOptions = React.useMemo(() => options.slice(0, 20), [options]);
+  const [query, setQuery] = React.useState<string>("");
+  const dispalyedOptions = React.useMemo<
+    RefinedCityStateCountryLocation[]
+  >(() => {
+    if (!Boolean(query)) return [];
+    return removeWhichDoNotStartWithQuery(query)(options);
+  }, [options, query]);
   // const loading = open && options.length === 0;
 
   // React.useEffect(() => {
@@ -91,14 +104,20 @@ export const LocationInputField = ({ onChange }) => {
   const handleInputChange = React.useCallback<TextFieldProps["onChange"]>(
     ({ currentTarget: { value } }) => {
       const firstLetter = (value as string).substr(0, 1).toLowerCase();
-      const isPreviouslySearched = some<string>((item) => item === firstLetter)(
-        searchedAlphabets
-      );
-      if (!isPreviouslySearched && Boolean(firstLetter))
-        debounceGetAndSetLocationOptions(setLoading, setOptions, firstLetter);
+      // const isPreviouslySearched = some<string>((item) => item === firstLetter)(
+      //   searchedAlphabets
+      // );
+      setQuery(value);
+      if (Boolean(firstLetter))
+        debounceGetAndSetLocationOptions(
+          setLoading,
+          setOptions,
+          firstLetter,
+          value
+        );
       setSearchedAlphabets((prev) => [...prev, firstLetter]);
     },
-    [searchedAlphabets]
+    []
   );
 
   const handleChangeCityStateCountry = React.useCallback<
@@ -111,6 +130,9 @@ export const LocationInputField = ({ onChange }) => {
     >["onChange"]
   >(
     (evt, selectedItem) => {
+      if (!selectedItem) {
+        setQuery("");
+      }
       if (typeof selectedItem !== "string") {
         onChange(selectedItem);
       }
@@ -126,6 +148,7 @@ export const LocationInputField = ({ onChange }) => {
 
   return (
     <Box>
+      <pre>{query}</pre>
       <Autocomplete
         id="asynchronous-demo"
         sx={{ width: 300 }}
@@ -133,6 +156,7 @@ export const LocationInputField = ({ onChange }) => {
         autoHighlight
         open={open}
         onOpen={() => {
+          if (!query) setOpen(false);
           setOpen(true);
         }}
         onClose={() => {
