@@ -42,12 +42,20 @@ const debounceGetAndSetLocationOptions = debounce(500)(
 export type LocationInputFieldProps = {
   error?: boolean;
   helperText?: string;
+  label?: string;
+  required?: boolean;
+  size?: TextFieldProps["size"];
+  variant?: TextFieldProps["variant"];
   onChange: (value: RefinedCityStateCountryLocation) => void;
 };
 
 export const LocationInputField = ({
   error,
   helperText,
+  label,
+  required,
+  size,
+  variant,
   onChange,
 }: LocationInputFieldProps) => {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -118,9 +126,12 @@ export const LocationInputField = ({
           renderInput={(params) => (
             <TextField
               {...params}
+              required={required}
               error={error}
-              label="Asynchronous"
+              label={label}
               onChange={handleInputChange}
+              size={size}
+              variant={variant}
               InputProps={{
                 ...params.InputProps,
                 endAdornment: (

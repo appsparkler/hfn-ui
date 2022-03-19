@@ -18,5 +18,9 @@ const AsyncButtonTemplate: ComponentStory<typeof LocationInputField> = (
 export const asyncButton = AsyncButtonTemplate.bind({});
 asyncButton.args = {
   error: false,
+  label: "City, State, Country",
+  required: false,
   helperText: "Helper text for the user.",
+  size: "medium",
+  variant: "filled",
 } as LocationInputFieldProps;
