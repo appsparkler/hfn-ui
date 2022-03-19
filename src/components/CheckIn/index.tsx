@@ -8,14 +8,7 @@ export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type CheckInProps = SignedInUserCheckInProps & {};
 
-export const CheckIn: FC<CheckInProps> = ({
-  onClickCheckIn,
-  onClickHelpOthersCheckIn,
-}) => {
-  return (
-    <SignedInUserCheckIn
-      onClickCheckIn={onClickCheckIn}
-      onClickHelpOthersCheckIn={onClickHelpOthersCheckIn}
-    />
-  );
-};
+export const CheckIn: FC<CheckInProps> = ({ onClickCheckIn }) => (
+  // <SignedInUserCheckIn onClickCheckIn={onClickCheckIn} />
+  <div>Signed In User Checkin (WIP)</div>
+);
