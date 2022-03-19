@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { uniq, pipe, map, find } from "lodash/fp";
 import { locations, CityStateCountryLocation } from "./locations";
 import { TextFieldProps } from "@mui/material";
 
@@ -25,35 +24,39 @@ export const LocationInputField = () => {
   >([]);
   // const loading = open && options.length === 0;
 
-  React.useEffect(() => {
-    let active = true;
+  // React.useEffect(() => {
+  //   let active = true;
 
-    if (!loading) {
-      return undefined;
-    }
+  //   if (!loading) {
+  //     return undefined;
+  //   }
 
-    (async () => {
-      console.log(1e4);
-      await sleep(1e3); // For demo purposes.
+  //   (async () => {
+  //     console.log(1e4);
+  //     await sleep(1e3); // For demo purposes.
 
-      if (active) {
-        setOptions([...locations]);
-      }
-    })();
+  //     if (active) {
+  //       setOptions([...locations]);
+  //     }
+  //   })();
 
-    return () => {
-      active = false;
-    };
-  }, [loading]);
+  //   return () => {
+  //     active = false;
+  //   };
+  // }, [loading]);
 
   const handleInputChange = React.useCallback<TextFieldProps["onChange"]>(
     async ({ currentTarget: { value } }) => {
-      const firstLetter = (value as string).substr(0, 1);
+      setLoading(true);
+      const firstLetter = (value as string).substr(0, 1).toLowerCase();
       const res = await fetch(`${api}/${firstLetter}.json`);
+      console.log(res);
       const resJson = await res.json();
-      console.log(resJson);
+      console.log(resJson.length);
+      setOptions(resJson.results);
+      setLoading(false);
     },
-    []
+    [api]
   );
   // React.useEffect(() => {
   //   if (!open) {
