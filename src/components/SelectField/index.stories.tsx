@@ -18,7 +18,9 @@ const SelectFieldTemplate: ComponentStory<typeof SelectField> = (args) => (
 export const selectField = SelectFieldTemplate.bind({});
 selectField.args = {
   labelId: "demo-simple-select-label",
+  error: false,
   label: "Age",
+  helperText: "Please select the age",
   options: [
     { value: 1, label: <em>Select Age</em> },
     { value: 10, label: "Ten" },

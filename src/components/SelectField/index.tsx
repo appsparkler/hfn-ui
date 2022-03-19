@@ -5,6 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectProps } from "@mui/material/Select";
 import map from "lodash/fp/map";
 import { useCallback } from "react";
+import { FormHelperText, FormHelperTextProps } from "@mui/material";
 
 export type OptionValue = string | number;
 
@@ -15,13 +16,20 @@ export type SelectFieldOption = {
 
 export type SelectFieldProps = Omit<
   SelectProps,
-  "value" | "onChange" | "defaultValue" | "label"
+  "value" | "onChange" | "defaultValue" | "label" | "error"
 > & {
+  //  Optional
+  error?: SelectProps["error"];
+  helperText?: FormHelperTextProps["children"];
+  wrapperProps?: BoxProps;
+
+  // Required
   label: string;
   labelId: string;
   options: SelectFieldOption[];
   value: OptionValue;
-  wrapperProps: BoxProps;
+
+  // Event Handlers
   onChange: (newValue: OptionValue) => void;
 };
 
@@ -37,6 +45,8 @@ export const SelectField = ({
   value,
   onChange,
   wrapperProps = {},
+  helperText,
+  error,
   ...restSelectProps
 }: SelectFieldProps) => {
   const handleChange = useCallback<SelectProps<OptionValue>["onChange"]>(
@@ -51,6 +61,7 @@ export const SelectField = ({
       <FormControl fullWidth>
         <InputLabel id={labelId}>{label}</InputLabel>
         <Select<OptionValue>
+          error={error}
           labelId={labelId}
           value={value}
           onChange={handleChange}
@@ -63,6 +74,9 @@ export const SelectField = ({
             </MenuItem>
           ))(options)}
         </Select>
+        {helperText && (
+          <FormHelperText error={error}>{helperText}</FormHelperText>
+        )}
       </FormControl>
     </Box>
   );
