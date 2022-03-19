@@ -206,8 +206,6 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
           />
           <FormHelperText error>Mobile # is invalid</FormHelperText>
         </FormControl>
-        <InputWithPopover />
-        <InputWithPopover />
       </Box>
       <Box display="flex" gap={2}>
         <Button
