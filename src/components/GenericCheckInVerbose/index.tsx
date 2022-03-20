@@ -22,7 +22,7 @@ import {
   SelectFieldOption,
   SelectFieldProps,
 } from "../SelectField";
-import { entries, keys, some, uniqueId, values } from "lodash/fp";
+import { some, uniqueId, values } from "lodash/fp";
 import { RefinedCityStateCountryLocation } from "../CityStateCountryLocation/locations";
 
 export type InputWithPopoverProps = {
@@ -42,6 +42,12 @@ export type Favourite = {
   id: string;
   name: string;
 } & MobileNumberOrEmailOrAbhyasiId;
+
+export type VerboseCheckInFormValue<T> = {
+  value: T;
+  helperText: string;
+  error: boolean;
+};
 
 export type GenericCheckInVerboseValue = {
   fullName: {
@@ -71,20 +77,61 @@ export type GenericCheckInVerboseValue = {
   };
 };
 
+const validateFullName = (
+  fullNameValue: string
+): VerboseCheckInFormValue<string> => {
+  return {
+    error: Boolean(fullNameValue),
+    helperText: "This field is required",
+    value: fullNameValue,
+  };
+};
+const validateLocation = (
+  location: RefinedCityStateCountryLocation
+): VerboseCheckInFormValue<RefinedCityStateCountryLocation> => {
+  return {
+    error: Boolean(location),
+    helperText: "Location details are required",
+    value: location,
+  };
+};
+const validateAgeGroup = (
+  ageGroup: OptionValue
+): VerboseCheckInFormValue<OptionValue> => {
+  return {
+    error: Boolean(ageGroup),
+    helperText: "Age group is required",
+    value: ageGroup,
+  };
+};
+const validateEmail = (email: string): VerboseCheckInFormValue<string> => {
+  return {
+    error: Boolean(email),
+    helperText: "Email is required.",
+    value: email,
+  };
+};
+const validateGender = (
+  gender: OptionValue
+): VerboseCheckInFormValue<OptionValue> => {
+  return {
+    error: Boolean(gender),
+    helperText: "Gender is required.",
+    value: gender,
+  };
+};
 export const validateCheckInDetails = (
   userDetails: GenericCheckInVerboseValue
 ): GenericCheckInVerboseValue => {
-  const hasFullName = Boolean(userDetails.fullName.value.trim());
-  if (!hasFullName) {
-    return {
-      ...userDetails,
-      fullName: {
-        ...userDetails.fullName,
-        error: true,
-        helperText: "This field is required",
-      },
-    };
-  }
+  const { fullName, location, ageGroup, email, gender } = userDetails;
+
+  return {
+    fullName: validateFullName(fullName.value),
+    location: validateLocation(location.value),
+    ageGroup: validateAgeGroup(ageGroup.value),
+    email: validateEmail(email.value),
+    gender: validateGender(gender.value),
+  };
 };
 
 export type GenericCheckInVerboseProps = {

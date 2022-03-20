@@ -1,9 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { GenericCheckInVerbose, GenericCheckInVerboseProps } from "./index";
-import random from "lodash/fp/random";
-import uniqueId from "lodash/uniqueId";
-import { action } from "@storybook/addon-actions";
 import { Box } from "@mui/system";
 
 export default {
@@ -32,6 +29,11 @@ genericCheckInVerbose.args = {
     },
     gender: {
       value: 0,
+      error: false,
+      helperText: "",
+    },
+    location: {
+      value: undefined,
       error: false,
       helperText: "",
     },
