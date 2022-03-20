@@ -16,7 +16,10 @@ import FormControlLabel, {
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import TextField from "@mui/material/TextField";
+import {
+  TextFieldWithLabel,
+  TextFieldWithLabelProps,
+} from "../TextFieldWithLabel";
 import React, {
   ChangeEventHandler,
   FC,
@@ -32,27 +35,20 @@ import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
 import { AsyncIconButton } from "../AsyncIconButton";
 import { Button, FormControl, FormHelperText } from "@mui/material";
+import {
+  LocationInputField,
+  LocationInputFieldProps,
+} from "../CityStateCountryLocation";
+import {
+  OptionValue,
+  SelectField,
+  SelectFieldOption,
+  SelectFieldProps,
+} from "../SelectField";
+import { uniqueId } from "lodash/fp";
 
 export type InputWithPopoverProps = {
   helperText?: string;
-};
-
-const InputWithPopover = ({ helperText }: InputWithPopoverProps) => {
-  return (
-    <Box>
-      <FormControl sx={{ width: "100%" }}>
-        <TextField
-          required
-          size="medium"
-          id="outlined-required"
-          label="Abhyasi ID, Email or Mobile Number"
-          fullWidth
-          error
-        />
-        {helperText && <FormHelperText>{helperText}</FormHelperText>}
-      </FormControl>
-    </Box>
-  );
 };
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
@@ -70,116 +66,45 @@ export type Favourite = {
 } & MobileNumberOrEmailOrAbhyasiId;
 
 export type GenericCheckInVerboseProps = {
-  favourites: Favourite[];
-  onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
-  onCheckInFavourite: (favouriteUserId: string) => void;
-  onDeleteFavourite: (favouriteUserId: string) => void;
+  value: {
+    firstName: {
+      value: string;
+      helperText: string;
+      error: boolean;
+    };
+    ageGroup: {
+      value: OptionValue;
+      helperText: string;
+      error: boolean;
+    };
+  };
 };
 
 export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
-  favourites = [],
-  onCheckInUser,
-  onCheckInFavourite,
-  onDeleteFavourite,
+  value,
 }) => {
-  const userInfoRef = useRef<HTMLInputElement>();
-
-  const [userInfo, setUserInfo] = useState<string>("");
-
-  const [snackbar, setSnackbar] = useState<{
-    isOpen: boolean;
-    message: string;
-    severity: AlertColor;
-  }>({
-    isOpen: false,
-    message: "",
-    severity: "error",
-  });
-
-  const [addToFavorite, setAddToFavorite] = useState<boolean>(false);
-
-  const [checkedInFavourites, setCheckedInFavourites] = useState<string[]>([]);
-
-  const isCheckInButtonDisabled = useMemo<boolean>(
-    () => userInfo.trim().length === 0,
-    [userInfo]
-  );
-
-  const { hasFavourites, noFavourites } = useMemo<{
-    hasFavourites: boolean;
-    noFavourites: boolean;
-  }>(() => {
-    const hasFavourites = favourites.length > 0;
-    const noFavourites = !hasFavourites;
-    return {
-      hasFavourites,
-      noFavourites,
-    };
-  }, [favourites]);
-
-  const handleChangeUserInfo = useCallback<InputChangeEventHandler>(
-    ({ currentTarget: { value } }) => {
-      setUserInfo(value);
-    },
+  const { ageGroup } = value;
+  const ageGroupOptions = useMemo<SelectFieldOption[]>(
+    () => [
+      { value: 0, label: <em>Select Age Group</em> },
+      { value: "0 - 4", label: "0 - 4" },
+      { value: "5 - 9", label: "5 - 9" },
+      { value: "10 - 14", label: "10 - 14" },
+    ],
     []
   );
+  const ageGroupSelectFieldId = useMemo(() => uniqueId("select-field-"), []);
+  const handleChange = useCallback<
+    TextFieldWithLabelProps["onChange"]
+  >(() => {}, []);
 
-  const handleChangeAddToFavourite = useCallback<
-    FormControlLabelProps["onChange"]
-  >(() => {
-    setAddToFavorite((prevValue) => !prevValue);
-  }, [setAddToFavorite]);
+  const handleChangeLocationInputField = useCallback<
+    LocationInputFieldProps["onChange"]
+  >(() => {}, []);
 
-  const handleCheckInUser = useCallback<ClickHandler>(async () => {
-    try {
-      const successMessage = await onCheckInUser(userInfo, addToFavorite);
-      setUserInfo("");
-      userInfoRef.current.focus();
-      return successMessage;
-    } catch (error) {
-      throw error;
-    }
-  }, [onCheckInUser, userInfo, addToFavorite]);
-
-  const handleCheckInFavouriteUser = useCallback<ClickHandler>(
-    async ({ currentTarget: { dataset } }) => {
-      try {
-        const { id } = dataset;
-        const successMessage = await onCheckInFavourite(id);
-        setCheckedInFavourites((prevItems) => [...prevItems, id]);
-        return successMessage;
-      } catch (e) {
-        throw e;
-      }
-    },
-    [onCheckInFavourite]
-  );
-
-  const handleSnackbarClose = useCallback(() => {
-    setSnackbar({ isOpen: false, message: "", severity: "error" });
-  }, []);
-
-  const isFavouriteCheckInDisabled = useCallback(
-    (id) => someStringsMatch(id)(checkedInFavourites),
-    [checkedInFavourites]
-  );
-
-  const handleClickDeleteButton = useCallback<ClickHandler>(
-    async (evt) => {
-      const {
-        currentTarget: { dataset },
-      } = evt;
-      try {
-        const { id } = dataset;
-        const successMessage = await onDeleteFavourite(id);
-
-        return successMessage;
-      } catch (error) {
-        throw error;
-      }
-    },
-    [onDeleteFavourite]
-  );
+  const handleChangeAgeGroup = useCallback<
+    SelectFieldProps["onChange"]
+  >(() => {}, []);
 
   return (
     <Box
@@ -191,37 +116,42 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
       }}
       gap={3}
     >
-      <Box width={[300, 400]} display="flex" flexDirection={"column"} gap={5}>
-        <FormControl sx={{ width: "100%" }}>
-          <TextField
-            required
-            error
-            size="medium"
-            id="outlined-required"
-            label="Abhyasi ID, Email or Mobile Number"
-            value={userInfo}
-            fullWidth
-            onChange={handleChangeUserInfo}
-            inputRef={userInfoRef}
-          />
-          <FormHelperText error>Mobile # is invalid</FormHelperText>
-        </FormControl>
-      </Box>
+      <TextFieldWithLabel
+        label="Full Name"
+        required
+        type="text"
+        {...value.firstName}
+        onChange={console.log}
+      />
+      <LocationInputField
+        onChange={handleChangeLocationInputField}
+        label="City, State, Country"
+        required
+      />
+      <SelectField
+        label="Age Group"
+        labelId={ageGroupSelectFieldId}
+        onChange={handleChangeAgeGroup}
+        options={ageGroupOptions}
+        {...ageGroup}
+      />
+      <SelectField
+        label="Age Group"
+        labelId={ageGroupSelectFieldId}
+        onChange={handleChangeAgeGroup}
+        options={ageGroupOptions}
+        {...ageGroup}
+      />
       <Box display="flex" gap={2}>
-        <Button
-          variant="outlined"
-          size="large"
-          onClick={handleCheckInUser}
-          disabled={isCheckInButtonDisabled}
-        >
+        <Button variant="outlined" size="large">
           Cancel
         </Button>
         <AsyncButton
           variant="contained"
           size="large"
-          onClick={handleCheckInUser}
-          errorMessage={`Checkin unsuccessful with ${userInfo}.`}
-          successMessage={`CheckedIn with ${userInfo}.`}
+          onClick={console.log}
+          errorMessage={`Checkin unsuccessful with ...`}
+          successMessage={`CheckedIn with ...`}
           label="Check In"
         />
       </Box>

@@ -101,11 +101,10 @@ export const LocationInputField = ({
   );
 
   return (
-    <Box>
-      <FormControl>
+    <Box width="100%">
+      <FormControl fullWidth>
         <Autocomplete
-          id="asynchronous-demo"
-          sx={{ width: 300 }}
+          fullWidth
           autoComplete
           autoHighlight
           open={open}
