@@ -98,8 +98,8 @@ export const FavouriteList = ({
     >
       {hasFavourites &&
         map<Favourite, JSX.Element>(({ name, id }) => (
-          <React.Fragment>
-            <ListItem key={id}>
+          <React.Fragment key={id}>
+            <ListItem>
               <ListItemAvatar>
                 <Avatar>
                   <PersonIcon />
