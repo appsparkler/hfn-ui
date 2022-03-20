@@ -22,6 +22,7 @@ export type SelectFieldProps = Omit<
   error?: SelectProps["error"];
   helperText?: FormHelperTextProps["children"];
   wrapperProps?: BoxProps;
+  required?: boolean;
 
   // Required
   label: string;
@@ -43,6 +44,7 @@ export const SelectField = ({
     { value: 30, label: "Thirty" },
   ],
   value,
+  required,
   onChange,
   wrapperProps = {},
   helperText,
@@ -58,14 +60,14 @@ export const SelectField = ({
 
   return (
     <Box sx={{ width: "100%" }} {...wrapperProps}>
-      <FormControl fullWidth>
+      <FormControl fullWidth required={required}>
         <InputLabel id={labelId}>{label}</InputLabel>
         <Select<OptionValue>
           error={error}
           labelId={labelId}
-          value={value}
           onChange={handleChange}
           label={label}
+          required={required}
           {...restSelectProps}
         >
           {map<SelectFieldOption, JSX.Element>(({ value, label }) => (
