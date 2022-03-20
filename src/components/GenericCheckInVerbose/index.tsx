@@ -10,7 +10,7 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { AsyncButton } from "../AsyncButton";
+import { AsyncButton, AsyncButtonProps } from "../AsyncButton";
 import { Button } from "@mui/material";
 import {
   LocationInputField,
@@ -22,7 +22,7 @@ import {
   SelectFieldOption,
   SelectFieldProps,
 } from "../SelectField";
-import { uniqueId } from "lodash/fp";
+import { entries, keys, some, uniqueId, values } from "lodash/fp";
 import { RefinedCityStateCountryLocation } from "../CityStateCountryLocation/locations";
 
 export type InputWithPopoverProps = {
@@ -71,14 +71,34 @@ export type GenericCheckInVerboseValue = {
   };
 };
 
+export const validateCheckInDetails = (
+  userDetails: GenericCheckInVerboseValue
+): GenericCheckInVerboseValue => {
+  const hasFullName = Boolean(userDetails.fullName.value.trim());
+  if (!hasFullName) {
+    return {
+      ...userDetails,
+      fullName: {
+        ...userDetails.fullName,
+        error: true,
+        helperText: "This field is required",
+      },
+    };
+  }
+};
+
 export type GenericCheckInVerboseProps = {
   value: GenericCheckInVerboseValue;
   onChange: (updatedValue: GenericCheckInVerboseValue) => void;
+  onClickCheckIn: (fieldValues: GenericCheckInVerboseValue) => void;
+  onClickCancel: ClickHandler;
 };
 
 export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   value,
   onChange,
+  onClickCheckIn,
+  onClickCancel,
 }) => {
   const { ageGroup, gender, email } = value;
   const ageGroupOptions = useMemo<SelectFieldOption[]>(
@@ -167,6 +187,23 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
     [onChange, value]
   );
 
+  const handleClickCheckIn = useCallback<
+    AsyncButtonProps["onClick"]
+  >(async () => {
+    const validatedValues: GenericCheckInVerboseValue =
+      validateCheckInDetails(value);
+    const someHaveError = some<{ error: boolean }>((item) => item.error);
+    const validationValues =
+      values<GenericCheckInVerboseValue>(validatedValues);
+    const userInfoHasErrors = someHaveError(validationValues);
+    if (userInfoHasErrors) {
+      onChange(validatedValues);
+    } else {
+      onClickCheckIn(validatedValues);
+    }
+    // await onClickCheckIn(value);
+  }, [onChange, onClickCheckIn, value]);
+
   return (
     <Box
       sx={{
@@ -212,13 +249,18 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         {...email}
       />
       <Box display="flex" gap={2}>
-        <Button variant="outlined" size="large">
+        <Button
+          variant="outlined"
+          size="large"
+          type="button"
+          onClick={onClickCancel}
+        >
           Cancel
         </Button>
         <AsyncButton
           variant="contained"
           size="large"
-          onClick={console.log}
+          onClick={handleClickCheckIn}
           errorMessage={`Checkin unsuccessful with ...`}
           successMessage={`CheckedIn with ...`}
           label="Check In"
