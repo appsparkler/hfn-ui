@@ -30,5 +30,15 @@ genericCheckInVerbose.args = {
       error: false,
       helperText: "",
     },
+    gender: {
+      value: 0,
+      error: false,
+      helperText: "",
+    },
+    email: {
+      value: "",
+      error: false,
+      helperText: "",
+    },
   },
 } as GenericCheckInVerboseProps;

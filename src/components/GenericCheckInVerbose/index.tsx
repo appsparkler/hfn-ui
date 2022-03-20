@@ -77,13 +77,23 @@ export type GenericCheckInVerboseProps = {
       helperText: string;
       error: boolean;
     };
+    gender: {
+      value: OptionValue;
+      helperText: string;
+      error: boolean;
+    };
+    email: {
+      value: string;
+      helperText: string;
+      error: boolean;
+    };
   };
 };
 
 export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   value,
 }) => {
-  const { ageGroup } = value;
+  const { ageGroup, gender, email } = value;
   const ageGroupOptions = useMemo<SelectFieldOption[]>(
     () => [
       { value: 0, label: <em>Select Age Group</em> },
@@ -93,7 +103,17 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
     ],
     []
   );
+  const genderSelectOptions = useMemo<SelectFieldOption[]>(
+    () => [
+      { value: 0, label: <em>Select Gender</em> },
+      { label: "Female", value: "Female" },
+      { label: "Male", value: "Male" },
+      { label: "Unspecified", value: "Unspecified" },
+    ],
+    []
+  );
   const ageGroupSelectFieldId = useMemo(() => uniqueId("select-field-"), []);
+  const genderSelectFieldId = useMemo(() => uniqueId("select-field-"), []);
   const handleChange = useCallback<
     TextFieldWithLabelProps["onChange"]
   >(() => {}, []);
@@ -136,11 +156,17 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         {...ageGroup}
       />
       <SelectField
-        label="Age Group"
-        labelId={ageGroupSelectFieldId}
+        label="Gender"
+        labelId={genderSelectFieldId}
         onChange={handleChangeAgeGroup}
-        options={ageGroupOptions}
-        {...ageGroup}
+        options={genderSelectOptions}
+        {...gender}
+      />
+      <TextFieldWithLabel
+        label="email"
+        type="email"
+        onChange={console.log}
+        {...email}
       />
       <Box display="flex" gap={2}>
         <Button variant="outlined" size="large">
