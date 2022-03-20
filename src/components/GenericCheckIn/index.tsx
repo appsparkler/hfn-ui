@@ -1,12 +1,10 @@
 import FavouriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Alert, { AlertColor } from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
-import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -32,6 +30,119 @@ import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
 import { AsyncIconButton } from "../AsyncIconButton";
 
+export type FavouriteListProps = {
+  favourites: Favourite[];
+  onCheckInFavourite: (favouriteUserId: string) => void;
+  onDeleteFavourite: (favouriteUserId: string) => void;
+};
+
+export const FavouriteList = ({
+  favourites,
+  onCheckInFavourite,
+  onDeleteFavourite,
+}: FavouriteListProps) => {
+  const { hasFavourites, noFavourites } = useMemo<{
+    hasFavourites: boolean;
+    noFavourites: boolean;
+  }>(() => {
+    const hasFavourites = favourites.length > 0;
+    const noFavourites = !hasFavourites;
+    return {
+      hasFavourites,
+      noFavourites,
+    };
+  }, [favourites]);
+  const handleClickDeleteFavourite = useCallback<ClickHandler>(
+    async (evt) => {
+      const {
+        currentTarget: { dataset },
+      } = evt;
+      try {
+        const { id } = dataset;
+        const successMessage = await onDeleteFavourite(id);
+
+        return successMessage;
+      } catch (error) {
+        throw error;
+      }
+    },
+    [onDeleteFavourite]
+  );
+
+  const handleCheckInFavouriteUser = useCallback<ClickHandler>(
+    async ({ currentTarget: { dataset } }) => {
+      const { id } = dataset;
+      const successMessage = await onCheckInFavourite(id);
+      setCheckedInFavourites((prevItems) => [...prevItems, id]);
+      return successMessage;
+    },
+    [onCheckInFavourite]
+  );
+
+  const [checkedInFavourites, setCheckedInFavourites] = useState<string[]>([]);
+
+  const isFavouriteCheckInDisabled = useCallback(
+    (id) => someStringsMatch(id)(checkedInFavourites),
+    [checkedInFavourites]
+  );
+
+  return (
+    <List
+      dense={false}
+      sx={{ width: ["100%", 400], maxWidth: 400 }}
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Checkin from your favourites list
+        </ListSubheader>
+      }
+    >
+      {hasFavourites &&
+        map<Favourite, JSX.Element>(({ name, id }) => (
+          <React.Fragment>
+            <ListItem key={id}>
+              <ListItemAvatar>
+                <Avatar>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={name} />
+              {!isFavouriteCheckInDisabled(id) && (
+                <AsyncButton
+                  data-id={id}
+                  variant="outlined"
+                  size="small"
+                  sx={{ ml: 1 }}
+                  onClick={handleCheckInFavouriteUser}
+                  label="Check In"
+                  successMessage={`${name} is checked in.`}
+                  errorMessage={`Checkin unsuccessful for ${name}`}
+                />
+              )}
+              {isFavouriteCheckInDisabled(id) && (
+                <Box marginLeft={2}>
+                  <CheckCircleIcon color="success" />
+                </Box>
+              )}
+              <AsyncIconButton
+                data-id={id}
+                edge="end"
+                aria-label="delete"
+                onClick={handleClickDeleteFavourite}
+                size="medium"
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </React.Fragment>
+        ))(favourites)}
+      {noFavourites && (
+        <Typography color="InactiveCaptionText" variant="body2">
+          <i>No farourites</i>
+        </Typography>
+      )}
+    </List>
+  );
+};
+
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type InputChangeEventHandler = ChangeEventHandler<HTMLInputElement>;
@@ -46,16 +157,14 @@ export type Favourite = {
   name: string;
 } & MobileNumberOrEmailOrAbhyasiId;
 
-export type GenericCheckInProps = {
-  favourites: Favourite[];
+export type GenericCheckInProps = FavouriteListProps & {
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
-  onCheckInFavourite: (favouriteUserId: string) => void;
-  onDeleteFavourite: (favouriteUserId: string) => void;
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
-  favourites = [],
   onCheckInUser,
+  // Favorites List
+  favourites,
   onCheckInFavourite,
   onDeleteFavourite,
 }) => {
@@ -63,36 +172,12 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
 
   const [userInfo, setUserInfo] = useState<string>("");
 
-  const [snackbar, setSnackbar] = useState<{
-    isOpen: boolean;
-    message: string;
-    severity: AlertColor;
-  }>({
-    isOpen: false,
-    message: "",
-    severity: "error",
-  });
-
   const [addToFavorite, setAddToFavorite] = useState<boolean>(false);
-
-  const [checkedInFavourites, setCheckedInFavourites] = useState<string[]>([]);
 
   const isCheckInButtonDisabled = useMemo<boolean>(
     () => userInfo.trim().length === 0,
     [userInfo]
   );
-
-  const { hasFavourites, noFavourites } = useMemo<{
-    hasFavourites: boolean;
-    noFavourites: boolean;
-  }>(() => {
-    const hasFavourites = favourites.length > 0;
-    const noFavourites = !hasFavourites;
-    return {
-      hasFavourites,
-      noFavourites,
-    };
-  }, [favourites]);
 
   const handleChangeUserInfo = useCallback<InputChangeEventHandler>(
     ({ currentTarget: { value } }) => {
@@ -117,46 +202,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       throw error;
     }
   }, [onCheckInUser, userInfo, addToFavorite]);
-
-  const handleCheckInFavouriteUser = useCallback<ClickHandler>(
-    async ({ currentTarget: { dataset } }) => {
-      try {
-        const { id } = dataset;
-        const successMessage = await onCheckInFavourite(id);
-        setCheckedInFavourites((prevItems) => [...prevItems, id]);
-        return successMessage;
-      } catch (e) {
-        throw e;
-      }
-    },
-    [onCheckInFavourite]
-  );
-
-  const handleSnackbarClose = useCallback(() => {
-    setSnackbar({ isOpen: false, message: "", severity: "error" });
-  }, []);
-
-  const isFavouriteCheckInDisabled = useCallback(
-    (id) => someStringsMatch(id)(checkedInFavourites),
-    [checkedInFavourites]
-  );
-
-  const handleClickDeleteButton = useCallback<ClickHandler>(
-    async (evt) => {
-      const {
-        currentTarget: { dataset },
-      } = evt;
-      try {
-        const { id } = dataset;
-        const successMessage = await onDeleteFavourite(id);
-
-        return successMessage;
-      } catch (error) {
-        throw error;
-      }
-    },
-    [onDeleteFavourite]
-  );
 
   return (
     <Box
@@ -199,68 +244,12 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         successMessage={`CheckedIn with ${userInfo}.`}
         label="Check In"
       />
-      <List
-        dense={false}
-        sx={{ width: ["100%", 400], maxWidth: 400 }}
-        subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            Checkin from your favourites list
-          </ListSubheader>
-        }
-      >
-        {hasFavourites &&
-          map<Favourite, JSX.Element>(({ name, id }) => (
-            <React.Fragment>
-              <ListItem key={id}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <PersonIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={name} />
-                {!isFavouriteCheckInDisabled(id) && (
-                  <AsyncButton
-                    data-id={id}
-                    variant="outlined"
-                    size="small"
-                    sx={{ ml: 1 }}
-                    onClick={handleCheckInFavouriteUser}
-                    label="Check In"
-                    successMessage={`${name} is checked in.`}
-                    errorMessage={`Checkin unsuccessful for ${name}`}
-                  />
-                )}
-                {isFavouriteCheckInDisabled(id) && (
-                  <Box marginLeft={2}>
-                    <CheckCircleIcon color="success" />
-                  </Box>
-                )}
-                <AsyncIconButton
-                  data-id={id}
-                  edge="end"
-                  aria-label="delete"
-                  onClick={handleClickDeleteButton}
-                  size="medium"
-                />
-              </ListItem>
-              <Divider variant="inset" component="li" />
-            </React.Fragment>
-          ))(favourites)}
-        {noFavourites && (
-          <Typography color="InactiveCaptionText" variant="body2">
-            <i>No farourites</i>
-          </Typography>
-        )}
-      </List>
-      <Snackbar
-        open={snackbar.isOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-      >
-        <Alert severity={snackbar.severity} sx={{ width: "100%" }}>
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+
+      <FavouriteList
+        favourites={favourites}
+        onCheckInFavourite={onCheckInFavourite}
+        onDeleteFavourite={onDeleteFavourite}
+      />
     </Box>
   );
 };
