@@ -1,7 +1,7 @@
-import { AlertColor } from "@mui/material/Alert";
-import { SnackbarProps } from "@mui/material/Snackbar";
 import { useCallback, useEffect, useState } from "react";
 import { ClickHandler } from "../types";
+
+import { AlertColor, SnackbarProps } from '@mui/material';
 
 export const useAsyncButton = (onClick, disabled) => {
   const [snackbar, setSnackbar] = useState<{
@@ -13,7 +13,7 @@ export const useAsyncButton = (onClick, disabled) => {
     message: "",
     severity: "error",
   });
-  const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const handleClick = useCallback<ClickHandler>(
     async (evt) => {
