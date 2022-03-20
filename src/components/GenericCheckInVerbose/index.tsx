@@ -258,6 +258,9 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         alignItems: "center",
         flexDirection: "column",
         bg: "",
+        width: "100%",
+        minWidth: 300,
+        maxWidth: 400,
       }}
       gap={3}
     >
