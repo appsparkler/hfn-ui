@@ -11,8 +11,6 @@ import { ClickHandler } from "../../types";
 export type AsyncButtonProps = ButtonProps & {
   onClick: ClickHandler;
   disabled?: boolean;
-  errorMessage: string;
-  successMessage: string;
   label: string;
   size?: ButtonProps["size"];
   variant?: ButtonProps["variant"];
@@ -22,8 +20,6 @@ export const AsyncButton = ({
   onClick = noop,
   disabled,
   label = "Sign In",
-  successMessage = "Done!",
-  errorMessage = "Oops! Something went wrong!",
   size,
   variant,
   ...restProps

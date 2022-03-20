@@ -311,8 +311,6 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
           variant="contained"
           size="large"
           onClick={handleClickCheckIn}
-          errorMessage={`Checkin unsuccessful with ...`}
-          successMessage={`CheckedIn with ...`}
           label="Check In"
         />
       </Box>

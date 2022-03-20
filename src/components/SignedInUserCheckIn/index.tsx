@@ -10,6 +10,7 @@ import {
   EventNameAndLocationProps,
 } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
+import { AsyncButton } from "../AsyncButton";
 
 export type AppBarProps = {
   onClickBackButton: ClickHandler;
@@ -50,14 +51,13 @@ export const SignedUserCheckInMainScreen = ({
         alignItems: "center",
       }}
     >
-      <Button
+      <AsyncButton
         variant="contained"
         type="button"
         size="large"
         onClick={onClickCheckIn}
-      >
-        Check In
-      </Button>
+        label="Check In"
+      />
       <Button
         variant="outlined"
         type="button"

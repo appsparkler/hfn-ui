@@ -118,8 +118,6 @@ export const FavouriteList = ({
                   sx={{ ml: 1 }}
                   onClick={handleCheckInFavouriteUser}
                   label="Check In"
-                  successMessage={`${name} is checked in.`}
-                  errorMessage={`Checkin unsuccessful for ${name}`}
                 />
               )}
               {isFavouriteCheckInDisabled(id) && (
@@ -261,8 +259,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
             size="large"
             onClick={handleCheckInUser}
             disabled={isCheckInButtonDisabled}
-            errorMessage={`Checkin unsuccessful with ${userInfo}.`}
-            successMessage={`CheckedIn with ${userInfo}.`}
             label="Check In"
           />
         </>
