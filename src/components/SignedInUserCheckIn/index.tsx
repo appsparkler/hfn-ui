@@ -50,12 +50,18 @@ export const SignedUserCheckInMainScreen = ({
         alignItems: "center",
       }}
     >
-      <Button variant="contained" type="button" onClick={onClickCheckIn}>
+      <Button
+        variant="contained"
+        type="button"
+        size="large"
+        onClick={onClickCheckIn}
+      >
         Check In
       </Button>
       <Button
         variant="outlined"
         type="button"
+        size="large"
         onClick={onClickHelpOthersCheckIn}
       >
         Help Others Check In
