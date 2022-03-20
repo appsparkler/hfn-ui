@@ -14,7 +14,9 @@ const Template: ComponentStory<typeof GenericCheckInVerbose> = (args) => (
   </Box>
 );
 
-export const genericCheckInVerbose = Template.bind({});
+export const genericCheckInVerbose: {
+  args: GenericCheckInVerboseProps;
+} = Template.bind({});
 genericCheckInVerbose.args = {
   value: {
     fullName: {

@@ -4,6 +4,7 @@ import { GenericCheckIn, GenericCheckInProps } from "./index";
 import random from "lodash/fp/random";
 import uniqueId from "lodash/uniqueId";
 import { action } from "@storybook/addon-actions";
+import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
 
 export default {
   title: "Components/Generic Check In",
@@ -18,6 +19,9 @@ export const genericCheckIn = Template.bind({});
 genericCheckIn.args = {
   eventName: "Youth Seminar",
   eventLocation: "Kanha Shanti Vanam",
+  onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
+  onCheckInVerboseUser: action("onCheckInVerboseUser"),
+  unRegisteredUserInfo: genericCheckInVerbose.args.value,
   favourites: [
     {
       name: "Prakash Mishra",
@@ -43,8 +47,9 @@ genericCheckIn.args = {
     action("onCheckInUser")(...args);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (random(1)(2) === 1) resolve("checked in user");
-        else reject(new Error("user not registered"));
+        // if (random(1)(2) === 1) resolve("checked in user");
+        // else
+        reject(new Error("user not registered"));
       }, 600);
     });
   },

@@ -29,6 +29,10 @@ import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
 import { AsyncIconButton } from "../AsyncIconButton";
+import {
+  GenericCheckInVerbose,
+  GenericCheckInVerboseProps,
+} from "../GenericCheckInVerbose";
 
 export type FavouriteListProps = {
   favourites: Favourite[];
@@ -159,16 +163,26 @@ export type Favourite = {
 
 export type GenericCheckInProps = FavouriteListProps & {
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
+  unRegisteredUserInfo: GenericCheckInVerboseProps["value"];
+  onCheckInVerboseUser: GenericCheckInVerboseProps["onClickCheckIn"];
+  onChangeVerboseUserInfo: GenericCheckInVerboseProps["onChange"];
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
   onCheckInUser,
+
   // Favorites List
   favourites,
   onCheckInFavourite,
   onDeleteFavourite,
+  // Verbose Check In
+  unRegisteredUserInfo,
+  onCheckInVerboseUser,
+  onChangeVerboseUserInfo,
 }) => {
   const userInfoRef = useRef<HTMLInputElement>();
+
+  const [showVerboseCheckin, setShowVerboseCheckin] = useState<boolean>(false);
 
   const [userInfo, setUserInfo] = useState<string>("");
 
@@ -199,9 +213,14 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       userInfoRef.current.focus();
       return successMessage;
     } catch (error) {
+      setShowVerboseCheckin(true);
       throw error;
     }
   }, [onCheckInUser, userInfo, addToFavorite]);
+
+  const handleClickCancel = useCallback(() => {
+    setShowVerboseCheckin(false);
+  }, []);
 
   return (
     <Box
@@ -213,38 +232,49 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       }}
       gap={3}
     >
-      <Box width={[300, 400]} display="flex">
-        <TextField
-          required
-          id="outlined-required"
-          label="Abhyasi ID, Email or Mobile Number"
-          value={userInfo}
-          fullWidth
-          onChange={handleChangeUserInfo}
-          inputRef={userInfoRef}
-        />
-      </Box>
-      <FormControlLabel
-        label="Add To Favorites"
-        onChange={handleChangeAddToFavourite}
-        checked={addToFavorite}
-        control={
-          <Checkbox
-            icon={<FavoriteBorderIcon />}
-            checkedIcon={<FavouriteIcon />}
+      {!showVerboseCheckin && (
+        <>
+          <Box width={[300, 400]} display="flex">
+            <TextField
+              required
+              id="outlined-required"
+              label="Abhyasi ID, Email or Mobile Number"
+              value={userInfo}
+              fullWidth
+              onChange={handleChangeUserInfo}
+              inputRef={userInfoRef}
+            />
+          </Box>
+          <FormControlLabel
+            label="Add To Favorites"
+            onChange={handleChangeAddToFavourite}
+            checked={addToFavorite}
+            control={
+              <Checkbox
+                icon={<FavoriteBorderIcon />}
+                checkedIcon={<FavouriteIcon />}
+              />
+            }
           />
-        }
-      />
-      <AsyncButton
-        variant="contained"
-        size="large"
-        onClick={handleCheckInUser}
-        disabled={isCheckInButtonDisabled}
-        errorMessage={`Checkin unsuccessful with ${userInfo}.`}
-        successMessage={`CheckedIn with ${userInfo}.`}
-        label="Check In"
-      />
-
+          <AsyncButton
+            variant="contained"
+            size="large"
+            onClick={handleCheckInUser}
+            disabled={isCheckInButtonDisabled}
+            errorMessage={`Checkin unsuccessful with ${userInfo}.`}
+            successMessage={`CheckedIn with ${userInfo}.`}
+            label="Check In"
+          />
+        </>
+      )}
+      {showVerboseCheckin && (
+        <GenericCheckInVerbose
+          value={unRegisteredUserInfo}
+          onChange={onChangeVerboseUserInfo}
+          onClickCheckIn={onCheckInVerboseUser}
+          onClickCancel={handleClickCancel}
+        />
+      )}
       <FavouriteList
         favourites={favourites}
         onCheckInFavourite={onCheckInFavourite}

@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SignedInUserCheckIn, SignedInUserCheckInProps } from "./index";
 import { uniqueId } from "lodash/fp";
 import { action } from "@storybook/addon-actions";
+import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
 export default {
   title: "Components/Signed In User Check In",
   component: SignedInUserCheckIn,
@@ -23,13 +24,26 @@ const asyncSuccess =
     });
   };
 
+const asyncFailure =
+  (actionName: string, failureMessage: string, timeout: number = 600) =>
+  (...args) => {
+    action(actionName)(...args);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(failureMessage);
+      }, timeout);
+    });
+  };
+
 export const example = Template.bind({});
 example.args = {
-  onCheckInUser: asyncSuccess(
-    "onCheckInUser",
-    "user is checked in with mobile#/email/abhyasi-id",
-    600
+  onCheckInUser: asyncFailure("onCheckInUser", "user is not registered", 600),
+  onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
+  onCheckInVerboseUser: asyncSuccess(
+    "onCheckInVerboseUser",
+    "New user successfullly checked in"
   ),
+  unRegisteredUserInfo: genericCheckInVerbose.args.value,
   favourites: [
     {
       name: "Prakash Mishra",

@@ -84,6 +84,9 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   onCheckInFavourite,
   onDeleteFavourite,
   onCheckInUser,
+  onChangeVerboseUserInfo,
+  onCheckInVerboseUser,
+  unRegisteredUserInfo,
 }) => {
   const [currentPage, setCurrentPage] = useState<SignedInUserScreen>(
     SignedInUserScreen.MAIN_PAGE
@@ -136,6 +139,9 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
             onCheckInFavourite={onCheckInFavourite}
             onCheckInUser={onCheckInUser}
             onDeleteFavourite={onDeleteFavourite}
+            onChangeVerboseUserInfo={onChangeVerboseUserInfo}
+            onCheckInVerboseUser={onCheckInVerboseUser}
+            unRegisteredUserInfo={unRegisteredUserInfo}
           />
         )}
       </Box>
