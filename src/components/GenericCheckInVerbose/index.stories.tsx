@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof GenericCheckInVerbose> = (args) => (
 export const genericCheckInVerbose = Template.bind({});
 genericCheckInVerbose.args = {
   value: {
-    firstName: {
+    fullName: {
       value: "",
       error: false,
       helperText: "",

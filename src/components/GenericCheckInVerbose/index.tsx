@@ -1,21 +1,4 @@
-import FavouriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Alert, { AlertColor } from "@mui/material/Alert";
-import Avatar from "@mui/material/Avatar";
-import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import Snackbar from "@mui/material/Snackbar";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel, {
-  FormControlLabelProps,
-} from "@mui/material/FormControlLabel";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import {
   TextFieldWithLabel,
   TextFieldWithLabelProps,
@@ -26,15 +9,9 @@ import React, {
   MouseEventHandler,
   useCallback,
   useMemo,
-  useRef,
-  useState,
 } from "react";
-import PersonIcon from "@mui/icons-material/Person";
-import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
-import { someStringsMatch } from "../../utils";
-import { AsyncIconButton } from "../AsyncIconButton";
-import { Button, FormControl, FormHelperText } from "@mui/material";
+import { Button } from "@mui/material";
 import {
   LocationInputField,
   LocationInputFieldProps,
@@ -46,6 +23,7 @@ import {
   SelectFieldProps,
 } from "../SelectField";
 import { uniqueId } from "lodash/fp";
+import { RefinedCityStateCountryLocation } from "../CityStateCountryLocation/locations";
 
 export type InputWithPopoverProps = {
   helperText?: string;
@@ -65,33 +43,42 @@ export type Favourite = {
   name: string;
 } & MobileNumberOrEmailOrAbhyasiId;
 
-export type GenericCheckInVerboseProps = {
-  value: {
-    firstName: {
-      value: string;
-      helperText: string;
-      error: boolean;
-    };
-    ageGroup: {
-      value: OptionValue;
-      helperText: string;
-      error: boolean;
-    };
-    gender: {
-      value: OptionValue;
-      helperText: string;
-      error: boolean;
-    };
-    email: {
-      value: string;
-      helperText: string;
-      error: boolean;
-    };
+export type GenericCheckInVerboseValue = {
+  fullName: {
+    value: string;
+    helperText: string;
+    error: boolean;
   };
+  location: {
+    value: RefinedCityStateCountryLocation;
+    helperText: string;
+    error: boolean;
+  };
+  ageGroup: {
+    value: OptionValue;
+    helperText: string;
+    error: boolean;
+  };
+  gender: {
+    value: OptionValue;
+    helperText: string;
+    error: boolean;
+  };
+  email: {
+    value: string;
+    helperText: string;
+    error: boolean;
+  };
+};
+
+export type GenericCheckInVerboseProps = {
+  value: GenericCheckInVerboseValue;
+  onChange: (updatedValue: GenericCheckInVerboseValue) => void;
 };
 
 export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   value,
+  onChange,
 }) => {
   const { ageGroup, gender, email } = value;
   const ageGroupOptions = useMemo<SelectFieldOption[]>(
@@ -112,17 +99,73 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   );
   const ageGroupSelectFieldId = useMemo(() => uniqueId("select-field-"), []);
   const genderSelectFieldId = useMemo(() => uniqueId("select-field-"), []);
-  const handleChange = useCallback<
-    TextFieldWithLabelProps["onChange"]
-  >(() => {}, []);
+
+  const handleChangeFullName = useCallback<TextFieldWithLabelProps["onChange"]>(
+    (updatedFullName) => {
+      onChange({
+        ...value,
+        fullName: {
+          ...value.fullName,
+          value: updatedFullName,
+        },
+      });
+    },
+    [onChange, value]
+  );
+
+  const handleChangeEmail = useCallback<TextFieldWithLabelProps["onChange"]>(
+    (updatedEmail) => {
+      onChange({
+        ...value,
+        email: {
+          ...value.fullName,
+          value: updatedEmail,
+        },
+      });
+    },
+    [onChange, value]
+  );
 
   const handleChangeLocationInputField = useCallback<
     LocationInputFieldProps["onChange"]
-  >(() => {}, []);
+  >(
+    (locationDetails) => {
+      onChange({
+        ...value,
+        location: {
+          ...value.location,
+          value: locationDetails,
+        },
+      });
+    },
+    [onChange, value]
+  );
 
-  const handleChangeAgeGroup = useCallback<
-    SelectFieldProps["onChange"]
-  >(() => {}, []);
+  const handleChangeAgeGroup = useCallback<SelectFieldProps["onChange"]>(
+    (ageGroupValue) => {
+      onChange({
+        ...value,
+        ageGroup: {
+          ...value.ageGroup,
+          value: ageGroupValue,
+        },
+      });
+    },
+    [onChange, value]
+  );
+
+  const handleChangeGender = useCallback<SelectFieldProps["onChange"]>(
+    (genderValue) => {
+      onChange({
+        ...value,
+        gender: {
+          ...value.gender,
+          value: genderValue,
+        },
+      });
+    },
+    [onChange, value]
+  );
 
   return (
     <Box
@@ -138,8 +181,8 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         label="Full Name"
         required
         type="text"
-        {...value.firstName}
-        onChange={console.log}
+        {...value.fullName}
+        onChange={handleChangeFullName}
       />
       <LocationInputField
         onChange={handleChangeLocationInputField}
@@ -158,14 +201,14 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         label="Gender"
         required
         labelId={genderSelectFieldId}
-        onChange={handleChangeAgeGroup}
+        onChange={handleChangeGender}
         options={genderSelectOptions}
         {...gender}
       />
       <TextFieldWithLabel
         type="email"
         label="Email"
-        onChange={console.log}
+        onChange={handleChangeEmail}
         {...email}
       />
       <Box display="flex" gap={2}>
