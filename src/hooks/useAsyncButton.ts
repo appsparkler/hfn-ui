@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { ClickHandler } from "../types";
 
-import { AlertColor, SnackbarProps } from '@mui/material';
+import { AlertColor, SnackbarProps } from "@mui/material";
 
-export const useAsyncButton = (onClick, disabled) => {
+export const useAsyncButton = (onClick: ClickHandler, disabled: boolean) => {
   const [snackbar, setSnackbar] = useState<{
     isOpen: boolean;
     message?: string;
@@ -26,7 +26,7 @@ export const useAsyncButton = (onClick, disabled) => {
           message: String(successMessage),
           severity: "success",
         });
-      } catch (e) {
+      } catch (e: any) {
         setSnackbar({
           isOpen: true,
           message: e.message,
@@ -38,7 +38,9 @@ export const useAsyncButton = (onClick, disabled) => {
     },
     [isMounted, onClick]
   );
-  const handleSnackbarClose = useCallback<SnackbarProps["onClose"]>(() => {
+  const handleSnackbarClose = useCallback<
+    NonNullable<SnackbarProps["onClose"]>
+  >(() => {
     setSnackbar((prev) => ({
       ...prev,
       isOpen: false,

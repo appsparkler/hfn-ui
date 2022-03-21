@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof SignedInUserCheckIn> = (args) => (
 
 const asyncSuccess =
   (actionName: string, successMessage: string, timeout: number = 600) =>
-  (...args) => {
+  (...args: any[]) => {
     action(actionName)(...args);
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -26,7 +26,7 @@ const asyncSuccess =
 
 const asyncFailure =
   (actionName: string, failureMessage: string, timeout: number = 600) =>
-  (...args) => {
+  (...args: any[]) => {
     action(actionName)(...args);
     return new Promise((resolve, reject) => {
       setTimeout(() => {

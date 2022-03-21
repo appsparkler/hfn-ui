@@ -51,7 +51,9 @@ export const SelectField = ({
   error,
   ...restSelectProps
 }: SelectFieldProps) => {
-  const handleChange = useCallback<SelectProps<OptionValue>["onChange"]>(
+  const handleChange = useCallback<
+    NonNullable<SelectProps<OptionValue>["onChange"]>
+  >(
     ({ target: { value } }) => {
       onChange(value);
     },

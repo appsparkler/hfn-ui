@@ -30,7 +30,7 @@ export const AsyncButton = ({
     handleClick,
     isProcessing,
     isDisabled,
-  } = useAsyncButton(onClick, disabled);
+  } = useAsyncButton(onClick, Boolean(disabled));
   return (
     <Box sx={{ position: "relative", display: "inline-block" }}>
       <Button

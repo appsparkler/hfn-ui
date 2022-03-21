@@ -1,16 +1,14 @@
-import Box, { BoxProps } from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectProps } from "@mui/material/Select";
-import map from "lodash/fp/map";
+import { SelectProps } from "@mui/material/Select";
 import { useCallback } from "react";
 import {
+  BoxProps,
   FormHelperText,
   FormHelperTextProps,
   TextField,
   TextFieldProps,
 } from "@mui/material";
+import { InputChangeEventHandler } from "../GenericCheckInVerbose";
 
 export type CustomTextFieldProps = Omit<
   TextFieldProps,
@@ -35,7 +33,7 @@ export const CustomTextField = ({
   ...restTextFieldProps
 }: CustomTextFieldProps) => {
   const { error } = restTextFieldProps;
-  const handleChange = useCallback<TextFieldProps["onChange"]>(
+  const handleChange = useCallback<InputChangeEventHandler>(
     ({ target: { value } }) => {
       onChange(value);
     },

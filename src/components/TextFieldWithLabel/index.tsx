@@ -1,19 +1,10 @@
-import Box, { BoxProps } from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
+import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectProps } from "@mui/material/Select";
-import map from "lodash/fp/map";
 import { useCallback } from "react";
-import {
-  FormHelperText,
-  FormHelperTextProps,
-  // TextField,
-  // TextFieldProps,
-} from "@mui/material";
+import { FormHelperText, FormHelperTextProps } from "@mui/material";
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { noop } from "lodash/fp";
-import React from "react";
+import { InputChangeEventHandler } from "../GenericCheckInVerbose";
 
 export type TextFieldWithLabelProps = Omit<
   TextFieldProps,
@@ -32,7 +23,7 @@ export const TextFieldWithLabel = ({
   helperText,
   ...textFieldProps
 }: TextFieldWithLabelProps) => {
-  const handleChange = useCallback<TextFieldProps["onChange"]>(
+  const handleChange = useCallback<InputChangeEventHandler>(
     ({ currentTarget: { value } }) => {
       onChange(value);
     },

@@ -126,31 +126,15 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   return (
     <>
       <AppBar onClickBackButton={handleClickBackButton} />
-      <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
-        <Box>
-          <EventNameAndLocation
-            eventName={eventName}
-            eventLocation={eventLocation}
-          />
-        </Box>
-        {showMainPage && (
-          <SignedUserCheckInMainScreen
-            onClickCheckIn={onClickCheckIn}
-            onClickHelpOthersCheckIn={handleClickHelpOthersCheckIn}
-          />
-        )}
-        {showGenericCheckInPage && (
-          <GenericCheckIn
-            favourites={favourites}
-            onCheckInFavourite={onCheckInFavourite}
-            onCheckInUser={onCheckInUser}
-            onDeleteFavourite={onDeleteFavourite}
-            onChangeVerboseUserInfo={onChangeVerboseUserInfo}
-            onCheckInVerboseUser={onCheckInVerboseUser}
-            unRegisteredUserInfo={unRegisteredUserInfo}
-          />
-        )}
-      </Box>
+      <GenericCheckIn
+        favourites={favourites}
+        onCheckInFavourite={onCheckInFavourite}
+        onCheckInUser={onCheckInUser}
+        onDeleteFavourite={onDeleteFavourite}
+        onChangeVerboseUserInfo={onChangeVerboseUserInfo}
+        onCheckInVerboseUser={onCheckInVerboseUser}
+        unRegisteredUserInfo={unRegisteredUserInfo}
+      />
     </>
   );
 };

@@ -26,7 +26,7 @@ export const AsyncIconButton = ({
     handleClick,
     handleSnackbarClose,
     isDisabled,
-  } = useAsyncButton(onClick, disabled);
+  } = useAsyncButton(onClick, Boolean(disabled));
 
   const circularProgressSize = useMemo<number>(() => {
     switch (size) {
