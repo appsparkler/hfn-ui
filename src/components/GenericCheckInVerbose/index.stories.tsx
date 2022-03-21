@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { GenericCheckInVerbose, GenericCheckInVerboseProps } from "./index";
 import { Box } from "@mui/system";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Components/Generic Check In Verbose",
@@ -14,9 +15,7 @@ const Template: ComponentStory<typeof GenericCheckInVerbose> = (args) => (
   </Box>
 );
 
-export const genericCheckInVerbose: {
-  args: GenericCheckInVerboseProps;
-} = Template.bind({});
+export const genericCheckInVerbose = Template.bind({});
 genericCheckInVerbose.args = {
   value: {
     fullName: {
@@ -45,4 +44,7 @@ genericCheckInVerbose.args = {
       helperText: "",
     },
   },
+  onChange: action("onChange"),
+  onClickCancel: action("onClickCancel"),
+  onClickCheckIn: action("onClickCheckIn"),
 } as GenericCheckInVerboseProps;

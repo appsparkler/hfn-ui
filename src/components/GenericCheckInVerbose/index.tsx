@@ -56,7 +56,7 @@ export type GenericCheckInVerboseValue = {
     error: boolean;
   };
   location: {
-    value: RefinedCityStateCountryLocation;
+    value: RefinedCityStateCountryLocation | undefined;
     helperText: string;
     error: boolean;
   };
@@ -87,8 +87,8 @@ const validateFullName = (
   };
 };
 const validateLocation = (
-  location: RefinedCityStateCountryLocation
-): VerboseCheckInFormValue<RefinedCityStateCountryLocation> => {
+  location: RefinedCityStateCountryLocation | undefined
+): VerboseCheckInFormValue<RefinedCityStateCountryLocation | undefined> => {
   return {
     error: Boolean(location),
     helperText: "Location details are required",
@@ -127,7 +127,7 @@ export const validateCheckInDetails = (
 
   return {
     fullName: validateFullName(fullName.value),
-    location: validateLocation(location.value),
+    location: validateLocation(location?.value),
     ageGroup: validateAgeGroup(ageGroup.value),
     email: validateEmail(email.value),
     gender: validateGender(gender.value),

@@ -62,7 +62,7 @@ export const FavouriteList = ({
         currentTarget: { dataset },
       } = evt;
       try {
-        const { id } = dataset;
+        const { id = "" } = dataset;
         const successMessage = await onDeleteFavourite(id);
 
         return successMessage;
@@ -75,7 +75,7 @@ export const FavouriteList = ({
 
   const handleCheckInFavouriteUser = useCallback<ClickHandler>(
     async ({ currentTarget: { dataset } }) => {
-      const { id } = dataset;
+      const { id = "" } = dataset;
       const successMessage = await onCheckInFavourite(id);
       setCheckedInFavourites((prevItems) => [...prevItems, id]);
       return successMessage;
@@ -199,7 +199,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   );
 
   const handleChangeAddToFavourite = useCallback<
-    FormControlLabelProps["onChange"]
+    NonNullable<FormControlLabelProps["onChange"]>
   >(() => {
     setAddToFavorite((prevValue) => !prevValue);
   }, [setAddToFavorite]);
@@ -208,7 +208,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     try {
       const successMessage = await onCheckInUser(userInfo, addToFavorite);
       setUserInfo("");
-      userInfoRef.current.focus();
+      userInfoRef.current?.focus();
       return successMessage;
     } catch (error) {
       setShowVerboseCheckin(true);

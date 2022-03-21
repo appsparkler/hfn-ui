@@ -9,7 +9,7 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 
 export type AsyncIconButtonProps = IconButtonProps & {
   disabled?: boolean;
-  onClick: (evt: React.MouseEvent<HTMLInputElement>) => Promise<string> | void;
+  onClick: (evt: React.MouseEvent<HTMLButtonElement>) => Promise<string> | void;
   size: IconButtonProps["size"];
 };
 

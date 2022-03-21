@@ -4,6 +4,7 @@ import { SignedInUserCheckIn, SignedInUserCheckInProps } from "./index";
 import { uniqueId } from "lodash/fp";
 import { action } from "@storybook/addon-actions";
 import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
+import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 export default {
   title: "Components/Signed In User Check In",
   component: SignedInUserCheckIn,
@@ -43,7 +44,8 @@ example.args = {
     "onCheckInVerboseUser",
     "New user successfullly checked in"
   ),
-  unRegisteredUserInfo: genericCheckInVerbose.args.value,
+  unRegisteredUserInfo: genericCheckInVerbose?.args
+    ?.value as GenericCheckInVerboseValue,
   favourites: [
     {
       name: "Prakash Mishra",

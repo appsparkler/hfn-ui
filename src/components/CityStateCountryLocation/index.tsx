@@ -65,35 +65,35 @@ export const LocationInputField = ({
   >([]);
   const [query, setQuery] = React.useState<string>("");
 
-  const handleInputChange = React.useCallback<TextFieldProps["onChange"]>(
-    ({ currentTarget: { value: query } }) => {
-      const firstLetter = (query as string).substr(0, 1).toLowerCase();
-      setQuery(query);
-      if (Boolean(firstLetter))
-        debounceGetAndSetLocationOptions(
-          setLoading,
-          setOptions,
-          firstLetter,
-          query
-        );
-    },
-    []
-  );
+  const handleInputChange = React.useCallback<
+    NonNullable<TextFieldProps["onChange"]>
+  >(({ currentTarget: { value: query } }) => {
+    const firstLetter = (query as string).substr(0, 1).toLowerCase();
+    setQuery(query);
+    if (Boolean(firstLetter))
+      debounceGetAndSetLocationOptions(
+        setLoading,
+        setOptions,
+        firstLetter,
+        query
+      );
+  }, []);
 
   const handleChangeCityStateCountry = React.useCallback<
-    AutocompleteProps<
-      RefinedCityStateCountryLocation,
-      undefined,
-      undefined,
-      undefined,
-      undefined
-    >["onChange"]
+    NonNullable<
+      AutocompleteProps<
+        RefinedCityStateCountryLocation,
+        undefined,
+        undefined,
+        undefined
+      >["onChange"]
+    >
   >(
     (evt, selectedItem) => {
       if (!selectedItem) {
         setQuery("");
       }
-      if (typeof selectedItem !== "string") {
+      if (selectedItem && typeof selectedItem !== "string") {
         onChange(selectedItem);
       }
     },

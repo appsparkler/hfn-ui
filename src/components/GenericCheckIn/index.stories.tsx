@@ -5,6 +5,7 @@ import random from "lodash/fp/random";
 import uniqueId from "lodash/uniqueId";
 import { action } from "@storybook/addon-actions";
 import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
+import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 
 export default {
   title: "Components/Generic Check In",
@@ -21,7 +22,8 @@ genericCheckIn.args = {
   eventLocation: "Kanha Shanti Vanam",
   onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
   onCheckInVerboseUser: action("onCheckInVerboseUser"),
-  unRegisteredUserInfo: genericCheckInVerbose.args.value,
+  unRegisteredUserInfo: genericCheckInVerbose?.args
+    ?.value as GenericCheckInVerboseValue,
   favourites: [
     {
       name: "Prakash Mishra",

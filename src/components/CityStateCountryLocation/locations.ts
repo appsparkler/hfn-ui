@@ -69,13 +69,19 @@ export const getUniqLocations = (
   >(
     map((location) => location.id),
     uniq,
-    map((id) =>
-      findWithId<RefinedCityStateCountryLocation>(id)(refinedLocations)
+    map(
+      (id) =>
+        findWithId<RefinedCityStateCountryLocation>(id)(
+          refinedLocations
+        ) as RefinedCityStateCountryLocation
     ),
     map((location) => location.cityStateCountry),
     uniq,
-    map((cityStateCountry) =>
-      findWithCityStateCountry(cityStateCountry)(refinedLocations)
+    map(
+      (cityStateCountry) =>
+        findWithCityStateCountry(cityStateCountry)(
+          refinedLocations
+        ) as RefinedCityStateCountryLocation
     )
   )(refinedLocations);
 };
