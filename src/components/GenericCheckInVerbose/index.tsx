@@ -11,7 +11,7 @@ import React, {
   useMemo,
 } from "react";
 import { AsyncButton, AsyncButtonProps } from "../AsyncButton";
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import {
   LocationInputField,
   LocationInputFieldProps,
@@ -134,8 +134,16 @@ export const validateCheckInDetails = (
   };
 };
 
+export enum UserNotFoundEnum {
+  MOBILE_NUMBER = "mobile number",
+  ABHYASI_ID = "abhyasi id",
+  EMAIL = "email address",
+}
+
 export type GenericCheckInVerboseProps = {
   value: GenericCheckInVerboseValue;
+  type: UserNotFoundEnum;
+  notFoundDetails: string;
   onChange: (updatedValue: GenericCheckInVerboseValue) => void;
   onClickCheckIn: (fieldValues: GenericCheckInVerboseValue) => void;
   onClickCancel: ClickHandler;
@@ -143,6 +151,8 @@ export type GenericCheckInVerboseProps = {
 
 export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   value,
+  type,
+  notFoundDetails,
   onChange,
   onClickCheckIn,
   onClickCancel,
@@ -264,6 +274,10 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
       }}
       gap={3}
     >
+      <Alert color="warning">
+        Profile with {type} {notFoundDetails} not found. Please enter the
+        following details to check in.
+      </Alert>
       <TextFieldWithLabel
         label="Full Name"
         required

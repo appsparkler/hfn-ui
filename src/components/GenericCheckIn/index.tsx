@@ -32,6 +32,7 @@ import { AsyncIconButton } from "../AsyncIconButton";
 import {
   GenericCheckInVerbose,
   GenericCheckInVerboseProps,
+  UserNotFoundEnum,
 } from "../GenericCheckInVerbose";
 
 export type FavouriteListProps = {
@@ -269,6 +270,8 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           onChange={onChangeVerboseUserInfo}
           onClickCheckIn={onCheckInVerboseUser}
           onClickCancel={handleClickCancel}
+          type={UserNotFoundEnum.MOBILE_NUMBER}
+          notFoundDetails="+9199898111299"
         />
       )}
       <FavouriteList

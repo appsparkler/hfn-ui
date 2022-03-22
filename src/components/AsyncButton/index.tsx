@@ -58,7 +58,11 @@ export const AsyncButton = ({
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
       >
-        <Alert severity={snackbar.severity} sx={{ width: "100%" }}>
+        <Alert
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+          variant="filled"
+        >
           {snackbar.message}
         </Alert>
       </Snackbar>

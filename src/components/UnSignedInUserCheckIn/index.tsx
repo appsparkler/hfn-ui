@@ -112,9 +112,9 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
     };
   }, [currentPage]);
 
-  const handleClickHelpOthersCheckIn = useCallback(() => {
-    setCurrentPage(SignedInUserScreen.GENERIC_CHECKIN_PAGE);
-  }, []);
+  // const handleClickHelpOthersCheckIn = useCallback(() => {
+  //   setCurrentPage(SignedInUserScreen.GENERIC_CHECKIN_PAGE);
+  // }, []);
 
   const handleClickBackButton = useCallback<ClickHandler>(() => {
     if (showMainPage) {
@@ -126,15 +126,23 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   return (
     <>
       <AppBar onClickBackButton={handleClickBackButton} />
-      <GenericCheckIn
-        favourites={favourites}
-        onCheckInFavourite={onCheckInFavourite}
-        onCheckInUser={onCheckInUser}
-        onDeleteFavourite={onDeleteFavourite}
-        onChangeVerboseUserInfo={onChangeVerboseUserInfo}
-        onCheckInVerboseUser={onCheckInVerboseUser}
-        unRegisteredUserInfo={unRegisteredUserInfo}
-      />
+      <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
+        <Box>
+          <EventNameAndLocation
+            eventName={eventName}
+            eventLocation={eventLocation}
+          />
+        </Box>
+        <GenericCheckIn
+          favourites={favourites}
+          onCheckInFavourite={onCheckInFavourite}
+          onCheckInUser={onCheckInUser}
+          onDeleteFavourite={onDeleteFavourite}
+          onChangeVerboseUserInfo={onChangeVerboseUserInfo}
+          onCheckInVerboseUser={onCheckInVerboseUser}
+          unRegisteredUserInfo={unRegisteredUserInfo}
+        />
+      </Box>
     </>
   );
 };
