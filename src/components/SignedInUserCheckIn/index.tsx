@@ -12,7 +12,6 @@ import {
 } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 import { AsyncButton } from "../AsyncButton";
-import { Typography } from "@mui/material";
 
 export type AppBarProps = {
   onClickBackButton: ClickHandler;
@@ -44,18 +43,13 @@ export const SignedUserCheckInMainScreen = ({
   onClickCheckIn,
   onClickHelpOthersCheckIn,
 }: SignedInUserCheckInMainScreenProps) => {
-  const [showCheckedInMessage, setShowCheckedInMessage] =
-    useState<boolean>(false);
-  const [checkInMessage, setCheckInMessage] = useState<string>(
-    "You are checked in."
-  );
+  const [showCheckedInView, setShowCheckedInView] = useState<boolean>(false);
 
   const handleClickCheckIn = useCallback<ClickHandler>(
     async (...args) => {
       try {
-        const checkInMessage = await onClickCheckIn(...args);
-        setShowCheckedInMessage(true);
-        setCheckInMessage(checkInMessage as unknown as string);
+        await onClickCheckIn(...args);
+        setShowCheckedInView(true);
       } catch (e: any) {
         throw e;
       }
@@ -72,10 +66,10 @@ export const SignedUserCheckInMainScreen = ({
         alignItems: "center",
       }}
     >
-      {showCheckedInMessage ? (
+      {showCheckedInView ? (
         <Box display="flex" alignContent={"center"} gap="5px">
-          <CheckCircleIcon color="success" />
-          <Typography variant="body1"> {checkInMessage}</Typography>
+          <CheckCircleIcon color="success" sx={{ fontSize: 42 }} />
+          {/* <Typography variant="body1"> {checkInMessage}</Typography> */}
         </Box>
       ) : (
         <AsyncButton
