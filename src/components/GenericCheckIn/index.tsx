@@ -57,6 +57,7 @@ export const FavouriteList = ({
       noFavourites,
     };
   }, [favourites]);
+
   const handleClickDeleteFavourite = useCallback<ClickHandler>(
     async (evt) => {
       const {

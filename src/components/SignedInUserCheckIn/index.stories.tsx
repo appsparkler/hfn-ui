@@ -31,7 +31,7 @@ const asyncFailure =
     action(actionName)(...args);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        reject(failureMessage);
+        reject(new Error(failureMessage));
       }, timeout);
     });
   };
@@ -63,9 +63,10 @@ example.args = {
     "fav is checked in",
     600
   ),
+  // onClickCheckIn: asyncFailure("onClickCheckIn", "You couldn't checkin", 600),
   onClickCheckIn: asyncSuccess(
     "onClickCheckIn",
-    "signed-in user is checked in",
+    "Yay! You are checked in!",
     600
   ),
   onDeleteFavourite: asyncSuccess(

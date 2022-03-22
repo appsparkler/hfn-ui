@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { FC, MouseEventHandler, useCallback, useMemo, useState } from "react";
 import MUIAppBar from "@mui/material/AppBar";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -11,6 +12,7 @@ import {
 } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 import { AsyncButton } from "../AsyncButton";
+import { Typography } from "@mui/material";
 
 export type AppBarProps = {
   onClickBackButton: ClickHandler;
@@ -42,6 +44,25 @@ export const SignedUserCheckInMainScreen = ({
   onClickCheckIn,
   onClickHelpOthersCheckIn,
 }: SignedInUserCheckInMainScreenProps) => {
+  const [showCheckedInMessage, setShowCheckedInMessage] =
+    useState<boolean>(false);
+  const [checkInMessage, setCheckInMessage] = useState<string>(
+    "You are checked in."
+  );
+
+  const handleClickCheckIn = useCallback<ClickHandler>(
+    async (...args) => {
+      try {
+        const checkInMessage = await onClickCheckIn(...args);
+        setShowCheckedInMessage(true);
+        setCheckInMessage(checkInMessage as unknown as string);
+      } catch (e: any) {
+        throw e;
+      }
+    },
+    [onClickCheckIn]
+  );
+
   return (
     <Box
       sx={{
@@ -51,13 +72,20 @@ export const SignedUserCheckInMainScreen = ({
         alignItems: "center",
       }}
     >
-      <AsyncButton
-        variant="contained"
-        type="button"
-        size="large"
-        onClick={onClickCheckIn}
-        label="Check In"
-      />
+      {showCheckedInMessage ? (
+        <Box display="flex" alignContent={"center"} gap="5px">
+          <CheckCircleIcon color="success" />
+          <Typography variant="body1"> {checkInMessage}</Typography>
+        </Box>
+      ) : (
+        <AsyncButton
+          variant="contained"
+          type="button"
+          size="large"
+          onClick={handleClickCheckIn}
+          label="Check In"
+        />
+      )}
       <Button
         variant="outlined"
         type="button"
