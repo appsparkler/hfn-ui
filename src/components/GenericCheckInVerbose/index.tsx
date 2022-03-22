@@ -134,7 +134,7 @@ export const validateCheckInDetails = (
   };
 };
 
-export enum UserNotFoundEnum {
+export enum UserInfoTypeEnum {
   MOBILE_NUMBER = "mobile number",
   ABHYASI_ID = "abhyasi id",
   EMAIL = "email address",
@@ -142,7 +142,7 @@ export enum UserNotFoundEnum {
 
 export type GenericCheckInVerboseProps = {
   value: GenericCheckInVerboseValue;
-  type: UserNotFoundEnum;
+  type: UserInfoTypeEnum;
   notFoundDetails: string;
   onChange: (updatedValue: GenericCheckInVerboseValue) => void;
   onClickCheckIn: (fieldValues: GenericCheckInVerboseValue) => void;
@@ -274,9 +274,9 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
       }}
       gap={3}
     >
-      <Alert color="warning">
-        Profile with {type} {notFoundDetails} not found. Please enter the
-        following details to check in.
+      <Alert severity="warning">
+        Profile with {type} <strong>{notFoundDetails}</strong> not found. Please
+        enter the following details to check in.
       </Alert>
       <TextFieldWithLabel
         label="Full Name"

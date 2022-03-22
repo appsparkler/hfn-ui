@@ -32,7 +32,7 @@ import { AsyncIconButton } from "../AsyncIconButton";
 import {
   GenericCheckInVerbose,
   GenericCheckInVerboseProps,
-  UserNotFoundEnum,
+  UserInfoTypeEnum,
 } from "../GenericCheckInVerbose";
 
 export type FavouriteListProps = {
@@ -187,10 +187,51 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
 
   const [addToFavorite, setAddToFavorite] = useState<boolean>(false);
 
-  const isCheckInButtonDisabled = useMemo<boolean>(
-    () => userInfo.trim().length === 0,
-    [userInfo]
-  );
+  const { isCheckInButtonDisabled, userInfoType } = useMemo<{
+    isCheckInButtonDisabled: boolean;
+    userInfoType: UserInfoTypeEnum | undefined;
+  }>(() => {
+    const trimmedUserInfo = String(userInfo.trim());
+    const emailRegEx = new RegExp(
+      /^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)\.([a-zA-Z]{2,5})$/
+    );
+    const abhyasiIdRegex = "^([a-zA-Z]{6}[0-9]{3}|[HABhab]{1}[0-9]{8})$";
+    const abhyasiIdTempRegex = "^([HAha]{1}[0-9]{8})$";
+    const mobileNumberRegex = /^(\+|00)[1-9][0-9 \-().]{7,32}$/;
+    const isEmail = Boolean(userInfo.match(emailRegEx));
+    const isAbhyasiIdRegex = Boolean(trimmedUserInfo.match(abhyasiIdRegex));
+    const isAbhyasiIdTempRegex = Boolean(
+      trimmedUserInfo.match(abhyasiIdTempRegex)
+    );
+    const isMobileNumber = Boolean(trimmedUserInfo.match(mobileNumberRegex));
+    if (isEmail)
+      return {
+        isCheckInButtonDisabled: false,
+        userInfoType: UserInfoTypeEnum.EMAIL,
+      };
+    if (isAbhyasiIdRegex) {
+      return {
+        isCheckInButtonDisabled: false,
+        userInfoType: UserInfoTypeEnum.ABHYASI_ID,
+      };
+    }
+    if (isAbhyasiIdTempRegex) {
+      return {
+        isCheckInButtonDisabled: false,
+        userInfoType: UserInfoTypeEnum.ABHYASI_ID,
+      };
+    }
+    if (isMobileNumber) {
+      return {
+        isCheckInButtonDisabled: false,
+        userInfoType: UserInfoTypeEnum.MOBILE_NUMBER,
+      };
+    }
+    return {
+      isCheckInButtonDisabled: true,
+      userInfoType: undefined,
+    };
+  }, [userInfo]);
 
   const handleChangeUserInfo = useCallback<InputChangeEventHandler>(
     ({ currentTarget: { value } }) => {
@@ -264,14 +305,14 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           />
         </>
       )}
-      {showVerboseCheckin && (
+      {showVerboseCheckin && userInfoType && (
         <GenericCheckInVerbose
           value={unRegisteredUserInfo}
           onChange={onChangeVerboseUserInfo}
           onClickCheckIn={onCheckInVerboseUser}
           onClickCancel={handleClickCancel}
-          type={UserNotFoundEnum.MOBILE_NUMBER}
-          notFoundDetails="+9199898111299"
+          type={userInfoType}
+          notFoundDetails={userInfo}
         />
       )}
       <FavouriteList

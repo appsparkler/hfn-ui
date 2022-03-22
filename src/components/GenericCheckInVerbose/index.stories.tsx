@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import {
   GenericCheckInVerbose,
   GenericCheckInVerboseProps,
-  UserNotFoundEnum,
+  UserInfoTypeEnum,
 } from "./index";
 import { Box } from "@mui/system";
 import { action } from "@storybook/addon-actions";
@@ -49,7 +49,7 @@ genericCheckInVerbose.args = {
     },
   },
   notFoundDetails: "+913838333347",
-  type: UserNotFoundEnum.MOBILE_NUMBER,
+  type: UserInfoTypeEnum.MOBILE_NUMBER,
   onChange: action("onChange"),
   onClickCancel: action("onClickCancel"),
   onClickCheckIn: action("onClickCheckIn"),
