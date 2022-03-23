@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
 import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 export default {
-  title: "Components/Un Signed In User Check In",
+  title: "Components/Guest User Check In",
   component: GuestUserCheckin,
 } as ComponentMeta<typeof GuestUserCheckin>;
 
