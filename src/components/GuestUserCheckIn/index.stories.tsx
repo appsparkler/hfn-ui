@@ -36,8 +36,8 @@ const asyncFailure =
     });
   };
 
-export const unSignedInUserCheckIn = Template.bind({});
-unSignedInUserCheckIn.args = {
+export const guestUserCheckIn = Template.bind({});
+guestUserCheckIn.args = {
   onCheckInUser: asyncFailure("onCheckInUser", "user is not registered", 600),
   onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
   onCheckInVerboseUser: asyncSuccess(
@@ -76,4 +76,3 @@ unSignedInUserCheckIn.args = {
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
 } as GuestUserCheckinProps;
-// unSignedInUserCheckIn.storyName = "Signed In User Check In";
