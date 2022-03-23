@@ -1,17 +1,17 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { SignedInUserCheckIn, SignedInUserCheckInProps } from "./index";
+import { GuestUserCheckin, GuestUserCheckinProps } from "./index";
 import { uniqueId } from "lodash/fp";
 import { action } from "@storybook/addon-actions";
 import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
 import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 export default {
   title: "Components/Un Signed In User Check In",
-  component: SignedInUserCheckIn,
-} as ComponentMeta<typeof SignedInUserCheckIn>;
+  component: GuestUserCheckin,
+} as ComponentMeta<typeof GuestUserCheckin>;
 
-const Template: ComponentStory<typeof SignedInUserCheckIn> = (args) => (
-  <SignedInUserCheckIn {...args} />
+const Template: ComponentStory<typeof GuestUserCheckin> = (args) => (
+  <GuestUserCheckin {...args} />
 );
 
 const asyncSuccess =
@@ -75,5 +75,5 @@ unSignedInUserCheckIn.args = {
   ),
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
-} as SignedInUserCheckInProps;
+} as GuestUserCheckinProps;
 // unSignedInUserCheckIn.storyName = "Signed In User Check In";

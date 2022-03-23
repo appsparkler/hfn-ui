@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { FC, MouseEventHandler, useCallback, useMemo, useState } from "react";
 import MUIAppBar from "@mui/material/AppBar";
@@ -10,7 +9,6 @@ import {
   EventNameAndLocationProps,
 } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
-import { AsyncButton } from "../AsyncButton";
 
 export type AppBarProps = {
   onClickBackButton: ClickHandler;
@@ -33,46 +31,9 @@ export const AppBar: FC<AppBarProps> = ({ onClickBackButton }) => (
   </MUIAppBar>
 );
 
-export type SignedInUserCheckInMainScreenProps = {
-  onClickCheckIn: ClickHandler;
-  onClickHelpOthersCheckIn: ClickHandler;
-};
-
-export const SignedUserCheckInMainScreen = ({
-  onClickCheckIn,
-  onClickHelpOthersCheckIn,
-}: SignedInUserCheckInMainScreenProps) => {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-        alignItems: "center",
-      }}
-    >
-      <AsyncButton
-        variant="contained"
-        type="button"
-        size="large"
-        onClick={onClickCheckIn}
-        label="Check In"
-      />
-      <Button
-        variant="outlined"
-        type="button"
-        size="large"
-        onClick={onClickHelpOthersCheckIn}
-      >
-        Help Others Check In
-      </Button>
-    </Box>
-  );
-};
-
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
-export type SignedInUserCheckInProps = {
+export type GuestUserCheckinProps = {
   onClickCheckIn: ClickHandler;
 } & GenericCheckInProps &
   EventNameAndLocationProps;
@@ -82,11 +43,10 @@ export enum SignedInUserScreen {
   GENERIC_CHECKIN_PAGE,
 }
 
-export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
+export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
   favourites,
   eventLocation,
   eventName,
-  onClickCheckIn,
   onCheckInFavourite,
   onDeleteFavourite,
   onCheckInUser,
@@ -111,10 +71,6 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
         SignedInUserScreen.GENERIC_CHECKIN_PAGE.toString(),
     };
   }, [currentPage]);
-
-  // const handleClickHelpOthersCheckIn = useCallback(() => {
-  //   setCurrentPage(SignedInUserScreen.GENERIC_CHECKIN_PAGE);
-  // }, []);
 
   const handleClickBackButton = useCallback<ClickHandler>(() => {
     if (showMainPage) {
