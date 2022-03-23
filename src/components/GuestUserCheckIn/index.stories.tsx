@@ -73,6 +73,7 @@ guestUserCheckIn.args = {
     "fav user is deleted",
     600
   ),
+  onClickBackButton: action("onClickBackButton"),
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
 } as GuestUserCheckinProps;
