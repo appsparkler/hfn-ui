@@ -9,11 +9,11 @@ import {
 } from "../EventNameAndLocation";
 import { ClickHandler } from "../GenericCheckInVerbose";
 
-export type AppBarProps = {
+export type AppHeaderProps = {
   onClickBackButton: ClickHandler;
 } & EventNameAndLocationProps;
 
-export const AppBar: FC<AppBarProps> = ({
+export const AppHeader: FC<AppHeaderProps> = ({
   onClickBackButton,
   eventLocation,
   eventName,

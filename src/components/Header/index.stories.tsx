@@ -1,14 +1,16 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { AppBar, AppBarProps } from "./index";
+import { AppHeader, AppHeaderProps } from "./index";
 export default {
   title: "Components/App Header",
-  component: AppBar,
-} as ComponentMeta<typeof AppBar>;
+  component: AppHeader,
+} as ComponentMeta<typeof AppHeader>;
 
-const Template: ComponentStory<typeof AppBar> = (args) => <AppBar {...args} />;
+const Template: ComponentStory<typeof AppHeader> = (args) => (
+  <AppHeader {...args} />
+);
 
-export const unSignedInUserCheckIn = Template.bind({});
-unSignedInUserCheckIn.args = {
+export const appHeader = Template.bind({});
+appHeader.args = {
   eventName: "Youth Seminar",
   eventLocation: "Kanha Shanti Vanam",
-} as AppBarProps;
+} as AppHeaderProps;

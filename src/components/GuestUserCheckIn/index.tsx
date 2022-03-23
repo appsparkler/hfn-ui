@@ -4,11 +4,9 @@ import MUIAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  EventNameAndLocation,
-  EventNameAndLocationProps,
-} from "../EventNameAndLocation";
+import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
+import { AppHeader } from "../Header";
 
 export type AppBarProps = {
   onClickBackButton: ClickHandler;
@@ -81,14 +79,12 @@ export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
 
   return (
     <>
-      <AppBar onClickBackButton={handleClickBackButton} />
+      <AppHeader
+        onClickBackButton={handleClickBackButton}
+        eventName={eventName}
+        eventLocation={eventLocation}
+      />
       <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
-        <Box>
-          <EventNameAndLocation
-            eventName={eventName}
-            eventLocation={eventLocation}
-          />
-        </Box>
         <GenericCheckIn
           favourites={favourites}
           onCheckInFavourite={onCheckInFavourite}

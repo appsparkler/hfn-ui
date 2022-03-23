@@ -1,6 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { FC } from "react";
 import PersonPinCircleIcon from "@mui/icons-material/PersonPinCircle";
+import Box from "@mui/material/Box";
 
 export type EventNameAndLocationProps = {
   eventName: string;
@@ -12,7 +13,7 @@ export const EventNameAndLocation: FC<EventNameAndLocationProps> = ({
   eventLocation,
 }) => {
   return (
-    <>
+    <Box marginBottom={5}>
       <Typography variant="h4" mt={2} align="center">
         {eventName}
       </Typography>
@@ -20,6 +21,6 @@ export const EventNameAndLocation: FC<EventNameAndLocationProps> = ({
         <PersonPinCircleIcon />
         {eventLocation}
       </Typography>
-    </>
+    </Box>
   );
 };
