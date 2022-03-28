@@ -1,38 +1,11 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { FC, MouseEventHandler, useCallback, useMemo, useState } from "react";
-import MUIAppBar from "@mui/material/AppBar";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  EventNameAndLocation,
-  EventNameAndLocationProps,
-} from "../EventNameAndLocation";
+import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 import { AsyncButton } from "../AsyncButton";
-
-export type AppBarProps = {
-  onClickBackButton: ClickHandler;
-};
-
-export const AppBar: FC<AppBarProps> = ({ onClickBackButton }) => (
-  <MUIAppBar position="static">
-    <Toolbar>
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 2 }}
-        onClick={onClickBackButton}
-      >
-        <ArrowBackIcon />
-      </IconButton>
-    </Toolbar>
-  </MUIAppBar>
-);
+import { AppHeader } from "../Header";
 
 export type SignedInUserCheckInMainScreenProps = {
   onClickCheckIn: ClickHandler;
@@ -108,13 +81,13 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   favourites,
   eventLocation,
   eventName,
+  unRegisteredUserInfo,
   onClickCheckIn,
   onCheckInFavourite,
   onDeleteFavourite,
   onCheckInUser,
   onChangeVerboseUserInfo,
   onCheckInVerboseUser,
-  unRegisteredUserInfo,
 }) => {
   const [currentPage, setCurrentPage] = useState<SignedInUserScreen>(
     SignedInUserScreen.MAIN_PAGE
@@ -147,14 +120,12 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
 
   return (
     <>
-      <AppBar onClickBackButton={handleClickBackButton} />
+      <AppHeader
+        onClickBackButton={handleClickBackButton}
+        eventLocation={eventLocation}
+        eventName={eventName}
+      />
       <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
-        <Box>
-          <EventNameAndLocation
-            eventName={eventName}
-            eventLocation={eventLocation}
-          />
-        </Box>
         {showMainPage && (
           <SignedUserCheckInMainScreen
             onClickCheckIn={onClickCheckIn}

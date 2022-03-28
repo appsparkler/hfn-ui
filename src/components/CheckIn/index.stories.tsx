@@ -11,5 +11,5 @@ const Template: ComponentStory<typeof CheckIn> = (args) => (
   <CheckIn {...args} />
 );
 
-export const example = Template.bind({});
-example.args = {};
+export const checkIn = Template.bind({});
+checkIn.args = {};

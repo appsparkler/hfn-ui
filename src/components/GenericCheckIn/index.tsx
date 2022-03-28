@@ -42,7 +42,7 @@ export type FavouriteListProps = {
 };
 
 export const FavouriteList = ({
-  favourites,
+  favourites = [],
   onCheckInFavourite,
   onDeleteFavourite,
 }: FavouriteListProps) => {

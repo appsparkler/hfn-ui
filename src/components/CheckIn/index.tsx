@@ -1,16 +1,24 @@
 import { FC, MouseEventHandler } from "react";
 import {
+  SignedInUserCheckIn,
   // SignedInUserCheckIn,
   SignedInUserCheckInProps,
 } from "../SignedInUserCheckIn";
-import { GuestUserCheckinProps } from "../GuestUserCheckIn";
+import { GuestUserCheckin, GuestUserCheckinProps } from "../GuestUserCheckIn";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type CheckInProps = SignedInUserCheckInProps &
-  GuestUserCheckinProps & {};
+  GuestUserCheckinProps & {
+    isSignedIn: boolean;
+  };
 
-export const CheckIn: FC<CheckInProps> = ({ onClickCheckIn }) => (
-  // <SignedInUserCheckIn onClickCheckIn={onClickCheckIn} />
-  <div>Signed In User Checkin (WIP)</div>
+export const CheckIn: FC<CheckInProps> = ({ isSignedIn, ...restProps }) => (
+  <>
+    {isSignedIn ? (
+      <SignedInUserCheckIn {...restProps} />
+    ) : (
+      <GuestUserCheckin {...restProps} />
+    )}
+  </>
 );
