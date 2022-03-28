@@ -21,4 +21,5 @@ locationInputField.args = {
   helperText: "Helper text for the user.",
   size: "medium",
   variant: "filled",
+  api: "https://static-gatsby.web.app/srcmapi/cities",
 } as LocationInputFieldProps;

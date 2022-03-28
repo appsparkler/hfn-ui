@@ -11,7 +11,7 @@ import {
 import { FormControl, FormHelperText, TextFieldProps } from "@mui/material";
 import debounce from "lodash/fp/debounce";
 
-const getApi = () => localStorage.getItem("cities-api");
+// const getApi = () => localStorage.getItem("cities-api");
 
 const debounceGetAndSetLocationOptions = debounce(500)(
   (
@@ -20,11 +20,12 @@ const debounceGetAndSetLocationOptions = debounce(500)(
       React.SetStateAction<readonly RefinedCityStateCountryLocation[]>
     >,
     firstLetter: string,
-    query: string
+    query: string,
+    api: string
   ): void => {
     try {
       setLoading(true);
-      fetch(`${getApi()}/${firstLetter}.json`)
+      fetch(`${api}/${firstLetter}.json`)
         .then((res) => res.json())
         .then((json) => json.results)
         .then((results: CityStateCountryLocation[]) => {
@@ -46,6 +47,7 @@ export type LocationInputFieldProps = {
   required?: boolean;
   size?: TextFieldProps["size"];
   variant?: TextFieldProps["variant"];
+  api?: string;
   onChange: (value: RefinedCityStateCountryLocation) => void;
 };
 
@@ -55,6 +57,7 @@ export const LocationInputField = ({
   label,
   required,
   size,
+  api = "https://static-gatsby.web.app/srcmapi/cities",
   variant,
   onChange,
 }: LocationInputFieldProps) => {
@@ -67,17 +70,21 @@ export const LocationInputField = ({
 
   const handleInputChange = React.useCallback<
     NonNullable<TextFieldProps["onChange"]>
-  >(({ currentTarget: { value: query } }) => {
-    const firstLetter = (query as string).substr(0, 1).toLowerCase();
-    setQuery(query);
-    if (Boolean(firstLetter))
-      debounceGetAndSetLocationOptions(
-        setLoading,
-        setOptions,
-        firstLetter,
-        query
-      );
-  }, []);
+  >(
+    ({ currentTarget: { value: query } }) => {
+      const firstLetter = (query as string).substr(0, 1).toLowerCase();
+      setQuery(query);
+      if (Boolean(firstLetter))
+        debounceGetAndSetLocationOptions(
+          setLoading,
+          setOptions,
+          firstLetter,
+          query,
+          api
+        );
+    },
+    [api]
+  );
 
   const handleChangeCityStateCountry = React.useCallback<
     NonNullable<
