@@ -1,9 +1,10 @@
 {
   "name": "@appsparkler/hfn-ui",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "browser": "dist/hfn-ui.min.js",
   "files": [
     "dist"
   ],
