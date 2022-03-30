@@ -95,7 +95,7 @@ export const FavouriteList = ({
   return (
     <List
       dense={false}
-      sx={{ width: ["100%", 400], maxWidth: 400 }}
+      sx={{ width: ["100%", 320], maxWidth: 400 }}
       subheader={
         <ListSubheader component="div" id="nested-list-subheader">
           Checkin from your favourites list
@@ -275,7 +275,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     >
       {!showVerboseCheckin && (
         <>
-          <Box width={[300, 400]} display="flex">
+          <Box width={320} maxWidth={400} display="flex">
             <TextField
               required
               id="outlined-required"

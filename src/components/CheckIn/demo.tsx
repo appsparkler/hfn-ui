@@ -299,20 +299,32 @@ export const CheckInDemo = () => {
           label="Label"
         />
       </Box>
-      <CheckIn
-        eventLocation={eventLocation}
-        eventName={eventName}
-        favourites={favourites}
-        unRegisteredUserInfo={unregisteredUserInfo}
-        isSignedIn={isSignedIn}
-        onCheckInFavourite={handleCheckinFavourite}
-        onDeleteFavourite={handleDeleteFavourite}
-        onCheckInUser={handleClickCheckInUser}
-        onClickCheckIn={handleSignedInUserCheckIn}
-        onChangeVerboseUserInfo={handleChangeVerboseUserInfo}
-        onCheckInVerboseUser={handleCheckInVerboseUser}
-        onClickBackButton={() => console.log("hello")}
-      />
+      <Box
+        sx={{
+          display: "flex",
+          width: 350,
+          m: 10,
+          outline: "1px  solid",
+          outlineColor: "primary",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <CheckIn
+          eventLocation={eventLocation}
+          eventName={eventName}
+          favourites={favourites}
+          unRegisteredUserInfo={unregisteredUserInfo}
+          isSignedIn={isSignedIn}
+          onCheckInFavourite={handleCheckinFavourite}
+          onDeleteFavourite={handleDeleteFavourite}
+          onCheckInUser={handleClickCheckInUser}
+          onClickCheckIn={handleSignedInUserCheckIn}
+          onChangeVerboseUserInfo={handleChangeVerboseUserInfo}
+          onCheckInVerboseUser={handleCheckInVerboseUser}
+          onClickBackButton={() => console.log("hello")}
+        />
+      </Box>
     </>
   );
 };
