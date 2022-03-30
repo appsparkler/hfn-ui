@@ -4,9 +4,11 @@ import queryString from "query-string";
 import { find, uniqueId, values, some } from "lodash/fp";
 import {
   Favourite,
-  GenericCheckInVerboseProps,
   GenericCheckInVerboseValue,
 } from "../GenericCheckInVerbose";
+import Box from "@mui/material/Box";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 // data
 const favouritesData = [
   { abhyasiId: "INAAAE478", id: "1", name: "Prashant Mishra" },
@@ -43,7 +45,14 @@ const deleteFavourite =
       }, 600);
     });
 
-const checkinUser = (userInfo: string) =>
+const checkinUser = (
+  userInfo: string
+): Promise<{
+  successMessage: string;
+  abhyasiId: string;
+  id: string;
+  name: string;
+}> =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (userInfo.includes("@")) reject(new Error("No user exists"));
@@ -82,7 +91,7 @@ const getDefaultUserInfo = () => ({
   location: { value: undefined, error: false, helperText: "" },
 });
 
-const getFullNameError = (fullName) => {
+const getFullNameError = (fullName: string) => {
   if (fullName.trim()) {
     return {
       error: false,
@@ -95,7 +104,7 @@ const getFullNameError = (fullName) => {
   };
 };
 
-const validateUserInfo = (userInfo) => {
+const validateUserInfo = (userInfo: GenericCheckInVerboseValue) => {
   const { fullName } = userInfo;
   return {
     ...userInfo,
@@ -106,12 +115,11 @@ const validateUserInfo = (userInfo) => {
   };
 };
 
-export default () => {
+export const CheckInDemo = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [favourites, setFavourites] = useState(favouritesData);
-  const [unregisteredUserInfo, setUnregisteredUserInfo] = useState(
-    getDefaultUserInfo()
-  );
+  const [unregisteredUserInfo, setUnregisteredUserInfo] =
+    useState<GenericCheckInVerboseValue>(getDefaultUserInfo());
   const [isFormSubmittedOnce, setIsFormSubmittedOnce] = useState(false);
 
   const handleChangeVerboseUserInfo = useCallback(
@@ -134,8 +142,15 @@ export default () => {
   }, []);
 
   const { eventName, eventLocation } = useMemo(() => {
-    if (typeof window !== "undefined")
-      return queryString.parse(window.location.search);
+    if (typeof window !== "undefined") {
+      const { eventName = "", eventLocation = "" } = queryString.parse(
+        window.location.search
+      );
+      return {
+        eventName: eventName as string,
+        eventLocation: eventLocation as string,
+      };
+    }
     return { eventName: "", eventLocation: "" };
   }, []);
 
@@ -156,8 +171,9 @@ export default () => {
           ...prevData.filter((fav) => fav.id !== favouriteUserId),
         ]);
         return successMessage;
-      } catch (e) {
-        throw new Error(e.message);
+      } catch (e: any) {
+        const err = e as Error;
+        throw new Error(err.message);
       }
     },
     [favourites]
@@ -166,20 +182,19 @@ export default () => {
   const handleClickCheckInUser = useCallback(
     async (userInfo, addToFavourite) => {
       try {
-        const checkedInUser = await checkinUser(userInfo);
+        const { successMessage, name, abhyasiId } = await checkinUser(userInfo);
         if (addToFavourite) {
           setFavourites((prevData) => [
             ...prevData,
             {
-              abhyasiId: checkedInUser.abhyasiId,
+              abhyasiId: abhyasiId,
               id: uniqueId("fav-user"),
-              name: checkedInUser.name,
+              name: name,
             },
           ]);
         }
-
-        return checkedInUser.successMessage;
-      } catch (error) {
+        return successMessage;
+      } catch (error: any) {
         throw new Error(error.message);
       }
     },
@@ -189,8 +204,9 @@ export default () => {
   const handleSignedInUserCheckIn = useCallback(async () => {
     try {
       await checkInSignedInUser();
-    } catch (error) {
-      throw new Error(error.message);
+    } catch (error: any) {
+      const err = error as Error;
+      throw new Error(err.message);
     }
   }, []);
 
@@ -201,10 +217,9 @@ export default () => {
   return (
     <>
       <Box sx={{ position: "fixed", bottom: 15, right: 15 }}>
-        <Switch
-          label="Signed In"
-          value={isSignedIn}
-          onChange={handleChangeSignIn}
+        <FormControlLabel
+          control={<Switch onChange={handleChangeSignIn} value={isSignedIn} />}
+          label="Label"
         />
       </Box>
       <CheckIn
@@ -224,3 +239,5 @@ export default () => {
     </>
   );
 };
+
+export default CheckInDemo;

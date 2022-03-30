@@ -80,9 +80,11 @@ export type GenericCheckInVerboseValue = {
 const validateFullName = (
   fullNameValue: string
 ): VerboseCheckInFormValue<string> => {
+  const trimmedValue = fullNameValue.trim();
+  const hasValue = Boolean(trimmedValue);
   return {
-    error: Boolean(fullNameValue),
-    helperText: "This field is required",
+    error: !hasValue,
+    helperText: hasValue ? "" : "This field is required",
     value: fullNameValue,
   };
 };
@@ -322,6 +324,7 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
           Cancel
         </Button>
         <AsyncButton
+          type="button"
           variant="contained"
           size="large"
           onClick={handleClickCheckIn}
