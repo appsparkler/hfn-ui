@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { LocationInputField, LocationInputFieldProps } from "./index";
 import Box from "@mui/material/Box";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Components/Location Input Field",
@@ -22,4 +23,5 @@ locationInputField.args = {
   size: "medium",
   variant: "filled",
   api: "https://static-gatsby.web.app/srcmapi/cities",
+  onChange: action("onChange"),
 } as LocationInputFieldProps;

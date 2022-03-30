@@ -48,8 +48,17 @@ export type LocationInputFieldProps = {
   size?: TextFieldProps["size"];
   variant?: TextFieldProps["variant"];
   api?: string;
-  onChange: (value: RefinedCityStateCountryLocation) => void;
+  onChange: (value: RefinedCityStateCountryLocation | undefined) => void;
 };
+
+export type LocationAutocompleteInputChange = NonNullable<
+  AutocompleteProps<
+    RefinedCityStateCountryLocation,
+    undefined,
+    undefined,
+    undefined
+  >["onInputChange"]
+>;
 
 export const LocationInputField = ({
   error,
@@ -72,7 +81,7 @@ export const LocationInputField = ({
     NonNullable<TextFieldProps["onChange"]>
   >(
     ({ currentTarget: { value: query } }) => {
-      const firstLetter = (query as string).substr(0, 1).toLowerCase();
+      const firstLetter = (query as string).slice(0, 1).toLowerCase();
       setQuery(query);
       if (Boolean(firstLetter))
         debounceGetAndSetLocationOptions(
@@ -82,6 +91,7 @@ export const LocationInputField = ({
           query,
           api
         );
+      else console.log(query);
     },
     [api]
   );
@@ -107,6 +117,16 @@ export const LocationInputField = ({
     [onChange]
   );
 
+  const handleAutocompleteInputChange =
+    React.useCallback<LocationAutocompleteInputChange>(
+      (event, value, reason) => {
+        if (reason === "clear") {
+          onChange(undefined);
+        }
+      },
+      [onChange]
+    );
+
   return (
     <Box width="100%">
       <FormControl fullWidth>
@@ -115,6 +135,7 @@ export const LocationInputField = ({
           autoComplete
           autoHighlight
           open={open}
+          onInputChange={handleAutocompleteInputChange}
           onOpen={() => {
             if (!query) setOpen(false);
             setOpen(true);
