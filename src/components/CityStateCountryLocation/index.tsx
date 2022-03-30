@@ -8,7 +8,7 @@ import {
   getUniqLocations,
   CityStateCountryLocation,
 } from "./locations";
-import { FormControl, FormHelperText, TextFieldProps } from "@mui/material";
+import { FormControl, TextFieldProps } from "@mui/material";
 import debounce from "lodash/fp/debounce";
 
 // const getApi = () => localStorage.getItem("cities-api");
@@ -155,6 +155,7 @@ export const LocationInputField = ({
               {...params}
               required={required}
               error={error}
+              helperText={helperText}
               label={label}
               onChange={handleInputChange}
               size={size}
@@ -173,9 +174,6 @@ export const LocationInputField = ({
             />
           )}
         />
-        {helperText && (
-          <FormHelperText error={error}>{helperText}</FormHelperText>
-        )}
       </FormControl>
     </Box>
   );

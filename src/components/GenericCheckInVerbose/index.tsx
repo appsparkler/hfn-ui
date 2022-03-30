@@ -88,40 +88,47 @@ const validateFullName = (
     value: fullNameValue,
   };
 };
+
 const validateLocation = (
   location: RefinedCityStateCountryLocation | undefined
 ): VerboseCheckInFormValue<RefinedCityStateCountryLocation | undefined> => {
   return {
-    error: Boolean(location),
+    error: !Boolean(location),
     helperText: "Location details are required",
     value: location,
   };
 };
+
 const validateAgeGroup = (
   ageGroup: OptionValue
 ): VerboseCheckInFormValue<OptionValue> => {
   return {
-    error: Boolean(ageGroup),
+    error: !Boolean(ageGroup),
     helperText: "Age group is required",
     value: ageGroup,
   };
 };
+
 const validateEmail = (email: string): VerboseCheckInFormValue<string> => {
+  const hasValue = Boolean(email);
   return {
-    error: Boolean(email),
-    helperText: "Email is required.",
+    error: !hasValue,
+    helperText: hasValue ? "" : "Email is required.",
     value: email,
   };
 };
+
 const validateGender = (
   gender: OptionValue
 ): VerboseCheckInFormValue<OptionValue> => {
+  const hasValue = Boolean(gender);
   return {
-    error: Boolean(gender),
-    helperText: "Gender is required.",
+    error: !hasValue,
+    helperText: hasValue ? "" : "Gender is required.",
     value: gender,
   };
 };
+
 export const validateCheckInDetails = (
   userDetails: GenericCheckInVerboseValue
 ): GenericCheckInVerboseValue => {
@@ -159,7 +166,7 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   onClickCheckIn,
   onClickCancel,
 }) => {
-  const { ageGroup, gender, email } = value;
+  const { ageGroup, gender, email, location, fullName } = value;
   const ageGroupOptions = useMemo<SelectFieldOption[]>(
     () => [
       { value: "0 - 4", label: "0 - 4" },
@@ -181,11 +188,11 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
 
   const handleChangeFullName = useCallback<TextFieldWithLabelProps["onChange"]>(
     (updatedFullName) => {
+      const validatedUserInfo = validateFullName(updatedFullName);
       onChange({
         ...value,
         fullName: {
-          ...value.fullName,
-          value: updatedFullName,
+          ...validatedUserInfo,
         },
       });
     },
@@ -194,11 +201,11 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
 
   const handleChangeEmail = useCallback<TextFieldWithLabelProps["onChange"]>(
     (updatedEmail) => {
+      const validatedEmail = validateEmail(updatedEmail);
       onChange({
         ...value,
         email: {
-          ...value.fullName,
-          value: updatedEmail,
+          ...validatedEmail,
         },
       });
     },
@@ -209,11 +216,11 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
     LocationInputFieldProps["onChange"]
   >(
     (locationDetails) => {
+      const validatedLocationDetails = validateLocation(locationDetails);
       onChange({
         ...value,
         location: {
-          ...value.location,
-          value: locationDetails,
+          ...validatedLocationDetails,
         },
       });
     },
@@ -284,13 +291,14 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         label="Full Name"
         required
         type="text"
-        {...value.fullName}
+        {...fullName}
         onChange={handleChangeFullName}
       />
       <LocationInputField
         onChange={handleChangeLocationInputField}
         label="City, State, Country"
         required
+        {...location}
       />
       <SelectField
         label="Age Group"

@@ -62,7 +62,7 @@ export const SelectField = ({
 
   return (
     <Box sx={{ width: "100%" }} {...wrapperProps}>
-      <FormControl fullWidth required={required}>
+      <FormControl fullWidth required={required} error={error}>
         <InputLabel id={labelId}>{label}</InputLabel>
         <Select<OptionValue>
           error={error}
