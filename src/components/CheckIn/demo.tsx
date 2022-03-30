@@ -293,21 +293,14 @@ export const CheckInDemo = () => {
 
   return (
     <>
-      <Box sx={{ position: "fixed", bottom: 15, right: 15 }}>
-        <FormControlLabel
-          control={<Switch onChange={handleChangeSignIn} value={isSignedIn} />}
-          label="Label"
-        />
-      </Box>
       <Box
         sx={{
-          display: "flex",
           width: 350,
-          m: 10,
           outline: "1px  solid",
           outlineColor: "primary",
-          flexDirection: "column",
-          justifyContent: "center",
+          margin: "auto",
+          marginTop: 2,
+          paddingBottom: 2,
         }}
       >
         <CheckIn
@@ -323,6 +316,13 @@ export const CheckInDemo = () => {
           onChangeVerboseUserInfo={handleChangeVerboseUserInfo}
           onCheckInVerboseUser={handleCheckInVerboseUser}
           onClickBackButton={() => console.log("hello")}
+        />
+      </Box>
+
+      <Box sx={{ position: "fixed", bottom: 15, right: 15 }}>
+        <FormControlLabel
+          control={<Switch onChange={handleChangeSignIn} value={isSignedIn} />}
+          label="Signed In"
         />
       </Box>
     </>

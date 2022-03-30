@@ -92,9 +92,10 @@ const validateFullName = (
 const validateLocation = (
   location: RefinedCityStateCountryLocation | undefined
 ): VerboseCheckInFormValue<RefinedCityStateCountryLocation | undefined> => {
+  const hasValue = Boolean(location);
   return {
-    error: !Boolean(location),
-    helperText: "Location details are required",
+    error: !hasValue,
+    helperText: hasValue ? "" : "Location details are required",
     value: location,
   };
 };
@@ -229,11 +230,11 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
 
   const handleChangeAgeGroup = useCallback<SelectFieldProps["onChange"]>(
     (ageGroupValue) => {
+      const validatedAgeGroup = validateAgeGroup(ageGroupValue);
       onChange({
         ...value,
         ageGroup: {
-          ...value.ageGroup,
-          value: ageGroupValue,
+          ...validatedAgeGroup,
         },
       });
     },
@@ -242,11 +243,11 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
 
   const handleChangeGender = useCallback<SelectFieldProps["onChange"]>(
     (genderValue) => {
+      const validatedGenderValue = validateGender(genderValue);
       onChange({
         ...value,
         gender: {
-          ...value.gender,
-          value: genderValue,
+          ...validatedGenderValue,
         },
       });
     },
