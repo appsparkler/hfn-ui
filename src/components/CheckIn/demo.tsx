@@ -9,6 +9,8 @@ import {
 import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { OptionValue } from "../SelectField";
+import { RefinedCityStateCountryLocation } from "../CityStateCountryLocation/locations";
 // data
 const favouritesData = [
   { abhyasiId: "INAAAE478", id: "1", name: "Prashant Mishra" },
@@ -104,13 +106,88 @@ const getFullNameError = (fullName: string) => {
   };
 };
 
-const validateUserInfo = (userInfo: GenericCheckInVerboseValue) => {
-  const { fullName } = userInfo;
+const getEmailErrorInfo = (emailValue: string) => {
+  if (emailValue.trim()) {
+    return {
+      error: false,
+      helperText: "",
+    };
+  }
+  return {
+    error: true,
+    helperText: "Email is required",
+  };
+};
+
+const getAgeGroupErrorInfo = (ageGroupValue: OptionValue) => {
+  if (ageGroupValue) {
+    return {
+      error: false,
+      helperText: "",
+    };
+  } else {
+    return {
+      error: true,
+      helperText: "Age is required",
+    };
+  }
+};
+
+const getGenderErrorInfo = (genderValue: OptionValue) => {
+  if (genderValue) {
+    return {
+      error: false,
+      helperText: "",
+    };
+  } else {
+    return {
+      error: true,
+      helperText: "Please select a value.",
+    };
+  }
+};
+
+const getLocationErrorInfo = (
+  locationValue: RefinedCityStateCountryLocation | undefined
+) => {
+  if (locationValue) {
+    return {
+      error: false,
+      helperText: "",
+    };
+  } else {
+    return {
+      error: true,
+      helperText: "Please enter location info.",
+    };
+  }
+};
+
+const validateUserInfo = (
+  userInfo: GenericCheckInVerboseValue
+): GenericCheckInVerboseValue => {
+  const { fullName, ageGroup, gender, email, location } = userInfo;
   return {
     ...userInfo,
     fullName: {
       ...fullName,
       ...getFullNameError(fullName.value),
+    },
+    ageGroup: {
+      ...ageGroup,
+      ...getAgeGroupErrorInfo(ageGroup.value),
+    },
+    gender: {
+      ...gender,
+      ...getGenderErrorInfo(gender.value),
+    },
+    email: {
+      ...email,
+      ...getEmailErrorInfo(email.value),
+    },
+    location: {
+      ...location,
+      ...getLocationErrorInfo(location.value),
     },
   };
 };
