@@ -193,6 +193,7 @@ const validateUserInfo = (
 };
 
 export const CheckInDemo = () => {
+  const [isCheckedIn, setIsCheckedIn] = useState<boolean>(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [favourites, setFavourites] = useState(favouritesData);
   const [unregisteredUserInfo, setUnregisteredUserInfo] =
@@ -281,6 +282,7 @@ export const CheckInDemo = () => {
   const handleSignedInUserCheckIn = useCallback(async () => {
     try {
       await checkInSignedInUser();
+      setIsCheckedIn(true);
     } catch (error: any) {
       const err = error as Error;
       throw new Error(err.message);
@@ -309,6 +311,7 @@ export const CheckInDemo = () => {
           favourites={favourites}
           unRegisteredUserInfo={unregisteredUserInfo}
           isSignedIn={isSignedIn}
+          isCheckedIn={isCheckedIn}
           onCheckInFavourite={handleCheckinFavourite}
           onDeleteFavourite={handleDeleteFavourite}
           onCheckInUser={handleClickCheckInUser}

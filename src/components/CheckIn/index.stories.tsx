@@ -1,6 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CheckIn } from "./index";
+import { CheckIn, CheckInProps } from "./index";
+import { action } from "@storybook/addon-actions";
+import { genericCheckInVerbose as genericCheckInVerboseStories } from "../GenericCheckInVerbose/index.stories";
 
 export default {
   title: "Apps/Check In",
@@ -12,4 +14,18 @@ const Template: ComponentStory<typeof CheckIn> = (args) => (
 );
 
 export const checkIn = Template.bind({});
-checkIn.args = {};
+checkIn.args = {
+  isCheckedIn: false,
+  eventLocation: "Kanha Shanti Vanam",
+  eventName: "Youth Seminar",
+  favourites: [],
+  isSignedIn: false,
+  unRegisteredUserInfo: genericCheckInVerboseStories.args?.value,
+  onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
+  onCheckInFavourite: action("onCheckInFavourite"),
+  onCheckInUser: action("onCheckInUser"),
+  onCheckInVerboseUser: action("onCheckInVerboseUser"),
+  onClickBackButton: action("onClickBackButton"),
+  onClickCheckIn: action("onClickCheckIn"),
+  onDeleteFavourite: action("onDeleteFavourite"),
+} as CheckInProps;

@@ -8,21 +8,20 @@ import { AsyncButton } from "../AsyncButton";
 import { AppHeader } from "../Header";
 
 export type SignedInUserCheckInMainScreenProps = {
+  isCheckedIn: boolean;
   onClickCheckIn: ClickHandler;
   onClickHelpOthersCheckIn: ClickHandler;
 };
 
 export const SignedUserCheckInMainScreen = ({
+  isCheckedIn,
   onClickCheckIn,
   onClickHelpOthersCheckIn,
 }: SignedInUserCheckInMainScreenProps) => {
-  const [showCheckedInView, setShowCheckedInView] = useState<boolean>(false);
-
   const handleClickCheckIn = useCallback<ClickHandler>(
     async (...args) => {
       try {
         await onClickCheckIn(...args);
-        setShowCheckedInView(true);
       } catch (e: any) {
         throw e;
       }
@@ -39,10 +38,9 @@ export const SignedUserCheckInMainScreen = ({
         alignItems: "center",
       }}
     >
-      {showCheckedInView ? (
+      {isCheckedIn ? (
         <Box display="flex" alignContent={"center"} gap="5px">
           <CheckCircleIcon color="success" sx={{ fontSize: 42 }} />
-          {/* <Typography variant="body1"> {checkInMessage}</Typography> */}
         </Box>
       ) : (
         <AsyncButton
@@ -69,6 +67,7 @@ export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
 export type SignedInUserCheckInProps = {
   onClickCheckIn: ClickHandler;
+  isCheckedIn: boolean;
 } & GenericCheckInProps &
   EventNameAndLocationProps;
 
@@ -82,6 +81,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   eventLocation,
   eventName,
   unRegisteredUserInfo,
+  isCheckedIn,
   onClickCheckIn,
   onCheckInFavourite,
   onDeleteFavourite,
@@ -128,6 +128,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
       <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
         {showMainPage && (
           <SignedUserCheckInMainScreen
+            isCheckedIn={isCheckedIn}
             onClickCheckIn={onClickCheckIn}
             onClickHelpOthersCheckIn={handleClickHelpOthersCheckIn}
           />

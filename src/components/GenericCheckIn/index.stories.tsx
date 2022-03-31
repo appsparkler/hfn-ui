@@ -67,4 +67,5 @@ genericCheckIn.args = {
       }, 600);
     });
   },
+  isCheckedIn: false,
 } as GenericCheckInProps;

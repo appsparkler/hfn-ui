@@ -76,5 +76,6 @@ example.args = {
   ),
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
+  isCheckedIn: false,
 } as SignedInUserCheckInProps;
 example.storyName = "Signed In User Check In";
