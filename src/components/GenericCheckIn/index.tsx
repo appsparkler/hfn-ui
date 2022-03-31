@@ -34,6 +34,12 @@ import {
   GenericCheckInVerboseProps,
   UserInfoTypeEnum,
 } from "../GenericCheckInVerbose";
+import {
+  abhyasiIdRegex,
+  abhyasiIdTempRegex,
+  emailRegEx,
+  mobileNumberRegex,
+} from "../../constants";
 
 export type FavouriteListProps = {
   favourites: Favourite[];
@@ -193,12 +199,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     userInfoType: UserInfoTypeEnum | undefined;
   }>(() => {
     const trimmedUserInfo = String(userInfo.trim());
-    const emailRegEx = new RegExp(
-      /^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+)\.([a-zA-Z]{2,5})$/
-    );
-    const abhyasiIdRegex = "^([a-zA-Z]{6}[0-9]{3}|[HABhab]{1}[0-9]{8})$";
-    const abhyasiIdTempRegex = "^([HAha]{1}[0-9]{8})$";
-    const mobileNumberRegex = /^(\+|00)[1-9][0-9 \-().]{7,32}$/;
     const isEmail = Boolean(userInfo.match(emailRegEx));
     const isAbhyasiIdRegex = Boolean(trimmedUserInfo.match(abhyasiIdRegex));
     const isAbhyasiIdTempRegex = Boolean(
@@ -251,7 +251,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     try {
       const successMessage = await onCheckInUser(userInfo, addToFavorite);
       setUserInfo("");
-      userInfoRef.current?.focus();
       return successMessage;
     } catch (error) {
       setShowVerboseCheckin(true);
