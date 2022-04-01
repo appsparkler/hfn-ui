@@ -36,7 +36,12 @@ export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
         eventName={eventName}
         eventLocation={eventLocation}
       />
-      <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
+      <Box
+        sx={{ display: "flex", gap: 5 }}
+        flexDirection="column"
+        px={1}
+        pb={1}
+      >
         <GenericCheckIn
           favourites={favourites}
           onCheckInFavourite={onCheckInFavourite}

@@ -125,7 +125,12 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
         eventLocation={eventLocation}
         eventName={eventName}
       />
-      <Box sx={{ display: "flex", gap: 5 }} flexDirection="column">
+      <Box
+        sx={{ display: "flex", gap: 5 }}
+        flexDirection="column"
+        pb={1}
+        px={1}
+      >
         {showMainPage && (
           <SignedUserCheckInMainScreen
             isCheckedIn={isCheckedIn}
