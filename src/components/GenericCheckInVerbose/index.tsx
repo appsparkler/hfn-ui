@@ -272,17 +272,7 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
   }, [onChange, onClickCheckIn, value]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        bg: "",
-        width: 320,
-        maxWidth: 400,
-      }}
-      gap={3}
-    >
+    <Box gap={2} display="flex" flexDirection={"column"}>
       <Alert severity="warning">
         Profile with {type} <strong>{notFoundDetails}</strong> not found. Please
         enter the following details to check in.
@@ -322,7 +312,7 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
         onChange={handleChangeEmail}
         {...email}
       />
-      <Box display="flex" gap={2}>
+      <Box display="flex" gap={2} justifyContent="center">
         <Button
           variant="outlined"
           size="large"

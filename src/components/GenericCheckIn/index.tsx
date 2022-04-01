@@ -147,21 +147,19 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         flexDirection: "column",
         bg: "",
       }}
-      gap={3}
+      gap={2}
     >
       {!showVerboseCheckin && (
         <>
-          <Box width={320} maxWidth={400} display="flex">
-            <TextField
-              required
-              id="outlined-required"
-              label="Abhyasi ID, Email or Mobile Number"
-              value={userInfo}
-              fullWidth
-              onChange={handleChangeUserInfo}
-              inputRef={userInfoRef}
-            />
-          </Box>
+          <TextField
+            required
+            id="outlined-required"
+            label="Abhyasi ID, Email or Mobile Number"
+            value={userInfo}
+            fullWidth
+            onChange={handleChangeUserInfo}
+            inputRef={userInfoRef}
+          />
           <FormControlLabel
             label="Add To Favorites"
             onChange={handleChangeAddToFavourite}
