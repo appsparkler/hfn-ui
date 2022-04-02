@@ -14,7 +14,7 @@ export const someStringsMatch = <T extends string>(itemToMatch: string) =>
 
 export const getDefaultUserInfo = (): GenericCheckInVerboseValue => ({
   ageGroup: { value: "", error: false, helperText: "" },
-  email: { value: "a@b.com", error: false, helperText: "" },
+  email: { value: "", error: false, helperText: "" },
   fullName: { value: "", error: false, helperText: "" },
   gender: { value: "", error: false, helperText: "" },
   location: { value: undefined, error: false, helperText: "" },
