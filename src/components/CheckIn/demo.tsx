@@ -322,10 +322,19 @@ export const CheckInDemo = () => {
         />
       </Box>
 
-      <Box>
+      <Box
+        sx={{
+          width: ["100%", 350],
+          outline: "1px  solid",
+          outlineColor: "primary",
+          margin: "auto",
+          marginTop: 2,
+        }}
+      >
         <FormControlLabel
           control={<Switch onChange={handleChangeSignIn} value={isSignedIn} />}
-          label="Signed In"
+          label="Signed In Flow"
+          sx={{ padding: 1 }}
         />
       </Box>
     </>
