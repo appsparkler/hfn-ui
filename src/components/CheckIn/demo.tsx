@@ -11,6 +11,7 @@ import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { OptionValue } from "../SelectField";
 import { RefinedCityStateCountryLocation } from "../CityStateCountryLocation/locations";
+import { getDefaultUserInfo } from "../../utils";
 // data
 const favouritesData = [
   { abhyasiId: "INAAAE478", id: "1", name: "Prashant Mishra" },
@@ -84,14 +85,6 @@ const checkInSignedInUser = () =>
   });
 
 const someHaveError = some(({ error }) => Boolean(error));
-
-const getDefaultUserInfo = () => ({
-  ageGroup: { value: "", error: false, helperText: "" },
-  email: { value: "", error: false, helperText: "" },
-  fullName: { value: "", error: false, helperText: "" },
-  gender: { value: "", error: false, helperText: "" },
-  location: { value: undefined, error: false, helperText: "" },
-});
 
 const getFullNameError = (fullName: string) => {
   if (fullName.trim()) {
@@ -192,6 +185,14 @@ const validateUserInfo = (
   };
 };
 
+const checkinVerboseUser = (userInfo: GenericCheckInVerboseValue) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve(`${userInfo.fullName.value} is checked in`);
+      reject(new Error("Server Error"));
+    }, 600);
+  });
+
 export const CheckInDemo = () => {
   const [isCheckedIn, setIsCheckedIn] = useState<boolean>(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -213,11 +214,23 @@ export const CheckInDemo = () => {
     [isFormSubmittedOnce]
   );
 
-  const handleCheckInVerboseUser = useCallback(() => {
-    setIsFormSubmittedOnce(true);
-    // if (!isFormSubmittedOnce) {
-    // }
-  }, []);
+  const handleCheckInVerboseUser = useCallback(async () => {
+    if (!isFormSubmittedOnce) {
+      setIsFormSubmittedOnce(true);
+    }
+    try {
+      const validatedUserInfo = validateUserInfo(unregisteredUserInfo);
+      const hasError = someHaveError(values(validatedUserInfo));
+      if (!hasError) {
+        const successMessage = await checkinVerboseUser(validatedUserInfo);
+        setUnregisteredUserInfo(getDefaultUserInfo());
+        setIsFormSubmittedOnce(false);
+        return successMessage;
+      }
+    } catch (e: any) {
+      throw new Error(e.message);
+    }
+  }, [isFormSubmittedOnce, unregisteredUserInfo]);
 
   const { eventName, eventLocation } = useMemo(() => {
     if (typeof window !== "undefined") {

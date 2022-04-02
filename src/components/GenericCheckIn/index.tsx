@@ -147,6 +147,19 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
     setShowVerboseCheckin(false);
   }, []);
 
+  const handleCheckInVerboseUser = useCallback<
+    GenericCheckInVerboseProps["onClickCheckIn"]
+  >(
+    async (...args) => {
+      const successMessage = await onCheckInVerboseUser(...args);
+      setTimeout(() => {
+        setShowVerboseCheckin(false);
+      }, 600);
+      return successMessage;
+    },
+    [onCheckInVerboseUser]
+  );
+
   useImperativeHandle(
     handle,
     () => {
@@ -204,7 +217,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
         <GenericCheckInVerbose
           value={unRegisteredUserInfo}
           onChange={onChangeVerboseUserInfo}
-          onClickCheckIn={onCheckInVerboseUser}
+          onClickCheckIn={handleCheckInVerboseUser}
           onClickCancel={handleClickCancel}
           type={userInfoType}
           notFoundDetails={userInfo}

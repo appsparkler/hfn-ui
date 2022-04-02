@@ -24,6 +24,7 @@ import {
 } from "../SelectField";
 import { some, uniqueId, values } from "lodash/fp";
 import { RefinedCityStateCountryLocation } from "../CityStateCountryLocation/locations";
+import { getDefaultUserInfo } from "../../utils";
 
 export type InputWithPopoverProps = {
   helperText?: string;
@@ -263,12 +264,11 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
     const validationValues =
       values<GenericCheckInVerboseValue>(validatedValues);
     const userInfoHasErrors = someHaveError(validationValues);
-    if (userInfoHasErrors) {
-      onChange(validatedValues);
-    } else {
-      onClickCheckIn(validatedValues);
+    if (!userInfoHasErrors) {
+      const successMessage = await onClickCheckIn(validatedValues);
+      onChange(getDefaultUserInfo());
+      return successMessage;
     }
-    // await onClickCheckIn(value);
   }, [onChange, onClickCheckIn, value]);
 
   return (
