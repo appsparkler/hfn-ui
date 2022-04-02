@@ -11,8 +11,6 @@ import {
 import { FormControl, TextFieldProps } from "@mui/material";
 import debounce from "lodash/fp/debounce";
 
-// const getApi = () => localStorage.getItem("cities-api");
-
 const debounceGetAndSetLocationOptions = debounce(500)(
   (
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -130,7 +128,7 @@ export const LocationInputField = ({
   return (
     <Box width="100%">
       <FormControl fullWidth>
-        <Autocomplete
+        <Autocomplete<RefinedCityStateCountryLocation>
           fullWidth
           autoComplete
           autoHighlight

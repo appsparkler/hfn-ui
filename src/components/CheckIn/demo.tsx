@@ -275,11 +275,12 @@ export const CheckInDemo = () => {
       try {
         const { successMessage, name, abhyasiId } = await checkinUser(userInfo);
         if (addToFavourite) {
+          const favUserId = uniqueId("fav-user");
           setFavourites((prevData) => [
             ...prevData,
             {
               abhyasiId: abhyasiId,
-              id: uniqueId("fav-user"),
+              id: favUserId,
               name: name,
             },
           ]);
