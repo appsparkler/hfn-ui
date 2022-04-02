@@ -1,11 +1,20 @@
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { FC, MouseEventHandler, useCallback, useMemo, useState } from "react";
+import {
+  FC,
+  MouseEventHandler,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 import { AsyncButton } from "../AsyncButton";
 import { AppHeader } from "../Header";
+import { FavouriteListProps } from "../FavouriteList";
+import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 
 export type SignedInUserCheckInMainScreenProps = {
   isCheckedIn: boolean;
@@ -68,8 +77,14 @@ export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 export type SignedInUserCheckInProps = {
   onClickCheckIn: ClickHandler;
   isCheckedIn: boolean;
-} & GenericCheckInProps &
-  EventNameAndLocationProps;
+  favourites: FavouriteListProps["favourites"];
+  unRegisteredUserInfo: GenericCheckInVerboseValue;
+  onCheckInFavourite: FavouriteListProps["onCheckInFavourite"];
+  onDeleteFavourite: FavouriteListProps["onDeleteFavourite"];
+  onCheckInUser: GenericCheckInProps["onCheckInUser"];
+  onChangeVerboseUserInfo: GenericCheckInProps["onChangeVerboseUserInfo"];
+  onCheckInVerboseUser: GenericCheckInProps["onCheckInVerboseUser"];
+} & EventNameAndLocationProps;
 
 export enum SignedInUserScreen {
   MAIN_PAGE,
@@ -89,6 +104,11 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   onChangeVerboseUserInfo,
   onCheckInVerboseUser,
 }) => {
+  const genericCheckinHandle: GenericCheckInProps["handle"] = useRef({
+    setShowVerboseCheckin: undefined,
+    showVerboseCheckin: undefined,
+  });
+
   const [currentPage, setCurrentPage] = useState<SignedInUserScreen>(
     SignedInUserScreen.MAIN_PAGE
   );
@@ -112,11 +132,14 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   }, []);
 
   const handleClickBackButton = useCallback<ClickHandler>(() => {
-    if (showMainPage) {
+    if (genericCheckinHandle.current.showVerboseCheckin) {
+      genericCheckinHandle.current.setShowVerboseCheckin(false);
     } else if (showGenericCheckInPage) {
       setCurrentPage(SignedInUserScreen.MAIN_PAGE);
+    } else {
+      alert("go back");
     }
-  }, [showGenericCheckInPage, showMainPage]);
+  }, [showGenericCheckInPage]);
 
   return (
     <>
@@ -140,6 +163,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
         )}
         {showGenericCheckInPage && (
           <GenericCheckIn
+            handle={genericCheckinHandle}
             favourites={favourites}
             onCheckInFavourite={onCheckInFavourite}
             onCheckInUser={onCheckInUser}

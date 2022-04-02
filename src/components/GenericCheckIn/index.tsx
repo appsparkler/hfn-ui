@@ -11,6 +11,7 @@ import React, {
   FC,
   MouseEventHandler,
   useCallback,
+  useImperativeHandle,
   useMemo,
   useRef,
   useState,
@@ -44,6 +45,10 @@ export type Favourite = {
 } & MobileNumberOrEmailOrAbhyasiId;
 
 export type GenericCheckInProps = FavouriteListProps & {
+  handle: React.MutableRefObject<{
+    setShowVerboseCheckin: any;
+    showVerboseCheckin: any;
+  }>;
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
   unRegisteredUserInfo: GenericCheckInVerboseProps["value"];
   onCheckInVerboseUser: GenericCheckInVerboseProps["onClickCheckIn"];
@@ -51,6 +56,7 @@ export type GenericCheckInProps = FavouriteListProps & {
 };
 
 export const GenericCheckIn: FC<GenericCheckInProps> = ({
+  handle,
   onCheckInUser,
 
   // Favorites List
@@ -138,6 +144,17 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   const handleClickCancel = useCallback(() => {
     setShowVerboseCheckin(false);
   }, []);
+
+  useImperativeHandle(
+    handle,
+    () => {
+      return {
+        setShowVerboseCheckin,
+        showVerboseCheckin,
+      };
+    },
+    [showVerboseCheckin]
+  );
 
   return (
     <Box

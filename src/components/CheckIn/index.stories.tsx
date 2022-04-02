@@ -28,4 +28,4 @@ checkIn.args = {
   onClickBackButton: action("onClickBackButton"),
   onClickCheckIn: action("onClickCheckIn"),
   onDeleteFavourite: action("onDeleteFavourite"),
-} as CheckInProps;
+};

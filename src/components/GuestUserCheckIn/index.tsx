@@ -1,7 +1,9 @@
 import Box from "@mui/material/Box";
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEventHandler, useRef } from "react";
 import { EventNameAndLocationProps } from "../EventNameAndLocation";
+import { FavouriteListProps } from "../FavouriteList";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
+import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 import { AppHeader } from "../Header";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
@@ -9,8 +11,14 @@ export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 export type GuestUserCheckinProps = {
   onClickCheckIn: ClickHandler;
   onClickBackButton: ClickHandler;
-} & GenericCheckInProps &
-  EventNameAndLocationProps;
+  favourites: FavouriteListProps["favourites"];
+  unRegisteredUserInfo: GenericCheckInVerboseValue;
+  onCheckInFavourite: FavouriteListProps["onCheckInFavourite"];
+  onDeleteFavourite: FavouriteListProps["onDeleteFavourite"];
+  onCheckInUser: GenericCheckInProps["onCheckInUser"];
+  onChangeVerboseUserInfo: GenericCheckInProps["onChangeVerboseUserInfo"];
+  onCheckInVerboseUser: GenericCheckInProps["onCheckInVerboseUser"];
+} & EventNameAndLocationProps;
 
 export enum SignedInUserScreen {
   MAIN_PAGE,
@@ -29,6 +37,10 @@ export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
   onClickBackButton,
   unRegisteredUserInfo,
 }) => {
+  const genericCheckinHandle: GenericCheckInProps["handle"] = useRef({
+    setShowVerboseCheckin: undefined,
+    showVerboseCheckin: undefined,
+  });
   return (
     <>
       <AppHeader
@@ -43,6 +55,7 @@ export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
         pb={1}
       >
         <GenericCheckIn
+          handle={genericCheckinHandle}
           favourites={favourites}
           onCheckInFavourite={onCheckInFavourite}
           onCheckInUser={onCheckInUser}

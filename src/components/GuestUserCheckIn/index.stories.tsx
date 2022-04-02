@@ -76,4 +76,4 @@ guestUserCheckIn.args = {
   onClickBackButton: action("onClickBackButton"),
   eventLocation: "Kanha Shanti Vanam",
   eventName: "Youth Seminar",
-} as GuestUserCheckinProps;
+};

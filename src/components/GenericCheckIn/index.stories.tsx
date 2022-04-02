@@ -18,8 +18,6 @@ const Template: ComponentStory<typeof GenericCheckIn> = (args) => (
 
 export const genericCheckIn = Template.bind({});
 genericCheckIn.args = {
-  eventName: "Youth Seminar",
-  eventLocation: "Kanha Shanti Vanam",
   onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
   onCheckInVerboseUser: action("onCheckInVerboseUser"),
   unRegisteredUserInfo: genericCheckInVerbose?.args
@@ -67,5 +65,4 @@ genericCheckIn.args = {
       }, 600);
     });
   },
-  isCheckedIn: false,
-} as GenericCheckInProps;
+};
