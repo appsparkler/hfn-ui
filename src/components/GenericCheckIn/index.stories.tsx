@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { GenericCheckIn, GenericCheckInProps } from "./index";
+import { GenericCheckIn } from "./index";
 import random from "lodash/fp/random";
 import uniqueId from "lodash/uniqueId";
 import { action } from "@storybook/addon-actions";

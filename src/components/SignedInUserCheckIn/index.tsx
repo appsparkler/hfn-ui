@@ -107,6 +107,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
   const genericCheckinHandle: GenericCheckInProps["handle"] = useRef({
     setShowVerboseCheckin: undefined,
     showVerboseCheckin: undefined,
+    setUserInfo: undefined,
   });
 
   const [currentPage, setCurrentPage] = useState<SignedInUserScreen>(
@@ -133,6 +134,7 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
 
   const handleClickBackButton = useCallback<ClickHandler>(() => {
     if (genericCheckinHandle.current.showVerboseCheckin) {
+      genericCheckinHandle.current.setUserInfo("");
       genericCheckinHandle.current.setShowVerboseCheckin(false);
     } else if (showGenericCheckInPage) {
       setCurrentPage(SignedInUserScreen.MAIN_PAGE);

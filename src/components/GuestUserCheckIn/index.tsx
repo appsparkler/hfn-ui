@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { FC, MouseEventHandler, useRef } from "react";
+import { FC, MouseEventHandler, useCallback, useRef } from "react";
 import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import { FavouriteListProps } from "../FavouriteList";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
@@ -40,11 +40,26 @@ export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
   const genericCheckinHandle: GenericCheckInProps["handle"] = useRef({
     setShowVerboseCheckin: undefined,
     showVerboseCheckin: undefined,
+    setUserInfo: undefined,
   });
+  const handleClickBackButton = useCallback<ClickHandler>(
+    (...args) => {
+      const { setUserInfo, showVerboseCheckin, setShowVerboseCheckin } =
+        genericCheckinHandle.current;
+      setUserInfo("");
+      if (showVerboseCheckin) {
+        setShowVerboseCheckin(false);
+      } else {
+        onClickBackButton(...args);
+      }
+    },
+    [onClickBackButton]
+  );
+
   return (
     <>
       <AppHeader
-        onClickBackButton={onClickBackButton}
+        onClickBackButton={handleClickBackButton}
         eventName={eventName}
         eventLocation={eventLocation}
       />

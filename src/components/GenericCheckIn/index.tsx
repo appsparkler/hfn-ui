@@ -48,6 +48,7 @@ export type GenericCheckInProps = FavouriteListProps & {
   handle: React.MutableRefObject<{
     setShowVerboseCheckin: any;
     showVerboseCheckin: any;
+    setUserInfo: any;
   }>;
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
   unRegisteredUserInfo: GenericCheckInVerboseProps["value"];
@@ -142,6 +143,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   }, [onCheckInUser, userInfo, addToFavorite]);
 
   const handleClickCancel = useCallback(() => {
+    setUserInfo("");
     setShowVerboseCheckin(false);
   }, []);
 
@@ -151,6 +153,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
       return {
         setShowVerboseCheckin,
         showVerboseCheckin,
+        setUserInfo,
       };
     },
     [showVerboseCheckin]
