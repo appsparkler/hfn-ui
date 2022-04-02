@@ -341,7 +341,7 @@ export const CheckInDemo = () => {
           outline: "1px  solid",
           outlineColor: "primary",
           margin: "auto",
-          marginTop: 2,
+          my: 2,
         }}
       >
         <FormControlLabel

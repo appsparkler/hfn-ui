@@ -271,6 +271,14 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
     }
   }, [onChange, onClickCheckIn, value]);
 
+  const handleClickCancel = useCallback<ClickHandler>(
+    (...args) => {
+      onChange(getDefaultUserInfo());
+      onClickCancel(...args);
+    },
+    [onChange, onClickCancel]
+  );
+
   return (
     <Box gap={2} display="flex" flexDirection={"column"}>
       <Alert severity="warning">
@@ -317,7 +325,7 @@ export const GenericCheckInVerbose: FC<GenericCheckInVerboseProps> = ({
           variant="outlined"
           size="large"
           type="button"
-          onClick={onClickCancel}
+          onClick={handleClickCancel}
         >
           Cancel
         </Button>
