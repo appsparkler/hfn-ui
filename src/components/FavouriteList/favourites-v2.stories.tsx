@@ -12,8 +12,8 @@ const Template: ComponentStory<typeof ConnectedFavourites> = (args) => (
 export const deleteFavouriteApi = (id: string): Promise<string> =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      // resolve(`Favourite ${id} is deleted`);
-      reject(new Error(`Couldn't delete ${id}.`));
+      resolve(`Favourite ${id} is deleted`);
+      // reject(new Error(`Couldn't delete ${id}.`));
     }, 600);
   });
 export const favouritesV2 = Template.bind({});

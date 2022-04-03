@@ -175,35 +175,6 @@ export const FavouritesListV2 = ({
     };
   }, [favourites]);
 
-  // const handleClickDeleteFavourite = useCallback<ClickHandler>(
-  //   async (evt) => {
-  //     const {
-  //       currentTarget: { dataset },
-  //     } = evt;
-  //     try {
-  //       const { id = "" } = dataset;
-  //       const successMessage = await onDeleteFavourite(id);
-
-  //       return successMessage;
-  //     } catch (error) {
-  //       throw error;
-  //     }
-  //   },
-  //   [onDeleteFavourite]
-  // );
-
-  // const handleCheckInFavouriteUser = useCallback<ClickHandler>(
-  //   async ({ currentTarget: { dataset } }) => {
-  //     const { id = "" } = dataset;
-  //     const successMessage = await onCheckInFavourite(id);
-  //     setCheckedInFavourites((prevItems) => [...prevItems, id]);
-  //     return successMessage;
-  //   },
-  //   [onCheckInFavourite]
-  // );
-
-  // const [checkedInFavourites, setCheckedInFavourites] = useState<string[]>([]);
-
   const isFavouriteCheckInDisabled = useCallback(
     (id) => someStringsMatch(id)(checkedIn),
     [checkedIn]
@@ -282,7 +253,7 @@ export const ConnectedFavourites = connect<
     onCheckInFavourite: favouritesActions.checkIn,
     onDeleteFavourite: async (id) => {
       const successMessage = await deleteFavouriteApi(id);
-      dispatch(favouritesActions.checkIn(id));
+      dispatch(favouritesActions.delete(id));
       return successMessage;
     },
   })
