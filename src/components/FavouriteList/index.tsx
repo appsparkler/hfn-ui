@@ -153,7 +153,10 @@ export const FavouriteList = ({
 export type FavouriteListV2Props = {
   favourites: Favourite[];
   checkedIn: string[];
-  onCheckInFavourite: ActionCreatorWithPayload<string, string>;
+} & FavouriteListActionProps;
+
+export type FavouriteListActionProps = {
+  onCheckInFavourite: (id: string) => Promise<string>;
   onDeleteFavourite: (id: string) => Promise<string>;
 };
 
@@ -237,10 +240,13 @@ export const FavouritesListV2 = ({
 export const ConnectedFavourites = connect<
   { favourites: Favourite[]; checkedIn: string[] },
   {
-    onCheckInFavourite: ActionCreatorWithPayload<string, string>;
+    onCheckInFavourite: (id: string) => Promise<string>;
     onDeleteFavourite: (id: string) => Promise<string>;
   },
-  { deleteFavouriteApi: (id: string) => Promise<string> },
+  {
+    deleteFavouriteApi: (id: string) => Promise<string>;
+    checkinFavouriteApi: (id: string) => Promise<string>;
+  },
   RootState
 >(
   ({ favourites: { all, checkedIn } }) => {
@@ -249,8 +255,12 @@ export const ConnectedFavourites = connect<
       checkedIn,
     };
   },
-  (dispatch, { deleteFavouriteApi }) => ({
-    onCheckInFavourite: favouritesActions.checkIn,
+  (dispatch, { deleteFavouriteApi, checkinFavouriteApi }) => ({
+    onCheckInFavourite: async (id) => {
+      const successMessage = await checkinFavouriteApi(id);
+      dispatch(favouritesActions.checkIn(id));
+      return successMessage;
+    },
     onDeleteFavourite: async (id) => {
       const successMessage = await deleteFavouriteApi(id);
       dispatch(favouritesActions.delete(id));
