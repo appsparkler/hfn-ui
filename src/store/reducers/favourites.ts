@@ -1,4 +1,9 @@
-import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  CaseReducer,
+  createSlice,
+  Dispatch,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { filter } from "lodash/fp";
 import { Favourite } from "../../components/FavouriteList";
 
@@ -41,3 +46,12 @@ export const {
     }),
   },
 });
+
+export const deleteFavouriteAction =
+  (deleteFavouriteFn: (id: string) => Promise<string>) =>
+  (id: string) =>
+  async (dispatch: Dispatch) => {
+    const successMessage = await deleteFavouriteFn(id);
+    dispatch(favouritesActions.delete(id));
+    return successMessage;
+  };

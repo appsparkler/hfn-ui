@@ -20,10 +20,10 @@ import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
 import { AsyncIconButton } from "../AsyncIconButton";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { RootState } from "../../store";
-import { favouritesActions } from "../../store/reducers";
+import { deleteFavouriteAction, favouritesActions } from "../../store/reducers";
 
 export type FavouriteListProps = {
   favourites: Favourite[];
@@ -154,7 +154,7 @@ export type FavouriteListV2Props = {
   favourites: Favourite[];
   checkedIn: string[];
   onCheckInFavourite: ActionCreatorWithPayload<string, string>;
-  onDeleteFavourite: ActionCreatorWithPayload<string, string>;
+  onDeleteFavourite: (id: string) => Promise<string>;
 };
 
 export const FavouritesListV2 = ({
@@ -267,9 +267,9 @@ export const ConnectedFavourites = connect<
   { favourites: Favourite[]; checkedIn: string[] },
   {
     onCheckInFavourite: ActionCreatorWithPayload<string, string>;
-    onDeleteFavourite: ActionCreatorWithPayload<string, string>;
+    onDeleteFavourite: (id: string) => Promise<string>;
   },
-  {},
+  { deleteFavouriteApi: (id: string) => Promise<string> },
   RootState
 >(
   ({ favourites: { all, checkedIn } }) => {
@@ -278,8 +278,12 @@ export const ConnectedFavourites = connect<
       checkedIn,
     };
   },
-  {
+  (dispatch, { deleteFavouriteApi }) => ({
     onCheckInFavourite: favouritesActions.checkIn,
-    onDeleteFavourite: favouritesActions.delete,
-  }
+    onDeleteFavourite: async (id) => {
+      const successMessage = await deleteFavouriteApi(id);
+      dispatch(favouritesActions.checkIn(id));
+      return successMessage;
+    },
+  })
 )(FavouritesListV2);
