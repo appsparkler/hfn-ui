@@ -20,6 +20,10 @@ import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
 import { AsyncIconButton } from "../AsyncIconButton";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { connect } from "react-redux";
+import { RootState } from "../../store";
+import { favouritesActions } from "../../store/reducers";
 
 export type FavouriteListProps = {
   favourites: Favourite[];
@@ -145,3 +149,137 @@ export const FavouriteList = ({
     </List>
   );
 };
+
+export type FavouriteListV2Props = {
+  favourites: Favourite[];
+  checkedIn: string[];
+  onCheckInFavourite: ActionCreatorWithPayload<string, string>;
+  onDeleteFavourite: ActionCreatorWithPayload<string, string>;
+};
+
+export const FavouritesListV2 = ({
+  favourites = [],
+  checkedIn,
+  onCheckInFavourite,
+  onDeleteFavourite,
+}: FavouriteListV2Props) => {
+  const { hasFavourites, noFavourites } = useMemo<{
+    hasFavourites: boolean;
+    noFavourites: boolean;
+  }>(() => {
+    const hasFavourites = favourites.length > 0;
+    const noFavourites = !hasFavourites;
+    return {
+      hasFavourites,
+      noFavourites,
+    };
+  }, [favourites]);
+
+  // const handleClickDeleteFavourite = useCallback<ClickHandler>(
+  //   async (evt) => {
+  //     const {
+  //       currentTarget: { dataset },
+  //     } = evt;
+  //     try {
+  //       const { id = "" } = dataset;
+  //       const successMessage = await onDeleteFavourite(id);
+
+  //       return successMessage;
+  //     } catch (error) {
+  //       throw error;
+  //     }
+  //   },
+  //   [onDeleteFavourite]
+  // );
+
+  // const handleCheckInFavouriteUser = useCallback<ClickHandler>(
+  //   async ({ currentTarget: { dataset } }) => {
+  //     const { id = "" } = dataset;
+  //     const successMessage = await onCheckInFavourite(id);
+  //     setCheckedInFavourites((prevItems) => [...prevItems, id]);
+  //     return successMessage;
+  //   },
+  //   [onCheckInFavourite]
+  // );
+
+  // const [checkedInFavourites, setCheckedInFavourites] = useState<string[]>([]);
+
+  const isFavouriteCheckInDisabled = useCallback(
+    (id) => someStringsMatch(id)(checkedIn),
+    [checkedIn]
+  );
+
+  return (
+    <List
+      dense={false}
+      subheader={
+        <ListSubheader component="div" id="nested-list-subheader">
+          Checkin from your favourites list
+        </ListSubheader>
+      }
+    >
+      {hasFavourites &&
+        map<Favourite, JSX.Element>(({ name, id }) => (
+          <React.Fragment key={id}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={name} />
+              {!isFavouriteCheckInDisabled(id) && (
+                <AsyncButton
+                  data-id={id}
+                  variant="outlined"
+                  size="small"
+                  sx={{ ml: 1 }}
+                  onClick={() => onCheckInFavourite(id)}
+                  label="Check In"
+                />
+              )}
+              {isFavouriteCheckInDisabled(id) && (
+                <Box marginLeft={2}>
+                  <CheckCircleIcon color="success" />
+                </Box>
+              )}
+              <AsyncIconButton
+                data-id={id}
+                edge="end"
+                aria-label="delete"
+                onClick={() => onDeleteFavourite(id)}
+                size="medium"
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+          </React.Fragment>
+        ))(favourites)}
+      {noFavourites && (
+        <Typography color="InactiveCaptionText" variant="body2">
+          <i>No farourites</i>
+        </Typography>
+      )}
+    </List>
+  );
+};
+
+export const ConnectedFavourites = connect<
+  { favourites: Favourite[]; checkedIn: string[] },
+  {
+    onCheckInFavourite: ActionCreatorWithPayload<string, string>;
+    onDeleteFavourite: ActionCreatorWithPayload<string, string>;
+  },
+  {},
+  RootState
+>(
+  ({ favourites: { all, checkedIn } }) => {
+    return {
+      favourites: all,
+      checkedIn,
+    };
+  },
+  {
+    onCheckInFavourite: favouritesActions.checkIn,
+    onDeleteFavourite: favouritesActions.delete,
+  }
+)(FavouritesListV2);
