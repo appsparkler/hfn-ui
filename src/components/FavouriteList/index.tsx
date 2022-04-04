@@ -20,10 +20,9 @@ import map from "lodash/fp/map";
 import { AsyncButton } from "../AsyncButton";
 import { someStringsMatch } from "../../utils";
 import { AsyncIconButton } from "../AsyncIconButton";
-import { ActionCreatorWithPayload, Dispatch } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { RootState } from "../../store";
-import { deleteFavouriteAction, favouritesActions } from "../../store/reducers";
+import { favouritesActions } from "../../store/reducers";
 
 export type FavouriteListProps = {
   favourites: Favourite[];
@@ -150,10 +149,13 @@ export const FavouriteList = ({
   );
 };
 
-export type FavouriteListV2Props = {
+type FavouriteListStateProps = {
   favourites: Favourite[];
   checkedIn: string[];
-} & FavouriteListActionProps;
+};
+
+export type FavouriteListV2Props = FavouriteListStateProps &
+  FavouriteListActionProps;
 
 export type FavouriteListActionProps = {
   onCheckInFavourite: (id: string) => Promise<string>;
@@ -162,7 +164,7 @@ export type FavouriteListActionProps = {
 
 export const FavouritesListV2 = ({
   favourites = [],
-  checkedIn,
+  checkedIn = [],
   onCheckInFavourite,
   onDeleteFavourite,
 }: FavouriteListV2Props) => {
@@ -181,6 +183,16 @@ export const FavouritesListV2 = ({
   const isFavouriteCheckInDisabled = useCallback(
     (id) => someStringsMatch(id)(checkedIn),
     [checkedIn]
+  );
+
+  const handleCheckinFavourite = useCallback<(id: string) => ClickHandler>(
+    (id) => () => onCheckInFavourite(id),
+    [onCheckInFavourite]
+  );
+
+  const handleDeleteFavourite = useCallback<(id: string) => ClickHandler>(
+    (id) => () => onDeleteFavourite(id),
+    [onDeleteFavourite]
   );
 
   return (
@@ -208,7 +220,7 @@ export const FavouritesListV2 = ({
                   variant="outlined"
                   size="small"
                   sx={{ ml: 1 }}
-                  onClick={() => onCheckInFavourite(id)}
+                  onClick={handleCheckinFavourite(id)}
                   label="Check In"
                 />
               )}
@@ -221,7 +233,7 @@ export const FavouritesListV2 = ({
                 data-id={id}
                 edge="end"
                 aria-label="delete"
-                onClick={() => onDeleteFavourite(id)}
+                onClick={handleDeleteFavourite(id)}
                 size="medium"
               />
             </ListItem>
@@ -237,16 +249,12 @@ export const FavouritesListV2 = ({
   );
 };
 
+export type ConnectedFavouritesProps = FavouriteListActionProps;
+
 export const ConnectedFavourites = connect<
-  { favourites: Favourite[]; checkedIn: string[] },
-  {
-    onCheckInFavourite: (id: string) => Promise<string>;
-    onDeleteFavourite: (id: string) => Promise<string>;
-  },
-  {
-    deleteFavouriteApi: (id: string) => Promise<string>;
-    checkinFavouriteApi: (id: string) => Promise<string>;
-  },
+  FavouriteListStateProps,
+  FavouriteListActionProps,
+  FavouriteListActionProps,
   RootState
 >(
   ({ favourites: { all, checkedIn } }) => {
@@ -255,14 +263,14 @@ export const ConnectedFavourites = connect<
       checkedIn,
     };
   },
-  (dispatch, { deleteFavouriteApi, checkinFavouriteApi }) => ({
-    onCheckInFavourite: async (id) => {
-      const successMessage = await checkinFavouriteApi(id);
+  (dispatch, { onDeleteFavourite, onCheckInFavourite }) => ({
+    onCheckInFavourite: async (id: string) => {
+      const successMessage = await onCheckInFavourite(id);
       dispatch(favouritesActions.checkIn(id));
       return successMessage;
     },
     onDeleteFavourite: async (id) => {
-      const successMessage = await deleteFavouriteApi(id);
+      const successMessage = await onDeleteFavourite(id);
       dispatch(favouritesActions.delete(id));
       return successMessage;
     },

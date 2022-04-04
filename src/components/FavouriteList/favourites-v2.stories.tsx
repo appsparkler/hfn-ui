@@ -9,22 +9,24 @@ export default {
 const Template: ComponentStory<typeof ConnectedFavourites> = (args) => (
   <ConnectedFavourites {...args} />
 );
-export const deleteFavouriteApi = (id: string): Promise<string> =>
+const deleteFavouriteApi = (id: string): Promise<string> =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(`Favourite ${id} is deleted`);
       // reject(new Error(`Couldn't delete ${id}.`));
     }, 600);
   });
-export const checkinFavouriteApi = (id: string): Promise<string> =>
+const checkinFavouriteApi = (id: string): Promise<string> =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(`Favourite ${id} is checked in`);
       // reject(new Error(`Couldn't delete ${id}.`));
     }, 600);
   });
+
 export const favouritesV2 = Template.bind({});
 favouritesV2.args = {
-  deleteFavouriteApi,
-  checkinFavouriteApi,
+  // deleteFavouriteApi,
+  // checkinFavouriteApi,
 };
+favouritesV2.storyName = "Favourites V2";
