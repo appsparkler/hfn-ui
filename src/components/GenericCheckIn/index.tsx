@@ -28,7 +28,12 @@ import {
   emailRegEx,
   mobileNumberRegex,
 } from "../../constants";
-import { FavouriteList, FavouriteListProps } from "../FavouriteList";
+import {
+  ConnectedFavourites,
+  ConnectedFavouritesProps,
+  FavouriteList,
+  FavouriteListProps,
+} from "../FavouriteList";
 
 export type ClickHandler = MouseEventHandler<HTMLButtonElement>;
 
@@ -44,12 +49,14 @@ export type Favourite = {
   name: string;
 } & MobileNumberOrEmailOrAbhyasiId;
 
-export type GenericCheckInProps = FavouriteListProps & {
+export type GenericCheckInProps = {
   handle: React.MutableRefObject<{
     setShowVerboseCheckin: any;
     showVerboseCheckin: any;
     setUserInfo: any;
   }>;
+  onCheckInFavourite: ConnectedFavouritesProps["onCheckInFavourite"];
+  onDeleteFavourite: ConnectedFavouritesProps["onDeleteFavourite"];
   onCheckInUser: (userInfo: string, addToFavorite: boolean) => void;
   unRegisteredUserInfo: GenericCheckInVerboseProps["value"];
   onCheckInVerboseUser: GenericCheckInVerboseProps["onClickCheckIn"];
@@ -61,7 +68,6 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
   onCheckInUser,
 
   // Favorites List
-  favourites,
   onCheckInFavourite,
   onDeleteFavourite,
 
@@ -223,8 +229,7 @@ export const GenericCheckIn: FC<GenericCheckInProps> = ({
           notFoundDetails={userInfo}
         />
       )}
-      <FavouriteList
-        favourites={favourites}
+      <ConnectedFavourites
         onCheckInFavourite={onCheckInFavourite}
         onDeleteFavourite={onDeleteFavourite}
       />

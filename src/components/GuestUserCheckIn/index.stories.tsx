@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { GuestUserCheckin, GuestUserCheckinProps } from "./index";
+import { GuestUserCheckin } from "./index";
 import { uniqueId } from "lodash/fp";
 import { action } from "@storybook/addon-actions";
 import { genericCheckInVerbose } from "../GenericCheckInVerbose/index.stories";
@@ -18,6 +18,16 @@ const asyncSuccess =
   (actionName: string, successMessage: string, timeout: number = 600) =>
   (...args: any[]) => {
     action(actionName)(...args);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(successMessage);
+      }, timeout);
+    });
+  };
+const asyncSuccessV2 =
+  (actionName: string, successMessage: string, timeout: number = 600) =>
+  (id: string): Promise<string> => {
+    action(actionName)(id);
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(successMessage);
@@ -58,7 +68,7 @@ guestUserCheckIn.args = {
       email: "ookla@dribble.com",
     },
   ],
-  onCheckInFavourite: asyncSuccess(
+  onCheckInFavourite: asyncSuccessV2(
     "oCheckInfavourite",
     "fav is checked in",
     600
@@ -68,7 +78,7 @@ guestUserCheckIn.args = {
     "signed-in user is checked in",
     600
   ),
-  onDeleteFavourite: asyncSuccess(
+  onDeleteFavourite: asyncSuccessV2(
     "onDeleteFavourite",
     "fav user is deleted",
     600

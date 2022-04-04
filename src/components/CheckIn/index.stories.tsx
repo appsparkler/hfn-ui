@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CheckIn, CheckInProps } from "./index";
+import { CheckIn } from "./index";
 import { action } from "@storybook/addon-actions";
 import { genericCheckInVerbose as genericCheckInVerboseStories } from "../GenericCheckInVerbose/index.stories";
 
@@ -22,10 +22,8 @@ checkIn.args = {
   isSignedIn: false,
   unRegisteredUserInfo: genericCheckInVerboseStories.args?.value,
   onChangeVerboseUserInfo: action("onChangeVerboseUserInfo"),
-  onCheckInFavourite: action("onCheckInFavourite"),
   onCheckInUser: action("onCheckInUser"),
   onCheckInVerboseUser: action("onCheckInVerboseUser"),
   onClickBackButton: action("onClickBackButton"),
   onClickCheckIn: action("onClickCheckIn"),
-  onDeleteFavourite: action("onDeleteFavourite"),
 };

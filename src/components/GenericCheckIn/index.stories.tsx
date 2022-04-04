@@ -22,18 +22,6 @@ genericCheckIn.args = {
   onCheckInVerboseUser: action("onCheckInVerboseUser"),
   unRegisteredUserInfo: genericCheckInVerbose?.args
     ?.value as GenericCheckInVerboseValue,
-  favourites: [
-    {
-      name: "Prakash Mishra",
-      id: uniqueId("favourite-"),
-      abhyasiId: "INABC2323",
-    },
-    {
-      name: "Gayathri Devaswami",
-      id: uniqueId("favourite-"),
-      email: "ookla@dribble.com",
-    },
-  ],
   onCheckInFavourite: (...args) => {
     action("onCheckInFavourite")(...args);
     return new Promise((resolve, reject) => {

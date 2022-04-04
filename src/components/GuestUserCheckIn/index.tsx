@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { FC, MouseEventHandler, useCallback, useRef } from "react";
 import { EventNameAndLocationProps } from "../EventNameAndLocation";
-import { FavouriteListProps } from "../FavouriteList";
+import { ConnectedFavouritesProps, FavouriteListProps } from "../FavouriteList";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 import { AppHeader } from "../Header";
@@ -13,8 +13,8 @@ export type GuestUserCheckinProps = {
   onClickBackButton: ClickHandler;
   favourites: FavouriteListProps["favourites"];
   unRegisteredUserInfo: GenericCheckInVerboseValue;
-  onCheckInFavourite: FavouriteListProps["onCheckInFavourite"];
-  onDeleteFavourite: FavouriteListProps["onDeleteFavourite"];
+  onCheckInFavourite: ConnectedFavouritesProps["onCheckInFavourite"];
+  onDeleteFavourite: ConnectedFavouritesProps["onDeleteFavourite"];
   onCheckInUser: GenericCheckInProps["onCheckInUser"];
   onChangeVerboseUserInfo: GenericCheckInProps["onChangeVerboseUserInfo"];
   onCheckInVerboseUser: GenericCheckInProps["onCheckInVerboseUser"];
@@ -71,7 +71,6 @@ export const GuestUserCheckin: FC<GuestUserCheckinProps> = ({
       >
         <GenericCheckIn
           handle={genericCheckinHandle}
-          favourites={favourites}
           onCheckInFavourite={onCheckInFavourite}
           onCheckInUser={onCheckInUser}
           onDeleteFavourite={onDeleteFavourite}

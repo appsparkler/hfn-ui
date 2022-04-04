@@ -25,6 +25,16 @@ const asyncSuccess =
     });
   };
 
+const asyncSuccessV2 =
+  (actionName: string, successMessage: string, timeout: number = 600) =>
+  (id: string): Promise<string> => {
+    action(actionName)(id);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(successMessage);
+      }, timeout);
+    });
+  };
 const asyncFailure =
   (actionName: string, failureMessage: string, timeout: number = 600) =>
   (...args: any[]) => {
@@ -58,7 +68,7 @@ example.args = {
       email: "ookla@dribble.com",
     },
   ],
-  onCheckInFavourite: asyncSuccess(
+  onCheckInFavourite: asyncSuccessV2(
     "oCheckInfavourite",
     "fav is checked in",
     600
@@ -69,7 +79,7 @@ example.args = {
     "Yay! You are checked in!",
     600
   ),
-  onDeleteFavourite: asyncSuccess(
+  onDeleteFavourite: asyncSuccessV2(
     "onDeleteFavourite",
     "fav user is deleted",
     600

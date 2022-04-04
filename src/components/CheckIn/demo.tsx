@@ -23,7 +23,8 @@ export const findWithId = <T extends { id: string }>(idToFind: string) =>
   find<T>((item) => item.id === idToFind);
 
 const checkInFavourite =
-  (favouriteUserId: string) => (favourites: Favourite[]) =>
+  (favouriteUserId: string) =>
+  (favourites: Favourite[]): Promise<string> =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
         const user = findWithId<Favourite>(favouriteUserId)(favourites);
@@ -36,7 +37,8 @@ const checkInFavourite =
     });
 
 const deleteFavourite =
-  (favouriteUserId: string) => (favourites: Favourite[]) =>
+  (favouriteUserId: string) =>
+  (favourites: Favourite[]): Promise<string> =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
         const user = findWithId<Favourite>(favouriteUserId)(favourites);

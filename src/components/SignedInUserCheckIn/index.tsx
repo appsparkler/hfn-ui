@@ -13,7 +13,7 @@ import { EventNameAndLocationProps } from "../EventNameAndLocation";
 import { GenericCheckIn, GenericCheckInProps } from "../GenericCheckIn";
 import { AsyncButton } from "../AsyncButton";
 import { AppHeader } from "../Header";
-import { FavouriteListProps } from "../FavouriteList";
+import { ConnectedFavouritesProps, FavouriteListProps } from "../FavouriteList";
 import { GenericCheckInVerboseValue } from "../GenericCheckInVerbose";
 
 export type SignedInUserCheckInMainScreenProps = {
@@ -79,8 +79,8 @@ export type SignedInUserCheckInProps = {
   isCheckedIn: boolean;
   favourites: FavouriteListProps["favourites"];
   unRegisteredUserInfo: GenericCheckInVerboseValue;
-  onCheckInFavourite: FavouriteListProps["onCheckInFavourite"];
-  onDeleteFavourite: FavouriteListProps["onDeleteFavourite"];
+  onCheckInFavourite: ConnectedFavouritesProps["onCheckInFavourite"];
+  onDeleteFavourite: ConnectedFavouritesProps["onDeleteFavourite"];
   onCheckInUser: GenericCheckInProps["onCheckInUser"];
   onChangeVerboseUserInfo: GenericCheckInProps["onChangeVerboseUserInfo"];
   onCheckInVerboseUser: GenericCheckInProps["onCheckInVerboseUser"];
@@ -166,7 +166,6 @@ export const SignedInUserCheckIn: FC<SignedInUserCheckInProps> = ({
         {showGenericCheckInPage && (
           <GenericCheckIn
             handle={genericCheckinHandle}
-            favourites={favourites}
             onCheckInFavourite={onCheckInFavourite}
             onCheckInUser={onCheckInUser}
             onDeleteFavourite={onDeleteFavourite}
