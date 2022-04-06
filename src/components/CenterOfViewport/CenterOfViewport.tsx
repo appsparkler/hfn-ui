@@ -1,11 +1,14 @@
 import Box, { BoxProps } from "@mui/material/Box";
 
-export type PageCenterProps = BoxProps;
+export type CenterOfViewportProps = BoxProps;
 
+/** A layout utility that places the children
+ * at the center of the viewport.
+ **/
 export const CenterOfViewport = ({
   children,
   ...restProps
-}: PageCenterProps) => {
+}: CenterOfViewportProps) => {
   return (
     <Box
       sx={{
