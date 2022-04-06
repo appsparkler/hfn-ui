@@ -1,13 +1,13 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CheckinSuccessSection } from "./SectionCheckInSuccess";
+import { SectionCheckinSuccess } from "./SectionCheckInSuccess";
 
 export default {
   title: "Widgets/Bhandara Checkin/Sections/Check In Success",
-  component: CheckinSuccessSection,
-} as ComponentMeta<typeof CheckinSuccessSection>;
+  component: SectionCheckinSuccess,
+} as ComponentMeta<typeof SectionCheckinSuccess>;
 
-const Template: ComponentStory<typeof CheckinSuccessSection> = (args) => (
-  <CheckinSuccessSection {...args} />
+const Template: ComponentStory<typeof SectionCheckinSuccess> = (args) => (
+  <SectionCheckinSuccess {...args} />
 );
 export const checkInSuccess = Template.bind({});
 checkInSuccess.args = {};

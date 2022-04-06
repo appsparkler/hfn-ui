@@ -3,13 +3,13 @@ import { Button, ButtonProps, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { CenterOfViewport } from "../../components/CenterOfViewport/CenterOfViewport";
 
-export type CheckinSuccessSectionProps = {
+export type SectionCheckinSuccessProps = {
   onClickReturn: ButtonProps["onClick"];
 };
 
-export const CheckinSuccessSection = ({
+export const SectionCheckinSuccess = ({
   onClickReturn,
-}: CheckinSuccessSectionProps) => {
+}: SectionCheckinSuccessProps) => {
   return (
     <CenterOfViewport gap={10}>
       <Box display="flex" alignItems="center" flexDirection="column">

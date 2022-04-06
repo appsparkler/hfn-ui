@@ -2,10 +2,10 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { SectionMain } from "./SectionMain";
 
 export default {
-  title: "Widgets/Bhandara Checkin/Sections/Section Main",
+  title: "Widgets/Bhandara Checkin/Sections/Main",
   component: SectionMain,
 } as ComponentMeta<typeof SectionMain>;
 
 const Template: ComponentStory<typeof SectionMain> = () => <SectionMain />;
-export const sectionMain = Template.bind({});
-sectionMain.args = {};
+export const main = Template.bind({});
+main.args = {};
