@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CenterOfViewport } from "./CenterOfViewport";
 
 export default {
-  title: "Components/Layout/Center Of Viewport",
+  title: "Components/Layouts/Center Of Viewport",
   component: CenterOfViewport,
 } as ComponentMeta<typeof CenterOfViewport>;
 
