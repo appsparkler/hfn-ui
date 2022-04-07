@@ -1,9 +1,14 @@
 import { Typography } from "@mui/material";
 import { CenterOfViewport } from "../../components";
 
-export type SectionUpdateDetailsProps = {
+export type SectionUpdateDetailsStateProps = {
   show?: boolean;
 };
+
+export type SectionUpdateDetailsDispatchProps = {};
+
+export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
+  SectionUpdateDetailsDispatchProps;
 
 export const SectionUpdateDetails = ({ show }: SectionUpdateDetailsProps) => {
   if (!show) {

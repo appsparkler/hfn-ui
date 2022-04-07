@@ -2,6 +2,7 @@ import { SectionMainConnected } from "./SectionMainConnected";
 import { configureStore } from "@reduxjs/toolkit";
 import { bhandaraCheckinSlice } from "../../store/slices";
 import { Provider } from "react-redux";
+import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 
 export type BhandaraCheckinWidgetProps = {};
 
@@ -19,27 +20,10 @@ export const BhandaraCheckinWidget = ({}: BhandaraCheckinWidgetProps) => {
         },
       }),
   });
-  // const {
-  //   showMainSection,
-  //   showCheckinSuccessSection,
-  //   showUpdateDetailsSection,
-  // } = useMemo<{
-  //   showMainSection: boolean;
-  //   showUpdateDetailsSection: boolean;
-  //   showCheckinSuccessSection: boolean;
-  // }>(
-  //   () => ({
-  //     showMainSection: currentSection === CurrentSection.MAIN,
-  //     showUpdateDetailsSection:
-  //       currentSection === CurrentSection.UPDATE_DETAILS,
-  //     showCheckinSuccessSection:
-  //       currentSection === CurrentSection.CHECKIN_SUCCESS,
-  //   }),
-  //   [currentSection]
-  // );
   return (
     <Provider store={store}>
       <SectionMainConnected />
+      <SectionUpdateDetailsConnected />
     </Provider>
   );
 };
