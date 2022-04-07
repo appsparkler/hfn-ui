@@ -5,5 +5,6 @@ export const store = "store";
 export type RootState = {
   bhandaraCheckin: {
     currentSection: CurrentSection;
+    registeringWithValue: string;
   };
 };
