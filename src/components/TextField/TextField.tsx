@@ -3,7 +3,6 @@ import { SelectProps } from "@mui/material/Select";
 import { useCallback } from "react";
 import {
   BoxProps,
-  FormHelperText,
   FormHelperTextProps,
   TextField,
   TextFieldProps,
@@ -48,13 +47,9 @@ export const CustomTextField = ({
         onChange={handleChange}
         variant="outlined"
         error={error}
-        helperText={helperText}
-        FormHelperTextProps={{}}
+        helperText={helperText || " "}
         {...restTextFieldProps}
       />
-      {helperText ? (
-        <FormHelperText error={error}>{helperText}</FormHelperText>
-      ) : null}
     </FormControl>
   );
 };

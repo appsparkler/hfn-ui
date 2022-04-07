@@ -1,8 +1,7 @@
 import Button, { ButtonProps } from "@mui/material/Button";
-import { RefObject, useCallback, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import { CustomTextField, CustomTextFieldProps } from "../../components";
 import { CenterOfViewport } from "../../components/CenterOfViewport/CenterOfViewport";
-import { InputChangeHandler } from "../../types";
 
 export type SectionMainProps = {
   error?: boolean;
@@ -34,13 +33,14 @@ export const SectionMain = ({
       marginX="auto"
     >
       <CustomTextField
-        inputProps={{ ref: idFieldRef, helperText }}
         label="Abhyasi ID / Mobile # / Email"
         labelId=""
         variant="outlined"
         error={error}
         value={value}
         onChange={onChange}
+        helperText={helperText}
+        inputRef={idFieldRef}
       />
       <Button
         variant="contained"

@@ -20,5 +20,6 @@ customTextField.args = {
   variant: "filled",
   label: "First Name",
   value: "hello world",
+  helperText: "This field is required",
   onChange: action("onChange"),
 };

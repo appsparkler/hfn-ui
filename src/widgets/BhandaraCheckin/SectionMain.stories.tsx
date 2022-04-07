@@ -13,5 +13,5 @@ export const main = Template.bind({});
 main.args = {
   error: false,
   value: "INEEIW837",
-  helperText: "Abhyasi with ID# INEEIW837 is already checked in.",
+  helperText: "",
 };
