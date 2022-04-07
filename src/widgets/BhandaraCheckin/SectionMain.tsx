@@ -1,7 +1,13 @@
 import Button, { ButtonProps } from "@mui/material/Button";
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useMemo, useRef } from "react";
 import { CustomTextField, CustomTextFieldProps } from "../../components";
-import { CenterOfViewport } from "../../components/CenterOfViewport/CenterOfViewport";
+import { CenterOfViewport } from "../../components";
+import {
+  abhyasiIdRegex,
+  emailRegEx,
+  abhyasiIdTempRegex,
+  mobileNumberRegex,
+} from "../../constants";
 
 export type SectionMainProps = {
   error?: boolean;
@@ -19,6 +25,17 @@ export const SectionMain = ({
   value = "",
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
+
+  const isStartButtonEnabled = useMemo(
+    () =>
+      Boolean(value.match(abhyasiIdRegex)) ||
+      Boolean(value.match(emailRegEx)) ||
+      Boolean(
+        value.match(abhyasiIdTempRegex) ||
+          Boolean(value.match(mobileNumberRegex))
+      ),
+    [value]
+  );
 
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
@@ -47,6 +64,7 @@ export const SectionMain = ({
         type="button"
         size="large"
         onClick={onClickStart}
+        disabled={!isStartButtonEnabled}
       >
         START CHECK IN
       </Button>
