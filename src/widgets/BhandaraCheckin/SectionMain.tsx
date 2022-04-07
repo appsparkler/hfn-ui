@@ -9,17 +9,24 @@ import {
   mobileNumberRegex,
 } from "../../constants";
 
-export type SectionMainProps = {
+export type SectionMainStateProps = {
   error?: boolean;
   helperText?: string;
   value: string;
+  show?: boolean;
+};
+
+export type SectionMainDispatchProps = {
   onChange: CustomTextFieldProps["onChange"];
   onClickStart: ButtonProps["onClick"];
 };
 
+export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
+
 export const SectionMain = ({
   onClickStart,
   onChange,
+  show,
   error,
   helperText,
   value = "",
@@ -41,6 +48,10 @@ export const SectionMain = ({
     if (idFieldRef.current) idFieldRef.current.focus();
   }, []);
 
+  if (!show) {
+    return null;
+  }
+
   return (
     <CenterOfViewport
       gap={10}
@@ -51,7 +62,6 @@ export const SectionMain = ({
     >
       <CustomTextField
         label="Abhyasi ID / Mobile # / Email"
-        labelId=""
         variant="outlined"
         error={error}
         value={value}

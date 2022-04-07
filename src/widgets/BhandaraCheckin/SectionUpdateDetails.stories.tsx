@@ -10,4 +10,6 @@ const Template: ComponentStory<typeof SectionUpdateDetails> = (args) => (
   <SectionUpdateDetails {...args} />
 );
 export const updateDetails = Template.bind({});
-updateDetails.args = {};
+updateDetails.args = {
+  show: true,
+};

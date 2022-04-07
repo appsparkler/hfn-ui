@@ -22,7 +22,7 @@ export type CustomTextFieldProps = Omit<
 
   // Required
   label: string;
-  labelId: string;
+  // labelId: string;
 
   // Event Handlers
   onChange: (newValue: string) => void;

@@ -1,9 +1,14 @@
 import { Typography } from "@mui/material";
 import { CenterOfViewport } from "../../components";
 
-export type SectionUpdateDetailsProps = {};
+export type SectionUpdateDetailsProps = {
+  show?: boolean;
+};
 
-export const SectionUpdateDetails = ({}: SectionUpdateDetailsProps) => {
+export const SectionUpdateDetails = ({ show }: SectionUpdateDetailsProps) => {
+  if (!show) {
+    return null;
+  }
   return (
     <CenterOfViewport
       gap={10}
