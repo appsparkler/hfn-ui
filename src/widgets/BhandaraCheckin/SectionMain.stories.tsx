@@ -6,6 +6,12 @@ export default {
   component: SectionMain,
 } as ComponentMeta<typeof SectionMain>;
 
-const Template: ComponentStory<typeof SectionMain> = () => <SectionMain />;
+const Template: ComponentStory<typeof SectionMain> = (args) => (
+  <SectionMain {...args} />
+);
 export const main = Template.bind({});
-main.args = {};
+main.args = {
+  error: false,
+  value: "INEEIW837",
+  helperText: "Abhyasi with ID# INEEIW837 is already checked in.",
+};

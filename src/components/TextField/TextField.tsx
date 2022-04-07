@@ -32,6 +32,7 @@ export type CustomTextFieldProps = Omit<
 export const CustomTextField = ({
   onChange,
   error,
+  helperText,
   ...restTextFieldProps
 }: CustomTextFieldProps) => {
   const handleChange = useCallback<InputChangeHandler>(
@@ -47,9 +48,13 @@ export const CustomTextField = ({
         onChange={handleChange}
         variant="outlined"
         error={error}
+        helperText={helperText}
+        FormHelperTextProps={{}}
         {...restTextFieldProps}
       />
-      <FormHelperText error={error}>Mobile # is invalid</FormHelperText>
+      {helperText ? (
+        <FormHelperText error={error}>{helperText}</FormHelperText>
+      ) : null}
     </FormControl>
   );
 };
