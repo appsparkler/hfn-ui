@@ -1,10 +1,13 @@
-import { CurrentSection } from "../widgets/BhandaraCheckin/types";
+import { configureStore } from "@reduxjs/toolkit";
+import { bhandaraCheckinSlice } from "./slices";
 
-export const store = "store";
+const store = configureStore({
+  reducer: {
+    bhandaraCheckin: bhandaraCheckinSlice.reducer,
+  },
+});
 
-export type RootState = {
-  bhandaraCheckin: {
-    currentSection: CurrentSection;
-    registeringWithValue: string;
-  };
-};
+export type RootState = ReturnType<typeof store.getState>;
+export type RootDispatch = typeof store.dispatch;
+
+export * from "./slices";

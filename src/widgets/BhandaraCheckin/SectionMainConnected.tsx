@@ -6,13 +6,13 @@ import {
   SectionMainDispatchProps,
   SectionMainStateProps,
 } from "./SectionMain";
-import { CurrentSection } from "./types";
+import { CurrentSectionEnum } from "./types";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({ bhandaraCheckin }) => {
     return {
       value: bhandaraCheckin.registeringWithValue,
-      show: bhandaraCheckin.currentSection === CurrentSection.MAIN,
+      show: bhandaraCheckin.currentSection === CurrentSectionEnum.MAIN,
     };
   };
 

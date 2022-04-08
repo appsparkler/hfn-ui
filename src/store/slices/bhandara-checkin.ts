@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentSection } from "../../widgets/BhandaraCheckin/types";
+import { CurrentSectionEnum } from "../../widgets/BhandaraCheckin/types";
 
 export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: {
-    currentSection: CurrentSection.MAIN,
+    currentSection: CurrentSectionEnum.MAIN,
     registeringWithValue: "",
   },
   reducers: {
     goToUpdateDetails: (state) => {
-      state.currentSection = CurrentSection.UPDATE_DETAILS;
+      state.currentSection = CurrentSectionEnum.UPDATE_DETAILS;
     },
     changeRegisteringWithValue: (state, { payload }) => {
       state.registeringWithValue = payload;

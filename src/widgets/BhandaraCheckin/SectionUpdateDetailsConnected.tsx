@@ -5,7 +5,7 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { CurrentSection } from "./types";
+import { CurrentSectionEnum } from "./types";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -13,7 +13,7 @@ const mapStateToProps: MapStateToProps<
   RootState
 > = ({ bhandaraCheckin }) => {
   return {
-    show: bhandaraCheckin.currentSection === CurrentSection.UPDATE_DETAILS,
+    show: bhandaraCheckin.currentSection === CurrentSectionEnum.UPDATE_DETAILS,
   };
 };
 
