@@ -5,6 +5,19 @@ const store = configureStore({
   reducer: {
     bhandaraCheckin: bhandaraCheckinSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: {
+          apis: {
+            testApi: () =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => resolve("done"), 600);
+              }),
+          },
+        },
+      },
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

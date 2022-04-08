@@ -1,4 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {
+  AsyncThunkAction,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { CurrentSectionEnum } from "../../widgets/BhandaraCheckin/types";
 
 export const bhandaraCheckinSlice = createSlice({
@@ -22,3 +26,17 @@ export const bhandaraCheckinSlice = createSlice({
     },
   },
 });
+
+export type ThunkApiConfig = {
+  extra: {
+    apis: { testApi: () => Promise<string> };
+  };
+};
+
+export const someAction = createAsyncThunk<void, {}, ThunkApiConfig>(
+  "bhandara-checkin/someAction",
+  async (_arg, thunkAPI) => {
+    await thunkAPI.extra.apis.testApi();
+    thunkAPI.dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+  }
+);
