@@ -1,5 +1,5 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState } from "../../store";
+import { bhandaraCheckinSlice, RootState } from "../../store";
 import {
   SectionUpdateDetails,
   SectionUpdateDetailsDispatchProps,
@@ -20,8 +20,11 @@ const mapStateToProps: MapStateToProps<
 const mapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
   {}
-> = () => {
-  return {};
+> = (dispatch) => {
+  return {
+    onClickCheckin: () =>
+      dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess()),
+  };
 };
 
 export const SectionUpdateDetailsConnected = connect(

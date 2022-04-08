@@ -3,9 +3,14 @@ import { Button, ButtonProps, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { CenterOfViewport } from "../../components/CenterOfViewport/CenterOfViewport";
 
-export type SectionCheckinSuccessProps = {
+export type SectionCheckinStateProps = {};
+
+export type SectionCheckinDispatchProps = {
   onClickReturn: ButtonProps["onClick"];
 };
+
+export type SectionCheckinSuccessProps = SectionCheckinStateProps &
+  SectionCheckinDispatchProps;
 
 export const SectionCheckinSuccess = ({
   onClickReturn,

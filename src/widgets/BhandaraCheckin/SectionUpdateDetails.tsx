@@ -1,16 +1,21 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { CenterOfViewport } from "../../components";
 
 export type SectionUpdateDetailsStateProps = {
   show?: boolean;
 };
 
-export type SectionUpdateDetailsDispatchProps = {};
+export type SectionUpdateDetailsDispatchProps = {
+  onClickCheckin: () => void;
+};
 
 export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
   SectionUpdateDetailsDispatchProps;
 
-export const SectionUpdateDetails = ({ show }: SectionUpdateDetailsProps) => {
+export const SectionUpdateDetails = ({
+  show,
+  onClickCheckin,
+}: SectionUpdateDetailsProps) => {
   if (!show) {
     return null;
   }
@@ -23,6 +28,9 @@ export const SectionUpdateDetails = ({ show }: SectionUpdateDetailsProps) => {
       marginX="auto"
     >
       <Typography variant="h4">Update Details</Typography>
+      <Button type="button" size="large" onClick={onClickCheckin}>
+        CHECK IN
+      </Button>
     </CenterOfViewport>
   );
 };
