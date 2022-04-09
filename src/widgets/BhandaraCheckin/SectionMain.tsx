@@ -69,7 +69,7 @@ export const SectionMain = ({
       gap={10}
       width={"100%"}
       maxWidth={400}
-      padding={2}
+      paddingX={1}
       marginX="auto"
     >
       <TextField

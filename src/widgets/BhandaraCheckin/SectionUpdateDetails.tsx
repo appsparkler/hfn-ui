@@ -90,7 +90,7 @@ export const SectionUpdateDetails = ({
       gap={5}
       width={"100%"}
       maxWidth={400}
-      padding={2}
+      paddingX={1}
       marginX="auto"
     >
       <Vertical gap={3} width={"100%"}>
