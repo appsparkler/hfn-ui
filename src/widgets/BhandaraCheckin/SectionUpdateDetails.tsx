@@ -157,6 +157,7 @@ export const SectionUpdateDetails = ({
             type="tel"
             variant="outlined"
             fullWidth
+            helperText="Please include the country code - for ex. +9183392..."
             {...userDetails.mobile}
           />
         ) : null}
