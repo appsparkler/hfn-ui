@@ -35,17 +35,12 @@ export type SelectFieldProps = Omit<
 export const SelectField = ({
   labelId,
   label,
-  options = [
-    { value: 1, label: <em>Select Age</em> },
-    { value: 10, label: "Ten" },
-    { value: 20, label: "Twenty" },
-    { value: 30, label: "Thirty" },
-  ],
+  options = [],
   value,
   required,
-  onChange,
   helperText,
   error,
+  onChange,
   ...restSelectProps
 }: SelectFieldProps) => {
   const isSelected = useCallback<($value: OptionValue) => boolean>(
