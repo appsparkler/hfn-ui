@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { User } from "../widgets/BhandaraCheckin/types";
 import { bhandaraCheckinSlice } from "./slices";
 
-const store = configureStore({
+const exampleStore = configureStore({
   reducer: {
     bhandaraCheckin: bhandaraCheckinSlice.reducer,
   },
@@ -9,18 +10,22 @@ const store = configureStore({
     getDefaultMiddleware({
       thunk: {
         extraArgument: {
-          apis: {
-            testApi: () =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => resolve("done"), 600);
-              }),
-          },
-        },
+          apis: {} as BhandaraCheckinAPIs,
+        } as ThunkApiConfig["extra"],
       },
     }),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type RootDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof exampleStore.getState>;
+export type RootDispatch = typeof exampleStore.dispatch;
+export type BhandaraCheckinAPIs = {
+  getIsUserCheckedIn: (userId: string) => Promise<boolean>;
+  getUserDetails: (userId: string) => Promise<User>;
+};
+export type ThunkApiConfig = {
+  extra: {
+    apis: BhandaraCheckinAPIs;
+  };
+};
 
 export * from "./slices";

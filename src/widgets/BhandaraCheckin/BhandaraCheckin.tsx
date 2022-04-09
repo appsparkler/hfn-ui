@@ -5,10 +5,13 @@ import { Provider } from "react-redux";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { useMemo } from "react";
+import { BhandaraCheckinAPIs } from "../../store";
 
-export type BhandaraCheckinWidgetProps = {};
+export type BhandaraCheckinWidgetProps = {
+  apis: BhandaraCheckinAPIs;
+};
 
-export const BhandaraCheckinWidget = ({}: BhandaraCheckinWidgetProps) => {
+export const BhandaraCheckinWidget = ({ apis }: BhandaraCheckinWidgetProps) => {
   const store = useMemo(
     () =>
       configureStore({
@@ -19,17 +22,12 @@ export const BhandaraCheckinWidget = ({}: BhandaraCheckinWidgetProps) => {
           getDefaultMiddleware({
             thunk: {
               extraArgument: {
-                apis: {
-                  testApi: () =>
-                    new Promise((resolve) => {
-                      setTimeout(() => resolve("done"), 600);
-                    }),
-                },
+                apis,
               },
             },
           }),
       }),
-    []
+    [apis]
   );
   return (
     <Provider store={store}>

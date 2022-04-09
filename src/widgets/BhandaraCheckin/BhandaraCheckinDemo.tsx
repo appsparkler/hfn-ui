@@ -5,22 +5,31 @@ import {
   BhandaraCheckinWidgetProps,
 } from "./BhandaraCheckin";
 
-// const verifyUser = (value: string) =>
-//   new Promise(() => {
-//     setTimeout(() => {
-//       resolve("User can checkin");
-//       resolve("User is already checked in");
-//     }, 400);
-//   });
-
 export const BhandaraCheckinWidgetDemo = () => {
-  // const handleClick = useCallback<
-  //   BhandaraCheckinWidgetProps["onClickStartCheckin"]
-  //   >(async() => {
-  //     const successMessage = await verifyUser();
+  return (
+    <BhandaraCheckinWidget
+      apis={{
+        getIsUserCheckedIn: () =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(false);
+            }, 600);
+          }),
 
-  //     return successMessage;
-  // }), []);
-
-  return <BhandaraCheckinWidget />;
+        getUserDetails: () =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve({
+                id: "ABCD",
+                email: "abc@def.com",
+                fullName: "Prakash Shah",
+                gender: "Male",
+                location: "Telangana, Hyderabad, India",
+                ageGroup: "30-35",
+              });
+            }, 600);
+          }),
+      }}
+    />
+  );
 };

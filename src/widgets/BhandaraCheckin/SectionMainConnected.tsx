@@ -13,6 +13,7 @@ const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({ bhandaraCheckin }) => {
     return {
       value: bhandaraCheckin.registeringWithValue,
+      isProcessing: bhandaraCheckin.isProcessing,
       show: bhandaraCheckin.currentSection === CurrentSectionEnum.MAIN,
     };
   };
@@ -23,7 +24,8 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   return {
     onChange: (value) =>
       dispatch(bhandaraCheckinSlice.actions.changeRegisteringWithValue(value)),
-    onClickStart: () => dispatch(someAction({}) as unknown as Action<any>),
+    onClickStart: (userId) =>
+      dispatch(someAction(userId) as unknown as Action<any>),
   };
 };
 

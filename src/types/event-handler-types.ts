@@ -1,5 +1,5 @@
-import { TextFieldProps } from "@mui/material";
+import { ButtonProps, TextFieldProps } from "@mui/material";
 
-export type x = {};
+export type ClickHandler = NonNullable<ButtonProps["onClick"]>;
 
 export type InputChangeHandler = NonNullable<TextFieldProps["onChange"]>;

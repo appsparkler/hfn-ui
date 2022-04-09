@@ -1,24 +1,22 @@
-import Button, { ButtonProps } from "@mui/material/Button";
-import { RefObject, useEffect, useMemo, useRef } from "react";
+import { Box, CircularProgress } from "@mui/material";
+import Button from "@mui/material/Button";
+import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CustomTextField, CustomTextFieldProps } from "../../components";
 import { CenterOfViewport } from "../../components";
-import {
-  abhyasiIdRegex,
-  emailRegEx,
-  abhyasiIdTempRegex,
-  mobileNumberRegex,
-} from "../../constants";
+import { ClickHandler } from "../../types";
+import { isAbhyasiId, isAbhyasiIdTemp, isEmail, isMobile } from "../../utils";
 
 export type SectionMainStateProps = {
   error?: boolean;
   helperText?: string;
   value: string;
   show?: boolean;
+  isProcessing?: boolean;
 };
 
 export type SectionMainDispatchProps = {
   onChange: CustomTextFieldProps["onChange"];
-  onClickStart: ButtonProps["onClick"];
+  onClickStart: (userId: string) => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -26,6 +24,7 @@ export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
 export const SectionMain = ({
   onClickStart,
   onChange,
+  isProcessing,
   show,
   error,
   helperText,
@@ -33,16 +32,23 @@ export const SectionMain = ({
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
-  const isStartButtonEnabled = useMemo(
+  const isValidValue = useMemo(
     () =>
-      Boolean(value.match(abhyasiIdRegex)) ||
-      Boolean(value.match(emailRegEx)) ||
-      Boolean(
-        value.match(abhyasiIdTempRegex) ||
-          Boolean(value.match(mobileNumberRegex))
-      ),
+      isEmail(value) ||
+      isMobile(value) ||
+      isAbhyasiIdTemp(value) ||
+      isAbhyasiId(value),
     [value]
   );
+
+  const isStartButtonEnabled = useMemo(
+    () => isValidValue && !isProcessing,
+    [isProcessing, isValidValue]
+  );
+
+  const handleClickStart = useCallback<ClickHandler>(() => {
+    onClickStart(value);
+  }, [onClickStart, value]);
 
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
@@ -69,15 +75,27 @@ export const SectionMain = ({
         helperText={helperText}
         inputRef={idFieldRef}
       />
-      <Button
-        variant="contained"
-        type="button"
-        size="large"
-        onClick={onClickStart}
-        disabled={!isStartButtonEnabled}
-      >
-        START CHECK IN
-      </Button>
+      <Box sx={{ position: "relative", display: "inline-block" }}>
+        <Button
+          type="button"
+          onClick={handleClickStart}
+          size="large"
+          variant="contained"
+          disabled={!isStartButtonEnabled}
+        >
+          START CHECK IN
+        </Button>
+        {isProcessing && (
+          <CircularProgress
+            sx={{
+              position: "absolute",
+              left: "calc(50% - 10px)",
+              top: "calc(50% - 10px)",
+            }}
+            size={20}
+          />
+        )}
+      </Box>
     </CenterOfViewport>
   );
 };
