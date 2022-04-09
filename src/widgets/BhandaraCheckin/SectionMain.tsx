@@ -1,8 +1,8 @@
+import { TextField } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
-import { CustomTextField, CustomTextFieldProps } from "../../components";
 import { CenterOfViewport } from "../../components";
 import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
-import { ClickHandler } from "../../types";
+import { ClickHandler, InputChangeHandler } from "../../types";
 import { isAbhyasiId, isAbhyasiIdTemp, isEmail, isMobile } from "../../utils";
 
 export type SectionMainStateProps = {
@@ -14,7 +14,7 @@ export type SectionMainStateProps = {
 };
 
 export type SectionMainDispatchProps = {
-  onChange: CustomTextFieldProps["onChange"];
+  onChange: (updatedValue: string) => void;
   onClickStart: (userId: string) => void;
 };
 
@@ -45,6 +45,13 @@ export const SectionMain = ({
     [isProcessing, isValidValue]
   );
 
+  const handleChange = useCallback<InputChangeHandler>(
+    ({ target: { value } }) => {
+      onChange(value);
+    },
+    [onChange]
+  );
+
   const handleClickStart = useCallback<ClickHandler>(() => {
     onClickStart(value);
   }, [onClickStart, value]);
@@ -65,14 +72,16 @@ export const SectionMain = ({
       padding={2}
       marginX="auto"
     >
-      <CustomTextField
+      <TextField
+        type="text"
         label="Abhyasi ID / Mobile # / Email"
         variant="outlined"
         error={error}
         value={value}
-        onChange={onChange}
+        onChange={handleChange}
         helperText={helperText}
         inputRef={idFieldRef}
+        fullWidth
       />
       <AsyncButton
         type="button"
