@@ -1,4 +1,5 @@
-import { Box, Button, TextField } from "@mui/material";
+import { BaseTextFieldProps, Box, TextField } from "@mui/material";
+import { useEffect, useRef } from "react";
 import { CenterOfViewport } from "../../components";
 import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
 
@@ -17,6 +18,14 @@ export const SectionUpdateDetails = ({
   show,
   onClickCheckin,
 }: SectionUpdateDetailsProps) => {
+  const fullNameRef: BaseTextFieldProps["inputRef"] = useRef(null);
+
+  useEffect(() => {
+    fullNameRef.current.focus();
+
+    return () => {};
+  }, []);
+
   if (!show) {
     return null;
   }
@@ -35,6 +44,7 @@ export const SectionUpdateDetails = ({
           type="text"
           variant="outlined"
           fullWidth
+          inputRef={fullNameRef}
         />
         <TextField
           label="Mobile"
