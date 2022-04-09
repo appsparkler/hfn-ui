@@ -1,3 +1,6 @@
+import { TextFieldProps } from "@mui/material";
+import { LocationTextFieldProps, SelectFieldProps } from "../../components";
+
 export enum CurrentSectionEnum {
   MAIN,
   UPDATE_DETAILS,
@@ -15,6 +18,20 @@ export type BaseUser = {
 
 export type User = BaseUser &
   ({ email: string } | { mobile: string } | { email: string; mobile: string });
+
+export type UserDetailsValueWrapper<T> = Partial<T> & {
+  show?: boolean;
+  isValid?: boolean;
+};
+
+export type UserDetails = {
+  fullName: UserDetailsValueWrapper<TextFieldProps>;
+  mobile: UserDetailsValueWrapper<TextFieldProps>;
+  email: UserDetailsValueWrapper<TextFieldProps>;
+  location: UserDetailsValueWrapper<LocationTextFieldProps>;
+  ageGroup: UserDetailsValueWrapper<SelectFieldProps>;
+  gender: UserDetailsValueWrapper<SelectFieldProps>;
+};
 
 // const user: User = {
 //   id: "id",

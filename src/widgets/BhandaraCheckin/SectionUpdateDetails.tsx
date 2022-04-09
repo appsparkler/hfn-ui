@@ -1,11 +1,5 @@
-import {
-  Alert,
-  BaseTextFieldProps,
-  Button,
-  TextField,
-  TextFieldProps,
-} from "@mui/material";
-import { useEffect, useMemo, useRef } from "react";
+import { Alert, BaseTextFieldProps, Button, TextField } from "@mui/material";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   CenterOfViewport,
   AsyncButton,
@@ -13,31 +7,21 @@ import {
   Horizontal,
   Vertical,
   SelectField,
-  LocationTextFieldProps,
-  SelectFieldProps,
 } from "../../components";
-
-export type UserDetailsValueWrapper<T> = Partial<T> & {
-  show?: boolean;
-  isValid?: boolean;
-};
+import { InputChangeHandler } from "../../types";
+import { UserDetails } from "./types";
+import { isFieldValueValid } from "./utils";
 
 export type SectionUpdateDetailsStateProps = {
   show?: boolean;
   isProcessing?: boolean;
-  userDetails: {
-    fullName: UserDetailsValueWrapper<TextFieldProps>;
-    mobile: UserDetailsValueWrapper<TextFieldProps>;
-    email: UserDetailsValueWrapper<TextFieldProps>;
-    location: UserDetailsValueWrapper<LocationTextFieldProps>;
-    ageGroup: UserDetailsValueWrapper<SelectFieldProps>;
-    gender: UserDetailsValueWrapper<SelectFieldProps>;
-  };
+  userDetails: UserDetails;
 };
 
 export type SectionUpdateDetailsDispatchProps = {
   onClickCheckin: () => void;
   onClickCancel: () => void;
+  onChange: (userDetails: UserDetails) => void;
 };
 
 export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
@@ -47,6 +31,7 @@ export const SectionUpdateDetails = ({
   show,
   isProcessing,
   userDetails,
+  onChange,
   onClickCheckin,
   onClickCancel,
 }: SectionUpdateDetailsProps) => {
@@ -76,6 +61,20 @@ export const SectionUpdateDetails = ({
     [isProcessing, isValid]
   );
 
+  const handleChange = useCallback<InputChangeHandler>(
+    ({ currentTarget: { name, value } }) => {
+      onChange({
+        ...userDetails,
+        [name]: {
+          ...userDetails[name as keyof UserDetails],
+          value,
+          isValid: isFieldValueValid(name as keyof UserDetails, value),
+        },
+      });
+    },
+    [onChange, userDetails]
+  );
+
   useEffect(() => {
     fullNameRef.current?.focus();
   }, []);
@@ -97,10 +96,12 @@ export const SectionUpdateDetails = ({
           <TextField
             label="Full Name"
             required
+            name="fullName"
             type="text"
             variant="outlined"
             fullWidth
             inputRef={fullNameRef}
+            onChange={handleChange}
             {...userDetails.fullName}
           />
         ) : null}
