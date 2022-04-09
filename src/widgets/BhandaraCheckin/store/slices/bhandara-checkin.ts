@@ -18,39 +18,27 @@ export const getInitialState = (): InitialState => {
     helperText: "",
     userDetails: {
       fullName: {
-        value: "Priyanka Patel",
         show: true,
+        value: "",
       },
       mobile: {
-        value: "+91339282838",
         show: true,
+        value: "",
       },
       email: {
-        value: "priyanka.patel@gmail.com",
         show: true,
+        value: "",
       },
       location: {
-        value: {
-          id: 84770,
-          name: "Bacita",
-          state: "Kwara",
-          country: "Nigeria",
-          country_id: 417,
-          state_id: 3107,
-          c_id: 0,
-          c_name: "",
-          active: true,
-          cityStateCountry: "Bacita, Kwara, Nigeria",
-        },
         show: true,
       },
       ageGroup: {
-        value: "0-10",
         show: true,
+        value: "",
       },
       gender: {
-        value: "female",
         show: true,
+        value: "",
       },
     },
   };

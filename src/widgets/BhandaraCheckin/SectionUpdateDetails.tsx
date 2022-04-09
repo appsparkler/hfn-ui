@@ -35,6 +35,11 @@ export const SectionUpdateDetails = ({
   onClickCheckin,
   onClickCancel,
 }: SectionUpdateDetailsProps) => {
+  const { fullName, ageGroup, email, gender, location, mobile } = useMemo(
+    () => userDetails,
+    [userDetails]
+  );
+
   const fullNameRef: BaseTextFieldProps["inputRef"] = useRef(null);
 
   const isValid = useMemo<boolean>(
@@ -102,7 +107,7 @@ export const SectionUpdateDetails = ({
             fullWidth
             inputRef={fullNameRef}
             onChange={handleChange}
-            {...userDetails.fullName}
+            value={fullName.name}
           />
         ) : null}
         <Horizontal gap={3}>
@@ -117,7 +122,7 @@ export const SectionUpdateDetails = ({
                 { label: "11-20", value: "11-20" },
               ]}
               required
-              {...userDetails.ageGroup}
+              value={ageGroup.value}
             />
           ) : null}
           {userDetails.gender.show ? (
@@ -132,7 +137,7 @@ export const SectionUpdateDetails = ({
                 { label: "Unspecified", value: "unspecified" },
               ]}
               required
-              {...userDetails.gender}
+              value={gender.value}
             />
           ) : null}
         </Horizontal>
@@ -141,7 +146,7 @@ export const SectionUpdateDetails = ({
             onChange={console.log}
             label="City / State / Country"
             required
-            {...userDetails.location}
+            value={location.value}
           />
         ) : null}
         {userDetails.email.show && userDetails.mobile.show ? (
@@ -158,7 +163,7 @@ export const SectionUpdateDetails = ({
             variant="outlined"
             fullWidth
             helperText="Please include the country code - for ex. +9183392..."
-            {...userDetails.mobile}
+            value={mobile.value}
           />
         ) : null}
         {userDetails.email.show ? (
@@ -168,7 +173,7 @@ export const SectionUpdateDetails = ({
             type="email"
             variant="outlined"
             fullWidth
-            {...userDetails.email}
+            value={email.value}
           />
         ) : null}
       </Vertical>
