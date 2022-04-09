@@ -45,6 +45,7 @@ export type LocationTextFieldProps = {
   size?: TextFieldProps["size"];
   variant?: TextFieldProps["variant"];
   api?: string;
+  value?: RefinedCityStateCountryLocation;
   onChange: (value: RefinedCityStateCountryLocation | undefined) => void;
 };
 
@@ -65,6 +66,7 @@ export const LocationTextField = ({
   size,
   api = "https://static-gatsby.web.app/srcmapi/cities",
   variant,
+  value,
   onChange,
 }: LocationTextFieldProps) => {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -131,6 +133,7 @@ export const LocationTextField = ({
       autoHighlight
       open={open}
       onInputChange={handleAutocompleteInputChange}
+      value={value}
       onOpen={() => {
         if (!query) setOpen(false);
         setOpen(true);

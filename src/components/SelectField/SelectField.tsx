@@ -26,7 +26,7 @@ export type SelectFieldProps = Omit<
   label: string;
   labelId: string;
   options: SelectFieldOption[];
-  value: OptionValue;
+  value?: OptionValue;
 
   // Event Handlers
   onChange: (newValue: OptionValue) => void;
