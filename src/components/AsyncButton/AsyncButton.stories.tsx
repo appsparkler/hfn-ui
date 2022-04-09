@@ -13,7 +13,7 @@ export const asyncButton = Template.bind({});
 asyncButton.args = {
   isProcessing: false,
   disabled: false,
-  label: "CHECK IN",
+  children: "CHECK IN",
   size: "large",
   variant: "contained",
   color: "success",

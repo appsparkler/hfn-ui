@@ -3,15 +3,14 @@ import Box from "@mui/material/Box";
 
 export type AsyncButtonProps = ButtonProps & {
   isProcessing?: boolean;
-  label: string;
 };
 
 export const AsyncButton = ({
   onClick,
   disabled,
   isProcessing,
-  label,
   color,
+  children,
   ...btnProps
 }: AsyncButtonProps) => {
   return (
@@ -25,7 +24,7 @@ export const AsyncButton = ({
         color={color}
         {...btnProps}
       >
-        {label}
+        {children}
       </Button>
       {isProcessing && (
         <CircularProgress

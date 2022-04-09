@@ -1,8 +1,7 @@
-import { Box, CircularProgress } from "@mui/material";
-import Button from "@mui/material/Button";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CustomTextField, CustomTextFieldProps } from "../../components";
 import { CenterOfViewport } from "../../components";
+import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
 import { ClickHandler } from "../../types";
 import { isAbhyasiId, isAbhyasiIdTemp, isEmail, isMobile } from "../../utils";
 
@@ -75,27 +74,14 @@ export const SectionMain = ({
         helperText={helperText}
         inputRef={idFieldRef}
       />
-      <Box sx={{ position: "relative", display: "inline-block" }}>
-        <Button
-          type="button"
-          onClick={handleClickStart}
-          size="large"
-          variant="contained"
-          disabled={!isStartButtonEnabled}
-        >
-          START CHECK IN
-        </Button>
-        {isProcessing && (
-          <CircularProgress
-            sx={{
-              position: "absolute",
-              left: "calc(50% - 10px)",
-              top: "calc(50% - 10px)",
-            }}
-            size={20}
-          />
-        )}
-      </Box>
+      <AsyncButton
+        type="button"
+        onClick={handleClickStart}
+        disabled={!isStartButtonEnabled}
+        isProcessing={isProcessing}
+      >
+        START CHECK IN
+      </AsyncButton>
     </CenterOfViewport>
   );
 };
