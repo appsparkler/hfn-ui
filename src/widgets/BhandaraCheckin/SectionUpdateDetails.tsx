@@ -1,5 +1,6 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { CenterOfViewport } from "../../components";
+import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
 
 export type SectionUpdateDetailsStateProps = {
   show?: boolean;
@@ -27,10 +28,32 @@ export const SectionUpdateDetails = ({
       padding={2}
       marginX="auto"
     >
-      <Typography variant="h4">Update Details</Typography>
-      <Button type="button" size="large" onClick={onClickCheckin}>
+      <Box display={"flex"} flexDirection="column" gap={3} width={"100%"}>
+        <TextField
+          label="Full Name"
+          required
+          type="text"
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          label="Mobile"
+          required
+          type="tel"
+          variant="outlined"
+          fullWidth
+        />
+        <TextField
+          label="Email"
+          required
+          type="email"
+          variant="outlined"
+          fullWidth
+        />
+      </Box>
+      <AsyncButton type="button" size="large" onClick={onClickCheckin}>
         CHECK IN
-      </Button>
+      </AsyncButton>
     </CenterOfViewport>
   );
 };
