@@ -1,7 +1,6 @@
 import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState } from "../../store";
-import { bhandaraCheckinSlice, someAction } from "../../store/slices";
+import { RootState, bhandaraCheckinSlice, someAction } from "./store";
 import {
   SectionMain,
   SectionMainDispatchProps,

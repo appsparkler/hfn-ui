@@ -1,5 +1,5 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState, bhandaraCheckinSlice } from "../../store";
+import { RootState, bhandaraCheckinSlice } from "./store";
 import {
   SectionCheckinSuccess,
   SectionCheckinStateProps,

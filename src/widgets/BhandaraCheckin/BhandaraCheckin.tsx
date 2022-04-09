@@ -1,11 +1,11 @@
 import { SectionMainConnected } from "./SectionMainConnected";
 import { configureStore } from "@reduxjs/toolkit";
-import { bhandaraCheckinSlice } from "../../store/slices";
+import { bhandaraCheckinSlice } from "./store/slices";
 import { Provider } from "react-redux";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { useMemo } from "react";
-import { BhandaraCheckinAPIs } from "../../store";
+import { BhandaraCheckinAPIs } from "./store";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;

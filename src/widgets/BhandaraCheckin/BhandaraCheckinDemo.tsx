@@ -1,9 +1,4 @@
-import { resolve } from "node:path/win32";
-import { useCallback } from "react";
-import {
-  BhandaraCheckinWidget,
-  BhandaraCheckinWidgetProps,
-} from "./BhandaraCheckin";
+import { BhandaraCheckinWidget } from "./BhandaraCheckin";
 
 export const BhandaraCheckinWidgetDemo = () => {
   return (
