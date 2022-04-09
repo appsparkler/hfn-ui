@@ -16,12 +16,15 @@ updateDetails.args = {
   userDetails: {
     fullName: {
       value: "Priyanka Patel",
+      show: true,
     },
     mobile: {
       value: "+91339282838",
+      show: true,
     },
     email: {
       value: "priyanka.patel@gmail.com",
+      show: true,
     },
     location: {
       value: {
@@ -36,12 +39,15 @@ updateDetails.args = {
         active: true,
         cityStateCountry: "Bacita, Kwara, Nigeria",
       },
+      show: true,
     },
     ageGroup: {
       value: "0-10",
+      show: true,
     },
     gender: {
       value: "female",
+      show: true,
     },
   },
 };

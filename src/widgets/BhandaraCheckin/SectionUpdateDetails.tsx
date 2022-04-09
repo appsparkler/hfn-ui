@@ -94,68 +94,82 @@ export const SectionUpdateDetails = ({
       marginX="auto"
     >
       <Vertical gap={3} width={"100%"}>
-        <TextField
-          label="Full Name"
-          required
-          type="text"
-          variant="outlined"
-          fullWidth
-          inputRef={fullNameRef}
-          {...userDetails.fullName}
-        />
+        {userDetails.fullName.show ? (
+          <TextField
+            label="Full Name"
+            required
+            type="text"
+            variant="outlined"
+            fullWidth
+            inputRef={fullNameRef}
+            {...userDetails.fullName}
+          />
+        ) : null}
         <Horizontal gap={3}>
-          <SelectField
-            autoWidth
-            label="Age Group"
-            labelId="age-group"
-            onChange={console.log}
-            options={[
-              { label: "0-10", value: "0-10" },
-              { label: "11-20", value: "11-20" },
-            ]}
-            required
-            {...userDetails.ageGroup}
-          />
-          <SelectField
-            autoWidth
-            label="Gender"
-            labelId="gender"
-            onChange={console.log}
-            options={[
-              { label: "Female", value: "female" },
-              { label: "Male", value: "male" },
-              { label: "Unspecified", value: "unspecified" },
-            ]}
-            required
-            {...userDetails.gender}
-          />
+          {userDetails.ageGroup.show ? (
+            <SelectField
+              autoWidth
+              label="Age Group"
+              labelId="age-group"
+              onChange={console.log}
+              options={[
+                { label: "0-10", value: "0-10" },
+                { label: "11-20", value: "11-20" },
+              ]}
+              required
+              {...userDetails.ageGroup}
+            />
+          ) : null}
+          {userDetails.gender.show ? (
+            <SelectField
+              autoWidth
+              label="Gender"
+              labelId="gender"
+              onChange={console.log}
+              options={[
+                { label: "Female", value: "female" },
+                { label: "Male", value: "male" },
+                { label: "Unspecified", value: "unspecified" },
+              ]}
+              required
+              {...userDetails.gender}
+            />
+          ) : null}
         </Horizontal>
-        <LocationTextField
-          onChange={console.log}
-          label="City / State / Country"
-          required
-          {...userDetails.location}
-        />
-        <Alert severity="info" variant="standard">
-          Please enter <strong>atleast one</strong> of <strong>Mobile</strong>{" "}
-          and <strong>Email</strong>
-        </Alert>
-        <TextField
-          label="Mobile"
-          required
-          type="tel"
-          variant="outlined"
-          fullWidth
-          {...userDetails.mobile}
-        />
-        <TextField
-          label="Email"
-          required
-          type="email"
-          variant="outlined"
-          fullWidth
-          {...userDetails.email}
-        />
+        {userDetails.location.show ? (
+          <LocationTextField
+            onChange={console.log}
+            label="City / State / Country"
+            required
+            {...userDetails.location}
+          />
+        ) : null}
+        {userDetails.email.show && userDetails.mobile.show ? (
+          <Alert severity="info" variant="standard">
+            Please enter <strong>atleast one</strong> of <strong>Mobile</strong>{" "}
+            and <strong>Email</strong>
+          </Alert>
+        ) : null}
+        {userDetails.mobile.show ? (
+          <TextField
+            label="Mobile"
+            required
+            type="tel"
+            variant="outlined"
+            fullWidth
+            {...userDetails.mobile}
+          />
+        ) : null}
+        {userDetails.email.show ? (
+          <TextField
+            label="Email"
+            required
+            type="email"
+            variant="outlined"
+            fullWidth
+            {...userDetails.email}
+          />
+        ) : null}
       </Vertical>
       <Horizontal gap={3}>
         <Button type="button" variant="outlined" onClick={onClickCancel}>
