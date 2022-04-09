@@ -5,7 +5,7 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { CurrentSectionEnum } from "./types";
+import { CurrentSectionEnum, UserDetails } from "./types";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -14,6 +14,12 @@ const mapStateToProps: MapStateToProps<
 > = ({ bhandaraCheckin }) => {
   return {
     show: bhandaraCheckin.currentSection === CurrentSectionEnum.UPDATE_DETAILS,
+    userDetails: {
+      fullName: {
+        value: "",
+      },
+    } as UserDetails,
+    isProcessing: false,
   };
 };
 
@@ -25,6 +31,7 @@ const mapDispatchToProps: MapDispatchToProps<
     onClickCheckin: () =>
       dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess()),
     onClickCancel: () => dispatch(bhandaraCheckinSlice.actions.goToMain()),
+    onChange: () => {},
   };
 };
 
