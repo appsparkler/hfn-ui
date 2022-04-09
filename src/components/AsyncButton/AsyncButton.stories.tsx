@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AsyncButton } from "./AsyncButton";
 
 export default {
-  title: "Components/Layouts/Async Button",
+  title: "Components/CTA/Async Button",
   component: AsyncButton,
 } as ComponentMeta<typeof AsyncButton>;
 
