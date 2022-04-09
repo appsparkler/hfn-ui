@@ -38,7 +38,7 @@ const debounceGetAndSetLocationOptions = debounce(500)(
   }
 );
 
-export type LocationInputFieldProps = {
+export type LocationTextFieldProps = {
   error?: boolean;
   helperText?: string;
   label?: string;
@@ -58,7 +58,7 @@ export type LocationAutocompleteInputChange = NonNullable<
   >["onInputChange"]
 >;
 
-export const LocationInputField = ({
+export const LocationTextField = ({
   error,
   helperText,
   label,
@@ -67,7 +67,7 @@ export const LocationInputField = ({
   api = "https://static-gatsby.web.app/srcmapi/cities",
   variant,
   onChange,
-}: LocationInputFieldProps) => {
+}: LocationTextFieldProps) => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState<boolean>(false);
   const [options, setOptions] = React.useState<

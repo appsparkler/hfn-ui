@@ -1,7 +1,10 @@
 import { BaseTextFieldProps, Box, TextField } from "@mui/material";
 import { useEffect, useRef } from "react";
-import { CenterOfViewport } from "../../components";
-import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
+import {
+  CenterOfViewport,
+  AsyncButton,
+  LocationTextField,
+} from "../../components";
 
 export type SectionUpdateDetailsStateProps = {
   show?: boolean;
@@ -21,7 +24,7 @@ export const SectionUpdateDetails = ({
   const fullNameRef: BaseTextFieldProps["inputRef"] = useRef(null);
 
   useEffect(() => {
-    fullNameRef.current.focus();
+    fullNameRef.current?.focus();
 
     return () => {};
   }, []);
@@ -59,6 +62,10 @@ export const SectionUpdateDetails = ({
           type="email"
           variant="outlined"
           fullWidth
+        />
+        <LocationTextField
+          onChange={console.log}
+          label="City / State / Country"
         />
       </Box>
       <AsyncButton type="button" size="large" onClick={onClickCheckin}>
