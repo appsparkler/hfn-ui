@@ -5,20 +5,16 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { CurrentSectionEnum, UserDetails } from "./types";
+import { CurrentSectionEnum } from "./types";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
   {},
   RootState
-> = ({ bhandaraCheckin }) => {
+> = ({ bhandaraCheckin: { userDetails, currentSection } }) => {
   return {
-    show: bhandaraCheckin.currentSection === CurrentSectionEnum.UPDATE_DETAILS,
-    userDetails: {
-      fullName: {
-        value: "",
-      },
-    } as UserDetails,
+    show: currentSection === CurrentSectionEnum.UPDATE_DETAILS,
+    userDetails,
     isProcessing: false,
   };
 };
