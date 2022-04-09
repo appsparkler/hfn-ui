@@ -78,13 +78,12 @@ export const SectionUpdateDetails = ({
 
   useEffect(() => {
     fullNameRef.current?.focus();
-
-    return () => {};
   }, []);
 
   if (!show) {
     return null;
   }
+
   return (
     <CenterOfViewport
       gap={5}
