@@ -29,7 +29,7 @@ export type SelectFieldProps = Omit<
   value?: OptionValue;
 
   // Event Handlers
-  onChange: (newValue: OptionValue) => void;
+  onChange: (name: string, newValue: OptionValue) => void;
 };
 
 export const SelectField = ({
@@ -40,6 +40,7 @@ export const SelectField = ({
   required,
   helperText,
   error,
+  name,
   onChange,
   ...restSelectProps
 }: SelectFieldProps) => {
@@ -51,8 +52,8 @@ export const SelectField = ({
   const handleChange = useCallback<
     NonNullable<SelectProps<OptionValue>["onChange"]>
   >(
-    ({ target: { value } }) => {
-      onChange(value);
+    ({ target: { name, value } }) => {
+      onChange(name, value);
     },
     [onChange]
   );
@@ -63,6 +64,7 @@ export const SelectField = ({
       <Select<OptionValue>
         error={error}
         labelId={labelId}
+        name={name}
         onChange={handleChange}
         label={label}
         required={required}

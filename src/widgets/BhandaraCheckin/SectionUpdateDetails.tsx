@@ -7,6 +7,8 @@ import {
   Horizontal,
   Vertical,
   SelectField,
+  LocationTextFieldProps,
+  SelectFieldProps,
 } from "../../components";
 import { InputChangeHandler } from "../../types";
 import { UserDetails } from "./types";
@@ -50,10 +52,12 @@ export const SectionUpdateDetails = ({
           userDetails.fullName.isValid &&
           userDetails.gender.isValid &&
           userDetails.location.isValid &&
-          userDetails.mobile.isValid
+          userDetails.mobile.isValid &&
+          userDetails.email.isValid
       ),
     [
       userDetails.ageGroup.isValid,
+      userDetails.email.isValid,
       userDetails.fullName.isValid,
       userDetails.gender.isValid,
       userDetails.location.isValid,
@@ -80,8 +84,37 @@ export const SectionUpdateDetails = ({
     [onChange, userDetails]
   );
 
+  const handleChangeSelectField = useCallback<SelectFieldProps["onChange"]>(
+    (name, value) => {
+      onChange({
+        ...userDetails,
+        [name]: {
+          ...userDetails[name as keyof UserDetails],
+          value: value,
+          isValid: isFieldValueValid("location", name),
+        },
+      });
+    },
+    [onChange, userDetails]
+  );
+
+  const handleChangeLocation = useCallback<LocationTextFieldProps["onChange"]>(
+    (location) => {
+      onChange({
+        ...userDetails,
+        location: {
+          ...userDetails.location,
+          value: location,
+          isValid: isFieldValueValid("location", location),
+        },
+      });
+    },
+    [onChange, userDetails]
+  );
+
   useEffect(() => {
-    fullNameRef.current?.focus();
+    // fullNameRef.current?.focus();
+    console.log({ userDetails });
   }, []);
 
   if (!show) {
@@ -105,7 +138,6 @@ export const SectionUpdateDetails = ({
             type="text"
             variant="outlined"
             fullWidth
-            inputRef={fullNameRef}
             onChange={handleChange}
             value={fullName.name}
           />
@@ -116,7 +148,8 @@ export const SectionUpdateDetails = ({
               autoWidth
               label="Age Group"
               labelId="age-group"
-              onChange={console.log}
+              name="ageGroup"
+              onChange={handleChangeSelectField}
               options={[
                 { label: "0-10", value: "0-10" },
                 { label: "11-20", value: "11-20" },
@@ -130,7 +163,8 @@ export const SectionUpdateDetails = ({
               autoWidth
               label="Gender"
               labelId="gender"
-              onChange={console.log}
+              name="gender"
+              onChange={handleChangeSelectField}
               options={[
                 { label: "Female", value: "female" },
                 { label: "Male", value: "male" },
@@ -143,7 +177,7 @@ export const SectionUpdateDetails = ({
         </Horizontal>
         {userDetails.location.show ? (
           <LocationTextField
-            onChange={console.log}
+            onChange={handleChangeLocation}
             label="City / State / Country"
             required
             value={location.value}

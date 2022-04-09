@@ -1,24 +1,25 @@
+import { RefinedCityStateCountryLocation } from "../../../components/LocationTextField/locations";
 import { isEmail, isMobile } from "../../../utils";
 import { UserDetails } from "../types";
 
 export const isFieldValueValid = (
   name: keyof UserDetails,
-  value: string
+  value: string | RefinedCityStateCountryLocation | undefined
 ): boolean => {
   switch (name) {
     case "ageGroup":
-      return Boolean(value.trim());
+      return Boolean((value as string).trim());
     case "email":
-      if (isEmail(value.trim())) return true;
+      if (isEmail((value as string).trim())) return true;
       return false;
     case "fullName":
-      return Boolean(value.trim());
+      return Boolean((value as string).trim());
     case "gender":
-      return Boolean(value.trim());
+      return Boolean((value as string).trim());
     case "location":
       return Boolean(value);
     case "mobile":
-      if (isMobile(value.trim())) return true;
+      if (isMobile((value as string).trim())) return true;
       return false;
 
     default:

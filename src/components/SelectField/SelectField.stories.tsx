@@ -19,6 +19,7 @@ selectField.args = {
   label: "Age",
   helperText: "Please select the age",
   required: false,
+  name: "age-group",
   options: [
     { value: 1, label: <em>Select Age</em> },
     { value: 10, label: "Ten" },
