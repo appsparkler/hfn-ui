@@ -58,7 +58,7 @@ export const SelectField = ({
   );
 
   return (
-    <FormControl fullWidth required={required} error={error}>
+    <FormControl required={required} error={error} fullWidth>
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select<OptionValue>
         error={error}

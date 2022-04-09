@@ -6,6 +6,7 @@ import {
   LocationTextField,
   Horizontal,
   Vertical,
+  SelectField,
 } from "../../components";
 
 export type SectionUpdateDetailsStateProps = {
@@ -76,6 +77,33 @@ export const SectionUpdateDetails = ({
           required
           helperText=" "
         />
+        <Horizontal gap={3}>
+          <SelectField
+            autoWidth
+            label="Age Group"
+            labelId="age-group"
+            onChange={console.log}
+            options={[
+              { label: "0-10", value: "0-10" },
+              { label: "11-20", value: "11-20" },
+            ]}
+            value={""}
+            required
+          />
+          <SelectField
+            autoWidth
+            label="Gender"
+            labelId="gender"
+            onChange={console.log}
+            options={[
+              { label: "Female", value: "female" },
+              { label: "Male", value: "male" },
+              { label: "Unspecified", value: "unspecified" },
+            ]}
+            value={""}
+            required
+          />
+        </Horizontal>
       </Vertical>
       <Horizontal gap={3}>
         <Button type="button" variant="outlined" onClick={onClickCancel}>
