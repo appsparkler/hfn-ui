@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { SelectField, SelectFieldProps } from "./SelectField";
+import { SelectField } from "./SelectField";
 import Box from "@mui/material/Box";
-import { action } from "@storybook/addon-actions";
 
 export default {
   title: "Components/Form Controls/Select Field",
