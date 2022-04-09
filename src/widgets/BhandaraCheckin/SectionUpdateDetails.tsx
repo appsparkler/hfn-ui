@@ -113,8 +113,7 @@ export const SectionUpdateDetails = ({
   );
 
   useEffect(() => {
-    // fullNameRef.current?.focus();
-    console.log({ userDetails });
+    fullNameRef.current?.focus();
   }, []);
 
   if (!show) {
@@ -140,6 +139,7 @@ export const SectionUpdateDetails = ({
             fullWidth
             onChange={handleChange}
             value={fullName.name}
+            inputRef={fullNameRef}
           />
         ) : null}
         <Horizontal gap={3}>
