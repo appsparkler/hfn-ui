@@ -1,11 +1,12 @@
-import { BaseTextFieldProps, Box, Button, TextField } from "@mui/material";
+import { BaseTextFieldProps, Button, TextField } from "@mui/material";
 import { useEffect, useRef } from "react";
 import {
   CenterOfViewport,
   AsyncButton,
   LocationTextField,
+  Horizontal,
+  Vertical,
 } from "../../components";
-import { Vertical } from "../../components/Boxes";
 
 export type SectionUpdateDetailsStateProps = {
   show?: boolean;
@@ -76,14 +77,14 @@ export const SectionUpdateDetails = ({
           helperText=" "
         />
       </Vertical>
-      <Box display="flex" flexDirection={"row"} gap={3}>
+      <Horizontal gap={3}>
         <Button type="button" variant="outlined" onClick={onClickCancel}>
           CANCEL
         </Button>
         <AsyncButton type="button" size="large" onClick={onClickCheckin}>
           CHECK IN
         </AsyncButton>
-      </Box>
+      </Horizontal>
     </CenterOfViewport>
   );
 };
