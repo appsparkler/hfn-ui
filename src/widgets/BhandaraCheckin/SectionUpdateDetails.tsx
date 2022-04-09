@@ -1,4 +1,4 @@
-import { BaseTextFieldProps, Box, TextField } from "@mui/material";
+import { BaseTextFieldProps, Box, Button, TextField } from "@mui/material";
 import { useEffect, useRef } from "react";
 import {
   CenterOfViewport,
@@ -66,11 +66,17 @@ export const SectionUpdateDetails = ({
         <LocationTextField
           onChange={console.log}
           label="City / State / Country"
+          required
         />
       </Box>
-      <AsyncButton type="button" size="large" onClick={onClickCheckin}>
-        CHECK IN
-      </AsyncButton>
+      <Box display="flex" flexDirection={"row"} gap={3}>
+        <Button type="button" variant="outlined">
+          CANCEL
+        </Button>
+        <AsyncButton type="button" size="large" onClick={onClickCheckin}>
+          CHECK IN
+        </AsyncButton>
+      </Box>
     </CenterOfViewport>
   );
 };

@@ -3,7 +3,7 @@ import { LocationTextField } from "./LocationTextField";
 import Box from "@mui/material/Box";
 
 export default {
-  title: "Components/Location Input Field",
+  title: "Components/HFN/Location Input Field",
   component: LocationTextField,
 } as ComponentMeta<typeof LocationTextField>;
 
