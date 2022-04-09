@@ -5,6 +5,7 @@ import {
   AsyncButton,
   LocationTextField,
 } from "../../components";
+import { Vertical } from "../../components/Boxes";
 
 export type SectionUpdateDetailsStateProps = {
   show?: boolean;
@@ -34,13 +35,13 @@ export const SectionUpdateDetails = ({
   }
   return (
     <CenterOfViewport
-      gap={10}
+      gap={5}
       width={"100%"}
       maxWidth={400}
       padding={2}
       marginX="auto"
     >
-      <Box display={"flex"} flexDirection="column" gap={3} width={"100%"}>
+      <Vertical gap={1} width={"100%"}>
         <TextField
           label="Full Name"
           required
@@ -48,6 +49,7 @@ export const SectionUpdateDetails = ({
           variant="outlined"
           fullWidth
           inputRef={fullNameRef}
+          helperText=" "
         />
         <TextField
           label="Mobile"
@@ -55,6 +57,7 @@ export const SectionUpdateDetails = ({
           type="tel"
           variant="outlined"
           fullWidth
+          helperText=" "
         />
         <TextField
           label="Email"
@@ -62,13 +65,15 @@ export const SectionUpdateDetails = ({
           type="email"
           variant="outlined"
           fullWidth
+          helperText=" "
         />
         <LocationTextField
           onChange={console.log}
           label="City / State / Country"
           required
+          helperText=" "
         />
-      </Box>
+      </Vertical>
       <Box display="flex" flexDirection={"row"} gap={3}>
         <Button type="button" variant="outlined">
           CANCEL
