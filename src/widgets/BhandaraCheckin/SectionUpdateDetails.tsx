@@ -158,12 +158,14 @@ export const SectionUpdateDetails = ({
         {userDetails.mobile.show ? (
           <TextField
             label="Mobile"
+            name="mobile"
             required
             type="tel"
             variant="outlined"
             fullWidth
             helperText="Please include the country code - for ex. +9183392..."
             value={mobile.value}
+            onChange={handleChange}
           />
         ) : null}
         {userDetails.email.show ? (
@@ -171,9 +173,11 @@ export const SectionUpdateDetails = ({
             label="Email"
             required
             type="email"
+            name="email"
             variant="outlined"
             fullWidth
             value={email.value}
+            onChange={handleChange}
           />
         ) : null}
       </Vertical>

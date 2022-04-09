@@ -63,6 +63,9 @@ export const bhandaraCheckinSlice = createSlice({
     setHelperText: (state, { payload }) => {
       state.helperText = payload;
     },
+    setUserDetails: (state, { payload }) => {
+      state.userDetails = { ...payload };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(someAction.pending, (state) => {
