@@ -2,13 +2,12 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete, { AutocompleteProps } from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import {
   RefinedCityStateCountryLocation,
   getUniqLocations,
   CityStateCountryLocation,
 } from "./locations";
-import { FormControl, TextFieldProps } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 import debounce from "lodash/fp/debounce";
 
 const debounceGetAndSetLocationOptions = debounce(500)(
@@ -126,53 +125,49 @@ export const LocationTextField = ({
     );
 
   return (
-    <Box width="100%">
-      <FormControl fullWidth>
-        <Autocomplete<RefinedCityStateCountryLocation>
-          fullWidth
-          autoComplete
-          autoHighlight
-          open={open}
-          onInputChange={handleAutocompleteInputChange}
-          onOpen={() => {
-            if (!query) setOpen(false);
-            setOpen(true);
+    <Autocomplete<RefinedCityStateCountryLocation>
+      fullWidth
+      autoComplete
+      autoHighlight
+      open={open}
+      onInputChange={handleAutocompleteInputChange}
+      onOpen={() => {
+        if (!query) setOpen(false);
+        setOpen(true);
+      }}
+      onClose={() => {
+        setOpen(false);
+      }}
+      isOptionEqualToValue={(option, value) =>
+        option.cityStateCountry === value.cityStateCountry
+      }
+      getOptionLabel={(option) => option.cityStateCountry}
+      options={options}
+      loading={loading}
+      onChange={handleChangeCityStateCountry}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          required={required}
+          error={error}
+          helperText={helperText}
+          label={label}
+          onChange={handleInputChange}
+          size={size}
+          variant={variant}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <React.Fragment>
+                {loading ? (
+                  <CircularProgress color="inherit" size={20} />
+                ) : null}
+                {params.InputProps.endAdornment}
+              </React.Fragment>
+            ),
           }}
-          onClose={() => {
-            setOpen(false);
-          }}
-          isOptionEqualToValue={(option, value) =>
-            option.cityStateCountry === value.cityStateCountry
-          }
-          getOptionLabel={(option) => option.cityStateCountry}
-          options={options}
-          loading={loading}
-          onChange={handleChangeCityStateCountry}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              required={required}
-              error={error}
-              helperText={helperText}
-              label={label}
-              onChange={handleInputChange}
-              size={size}
-              variant={variant}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <React.Fragment>
-                    {loading ? (
-                      <CircularProgress color="inherit" size={20} />
-                    ) : null}
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
-              }}
-            />
-          )}
         />
-      </FormControl>
-    </Box>
+      )}
+    />
   );
 };
