@@ -13,6 +13,7 @@ export type SectionUpdateDetailsStateProps = {
 
 export type SectionUpdateDetailsDispatchProps = {
   onClickCheckin: () => void;
+  onClickCancel: () => void;
 };
 
 export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
@@ -21,6 +22,7 @@ export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
 export const SectionUpdateDetails = ({
   show,
   onClickCheckin,
+  onClickCancel,
 }: SectionUpdateDetailsProps) => {
   const fullNameRef: BaseTextFieldProps["inputRef"] = useRef(null);
 
@@ -75,7 +77,7 @@ export const SectionUpdateDetails = ({
         />
       </Vertical>
       <Box display="flex" flexDirection={"row"} gap={3}>
-        <Button type="button" variant="outlined">
+        <Button type="button" variant="outlined" onClick={onClickCancel}>
           CANCEL
         </Button>
         <AsyncButton type="button" size="large" onClick={onClickCheckin}>

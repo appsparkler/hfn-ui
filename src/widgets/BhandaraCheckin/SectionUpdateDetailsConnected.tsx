@@ -24,6 +24,7 @@ const mapDispatchToProps: MapDispatchToProps<
   return {
     onClickCheckin: () =>
       dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess()),
+    onClickCancel: () => dispatch(bhandaraCheckinSlice.actions.goToMain()),
   };
 };
 
