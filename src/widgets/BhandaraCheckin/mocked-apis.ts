@@ -1,4 +1,4 @@
-import { some, uniqueId } from "lodash/fp";
+import { some } from "lodash/fp";
 import {
   BhandaraCheckinAPIs,
   UserWithEmail,
@@ -43,7 +43,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
       }, 600);
     }),
 
-  isMobileOrEmailUserCheckedIn: async ({ fullName, email, mobile }) =>
+  isMobileOrEmailUserCheckedIn: ({ fullName, email, mobile }) =>
     new Promise((resolve) => {
       setTimeout(() => {
         if (email) {
@@ -56,9 +56,9 @@ export const mockedApis: BhandaraCheckinAPIs = {
                 (user as UserWithEmail).email === email &&
                 user.fullName === fullName
             );
-          if (someUserWithEmailCheckedIn(email, fullName)(checkedInUsersData))
-            resolve(true);
-          else resolve(false);
+          resolve(
+            someUserWithEmailCheckedIn(email, fullName)(checkedInUsersData)
+          );
         } else if (mobile) {
           const someUserWithMobileCheckedIn = (
             mobile: string,
@@ -69,16 +69,17 @@ export const mockedApis: BhandaraCheckinAPIs = {
                 (user as UserWithMobile).mobile === mobile &&
                 user.fullName === fullName
             );
-          if (someUserWithMobileCheckedIn(mobile, fullName)(checkedInUsersData))
-            resolve(true);
-          else resolve(false);
+          resolve(
+            someUserWithMobileCheckedIn(mobile, fullName)(checkedInUsersData)
+          );
         }
       }, 600);
     }),
 
-  checkinMobileOrEmailUser: async (user) =>
+  checkinMobileOrEmailUser: (user) =>
     new Promise((resolve) => {
       setTimeout(() => {
+        checkedInUsersData.push(user);
         resolve(true);
       }, 600);
     }),

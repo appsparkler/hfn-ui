@@ -1,23 +1,27 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { bhandaraCheckinSlice, RootState } from "./store";
+import { bhandaraCheckinSlice, checkinUser, RootState } from "./store";
 import {
   SectionUpdateDetails,
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { CurrentSectionEnum } from "./types";
+import { Action } from "@reduxjs/toolkit";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
   {},
   RootState
 > = ({
-  bhandaraCheckin: { userDetails, currentSection, updateDetailsWarning },
+  bhandaraCheckin: {
+    userDetails,
+    currentSection,
+    updateDetailsWarning,
+    updateDetailsProcessing,
+  },
 }) => {
   return {
-    show: currentSection === CurrentSectionEnum.UPDATE_DETAILS,
     userDetails,
-    isProcessing: false,
+    isProcessing: updateDetailsProcessing,
     warning: updateDetailsWarning,
   };
 };
@@ -27,8 +31,7 @@ const mapDispatchToProps: MapDispatchToProps<
   {}
 > = (dispatch) => {
   return {
-    onClickCheckin: () =>
-      dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess()),
+    onClickCheckin: () => dispatch(checkinUser() as unknown as Action<any>),
     onClickCancel: () => dispatch(bhandaraCheckinSlice.actions.goToMain()),
     onChange: (userDetails) =>
       dispatch(bhandaraCheckinSlice.actions.setUserDetails(userDetails)),
