@@ -66,13 +66,7 @@ export const SectionMain = ({
   }
 
   return (
-    <CenterOfViewport
-      gap={10}
-      width={"100%"}
-      maxWidth={maxWidth}
-      paddingX={1}
-      marginX="auto"
-    >
+    <CenterOfViewport gap={10} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       <Typography variant="h4" color="goldenrod" align="center">
         Golden Book Registration
       </Typography>

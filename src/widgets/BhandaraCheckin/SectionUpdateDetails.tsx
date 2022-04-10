@@ -17,7 +17,7 @@ import {
   SelectFieldProps,
 } from "../../components";
 import { InputChangeHandler } from "../../types";
-import { maxWidth } from "./constants";
+import { ageGroupOptions, maxWidth } from "./constants";
 import { UserDetails } from "./types";
 import { isFieldValueValid } from "./utils";
 
@@ -136,13 +136,7 @@ export const SectionUpdateDetails = ({
   }, []);
 
   return (
-    <CenterOfViewport
-      gap={5}
-      width={"100%"}
-      maxWidth={maxWidth}
-      paddingX={1}
-      marginX="auto"
-    >
+    <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       {warning ? (
         <Alert severity="warning" variant="standard">
           {warning}
@@ -172,10 +166,7 @@ export const SectionUpdateDetails = ({
               labelId="age-group"
               name="ageGroup"
               onChange={handleChangeSelectField}
-              options={[
-                { label: "0-10", value: "0-10" },
-                { label: "11-20", value: "11-20" },
-              ]}
+              options={ageGroupOptions}
               required
               value={ageGroup.value}
             />

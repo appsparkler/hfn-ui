@@ -11,9 +11,10 @@ export const CenterOfViewport = ({
 }: CenterOfViewportProps) => {
   return (
     <Box
+      marginX="auto"
       sx={{
         height: "100vh",
-        overflow: "auto",
+        width: "100vw",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",

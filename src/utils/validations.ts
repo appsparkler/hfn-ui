@@ -9,7 +9,7 @@ export const isEmail = (value: string): boolean =>
   Boolean(value.match(emailRegEx));
 
 export const isMobile = (value: string): boolean =>
-  Boolean(value.match(mobileNumberRegex));
+  Boolean(value.match(mobileNumberRegex) && value.length <= 16);
 
 export const isAbhyasiIdTemp = (value: string): boolean =>
   Boolean(value.match(abhyasiIdTempRegex));
