@@ -1,5 +1,3 @@
-import { TextFieldProps } from "@mui/material";
-import { LocationTextFieldProps, SelectFieldProps } from "../../components";
 import { RefinedCityStateCountryLocation } from "../../components/LocationTextField/locations";
 
 export enum CurrentSectionEnum {
