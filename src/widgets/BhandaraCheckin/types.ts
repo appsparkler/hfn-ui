@@ -32,6 +32,7 @@ export type UserDetailsValueWrapper<T> = {
   show?: boolean;
   isValid?: boolean;
   value?: T;
+  disabled?: boolean;
 };
 
 export type UserDetails = {

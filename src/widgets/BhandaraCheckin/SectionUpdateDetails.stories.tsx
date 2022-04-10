@@ -21,10 +21,12 @@ updateDetails.args = {
     mobile: {
       value: "+91339282838",
       show: true,
+      disabled: true,
     },
     email: {
       value: "priyanka.patel@gmail.com",
       show: true,
+      disabled: false,
     },
     location: {
       value: {

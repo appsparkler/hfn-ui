@@ -213,6 +213,7 @@ export const SectionUpdateDetails = ({
             fullWidth
             helperText="Please include the country code - for ex. +9183392..."
             value={mobile.value}
+            disabled={mobile.disabled}
             onChange={handleChange}
           />
         ) : null}
@@ -225,6 +226,7 @@ export const SectionUpdateDetails = ({
             variant="outlined"
             fullWidth
             value={email.value}
+            disabled={email.disabled}
             onChange={handleChange}
           />
         ) : null}
