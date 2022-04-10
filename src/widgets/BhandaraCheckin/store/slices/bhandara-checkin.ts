@@ -34,7 +34,7 @@ export type InitialState = {
 export const getInitialState = (): InitialState => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
-    registeringWithValue: "+916438010246",
+    registeringWithValue: "",
     isProcessing: false,
     helperText: "",
     userDetails: {
@@ -109,7 +109,14 @@ export const bhandaraCheckinSlice = createSlice({
       })
       .addCase(checkinUser.fulfilled, (state) => {
         state.updateDetailsProcessing = false;
-      });
+      })
+      .addMatcher(
+        ({ type }: { type: string }) =>
+          Boolean(type.match("goToCheckinSuccess")),
+        (state, action) => {
+          console.log("go to checkin success...");
+        }
+      );
   },
 });
 
@@ -237,12 +244,7 @@ export const startCheckIn = createAsyncThunk<void, string, ThunkApiConfig>(
   }
 );
 
-export const checkinUser = createAsyncThunk<
-  void,
-  // { registeringWithValue: string; userDetails: UserDetails },
-  undefined,
-  ThunkApiConfig
->(
+export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/checkinUser",
   async (_, { dispatch, getState, extra: { apis } }) => {
     dispatch(bhandaraCheckinSlice.actions.setUpdateDetailsWarning(""));
