@@ -52,4 +52,5 @@ updateDetails.args = {
       show: true,
     },
   },
+  warning: "User is already checked in.",
 };

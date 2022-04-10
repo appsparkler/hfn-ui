@@ -18,6 +18,7 @@ export type SectionUpdateDetailsStateProps = {
   show?: boolean;
   isProcessing?: boolean;
   userDetails: UserDetails;
+  warning?: string;
 };
 
 export type SectionUpdateDetailsDispatchProps = {
@@ -33,6 +34,7 @@ export const SectionUpdateDetails = ({
   show,
   isProcessing,
   userDetails,
+  warning,
   onChange,
   onClickCheckin,
   onClickCancel,
@@ -245,6 +247,11 @@ export const SectionUpdateDetails = ({
           CHECK IN
         </AsyncButton>
       </Horizontal>
+      {warning ? (
+        <Alert severity="warning" variant="standard" sx={{ width: "100%" }}>
+          User is already checked in.
+        </Alert>
+      ) : null}
     </CenterOfViewport>
   );
 };
