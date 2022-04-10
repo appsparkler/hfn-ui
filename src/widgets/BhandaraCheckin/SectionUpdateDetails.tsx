@@ -44,6 +44,20 @@ export const SectionUpdateDetails = ({
 
   const fullNameRef: BaseTextFieldProps["inputRef"] = useRef(null);
 
+  const areEmailAndMobileValid = useMemo<boolean>(() => {
+    const hasEmail = Boolean(userDetails.email.value);
+    const hasMobile = Boolean(userDetails.mobile.value);
+    const hasValidEmail = isFieldValueValid("email", userDetails.email.value);
+    const hasValidMobile = isFieldValueValid(
+      "mobile",
+      userDetails.mobile.value
+    );
+    if (!hasEmail && hasMobile && hasValidMobile) return true;
+    if (!hasMobile && hasValidEmail && hasMobile) return true;
+    if (hasEmail && hasMobile && hasValidMobile && hasValidEmail) return true;
+    return false;
+  }, [userDetails.email.value, userDetails.mobile.value]);
+
   const isValid = useMemo<boolean>(
     () =>
       Boolean(
@@ -52,32 +66,16 @@ export const SectionUpdateDetails = ({
           userDetails.fullName.isValid &&
           userDetails.gender.isValid &&
           userDetails.location.isValid &&
-          ((userDetails.mobile.isValid &&
-            userDetails.mobile.value?.trim().length) ||
-            (userDetails.email.value?.trim().length &&
-              userDetails.email.isValid))
+          areEmailAndMobileValid
       ),
     [
+      areEmailAndMobileValid,
       userDetails.ageGroup.isValid,
-      userDetails.email.isValid,
-      userDetails.email.value,
       userDetails.fullName.isValid,
       userDetails.gender.isValid,
       userDetails.location.isValid,
-      userDetails.mobile.isValid,
-      userDetails.mobile.value,
     ]
   );
-
-  fetch(
-    "https://profile.srcm.net/api/abhyasis/search/?email=chinta512@gmail.com",
-    {
-      headers: new Headers({
-        Authorization: "MTq9doPD3xRZEJnZZbflzh2ZCsKq67",
-      }),
-      method: "GET",
-    }
-  ).then(console.log);
 
   const isCheckinButtonEnabled = useMemo<boolean>(
     () => isValid && !isProcessing,

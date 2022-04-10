@@ -6,7 +6,12 @@ import {
 } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "../../types";
 import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
-import { isAbhyasiId, isAbhyasiIdTemp, isMobile } from "../../../../utils";
+import {
+  isAbhyasiId,
+  isAbhyasiIdTemp,
+  isEmail,
+  isMobile,
+} from "../../../../utils";
 import {
   CurrentSectionEnum,
   User,
@@ -98,6 +103,7 @@ export type ThunkApiConfig = {
   };
 };
 
+// Thunk Utils
 const getRefinedUserDetails = (user: User): UserDetails => {
   const defaultUserDetails: UserDetails = getInitialState().userDetails;
   return {
@@ -178,10 +184,16 @@ const getUserDetailsWithEmailOrMobile = (userInfo: string): UserDetails => {
       ...userDetails[loginWith],
       value: userInfo,
       disabled: true,
+      isValid: true,
     },
   };
 };
 
+const validateEmailOrMobileUserDetails = (userDetails: UserDetails) => {
+  // if(userDetails.)
+};
+
+// Async Thunks
 export const startCheckIn = createAsyncThunk<void, string, ThunkApiConfig>(
   "bhandara-checkin/startCheckIn",
   async (userId, { dispatch, extra: { apis } }) => {
@@ -194,6 +206,18 @@ export const startCheckIn = createAsyncThunk<void, string, ThunkApiConfig>(
         )
       );
       dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    }
+  }
+);
+
+export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
+  "bhandara-checkin/checkinUser",
+  async (_, { dispatch, getState, extra: {} }) => {
+    const { registeringWithValue, userDetails } = getState() as InitialState;
+    const isEmailOrMobileUser =
+      isEmail(registeringWithValue) || isMobile(registeringWithValue);
+    if (isEmailOrMobileUser) {
+      const isValid = validateEmailOrMobileUserDetails(userDetails);
     }
   }
 );

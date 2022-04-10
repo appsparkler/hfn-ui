@@ -133,7 +133,7 @@ export const LocationTextField = ({
       autoHighlight
       open={open}
       onInputChange={handleAutocompleteInputChange}
-      value={value}
+      value={value || null}
       onOpen={() => {
         if (!query) setOpen(false);
         setOpen(true);
