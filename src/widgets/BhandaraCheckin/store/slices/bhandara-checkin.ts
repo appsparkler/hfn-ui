@@ -21,6 +21,7 @@ export type InitialState = {
   isProcessing: boolean;
   helperText: string;
   userDetails: UserDetails;
+  updateDetailsWarning: string;
 };
 
 export const getInitialState = (): InitialState => {
@@ -54,6 +55,7 @@ export const getInitialState = (): InitialState => {
         value: "",
       },
     },
+    updateDetailsWarning: "",
   };
 };
 

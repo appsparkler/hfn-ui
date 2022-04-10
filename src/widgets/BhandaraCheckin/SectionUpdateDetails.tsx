@@ -15,7 +15,6 @@ import { UserDetails } from "./types";
 import { isFieldValueValid } from "./utils";
 
 export type SectionUpdateDetailsStateProps = {
-  show?: boolean;
   isProcessing?: boolean;
   userDetails: UserDetails;
   warning?: string;
@@ -31,7 +30,6 @@ export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
   SectionUpdateDetailsDispatchProps;
 
 export const SectionUpdateDetails = ({
-  show,
   isProcessing,
   userDetails,
   warning,
@@ -131,10 +129,6 @@ export const SectionUpdateDetails = ({
   useEffect(() => {
     fullNameRef.current?.focus();
   }, []);
-
-  if (!show) {
-    return null;
-  }
 
   return (
     <CenterOfViewport

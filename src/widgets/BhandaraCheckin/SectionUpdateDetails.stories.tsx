@@ -11,7 +11,6 @@ const Template: ComponentStory<typeof SectionUpdateDetails> = (args) => (
 );
 export const updateDetails = Template.bind({});
 updateDetails.args = {
-  show: true,
   isProcessing: false,
   userDetails: {
     fullName: {

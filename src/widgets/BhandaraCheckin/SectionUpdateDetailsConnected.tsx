@@ -11,11 +11,14 @@ const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
   {},
   RootState
-> = ({ bhandaraCheckin: { userDetails, currentSection } }) => {
+> = ({
+  bhandaraCheckin: { userDetails, currentSection, updateDetailsWarning },
+}) => {
   return {
     show: currentSection === CurrentSectionEnum.UPDATE_DETAILS,
     userDetails,
     isProcessing: false,
+    warning: updateDetailsWarning,
   };
 };
 
