@@ -15,9 +15,11 @@ const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
       isProcessing,
       currentSection,
       helperText,
+      startCheckInError,
     },
   }) => {
     return {
+      error: startCheckInError,
       helperText,
       value: registeringWithValue,
       isProcessing: isProcessing,

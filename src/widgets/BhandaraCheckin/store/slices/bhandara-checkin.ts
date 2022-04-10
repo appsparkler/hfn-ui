@@ -1,11 +1,6 @@
-import {
-  AnyAction,
-  createAsyncThunk,
-  createSlice,
-  Dispatch,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs, UserWithEmailAndMobile } from "../../types";
-import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
+// import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
 import {
   isAbhyasiId,
   isAbhyasiIdTemp,
@@ -14,7 +9,6 @@ import {
 } from "../../../../utils";
 import {
   CurrentSectionEnum,
-  User,
   UserDetails,
   UserWithEmail,
   UserWithMobile,
@@ -23,6 +17,7 @@ import { RootDispatch, RootState } from "..";
 
 export type InitialState = {
   currentSection: CurrentSectionEnum;
+  startCheckInError: boolean;
   registeringWithValue: string;
   isProcessing: boolean;
   helperText: string;
@@ -34,6 +29,8 @@ export type InitialState = {
 export const getInitialState = (): InitialState => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
+    //
+    startCheckInError: false,
     registeringWithValue: "",
     isProcessing: false,
     helperText: "For mobile, please include country code.  For ex. + 913223...",
@@ -71,6 +68,12 @@ export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getInitialState(),
   reducers: {
+    setState: (state, { payload }: { payload: Partial<InitialState> }) => {
+      return {
+        ...state,
+        ...payload,
+      };
+    },
     setUpdateDetailsWarning: (state, { payload }: { payload: string }) => {
       state.updateDetailsWarning = payload;
     },
@@ -87,12 +90,14 @@ export const bhandaraCheckinSlice = createSlice({
       state.currentSection = CurrentSectionEnum.CHECKIN_SUCCESS;
     },
     changeRegisteringWithValue: (state, { payload }) => {
+      state.startCheckInError = false;
       state.registeringWithValue = payload;
     },
     setHelperText: (state, { payload }) => {
       state.helperText = payload;
     },
     setUserDetails: (state, { payload }) => {
+      state.updateDetailsWarning = "";
       state.userDetails = payload;
     },
   },
@@ -113,22 +118,7 @@ export const bhandaraCheckinSlice = createSlice({
       .addMatcher(
         ({ type }: { type: string }) => Boolean(type.match("goToMain")),
         (state, action) => {
-          const {
-            helperText,
-            currentSection,
-            isProcessing,
-            registeringWithValue,
-            updateDetailsProcessing,
-            updateDetailsWarning,
-            userDetails,
-          } = getInitialState();
-          state.helperText = helperText;
-          state.currentSection = currentSection;
-          state.isProcessing = isProcessing;
-          state.registeringWithValue = registeringWithValue;
-          state.updateDetailsProcessing = updateDetailsProcessing;
-          state.updateDetailsWarning = updateDetailsWarning;
-          state.userDetails = userDetails;
+          return getInitialState();
         }
       );
   },
@@ -143,76 +133,76 @@ export type ThunkApiConfig = {
 };
 
 // Thunk Utils
-const getRefinedUserDetails = (user: User): UserDetails => {
-  const defaultUserDetails: UserDetails = getInitialState().userDetails;
-  return {
-    ...getInitialState().userDetails,
-    email: (user as UserWithEmail).email
-      ? {
-          isValid: true,
-          show: false,
-          value: String((user as UserWithEmail).email),
-        }
-      : defaultUserDetails.email,
-    mobile: (user as UserWithMobile).mobile
-      ? {
-          isValid: true,
-          show: false,
-          value: String((user as UserWithMobile).mobile),
-        }
-      : defaultUserDetails.mobile,
-    ageGroup: user.ageGroup
-      ? {
-          isValid: true,
-          show: false,
-          value: String(user.ageGroup),
-        }
-      : defaultUserDetails.ageGroup,
-    fullName: user.fullName
-      ? {
-          isValid: true,
-          show: false,
-          value: String(user.fullName),
-        }
-      : defaultUserDetails.fullName,
-    gender: user.gender
-      ? {
-          isValid: true,
-          show: false,
-          value: String(user.gender),
-        }
-      : defaultUserDetails.gender,
-    location: user.location
-      ? {
-          isValid: true,
-          show: false,
-          value: String(
-            user.location
-          ) as unknown as RefinedCityStateCountryLocation,
-        }
-      : defaultUserDetails.location,
-  };
-};
+// const getRefinedUserDetails = (user: User): UserDetails => {
+//   const defaultUserDetails: UserDetails = getInitialState().userDetails;
+//   return {
+//     ...getInitialState().userDetails,
+//     email: (user as UserWithEmail).email
+//       ? {
+//           isValid: true,
+//           show: false,
+//           value: String((user as UserWithEmail).email),
+//         }
+//       : defaultUserDetails.email,
+//     mobile: (user as UserWithMobile).mobile
+//       ? {
+//           isValid: true,
+//           show: false,
+//           value: String((user as UserWithMobile).mobile),
+//         }
+//       : defaultUserDetails.mobile,
+//     ageGroup: user.ageGroup
+//       ? {
+//           isValid: true,
+//           show: false,
+//           value: String(user.ageGroup),
+//         }
+//       : defaultUserDetails.ageGroup,
+//     fullName: user.fullName
+//       ? {
+//           isValid: true,
+//           show: false,
+//           value: String(user.fullName),
+//         }
+//       : defaultUserDetails.fullName,
+//     gender: user.gender
+//       ? {
+//           isValid: true,
+//           show: false,
+//           value: String(user.gender),
+//         }
+//       : defaultUserDetails.gender,
+//     location: user.location
+//       ? {
+//           isValid: true,
+//           show: false,
+//           value: String(
+//             user.location
+//           ) as unknown as RefinedCityStateCountryLocation,
+//         }
+//       : defaultUserDetails.location,
+//   };
+// };
 
-const startCheckinAbhyasi = async (
-  apis: BhandaraCheckinAPIs,
-  userId: string,
-  dispatch: Dispatch<AnyAction>
-): Promise<void> => {
-  const isAbhyasiCheckedIn = await apis.getIsUserCheckedIn(userId);
-  if (isAbhyasiCheckedIn) {
-    dispatch(
-      bhandaraCheckinSlice.actions.setHelperText(
-        `Abhyasi with id ${userId} is already checked in.`
-      )
-    );
-  } else {
-    const user = await apis.getUserDetails(userId);
-    const refinedUserDetails = getRefinedUserDetails(user);
-    dispatch(bhandaraCheckinSlice.actions.setUserDetails(refinedUserDetails));
-    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
-  }
-};
+// const startCheckinAbhyasiV0 = async (
+//   apis: BhandaraCheckinAPIs,
+//   userId: string,
+//   dispatch: Dispatch<AnyAction>
+// ): Promise<void> => {
+//   const isAbhyasiCheckedIn = await apis.getIsUserCheckedIn(userId);
+//   if (isAbhyasiCheckedIn) {
+//     dispatch(
+//       bhandaraCheckinSlice.actions.setHelperText(
+//         `Abhyasi with id ${userId} is already checked in.`
+//       )
+//     );
+//   } else {
+//     const user = await apis.getUserDetails(userId);
+//     const refinedUserDetails = getRefinedUserDetails(user);
+//     dispatch(bhandaraCheckinSlice.actions.setUserDetails(refinedUserDetails));
+//     dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+//   }
+// };
 
 const getUserDetailsWithEmailOrMobile = (userInfo: string): UserDetails => {
   const userDetails = getInitialState().userDetails;
@@ -242,6 +232,18 @@ const getUserForCheckin = (
 };
 
 // Async Thunks
+export const startCheckinAbhyasiId = createAsyncThunk<
+  void,
+  undefined,
+  ThunkApiConfig
+>("bhandara-checkin/startCheckinAbhyasiId", (_, { dispatch, getState }) => {
+  dispatch(
+    bhandaraCheckinSlice.actions.setState({
+      helperText: "Checkin with abhyasi-id is not yet implemented",
+      startCheckInError: true,
+    })
+  );
+});
 export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/startCheckIn",
   async (_, { dispatch, getState, extra: { apis } }) => {
@@ -251,7 +253,8 @@ export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
       isAbhyasiId(registeringWithValue) ||
       isAbhyasiIdTemp(registeringWithValue)
     )
-      await startCheckinAbhyasi(apis, registeringWithValue, dispatch);
+      dispatch(startCheckinAbhyasiId());
+    // await startCheckinAbhyasi(apis, registeringWithValue, dispatch);
     else {
       dispatch(
         bhandaraCheckinSlice.actions.setUserDetails(

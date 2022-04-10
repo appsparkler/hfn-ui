@@ -1,9 +1,10 @@
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport } from "../../components";
 import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
 import { ClickHandler, InputChangeHandler } from "../../types";
 import { isAbhyasiId, isAbhyasiIdTemp, isEmail, isMobile } from "../../utils";
+import { maxWidth } from "./constants";
 
 export type SectionMainStateProps = {
   error?: boolean;
@@ -68,10 +69,13 @@ export const SectionMain = ({
     <CenterOfViewport
       gap={10}
       width={"100%"}
-      maxWidth={400}
+      maxWidth={maxWidth}
       paddingX={1}
       marginX="auto"
     >
+      <Typography variant="h4" color="goldenrod" align="center">
+        Golden Book Registration
+      </Typography>
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"

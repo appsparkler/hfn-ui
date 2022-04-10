@@ -1,4 +1,10 @@
-import { Alert, BaseTextFieldProps, Button, TextField } from "@mui/material";
+import {
+  Alert,
+  BaseTextFieldProps,
+  Button,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   CenterOfViewport,
@@ -11,6 +17,7 @@ import {
   SelectFieldProps,
 } from "../../components";
 import { InputChangeHandler } from "../../types";
+import { maxWidth } from "./constants";
 import { UserDetails } from "./types";
 import { isFieldValueValid } from "./utils";
 
@@ -53,7 +60,7 @@ export const SectionUpdateDetails = ({
       userDetails.mobile.value
     );
     if (!hasEmail && hasMobile && hasValidMobile) return true;
-    if (!hasMobile && hasValidEmail && hasMobile) return true;
+    if (!hasMobile && hasValidEmail && hasEmail) return true;
     if (hasEmail && hasMobile && hasValidMobile && hasValidEmail) return true;
     return false;
   }, [userDetails.email.value, userDetails.mobile.value]);
@@ -125,17 +132,24 @@ export const SectionUpdateDetails = ({
   );
 
   useEffect(() => {
-    fullNameRef.current?.focus();
+    // fullNameRef.current?.focus();
   }, []);
 
   return (
     <CenterOfViewport
       gap={5}
       width={"100%"}
-      maxWidth={400}
+      maxWidth={maxWidth}
       paddingX={1}
       marginX="auto"
     >
+      {warning ? (
+        <Alert severity="warning" variant="standard">
+          {warning}
+        </Alert>
+      ) : (
+        <Typography variant="h4">Update Details</Typography>
+      )}
       <Vertical gap={3} width={"100%"}>
         {userDetails.fullName.show ? (
           <TextField
@@ -239,11 +253,6 @@ export const SectionUpdateDetails = ({
           CHECK IN
         </AsyncButton>
       </Horizontal>
-      {warning ? (
-        <Alert severity="warning" variant="standard" sx={{ width: "100%" }}>
-          {warning}
-        </Alert>
-      ) : null}
     </CenterOfViewport>
   );
 };

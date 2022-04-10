@@ -13,6 +13,7 @@ export const CenterOfViewport = ({
     <Box
       sx={{
         height: "100vh",
+        overflow: "auto",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",

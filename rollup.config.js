@@ -36,7 +36,7 @@ function tscAliasPlugin() {
 
 /** @type {import('rollup').RollupOptions} */
 const buildConfig = {
-    input: 'src/index.ts',
+    input: 'src/lib/index.ts',
     output: [
         {
             file: pkg.module,
