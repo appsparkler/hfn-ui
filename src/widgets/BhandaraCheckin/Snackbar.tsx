@@ -4,6 +4,7 @@ export type AppSnackbarProps = {
   open?: SnackbarProps["open"];
   autoHideDuration?: SnackbarProps["autoHideDuration"];
   severity?: AlertProps["severity"];
+  variant?: AlertProps["variant"];
   snackbarProps?: SnackbarProps;
   alertProps?: AlertProps;
   children?: AlertProps["children"];
@@ -14,8 +15,10 @@ export const AppSnackbar = ({
   open,
   autoHideDuration,
   severity,
+  variant,
   snackbarProps,
   alertProps,
+  children,
   onClose,
 }: AppSnackbarProps) => (
   <Snackbar
@@ -24,6 +27,8 @@ export const AppSnackbar = ({
     onClose={onClose}
     {...snackbarProps}
   >
-    <Alert severity={severity} {...alertProps}></Alert>
+    <Alert severity={severity} variant={variant} {...alertProps}>
+      {children}
+    </Alert>
   </Snackbar>
 );
