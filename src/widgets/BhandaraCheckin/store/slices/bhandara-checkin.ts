@@ -169,20 +169,13 @@ const startCheckinAbhyasi = async (
 
 const getUserDetailsWithEmailOrMobile = (userInfo: string): UserDetails => {
   const userDetails = getInitialState().userDetails;
-  if (isMobile(userInfo)) {
-    return {
-      ...userDetails,
-      mobile: {
-        ...userDetails.mobile,
-        value: userInfo,
-      },
-    };
-  }
+  const loginWith: keyof UserDetails = isMobile(userInfo) ? "mobile" : "email";
   return {
     ...userDetails,
-    email: {
-      ...userDetails.email,
+    [loginWith]: {
+      ...userDetails[loginWith],
       value: userInfo,
+      disabled: true,
     },
   };
 };
