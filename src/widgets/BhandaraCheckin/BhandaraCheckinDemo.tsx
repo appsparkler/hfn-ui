@@ -1,4 +1,4 @@
-import { BhandaraCheckinWidget } from "./BhandaraCheckin";
+import { BhandaraCheckinWidget } from "./BhandaraCheckinWidget";
 
 export const BhandaraCheckinWidgetDemo = () => {
   return (
@@ -15,7 +15,6 @@ export const BhandaraCheckinWidgetDemo = () => {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve({
-                id: "ABCD",
                 email: "abc@def.com",
                 fullName: "Prakash Shah",
                 gender: "Male",

@@ -1,6 +1,24 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  createAsyncThunk,
+  createSlice,
+  Dispatch,
+} from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "..";
-import { CurrentSectionEnum, UserDetails } from "../../types";
+import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
+import {
+  isAbhyasiId,
+  isAbhyasiIdTemp,
+  isEmail,
+  isMobile,
+} from "../../../../utils";
+import {
+  CurrentSectionEnum,
+  User,
+  UserDetails,
+  UserWithEmail,
+  UserWithMobile,
+} from "../../types";
 
 export type InitialState = {
   currentSection: CurrentSectionEnum;
@@ -64,14 +82,14 @@ export const bhandaraCheckinSlice = createSlice({
       state.helperText = payload;
     },
     setUserDetails: (state, { payload }) => {
-      state.userDetails = { ...payload };
+      state.userDetails = payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(someAction.pending, (state) => {
+    builder.addCase(startCheckIn.pending, (state) => {
       state.isProcessing = true;
     });
-    builder.addCase(someAction.fulfilled, (state, action) => {
+    builder.addCase(startCheckIn.fulfilled, (state, action) => {
       state.isProcessing = false;
     });
   },
@@ -83,19 +101,109 @@ export type ThunkApiConfig = {
   };
 };
 
-export const someAction = createAsyncThunk<void, string, ThunkApiConfig>(
-  "bhandara-checkin/someAction",
-  async (userId, thunkAPI) => {
-    const isUserCheckedIn = await thunkAPI.extra.apis.getIsUserCheckedIn(
-      userId
-    );
-    if (isUserCheckedIn) {
+const getRefinedUserDetails = (user: User): UserDetails => {
+  const defaultUserDetails: UserDetails = getInitialState().userDetails;
+  return {
+    ...getInitialState().userDetails,
+    email: (user as UserWithEmail).email
+      ? {
+          isValid: true,
+          show: false,
+          value: String((user as UserWithEmail).email),
+        }
+      : defaultUserDetails.email,
+    mobile: (user as UserWithMobile).mobile
+      ? {
+          isValid: true,
+          show: false,
+          value: String((user as UserWithMobile).mobile),
+        }
+      : defaultUserDetails.mobile,
+    ageGroup: user.ageGroup
+      ? {
+          isValid: true,
+          show: false,
+          value: String(user.ageGroup),
+        }
+      : defaultUserDetails.ageGroup,
+    fullName: user.fullName
+      ? {
+          isValid: true,
+          show: false,
+          value: String(user.fullName),
+        }
+      : defaultUserDetails.fullName,
+    gender: user.gender
+      ? {
+          isValid: true,
+          show: false,
+          value: String(user.gender),
+        }
+      : defaultUserDetails.gender,
+    location: user.location
+      ? {
+          isValid: true,
+          show: false,
+          value: String(
+            user.location
+          ) as unknown as RefinedCityStateCountryLocation,
+        }
+      : defaultUserDetails.location,
+  };
+};
+
+const startCheckinAbhyasi = async (
+  apis: BhandaraCheckinAPIs,
+  userId: string,
+  dispatch: Dispatch<AnyAction>
+): Promise<void> => {
+  const isAbhyasiCheckedIn = await apis.getIsUserCheckedIn(userId);
+  if (isAbhyasiCheckedIn) {
+    dispatch(
       bhandaraCheckinSlice.actions.setHelperText(
-        `Abhyasi with ID ${userId} is already checkedin`
+        `Abhyasi with id ${userId} is already checked in.`
+      )
+    );
+  } else {
+    const user = await apis.getUserDetails(userId);
+    const refinedUserDetails = getRefinedUserDetails(user);
+    dispatch(bhandaraCheckinSlice.actions.setUserDetails(refinedUserDetails));
+    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+  }
+};
+
+const getUserDetailsWithEmailOrMobile = (userInfo: string): UserDetails => {
+  const userDetails = getInitialState().userDetails;
+  if (isMobile(userInfo)) {
+    return {
+      ...userDetails,
+      mobile: {
+        ...userDetails.mobile,
+        value: userInfo,
+      },
+    };
+  }
+  return {
+    ...userDetails,
+    email: {
+      ...userDetails.email,
+      value: userInfo,
+    },
+  };
+};
+
+export const startCheckIn = createAsyncThunk<void, string, ThunkApiConfig>(
+  "bhandara-checkin/startCheckIn",
+  async (userId, { dispatch, extra: { apis } }) => {
+    if (isAbhyasiId(userId) || isAbhyasiIdTemp(userId))
+      await startCheckinAbhyasi(apis, userId, dispatch);
+    else {
+      dispatch(
+        bhandaraCheckinSlice.actions.setUserDetails(
+          getUserDetailsWithEmailOrMobile(userId)
+        )
       );
-    } else {
-      const userDetails = await thunkAPI.extra.apis.getUserDetails(userId);
-      thunkAPI.dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+      dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
     }
   }
 );

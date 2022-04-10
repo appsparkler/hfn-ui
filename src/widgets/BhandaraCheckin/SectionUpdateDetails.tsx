@@ -52,18 +52,32 @@ export const SectionUpdateDetails = ({
           userDetails.fullName.isValid &&
           userDetails.gender.isValid &&
           userDetails.location.isValid &&
-          userDetails.mobile.isValid &&
-          userDetails.email.isValid
+          ((userDetails.mobile.isValid &&
+            userDetails.mobile.value?.trim().length) ||
+            (userDetails.email.value?.trim().length &&
+              userDetails.email.isValid))
       ),
     [
       userDetails.ageGroup.isValid,
       userDetails.email.isValid,
+      userDetails.email.value,
       userDetails.fullName.isValid,
       userDetails.gender.isValid,
       userDetails.location.isValid,
       userDetails.mobile.isValid,
+      userDetails.mobile.value,
     ]
   );
+
+  fetch(
+    "https://profile.srcm.net/api/abhyasis/search/?email=chinta512@gmail.com",
+    {
+      headers: new Headers({
+        Authorization: "MTq9doPD3xRZEJnZZbflzh2ZCsKq67",
+      }),
+      method: "GET",
+    }
+  ).then(console.log);
 
   const isCheckinButtonEnabled = useMemo<boolean>(
     () => isValid && !isProcessing,
@@ -138,7 +152,7 @@ export const SectionUpdateDetails = ({
             variant="outlined"
             fullWidth
             onChange={handleChange}
-            value={fullName.name}
+            value={fullName.value}
             inputRef={fullNameRef}
           />
         ) : null}

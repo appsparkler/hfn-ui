@@ -6,9 +6,30 @@ import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { useMemo } from "react";
 import { BhandaraCheckinAPIs } from "./store";
+import { BhandaraCheckinViewConnected } from "./BhandaraCheckinViewConnected";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
+};
+
+export type BhandaraCheckinViewStateProps = {
+  showMain: boolean;
+  showUpdateDetails: boolean;
+  showCheckinSuccess: boolean;
+};
+
+export const BhandaraCheckinView = ({
+  showMain,
+  showUpdateDetails,
+  showCheckinSuccess,
+}: BhandaraCheckinViewStateProps) => {
+  return (
+    <>
+      {showMain ? <SectionMainConnected /> : null}
+      {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
+      {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
+    </>
+  );
 };
 
 export const BhandaraCheckinWidget = ({ apis }: BhandaraCheckinWidgetProps) => {
@@ -29,11 +50,10 @@ export const BhandaraCheckinWidget = ({ apis }: BhandaraCheckinWidgetProps) => {
       }),
     [apis]
   );
+
   return (
     <Provider store={store}>
-      <SectionMainConnected />
-      <SectionUpdateDetailsConnected />
-      <SectionCheckinSuccessConnected />
+      <BhandaraCheckinViewConnected />
     </Provider>
   );
 };

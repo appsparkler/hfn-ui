@@ -1,6 +1,6 @@
 import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState, bhandaraCheckinSlice, someAction } from "./store";
+import { RootState, bhandaraCheckinSlice, startCheckIn } from "./store";
 import {
   SectionMain,
   SectionMainDispatchProps,
@@ -24,7 +24,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
     onChange: (value) =>
       dispatch(bhandaraCheckinSlice.actions.changeRegisteringWithValue(value)),
     onClickStart: (userId) =>
-      dispatch(someAction(userId) as unknown as Action<any>),
+      dispatch(startCheckIn(userId) as unknown as Action<any>),
   };
 };
 

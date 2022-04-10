@@ -1,5 +1,6 @@
 import { TextFieldProps } from "@mui/material";
 import { LocationTextFieldProps, SelectFieldProps } from "../../components";
+import { RefinedCityStateCountryLocation } from "../../components/LocationTextField/locations";
 
 export enum CurrentSectionEnum {
   MAIN,
@@ -8,7 +9,6 @@ export enum CurrentSectionEnum {
 }
 
 export type BaseUser = {
-  id: string;
   abhyasiId?: string;
   fullName: string;
   ageGroup: string;
@@ -16,21 +16,33 @@ export type BaseUser = {
   gender: string;
 };
 
-export type User = BaseUser &
-  ({ email: string } | { mobile: string } | { email: string; mobile: string });
+export type UserWithMobile = BaseUser & { mobile: string };
+export type UserWithEmail = BaseUser & { email: string };
+export type UserWithEmailAndMobile = BaseUser & {
+  email: string;
+  mobile: string;
+};
 
-export type UserDetailsValueWrapper<T> = Partial<T> & {
+export type User = UserWithMobile | UserWithEmail | UserWithEmailAndMobile;
+// (
+//   | { email: boolean }
+//   | { mobile: boolean }
+//   | { email: boolean; mobile: boolean }
+// );
+
+export type UserDetailsValueWrapper<T> = {
   show?: boolean;
   isValid?: boolean;
+  value?: T;
 };
 
 export type UserDetails = {
-  fullName: UserDetailsValueWrapper<TextFieldProps>;
-  mobile: UserDetailsValueWrapper<TextFieldProps>;
-  email: UserDetailsValueWrapper<TextFieldProps>;
-  location: UserDetailsValueWrapper<LocationTextFieldProps>;
-  ageGroup: UserDetailsValueWrapper<SelectFieldProps>;
-  gender: UserDetailsValueWrapper<SelectFieldProps>;
+  fullName: UserDetailsValueWrapper<string>;
+  mobile: UserDetailsValueWrapper<string>;
+  email: UserDetailsValueWrapper<string>;
+  location: UserDetailsValueWrapper<RefinedCityStateCountryLocation>;
+  ageGroup: UserDetailsValueWrapper<string>;
+  gender: UserDetailsValueWrapper<string>;
 };
 
 // const user: User = {
@@ -42,3 +54,36 @@ export type UserDetails = {
 //   location: "ABC",
 //   mobile: "39393939",
 // };
+
+export type AbhyasiAPI = {
+  id: number;
+  name: string;
+  ref: string;
+  record_type: string;
+  city: {
+    id: number;
+    name: string;
+  };
+  email: string;
+  mobile: string;
+  firebase_uid: string;
+  gender: string;
+  year_of_joining: string;
+  age_group: string;
+};
+
+// const user = [
+//   {
+//     id: 83635,
+//     name: "AJAY KUMAR CHINTA",
+//     ref: "I******1",
+//     record_type: "a",
+//     city: { id: 73902, name: "Hyderabad" },
+//     email: "c********2@gmail.com",
+//     mobile: "+91****46",
+//     firebase_uid: "BJt1sraT4OgMzSIzCcdKyXWFca22",
+//     gender: "*",
+//     year_of_joining: "1998",
+//     age_group: "40-45",
+//   },
+// ];
