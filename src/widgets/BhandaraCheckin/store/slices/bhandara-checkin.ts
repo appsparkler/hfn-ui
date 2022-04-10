@@ -6,12 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "..";
 import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
-import {
-  isAbhyasiId,
-  isAbhyasiIdTemp,
-  isEmail,
-  isMobile,
-} from "../../../../utils";
+import { isAbhyasiId, isAbhyasiIdTemp, isMobile } from "../../../../utils";
 import {
   CurrentSectionEnum,
   User,
