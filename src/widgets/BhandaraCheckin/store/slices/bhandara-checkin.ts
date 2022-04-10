@@ -4,7 +4,7 @@ import {
   createSlice,
   Dispatch,
 } from "@reduxjs/toolkit";
-import { BhandaraCheckinAPIs } from "../../types";
+import { BhandaraCheckinAPIs, UserWithEmailAndMobile } from "../../types";
 import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
 import {
   isAbhyasiId,
@@ -68,6 +68,9 @@ export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getInitialState(),
   reducers: {
+    setUpdateDetailsWarning: (state, { payload }: { payload: string }) => {
+      state.updateDetailsWarning = payload;
+    },
     goToUpdateDetails: (state) => {
       state.currentSection = CurrentSectionEnum.UPDATE_DETAILS;
     },
@@ -189,8 +192,17 @@ const getUserDetailsWithEmailOrMobile = (userInfo: string): UserDetails => {
   };
 };
 
-const validateEmailOrMobileUserDetails = (userDetails: UserDetails) => {
-  // if(userDetails.)
+const getUserForCheckin = (
+  userDetails: UserDetails
+): UserWithEmail | UserWithMobile | UserWithEmailAndMobile => {
+  return {
+    ageGroup: String(userDetails.ageGroup.value),
+    email: String(userDetails.email.value),
+    fullName: String(userDetails.fullName.value),
+    gender: String(userDetails.gender.value),
+    location: String(JSON.stringify(userDetails.location.value)),
+    mobile: String(userDetails.mobile.value),
+  };
 };
 
 // Async Thunks
@@ -212,12 +224,30 @@ export const startCheckIn = createAsyncThunk<void, string, ThunkApiConfig>(
 
 export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/checkinUser",
-  async (_, { dispatch, getState, extra: {} }) => {
+  async (_, { dispatch, getState, extra: { apis } }) => {
     const { registeringWithValue, userDetails } = getState() as InitialState;
+    const isRegisteringWithEmail = isEmail(registeringWithValue);
     const isEmailOrMobileUser =
-      isEmail(registeringWithValue) || isMobile(registeringWithValue);
+      isRegisteringWithEmail || isMobile(registeringWithValue);
     if (isEmailOrMobileUser) {
-      const isValid = validateEmailOrMobileUserDetails(userDetails);
+      const isCheckedIn = await apis.isMobileOrEmailUserCheckedIn({
+        fullName: userDetails.fullName.value as string,
+        email: userDetails.email.value,
+        mobile: userDetails.mobile.value,
+      });
+      if (isCheckedIn) {
+        dispatch(
+          bhandaraCheckinSlice.actions.setUpdateDetailsWarning(
+            "User is already checked in"
+          )
+        );
+      }
+    } else {
+      const userForCheckin = getUserForCheckin(userDetails);
+      const isCheckinDone = await apis.checkinMobileOrEmailUser(userForCheckin);
+      if (isCheckinDone) {
+        bhandaraCheckinSlice.actions.goToCheckinSuccess();
+      }
     }
   }
 );

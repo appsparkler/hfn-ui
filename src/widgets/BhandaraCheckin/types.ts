@@ -88,6 +88,18 @@ export type AbhyasiAPI = {
 // ];
 
 export type BhandaraCheckinAPIs = {
+  checkinMobileOrEmailUser: (
+    user: UserWithEmail | UserWithMobile | UserWithEmailAndMobile
+  ) => Promise<boolean>;
+  isMobileOrEmailUserCheckedIn: ({
+    fullName,
+    email,
+    mobile,
+  }: {
+    fullName: string;
+    email?: string;
+    mobile?: string;
+  }) => Promise<boolean>;
   getIsUserCheckedIn: (userId: string) => Promise<boolean>;
   getUserDetails: (
     userId: string
