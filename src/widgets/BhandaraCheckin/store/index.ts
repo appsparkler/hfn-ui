@@ -1,11 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  BhandaraCheckinAPIs,
-  User,
-  UserWithEmail,
-  UserWithEmailAndMobile,
-  UserWithMobile,
-} from "../types";
+import { BhandaraCheckinAPIs } from "../types";
 import { bhandaraCheckinSlice } from "./slices";
 
 const exampleStore = configureStore({

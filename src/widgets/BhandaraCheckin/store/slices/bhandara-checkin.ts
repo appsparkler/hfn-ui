@@ -26,7 +26,7 @@ export type InitialState = {
 export const getInitialState = (): InitialState => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
-    registeringWithValue: "abc@gmail.com",
+    registeringWithValue: "+916438010246",
     isProcessing: false,
     helperText: "",
     userDetails: {
