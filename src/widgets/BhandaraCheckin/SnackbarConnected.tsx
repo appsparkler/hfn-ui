@@ -1,26 +1,29 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { bhandaraCheckinSlice, checkinUser, RootState } from "./store";
-import { AppSnackbar, AppSnackbarProps } from "./Snackbar";
-import { Action } from "@reduxjs/toolkit";
+import { RootState } from "./store";
+import { Snackbar, SnackbarProps } from "../../components";
+import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
 
-const mapStateToProps: MapStateToProps<AppSnackbarProps, {}, RootState> = ({
-  bhandaraCheckin: {
-    userDetails,
-    currentSection,
-    updateDetailsWarning,
-    updateDetailsProcessing,
-  },
+const mapStateToProps: MapStateToProps<SnackbarProps, {}, RootState> = ({
+  snackbar: { open, vertical, horizontal, severity, children },
 }) => {
-  return {};
+  return {
+    open,
+    vertical,
+    horizontal,
+    severity,
+    children,
+  };
 };
 
-const mapDispatchToProps: MapDispatchToProps<AppSnackbarProps, {}> = (
+const mapDispatchToProps: MapDispatchToProps<SnackbarProps, {}> = (
   dispatch
 ) => {
-  return {};
+  return {
+    onClose: () => dispatch(snackbarSlice.actions.closeSnackbar),
+  };
 };
 
 export const SectionUpdateDetailsConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AppSnackbar);
+)(Snackbar);
