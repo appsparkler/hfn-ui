@@ -241,7 +241,7 @@ export const SectionUpdateDetails = ({
       </Horizontal>
       {warning ? (
         <Alert severity="warning" variant="standard" sx={{ width: "100%" }}>
-          User is already checked in.
+          {warning}
         </Alert>
       ) : null}
     </CenterOfViewport>

@@ -36,7 +36,7 @@ export const getInitialState = (): InitialState => {
     currentSection: CurrentSectionEnum.MAIN,
     registeringWithValue: "",
     isProcessing: false,
-    helperText: "",
+    helperText: "For mobile, please include country code.  For ex. + 913223...",
     userDetails: {
       fullName: {
         show: true,
@@ -111,10 +111,24 @@ export const bhandaraCheckinSlice = createSlice({
         state.updateDetailsProcessing = false;
       })
       .addMatcher(
-        ({ type }: { type: string }) =>
-          Boolean(type.match("goToCheckinSuccess")),
+        ({ type }: { type: string }) => Boolean(type.match("goToMain")),
         (state, action) => {
-          console.log("go to checkin success...");
+          const {
+            helperText,
+            currentSection,
+            isProcessing,
+            registeringWithValue,
+            updateDetailsProcessing,
+            updateDetailsWarning,
+            userDetails,
+          } = getInitialState();
+          state.helperText = helperText;
+          state.currentSection = currentSection;
+          state.isProcessing = isProcessing;
+          state.registeringWithValue = registeringWithValue;
+          state.updateDetailsProcessing = updateDetailsProcessing;
+          state.updateDetailsWarning = updateDetailsWarning;
+          state.userDetails = userDetails;
         }
       );
   },
@@ -228,15 +242,20 @@ const getUserForCheckin = (
 };
 
 // Async Thunks
-export const startCheckIn = createAsyncThunk<void, string, ThunkApiConfig>(
+export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/startCheckIn",
-  async (userId, { dispatch, extra: { apis } }) => {
-    if (isAbhyasiId(userId) || isAbhyasiIdTemp(userId))
-      await startCheckinAbhyasi(apis, userId, dispatch);
+  async (_, { dispatch, getState, extra: { apis } }) => {
+    const state = getState() as RootState;
+    const { registeringWithValue } = state.bhandaraCheckin;
+    if (
+      isAbhyasiId(registeringWithValue) ||
+      isAbhyasiIdTemp(registeringWithValue)
+    )
+      await startCheckinAbhyasi(apis, registeringWithValue, dispatch);
     else {
       dispatch(
         bhandaraCheckinSlice.actions.setUserDetails(
-          getUserDetailsWithEmailOrMobile(userId)
+          getUserDetailsWithEmailOrMobile(registeringWithValue)
         )
       );
       dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());

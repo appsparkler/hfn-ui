@@ -9,11 +9,19 @@ import {
 import { CurrentSectionEnum } from "./types";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
-  ({ bhandaraCheckin }) => {
+  ({
+    bhandaraCheckin: {
+      registeringWithValue,
+      isProcessing,
+      currentSection,
+      helperText,
+    },
+  }) => {
     return {
-      value: bhandaraCheckin.registeringWithValue,
-      isProcessing: bhandaraCheckin.isProcessing,
-      show: bhandaraCheckin.currentSection === CurrentSectionEnum.MAIN,
+      helperText,
+      value: registeringWithValue,
+      isProcessing: isProcessing,
+      show: currentSection === CurrentSectionEnum.MAIN,
     };
   };
 
@@ -24,7 +32,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
     onChange: (value) =>
       dispatch(bhandaraCheckinSlice.actions.changeRegisteringWithValue(value)),
     onClickStart: (userId) =>
-      dispatch(startCheckIn(userId) as unknown as Action<any>),
+      dispatch(startCheckIn() as unknown as Action<any>),
   };
 };
 
