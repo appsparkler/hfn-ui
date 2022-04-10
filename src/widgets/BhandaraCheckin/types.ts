@@ -87,3 +87,10 @@ export type AbhyasiAPI = {
 //     age_group: "40-45",
 //   },
 // ];
+
+export type BhandaraCheckinAPIs = {
+  getIsUserCheckedIn: (userId: string) => Promise<boolean>;
+  getUserDetails: (
+    userId: string
+  ) => Promise<UserWithEmail | UserWithMobile | UserWithEmailAndMobile>;
+};

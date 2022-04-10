@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { useMemo } from "react";
-import { BhandaraCheckinAPIs } from "./store";
+import { BhandaraCheckinAPIs } from "./types";
 import { BhandaraCheckinViewConnected } from "./BhandaraCheckinViewConnected";
 
 export type BhandaraCheckinWidgetProps = {

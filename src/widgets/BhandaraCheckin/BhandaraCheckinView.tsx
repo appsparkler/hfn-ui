@@ -1,7 +1,7 @@
 import { SectionMainConnected } from "./SectionMainConnected";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
-import { BhandaraCheckinAPIs } from "./store";
+import { BhandaraCheckinAPIs } from "./types";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;

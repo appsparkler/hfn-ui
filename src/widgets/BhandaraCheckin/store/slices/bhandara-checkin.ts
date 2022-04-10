@@ -4,7 +4,7 @@ import {
   createSlice,
   Dispatch,
 } from "@reduxjs/toolkit";
-import { BhandaraCheckinAPIs } from "..";
+import { BhandaraCheckinAPIs } from "../../types";
 import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
 import { isAbhyasiId, isAbhyasiIdTemp, isMobile } from "../../../../utils";
 import {

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
+  BhandaraCheckinAPIs,
   User,
   UserWithEmail,
   UserWithEmailAndMobile,
@@ -23,12 +24,7 @@ const exampleStore = configureStore({
 
 export type RootState = ReturnType<typeof exampleStore.getState>;
 export type RootDispatch = typeof exampleStore.dispatch;
-export type BhandaraCheckinAPIs = {
-  getIsUserCheckedIn: (userId: string) => Promise<boolean>;
-  getUserDetails: (
-    userId: string
-  ) => Promise<UserWithEmail | UserWithMobile | UserWithEmailAndMobile>;
-};
+
 export type ThunkApiConfig = {
   extra: {
     apis: BhandaraCheckinAPIs;
