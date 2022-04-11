@@ -2,6 +2,7 @@ import { SectionMainConnected } from "./SectionMainConnected";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { BhandaraCheckinAPIs } from "./types";
+import { SnackbarConnected } from "./SnackbarConnected";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -23,6 +24,7 @@ export const BhandaraCheckinView = ({
       {showMain ? <SectionMainConnected /> : null}
       {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
       {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
+      <SnackbarConnected />
     </>
   );
 };

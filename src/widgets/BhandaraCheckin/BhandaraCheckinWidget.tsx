@@ -7,6 +7,7 @@ import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected
 import { useMemo } from "react";
 import { BhandaraCheckinAPIs } from "./types";
 import { BhandaraCheckinViewConnected } from "./BhandaraCheckinViewConnected";
+import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -38,6 +39,7 @@ export const BhandaraCheckinWidget = ({ apis }: BhandaraCheckinWidgetProps) => {
       configureStore({
         reducer: {
           bhandaraCheckin: bhandaraCheckinSlice.reducer,
+          snackbar: snackbarSlice.reducer,
         },
         middleware: (getDefaultMiddleware) =>
           getDefaultMiddleware({

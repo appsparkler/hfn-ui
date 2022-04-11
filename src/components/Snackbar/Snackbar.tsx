@@ -23,7 +23,7 @@ export type SnackbarProps = {
 
 export const Snackbar = ({
   open,
-  autoHideDuration,
+  autoHideDuration = 5000,
   severity,
   variant,
   snackbarProps,
@@ -40,7 +40,12 @@ export const Snackbar = ({
     {...snackbarProps}
     anchorOrigin={{ vertical, horizontal }}
   >
-    <Alert severity={severity} variant={variant} {...alertProps}>
+    <Alert
+      severity={severity}
+      onClose={onClose as AlertProps["onClose"]}
+      variant={variant}
+      {...alertProps}
+    >
       {children}
     </Alert>
   </MUISnackbar>

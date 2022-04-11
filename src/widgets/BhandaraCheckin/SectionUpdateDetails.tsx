@@ -24,7 +24,6 @@ import { isFieldValueValid } from "./utils";
 export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;
   userDetails: UserDetails;
-  warning?: string;
 };
 
 export type SectionUpdateDetailsDispatchProps = {
@@ -39,7 +38,6 @@ export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
 export const SectionUpdateDetails = ({
   isProcessing,
   userDetails,
-  warning,
   onChange,
   onClickCheckin,
   onClickCancel,
@@ -137,13 +135,7 @@ export const SectionUpdateDetails = ({
 
   return (
     <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
-      {warning ? (
-        <Alert severity="warning" variant="standard">
-          {warning}
-        </Alert>
-      ) : (
-        <Typography variant="h4">Update Details</Typography>
-      )}
+      <Typography variant="h4">Update Details</Typography>
       <Vertical gap={3} width={"100%"}>
         {userDetails.fullName.show ? (
           <TextField

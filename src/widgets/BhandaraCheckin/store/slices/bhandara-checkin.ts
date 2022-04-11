@@ -14,6 +14,7 @@ import {
   UserWithMobile,
 } from "../../types";
 import { RootDispatch, RootState } from "..";
+import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 
 export type InitialState = {
   currentSection: CurrentSectionEnum;
@@ -22,7 +23,6 @@ export type InitialState = {
   isProcessing: boolean;
   helperText: string;
   userDetails: UserDetails;
-  updateDetailsWarning: string;
   updateDetailsProcessing: boolean;
 };
 
@@ -59,7 +59,6 @@ export const getInitialState = (): InitialState => {
         value: "",
       },
     },
-    updateDetailsWarning: "",
     updateDetailsProcessing: false,
   };
 };
@@ -73,9 +72,6 @@ export const bhandaraCheckinSlice = createSlice({
         ...state,
         ...payload,
       };
-    },
-    setUpdateDetailsWarning: (state, { payload }: { payload: string }) => {
-      state.updateDetailsWarning = payload;
     },
     setUpdateDetailsProcessing: (state, { payload }: { payload: boolean }) => {
       state.updateDetailsProcessing = payload;
@@ -97,7 +93,6 @@ export const bhandaraCheckinSlice = createSlice({
       state.helperText = payload;
     },
     setUserDetails: (state, { payload }) => {
-      state.updateDetailsWarning = "";
       state.userDetails = payload;
     },
   },
@@ -244,6 +239,7 @@ export const startCheckinAbhyasiId = createAsyncThunk<
     })
   );
 });
+
 export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/startCheckIn",
   async (_, { dispatch, getState, extra: { apis } }) => {
@@ -269,7 +265,6 @@ export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
 export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/checkinUser",
   async (_, { dispatch, getState, extra: { apis } }) => {
-    dispatch(bhandaraCheckinSlice.actions.setUpdateDetailsWarning(""));
     const state = getState() as RootState;
     const { registeringWithValue, userDetails } = state.bhandaraCheckin;
     const isRegisteringWithEmail = isEmail(registeringWithValue);
@@ -283,9 +278,14 @@ export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
       });
       if (isCheckedIn) {
         dispatch(
-          bhandaraCheckinSlice.actions.setUpdateDetailsWarning(
-            "User is already checked in"
-          )
+          snackbarSlice.actions.openSnackbar({
+            children: "User is already checked in",
+            severity: "warning",
+            horizontal: "right",
+            vertical: "top",
+            variant: "standard",
+            autoHideDuration: 5000,
+          })
         );
       } else {
         const userForCheckin = getUserForCheckin(userDetails);

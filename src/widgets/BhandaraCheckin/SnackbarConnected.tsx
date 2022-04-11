@@ -19,11 +19,11 @@ const mapDispatchToProps: MapDispatchToProps<SnackbarProps, {}> = (
   dispatch
 ) => {
   return {
-    onClose: () => dispatch(snackbarSlice.actions.closeSnackbar),
+    onClose: () => dispatch(snackbarSlice.actions.closeSnackbar()),
   };
 };
 
-export const SectionUpdateDetailsConnected = connect(
+export const SnackbarConnected = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Snackbar);

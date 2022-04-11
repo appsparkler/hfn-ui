@@ -6,23 +6,16 @@ import {
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
 import { Action } from "@reduxjs/toolkit";
+import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
   {},
   RootState
-> = ({
-  bhandaraCheckin: {
-    userDetails,
-    currentSection,
-    updateDetailsWarning,
-    updateDetailsProcessing,
-  },
-}) => {
+> = ({ bhandaraCheckin: { userDetails, updateDetailsProcessing } }) => {
   return {
     userDetails,
     isProcessing: updateDetailsProcessing,
-    warning: updateDetailsWarning,
   };
 };
 
@@ -33,8 +26,10 @@ const mapDispatchToProps: MapDispatchToProps<
   return {
     onClickCheckin: () => dispatch(checkinUser() as unknown as Action<any>),
     onClickCancel: () => dispatch(bhandaraCheckinSlice.actions.goToMain()),
-    onChange: (userDetails) =>
-      dispatch(bhandaraCheckinSlice.actions.setUserDetails(userDetails)),
+    onChange: (userDetails) => {
+      dispatch(snackbarSlice.actions.closeSnackbar());
+      dispatch(bhandaraCheckinSlice.actions.setUserDetails(userDetails));
+    },
   };
 };
 
