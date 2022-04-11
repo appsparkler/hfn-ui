@@ -19,6 +19,7 @@ import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 export type InitialState = {
   currentSection: CurrentSectionEnum;
   startCheckInError: boolean;
+  startCheckinIsProcessing: boolean;
   registeringWithValue: string;
   isProcessing: boolean;
   helperText: string;
@@ -31,6 +32,7 @@ export const getInitialState = (): InitialState => {
     currentSection: CurrentSectionEnum.MAIN,
     //
     startCheckInError: false,
+    startCheckinIsProcessing: false,
     registeringWithValue: "",
     isProcessing: false,
     helperText: "For mobile, please include country code.  For ex. + 913223...",
@@ -237,6 +239,11 @@ export const startCheckinWithAbhyasiId = createAsyncThunk<
   async (_, { dispatch, getState, extra: { apis } }) => {
     const state = getState() as RootState;
     const { registeringWithValue } = state.bhandaraCheckin;
+    dispatch(
+      bhandaraCheckinSlice.actions.setState({
+        startCheckinIsProcessing: true,
+      })
+    );
     const isAbhyasiCheckedIn = await apis.getIsUserCheckedIn(
       registeringWithValue
     );
@@ -245,6 +252,7 @@ export const startCheckinWithAbhyasiId = createAsyncThunk<
         bhandaraCheckinSlice.actions.setState({
           helperText: `Abhyasi with ID ${registeringWithValue} is already checked in.`,
           startCheckInError: true,
+          startCheckinIsProcessing: false,
         })
       );
     }

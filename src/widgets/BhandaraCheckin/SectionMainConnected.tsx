@@ -12,17 +12,17 @@ const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({
     bhandaraCheckin: {
       registeringWithValue,
-      isProcessing,
       currentSection,
       helperText,
       startCheckInError,
+      startCheckinIsProcessing,
     },
   }) => {
     return {
       error: startCheckInError,
       helperText,
       value: registeringWithValue,
-      isProcessing: isProcessing,
+      isProcessing: startCheckinIsProcessing,
       show: currentSection === CurrentSectionEnum.MAIN,
     };
   };
