@@ -46,33 +46,24 @@ export const mockedApis: BhandaraCheckinAPIs = {
   isMobileOrEmailUserCheckedIn: ({ fullName, email, mobile }) =>
     new Promise((resolve) => {
       setTimeout(() => {
-        if (email) {
-          const someUserWithEmailCheckedIn = (
-            email: string,
-            fullName: string
-          ) =>
-            some<UserWithEmailAndMobile | UserWithEmail | UserWithMobile>(
-              (user) =>
-                (user as UserWithEmail).email === email &&
-                user.fullName === fullName
-            );
-          resolve(
-            someUserWithEmailCheckedIn(email, fullName)(checkedInUsersData)
+        const someUserWithEmailOrMobileAreCheckedIn = (
+          email: string | undefined,
+          mobile: string | undefined,
+          fullName: string
+        ) =>
+          some<UserWithEmailAndMobile | UserWithEmail | UserWithMobile>(
+            (user) =>
+              ((user as UserWithEmail).email === email ||
+                (user as UserWithMobile).mobile === mobile) &&
+              user.fullName === fullName
           );
-        } else if (mobile) {
-          const someUserWithMobileCheckedIn = (
-            mobile: string,
-            fullName: string
-          ) =>
-            some<UserWithEmailAndMobile | UserWithEmail | UserWithMobile>(
-              (user) =>
-                (user as UserWithMobile).mobile === mobile &&
-                user.fullName === fullName
-            );
-          resolve(
-            someUserWithMobileCheckedIn(mobile, fullName)(checkedInUsersData)
-          );
-        }
+        resolve(
+          someUserWithEmailOrMobileAreCheckedIn(
+            email,
+            mobile,
+            fullName
+          )(checkedInUsersData)
+        );
       }, 600);
     }),
 

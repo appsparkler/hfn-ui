@@ -4,7 +4,7 @@ import { Snackbar, SnackbarProps } from "../../components";
 import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
 
 const mapStateToProps: MapStateToProps<SnackbarProps, {}, RootState> = ({
-  snackbar: { open, vertical, horizontal, severity, children },
+  snackbar: { open, vertical, horizontal, severity, children, variant },
 }) => {
   return {
     open,
@@ -12,6 +12,7 @@ const mapStateToProps: MapStateToProps<SnackbarProps, {}, RootState> = ({
     horizontal,
     severity,
     children,
+    variant,
   };
 };
 

@@ -42,8 +42,8 @@ export const Snackbar = ({
   >
     <Alert
       severity={severity}
-      onClose={onClose as AlertProps["onClose"]}
       variant={variant}
+      onClose={onClose as AlertProps["onClose"]}
       {...alertProps}
     >
       {children}

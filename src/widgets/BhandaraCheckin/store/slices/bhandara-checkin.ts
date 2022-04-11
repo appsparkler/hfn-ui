@@ -283,7 +283,7 @@ export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
             severity: "warning",
             horizontal: "right",
             vertical: "top",
-            variant: "standard",
+            variant: "filled",
             autoHideDuration: 5000,
           })
         );

@@ -20,6 +20,7 @@ export const CenterOfViewport = ({
         flexDirection: "column",
         alignItems: "center",
       }}
+      boxSizing="border-box"
       {...restProps}
     >
       {children}
