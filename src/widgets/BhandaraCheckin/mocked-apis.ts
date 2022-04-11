@@ -26,7 +26,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
   getIsUserCheckedIn: () =>
     new Promise((resolve) => {
       setTimeout(() => {
-        resolve(false);
+        resolve(true);
       }, 600);
     }),
 

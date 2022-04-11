@@ -87,6 +87,7 @@ export const bhandaraCheckinSlice = createSlice({
     },
     changeRegisteringWithValue: (state, { payload }) => {
       state.startCheckInError = false;
+      state.helperText = getInitialState().helperText;
       state.registeringWithValue = payload;
     },
     setHelperText: (state, { payload }) => {
@@ -227,18 +228,28 @@ const getUserForCheckin = (
 };
 
 // Async Thunks
-export const startCheckinAbhyasiId = createAsyncThunk<
+export const startCheckinWithAbhyasiId = createAsyncThunk<
   void,
   undefined,
   ThunkApiConfig
->("bhandara-checkin/startCheckinAbhyasiId", (_, { dispatch, getState }) => {
-  dispatch(
-    bhandaraCheckinSlice.actions.setState({
-      helperText: "Checkin with abhyasi-id is not yet implemented",
-      startCheckInError: true,
-    })
-  );
-});
+>(
+  "bhandara-checkin/startCheckinWithAbhyasiId",
+  async (_, { dispatch, getState, extra: { apis } }) => {
+    const state = getState() as RootState;
+    const { registeringWithValue } = state.bhandaraCheckin;
+    const isAbhyasiCheckedIn = await apis.getIsUserCheckedIn(
+      registeringWithValue
+    );
+    if (isAbhyasiCheckedIn) {
+      dispatch(
+        bhandaraCheckinSlice.actions.setState({
+          helperText: `Abhyasi with ID ${registeringWithValue} is already checked in.`,
+          startCheckInError: true,
+        })
+      );
+    }
+  }
+);
 
 export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/startCheckIn",
@@ -249,8 +260,7 @@ export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
       isAbhyasiId(registeringWithValue) ||
       isAbhyasiIdTemp(registeringWithValue)
     )
-      dispatch(startCheckinAbhyasiId());
-    // await startCheckinAbhyasi(apis, registeringWithValue, dispatch);
+      dispatch(startCheckinWithAbhyasiId());
     else {
       dispatch(
         bhandaraCheckinSlice.actions.setUserDetails(
