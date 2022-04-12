@@ -15,7 +15,6 @@ export const Template = () => {
   }, []);
   return (
     <div>
-      Test API
       <button onClick={onClickCallApi} type="button">
         Call API
       </button>
