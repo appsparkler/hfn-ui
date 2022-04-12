@@ -5,7 +5,7 @@ import {
   UserWithEmailAndMobile,
   UserWithMobile,
 } from "../types";
-import { fetchUserDetails } from "./fetchUserDetails";
+import { fetchUserDetails } from "./server-apis";
 import { init } from "./init";
 
 init();

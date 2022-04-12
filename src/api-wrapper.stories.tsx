@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchUserDetails } from "./widgets/BhandaraCheckin/mocked-apis/fetchUserDetails";
+import { fetchUserDetails } from "./widgets/BhandaraCheckin/mocked-apis/server-apis";
 
 export default {
   title: "API Story",
