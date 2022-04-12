@@ -8,31 +8,26 @@ import {
 import { fetchUserDetails } from "./server-apis";
 import { init } from "./init";
 
+const checkedInAbhyasis = ["INAAAE478"];
+
 init();
 
 const checkedInUsersData: (
   | UserWithEmail
   | UserWithMobile
   | UserWithEmailAndMobile
-)[] = [
-  {
-    // id: uniqueId("checked-in-user"),
-    mobile: "+918273048930",
-    fullName: "Anurita Panday",
-    ageGroup: "10-20",
-    email: "anurita.pandey@gmail.com",
-    gender: "female",
-    location: "",
-  },
-];
+)[] = [];
 
 export const mockedApis: BhandaraCheckinAPIs = {
-  getIsUserCheckedIn: () =>
+  getIsUserCheckedIn: ($id: string) =>
     new Promise((resolve) => {
       setTimeout(() => {
-        resolve(true);
+        const isCheckedIn = some<string>((id) => $id === id)(checkedInAbhyasis);
+        if (isCheckedIn) resolve(true);
+        resolve(false);
       }, 600);
     }),
+
   getUserDetails: async () => {
     const res = await fetchUserDetails("INAAAE478");
     return {
