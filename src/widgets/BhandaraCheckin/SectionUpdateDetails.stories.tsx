@@ -16,6 +16,7 @@ updateDetails.args = {
     fullName: {
       value: "Priyanka Patel",
       show: true,
+      disabled: true,
     },
     mobile: {
       value: "+91339282838",

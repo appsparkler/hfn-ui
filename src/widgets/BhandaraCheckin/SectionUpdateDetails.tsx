@@ -1,11 +1,5 @@
-import {
-  Alert,
-  BaseTextFieldProps,
-  Button,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { Alert, Button, TextField, Typography } from "@mui/material";
+import { useCallback, useMemo } from "react";
 import {
   CenterOfViewport,
   AsyncButton,
@@ -46,8 +40,6 @@ export const SectionUpdateDetails = ({
     () => userDetails,
     [userDetails]
   );
-
-  const fullNameRef: BaseTextFieldProps["inputRef"] = useRef(null);
 
   const areEmailAndMobileValid = useMemo<boolean>(() => {
     const hasEmail = Boolean(userDetails.email.value);
@@ -129,10 +121,6 @@ export const SectionUpdateDetails = ({
     [onChange, userDetails]
   );
 
-  useEffect(() => {
-    // fullNameRef.current?.focus();
-  }, []);
-
   return (
     <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       <Typography variant="h4">Update Details</Typography>
@@ -147,7 +135,7 @@ export const SectionUpdateDetails = ({
             fullWidth
             onChange={handleChange}
             value={fullName.value}
-            inputRef={fullNameRef}
+            disabled={fullName.disabled}
           />
         ) : null}
         <Horizontal gap={3}>
