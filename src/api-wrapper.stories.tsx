@@ -1,26 +1,42 @@
 import React from "react";
+import { fetchUserDetails } from "./widgets/BhandaraCheckin/mocked-apis/fetchUserDetails";
+import { fetchToken } from "./widgets/BhandaraCheckin/mocked-apis/token";
+import { UserSRCM } from "./widgets/BhandaraCheckin/types";
 
 export default {
   title: "API Story",
 };
 
-var formdata = new FormData();
-formdata.append("client_id", "XxFhQFRe5E0RsmyZ2SvCRqjvcmXJogEW2OPUPeSK");
-formdata.append("grant_type", "client_credentials");
-formdata.append(
-  "client_secret",
-  "n7XvchA0MHClZPIlrqicZBDbns9kp0DjdbdmtGUtEwR1NLCCwYDv2uu3flsZA720QbE7woOWsmyXjr6JJIWYAfPXeapA2OXQMgeVfHL7bDXgHZ0QDmpnQy88JtCcdVSI"
-);
-
-var requestOptions: RequestInit = {
-  method: "POST",
-  body: formdata,
+const getUserDetails = async ({
+  abhyasiId,
+  bearerToken,
+}: {
+  abhyasiId: string;
+  bearerToken?: string;
+}): Promise<UserSRCM | undefined> => {
+  try {
+    const res = await fetchUserDetails({ abhyasiId });
+    const obj = await res.json();
+    if (obj.detail === "Authentication credentials were not provided.") {
+      await fetchToken();
+      const tokenJSON =
+        localStorage.getItem("srcmToken") || '{"accessToken": ""}';
+      const { access_token } = JSON.parse(tokenJSON);
+      return getUserDetails({ abhyasiId, bearerToken: access_token });
+    } else {
+      console.log(obj.results[0]);
+      return obj.results[0];
+    }
+  } catch (e) {
+    console.error(e);
+  }
 };
 
-fetch("https://profile.srcm.net/o/token/", requestOptions)
-  .then((response) => response.text())
-  .then((result) => console.log(result))
-  .catch((error) => console.log("error", error));
+getUserDetails({ abhyasiId: "INAAAE478" })
+  .then((res) => {
+    console.log({ res });
+  })
+  .catch(console.error);
 
 export const chore = () => {
   return <div>Test API</div>;

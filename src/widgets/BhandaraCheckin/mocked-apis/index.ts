@@ -4,7 +4,11 @@ import {
   UserWithEmail,
   UserWithEmailAndMobile,
   UserWithMobile,
-} from "./types";
+} from "../types";
+import { fetchUserDetails } from "./fetchUserDetails";
+import { init } from "./init";
+
+init();
 
 const checkedInUsersData: (
   | UserWithEmail
@@ -29,19 +33,24 @@ export const mockedApis: BhandaraCheckinAPIs = {
         resolve(true);
       }, 600);
     }),
-
-  getUserDetails: () =>
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          email: "abc@def.com",
-          fullName: "Prakash Shah",
-          gender: "Male",
-          location: "Telangana, Hyderabad, India",
-          ageGroup: "30-35",
-        });
-      }, 600);
-    }),
+  getUserDetails: async () => {
+    const res = await fetchUserDetails({});
+    const json = await res.json();
+    const userDetails = JSON.parse(json);
+    return userDetails;
+  },
+  // getUserDetails: () =>
+  //   new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       resolve({
+  //         email: "abc@def.com",
+  //         fullName: "Prakash Shah",
+  //         gender: "Male",
+  //         location: "Telangana, Hyderabad, India",
+  //         ageGroup: "30-35",
+  //       });
+  //     }, 600);
+  //   }),
 
   isMobileOrEmailUserCheckedIn: ({ fullName, email, mobile }) =>
     new Promise((resolve) => {
