@@ -6,26 +6,26 @@ export enum CurrentSectionEnum {
   CHECKIN_SUCCESS,
 }
 
-export type BaseUser = {
-  abhyasiId?: string;
-  fullName: string;
-  ageGroup: string;
-  location: string;
-  gender: string;
-};
-
 export type UserSRCM = {
   id: number;
   name: string;
   ref: string;
   record_type: string;
-  city: null;
+  city: string;
   email: string;
   mobile: string;
   firebase_uid: null;
   gender: string;
   year_of_joining: string;
   age_group: string;
+};
+
+export type BaseUser = {
+  abhyasiId?: string;
+  fullName: string;
+  ageGroup: string;
+  location: string;
+  gender: string;
 };
 
 export type UserWithMobile = BaseUser & { mobile: string };

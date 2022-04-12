@@ -1,11 +1,11 @@
 import React from "react";
-import { fetchUserDetailsV1 } from "./widgets/BhandaraCheckin/mocked-apis/fetchUserDetails";
+import { fetchUserDetails } from "./widgets/BhandaraCheckin/mocked-apis/fetchUserDetails";
 
 export default {
   title: "API Story",
 };
 
-fetchUserDetailsV1("INAAAE478")
+fetchUserDetails("INAAAE478")
   .then((res) => {
     alert(res.name);
   })

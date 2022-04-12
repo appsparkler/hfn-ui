@@ -34,23 +34,17 @@ export const mockedApis: BhandaraCheckinAPIs = {
       }, 600);
     }),
   getUserDetails: async () => {
-    const res = await fetchUserDetails({});
-    const json = await res.json();
-    const userDetails = JSON.parse(json);
-    return userDetails;
+    const res = await fetchUserDetails("INAAAE478");
+    return {
+      abhyasiId: res.ref,
+      ageGroup: res.age_group,
+      email: res.email,
+      fullName: res.name,
+      gender: res.gender,
+      location: res.city,
+      mobile: res.mobile,
+    };
   },
-  // getUserDetails: () =>
-  //   new Promise((resolve) => {
-  //     setTimeout(() => {
-  //       resolve({
-  //         email: "abc@def.com",
-  //         fullName: "Prakash Shah",
-  //         gender: "Male",
-  //         location: "Telangana, Hyderabad, India",
-  //         ageGroup: "30-35",
-  //       });
-  //     }, 600);
-  //   }),
 
   isMobileOrEmailUserCheckedIn: ({ fullName, email, mobile }) =>
     new Promise((resolve) => {
