@@ -11,7 +11,7 @@ var requestOptions: RequestInit = {
   body: formdata,
 };
 
-export const fetchToken = () =>
+export const setupToken = () =>
   fetch("https://profile.srcm.net/o/token/", requestOptions)
     .then((response) => response.text())
     .then((result) => {

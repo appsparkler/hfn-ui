@@ -1,8 +1,7 @@
-import { getAccessToken } from "./init";
+import { UserSRCM } from "../types";
+import { fetchWithToken } from "./init";
 
-export const fetchUserDetails = ({ abhyasiId }: { abhyasiId?: string }) =>
-  fetch(`https://profile.srcm.net/api/abhyasis/search/?ref=${abhyasiId}`, {
-    headers: {
-      Authorization: `Bearer ${getAccessToken()}`,
-    },
-  });
+export const fetchUserDetailsV1 = (abhyasiId: string): Promise<UserSRCM> =>
+  fetchWithToken(
+    `https://profile.srcm.net/api/abhyasis/search/?ref=${abhyasiId}`
+  ).then((res) => res.results[0]);
