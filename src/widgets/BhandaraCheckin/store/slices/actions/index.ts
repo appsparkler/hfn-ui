@@ -12,7 +12,7 @@ import {
 } from "../../../types";
 import {
   getInitialState,
-  InitialState,
+  BhandaraCheckinState,
   ThunkApiConfig,
 } from "../bhandara-checkin";
 
@@ -41,7 +41,7 @@ export const getAbhyasiData = createAsyncThunk<
       return rejectWithValue({
         helperText: (error as Error).message,
         startCheckInError: true,
-      } as InitialState);
+      } as BhandaraCheckinState);
     }
   }
 );

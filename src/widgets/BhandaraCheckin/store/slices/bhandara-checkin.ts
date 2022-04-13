@@ -16,7 +16,7 @@ import {
 import { RootDispatch, RootState } from "..";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 
-export type InitialState = {
+export type BhandaraCheckinState = {
   currentSection: CurrentSectionEnum;
   startCheckInError: boolean;
   startCheckinIsProcessing: boolean;
@@ -27,7 +27,7 @@ export type InitialState = {
   updateDetailsProcessing: boolean;
 };
 
-export const getInitialState = (): InitialState => {
+export const getInitialState = (): BhandaraCheckinState => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
     //
@@ -69,7 +69,10 @@ export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getInitialState(),
   reducers: {
-    setState: (state, { payload }: { payload: Partial<InitialState> }) => {
+    setState: (
+      state,
+      { payload }: { payload: Partial<BhandaraCheckinState> }
+    ) => {
       return {
         ...state,
         ...payload,
@@ -123,7 +126,7 @@ export const bhandaraCheckinSlice = createSlice({
 });
 
 export type ThunkApiConfig = {
-  getState: () => InitialState;
+  getState: () => RootState;
   dispatch: RootDispatch;
   extra: {
     apis: BhandaraCheckinAPIs;
