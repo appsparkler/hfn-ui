@@ -12,23 +12,6 @@ import { getConfiguredUserDetails } from "./utils";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
 
-const getAbhyasiData = createAsyncThunk<
-  UserWithEmail | UserWithMobile | UserWithEmailAndMobile,
-  string,
-  ThunkApiConfig & { rejectWithValue: (errorMessage: string) => any }
->(
-  "bhandara-checkin/getAbhyasiData",
-  async (abhyasiId, { extra: { apis }, rejectWithValue }) => {
-    try {
-      const abhyasi = await apis.getAbhyasiData(abhyasiId);
-      return abhyasi;
-    } catch (error) {
-      const errorMessage = (error as Error).message;
-      return rejectWithValue(errorMessage as string);
-    }
-  }
-);
-
 export const checkinMobileOrEmailUser = createAsyncThunk<
   boolean,
   User,
@@ -73,6 +56,14 @@ const continueCheckinAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
       const abhyasiData = await apis.getAbhyasiData(abhyasiId);
       if (canCheckinDirectly(abhyasiData)) {
         dispatch(checkinUser(abhyasiData));
+      } else {
+        const configuredUserDetails = getConfiguredUserDetails(abhyasiData);
+        dispatch(
+          updateDetailsSectionSlice.actions.setState({
+            userDetails: configuredUserDetails,
+          })
+        );
+        dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
       }
     } catch (error) {
       dispatch(
