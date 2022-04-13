@@ -19,7 +19,7 @@ export const mainSectionSlice = createSlice({
       { payload }: { payload: Partial<SectionMainStateProps> }
     ) => ({
       ...state,
-      payload,
+      ...payload,
     }),
   },
 });
