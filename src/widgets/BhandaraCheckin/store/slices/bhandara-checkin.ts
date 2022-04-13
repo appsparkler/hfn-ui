@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  BhandaraCheckinAPIs,
-  User,
-  UserSRCM,
-  UserWithEmailAndMobile,
-} from "../../types";
-// import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
+import { BhandaraCheckinAPIs, User, UserWithEmailAndMobile } from "../../types";
+
 import {
   isAbhyasiId,
   isAbhyasiIdTemp,
@@ -136,6 +131,25 @@ export type ThunkApiConfig = {
 };
 
 // Thunk Utils
+const canDirectlyCheckin = ({
+  ageGroup,
+  fullName,
+  gender,
+  location,
+  ...user
+}: User): boolean => {
+  const { mobile } = user as UserWithMobile;
+  const { email } = user as UserWithEmail;
+  const hasEmailOrMobile = Boolean(mobile || email);
+  return (
+    Boolean(ageGroup) &&
+    Boolean(fullName) &&
+    Boolean(gender) &&
+    Boolean(location) &&
+    Boolean(hasEmailOrMobile)
+  );
+};
+
 const getRefinedUserDetails = (user: User): UserDetails => {
   const defaultUserDetails: UserDetails = getInitialState().userDetails;
   return {
