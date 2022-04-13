@@ -4,7 +4,7 @@ import { SectionMainStateProps } from "../../SectionMain";
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   return {
     value: "",
-    helperText: "",
+    helperText: "For mobile, please use country code.  For ex. +91868...",
     error: false,
     isProcessing: false,
   };
