@@ -2,12 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { canCheckinDirectly, isAbhyasiId as isAbhyasiIdUtil } from "./utils";
 import { RootState, ThunkApiConfig } from "../index";
 import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
-import {
-  User,
-  UserWithEmail,
-  UserWithEmailAndMobile,
-  UserWithMobile,
-} from "../../types";
+import { User } from "../../types";
 import { getConfiguredUserDetails } from "./utils";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
@@ -18,9 +13,7 @@ export const checkinMobileOrEmailUser = createAsyncThunk<
   ThunkApiConfig
 >("widget/checkin-user", async (user, { extra: { apis }, rejectWithValue }) => {
   try {
-    const checkinStatus = await apis.checkinMobileOrEmailUser(
-      user as UserWithEmailAndMobile
-    );
+    const checkinStatus = await apis.checkinMobileOrEmailUser(user);
     return checkinStatus;
   } catch (error) {
     return rejectWithValue((error as Error).message);
