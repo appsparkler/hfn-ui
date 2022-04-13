@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BhandaraCheckinAPIs, UserWithEmailAndMobile } from "../../types";
+import {
+  BhandaraCheckinAPIs,
+  User,
+  UserSRCM,
+  UserWithEmailAndMobile,
+} from "../../types";
 // import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
 import {
   isAbhyasiId,
@@ -95,7 +100,7 @@ export const bhandaraCheckinSlice = createSlice({
     setHelperText: (state, { payload }) => {
       state.helperText = payload;
     },
-    setUserDetails: (state, { payload }) => {
+    setUserDetails: (state, { payload }: { payload: UserDetails }) => {
       state.userDetails = payload;
     },
   },
@@ -131,56 +136,55 @@ export type ThunkApiConfig = {
 };
 
 // Thunk Utils
-// const getRefinedUserDetails = (user: User): UserDetails => {
-//   const defaultUserDetails: UserDetails = getInitialState().userDetails;
-//   return {
-//     ...getInitialState().userDetails,
-//     email: (user as UserWithEmail).email
-//       ? {
-//           isValid: true,
-//           show: false,
-//           value: String((user as UserWithEmail).email),
-//         }
-//       : defaultUserDetails.email,
-//     mobile: (user as UserWithMobile).mobile
-//       ? {
-//           isValid: true,
-//           show: false,
-//           value: String((user as UserWithMobile).mobile),
-//         }
-//       : defaultUserDetails.mobile,
-//     ageGroup: user.ageGroup
-//       ? {
-//           isValid: true,
-//           show: false,
-//           value: String(user.ageGroup),
-//         }
-//       : defaultUserDetails.ageGroup,
-//     fullName: user.fullName
-//       ? {
-//           isValid: true,
-//           show: false,
-//           value: String(user.fullName),
-//         }
-//       : defaultUserDetails.fullName,
-//     gender: user.gender
-//       ? {
-//           isValid: true,
-//           show: false,
-//           value: String(user.gender),
-//         }
-//       : defaultUserDetails.gender,
-//     location: user.location
-//       ? {
-//           isValid: true,
-//           show: false,
-//           value: String(
-//             user.location
-//           ) as unknown as RefinedCityStateCountryLocation,
-//         }
-//       : defaultUserDetails.location,
-//   };
-// };
+const getRefinedUserDetails = (user: User): UserDetails => {
+  const defaultUserDetails: UserDetails = getInitialState().userDetails;
+  return {
+    ...defaultUserDetails,
+    email: (user as UserWithEmail).email
+      ? {
+          isValid: true,
+          show: false,
+          value: String((user as UserWithEmail).email),
+        }
+      : defaultUserDetails.email,
+    mobile: (user as UserWithMobile).mobile
+      ? {
+          isValid: true,
+          show: false,
+          value: String((user as UserWithMobile).mobile),
+        }
+      : defaultUserDetails.mobile,
+    ageGroup: user.ageGroup
+      ? {
+          isValid: true,
+          show: false,
+          value: String(user.ageGroup),
+        }
+      : defaultUserDetails.ageGroup,
+    fullName: user.fullName
+      ? {
+          isValid: true,
+          show: true,
+          disabled: true,
+          value: String(user.fullName),
+        }
+      : defaultUserDetails.fullName,
+    gender: user.gender
+      ? {
+          isValid: true,
+          show: false,
+          value: String(user.gender),
+        }
+      : defaultUserDetails.gender,
+    location: user.location
+      ? {
+          isValid: true,
+          show: false,
+          value: String(user.location) as unknown as any,
+        }
+      : defaultUserDetails.location,
+  };
+};
 
 // const startCheckinAbhyasiV0 = async (
 //   apis: BhandaraCheckinAPIs,
@@ -230,6 +234,29 @@ const getUserForCheckin = (
 };
 
 // Async Thunks
+const validateAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
+  "bhandara-checkin/validateAbhyasi",
+  async (
+    abhyasiId: string,
+    {
+      dispatch,
+      extra: {
+        apis: { getAbhyasiData },
+      },
+    }
+  ) => {
+    const userDetails = await getAbhyasiData(abhyasiId);
+    const refinedUserDetails = getRefinedUserDetails(userDetails);
+    dispatch(
+      bhandaraCheckinSlice.actions.setUserDetails({
+        ...getInitialState().userDetails,
+        ...refinedUserDetails,
+      })
+    );
+    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+  }
+);
+
 export const startCheckinWithAbhyasiId = createAsyncThunk<
   void,
   undefined,
@@ -244,7 +271,7 @@ export const startCheckinWithAbhyasiId = createAsyncThunk<
         startCheckinIsProcessing: true,
       })
     );
-    const isAbhyasiCheckedIn = await apis.getIsUserCheckedIn(
+    const isAbhyasiCheckedIn = await apis.isAbhyasiCheckedIn(
       registeringWithValue
     );
     if (isAbhyasiCheckedIn) {
@@ -255,6 +282,8 @@ export const startCheckinWithAbhyasiId = createAsyncThunk<
           startCheckinIsProcessing: false,
         })
       );
+    } else {
+      dispatch(validateAbhyasi(registeringWithValue));
     }
   }
 );

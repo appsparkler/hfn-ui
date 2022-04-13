@@ -19,7 +19,7 @@ const checkedInUsersData: (
 )[] = [];
 
 export const mockedApis: BhandaraCheckinAPIs = {
-  getIsUserCheckedIn: ($id: string) =>
+  isAbhyasiCheckedIn: ($id: string) =>
     new Promise((resolve) => {
       setTimeout(() => {
         const isCheckedIn = some<string>((id) => $id === id)(checkedInAbhyasis);
@@ -28,7 +28,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
       }, 600);
     }),
 
-  getUserDetails: async () => {
+  getAbhyasiData: async () => {
     const res = await fetchUserDetails("INAAAE478");
     return {
       abhyasiId: res.ref,
