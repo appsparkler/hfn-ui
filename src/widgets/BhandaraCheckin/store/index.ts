@@ -34,3 +34,4 @@ export type ThunkApiConfig = {
 };
 
 export * from "./slices";
+export * from "./actions";
