@@ -251,23 +251,28 @@ const getUserForCheckin = (
 const validateAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
   "bhandara-checkin/validateAbhyasi",
   async (
-    abhyasiId: string,
+    abhyasiId,
     {
       dispatch,
+      rejectWithValue,
       extra: {
         apis: { getAbhyasiData },
       },
     }
   ) => {
-    const userDetails = await getAbhyasiData(abhyasiId);
-    const refinedUserDetails = getRefinedUserDetails(userDetails);
-    dispatch(
-      bhandaraCheckinSlice.actions.setUserDetails({
-        ...getInitialState().userDetails,
-        ...refinedUserDetails,
-      })
-    );
-    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    try {
+      const userDetails = await getAbhyasiData(abhyasiId);
+      const refinedUserDetails = getRefinedUserDetails(userDetails);
+      dispatch(
+        bhandaraCheckinSlice.actions.setUserDetails({
+          ...getInitialState().userDetails,
+          ...refinedUserDetails,
+        })
+      );
+      dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    } catch (e) {
+      return rejectWithValue((e as Error).message);
+    }
   }
 );
 
@@ -297,7 +302,19 @@ export const startCheckinWithAbhyasiId = createAsyncThunk<
         })
       );
     } else {
-      dispatch(validateAbhyasi(registeringWithValue));
+      const res = await dispatch(validateAbhyasi(registeringWithValue));
+      if (
+        typeof res.payload === "string" &&
+        res.payload.includes("not found")
+      ) {
+        dispatch(
+          bhandaraCheckinSlice.actions.setState({
+            startCheckInError: true,
+            startCheckinIsProcessing: false,
+            helperText: res.payload,
+          })
+        );
+      }
     }
   }
 );

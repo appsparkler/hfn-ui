@@ -5,13 +5,13 @@ export default {
   title: "API Story",
 };
 
-export const Template = () => {
+const Template = () => {
   const onClickCallApi = useCallback(() => {
-    fetchUserDetails("INAAAE478")
+    fetchUserDetails("jifej2323")
       .then((res) => {
         alert(res.name);
       })
-      .catch(console.error);
+      .catch((e) => console.error("oops", e));
   }, []);
   return (
     <div>

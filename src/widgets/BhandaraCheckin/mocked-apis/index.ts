@@ -28,17 +28,21 @@ export const mockedApis: BhandaraCheckinAPIs = {
       }, 600);
     }),
 
-  getAbhyasiData: async () => {
-    const res = await fetchUserDetails("INAAAE478");
-    return {
-      abhyasiId: res.ref,
-      ageGroup: res.age_group,
-      email: res.email,
-      fullName: res.name,
-      gender: res.gender,
-      location: res.city,
-      mobile: res.mobile,
-    };
+  getAbhyasiData: async (abhyasiId: string) => {
+    try {
+      const res = await fetchUserDetails(abhyasiId);
+      return {
+        abhyasiId: res.ref,
+        ageGroup: res.age_group,
+        email: res.email,
+        fullName: res.name,
+        gender: res.gender,
+        location: res.city,
+        mobile: res.mobile,
+      };
+    } catch (error) {
+      throw new Error(`Abhyas with ID ${abhyasiId} not found.`);
+    }
   },
 
   isMobileOrEmailUserCheckedIn: ({ fullName, email, mobile }) =>
