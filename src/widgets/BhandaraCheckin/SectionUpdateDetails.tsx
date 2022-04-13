@@ -55,7 +55,10 @@ export const SectionUpdateDetails = ({
     if (!hasEmail && hasMobile && !showMobile) return true;
     if (!hasMobile && hasEmail && !showEmail) return true;
     if (hasEmail && hasMobile && !showEmail && !showMobile) return true;
-
+    if (hasEmail && hasMobile && !showEmail && showMobile && hasValidMobile)
+      return true;
+    if (hasEmail && hasMobile && !showMobile && showEmail && hasValidEmail)
+      return true;
     // validation for shown fields
     if (!hasEmail && hasMobile && hasValidMobile) return true;
     if (!hasMobile && hasValidEmail && hasEmail) return true;
@@ -138,49 +141,49 @@ export const SectionUpdateDetails = ({
     <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       <Typography variant="h4">Update Details</Typography>
       <Vertical gap={3} width={"100%"}>
-        {userDetails.fullName.show ? (
-          <TextField
-            label="Full Name"
-            required
-            name="fullName"
-            type="text"
-            variant="outlined"
-            fullWidth
-            onChange={handleChange}
-            value={fullName.value}
-            disabled={fullName.disabled}
-          />
+        <TextField
+          label="Full Name"
+          required
+          name="fullName"
+          type="text"
+          variant="outlined"
+          fullWidth
+          onChange={handleChange}
+          value={fullName.value}
+          disabled={fullName.disabled}
+        />
+        {userDetails.gender.show || userDetails.ageGroup.show ? (
+          <Horizontal gap={3}>
+            {userDetails.ageGroup.show ? (
+              <SelectField
+                autoWidth
+                label="Age Group"
+                labelId="age-group"
+                name="ageGroup"
+                onChange={handleChangeSelectField}
+                options={ageGroupOptions}
+                required
+                value={ageGroup.value}
+              />
+            ) : null}
+            {userDetails.gender.show ? (
+              <SelectField
+                autoWidth
+                label="Gender"
+                labelId="gender"
+                name="gender"
+                onChange={handleChangeSelectField}
+                options={[
+                  { label: "Female", value: "female" },
+                  { label: "Male", value: "male" },
+                  { label: "Unspecified", value: "unspecified" },
+                ]}
+                required
+                value={gender.value}
+              />
+            ) : null}
+          </Horizontal>
         ) : null}
-        <Horizontal gap={3}>
-          {userDetails.ageGroup.show ? (
-            <SelectField
-              autoWidth
-              label="Age Group"
-              labelId="age-group"
-              name="ageGroup"
-              onChange={handleChangeSelectField}
-              options={ageGroupOptions}
-              required
-              value={ageGroup.value}
-            />
-          ) : null}
-          {userDetails.gender.show ? (
-            <SelectField
-              autoWidth
-              label="Gender"
-              labelId="gender"
-              name="gender"
-              onChange={handleChangeSelectField}
-              options={[
-                { label: "Female", value: "female" },
-                { label: "Male", value: "male" },
-                { label: "Unspecified", value: "unspecified" },
-              ]}
-              required
-              value={gender.value}
-            />
-          ) : null}
-        </Horizontal>
         {userDetails.location.show ? (
           <LocationTextField
             onChange={handleChangeLocation}
