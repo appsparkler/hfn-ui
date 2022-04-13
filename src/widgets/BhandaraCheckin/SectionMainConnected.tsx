@@ -16,7 +16,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   dispatch
 ) => {
   return {
-    onChange: (value) => dispatch(mainSectionSlice.actions.setState({ value })),
+    onChange: (value) => dispatch(mainSectionSlice.actions.setValue(value)),
     onClickStart: (userId) => {
       dispatch(startCheckin() as unknown as Action<any>);
       // dispatch(startCheckIn() as unknown as Action<any>);
