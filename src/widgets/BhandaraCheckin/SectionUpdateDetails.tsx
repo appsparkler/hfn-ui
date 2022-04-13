@@ -136,7 +136,6 @@ export const SectionUpdateDetails = ({
 
   return (
     <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
-      <pre>{String(areEmailAndMobileValid)}</pre>
       <Typography variant="h4">Update Details</Typography>
       <Vertical gap={3} width={"100%"}>
         {userDetails.fullName.show ? (
