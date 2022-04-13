@@ -1,17 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId as isAbhyasiIdUtil } from "./utils";
-import { RootState } from "../../index";
+import { RootState } from "../index";
 import {
   bhandaraCheckinSlice,
   getInitialState,
   ThunkApiConfig,
-} from "../bhandara-checkin";
+} from "../slices/bhandara-checkin";
 import {
   CurrentSectionEnum,
   UserWithEmail,
   UserWithEmailAndMobile,
   UserWithMobile,
-} from "../../../types";
+} from "../../types";
 import { getConfiguredUserDetails } from "./utils";
 
 const getAbhyasiData = createAsyncThunk<

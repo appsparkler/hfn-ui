@@ -2,19 +2,19 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   isAbhyasiId as isAbhyasiIdUtil,
   isAbhyasiIdTemp,
-} from "../../../../../utils";
+} from "../../../../utils";
 import {
   User,
   UserDetails,
   UserWithEmail,
   UserWithEmailAndMobile,
   UserWithMobile,
-} from "../../../types";
+} from "../../types";
 import {
   getInitialState,
   BhandaraCheckinState,
   ThunkApiConfig,
-} from "../bhandara-checkin";
+} from "../slices/bhandara-checkin";
 
 export const isAbhyasiID = createAction(
   "bhandara-checkin/is-abhyasi-id",

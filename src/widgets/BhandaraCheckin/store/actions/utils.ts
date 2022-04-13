@@ -1,14 +1,9 @@
 import {
   isAbhyasiId as matchesAbhyasiId,
   isAbhyasiIdTemp,
-} from "../../../../../utils";
-import {
-  User,
-  UserDetails,
-  UserWithEmail,
-  UserWithMobile,
-} from "../../../types";
-import { getInitialState } from "../bhandara-checkin";
+} from "../../../../utils";
+import { User, UserDetails, UserWithEmail, UserWithMobile } from "../../types";
+import { getInitialState } from "../slices/bhandara-checkin";
 
 export const isAbhyasiId = (value: string) =>
   matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
