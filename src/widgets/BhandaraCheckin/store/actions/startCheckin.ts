@@ -1,18 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId as isAbhyasiIdUtil } from "./utils";
-import { RootState } from "../index";
+import { RootState, ThunkApiConfig } from "../index";
+import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
 import {
-  bhandaraCheckinSlice,
-  getInitialState,
-  ThunkApiConfig,
-} from "../slices/bhandara-checkin";
-import {
-  CurrentSectionEnum,
   UserWithEmail,
   UserWithEmailAndMobile,
   UserWithMobile,
 } from "../../types";
 import { getConfiguredUserDetails } from "./utils";
+import { mainSectionSlice } from "../slices/mainSectionSlice";
+import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
 
 const getAbhyasiData = createAsyncThunk<
   UserWithEmail | UserWithMobile | UserWithEmailAndMobile,
@@ -34,10 +31,10 @@ const getAbhyasiData = createAsyncThunk<
 export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
   async (_, { extra: { apis }, dispatch, getState }) => {
-    const { bhandaraCheckin } = getState() as RootState;
-    const { value } = bhandaraCheckin.mainSection;
+    const { mainSection } = getState() as RootState;
+    const { value } = mainSection;
     dispatch(
-      bhandaraCheckinSlice.actions.setState({
+      mainSectionSlice.actions.setState({
         isProcessing: true,
       })
     );
@@ -46,21 +43,25 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
       const res = await dispatch(getAbhyasiData(value));
       if (res.meta.requestStatus === "rejected") {
         dispatch(
-          bhandaraCheckinSlice.actions.setMainSectionState({
+          mainSectionSlice.actions.setState({
             helperText: res.payload as string,
             error: true,
             isProcessing: false,
           })
         );
       } else {
-        const { helperText, startCheckinIsProcessing, startCheckInError } =
-          getInitialState();
+        // const { helperText, startCheckinIsProcessing, startCheckInError } =
+        //   getInitialState();
         dispatch(
-          bhandaraCheckinSlice.actions.setState({
-            currentSection: CurrentSectionEnum.UPDATE_DETAILS,
-            helperText,
-            startCheckinIsProcessing,
-            startCheckInError,
+          mainSectionSlice.actions.setState({
+            // currentSection: CurrentSectionEnum.UPDATE_DETAILS,
+            helperText: "",
+            isProcessing: false,
+            error: false,
+          })
+        );
+        dispatch(
+          updateDetailsSectionSlice.actions.setState({
             userDetails: getConfiguredUserDetails(
               res.payload as
                 | UserWithEmail
@@ -69,6 +70,7 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
             ),
           })
         );
+        dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
       }
     } else {
     }

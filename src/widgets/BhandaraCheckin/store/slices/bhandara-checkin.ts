@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BhandaraCheckinAPIs, User, UserWithEmailAndMobile } from "../../types";
+import { User, UserWithEmailAndMobile } from "../../types";
 
 import {
   isAbhyasiId,
@@ -13,209 +13,204 @@ import {
   UserWithEmail,
   UserWithMobile,
 } from "../../types";
-import { RootDispatch, RootState } from "..";
+import { RootState, ThunkApiConfig } from "..";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
-import { SectionMainStateProps } from "../../SectionMain";
-import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails";
-import { SectionCheckinSuccessProps } from "../../SectionCheckInSuccess";
 import { mainSectionSlice } from "./mainSectionSlice";
+import { BhandaraCheckinViewStateProps } from "../../BhandaraCheckinView";
+import {
+  getUpdateDetailsSectionInitialState,
+  updateDetailsSectionSlice,
+} from "./updateDetailsSectionSlice";
 
-export type BhandaraCheckinState = {
-  currentSection: CurrentSectionEnum;
-  mainSection: SectionMainStateProps;
-  updateDetailsSection: SectionUpdateDetailsStateProps;
-  startCheckInError: boolean;
-  startCheckinIsProcessing: boolean;
-  registeringWithValue: string;
-  isProcessing: boolean;
-  helperText: string;
-  userDetails: UserDetails;
-  updateDetailsProcessing: boolean;
-};
+// export type BhandaraCheckinState = {
+//   currentSection: CurrentSectionEnum;
+//   mainSection: SectionMainStateProps;
+//   updateDetailsSection: SectionUpdateDetailsStateProps;
+//   startCheckInError: boolean;
+//   startCheckinIsProcessing: boolean;
+//   registeringWithValue: string;
+//   isProcessing: boolean;
+//   helperText: string;
+//   userDetails: UserDetails;
+//   updateDetailsProcessing: boolean;
+// };
 
-export const getInitialState = (): BhandaraCheckinState => {
-  return {
-    currentSection: CurrentSectionEnum.MAIN,
-    mainSection: {
-      value: "",
-      error: false,
-      helperText:
-        "For mobile, please include country code.  For ex. + 913223...",
-      isProcessing: false,
-    },
-    updateDetailsSection: {
-      userDetails: {
-        fullName: {
-          show: true,
-          value: "",
-        },
-        mobile: {
-          show: true,
-          value: "",
-        },
-        email: {
-          show: true,
-          value: "",
-        },
-        location: {
-          show: true,
-        },
-        ageGroup: {
-          show: true,
-          value: "",
-        },
-        gender: {
-          show: true,
-          value: "",
-        },
-      },
-    },
-    //
-    startCheckInError: false,
-    startCheckinIsProcessing: false,
-    registeringWithValue: "",
-    isProcessing: false,
-    helperText: "For mobile, please include country code.  For ex. + 913223...",
-    userDetails: {
-      fullName: {
-        show: true,
-        value: "",
-      },
-      mobile: {
-        show: true,
-        value: "",
-      },
-      email: {
-        show: true,
-        value: "",
-      },
-      location: {
-        show: true,
-      },
-      ageGroup: {
-        show: true,
-        value: "",
-      },
-      gender: {
-        show: true,
-        value: "",
-      },
-    },
-    updateDetailsProcessing: false,
+export const getBhandaraCheckinInitialState =
+  (): BhandaraCheckinViewStateProps => {
+    return {
+      currentSection: CurrentSectionEnum.MAIN,
+      // mainSection: {
+      //   value: "",
+      //   error: false,
+      //   helperText:
+      //     "For mobile, please include country code.  For ex. + 913223...",
+      //   isProcessing: false,
+      // },
+      // updateDetailsSection: {
+      //   userDetails: {
+      //     fullName: {
+      //       show: true,
+      //       value: "",
+      //     },
+      //     mobile: {
+      //       show: true,
+      //       value: "",
+      //     },
+      //     email: {
+      //       show: true,
+      //       value: "",
+      //     },
+      //     location: {
+      //       show: true,
+      //     },
+      //     ageGroup: {
+      //       show: true,
+      //       value: "",
+      //     },
+      //     gender: {
+      //       show: true,
+      //       value: "",
+      //     },
+      //   },
+      // },
+      // //
+      // startCheckInError: false,
+      // startCheckinIsProcessing: false,
+      // registeringWithValue: "",
+      // isProcessing: false,
+      // helperText: "For mobile, please include country code.  For ex. + 913223...",
+      // userDetails: {
+      //   fullName: {
+      //     show: true,
+      //     value: "",
+      //   },
+      //   mobile: {
+      //     show: true,
+      //     value: "",
+      //   },
+      //   email: {
+      //     show: true,
+      //     value: "",
+      //   },
+      //   location: {
+      //     show: true,
+      //   },
+      //   ageGroup: {
+      //     show: true,
+      //     value: "",
+      //   },
+      //   gender: {
+      //     show: true,
+      //     value: "",
+      //   },
+      // },
+      // updateDetailsProcessing: false,
+    };
   };
-};
 
 export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
-  initialState: getInitialState(),
+  initialState: getBhandaraCheckinInitialState(),
   reducers: {
-    setMainSectionState: (
-      state,
-      { payload }: { payload: Partial<SectionMainStateProps> }
-    ) => ({
-      ...state,
-      mainSection: {
-        ...state.mainSection,
-        ...payload,
-      },
-    }),
-    setUpdateSectionState: (
-      state,
-      { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
-    ) => ({
-      ...state,
-      updateDetailsSection: {
-        ...state.updateDetailsSection,
-        ...payload,
-      },
-    }),
-    setState: (
-      state,
-      { payload }: { payload: Partial<BhandaraCheckinState> }
-    ) => {
-      return {
-        ...state,
-        ...payload,
-      };
-    },
-
-    setUpdateDetailsProcessing: (state, { payload }: { payload: boolean }) => {
-      state.updateDetailsProcessing = payload;
+    goToMain: (state) => {
+      state.currentSection = CurrentSectionEnum.MAIN;
     },
     goToUpdateDetails: (state) => {
       state.currentSection = CurrentSectionEnum.UPDATE_DETAILS;
     },
-    goToMain: (state) => {
-      state.currentSection = CurrentSectionEnum.MAIN;
-    },
     goToCheckinSuccess: (state) => {
       state.currentSection = CurrentSectionEnum.CHECKIN_SUCCESS;
     },
-    changeRegisteringWithValue: (state, { payload }) => {
-      state.startCheckInError = false;
-      state.helperText = getInitialState().helperText;
-      state.registeringWithValue = payload;
-    },
-    setHelperText: (state, { payload }) => {
-      state.helperText = payload;
-    },
-    setUserDetails: (state, { payload }: { payload: UserDetails }) => {
-      state.userDetails = payload;
-    },
+    // setMainSectionState: (
+    //   state,
+    //   { payload }: { payload: Partial<SectionMainStateProps> }
+    // ) => ({
+    //   ...state,
+    //   mainSection: {
+    //     ...state.mainSection,
+    //     ...payload,
+    //   },
+    // }),
+    // setUpdateSectionState: (
+    //   state,
+    //   { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
+    // ) => ({
+    //   ...state,
+    //   updateDetailsSection: {
+    //     ...state.updateDetailsSection,
+    //     ...payload,
+    //   },
+    // }),
+    // setState: (
+    //   state,
+    //   { payload }: { payload: Partial<BhandaraCheckinState> }
+    // ) => {
+    //   return {
+    //     ...state,
+    //     ...payload,
+    //   };
+    // },
+
+    // setUpdateDetailsProcessing: (state, { payload }: { payload: boolean }) => {
+    //   state.updateDetailsProcessing = payload;
+    // },
+    // goToUpdateDetails: (state) => {
+    //   state.currentSection = CurrentSectionEnum.UPDATE_DETAILS;
+    // },
+    // goToMain: (state) => {
+    //   state.currentSection = CurrentSectionEnum.MAIN;
+    // },
+    // goToCheckinSuccess: (state) => {
+    //   state.currentSection = CurrentSectionEnum.CHECKIN_SUCCESS;
+    // },
+    // changeRegisteringWithValue: (state, { payload }) => {
+    //   state.startCheckInError = false;
+    //   state.helperText = getInitialState().helperText;
+    //   state.registeringWithValue = payload;
+    // },
+    // setHelperText: (state, { payload }) => {
+    //   state.helperText = payload;
+    // },
+    // setUserDetails: (state, { payload }: { payload: UserDetails }) => {
+    //   state.userDetails = payload;
+    // },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(startCheckIn.pending, (state) => {
-        state.isProcessing = true;
-      })
-      .addCase(startCheckIn.fulfilled, (state, action) => {
-        state.isProcessing = false;
-      })
-      .addCase(checkinUser.pending, (state) => {
-        state.updateDetailsProcessing = true;
-      })
-      .addCase(checkinUser.fulfilled, (state) => {
-        state.updateDetailsProcessing = false;
-      })
-      .addMatcher(
-        ({ type }: { type: string }) => Boolean(type.match("goToMain")),
-        (state, action) => {
-          return getInitialState();
-        }
-      );
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(startCheckIn.pending, (state) => {
+  //       state.isProcessing = true;
+  //     })
+  //     .addCase(startCheckIn.fulfilled, (state, action) => {
+  //       state.isProcessing = false;
+  //     })
+  //     .addCase(checkinUser.pending, (state) => {
+  //       state.updateDetailsProcessing = true;
+  //     })
+  //     .addCase(checkinUser.fulfilled, (state) => {
+  //       state.updateDetailsProcessing = false;
+  //     })
+  //     .addMatcher(
+  //       ({ type }: { type: string }) => Boolean(type.match("goToMain")),
+  //       (state, action) => {
+  //         return getInitialState();
+  //       }
+  //     );
+  // },
 });
 
-export type ThunkApiConfig = {
-  getState: () => RootState;
-  dispatch: RootDispatch;
-  extra: {
-    apis: BhandaraCheckinAPIs;
-  };
-};
+// export type ThunkApiConfig = {
+//   getState: () => RootState;
+//   dispatch: RootDispatch;
+//   extra: {
+//     apis: BhandaraCheckinAPIs;
+//   };
+// };
 
 // Thunk Utils
-const canDirectlyCheckin = ({
-  ageGroup,
-  fullName,
-  gender,
-  location,
-  ...user
-}: User): boolean => {
-  const { mobile } = user as UserWithMobile;
-  const { email } = user as UserWithEmail;
-  const hasEmailOrMobile = Boolean(mobile || email);
-  return (
-    Boolean(ageGroup) &&
-    Boolean(fullName) &&
-    Boolean(gender) &&
-    Boolean(location) &&
-    Boolean(hasEmailOrMobile)
-  );
-};
 
 const getRefinedUserDetails = (user: User): UserDetails => {
-  const defaultUserDetails: UserDetails = getInitialState().userDetails;
+  const defaultUserDetails: UserDetails =
+    getUpdateDetailsSectionInitialState().userDetails;
   return {
     ...defaultUserDetails,
     email: (user as UserWithEmail).email
@@ -285,7 +280,7 @@ const getRefinedUserDetails = (user: User): UserDetails => {
 // };
 
 const getUserDetailsWithEmailOrMobile = (userInfo: string): UserDetails => {
-  const userDetails = getInitialState().userDetails;
+  const userDetails = getUpdateDetailsSectionInitialState().userDetails;
   const loginWith: keyof UserDetails = isMobile(userInfo) ? "mobile" : "email";
   return {
     ...userDetails,
@@ -328,9 +323,11 @@ const validateAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
       const userDetails = await getAbhyasiData(abhyasiId);
       const refinedUserDetails = getRefinedUserDetails(userDetails);
       dispatch(
-        bhandaraCheckinSlice.actions.setUserDetails({
-          ...getInitialState().userDetails,
-          ...refinedUserDetails,
+        updateDetailsSectionSlice.actions.setState({
+          userDetails: {
+            ...getUpdateDetailsSectionInitialState().userDetails,
+            ...refinedUserDetails,
+          },
         })
       );
       dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
@@ -348,33 +345,31 @@ export const startCheckinWithAbhyasiId = createAsyncThunk<
   "bhandara-checkin/startCheckinWithAbhyasiId",
   async (_, { dispatch, getState, extra: { apis } }) => {
     const state = getState() as RootState;
-    const { registeringWithValue } = state.bhandaraCheckin;
+    const { value } = state.mainSection;
     dispatch(
-      bhandaraCheckinSlice.actions.setState({
-        startCheckinIsProcessing: true,
+      mainSectionSlice.actions.setState({
+        isProcessing: true,
       })
     );
-    const isAbhyasiCheckedIn = await apis.isAbhyasiCheckedIn(
-      registeringWithValue
-    );
+    const isAbhyasiCheckedIn = await apis.isAbhyasiCheckedIn(value);
     if (isAbhyasiCheckedIn) {
       dispatch(
-        bhandaraCheckinSlice.actions.setState({
-          helperText: `Abhyasi with ID ${registeringWithValue} is already checked in.`,
-          startCheckInError: true,
-          startCheckinIsProcessing: false,
+        mainSectionSlice.actions.setState({
+          helperText: `Abhyasi with ID ${value} is already checked in.`,
+          error: true,
+          isProcessing: false,
         })
       );
     } else {
-      const res = await dispatch(validateAbhyasi(registeringWithValue));
+      const res = await dispatch(validateAbhyasi(value));
       if (
         typeof res.payload === "string" &&
         res.payload.includes("not found")
       ) {
         dispatch(
-          bhandaraCheckinSlice.actions.setState({
-            startCheckInError: true,
-            startCheckinIsProcessing: false,
+          mainSectionSlice.actions.setState({
+            error: true,
+            isProcessing: false,
             helperText: res.payload,
           })
         );
@@ -387,17 +382,14 @@ export const startCheckIn = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/startCheckIn",
   async (_, { dispatch, getState, extra: { apis } }) => {
     const state = getState() as RootState;
-    const { registeringWithValue } = state.bhandaraCheckin;
-    if (
-      isAbhyasiId(registeringWithValue) ||
-      isAbhyasiIdTemp(registeringWithValue)
-    )
+    const { value } = state.mainSection;
+    if (isAbhyasiId(value) || isAbhyasiIdTemp(value))
       dispatch(startCheckinWithAbhyasiId());
     else {
       dispatch(
-        bhandaraCheckinSlice.actions.setUserDetails(
-          getUserDetailsWithEmailOrMobile(registeringWithValue)
-        )
+        updateDetailsSectionSlice.actions.setState({
+          userDetails: getUserDetailsWithEmailOrMobile(value),
+        })
       );
       dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
     }
@@ -408,10 +400,10 @@ export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/checkinUser",
   async (_, { dispatch, getState, extra: { apis } }) => {
     const state = getState() as RootState;
-    const { registeringWithValue, userDetails } = state.bhandaraCheckin;
-    const isRegisteringWithEmail = isEmail(registeringWithValue);
-    const isEmailOrMobileUser =
-      isRegisteringWithEmail || isMobile(registeringWithValue);
+    const { value } = state.mainSection;
+    const { userDetails } = state.updateDetailsSection;
+    const isRegisteringWithEmail = isEmail(value);
+    const isEmailOrMobileUser = isRegisteringWithEmail || isMobile(value);
     if (isEmailOrMobileUser) {
       const isCheckedIn = await apis.isMobileOrEmailUserCheckedIn({
         fullName: userDetails.fullName.value as string,

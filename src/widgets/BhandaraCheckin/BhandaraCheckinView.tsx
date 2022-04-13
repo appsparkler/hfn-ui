@@ -1,24 +1,33 @@
 import { SectionMainConnected } from "./SectionMainConnected";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
-import { BhandaraCheckinAPIs } from "./types";
+import { BhandaraCheckinAPIs, CurrentSectionEnum } from "./types";
 import { SnackbarConnected } from "./SnackbarConnected";
+import { useMemo } from "react";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
 };
 
 export type BhandaraCheckinViewStateProps = {
-  showMain: boolean;
-  showUpdateDetails: boolean;
-  showCheckinSuccess: boolean;
+  currentSection: CurrentSectionEnum;
 };
 
 export const BhandaraCheckinView = ({
-  showMain,
-  showUpdateDetails,
-  showCheckinSuccess,
+  currentSection,
 }: BhandaraCheckinViewStateProps) => {
+  const { showMain, showUpdateDetails, showCheckinSuccess } = useMemo<{
+    showMain: boolean;
+    showUpdateDetails: boolean;
+    showCheckinSuccess: boolean;
+  }>(
+    () => ({
+      showMain: currentSection === CurrentSectionEnum.MAIN,
+      showUpdateDetails: currentSection === CurrentSectionEnum.UPDATE_DETAILS,
+      showCheckinSuccess: currentSection === CurrentSectionEnum.CHECKIN_SUCCESS,
+    }),
+    [currentSection]
+  );
   return (
     <>
       {showMain ? <SectionMainConnected /> : null}

@@ -1,4 +1,5 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { getUpdateDetailsSectionInitialState } from "../slices";
 import {
   isAbhyasiId as isAbhyasiIdUtil,
   isAbhyasiIdTemp,
@@ -10,11 +11,7 @@ import {
   UserWithEmailAndMobile,
   UserWithMobile,
 } from "../../types";
-import {
-  getInitialState,
-  BhandaraCheckinState,
-  ThunkApiConfig,
-} from "../slices/bhandara-checkin";
+import { ThunkApiConfig } from "..";
 
 export const isAbhyasiID = createAction(
   "bhandara-checkin/is-abhyasi-id",
@@ -27,24 +24,24 @@ export const isAbhyasiID = createAction(
   }
 );
 
-export const getAbhyasiData = createAsyncThunk<
-  UserWithEmail | UserWithMobile | UserWithEmailAndMobile,
-  string,
-  ThunkApiConfig
->(
-  "bhandara-checkin/getAbhyasiData",
-  async (abhyasiId, { dispatch, rejectWithValue, extra: { apis } }) => {
-    try {
-      const abhyasiData = apis.getAbhyasiData(abhyasiId);
-      return abhyasiData;
-    } catch (error) {
-      return rejectWithValue({
-        helperText: (error as Error).message,
-        startCheckInError: true,
-      } as BhandaraCheckinState);
-    }
-  }
-);
+// export const getAbhyasiData = createAsyncThunk<
+//   UserWithEmail | UserWithMobile | UserWithEmailAndMobile,
+//   string,
+//   ThunkApiConfig
+// >(
+//   "bhandara-checkin/getAbhyasiData",
+//   async (abhyasiId, { dispatch, rejectWithValue, extra: { apis } }) => {
+//     try {
+//       const abhyasiData = apis.getAbhyasiData(abhyasiId);
+//       return abhyasiData;
+//     } catch (error) {
+//       return rejectWithValue({
+//         helperText: (error as Error).message,
+//         startCheckInError: true,
+//       } as BhandaraCheckinState);
+//     }
+//   }
+// );
 
 export const areAllDetailsAvailable = createAction(
   "bhandara-checkin/areAllDetailsAvailable",
@@ -75,7 +72,8 @@ export const checkinAbhyasi = createAsyncThunk<
 export const getConfiguredUserDetails = createAction(
   "bhandara-checkin/showMissingLinks",
   (user: UserWithEmail | UserWithMobile | UserWithEmailAndMobile) => {
-    const defaultUserDetails: UserDetails = getInitialState().userDetails;
+    const defaultUserDetails: UserDetails =
+      getUpdateDetailsSectionInitialState().userDetails;
 
     return {
       payload: {

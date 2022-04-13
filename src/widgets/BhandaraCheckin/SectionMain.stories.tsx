@@ -14,6 +14,5 @@ main.args = {
   error: false,
   value: "INEEIW837",
   helperText: "",
-  show: true,
   isProcessing: false,
 };

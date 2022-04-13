@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SectionMainStateProps } from "../../SectionMain";
 
-const getInitialState = (): SectionMainStateProps => {
+export const getMainSectionInitialState = (): SectionMainStateProps => {
   return {
     value: "",
     helperText: "",
@@ -12,7 +12,7 @@ const getInitialState = (): SectionMainStateProps => {
 
 export const mainSectionSlice = createSlice({
   name: "mainSectionSlice",
-  initialState: getInitialState(),
+  initialState: getMainSectionInitialState(),
   reducers: {
     setState: (
       state,

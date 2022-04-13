@@ -5,17 +5,12 @@ import {
   SectionCheckinStateProps,
   SectionCheckinDispatchProps,
 } from "./SectionCheckInSuccess";
-import { CurrentSectionEnum } from "./types";
 
 const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,
   {},
   RootState
-> = ({ bhandaraCheckin }) => {
-  return {
-    show: bhandaraCheckin.currentSection === CurrentSectionEnum.UPDATE_DETAILS,
-  };
-};
+> = () => ({});
 
 const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
   (dispatch) => {

@@ -3,13 +3,14 @@ import {
   isAbhyasiIdTemp,
 } from "../../../../utils";
 import { User, UserDetails, UserWithEmail, UserWithMobile } from "../../types";
-import { getInitialState } from "../slices/bhandara-checkin";
+import { getUpdateDetailsSectionInitialState } from "../slices";
 
 export const isAbhyasiId = (value: string) =>
   matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
 
 export const getConfiguredUserDetails = (user: User): UserDetails => {
-  const defaultUserDetails: UserDetails = getInitialState().userDetails;
+  const defaultUserDetails: UserDetails =
+    getUpdateDetailsSectionInitialState().userDetails;
   return {
     ...defaultUserDetails,
     email: (user as UserWithEmail).email

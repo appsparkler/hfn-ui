@@ -1,37 +1,22 @@
 import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState, bhandaraCheckinSlice, startCheckIn } from "./store";
+import { RootState } from "./store";
 import { startCheckin } from "./store/actions/startCheckin";
 import {
   SectionMain,
   SectionMainDispatchProps,
   SectionMainStateProps,
 } from "./SectionMain";
+import { mainSectionSlice } from "./store/slices/mainSectionSlice";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
-  ({
-    bhandaraCheckin: {
-      registeringWithValue,
-      currentSection,
-      helperText,
-      startCheckInError,
-      startCheckinIsProcessing,
-    },
-  }) => {
-    return {
-      error: startCheckInError,
-      helperText,
-      value: registeringWithValue,
-      isProcessing: startCheckinIsProcessing,
-    };
-  };
+  ({ mainSection }) => mainSection;
 
 const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   dispatch
 ) => {
   return {
-    onChange: (value) =>
-      dispatch(bhandaraCheckinSlice.actions.changeRegisteringWithValue(value)),
+    onChange: (value) => dispatch(mainSectionSlice.actions.setState({ value })),
     onClickStart: (userId) => {
       dispatch(startCheckin() as unknown as Action<any>);
       // dispatch(startCheckIn() as unknown as Action<any>);
