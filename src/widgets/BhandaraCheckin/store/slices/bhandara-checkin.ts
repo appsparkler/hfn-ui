@@ -18,6 +18,7 @@ import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 import { SectionMainStateProps } from "../../SectionMain";
 import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails";
 import { SectionCheckinSuccessProps } from "../../SectionCheckInSuccess";
+import { mainSectionSlice } from "./mainSectionSlice";
 
 export type BhandaraCheckinState = {
   currentSection: CurrentSectionEnum;

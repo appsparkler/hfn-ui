@@ -1,13 +1,12 @@
 import { SectionMainConnected } from "./SectionMainConnected";
 import { configureStore } from "@reduxjs/toolkit";
-import { bhandaraCheckinSlice } from "./store/slices";
 import { Provider } from "react-redux";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { useMemo } from "react";
 import { BhandaraCheckinAPIs } from "./types";
 import { BhandaraCheckinViewConnected } from "./BhandaraCheckinViewConnected";
-import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
+import { rootReducer } from "./store";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -37,10 +36,7 @@ export const BhandaraCheckinWidget = ({ apis }: BhandaraCheckinWidgetProps) => {
   const store = useMemo(
     () =>
       configureStore({
-        reducer: {
-          bhandaraCheckin: bhandaraCheckinSlice.reducer,
-          snackbar: snackbarSlice.reducer,
-        },
+        reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
           getDefaultMiddleware({
             thunk: {
