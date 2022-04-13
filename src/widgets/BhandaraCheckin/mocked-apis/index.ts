@@ -30,7 +30,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
 
   getAbhyasiData: async (abhyasiId: string) => {
     try {
-      const resV0 = await fetchUserDetails(abhyasiId);
+      // const res = await fetchUserDetails(abhyasiId);
       const res = {
         id: 203146,
         name: "Jody Wohlert",
