@@ -41,7 +41,7 @@ export const updateDetailsSectionSlice = createSlice({
       { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
     ) => ({
       ...state,
-      payload,
+      ...payload,
     }),
   },
 });
