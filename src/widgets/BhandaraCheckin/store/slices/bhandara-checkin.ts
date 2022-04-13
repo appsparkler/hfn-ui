@@ -13,6 +13,7 @@ export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getBhandaraCheckinInitialState(),
   reducers: {
+    reset: () => getBhandaraCheckinInitialState(),
     goToMain: (state) => {
       state.currentSection = CurrentSectionEnum.MAIN;
     },

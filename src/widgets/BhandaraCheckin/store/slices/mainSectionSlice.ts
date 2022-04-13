@@ -17,6 +17,7 @@ export const mainSectionSlice = createSlice({
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
     },
+    reset: () => getMainSectionInitialState(),
     setState: (
       state,
       { payload }: { payload: Partial<SectionMainStateProps> }

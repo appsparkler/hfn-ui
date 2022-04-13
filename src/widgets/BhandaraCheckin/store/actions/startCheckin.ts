@@ -28,6 +28,15 @@ const getAbhyasiData = createAsyncThunk<
   }
 );
 
+export const resetAppState = createAsyncThunk<void, undefined, ThunkApiConfig>(
+  "widget/reset-state",
+  (_, { dispatch }) => {
+    dispatch(mainSectionSlice.actions.reset());
+    dispatch(bhandaraCheckinSlice.actions.reset());
+    dispatch(updateDetailsSectionSlice.actions.reset());
+  }
+);
+
 export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
   async (_, { extra: { apis }, dispatch, getState }) => {

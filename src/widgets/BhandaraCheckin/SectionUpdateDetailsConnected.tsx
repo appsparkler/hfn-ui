@@ -1,13 +1,13 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { bhandaraCheckinSlice, RootState } from "./store";
+import { bhandaraCheckinSlice, resetAppState, RootState } from "./store";
 import {
   SectionUpdateDetails,
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-// import { Action } from "@reduxjs/toolkit";
 import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
 import { updateDetailsSectionSlice } from "./store/slices/updateDetailsSectionSlice";
+import { Action } from "@reduxjs/toolkit";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -23,7 +23,7 @@ const mapDispatchToProps: MapDispatchToProps<
     onClickCheckin: () => {
       // dispatch(checkinUser() as unknown as Action<any>)
     },
-    onClickCancel: () => dispatch(bhandaraCheckinSlice.actions.goToMain()),
+    onClickCancel: () => dispatch(resetAppState() as unknown as Action<any>),
     onChange: (userDetails) => {
       dispatch(snackbarSlice.actions.closeSnackbar());
       dispatch(
