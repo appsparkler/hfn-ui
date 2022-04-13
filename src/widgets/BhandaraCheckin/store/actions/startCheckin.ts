@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { isAbhyasiId as isAbhyasiIdUtil } from "./utils";
+import { canCheckinDirectly, isAbhyasiId as isAbhyasiIdUtil } from "./utils";
 import { RootState, ThunkApiConfig } from "../index";
 import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
 import {
+  User,
   UserWithEmail,
   UserWithEmailAndMobile,
   UserWithMobile,
@@ -27,6 +28,21 @@ const getAbhyasiData = createAsyncThunk<
     }
   }
 );
+
+export const checkinMobileOrEmailUser = createAsyncThunk<
+  boolean,
+  User,
+  ThunkApiConfig
+>("widget/checkin-user", async (user, { extra: { apis }, rejectWithValue }) => {
+  try {
+    const checkinStatus = await apis.checkinMobileOrEmailUser(
+      user as UserWithEmailAndMobile
+    );
+    return checkinStatus;
+  } catch (error) {
+    return rejectWithValue((error as Error).message);
+  }
+});
 
 export const resetAppState = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "widget/reset-state",
@@ -69,17 +85,21 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
             error: false,
           })
         );
-        dispatch(
-          updateDetailsSectionSlice.actions.setState({
-            userDetails: getConfiguredUserDetails(
-              res.payload as
-                | UserWithEmail
-                | UserWithMobile
-                | UserWithEmailAndMobile
-            ),
-          })
-        );
-        dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+        if (canCheckinDirectly(res.payload as User)) {
+          alert("checkin directly");
+        } else {
+          dispatch(
+            updateDetailsSectionSlice.actions.setState({
+              userDetails: getConfiguredUserDetails(
+                res.payload as
+                  | UserWithEmail
+                  | UserWithMobile
+                  | UserWithEmailAndMobile
+              ),
+            })
+          );
+          dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+        }
       }
     } else {
     }

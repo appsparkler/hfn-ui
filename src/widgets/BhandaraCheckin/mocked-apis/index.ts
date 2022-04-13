@@ -30,7 +30,21 @@ export const mockedApis: BhandaraCheckinAPIs = {
 
   getAbhyasiData: async (abhyasiId: string) => {
     try {
-      const res = await fetchUserDetails(abhyasiId);
+      const resV0 = await fetchUserDetails(abhyasiId);
+      const res = {
+        id: 203146,
+        name: "Jody Wohlert",
+        ref: "I******7",
+        record_type: "a",
+        // city: null,
+        city: "Hyderabad",
+        email: "j********t@mailinator.com",
+        mobile: "+91****50",
+        firebase_uid: null,
+        gender: "*",
+        year_of_joining: "1982",
+        age_group: "50-55",
+      };
       return {
         abhyasiId: res.ref,
         ageGroup: res.age_group,

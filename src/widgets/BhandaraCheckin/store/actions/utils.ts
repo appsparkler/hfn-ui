@@ -58,3 +58,15 @@ export const getConfiguredUserDetails = (user: User): UserDetails => {
       : defaultUserDetails.location,
   };
 };
+
+export const canCheckinDirectly = ({
+  ageGroup,
+  gender,
+  location,
+  ...user
+}: User) => {
+  const { email } = user as UserWithEmail;
+  const { mobile } = user as UserWithMobile;
+  const hasMobileOrEmail = Boolean(email || mobile);
+  return Boolean(ageGroup && gender && location && hasMobileOrEmail);
+};
