@@ -1,5 +1,5 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { resetAppState, RootState } from "./store";
+import { checkinUser, resetAppState, RootState } from "./store";
 import {
   SectionUpdateDetails,
   SectionUpdateDetailsDispatchProps,
@@ -21,7 +21,7 @@ const mapDispatchToProps: MapDispatchToProps<
 > = (dispatch) => {
   return {
     onClickCheckin: () => {
-      // dispatch(checkinUser() as unknown as Action<any>)
+      dispatch(checkinUser() as unknown as Action<any>);
     },
     onClickCancel: () => dispatch(resetAppState() as unknown as Action<any>),
     onChange: (userDetails) => {

@@ -29,9 +29,20 @@ export const resetAppState = createAsyncThunk<void, undefined, ThunkApiConfig>(
   }
 );
 
-export const checkinUser = createAsyncThunk<void, User, ThunkApiConfig>(
+export const checkinUser = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "widget/checkinUser",
-  async (user, { dispatch, extra: { apis } }) => {
+  async (_, { dispatch, extra: { apis }, getState }) => {
+    const { updateDetailsSection, mainSection } = getState() as RootState;
+    const { userDetails } = updateDetailsSection;
+    const user = {
+      ageGroup: userDetails.ageGroup.value,
+      email: userDetails.email.value,
+      fullName: userDetails.fullName.value,
+      gender: userDetails.gender.value,
+      location: userDetails.location.value as unknown as string,
+      mobile: userDetails.mobile.value,
+      abhyasiId: mainSection.value,
+    } as User;
     try {
       const checkinSuccess = await apis.checkinMobileOrEmailUser(user);
       if (checkinSuccess) {
@@ -48,7 +59,7 @@ const continueCheckinAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
     try {
       const abhyasiData = await apis.getAbhyasiData(abhyasiId);
       if (canCheckinDirectly(abhyasiData)) {
-        dispatch(checkinUser(abhyasiData));
+        dispatch(checkinUser());
       } else {
         const configuredUserDetails = getConfiguredUserDetails(abhyasiData);
         dispatch(
