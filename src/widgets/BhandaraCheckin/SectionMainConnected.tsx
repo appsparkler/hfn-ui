@@ -7,7 +7,6 @@ import {
   SectionMainDispatchProps,
   SectionMainStateProps,
 } from "./SectionMain";
-import { CurrentSectionEnum } from "./types";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({
@@ -24,7 +23,6 @@ const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
       helperText,
       value: registeringWithValue,
       isProcessing: startCheckinIsProcessing,
-      show: currentSection === CurrentSectionEnum.MAIN,
     };
   };
 

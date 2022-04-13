@@ -10,7 +10,6 @@ export type SectionMainStateProps = {
   error?: boolean;
   helperText?: string;
   value: string;
-  show?: boolean;
   isProcessing?: boolean;
 };
 
@@ -25,7 +24,6 @@ export const SectionMain = ({
   onClickStart,
   onChange,
   isProcessing,
-  show,
   error,
   helperText,
   value = "",
@@ -60,10 +58,6 @@ export const SectionMain = ({
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
   }, []);
-
-  if (!show) {
-    return null;
-  }
 
   return (
     <CenterOfViewport gap={10} width={"100%"} maxWidth={maxWidth} paddingX={1}>

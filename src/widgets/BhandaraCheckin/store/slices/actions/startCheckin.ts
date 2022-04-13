@@ -35,21 +35,21 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
   async (_, { extra: { apis }, dispatch, getState }) => {
     const { bhandaraCheckin } = getState() as RootState;
-    const { registeringWithValue } = bhandaraCheckin;
+    const { value } = bhandaraCheckin.mainSection;
     dispatch(
       bhandaraCheckinSlice.actions.setState({
-        startCheckinIsProcessing: true,
+        isProcessing: true,
       })
     );
-    const isAbhyasiId = isAbhyasiIdUtil(registeringWithValue);
+    const isAbhyasiId = isAbhyasiIdUtil(value);
     if (isAbhyasiId) {
-      const res = await dispatch(getAbhyasiData(registeringWithValue));
+      const res = await dispatch(getAbhyasiData(value));
       if (res.meta.requestStatus === "rejected") {
         dispatch(
-          bhandaraCheckinSlice.actions.setState({
+          bhandaraCheckinSlice.actions.setMainSectionState({
             helperText: res.payload as string,
-            startCheckInError: true,
-            startCheckinIsProcessing: false,
+            error: true,
+            isProcessing: false,
           })
         );
       } else {

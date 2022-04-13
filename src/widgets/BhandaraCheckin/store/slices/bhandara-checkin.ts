@@ -15,9 +15,14 @@ import {
 } from "../../types";
 import { RootDispatch, RootState } from "..";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
+import { SectionMainStateProps } from "../../SectionMain";
+import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails";
+import { SectionCheckinSuccessProps } from "../../SectionCheckInSuccess";
 
 export type BhandaraCheckinState = {
   currentSection: CurrentSectionEnum;
+  mainSection: SectionMainStateProps;
+  updateDetailsSection: SectionUpdateDetailsStateProps;
   startCheckInError: boolean;
   startCheckinIsProcessing: boolean;
   registeringWithValue: string;
@@ -30,6 +35,40 @@ export type BhandaraCheckinState = {
 export const getInitialState = (): BhandaraCheckinState => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
+    mainSection: {
+      value: "",
+      error: false,
+      helperText:
+        "For mobile, please include country code.  For ex. + 913223...",
+      isProcessing: false,
+    },
+    updateDetailsSection: {
+      userDetails: {
+        fullName: {
+          show: true,
+          value: "",
+        },
+        mobile: {
+          show: true,
+          value: "",
+        },
+        email: {
+          show: true,
+          value: "",
+        },
+        location: {
+          show: true,
+        },
+        ageGroup: {
+          show: true,
+          value: "",
+        },
+        gender: {
+          show: true,
+          value: "",
+        },
+      },
+    },
     //
     startCheckInError: false,
     startCheckinIsProcessing: false,
@@ -69,6 +108,26 @@ export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getInitialState(),
   reducers: {
+    setMainSectionState: (
+      state,
+      { payload }: { payload: Partial<SectionMainStateProps> }
+    ) => ({
+      ...state,
+      mainSection: {
+        ...state.mainSection,
+        ...payload,
+      },
+    }),
+    setUpdateSectionState: (
+      state,
+      { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
+    ) => ({
+      ...state,
+      updateDetailsSection: {
+        ...state.updateDetailsSection,
+        ...payload,
+      },
+    }),
     setState: (
       state,
       { payload }: { payload: Partial<BhandaraCheckinState> }
@@ -78,6 +137,7 @@ export const bhandaraCheckinSlice = createSlice({
         ...payload,
       };
     },
+
     setUpdateDetailsProcessing: (state, { payload }: { payload: boolean }) => {
       state.updateDetailsProcessing = payload;
     },
