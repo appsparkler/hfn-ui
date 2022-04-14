@@ -1,6 +1,8 @@
 import {
   isAbhyasiId as matchesAbhyasiId,
   isAbhyasiIdTemp,
+  isEmail,
+  isMobile,
 } from "../../../../utils";
 import { User, UserDetails, UserWithEmail, UserWithMobile } from "../../types";
 import { getUpdateDetailsSectionInitialState } from "../slices";
@@ -56,6 +58,24 @@ export const getConfiguredUserDetails = (user: User): UserDetails => {
           value: String(user.location) as unknown as any,
         }
       : defaultUserDetails.location,
+  };
+};
+
+export const getUserDetailsForEmailOrMobile = (
+  emailOrMobile: string
+): UserDetails => {
+  const defaultUserDetails: UserDetails =
+    getUpdateDetailsSectionInitialState().userDetails;
+  const isEmailString = isEmail(emailOrMobile);
+  const isMobileString = isMobile(emailOrMobile);
+  return {
+    ...defaultUserDetails,
+    email: isEmailString
+      ? { ...defaultUserDetails.email, disabled: true, value: emailOrMobile }
+      : defaultUserDetails.email,
+    mobile: isMobileString
+      ? { ...defaultUserDetails.mobile, disabled: true, value: emailOrMobile }
+      : defaultUserDetails.mobile,
   };
 };
 

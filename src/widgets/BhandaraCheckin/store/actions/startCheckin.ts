@@ -8,6 +8,7 @@ import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
+import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
 
 export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
@@ -21,8 +22,10 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
     );
     const isAbhyasiId = isAbhyasiIdUtil(value);
     if (isAbhyasiId) {
-      dispatch(startCheckinAbhyasi(value));
+      await dispatch(startCheckinAbhyasi(value));
     } else {
+      await dispatch(startCheckinMobileOrEmailUser(value));
     }
+    // dispatch(mainSectionSlice.actions.stopProcessing());
   }
 );
