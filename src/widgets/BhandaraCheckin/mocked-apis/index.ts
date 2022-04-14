@@ -85,6 +85,25 @@ export const mockedApis: BhandaraCheckinAPIs = {
       }, 600);
     }),
 
+  checkinAbhyasi: (user) =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const isAbhyasiCheckedIn = some<string>(
+          (userId) => userId === user.abhyasiId
+        )(checkedInAbhyasis);
+        if (isAbhyasiCheckedIn) {
+          reject(
+            new Error(`Abhyasi with ID ${user.abhyasiId} is already checked in`)
+          );
+        } else {
+          resolve(true);
+        }
+        if (user.abhyasiId) {
+          checkedInAbhyasis.push(user.abhyasiId);
+        }
+      }, 600);
+    }),
+
   checkinMobileOrEmailUser: (user) =>
     new Promise((resolve) => {
       setTimeout(() => {

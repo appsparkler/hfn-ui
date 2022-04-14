@@ -105,6 +105,7 @@ export type BhandaraCheckinAPIs = {
   checkinMobileOrEmailUser: (
     user: UserWithEmail | UserWithMobile | UserWithEmailAndMobile
   ) => Promise<boolean>;
+  checkinAbhyasi: (user: User) => Promise<boolean>;
   isMobileOrEmailUserCheckedIn: ({
     fullName,
     email,

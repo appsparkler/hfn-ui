@@ -18,6 +18,14 @@ export const mainSectionSlice = createSlice({
       state.value = payload;
     },
     reset: () => getMainSectionInitialState(),
+    setError: (state, { payload }: { payload: string }) => {
+      state.helperText = payload;
+      state.error = true;
+      state.isProcessing = false;
+    },
+    stopProcessing: (state) => {
+      state.isProcessing = false;
+    },
     setState: (
       state,
       { payload }: { payload: Partial<SectionMainStateProps> }
