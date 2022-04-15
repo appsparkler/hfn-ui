@@ -2,21 +2,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { canCheckinDirectly } from "./utils";
 import { RootState, ThunkApiConfig } from "../index";
 import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
-import { CurrentSectionEnum, User } from "../../types";
 import { getConfiguredUserDetails } from "./utils";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
-import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
+import { User } from "../../types";
 
 export const continueCheckinAbhyasiPart2 = createAsyncThunk<
-  void,
+  boolean,
   undefined,
   ThunkApiConfig
 >(
   "widget/continueCheckinAbhyasiPart2",
-  async (_, { dispatch, extra: { apis }, getState }) => {
-    const { updateDetailsSection, mainSection, bhandaraCheckin } =
-      getState() as RootState;
+  async (_, { dispatch, extra: { apis }, getState, rejectWithValue }) => {
+    const { updateDetailsSection, mainSection } = getState() as RootState;
     try {
       const { userDetails } = updateDetailsSection;
       const user = {
@@ -31,21 +29,11 @@ export const continueCheckinAbhyasiPart2 = createAsyncThunk<
       const checkinSuccess = await apis.checkinAbhyasi(user);
       if (checkinSuccess) {
         dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
+        return true;
       }
+      return false;
     } catch (error) {
-      if (
-        bhandaraCheckin.currentSection === CurrentSectionEnum.UPDATE_DETAILS
-      ) {
-        dispatch(
-          snackbarSlice.actions.openSnackbar({
-            children: (error as Error).message,
-          })
-        );
-        dispatch(updateDetailsSectionSlice.actions.stopProcessing());
-      } else {
-        dispatch(mainSectionSlice.actions.setError((error as Error).message));
-        dispatch(mainSectionSlice.actions.stopProcessing());
-      }
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -72,35 +60,37 @@ const continueCheckinAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
   }
 );
 
+export const isCheckedInAbhyasi = createAsyncThunk<
+  boolean,
+  string,
+  ThunkApiConfig
+>(
+  "bhandara-checkin/isCheckinAbhyasi",
+  async (abhyasiId, { extra: { apis }, rejectWithValue }) => {
+    try {
+      const isCheckedIn = await apis.isAbhyasiCheckedIn(abhyasiId);
+      return isCheckedIn;
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  }
+);
+
 export const startCheckinAbhyasi = createAsyncThunk<
   void,
   string,
   ThunkApiConfig
->(
-  "widget/start-checkin-abhyasi",
-  async (abhyasiId, { dispatch, extra: { apis } }) => {
-    try {
-      const isAbhyasiCheckedIn = await apis.isAbhyasiCheckedIn(abhyasiId);
-      if (isAbhyasiCheckedIn)
-        dispatch(
-          mainSectionSlice.actions.setState({
-            error: true,
-            helperText: `Abhyasi with ID ${abhyasiId} is already checked in.`,
-            isProcessing: false,
-          })
-        );
-      else {
-        dispatch(continueCheckinAbhyasi(abhyasiId));
-      }
-    } catch (error) {
-      const errorMessage = (error as Error).message;
-      dispatch(
-        mainSectionSlice.actions.setState({
-          error: true,
-          helperText: errorMessage,
-          isProcessing: false,
-        })
-      );
-    }
+>("widget/start-checkin-abhyasi", async (abhyasiId, { dispatch }) => {
+  const res = await dispatch(isCheckedInAbhyasi(abhyasiId));
+  if (res.meta.requestStatus === "rejected")
+    dispatch(
+      mainSectionSlice.actions.setState({
+        error: true,
+        helperText: res.payload as string,
+        isProcessing: false,
+      })
+    );
+  else if (res.payload === true) {
+    dispatch(continueCheckinAbhyasi(abhyasiId));
   }
-);
+});

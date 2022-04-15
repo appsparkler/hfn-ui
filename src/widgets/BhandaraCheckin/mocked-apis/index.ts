@@ -20,11 +20,17 @@ const checkedInUsersData: (
 
 export const mockedApis: BhandaraCheckinAPIs = {
   isAbhyasiCheckedIn: ($id: string) =>
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       setTimeout(() => {
-        const isCheckedIn = some<string>((id) => $id === id)(checkedInAbhyasis);
-        if (isCheckedIn) resolve(true);
-        resolve(false);
+        const upperCaseId = $id.toUpperCase();
+        const isCheckedIn = some<string>((id) => upperCaseId === id)(
+          checkedInAbhyasis
+        );
+        if (isCheckedIn)
+          reject(
+            new Error(`Abhyasi with ${upperCaseId} has already checked in.`)
+          );
+        else resolve(true);
       }, 600);
     }),
 
