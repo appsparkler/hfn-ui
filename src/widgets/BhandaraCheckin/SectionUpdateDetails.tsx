@@ -101,7 +101,7 @@ export const SectionUpdateDetails = ({
         ...userDetails,
         [name]: {
           ...userDetails[name as keyof UserDetails],
-          value,
+          value: name === "email" ? (value as string).toLowerCase() : value,
           isValid: isFieldValueValid(name as keyof UserDetails, value),
         },
       });

@@ -37,6 +37,12 @@ export const updateDetailsSectionSlice = createSlice({
   initialState: getUpdateDetailsSectionInitialState(),
   reducers: {
     reset: () => getUpdateDetailsSectionInitialState(),
+    stopProcessing: (state) => {
+      state.isProcessing = false;
+    },
+    startProcessing: (state) => {
+      state.isProcessing = false;
+    },
     setState: (
       state,
       { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }

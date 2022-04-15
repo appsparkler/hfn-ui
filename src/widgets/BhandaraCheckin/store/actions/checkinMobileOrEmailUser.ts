@@ -32,7 +32,7 @@ export const checkinMobileOrEmailUser = createAsyncThunk<
     } else {
       const isCheckinSuccess = await apis.checkinMobileOrEmailUser({
         ageGroup: String(userDetails.ageGroup.value),
-        email: String(userDetails.email.value),
+        email: String(userDetails.email.value?.toLowerCase()),
         fullName: String(userDetails.fullName.value),
         gender: String(userDetails.gender.value),
         location: userDetails.location.value as unknown as string,

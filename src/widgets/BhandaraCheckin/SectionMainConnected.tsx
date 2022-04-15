@@ -20,7 +20,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
       dispatch(
         mainSectionSlice.actions.setState({
           ...getMainSectionInitialState(),
-          value: value.toUpperCase(),
+          value,
         })
       );
     },
