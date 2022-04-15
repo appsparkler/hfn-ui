@@ -44,7 +44,7 @@ updateDetails.args = {
       show: true,
     },
     ageGroup: {
-      value: "0-10",
+      value: "5-9",
       show: true,
     },
     gender: {

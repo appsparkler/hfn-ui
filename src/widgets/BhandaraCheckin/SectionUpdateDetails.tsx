@@ -227,7 +227,12 @@ export const SectionUpdateDetails = ({
         ) : null}
       </Vertical>
       <Horizontal gap={3}>
-        <Button type="button" variant="outlined" onClick={onClickCancel}>
+        <Button
+          type="button"
+          variant="outlined"
+          onClick={onClickCancel}
+          disabled={isProcessing}
+        >
           CANCEL
         </Button>
         <AsyncButton

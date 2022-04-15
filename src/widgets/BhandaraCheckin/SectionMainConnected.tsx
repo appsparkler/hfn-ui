@@ -20,13 +20,12 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
       dispatch(
         mainSectionSlice.actions.setState({
           ...getMainSectionInitialState(),
-          value,
+          value: value.toUpperCase(),
         })
       );
     },
     onClickStart: (userId) => {
       dispatch(startCheckin() as unknown as Action<any>);
-      // dispatch(startCheckIn() as unknown as Action<any>);
     },
   };
 };
