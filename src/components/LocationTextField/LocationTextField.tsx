@@ -160,6 +160,7 @@ export const LocationTextField = ({
           variant={variant}
           InputProps={{
             ...params.InputProps,
+            autoComplete: "off",
             endAdornment: (
               <React.Fragment>
                 {loading ? (

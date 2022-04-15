@@ -68,6 +68,7 @@ export const SectionMain = ({
         type="text"
         label="Abhyasi ID / Mobile # / Email"
         variant="outlined"
+        autoComplete="off"
         error={error}
         value={value}
         onChange={handleChange}

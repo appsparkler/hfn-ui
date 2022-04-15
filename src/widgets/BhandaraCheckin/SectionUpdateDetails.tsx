@@ -144,6 +144,7 @@ export const SectionUpdateDetails = ({
         <TextField
           label="Full Name"
           required
+          autoComplete="off"
           name="fullName"
           type="text"
           variant="outlined"
@@ -157,6 +158,7 @@ export const SectionUpdateDetails = ({
             {userDetails.ageGroup.show ? (
               <SelectField
                 autoWidth
+                autoComplete="off"
                 label="Age Group"
                 labelId="age-group"
                 name="ageGroup"
@@ -169,6 +171,7 @@ export const SectionUpdateDetails = ({
             {userDetails.gender.show ? (
               <SelectField
                 autoWidth
+                autoComplete="off"
                 label="Gender"
                 labelId="gender"
                 name="gender"
@@ -202,6 +205,7 @@ export const SectionUpdateDetails = ({
           <TextField
             label="Mobile"
             name="mobile"
+            autoComplete="off"
             required
             type="tel"
             variant="outlined"
@@ -216,6 +220,7 @@ export const SectionUpdateDetails = ({
           <TextField
             label="Email"
             required
+            autoComplete="off"
             type="email"
             name="email"
             variant="outlined"
