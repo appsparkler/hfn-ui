@@ -4,6 +4,7 @@ import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected
 import { BhandaraCheckinAPIs, CurrentSectionEnum } from "./types";
 import { SnackbarConnected } from "./SnackbarConnected";
 import { useMemo } from "react";
+import { Box } from "@mui/material";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -29,11 +30,11 @@ export const BhandaraCheckinView = ({
     [currentSection]
   );
   return (
-    <>
+    <Box bgcolor={"white"}>
       {showMain ? <SectionMainConnected /> : null}
       {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
       {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
       <SnackbarConnected />
-    </>
+    </Box>
   );
 };
