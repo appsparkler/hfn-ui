@@ -1,12 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { canCheckinDirectly, isAbhyasiId as isAbhyasiIdUtil } from "./utils";
+import { canCheckinDirectly } from "./utils";
 import { RootState, ThunkApiConfig } from "../index";
 import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
-import { User, UserWithEmail, UserWithMobile } from "../../types";
+import { User } from "../../types";
 import { getConfiguredUserDetails } from "./utils";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
-import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 
 export const continueCheckinAbhyasiPart2 = createAsyncThunk<
   void,
