@@ -41,7 +41,7 @@ export const updateDetailsSectionSlice = createSlice({
       state.isProcessing = false;
     },
     startProcessing: (state) => {
-      state.isProcessing = false;
+      state.isProcessing = true;
     },
     setState: (
       state,

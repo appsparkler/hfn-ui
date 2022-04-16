@@ -1,4 +1,4 @@
-import { some } from "lodash/fp";
+import { random, some } from "lodash/fp";
 import {
   BhandaraCheckinAPIs,
   UserWithEmail,
@@ -68,7 +68,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
   },
 
   isMobileOrEmailUserCheckedIn: ({ fullName, email, mobile }) =>
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       setTimeout(() => {
         const someUserWithEmailOrMobileAreCheckedIn = (
           email: string | undefined,
@@ -81,13 +81,14 @@ export const mockedApis: BhandaraCheckinAPIs = {
                 (user as UserWithMobile).mobile === mobile) &&
               user.fullName === fullName
           );
-        resolve(
-          someUserWithEmailOrMobileAreCheckedIn(
-            email,
-            mobile,
-            fullName
-          )(checkedInUsersData)
-        );
+        const isCheckedIn = someUserWithEmailOrMobileAreCheckedIn(
+          email,
+          mobile,
+          fullName
+        )(checkedInUsersData);
+        if (isCheckedIn) {
+          reject(new Error(`User has already checked in.`));
+        } else resolve(isCheckedIn);
       }, 600);
     }),
 
@@ -111,10 +112,14 @@ export const mockedApis: BhandaraCheckinAPIs = {
     }),
 
   checkinMobileOrEmailUser: (user) =>
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       setTimeout(() => {
-        checkedInUsersData.push(user);
-        resolve(true);
+        if (random(1)(2) === 1) {
+          checkedInUsersData.push(user);
+          resolve(true);
+        } else {
+          reject(new Error(`Could not checkin user. Please try again later.`));
+        }
       }, 600);
     }),
 };

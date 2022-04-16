@@ -120,3 +120,9 @@ export type BhandaraCheckinAPIs = {
     userId: string
   ) => Promise<UserWithEmail | UserWithMobile | UserWithEmailAndMobile>;
 };
+
+export type MobileOrEmailUser = {
+  fullName: string;
+  email?: string | undefined;
+  mobile?: string | undefined;
+};
