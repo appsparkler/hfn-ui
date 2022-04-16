@@ -114,12 +114,12 @@ export const mockedApis: BhandaraCheckinAPIs = {
   checkinMobileOrEmailUser: (user) =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (random(1)(2) === 1) {
-          checkedInUsersData.push(user);
-          resolve(true);
-        } else {
-          reject(new Error(`Could not checkin user. Please try again later.`));
-        }
+        // if (random(1)(2) === 1) {
+        checkedInUsersData.push(user);
+        resolve(true);
+        // } else {
+        //   reject(new Error(`Could not checkin user. Please try again later.`));
+        // }
       }, 600);
     }),
 };
