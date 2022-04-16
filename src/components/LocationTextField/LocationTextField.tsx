@@ -134,6 +134,7 @@ export const LocationTextField = ({
       open={open}
       onInputChange={handleAutocompleteInputChange}
       value={value || null}
+      noOptionsText="Please start typing to see options..."
       onOpen={() => {
         if (!query) setOpen(false);
         setOpen(true);
