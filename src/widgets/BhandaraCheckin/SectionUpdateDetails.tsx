@@ -206,7 +206,6 @@ export const SectionUpdateDetails = ({
             label="Mobile"
             name="mobile"
             autoComplete="off"
-            required
             type="tel"
             variant="outlined"
             fullWidth
@@ -219,7 +218,6 @@ export const SectionUpdateDetails = ({
         {userDetails.email.show ? (
           <TextField
             label="Email"
-            required
             autoComplete="off"
             type="email"
             name="email"
