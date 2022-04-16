@@ -24,7 +24,9 @@ export const fetchWithToken = async <T = any>(
   init?: RequestInit | undefined
 ): Promise<T> => {
   const res = await fetch(input, {
+    ...init,
     headers: {
+      ...init?.headers,
       Authorization: `Bearer ${getAccessToken()}`,
     },
   });
