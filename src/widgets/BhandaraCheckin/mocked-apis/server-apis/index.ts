@@ -2,7 +2,11 @@ import { RefinedCityStateCountryLocation } from "../../../../components/Location
 import { User, UserSRCM, UserWithEmail, UserWithMobile } from "../../types";
 import { fetchWithToken } from "../init";
 
-export const fetchUserDetails = (abhyasiId: string): Promise<UserSRCM> =>
+export * from "./attendanceExitsts";
+export * from "./postAttendance";
+export * from "./searchUser";
+
+export const fetchUserDetails = (abhyasiId: string): Promise<any> =>
   fetchWithToken(
     `https://profile.srcm.net/api/abhyasis/search/?${new URLSearchParams({
       ref: abhyasiId.toUpperCase(),
@@ -67,7 +71,3 @@ export const isCheckedIn = async (userInfo: {
   );
   return res;
 };
-
-export * from "./attendanceExitsts";
-export * from "./postAttendance";
-export * from "./searchUser";

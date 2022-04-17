@@ -11,7 +11,10 @@ export type UserSRCM = {
   name: string;
   ref: string;
   record_type: string;
-  city: string;
+  city: {
+    id: number;
+    name: string;
+  };
   email: string;
   mobile: string;
   firebase_uid: null;
@@ -100,7 +103,16 @@ export type AbhyasiAPI = {
 //     age_group: "40-45",
 //   },
 // ];
-export type SearchUserParams = Partial<Omit<UserSRCM, "id" | "firebase_uid">>;
+export type SearchUserParams = {
+  name?: string;
+  ref?: string;
+  email?: string;
+  mobile?: string;
+  city_id?: string;
+  firebase_uid?: string;
+  page?: number;
+  page_size?: number;
+};
 
 export type PostAttendanceSuccess = {
   id: number;
@@ -170,15 +182,26 @@ export type AttendanceExistsUser = {
   ref?: string;
 };
 
+export type AttendanceExistsResponse = {
+  attendance_exists: boolean;
+  registration_exists: boolean;
+};
+
+export type SearchUserResponse = {
+  count: number;
+  next: null;
+  previous: null;
+  results: UserSRCM[];
+};
+
 export type BhandaraCheckinAPIs = {
-  searchUser: (searchParams: SearchUserParams) => Promise<UserSRCM>;
+  searchUser: (searchParams: SearchUserParams) => Promise<SearchUserResponse>;
   postAttendance: (
     user: PostAttendanceUser
   ) => Promise<PostAttendanceSuccess | PostAttendanceFailure>;
-  attendanceExists: (user: AttendanceExistsUser) => Promise<{
-    attendance_exists: boolean;
-    registration_exists: boolean;
-  }>;
+  attendanceExists: (
+    user: AttendanceExistsUser
+  ) => Promise<AttendanceExistsResponse>;
   // Previous
   checkinMobileOrEmailUser: (
     user: UserWithEmail | UserWithMobile | UserWithEmailAndMobile
