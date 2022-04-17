@@ -44,7 +44,7 @@ const Template = () => {
       age_group: "24",
       gender: "M",
     };
-    const res = await postAttendance(user);
+    const res = await postAttendance();
     console.log(res);
     // const res = await checkinUserAPI({
     //   ageGroup: "10-19",
