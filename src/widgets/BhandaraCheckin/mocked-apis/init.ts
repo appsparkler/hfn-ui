@@ -28,6 +28,7 @@ export const fetchWithToken = async <T = any>(
     headers: {
       ...init?.headers,
       Authorization: `Bearer ${getAccessToken()}`,
+      "Content-Type": "application/json",
     },
   });
 
