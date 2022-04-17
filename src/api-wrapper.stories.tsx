@@ -5,6 +5,7 @@ import {
   isCheckedIn,
   // checkinUser,
 } from "./widgets/BhandaraCheckin/mocked-apis/server-apis";
+import { attendanceExists } from "./widgets/BhandaraCheckin/mocked-apis/server-apis/attendanceExitsts";
 
 export default {
   title: "API Story",
@@ -46,6 +47,16 @@ const Template = () => {
     });
     console.log(res);
   }, []);
+
+  const handleAttendanceExists = useCallback(async () => {
+    // const res = await isCheckedIn({
+    //   email: "appsparkler@gmail.com",
+    //   mobile: "+917338080855",
+    //   part_name: "Aakash Shah",
+    // });
+    const res = await attendanceExists();
+    console.log(res);
+  }, []);
   return (
     <div style={{ display: "flex", gap: 10 }}>
       <button onClick={fetchAbhyasiData} type="button">
@@ -56,6 +67,9 @@ const Template = () => {
       </button>
       <button type="button" onClick={handleIsCheckedIn}>
         Is Checked In
+      </button>
+      <button type="button" onClick={handleAttendanceExists}>
+        Attendance Exists
       </button>
     </div>
   );
