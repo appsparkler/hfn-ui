@@ -8,3 +8,5 @@ export const errorAbhyasiAlreadyCheckedin = (abhyasiID: string) =>
   `Abhyasi with id ${abhyasiID.toUpperCase()} has already checked in.`;
 
 export const errorUserAlreadyCheckedIn = () => "User has already checked in.";
+
+export const errorUnrecognizedInput = () => "Entered value is not recognized.";

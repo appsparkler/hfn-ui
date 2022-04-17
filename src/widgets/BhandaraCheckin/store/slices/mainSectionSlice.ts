@@ -26,6 +26,9 @@ export const mainSectionSlice = createSlice({
     stopProcessing: (state) => {
       state.isProcessing = false;
     },
+    startProcessing: (state) => {
+      state.isProcessing = true;
+    },
     setState: (
       state,
       { payload }: { payload: Partial<SectionMainStateProps> }

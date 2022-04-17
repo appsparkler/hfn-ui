@@ -42,13 +42,9 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
           ref: abhyasiId.toUpperCase(),
           city_id: abhyasi.city.id,
           age_group: abhyasi.age_group,
-          // email: null,
-          // gender: null,
-          // mobile: null,
         })
       );
       if (res.meta.requestStatus === "rejected") {
-        dispatch(mainSectionSlice.actions.stopProcessing());
         if (res.payload === PostAttendanceRejectReason.ALREADY_CHECKED_IN) {
           dispatch(
             mainSectionSlice.actions.setError(
@@ -64,11 +60,9 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
         }
       } else {
         dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
-        dispatch(mainSectionSlice.actions.stopProcessing());
       }
     } else {
-      // VISIT UPDATE DETAILS SECTION
-      dispatch(mainSectionSlice.actions.stopProcessing());
+      // VISIT UPDATE DETAILS SECTION for updating details before checkin
       const configuredUserDetails = getConfiguredUserDetails(abhyasi);
       dispatch(
         updateDetailsSectionSlice.actions.setState({
@@ -81,12 +75,12 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
 );
 
 export const continueCheckinFoundAbhyasi = createAsyncThunk<
-  void,
+  boolean,
   UserSRCM,
   ThunkApiConfig
 >(
   getBhandaraCheckinActionName("continueCheckinAbhyasiPart1"),
-  async (abhyasi, { dispatch, getState }) => {
+  async (abhyasi, { dispatch, getState, rejectWithValue }) => {
     // CHECK IF ABHYASI IS ALREADY CHECKED IN
     const {
       mainSection: { value: abhyasiId },
@@ -110,26 +104,28 @@ export const continueCheckinFoundAbhyasi = createAsyncThunk<
           })
         );
       }
+      return rejectWithValue(false);
     } else {
       // CONTINUE TO FINAL CHECKIN SCENARIO
       const res = await dispatch(continueCheckinAbhyasiFinal(abhyasi));
       // handle if checkin-abhyasi-part2 is rejected
+      if (res.meta.requestStatus === "rejected") rejectWithValue(false);
+      return true;
     }
   }
 );
 
 export const startCheckinAbhyasi = createAsyncThunk<
-  void,
+  boolean,
   string,
   ThunkApiConfig
 >(
   getBhandaraCheckinActionName("start-checkin-abhyasi"),
-  async (abhyasiId, { dispatch }) => {
+  async (abhyasiId, { dispatch, rejectWithValue }) => {
     // CHECK IF USER EXISTS IN SRCM DB
     const searchAbhyasiRes = await dispatch(searchAbhyasi(abhyasiId));
     if (searchAbhyasiRes.meta.requestStatus === "rejected") {
       // SHOW ERROR IF ABHYASI NOT FOUND
-      dispatch(mainSectionSlice.actions.stopProcessing());
       dispatch(
         mainSectionSlice.actions.setState({
           error: true,
@@ -137,12 +133,14 @@ export const startCheckinAbhyasi = createAsyncThunk<
           isProcessing: false,
         })
       );
+      return rejectWithValue(false);
     } else {
       // CONTINUE CHECKIN IF ABHYASI EXISTS
       const res = await dispatch(
         continueCheckinFoundAbhyasi(searchAbhyasiRes.payload as UserSRCM)
       );
-      // handle if checkin-abhyasi-part1 is rejected
+      if (res.meta.requestStatus === "fulfilled") return true;
+      else return rejectWithValue(false);
     }
   }
 );

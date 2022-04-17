@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ThunkApiConfig } from "../..";
+import { ThunkApiConfig } from "../../index";
 import { bhandaraCheckinSlice, updateDetailsSectionSlice } from "../../slices";
 import { getUserDetailsForEmailOrMobile } from "../utils";
 
