@@ -36,16 +36,17 @@ const Template = () => {
     // };
     const user = {
       name: "1650177042",
-      ref: "B99999999",
-      email: "1650177042@mailinator.com",
-      mobile: "911650177042",
+      // ref: "B99999993",
+      // ref: null,
+      email: "1650177092@mailinator.com",
+      mobile: "911650177092",
       attendance_datetime: "",
       city_id: 195,
       age_group: "24",
       gender: "M",
     };
     try {
-      const res = await postAttendance();
+      const res = await postAttendance(user);
       console.log(res);
     } catch (error) {
       console.error(error);
