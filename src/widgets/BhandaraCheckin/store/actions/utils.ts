@@ -5,13 +5,7 @@ import {
   isEmail,
   isMobile,
 } from "../../../../utils";
-import {
-  User,
-  UserDetails,
-  UserSRCM,
-  UserWithEmail,
-  UserWithMobile,
-} from "../../types";
+import { UserDetails, UserSRCM } from "../../types";
 import { getUpdateDetailsSectionInitialState } from "../slices";
 
 export const isAbhyasiId = (value: string) =>
