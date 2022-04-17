@@ -20,26 +20,11 @@ const Template = () => {
   }, []);
 
   const handleCheckinUser = useCallback(async () => {
-    // const user = {
-    //   // id: 37614,
-    //   name: "Thaddeus Fumagalli",
-    //   ref: Date.now().toString(),
-    //   record_type: "a",
-    //   city_id: null,
-    //   email: `${Date.now()}@malinator.com`,
-    //   mobile: `+${Date.now()}`,
-    //   location: "123",
-    //   // firebase_uid: null,
-    //   gender: "M",
-    //   // year_of_joining: "1990",
-    //   ageGroup: "70-75",
-    // };
     const user = {
-      name: "1650177042",
-      // ref: "B99999993",
-      // ref: null,
-      email: "1650177092@mailinator.com",
-      mobile: "911650177092",
+      name: "1650177011",
+      ref: undefined,
+      email: "1650177011@mailinator.com",
+      mobile: "1650177011",
       attendance_datetime: "",
       city_id: 195,
       age_group: "24",
@@ -51,17 +36,6 @@ const Template = () => {
     } catch (error) {
       console.error(error);
     }
-    // const res = await checkinUserAPI({
-    //   ageGroup: "10-19",
-    //   // email: "appsparkler@gmail.com",
-    //   fullName: "Aakash Shah",
-    //   gender: "male",
-    //   location: "123",
-    //   mobile: "+917338080855",
-    //   abhyasiId: "INAAAE393",
-    // });
-    // const res = await checkinUser(user);
-    // console.log(res);
   }, []);
 
   const handleIsCheckedIn = useCallback(async () => {
