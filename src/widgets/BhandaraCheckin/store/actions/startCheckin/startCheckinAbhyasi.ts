@@ -45,19 +45,11 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
         })
       );
       if (res.meta.requestStatus === "rejected") {
-        if (res.payload === PostAttendanceRejectReason.ALREADY_CHECKED_IN) {
-          dispatch(
-            mainSectionSlice.actions.setError(
-              errorAbhyasiAlreadyCheckedin(abhyasiId)
-            )
-          );
-        } else if (res.payload === PostAttendanceRejectReason.SERVER_ERROR) {
-          dispatch(
-            snackbarSlice.actions.openSnackbar({
-              children: errorServer(),
-            })
-          );
-        }
+        dispatch(
+          snackbarSlice.actions.openSnackbar({
+            children: errorServer(),
+          })
+        );
       } else {
         dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
       }

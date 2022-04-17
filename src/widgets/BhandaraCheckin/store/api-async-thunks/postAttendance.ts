@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { PostAttendanceSuccess, PostAttendanceUser } from "../../types";
+import {
+  PostAttendanceSuccess,
+  PostAttendanceUser,
+  PostAttendanceFailure,
+} from "../../types";
 import { ThunkApiConfig } from "../index";
 
 export enum PostAttendanceRejectReason {
@@ -14,9 +18,11 @@ export const postAttendance = createAsyncThunk<
 >("api/post-attendance", async (user, { extra: { apis }, rejectWithValue }) => {
   try {
     const res = await apis.postAttendance(user);
-    if (!(res as PostAttendanceSuccess).id) {
-      return rejectWithValue(PostAttendanceRejectReason.ALREADY_CHECKED_IN);
+    if ((res as PostAttendanceFailure).detail) {
+      return rejectWithValue((res as PostAttendanceFailure).detail[0]);
     }
+    if (!(res as PostAttendanceSuccess).id)
+      return rejectWithValue(JSON.stringify(res));
     return res as PostAttendanceSuccess;
   } catch (error) {
     return rejectWithValue(PostAttendanceRejectReason.SERVER_ERROR);
