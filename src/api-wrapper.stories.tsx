@@ -1,17 +1,18 @@
-import { useCallback } from "react";
-import { postAttendance } from "./widgets/BhandaraCheckin/mocked-apis/server-apis/postAttendance";
+import { useCallback, useState } from "react";
 import {
   fetchUserDetails,
   isCheckedIn,
-  // checkinUser,
+  postAttendance,
+  attendanceExists,
+  searchUser,
 } from "./widgets/BhandaraCheckin/mocked-apis/server-apis";
-import { attendanceExists } from "./widgets/BhandaraCheckin/mocked-apis/server-apis/attendanceExitsts";
 
 export default {
-  title: "API Story",
+  title: "Widgets/Bhandara Checkin/API Story",
 };
 
 const Template = () => {
+  const [response, setResponse] = useState<any>({});
   const fetchAbhyasiData = useCallback(() => {
     fetchUserDetails("INAAAE479")
       .then((res) => {
@@ -33,7 +34,10 @@ const Template = () => {
     };
     try {
       const res = await postAttendance(user);
-      console.log(res);
+      // if ((res as typeof sam).id) {
+
+      // }
+      setResponse(res);
     } catch (error) {
       console.error(error);
     }
@@ -45,15 +49,19 @@ const Template = () => {
       mobile: "+917338080855",
       part_name: "Aakash Shah",
     });
-    console.log(res);
+    setResponse(res);
+  }, []);
+
+  const handleSearchUser = useCallback(async () => {
+    const res = await searchUser({
+      email: "appsparkler@gmail.com",
+      // mobile: "+917338080855",
+      // part_name: "Aakash Shah",
+    });
+    setResponse(res);
   }, []);
 
   const handleAttendanceExists = useCallback(async () => {
-    // const res = await isCheckedIn({
-    //   email: "appsparkler@gmail.com",
-    //   mobile: "+917338080855",
-    //   part_name: "Aakash Shah",
-    // });
     const res = await attendanceExists({
       // part_name: "Aakash Shah",
       // email: "subs@appsparkler@gmail.com",
@@ -61,22 +69,29 @@ const Template = () => {
       ref: "INAAAE478",
       // email: undefined,
     });
-    console.log(res);
+    setResponse(res);
   }, []);
   return (
-    <div style={{ display: "flex", gap: 10 }}>
-      <button onClick={fetchAbhyasiData} type="button">
-        Fetch Abhyasi Data
-      </button>
-      <button type="button" onClick={handleCheckinUser}>
-        Checkin User
-      </button>
-      <button type="button" onClick={handleIsCheckedIn}>
-        Is Checked In
-      </button>
-      <button type="button" onClick={handleAttendanceExists}>
-        Attendance Exists
-      </button>
+    <div>
+      <div style={{ display: "flex", gap: 10 }}>
+        <button onClick={fetchAbhyasiData} type="button">
+          Fetch Abhyasi Data
+        </button>
+        <button type="button" onClick={handleIsCheckedIn}>
+          Is Checked In
+        </button>
+        <button type="button" onClick={handleSearchUser}>
+          Search User
+        </button>
+        <button type="button" onClick={handleCheckinUser}>
+          Post Attendance
+        </button>
+        <button type="button" onClick={handleAttendanceExists}>
+          Attendance Exists
+        </button>
+      </div>
+      <h4>Response:</h4>
+      <pre>{JSON.stringify(response, null, 2)}</pre>
     </div>
   );
 };
