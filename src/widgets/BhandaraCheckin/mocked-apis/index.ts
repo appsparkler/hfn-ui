@@ -5,7 +5,7 @@ import {
   UserWithEmailAndMobile,
   UserWithMobile,
 } from "../types";
-import { fetchUserDetails } from "./server-apis";
+import { checkinUser, fetchUserDetails } from "./server-apis";
 import { init } from "./init";
 
 const checkedInAbhyasis = ["INAAAE478"];
@@ -92,24 +92,31 @@ export const mockedApis: BhandaraCheckinAPIs = {
       }, 600);
     }),
 
-  checkinAbhyasi: (user) =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const isAbhyasiCheckedIn = some<string>(
-          (userId) => userId === user.abhyasiId
-        )(checkedInAbhyasis);
-        if (isAbhyasiCheckedIn) {
-          reject(
-            new Error(`Abhyasi with ID ${user.abhyasiId} is already checked in`)
-          );
-        } else {
-          resolve(true);
-        }
-        if (user.abhyasiId) {
-          checkedInAbhyasis.push(user.abhyasiId);
-        }
-      }, 600);
-    }),
+  checkinAbhyasi: async (user) => {
+    const res = await checkinUser(user);
+    console.log({ res });
+    debugger;
+    return true;
+  },
+
+  // checkinAbhyasi: (user) =>
+  //   new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       const isAbhyasiCheckedIn = some<string>(
+  //         (userId) => userId === user.abhyasiId
+  //       )(checkedInAbhyasis);
+  //       if (isAbhyasiCheckedIn) {
+  //         reject(
+  //           new Error(`Abhyasi with ID ${user.abhyasiId} is already checked in`)
+  //         );
+  //       } else {
+  //         resolve(true);
+  //       }
+  //       if (user.abhyasiId) {
+  //         checkedInAbhyasis.push(user.abhyasiId);
+  //       }
+  //     }, 600);
+  //   }),
 
   checkinMobileOrEmailUser: (user) =>
     new Promise((resolve, reject) => {
