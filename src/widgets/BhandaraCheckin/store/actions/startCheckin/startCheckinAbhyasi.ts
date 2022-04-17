@@ -1,27 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { canCheckinDirectly } from "./utils";
-import { RootState, ThunkApiConfig } from "../index";
-import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
-import { getConfiguredUserDetails } from "./utils";
-import { mainSectionSlice } from "../slices/mainSectionSlice";
-import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
-import { UserSRCM } from "../../types";
+import { canCheckinDirectly } from "../utils";
+import { RootState, ThunkApiConfig } from "../../index";
+import { bhandaraCheckinSlice } from "../../slices/bhandara-checkin";
+import { getConfiguredUserDetails } from "../utils";
+import { mainSectionSlice } from "../../slices/mainSectionSlice";
+import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
+import { UserSRCM } from "../../../types";
 import {
   AttendanceExistEnumType,
   isCheckedinAbhyasi,
-} from "../api-async-thunks/attendanceExists";
-import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
+} from "../../api-async-thunks/attendanceExists";
+import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice";
 import {
   postAttendance,
   PostAttendanceRejectReason,
   searchAbhyasi,
-} from "../api-async-thunks";
+} from "../../api-async-thunks";
 import {
   errorAbhyasiAlreadyCheckedin,
   errorAbhyasiNotFound,
   getBhandaraCheckinActionName,
   errorServer,
-} from "../utils";
+} from "../../utils";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
