@@ -32,7 +32,9 @@ export const isCheckedinAbhyasi = createAsyncThunk<
 >(
   "apis/is-checked-in-abhyasi",
   async (abhyasiId, { rejectWithValue, dispatch }) => {
-    const res = await dispatch(attendanceExists({ ref: abhyasiId }));
+    const res = await dispatch(
+      attendanceExists({ ref: abhyasiId.toUpperCase() })
+    );
     if (res.meta.requestStatus === "rejected") {
       return rejectWithValue(res.payload);
     }

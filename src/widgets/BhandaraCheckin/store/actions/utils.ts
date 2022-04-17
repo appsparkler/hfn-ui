@@ -1,61 +1,70 @@
+import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
 import {
   isAbhyasiId as matchesAbhyasiId,
   isAbhyasiIdTemp,
   isEmail,
   isMobile,
 } from "../../../../utils";
-import { User, UserDetails, UserWithEmail, UserWithMobile } from "../../types";
+import {
+  User,
+  UserDetails,
+  UserSRCM,
+  UserWithEmail,
+  UserWithMobile,
+} from "../../types";
 import { getUpdateDetailsSectionInitialState } from "../slices";
 
 export const isAbhyasiId = (value: string) =>
   matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
 
-export const getConfiguredUserDetails = (user: User): UserDetails => {
+export const getConfiguredUserDetails = (user: UserSRCM): UserDetails => {
   const defaultUserDetails: UserDetails =
     getUpdateDetailsSectionInitialState().userDetails;
   return {
     ...defaultUserDetails,
-    email: (user as UserWithEmail).email
+    email: user.email
       ? {
           isValid: true,
           show: false,
-          value: String((user as UserWithEmail).email),
+          value: user.email,
         }
       : defaultUserDetails.email,
-    mobile: (user as UserWithMobile).mobile
+    mobile: user.mobile
       ? {
           isValid: true,
           show: false,
-          value: String((user as UserWithMobile).mobile),
+          value: user.mobile,
         }
       : defaultUserDetails.mobile,
-    ageGroup: user.ageGroup
+    ageGroup: user.age_group
       ? {
           isValid: true,
           show: false,
-          value: String(user.ageGroup),
+          value: user.age_group,
         }
       : defaultUserDetails.ageGroup,
-    fullName: user.fullName
+    fullName: user.name
       ? {
           isValid: true,
           show: true,
           disabled: true,
-          value: String(user.fullName),
+          value: user.name,
         }
       : defaultUserDetails.fullName,
     gender: user.gender
       ? {
           isValid: true,
           show: false,
-          value: String(user.gender),
+          value: user.gender,
         }
       : defaultUserDetails.gender,
-    location: user.location
+    location: user.city
       ? {
           isValid: true,
           show: false,
-          value: String(user.location) as unknown as any,
+          value:
+            (user.city?.id as unknown as RefinedCityStateCountryLocation) ||
+            ("" as unknown as RefinedCityStateCountryLocation),
         }
       : defaultUserDetails.location,
   };
@@ -79,14 +88,9 @@ export const getUserDetailsForEmailOrMobile = (
   };
 };
 
-export const canCheckinDirectly = ({
-  ageGroup,
-  gender,
-  location,
-  ...user
-}: User) => {
-  const { email } = user as UserWithEmail;
-  const { mobile } = user as UserWithMobile;
+export const canCheckinDirectly = (user: UserSRCM) => {
+  const { email, mobile, age_group, gender, city } = user;
   const hasMobileOrEmail = Boolean(email || mobile);
-  return Boolean(ageGroup && gender && location && hasMobileOrEmail);
+  const hasCity = Boolean(city && city.id);
+  return Boolean(hasMobileOrEmail && hasCity && age_group && gender);
 };

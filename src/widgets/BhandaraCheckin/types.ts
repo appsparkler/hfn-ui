@@ -163,12 +163,12 @@ export type PostAttendanceSuccess = {
 export type PostAttendanceUser = {
   name: string;
   ref?: string | null;
-  email: string | null;
-  mobile: string | null;
+  email?: string | null;
+  mobile?: string | null;
   attendance_datetime?: string;
-  city_id: number | null;
-  age_group: string | null;
-  gender: string | null;
+  city_id?: number | null;
+  age_group?: string | null;
+  gender?: string | null;
 };
 
 export type PostAttendanceFailure = {

@@ -1,45 +1,75 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { canCheckinDirectly } from "./utils";
-import { ThunkApiConfig } from "../index";
+import { RootState, ThunkApiConfig } from "../index";
 import { bhandaraCheckinSlice } from "../slices/bhandara-checkin";
 import { getConfiguredUserDetails } from "./utils";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
-import {
-  checkinAbhyasi,
-  getAbhyasiData,
-  // isCheckedInAbhyasi,
-} from "./async-thunks";
-import { User } from "../../types";
+import { UserSRCM } from "../../types";
 import {
   AttendanceExistEnumType,
   isCheckedinAbhyasi,
 } from "../api-async-thunks/attendanceExists";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
-import { searchAbhyasi } from "../api-async-thunks";
 import {
-  abhyasiAlreadyCheckedIn,
-  abhyasiNotFoundError,
+  postAttendance,
+  PostAttendanceRejectReason,
+  searchAbhyasi,
+} from "../api-async-thunks";
+import {
+  errorAbhyasiAlreadyCheckedin,
+  errorAbhyasiNotFound,
   getBhandaraCheckinActionName,
-  serverError,
+  errorServer,
 } from "../utils";
 
-const continueCheckinAbhyasiPart2 = createAsyncThunk<
+const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
-  string,
+  UserSRCM,
   ThunkApiConfig
 >(
   getBhandaraCheckinActionName("continue-checkin-abhyasi"),
-  async (abhyasiId, { dispatch }) => {
-    const res = await dispatch(getAbhyasiData(abhyasiId));
-    if (res.meta.requestStatus === "rejected") {
-      dispatch(mainSectionSlice.actions.setError(res.payload as string));
-    } else if (canCheckinDirectly(res.payload as User)) {
-      dispatch(checkinAbhyasi());
-    } else {
-      const configuredUserDetails = getConfiguredUserDetails(
-        res.payload as User
+  async (abhyasi, { dispatch, getState }) => {
+    const {
+      mainSection: { value: abhyasiId },
+    } = getState() as RootState;
+    const canAbhyasiCheckinDirectly = canCheckinDirectly(abhyasi);
+    // IF ABHYASI CAN CHECKIN DIRECTLY
+    if (canAbhyasiCheckinDirectly) {
+      const res = await dispatch(
+        postAttendance({
+          name: abhyasi.name,
+          ref: abhyasiId.toUpperCase(),
+          city_id: abhyasi.city.id,
+          age_group: abhyasi.age_group,
+          // email: null,
+          // gender: null,
+          // mobile: null,
+        })
       );
+      if (res.meta.requestStatus === "rejected") {
+        dispatch(mainSectionSlice.actions.stopProcessing());
+        if (res.payload === PostAttendanceRejectReason.ALREADY_CHECKED_IN) {
+          dispatch(
+            mainSectionSlice.actions.setError(
+              errorAbhyasiAlreadyCheckedin(abhyasiId)
+            )
+          );
+        } else if (res.payload === PostAttendanceRejectReason.SERVER_ERROR) {
+          dispatch(
+            snackbarSlice.actions.openSnackbar({
+              children: errorServer(),
+            })
+          );
+        }
+      } else {
+        dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
+        dispatch(mainSectionSlice.actions.stopProcessing());
+      }
+    } else {
+      // VISIT UPDATE DETAILS SECTION
+      dispatch(mainSectionSlice.actions.stopProcessing());
+      const configuredUserDetails = getConfiguredUserDetails(abhyasi);
       dispatch(
         updateDetailsSectionSlice.actions.setState({
           userDetails: configuredUserDetails,
@@ -50,35 +80,39 @@ const continueCheckinAbhyasiPart2 = createAsyncThunk<
   }
 );
 
-export const continueCheckinAbhyasiPart1 = createAsyncThunk<
+export const continueCheckinFoundAbhyasi = createAsyncThunk<
   void,
-  string,
+  UserSRCM,
   ThunkApiConfig
 >(
   getBhandaraCheckinActionName("continueCheckinAbhyasiPart1"),
-  async (abhyasiId, { dispatch }) => {
+  async (abhyasi, { dispatch, getState }) => {
     // CHECK IF ABHYASI IS ALREADY CHECKED IN
+    const {
+      mainSection: { value: abhyasiId },
+    } = getState() as RootState;
     const res = await dispatch(isCheckedinAbhyasi(abhyasiId));
     if (res.meta.requestStatus === "rejected") {
+      dispatch(mainSectionSlice.actions.stopProcessing());
       // ERROR HANDLING
       if (res.payload === AttendanceExistEnumType.SERVER_ERROR) {
         dispatch(
           snackbarSlice.actions.openSnackbar({
-            children: serverError(),
+            children: errorServer(),
           })
         );
       } else if (res.payload === AttendanceExistEnumType.USER_EXISTS) {
         dispatch(
           mainSectionSlice.actions.setState({
             error: true,
-            helperText: abhyasiAlreadyCheckedIn(abhyasiId),
+            helperText: errorAbhyasiAlreadyCheckedin(abhyasiId),
             isProcessing: false,
           })
         );
       }
     } else {
       // CONTINUE TO FINAL CHECKIN SCENARIO
-      const res = await dispatch(continueCheckinAbhyasiPart2(abhyasiId));
+      const res = await dispatch(continueCheckinAbhyasiFinal(abhyasi));
       // handle if checkin-abhyasi-part2 is rejected
     }
   }
@@ -95,16 +129,19 @@ export const startCheckinAbhyasi = createAsyncThunk<
     const searchAbhyasiRes = await dispatch(searchAbhyasi(abhyasiId));
     if (searchAbhyasiRes.meta.requestStatus === "rejected") {
       // SHOW ERROR IF ABHYASI NOT FOUND
+      dispatch(mainSectionSlice.actions.stopProcessing());
       dispatch(
         mainSectionSlice.actions.setState({
           error: true,
-          helperText: abhyasiNotFoundError(abhyasiId),
+          helperText: errorAbhyasiNotFound(abhyasiId),
           isProcessing: false,
         })
       );
     } else {
       // CONTINUE CHECKIN IF ABHYASI EXISTS
-      const res = await dispatch(continueCheckinAbhyasiPart1(abhyasiId));
+      const res = await dispatch(
+        continueCheckinFoundAbhyasi(searchAbhyasiRes.payload as UserSRCM)
+      );
       // handle if checkin-abhyasi-part1 is rejected
     }
   }
