@@ -3,7 +3,7 @@ import { postAttendance } from "./widgets/BhandaraCheckin/mocked-apis/server-api
 import {
   fetchUserDetails,
   isCheckedIn,
-  checkinUser,
+  // checkinUser,
 } from "./widgets/BhandaraCheckin/mocked-apis/server-apis";
 
 export default {
