@@ -4,7 +4,6 @@ import { RootState, ThunkApiConfig } from "../../index";
 import { mainSectionSlice } from "../../slices/mainSectionSlice";
 import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
 import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
-import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice";
 import { isEmail, isMobile } from "../../../../../utils";
 import { errorUnrecognizedInput } from "../../utils";
 
@@ -17,23 +16,9 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
     const isAbhyasiId = isAbhyasiIdUtil(value);
     const isEmailOrMobile = isEmail(value) || isMobile(value);
     if (isAbhyasiId) {
-      const res = await dispatch(startCheckinAbhyasi(value));
-      if (res.meta.requestStatus === "rejected") {
-        dispatch(
-          snackbarSlice.actions.openSnackbar({
-            children: res.payload as string,
-          })
-        );
-      }
+      await dispatch(startCheckinAbhyasi(value));
     } else if (isEmailOrMobile) {
-      const res = await dispatch(startCheckinMobileOrEmailUser(value));
-      if (res.meta.requestStatus === "rejected") {
-        dispatch(
-          snackbarSlice.actions.openSnackbar({
-            children: res.payload as string,
-          })
-        );
-      }
+      await dispatch(startCheckinMobileOrEmailUser(value));
     } else {
       dispatch(mainSectionSlice.actions.setError(errorUnrecognizedInput()));
     }
