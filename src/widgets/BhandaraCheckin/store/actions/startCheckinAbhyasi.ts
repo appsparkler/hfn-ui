@@ -14,9 +14,9 @@ import { User } from "../../types";
 import {
   AttendanceExistEnumType,
   isCheckedinAbhyasi,
-} from "../async-thunks/attendanceExists";
+} from "../api-async-thunks/attendanceExists";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
-import { searchAbhyasi } from "../async-thunks";
+import { searchAbhyasi } from "../api-async-thunks";
 
 const continueCheckinAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
   "widget/continue-checkin-abhyasi",
