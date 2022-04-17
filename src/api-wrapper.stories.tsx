@@ -54,7 +54,13 @@ const Template = () => {
     //   mobile: "+917338080855",
     //   part_name: "Aakash Shah",
     // });
-    const res = await attendanceExists();
+    const res = await attendanceExists({
+      // part_name: "Aakash Shah",
+      // email: "subs@appsparkler@gmail.com",
+      // mobile: "+917338080855",
+      ref: "INAAAE478",
+      // email: undefined,
+    });
     console.log(res);
   }, []);
   return (
