@@ -1,4 +1,4 @@
-import { fetchWithToken } from "./init";
+import { fetchWithToken } from "../init";
 
 export type PostAttendanceUser = {
   name: string;

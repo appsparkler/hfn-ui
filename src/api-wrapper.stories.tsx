@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { postAttendance } from "./widgets/BhandaraCheckin/mocked-apis/postAttendance";
+import { postAttendance } from "./widgets/BhandaraCheckin/mocked-apis/server-apis/postAttendance";
 import {
   fetchUserDetails,
   isCheckedIn,

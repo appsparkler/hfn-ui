@@ -1,6 +1,6 @@
-import { RefinedCityStateCountryLocation } from "../../../components/LocationTextField/locations";
-import { User, UserSRCM, UserWithEmail, UserWithMobile } from "../types";
-import { fetchWithToken } from "./init";
+import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
+import { User, UserSRCM, UserWithEmail, UserWithMobile } from "../../types";
+import { fetchWithToken } from "../init";
 
 export const fetchUserDetails = (abhyasiId: string): Promise<UserSRCM> =>
   fetchWithToken(
