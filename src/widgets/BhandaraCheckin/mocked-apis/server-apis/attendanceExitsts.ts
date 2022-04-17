@@ -1,14 +1,8 @@
+import { AttendanceExistsUser } from "../../types";
 import { fetchWithToken } from "../init";
 
-export type AttendanceExistsUser = {
-  part_name?: string;
-  mobile?: string;
-  email?: string;
-  ref?: string;
-};
-
 export const attendanceExists = (
-  user?: AttendanceExistsUser
+  user: AttendanceExistsUser
 ): Promise<{
   attendance_exists: boolean;
   registration_exists: boolean;

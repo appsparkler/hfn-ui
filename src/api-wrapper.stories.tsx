@@ -54,8 +54,12 @@ const Template = () => {
 
   const handleSearchUser = useCallback(async () => {
     const res = await searchUser({
-      email: "appsparkler@gmail.com",
-      // mobile: "+917338080855",
+      // email: "appsparkler@gmail.com",
+      // ref: "INAAAE",
+      // mobile: "899",
+      // name: "ANK",
+      // year_of_joining: "1999",
+      mobile: "+917338080855",
       // part_name: "Aakash Shah",
     });
     setResponse(res);

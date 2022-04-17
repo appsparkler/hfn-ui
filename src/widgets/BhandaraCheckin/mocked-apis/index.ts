@@ -1,11 +1,17 @@
-import { random, some } from "lodash/fp";
+import { some } from "lodash/fp";
 import {
   BhandaraCheckinAPIs,
   UserWithEmail,
   UserWithEmailAndMobile,
   UserWithMobile,
 } from "../types";
-import { checkinUser, fetchUserDetails } from "./server-apis";
+import {
+  attendanceExists,
+  checkinUser,
+  fetchUserDetails,
+  postAttendance,
+  searchUser,
+} from "./server-apis";
 import { init } from "./init";
 
 const checkedInAbhyasis = ["INAAAE478"];
@@ -19,6 +25,11 @@ const checkedInUsersData: (
 )[] = [];
 
 export const mockedApis: BhandaraCheckinAPIs = {
+  attendanceExists: attendanceExists,
+  postAttendance: postAttendance,
+  searchUser: searchUser,
+
+  // previous
   isAbhyasiCheckedIn: ($id: string) =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
