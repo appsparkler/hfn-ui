@@ -8,9 +8,15 @@ import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
 import {
   checkinAbhyasi,
   getAbhyasiData,
-  isCheckedInAbhyasi,
+  // isCheckedInAbhyasi,
 } from "./async-thunks";
 import { User } from "../../types";
+import {
+  AttendanceExistEnumType,
+  isCheckedinAbhyasi,
+} from "../async-thunks/attendanceExists";
+import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
+import { searchAbhyasi } from "../async-thunks";
 
 const continueCheckinAbhyasi = createAsyncThunk<void, string, ThunkApiConfig>(
   "widget/continue-checkin-abhyasi",
@@ -39,16 +45,34 @@ export const startCheckinAbhyasi = createAsyncThunk<
   string,
   ThunkApiConfig
 >("widget/start-checkin-abhyasi", async (abhyasiId, { dispatch }) => {
-  const res = await dispatch(isCheckedInAbhyasi(abhyasiId));
-  if (res.meta.requestStatus === "rejected")
+  const searchAbhyasiRes = await dispatch(searchAbhyasi(abhyasiId));
+  if (searchAbhyasiRes.meta.requestStatus === "rejected") {
     dispatch(
       mainSectionSlice.actions.setState({
         error: true,
-        helperText: res.payload as string,
+        helperText: `Abhyasi with ID ${abhyasiId} not found.`,
         isProcessing: false,
       })
     );
-  else if (res.payload === true) {
-    dispatch(continueCheckinAbhyasi(abhyasiId));
+  }
+  const res = await dispatch(isCheckedinAbhyasi(abhyasiId));
+  if (res.meta.requestStatus === "rejected") {
+    if (res.payload === AttendanceExistEnumType.SERVER_ERROR) {
+      dispatch(
+        snackbarSlice.actions.openSnackbar({
+          children: "Server Error! Please try again in some time.",
+        })
+      );
+    } else if (res.payload === AttendanceExistEnumType.USER_EXISTS) {
+      dispatch(
+        mainSectionSlice.actions.setState({
+          error: true,
+          helperText: `Abhyasi with ID has ${abhyasiId} already checked in.`,
+          isProcessing: false,
+        })
+      );
+    }
+  } else {
+    // const res = await dispatch(continueCheckinAbhyasi(abhyasiId));
   }
 });

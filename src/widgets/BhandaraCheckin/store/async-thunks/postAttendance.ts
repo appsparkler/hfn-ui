@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PostAttendanceSuccess, PostAttendanceUser } from "../../types";
 import { ThunkApiConfig } from "../index";
+import { serverError } from "../utils";
 
 export const postAttendance = createAsyncThunk<
   PostAttendanceSuccess,
@@ -14,6 +15,6 @@ export const postAttendance = createAsyncThunk<
     }
     return res as PostAttendanceSuccess;
   } catch (error) {
-    return rejectWithValue("Server Error! Please try after some time.");
+    return rejectWithValue(serverError());
   }
 });

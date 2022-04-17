@@ -2,21 +2,21 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { User, UserDetails } from "../../types";
 import { bhandaraCheckinSlice, RootState, ThunkApiConfig } from "../index";
 
-export const isCheckedInAbhyasi = createAsyncThunk<
-  boolean,
-  string,
-  ThunkApiConfig
->(
-  "bhandara-checkin/isCheckinAbhyasi",
-  async (abhyasiId, { extra: { apis }, rejectWithValue }) => {
-    try {
-      const isCheckedIn = await apis.isAbhyasiCheckedIn(abhyasiId);
-      return isCheckedIn;
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  }
-);
+// export const isCheckedInAbhyasi = createAsyncThunk<
+//   boolean,
+//   string,
+//   ThunkApiConfig
+// >(
+//   "bhandara-checkin/isCheckinAbhyasi",
+//   async (abhyasiId, { extra: { apis }, rejectWithValue }) => {
+//     try {
+//       const isCheckedIn = await apis.isAbhyasiCheckedIn(abhyasiId);
+//       return isCheckedIn;
+//     } catch (error) {
+//       return rejectWithValue((error as Error).message);
+//     }
+//   }
+// );
 
 export const checkinAbhyasi = createAsyncThunk<
   boolean,

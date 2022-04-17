@@ -4,6 +4,7 @@ import { RootState, ThunkApiConfig } from "../index";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
 import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
+import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 
 export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
@@ -17,9 +18,23 @@ export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
     );
     const isAbhyasiId = isAbhyasiIdUtil(value);
     if (isAbhyasiId) {
-      await dispatch(startCheckinAbhyasi(value));
+      const res = await dispatch(startCheckinAbhyasi(value));
+      if (res.meta.requestStatus === "rejected") {
+        dispatch(
+          snackbarSlice.actions.openSnackbar({
+            children: res.payload as string,
+          })
+        );
+      }
     } else {
-      await dispatch(startCheckinMobileOrEmailUser(value));
+      const res = await dispatch(startCheckinMobileOrEmailUser(value));
+      if (res.meta.requestStatus === "rejected") {
+        dispatch(
+          snackbarSlice.actions.openSnackbar({
+            children: res.payload as string,
+          })
+        );
+      }
     }
   }
 );

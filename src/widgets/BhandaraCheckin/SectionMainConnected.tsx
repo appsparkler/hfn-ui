@@ -24,8 +24,9 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
         })
       );
     },
-    onClickStart: (userId) => {
-      dispatch(startCheckin() as unknown as Action<any>);
+    onClickStart: async (userId) => {
+      const res = await dispatch(startCheckin() as unknown as Action<any>);
+      console.log(res);
     },
   };
 };
