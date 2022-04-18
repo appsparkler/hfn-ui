@@ -1,4 +1,4 @@
-import { SectionMainConnected } from "./SectionMainConnected";
+import { SectionMainConnected } from "./SectionMain";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
