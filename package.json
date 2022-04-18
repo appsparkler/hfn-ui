@@ -34,7 +34,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "compile": "rimraf dist && yarn rollup -c",
-    "deploy": "yarn build && netlify deploy -d build"
+    "deploy": "yarn build && netlify deploy -d build",
+    "deploy-prod": "yarn deploy --prod"
   },
   "eslintConfig": {
     "extends": [
