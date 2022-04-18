@@ -1,10 +1,15 @@
 import { TextField, Typography } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
-import { CenterOfViewport } from "../../components";
-import { AsyncButton } from "../../components/AsyncButton/AsyncButton";
-import { ClickHandler, InputChangeHandler } from "../../types";
-import { isAbhyasiId, isAbhyasiIdTemp, isEmail, isMobile } from "../../utils";
-import { maxWidth } from "./constants";
+import { CenterOfViewport } from "../../../components";
+import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
+import { ClickHandler, InputChangeHandler } from "../../../types";
+import {
+  isAbhyasiId,
+  isAbhyasiIdTemp,
+  isEmail,
+  isMobile,
+} from "../../../utils";
+import { maxWidth } from "../constants";
 
 export type SectionMainStateProps = {
   error?: boolean;

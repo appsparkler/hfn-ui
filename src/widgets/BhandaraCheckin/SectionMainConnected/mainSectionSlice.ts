@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SectionMainStateProps } from "../../SectionMain";
+import { SectionMainStateProps } from "./SectionMain";
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   return {
@@ -11,7 +11,7 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
 };
 
 export const mainSectionSlice = createSlice({
-  name: "mainSectionSlice",
+  name: "main-section",
   initialState: getMainSectionInitialState(),
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
@@ -38,3 +38,9 @@ export const mainSectionSlice = createSlice({
     }),
   },
 });
+
+export const {
+  actions: mainSectionActions,
+  reducer: mainSectionReducer,
+  name: mainSectionName,
+} = mainSectionSlice;

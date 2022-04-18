@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId as isAbhyasiIdUtil } from "../utils";
 import { RootState, ThunkApiConfig } from "../../index";
-import { mainSectionSlice } from "../../slices/mainSectionSlice";
+import { mainSectionSlice } from "../../../SectionMainConnected/mainSectionSlice";
 import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
 import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
 import { isEmail, isMobile } from "../../../../../utils";

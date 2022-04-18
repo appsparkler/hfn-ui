@@ -3,7 +3,7 @@ import { canCheckinDirectly } from "../utils";
 import { RootState, ThunkApiConfig } from "../../index";
 import { bhandaraCheckinSlice } from "../../slices/bhandara-checkin";
 import { getConfiguredUserDetails } from "../utils";
-import { mainSectionSlice } from "../../slices/mainSectionSlice";
+import { mainSectionSlice } from "../../../SectionMainConnected/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 import { UserSRCM } from "../../../types";
 import {
