@@ -11,11 +11,7 @@ import {
   isCheckedinAbhyasi,
 } from "../../api-async-thunks/attendanceExists";
 import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice";
-import {
-  postAttendance,
-  PostAttendanceRejectReason,
-  searchAbhyasi,
-} from "../../api-async-thunks";
+import { postAttendance, searchAbhyasi } from "../../api-async-thunks";
 import {
   errorAbhyasiAlreadyCheckedin,
   errorAbhyasiNotFound,

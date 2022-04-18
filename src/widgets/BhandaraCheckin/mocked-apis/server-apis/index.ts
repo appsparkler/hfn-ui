@@ -1,5 +1,5 @@
 import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
-import { User, UserSRCM, UserWithEmail, UserWithMobile } from "../../types";
+import { User, UserWithEmail, UserWithMobile } from "../../types";
 import { fetchWithToken } from "../init";
 
 export * from "./attendanceExitsts";

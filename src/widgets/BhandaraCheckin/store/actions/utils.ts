@@ -74,7 +74,11 @@ export const getUserDetailsForEmailOrMobile = (
   return {
     ...defaultUserDetails,
     email: isEmailString
-      ? { ...defaultUserDetails.email, disabled: true, value: emailOrMobile }
+      ? {
+          ...defaultUserDetails.email,
+          disabled: true,
+          value: emailOrMobile.toLowerCase(),
+        }
       : defaultUserDetails.email,
     mobile: isMobileString
       ? { ...defaultUserDetails.mobile, disabled: true, value: emailOrMobile }
