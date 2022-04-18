@@ -1,4 +1,4 @@
-import { SectionMainConnected } from "./SectionMain";
+import { SectionMainConnected } from "./SectionMain/SectionMainConnected";
 import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "./SectionCheckInSuccessConnected";
 import { BhandaraCheckinAPIs, CurrentSectionEnum } from "./types";
