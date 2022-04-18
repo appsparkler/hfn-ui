@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { isAbhyasiId as isAbhyasiIdUtil } from "../utils";
-import { RootState, ThunkApiConfig } from "../../index";
-import { mainSectionSlice } from "../../../SectionMainConnected/mainSectionSlice";
+import { isAbhyasiId as isAbhyasiIdUtil } from "../../store/actions/utils";
+import { RootState, ThunkApiConfig } from "../../store/index";
+import { mainSectionSlice } from "../mainSectionSlice";
 import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
 import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
-import { isEmail, isMobile } from "../../../../../utils";
-import { errorUnrecognizedInput } from "../../utils";
+import { isEmail, isMobile } from "../../../../utils";
+import { errorUnrecognizedInput } from "../../store/utils";
 
 export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
