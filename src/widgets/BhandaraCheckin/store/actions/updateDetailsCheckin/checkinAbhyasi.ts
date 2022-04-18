@@ -12,7 +12,7 @@ const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   }
   if (!userDetails.email.value) return {};
   return {
-    email: userDetails.email.value,
+    email: userDetails.email.value.toUpperCase(),
   };
 };
 
