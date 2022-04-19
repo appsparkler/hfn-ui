@@ -193,6 +193,7 @@ export const SectionUpdateDetails = ({
             label="City / State / Country"
             required
             value={location.value}
+            disabled={location.disabled}
           />
         ) : null}
         {userDetails.email.show && userDetails.mobile.show ? (

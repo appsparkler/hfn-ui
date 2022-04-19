@@ -50,6 +50,7 @@ export const getConfiguredUserDetails = (user: UserSRCM): UserDetails => {
       ? {
           isValid: true,
           show: true,
+          disabled: true,
           value: {
             active: true,
             c_id: user.city?.id,

@@ -46,6 +46,7 @@ export type LocationTextFieldProps = {
   variant?: TextFieldProps["variant"];
   api?: string;
   value?: RefinedCityStateCountryLocation;
+  disabled?: boolean;
   onChange: (value: RefinedCityStateCountryLocation | undefined) => void;
 };
 
@@ -60,6 +61,7 @@ export type LocationAutocompleteInputChange = NonNullable<
 
 export const LocationTextField = ({
   error,
+  disabled,
   helperText,
   label,
   required,
@@ -132,6 +134,7 @@ export const LocationTextField = ({
       autoComplete
       autoHighlight
       open={open}
+      disabled={disabled}
       onInputChange={handleAutocompleteInputChange}
       value={value || null}
       noOptionsText="Please start typing to see options..."

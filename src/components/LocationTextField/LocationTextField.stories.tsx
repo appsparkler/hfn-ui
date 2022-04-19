@@ -21,4 +21,5 @@ locationInputField.args = {
   size: "medium",
   variant: "filled",
   api: "https://static-gatsby.web.app/srcmapi/cities",
+  disabled: false,
 };
