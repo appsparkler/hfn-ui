@@ -1,4 +1,3 @@
-import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
 import { getUpdateDetailsSectionInitialState } from "../../store";
 import { UserDetails, UserSRCM } from "../../types";
 import { onFileText } from "./constants";
