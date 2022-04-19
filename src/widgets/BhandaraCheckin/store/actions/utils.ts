@@ -11,59 +11,6 @@ import { getUpdateDetailsSectionInitialState } from "../slices";
 export const isAbhyasiId = (value: string) =>
   matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
 
-export const getConfiguredUserDetails = (user: UserSRCM): UserDetails => {
-  const defaultUserDetails: UserDetails =
-    getUpdateDetailsSectionInitialState().userDetails;
-  return {
-    ...defaultUserDetails,
-    email: user.email
-      ? {
-          isValid: true,
-          show: false,
-          value: user.email,
-        }
-      : defaultUserDetails.email,
-    mobile: user.mobile
-      ? {
-          isValid: true,
-          show: false,
-          value: user.mobile,
-        }
-      : defaultUserDetails.mobile,
-    ageGroup: user.age_group
-      ? {
-          isValid: true,
-          show: false,
-          value: user.age_group,
-        }
-      : defaultUserDetails.ageGroup,
-    fullName: user.name
-      ? {
-          isValid: true,
-          show: true,
-          disabled: true,
-          value: user.name,
-        }
-      : defaultUserDetails.fullName,
-    gender: user.gender
-      ? {
-          isValid: true,
-          show: false,
-          value: user.gender,
-        }
-      : defaultUserDetails.gender,
-    location: user.city
-      ? {
-          isValid: true,
-          show: false,
-          value:
-            (user.city?.id as unknown as RefinedCityStateCountryLocation) ||
-            ("" as unknown as RefinedCityStateCountryLocation),
-        }
-      : defaultUserDetails.location,
-  };
-};
-
 export const getUserDetailsForEmailOrMobile = (
   emailOrMobile: string
 ): UserDetails => {

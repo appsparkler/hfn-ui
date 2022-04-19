@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { canCheckinDirectly } from "../../store/actions/utils";
 import { RootState, ThunkApiConfig } from "../../store/index";
 import { bhandaraCheckinSlice } from "../../store/slices/bhandara-checkin";
-import { getConfiguredUserDetails } from "../../store/actions/utils";
 import { mainSectionSlice } from "../mainSectionSlice";
 import { updateDetailsSectionSlice } from "../../store/slices/updateDetailsSectionSlice";
 import { UserSRCM } from "../../types";
@@ -18,6 +17,7 @@ import {
   getBhandaraCheckinActionName,
   errorServer,
 } from "../../store/utils";
+import { getConfiguredUserDetails } from "./utils";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
