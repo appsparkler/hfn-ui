@@ -1,9 +1,11 @@
 import { SelectFieldOption } from "../../../components";
 import { onFileText } from "../SectionMain/startCheckin/constants";
 
-export const noFileOptions = [{ label: onFileText, value: onFileText }];
+export const onFileOptions: SelectFieldOption[] = [
+  { label: onFileText, value: onFileText },
+];
 
-export const genderOptions = [
+export const genderOptions: SelectFieldOption[] = [
   { label: "Female", value: "female" },
   { label: "Male", value: "male" },
   { label: "Unspecified", value: "unspecified" },

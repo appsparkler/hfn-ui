@@ -54,10 +54,10 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
       // VISIT UPDATE DETAILS SECTION for updating details before checkin
       const configuredUserDetails = getConfiguredUserDetails(abhyasi);
       if (configuredUserDetails.ageGroup.value === onFileText) {
-        dispatch(updateDetailsSectionSlice.actions.setNoFileOption());
+        dispatch(updateDetailsSectionSlice.actions.setAgeOnFileOption());
       }
       if (configuredUserDetails.gender.value === onFileText) {
-        dispatch(updateDetailsSectionSlice.actions.setGenderNoFileOption());
+        dispatch(updateDetailsSectionSlice.actions.setGenderOnFileOption());
       }
       dispatch(
         updateDetailsSectionSlice.actions.setState({

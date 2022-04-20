@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ageGroupOptions, genderOptions, noFileOptions } from "../../constants";
+import { ageGroupOptions, genderOptions, onFileOptions } from "../../constants";
 import { onFileText } from "../../SectionMain/startCheckin/constants";
 import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails";
 
@@ -54,14 +54,14 @@ export const updateDetailsSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
-    setNoFileOption: (state) => {
+    setAgeOnFileOption: (state) => {
       state.ageGroupOptions = [{ label: onFileText, value: onFileText }];
     },
     setDefaultAgeOptions: (state) => {
       state.ageGroupOptions = { ...ageGroupOptions };
     },
-    setGenderNoFileOption: (state) => {
-      state.genderOptions = { ...noFileOptions };
+    setGenderOnFileOption: (state) => {
+      state.genderOptions = { ...onFileOptions };
     },
     setDefaultGenderOptions: (state) => {
       state.genderOptions = { ...genderOptions };
