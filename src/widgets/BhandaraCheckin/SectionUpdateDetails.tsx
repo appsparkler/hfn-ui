@@ -44,8 +44,8 @@ export const SectionUpdateDetails = ({
   );
 
   const areEmailAndMobileValid = useMemo<boolean>(() => {
-    const showEmail = Boolean(userDetails.email.show);
-    const showMobile = Boolean(userDetails.mobile.show);
+    const disabledEmail = Boolean(userDetails.email.disabled);
+    const disabledMobile = Boolean(userDetails.mobile.disabled);
     const hasEmail = Boolean(userDetails.email.value);
     const hasMobile = Boolean(userDetails.mobile.value);
     const hasValidEmail = isFieldValueValid("email", userDetails.email.value);
@@ -54,24 +54,31 @@ export const SectionUpdateDetails = ({
       userDetails.mobile.value
     );
     // validation for hidden fields
-    if (!hasEmail && hasMobile && !showMobile) return true;
-    if (!hasMobile && hasEmail && !showEmail) return true;
-    if (hasEmail && hasMobile && !showEmail && !showMobile) return true;
-    if (hasEmail && hasMobile && !showEmail && showMobile && hasValidMobile)
+    if (!hasEmail && hasMobile && !disabledMobile) return true;
+    if (!hasMobile && hasEmail && !disabledEmail) return true;
+    if (hasEmail && hasMobile && !disabledEmail && !disabledMobile) return true;
+    if (
+      hasEmail &&
+      hasMobile &&
+      !disabledEmail &&
+      disabledMobile &&
+      hasValidMobile
+    )
       return true;
-    if (hasEmail && hasMobile && !showMobile && showEmail && hasValidEmail)
+    if (
+      hasEmail &&
+      hasMobile &&
+      !disabledMobile &&
+      disabledEmail &&
+      hasValidEmail
+    )
       return true;
     // validation for shown fields
     if (!hasEmail && hasMobile && hasValidMobile) return true;
     if (!hasMobile && hasValidEmail && hasEmail) return true;
     if (hasEmail && hasMobile && hasValidMobile && hasValidEmail) return true;
     return false;
-  }, [
-    userDetails.email.show,
-    userDetails.email.value,
-    userDetails.mobile.show,
-    userDetails.mobile.value,
-  ]);
+  }, [userDetails]);
 
   const isValid = useMemo<boolean>(
     () =>
