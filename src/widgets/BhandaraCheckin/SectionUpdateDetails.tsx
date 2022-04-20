@@ -166,80 +166,66 @@ export const SectionUpdateDetails = ({
           disabled={fullName.disabled}
           focused
         />
-        {userDetails.gender.show || userDetails.ageGroup.show ? (
-          <Horizontal gap={3}>
-            {userDetails.ageGroup.show ? (
-              <SelectField
-                autoWidth
-                autoComplete="off"
-                label="Age Group"
-                labelId="age-group"
-                name="ageGroup"
-                onChange={handleChangeSelectField}
-                options={ageGroupOptions}
-                required
-                value={ageGroup.value}
-                disabled={ageGroup.disabled}
-              />
-            ) : null}
-            {userDetails.gender.show ? (
-              <SelectField
-                autoWidth
-                autoComplete="off"
-                label="Gender"
-                labelId="gender"
-                name="gender"
-                onChange={handleChangeSelectField}
-                options={genderOptions}
-                required
-                value={gender.value}
-                disabled={gender.disabled}
-              />
-            ) : null}
-          </Horizontal>
-        ) : null}
-        {userDetails.location.show ? (
-          <LocationTextField
-            onChange={handleChangeLocation}
-            label="City / State / Country"
+        <Horizontal gap={3}>
+          <SelectField
+            autoWidth
+            autoComplete="off"
+            label="Age Group"
+            labelId="age-group"
+            name="ageGroup"
+            onChange={handleChangeSelectField}
+            options={ageGroupOptions}
             required
-            value={location.value}
-            disabled={location.disabled}
+            value={ageGroup.value}
+            disabled={ageGroup.disabled}
           />
-        ) : null}
-        {userDetails.email.show && userDetails.mobile.show ? (
-          <Alert severity="info" variant="standard">
-            Please enter <strong>atleast one</strong> of <strong>Mobile</strong>{" "}
-            and <strong>Email</strong>
-          </Alert>
-        ) : null}
-        {userDetails.mobile.show ? (
-          <TextField
-            label="Mobile"
-            name="mobile"
+          <SelectField
+            autoWidth
             autoComplete="off"
-            type="tel"
-            variant="outlined"
-            fullWidth
-            helperText="Please include the country code - for ex. +9183392..."
-            value={mobile.value}
-            disabled={mobile.disabled}
-            onChange={handleChange}
+            label="Gender"
+            labelId="gender"
+            name="gender"
+            onChange={handleChangeSelectField}
+            options={genderOptions}
+            required
+            value={gender.value}
+            disabled={gender.disabled}
           />
-        ) : null}
-        {userDetails.email.show ? (
-          <TextField
-            label="Email"
-            autoComplete="off"
-            type="email"
-            name="email"
-            variant="outlined"
-            fullWidth
-            value={email.value}
-            disabled={email.disabled}
-            onChange={handleChange}
-          />
-        ) : null}
+        </Horizontal>
+        <LocationTextField
+          onChange={handleChangeLocation}
+          label="City / State / Country"
+          required
+          value={location.value}
+          disabled={location.disabled}
+        />
+        <Alert severity="info" variant="standard">
+          Please enter <strong>atleast one</strong> of <strong>Mobile</strong>{" "}
+          and <strong>Email</strong>
+        </Alert>
+        <TextField
+          label="Mobile"
+          name="mobile"
+          autoComplete="off"
+          type="tel"
+          variant="outlined"
+          fullWidth
+          helperText="Please include the country code - for ex. +9183392..."
+          value={mobile.value}
+          disabled={mobile.disabled}
+          onChange={handleChange}
+        />
+        <TextField
+          label="Email"
+          autoComplete="off"
+          type="email"
+          name="email"
+          variant="outlined"
+          fullWidth
+          value={email.value}
+          disabled={email.disabled}
+          onChange={handleChange}
+        />
       </Vertical>
       <Horizontal gap={3}>
         <Button
