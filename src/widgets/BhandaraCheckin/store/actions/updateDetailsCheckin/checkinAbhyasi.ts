@@ -13,7 +13,7 @@ const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   }
   if (!userDetails.email.value) return {};
   return {
-    email: userDetails.email.value.toUpperCase(),
+    email: userDetails.email.value.toLowerCase(),
   };
 };
 
@@ -38,10 +38,10 @@ const getAgeGroupValue = (userDetails: UserDetails): { age_group?: string } => {
 };
 
 const getGenderValue = (userDetails: UserDetails): { gender?: string } => {
-  if (userDetails.ageGroup.value?.match(/\*/)) {
+  if (userDetails.gender.value?.match(/\*/)) {
     return {};
   }
-  if (!userDetails.ageGroup.value) return {};
+  if (!userDetails.gender.value) return {};
   return {
     gender: String(userDetails.gender.value),
   };
