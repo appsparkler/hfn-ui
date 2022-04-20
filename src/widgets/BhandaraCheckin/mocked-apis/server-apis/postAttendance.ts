@@ -14,7 +14,7 @@ export const postAttendance = (
     body: raw,
   };
   return fetchWithToken(
-    "https://profile.srcm.net/api/v3/events/0317dc43-15f3-434e-8ee9-ad1aa7f61cf6/attendance/",
+    "https://profile.srcm.net/api/v3/events/6b3ba9a6-84aa-40a4-86bc-3138493b4277/attendance/",
     requestOptions
   );
 };
