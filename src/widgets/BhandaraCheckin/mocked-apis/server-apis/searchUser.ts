@@ -15,8 +15,9 @@ export const searchUser = (
         results: [
           {
             ...res.results[0],
-            age_group: "40-49",
-            gender: "",
+            // age_group: "40-49",
+            age_group: "",
+            gender: "male",
             email: "a*****b@malinator.com",
             mobile: "+91*****399393",
             city: {

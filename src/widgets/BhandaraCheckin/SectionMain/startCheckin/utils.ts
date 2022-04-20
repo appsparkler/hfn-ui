@@ -44,6 +44,7 @@ export const getConfiguredUserDetails = (user: UserSRCM): UserDetails => {
           isValid: true,
           show: true,
           value: onFileText,
+          disabled: true,
         }
       : defaultUserDetails.gender,
     location: user.city
