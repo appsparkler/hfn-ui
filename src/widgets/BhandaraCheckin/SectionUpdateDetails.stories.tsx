@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { ageGroupOptions } from "./constants";
 import { onFileText } from "./SectionMain/startCheckin/constants";
 import { SectionUpdateDetails } from "./SectionUpdateDetails";
 

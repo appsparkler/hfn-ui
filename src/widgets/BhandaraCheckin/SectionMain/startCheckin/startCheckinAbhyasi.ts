@@ -18,6 +18,7 @@ import {
   errorServer,
 } from "../../store/utils";
 import { getConfiguredUserDetails } from "./utils";
+import { onFileText } from "./constants";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
@@ -52,6 +53,9 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
     } else {
       // VISIT UPDATE DETAILS SECTION for updating details before checkin
       const configuredUserDetails = getConfiguredUserDetails(abhyasi);
+      if (configuredUserDetails.ageGroup.value === onFileText) {
+        dispatch(updateDetailsSectionSlice.actions.setNoFileOption());
+      }
       dispatch(
         updateDetailsSectionSlice.actions.setState({
           userDetails: configuredUserDetails,
