@@ -61,18 +61,18 @@ export const SectionUpdateDetails = ({
     if (hasEmail && hasMobile && disabledEmail && disabledMobile) return true;
     if (
       hasEmail &&
-      hasMobile &&
       !disabledEmail &&
-      disabledMobile &&
-      hasValidMobile
+      hasValidEmail &&
+      hasMobile &&
+      disabledMobile
     )
       return true;
     if (
       hasEmail &&
+      disabledEmail &&
       hasMobile &&
       !disabledMobile &&
-      disabledEmail &&
-      hasValidEmail
+      hasValidMobile
     )
       return true;
     // validation for shown fields
