@@ -11,13 +11,14 @@ import {
   SelectFieldProps,
 } from "../../components";
 import { InputChangeHandler } from "../../types";
-import { ageGroupOptions, maxWidth } from "./constants";
+import { maxWidth } from "./constants";
 import { UserDetails } from "./types";
 import { isFieldValueValid } from "./utils";
 
 export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;
   userDetails: UserDetails;
+  ageGroupOptions: SelectFieldProps["options"];
 };
 
 export type SectionUpdateDetailsDispatchProps = {
@@ -32,6 +33,7 @@ export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
 export const SectionUpdateDetails = ({
   isProcessing,
   userDetails,
+  ageGroupOptions,
   onChange,
   onClickCheckin,
   onClickCancel,
@@ -166,6 +168,7 @@ export const SectionUpdateDetails = ({
                 options={ageGroupOptions}
                 required
                 value={ageGroup.value}
+                disabled={ageGroup.disabled}
               />
             ) : null}
             {userDetails.gender.show ? (
@@ -183,6 +186,7 @@ export const SectionUpdateDetails = ({
                 ]}
                 required
                 value={gender.value}
+                disabled={gender.disabled}
               />
             ) : null}
           </Horizontal>

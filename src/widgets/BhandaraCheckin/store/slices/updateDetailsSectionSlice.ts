@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ageGroupOptions } from "../../constants";
+import { onFileText } from "../../SectionMain/startCheckin/constants";
 import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails";
 
 export const getUpdateDetailsSectionInitialState =
   (): SectionUpdateDetailsStateProps => {
     return {
+      ageGroupOptions,
       userDetails: {
         fullName: {
           show: true,
@@ -50,5 +53,11 @@ export const updateDetailsSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
+    setNoFileOption: (state) => {
+      state.ageGroupOptions = [{ label: onFileText, value: onFileText }];
+    },
+    setDefaultAgeOptions: (state) => {
+      state.ageGroupOptions = ageGroupOptions;
+    },
   },
 });

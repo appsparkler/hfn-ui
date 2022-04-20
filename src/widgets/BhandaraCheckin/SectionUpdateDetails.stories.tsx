@@ -1,4 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ageGroupOptions } from "./constants";
+import { onFileText } from "./SectionMain/startCheckin/constants";
 import { SectionUpdateDetails } from "./SectionUpdateDetails";
 
 export default {
@@ -11,6 +13,7 @@ const Template: ComponentStory<typeof SectionUpdateDetails> = (args) => (
 );
 export const updateDetails = Template.bind({});
 updateDetails.args = {
+  ageGroupOptions: [{ value: onFileText, label: onFileText }],
   isProcessing: false,
   userDetails: {
     fullName: {
@@ -44,8 +47,9 @@ updateDetails.args = {
       show: true,
     },
     ageGroup: {
-      value: "5-9",
+      value: onFileText,
       show: true,
+      disabled: true,
     },
     gender: {
       value: "female",

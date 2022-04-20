@@ -1,5 +1,7 @@
+import { SelectFieldOption } from "../../../components";
+
 export const maxWidth = 350;
-export const ageGroupOptions = [
+export const ageGroupOptions: SelectFieldOption[] = [
   {
     value: "0-4",
     label: "0-4",
