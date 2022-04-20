@@ -9,11 +9,11 @@ import {
   SelectField,
   LocationTextFieldProps,
   SelectFieldProps,
-} from "../../components";
-import { InputChangeHandler } from "../../types";
-import { maxWidth } from "./constants";
-import { UserDetails } from "./types";
-import { isFieldValueValid } from "./utils";
+} from "../../../components";
+import { InputChangeHandler } from "../../../types";
+import { maxWidth } from "../constants";
+import { UserDetails } from "../types";
+import { isFieldValueValid } from "../utils";
 
 export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;

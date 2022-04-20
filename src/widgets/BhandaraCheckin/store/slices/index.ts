@@ -1,3 +1,3 @@
 export * from "./bhandara-checkin";
 export * from "../../SectionMain/mainSectionSlice";
-export * from "./updateDetailsSectionSlice";
+export * from "../../SectionUpdateDetails/updateDetailsSectionSlice";

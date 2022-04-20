@@ -1,12 +1,12 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { resetAppState, RootState, updateDetailsCheckin } from "./store";
+import { resetAppState, RootState, updateDetailsCheckin } from "../store";
 import {
   SectionUpdateDetails,
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { snackbarSlice } from "../../components/Snackbar/snackbarSlice";
-import { updateDetailsSectionSlice } from "./store/slices/updateDetailsSectionSlice";
+import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
+import { updateDetailsSectionSlice } from "./updateDetailsSectionSlice";
 import { Action } from "@reduxjs/toolkit";
 
 const mapStateToProps: MapStateToProps<

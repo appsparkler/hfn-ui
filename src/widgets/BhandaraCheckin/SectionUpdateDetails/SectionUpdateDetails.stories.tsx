@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { onFileText } from "./SectionMain/startCheckin/constants";
+import { onFileText } from "../SectionMain/startCheckin/constants";
 import { SectionUpdateDetails } from "./SectionUpdateDetails";
 
 export default {

@@ -3,7 +3,7 @@ import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
 import { BhandaraCheckinAPIs } from "../types";
 import { bhandaraCheckinSlice } from "./slices";
 import { mainSectionSlice } from "../SectionMain/mainSectionSlice";
-import { updateDetailsSectionSlice } from "./slices/updateDetailsSectionSlice";
+import { updateDetailsSectionSlice } from "../SectionUpdateDetails/updateDetailsSectionSlice";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinSlice.reducer,
