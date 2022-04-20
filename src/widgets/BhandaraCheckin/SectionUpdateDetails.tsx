@@ -19,6 +19,7 @@ export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;
   userDetails: UserDetails;
   ageGroupOptions: SelectFieldProps["options"];
+  genderOptions: SelectFieldProps["options"];
 };
 
 export type SectionUpdateDetailsDispatchProps = {
@@ -34,6 +35,7 @@ export const SectionUpdateDetails = ({
   isProcessing,
   userDetails,
   ageGroupOptions,
+  genderOptions,
   onChange,
   onClickCheckin,
   onClickCancel,
@@ -54,9 +56,9 @@ export const SectionUpdateDetails = ({
       userDetails.mobile.value
     );
     // validation for hidden fields
-    if (!hasEmail && hasMobile && !disabledMobile) return true;
-    if (!hasMobile && hasEmail && !disabledEmail) return true;
-    if (hasEmail && hasMobile && !disabledEmail && !disabledMobile) return true;
+    if (!hasEmail && hasMobile && disabledMobile) return true;
+    if (!hasMobile && hasEmail && disabledEmail) return true;
+    if (hasEmail && hasMobile && disabledEmail && disabledMobile) return true;
     if (
       hasEmail &&
       hasMobile &&
@@ -152,6 +154,7 @@ export const SectionUpdateDetails = ({
       <Vertical gap={3} width={"100%"}>
         <TextField
           label="Full Name"
+          color="info"
           required
           autoComplete="off"
           name="fullName"
@@ -161,6 +164,7 @@ export const SectionUpdateDetails = ({
           onChange={handleChange}
           value={fullName.value}
           disabled={fullName.disabled}
+          focused
         />
         {userDetails.gender.show || userDetails.ageGroup.show ? (
           <Horizontal gap={3}>
@@ -186,11 +190,7 @@ export const SectionUpdateDetails = ({
                 labelId="gender"
                 name="gender"
                 onChange={handleChangeSelectField}
-                options={[
-                  { label: "Female", value: "female" },
-                  { label: "Male", value: "male" },
-                  { label: "Unspecified", value: "unspecified" },
-                ]}
+                options={genderOptions}
                 required
                 value={gender.value}
                 disabled={gender.disabled}

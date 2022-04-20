@@ -1,6 +1,16 @@
 import { SelectFieldOption } from "../../../components";
+import { onFileText } from "../SectionMain/startCheckin/constants";
+
+export const noFileOptions = [{ label: onFileText, value: onFileText }];
+
+export const genderOptions = [
+  { label: "Female", value: "female" },
+  { label: "Male", value: "male" },
+  { label: "Unspecified", value: "unspecified" },
+];
 
 export const maxWidth = 350;
+
 export const ageGroupOptions: SelectFieldOption[] = [
   {
     value: "0-4",

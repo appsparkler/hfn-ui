@@ -56,6 +56,9 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
       if (configuredUserDetails.ageGroup.value === onFileText) {
         dispatch(updateDetailsSectionSlice.actions.setNoFileOption());
       }
+      if (configuredUserDetails.gender.value === onFileText) {
+        dispatch(updateDetailsSectionSlice.actions.setGenderNoFileOption());
+      }
       dispatch(
         updateDetailsSectionSlice.actions.setState({
           userDetails: configuredUserDetails,
