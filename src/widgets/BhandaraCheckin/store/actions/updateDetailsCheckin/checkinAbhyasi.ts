@@ -5,6 +5,7 @@ import { bhandaraCheckinSlice } from "../../slices";
 import { getBhandaraCheckinActionName } from "../../utils";
 import { postAttendance } from "../../api-async-thunks";
 import { UserDetails } from "../../../types";
+import { RefinedCityStateCountryLocation } from "../../../../../components/LocationTextField/locations";
 
 const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   if (userDetails.email.value?.match(/\*/)) {
@@ -25,6 +26,7 @@ const getMobileValue = (userDetails: UserDetails): { mobile?: string } => {
     mobile: userDetails.mobile.value,
   };
 };
+
 const getAgeGroupValue = (userDetails: UserDetails): { age_group?: string } => {
   if (userDetails.ageGroup.value?.match(/\*/)) {
     return {};
@@ -34,6 +36,24 @@ const getAgeGroupValue = (userDetails: UserDetails): { age_group?: string } => {
     age_group: userDetails.ageGroup.value,
   };
 };
+
+const getGenderValue = (userDetails: UserDetails): { gender?: string } => {
+  if (userDetails.ageGroup.value?.match(/\*/)) {
+    return {};
+  }
+  if (!userDetails.ageGroup.value) return {};
+  return {
+    gender: String(userDetails.gender.value),
+  };
+};
+
+const getCityId = (userDetails: UserDetails): { city_id?: number } => {
+  return {
+    city_id: (userDetails.location.value as RefinedCityStateCountryLocation)
+      .c_id as number,
+  };
+};
+
 export const checkinAbhyasi = createAsyncThunk<
   boolean,
   undefined,
@@ -49,13 +69,11 @@ export const checkinAbhyasi = createAsyncThunk<
       postAttendance({
         ref: value.toUpperCase(),
         name: String(userDetails.fullName.value),
-        age_group: userDetails.ageGroup.value,
-        city_id: userDetails.location.show
-          ? userDetails.location.value?.c_id
-          : (userDetails.location.value as unknown as number),
+        ...getCityId(userDetails),
         ...getEmailValue(userDetails),
         ...getMobileValue(userDetails),
         ...getAgeGroupValue(userDetails),
+        ...getGenderValue(userDetails),
       })
     );
     if (res.meta.requestStatus === "rejected") {
