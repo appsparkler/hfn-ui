@@ -4,8 +4,8 @@ import {
   isEmail,
   isMobile,
 } from "../../../../utils";
+import { getUpdateDetailsSectionInitialState } from "../../SectionUpdateDetails/updateDetailsSectionSlice";
 import { UserDetails, UserSRCM } from "../../types";
-import { getUpdateDetailsSectionInitialState } from "../slices";
 
 export const isAbhyasiId = (value: string) =>
   matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
