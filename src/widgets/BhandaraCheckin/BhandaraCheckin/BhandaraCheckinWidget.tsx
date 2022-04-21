@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { useMemo } from "react";
-import { BhandaraCheckinAPIs } from "./types";
+import { BhandaraCheckinAPIs } from "../types";
 import { BhandaraCheckinViewConnected } from "./BhandaraCheckinViewConnected";
-import { rootReducer } from "./store";
+import { rootReducer } from "../store";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;

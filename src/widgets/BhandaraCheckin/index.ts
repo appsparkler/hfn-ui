@@ -1,1 +1,1 @@
-export * from "./BhandaraCheckinWidget";
+export * from "./BhandaraCheckin/BhandaraCheckinWidget";
