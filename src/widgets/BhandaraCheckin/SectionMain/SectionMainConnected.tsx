@@ -1,34 +1,23 @@
-import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState, getMainSectionInitialState } from "../store";
-import { startCheckin } from "./startCheckin";
 import {
   SectionMain,
   SectionMainDispatchProps,
   SectionMainStateProps,
 } from "./SectionMain";
-import { mainSectionSlice } from "./mainSectionSlice";
 
-const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
-  ({ mainSection }) => mainSection;
+type SectionMainMapStateToProps = MapStateToProps<
+  SectionMainStateProps,
+  {},
+  { mainSection: SectionMainStateProps }
+>;
 
-const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
-  dispatch
-) => {
-  return {
-    onChange: (value) => {
-      dispatch(
-        mainSectionSlice.actions.setState({
-          ...getMainSectionInitialState(),
-          value,
-        })
-      );
-    },
-    onClickStart: (userId) => {
-      dispatch(startCheckin() as unknown as Action<any>);
-    },
-  };
-};
+const mapStateToProps: SectionMainMapStateToProps = ({ mainSection }) =>
+  mainSection;
+
+const mapDispatchToProps: MapDispatchToProps<
+  SectionMainDispatchProps,
+  SectionMainDispatchProps
+> = (dispatch, dispatchProps) => dispatchProps;
 
 export const SectionMainConnected = connect(
   mapStateToProps,

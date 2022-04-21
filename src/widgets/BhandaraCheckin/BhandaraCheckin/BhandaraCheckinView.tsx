@@ -5,6 +5,13 @@ import { BhandaraCheckinAPIs, CurrentSectionEnum } from "../types";
 import { SnackbarConnected } from "./SnackbarConnected";
 import { useMemo } from "react";
 import { Box } from "@mui/material";
+import { useDispatch } from "react-redux";
+import {
+  getMainSectionInitialState,
+  mainSectionSlice,
+} from "../SectionMain/mainSectionSlice";
+import { startCheckin } from "../SectionMain/startCheckin";
+import { Action } from "@reduxjs/toolkit";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -17,6 +24,7 @@ export type BhandaraCheckinViewStateProps = {
 export const BhandaraCheckinView = ({
   currentSection,
 }: BhandaraCheckinViewStateProps) => {
+  const dispatch = useDispatch();
   const { showMain, showUpdateDetails, showCheckinSuccess } = useMemo<{
     showMain: boolean;
     showUpdateDetails: boolean;
@@ -31,7 +39,21 @@ export const BhandaraCheckinView = ({
   );
   return (
     <Box bgcolor={"white"}>
-      {showMain ? <SectionMainConnected /> : null}
+      {showMain ? (
+        <SectionMainConnected
+          onChange={(value) =>
+            dispatch(
+              mainSectionSlice.actions.setState({
+                ...getMainSectionInitialState(),
+                value,
+              })
+            )
+          }
+          onClickStart={(userId) => {
+            dispatch(startCheckin());
+          }}
+        />
+      ) : null}
       {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
       {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
       <SnackbarConnected />
