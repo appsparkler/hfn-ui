@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
 import { BhandaraCheckinAPIs } from "../types";
-import { bhandaraCheckinSlice } from "./slices";
 import { mainSectionSlice } from "../SectionMain/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../SectionUpdateDetails/updateDetailsSectionSlice";
+import { bhandaraCheckinSlice } from "../BhandaraCheckin/bhandaraCheckinSlice";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinSlice.reducer,
@@ -34,5 +34,4 @@ export type ThunkApiConfig = {
   };
 };
 
-export * from "./slices";
 export * from "./actions";

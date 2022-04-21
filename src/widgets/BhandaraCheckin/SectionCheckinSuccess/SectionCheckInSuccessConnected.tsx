@@ -1,11 +1,12 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState, bhandaraCheckinSlice, resetAppState } from "../store";
+import { RootState } from "../store";
 import {
   SectionCheckinSuccess,
   SectionCheckinStateProps,
   SectionCheckinDispatchProps,
 } from "./SectionCheckInSuccess";
-import { Action } from "@reduxjs/toolkit";
+import { bhandaraCheckinSlice } from "../BhandaraCheckin/bhandaraCheckinSlice";
+import { resetAppStateAction } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,
@@ -18,7 +19,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
     return {
       onClickReturn: () => {
         dispatch(bhandaraCheckinSlice.actions.goToMain());
-        dispatch(resetAppState() as unknown as Action<any>);
+        dispatch(resetAppStateAction() as any);
       },
     };
   };

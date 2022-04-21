@@ -1,3 +1,3 @@
 export { updateDetailsCheckin } from "../../SectionUpdateDetails/updateDetailsCheckin";
-export { resetAppState } from "./resetAppState";
+export { resetAppStateAction } from "./resetAppState";
 export { startCheckin } from "../../SectionMain/startCheckin";
