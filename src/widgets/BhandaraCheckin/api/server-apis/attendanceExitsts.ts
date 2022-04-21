@@ -1,5 +1,6 @@
 import { AttendanceExistsUser } from "../../types";
 import { fetchWithToken } from "../utils";
+import { API_URL, API_VERSION, EVENT_ID } from "./env-variables";
 
 export const attendanceExists = (
   user: AttendanceExistsUser
@@ -13,7 +14,7 @@ export const attendanceExists = (
   };
 
   return fetchWithToken(
-    `https://profile.srcm.net/api/v3/events/6b3ba9a6-84aa-40a4-86bc-3138493b4277/attendance/exists/?${urlSearchParams}`,
+    `${API_URL}/api/${API_VERSION}/events/${EVENT_ID}/attendance/exists/?${urlSearchParams}`,
     requestOptions
   );
 };
