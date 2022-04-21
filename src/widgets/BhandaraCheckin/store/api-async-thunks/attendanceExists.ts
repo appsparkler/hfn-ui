@@ -16,9 +16,13 @@ export const attendanceExists = createAsyncThunk<
   async (user, { extra: { apis }, rejectWithValue }) => {
     try {
       const res = await apis.attendanceExists(user);
-      if (res.attendance_exists)
+      if (res.attendance_exists === false) {
+        return true;
+      }
+      if (res.attendance_exists === true) {
         return rejectWithValue(AttendanceExistEnumType.USER_EXISTS);
-      return res.attendance_exists;
+      }
+      return rejectWithValue(AttendanceExistEnumType.SERVER_ERROR);
     } catch (error) {
       return rejectWithValue(AttendanceExistEnumType.SERVER_ERROR);
     }
