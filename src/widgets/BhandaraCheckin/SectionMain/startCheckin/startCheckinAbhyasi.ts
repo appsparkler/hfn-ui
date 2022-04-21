@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { canCheckinDirectly } from "../../store/actions/utils";
 import { RootState, ThunkApiConfig } from "../../store/index";
-import { bhandaraCheckinSlice } from "../../BhandaraCheckin/bhandara-checkin";
+import { bhandaraCheckinSlice } from "../../BhandaraCheckin/bhandaraCheckinSlice";
 import { mainSectionSlice } from "../mainSectionSlice";
 import { updateDetailsSectionSlice } from "../../SectionUpdateDetails/updateDetailsSectionSlice";
 import { UserSRCM } from "../../types";
