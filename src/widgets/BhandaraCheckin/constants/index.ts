@@ -1,5 +1,6 @@
 import { SelectFieldOption } from "../../../components";
-import { onFileText } from "../SectionMain/startCheckin/constants";
+
+export const onFileText = "**on file**";
 
 export const onFileOptions: SelectFieldOption[] = [
   { label: onFileText, value: onFileText },

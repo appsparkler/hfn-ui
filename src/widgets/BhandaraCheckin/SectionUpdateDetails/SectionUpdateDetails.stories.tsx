@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { onFileText } from "../SectionMain/startCheckin/constants";
+import { onFileOptions, onFileText } from "../constants";
 import { SectionUpdateDetails } from "./SectionUpdateDetails";
 
 export default {
@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof SectionUpdateDetails> = (args) => (
 );
 export const updateDetails = Template.bind({});
 updateDetails.args = {
-  ageGroupOptions: [{ value: onFileText, label: onFileText }],
+  ageGroupOptions: [...onFileOptions],
   isProcessing: false,
   userDetails: {
     fullName: {

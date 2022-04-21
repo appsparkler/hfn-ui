@@ -18,7 +18,7 @@ import {
   errorServer,
 } from "../../store/utils";
 import { getConfiguredUserDetails } from "./utils";
-import { onFileText } from "./constants";
+import { onFileText } from "../../constants";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,

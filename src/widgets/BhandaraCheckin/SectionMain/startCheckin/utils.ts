@@ -1,6 +1,6 @@
+import { onFileText } from "../../constants";
 import { getUpdateDetailsSectionInitialState } from "../../store";
 import { UserDetails, UserSRCM } from "../../types";
-import { onFileText } from "./constants";
 
 export const getConfiguredUserDetails = (user: UserSRCM): UserDetails => {
   const defaultUserDetails: UserDetails =
