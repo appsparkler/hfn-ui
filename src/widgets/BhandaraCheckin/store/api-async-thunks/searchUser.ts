@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkApiConfig } from "..";
 import { SearchUserParams, SearchUserResponse, UserSRCM } from "../../types";
-import { errorAbhyasiNotFound } from "../utils";
+import { errorAbhyasiNotFound } from "../../utils";
 
 export const searchUser = createAsyncThunk<
   SearchUserResponse,

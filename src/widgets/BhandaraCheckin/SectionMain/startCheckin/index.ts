@@ -5,7 +5,7 @@ import { mainSectionSlice } from "../mainSectionSlice";
 import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
 import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
 import { isEmail, isMobile } from "../../../../utils";
-import { errorUnrecognizedInput } from "../../store/utils";
+import { errorUnrecognizedInput } from "../../utils";
 
 export const startCheckin = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",

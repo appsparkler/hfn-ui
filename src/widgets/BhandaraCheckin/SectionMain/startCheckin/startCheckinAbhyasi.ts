@@ -11,14 +11,14 @@ import {
 } from "../../store/api-async-thunks/attendanceExists";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 import { postAttendance, searchAbhyasi } from "../../store/api-async-thunks";
+import { getBhandaraCheckinActionName } from "../../store/utils";
+import { getConfiguredUserDetails } from "./utils";
+import { onFileText } from "../../constants";
 import {
   errorAbhyasiAlreadyCheckedin,
   errorAbhyasiNotFound,
-  getBhandaraCheckinActionName,
   errorServer,
-} from "../../store/utils";
-import { getConfiguredUserDetails } from "./utils";
-import { onFileText } from "../../constants";
+} from "../../utils";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
