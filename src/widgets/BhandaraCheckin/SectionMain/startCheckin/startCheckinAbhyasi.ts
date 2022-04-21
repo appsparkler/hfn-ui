@@ -11,7 +11,7 @@ import {
 } from "../../store/api-async-thunks/attendanceExists";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
 import { postAttendance, searchAbhyasi } from "../../store/api-async-thunks";
-import { getBhandaraCheckinActionName } from "../../store/utils";
+// import { getBhandaraCheckinActionName } from "../../store/utils";
 import { getConfiguredUserDetails } from "./utils";
 import { onFileText } from "../../constants";
 import {
@@ -25,7 +25,7 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
   UserSRCM,
   ThunkApiConfig
 >(
-  getBhandaraCheckinActionName("continue-checkin-abhyasi"),
+  `${mainSectionSlice.name}/continue-checkin-abhyasi`,
   async (abhyasi, { dispatch, getState }) => {
     const {
       mainSection: { value: abhyasiId },
@@ -74,7 +74,7 @@ export const continueCheckinFoundAbhyasi = createAsyncThunk<
   UserSRCM,
   ThunkApiConfig
 >(
-  getBhandaraCheckinActionName("continueCheckinAbhyasiPart1"),
+  `${mainSectionSlice.name}/continueCheckinFoundAbhyasi`,
   async (abhyasi, { dispatch, getState, rejectWithValue }) => {
     // CHECK IF ABHYASI IS ALREADY CHECKED IN
     const {
@@ -115,7 +115,7 @@ export const startCheckinAbhyasi = createAsyncThunk<
   string,
   ThunkApiConfig
 >(
-  getBhandaraCheckinActionName("start-checkin-abhyasi"),
+  `${mainSectionSlice.name}/startCheckinAbhyasi`,
   async (abhyasiId, { dispatch, rejectWithValue }) => {
     // CHECK IF USER EXISTS IN SRCM DB
     const searchAbhyasiRes = await dispatch(searchAbhyasi(abhyasiId));

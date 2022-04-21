@@ -25,6 +25,7 @@ const exampleStore = configureStore({
 });
 
 export type RootState = ReturnType<typeof exampleStore.getState>;
+
 export type RootDispatch = typeof exampleStore.dispatch;
 
 export type ThunkApiConfig = {

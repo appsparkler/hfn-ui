@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState, ThunkApiConfig } from "../../store";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
-import { bhandaraCheckinSlice } from "../../store/slices";
-import { getBhandaraCheckinActionName } from "../../store/utils";
+import {
+  bhandaraCheckinSlice,
+  updateDetailsSectionSlice,
+} from "../../store/slices";
 import { postAttendance } from "../../store/api-async-thunks";
 import { UserDetails } from "../../types";
 import { RefinedCityStateCountryLocation } from "../../../../components/LocationTextField/locations";
@@ -59,7 +61,7 @@ export const checkinAbhyasi = createAsyncThunk<
   undefined,
   ThunkApiConfig
 >(
-  getBhandaraCheckinActionName("update-details-checkin-abhyasi"),
+  `${updateDetailsSectionSlice.name}/checkinAbhyasi`,
   async (_, { getState, dispatch, rejectWithValue }) => {
     const {
       updateDetailsSection: { userDetails },
