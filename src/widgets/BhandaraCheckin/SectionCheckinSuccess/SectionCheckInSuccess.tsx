@@ -1,8 +1,8 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
-import { Vertical } from "../../components";
-import { CenterOfViewport } from "../../components/CenterOfViewport/CenterOfViewport";
-import { maxWidth } from "./constants";
+import { Vertical } from "../../../components";
+import { CenterOfViewport } from "../../../components/CenterOfViewport/CenterOfViewport";
+import { maxWidth } from "../constants";
 
 export type SectionCheckinStateProps = {};
 

@@ -1,8 +1,8 @@
 import { SectionMainConnected } from "../SectionMain/SectionMainConnected";
 import { SectionUpdateDetailsConnected } from "../SectionUpdateDetails/SectionUpdateDetailsConnected";
-import { SectionCheckinSuccessConnected } from "../SectionCheckInSuccessConnected";
+import { SectionCheckinSuccessConnected } from "../SectionCheckinSuccess/SectionCheckInSuccessConnected";
 import { BhandaraCheckinAPIs, CurrentSectionEnum } from "../types";
-import { SnackbarConnected } from "../SnackbarConnected";
+import { SnackbarConnected } from "./SnackbarConnected";
 import { useMemo } from "react";
 import { Box } from "@mui/material";
 
