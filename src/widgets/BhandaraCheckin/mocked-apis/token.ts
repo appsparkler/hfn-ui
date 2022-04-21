@@ -1,17 +1,19 @@
 const formdata = new FormData();
-formdata.append("client_id", "XxFhQFRe5E0RsmyZ2SvCRqjvcmXJogEW2OPUPeSK");
-formdata.append("grant_type", "client_credentials");
+formdata.append("grant_type", "password");
+formdata.append("client_id", "u4g9FxYdcjAZVAGfEQw1TWxVnskG1o8y6axOfVVH");
 formdata.append(
   "client_secret",
-  "n7XvchA0MHClZPIlrqicZBDbns9kp0DjdbdmtGUtEwR1NLCCwYDv2uu3flsZA720QbE7woOWsmyXjr6JJIWYAfPXeapA2OXQMgeVfHL7bDXgHZ0QDmpnQy88JtCcdVSI"
+  "nd25rjcZfLQxr3cTYk4OSKL2e8D9YrZwqE8viE8dlQrDwIs1orK6NZjOrnK8Vs3oT4Iv2ZBtCTO2OnohT2qvBj3PFiQjzNr94uFvsUOFQYjSwdINQLLas0liP7l0K1BK"
 );
+formdata.append("username", "test_abhyasi1@mailinator.com");
+formdata.append("password", "password");
 
 var requestOptions: RequestInit = {
   method: "POST",
   body: formdata,
 };
 
-export const setupToken = () =>
+export const login = () =>
   fetch("https://profile.srcm.net/o/token/", requestOptions)
     .then((response) => response.text())
     .then((result) => {

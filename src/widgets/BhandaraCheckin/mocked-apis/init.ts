@@ -1,4 +1,4 @@
-import { setupToken } from "./token";
+import { login } from "./token";
 
 export const init = () => {
   const accessTokenObj = localStorage.getItem("srcmToken");
@@ -34,7 +34,7 @@ export const fetchWithToken = async <T = any>(
 
   const obj = await res.json();
   if (obj.detail === "Authentication credentials were not provided.") {
-    await setupToken();
+    await login();
     return fetchWithToken(input, init);
   } else return obj;
 };
