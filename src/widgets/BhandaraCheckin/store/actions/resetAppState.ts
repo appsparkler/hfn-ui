@@ -1,10 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { mainSectionSlice } from "../../SectionMain/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../../SectionUpdateDetails/updateDetailsSectionSlice";
-import {
-  bhandaraCheckinSlice,
-  mainSectionSlice,
-  ThunkApiConfig,
-} from "../index";
+import { bhandaraCheckinSlice, ThunkApiConfig } from "../index";
 
 export const resetAppState = createAsyncThunk<void, undefined, ThunkApiConfig>(
   "widget/reset-state",
