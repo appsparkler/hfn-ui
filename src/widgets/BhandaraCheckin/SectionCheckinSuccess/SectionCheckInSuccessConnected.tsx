@@ -5,8 +5,7 @@ import {
   SectionCheckinStateProps,
   SectionCheckinDispatchProps,
 } from "./SectionCheckInSuccess";
-import { bhandaraCheckinSlice } from "../BhandaraCheckin/bhandaraCheckinSlice";
-import { resetAppStateAction } from "../store";
+import { resetAppState } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,
@@ -18,8 +17,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
   (dispatch) => {
     return {
       onClickReturn: () => {
-        dispatch(bhandaraCheckinSlice.actions.goToMain());
-        dispatch(resetAppStateAction() as any);
+        resetAppState(dispatch);
       },
     };
   };
