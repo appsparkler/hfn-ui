@@ -3,7 +3,7 @@ import {
   PostAttendanceSuccess,
   PostAttendanceUser,
 } from "../../types";
-import { fetchWithToken } from "../init";
+import { fetchWithToken } from "../utils";
 
 export const postAttendance = (
   user: PostAttendanceUser

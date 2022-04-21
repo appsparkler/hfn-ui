@@ -1,5 +1,5 @@
 import { SearchUserParams, SearchUserResponse } from "../../types";
-import { fetchWithToken } from "../init";
+import { fetchWithToken } from "../utils";
 
 export const searchUser = (
   searchParams: SearchUserParams

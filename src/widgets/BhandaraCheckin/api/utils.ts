@@ -1,6 +1,6 @@
 import { login } from "./server-apis/login";
 
-export const init = () => {
+export const setAccessTokenOnLocalStorage = () => {
   const accessTokenObj = localStorage.getItem("srcmToken");
   if (!accessTokenObj) {
     const tokenObj = {

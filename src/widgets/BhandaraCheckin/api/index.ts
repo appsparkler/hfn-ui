@@ -1,10 +1,10 @@
 import { BhandaraCheckinAPIs } from "../types";
 import { attendanceExists, postAttendance, searchUser } from "./server-apis";
-import { init } from "./init";
+import { setAccessTokenOnLocalStorage } from "./utils";
 
-init();
+setAccessTokenOnLocalStorage();
 
-export const mockedApis: BhandaraCheckinAPIs = {
+export const apis: BhandaraCheckinAPIs = {
   attendanceExists: attendanceExists,
   postAttendance: postAttendance,
   searchUser: searchUser,

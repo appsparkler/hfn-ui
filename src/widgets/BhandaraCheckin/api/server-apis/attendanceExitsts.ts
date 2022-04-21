@@ -1,5 +1,5 @@
 import { AttendanceExistsUser } from "../../types";
-import { fetchWithToken } from "../init";
+import { fetchWithToken } from "../utils";
 
 export const attendanceExists = (
   user: AttendanceExistsUser
