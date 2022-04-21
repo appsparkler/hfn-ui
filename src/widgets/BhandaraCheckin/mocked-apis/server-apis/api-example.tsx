@@ -1,34 +1,8 @@
 import { useCallback, useState } from "react";
-import {
-  fetchUserDetails,
-  isCheckedIn,
-  postAttendance,
-  attendanceExists,
-  searchUser,
-} from "./widgets/BhandaraCheckin/mocked-apis/server-apis";
+import { postAttendance, attendanceExists, searchUser } from "./index";
 
-export default {
-  title: "Widgets/Bhandara Checkin/API Story",
-};
-
-const Template = () => {
+export const ApiExample = () => {
   const [response, setResponse] = useState<any>({});
-  const fetchAbhyasiData = useCallback(() => {
-    fetchUserDetails("INAAAE479")
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => console.error("oops", e));
-  }, []);
-
-  const handleIsCheckedIn = useCallback(async () => {
-    const res = await isCheckedIn({
-      email: "appsparkler@gmail.com",
-      mobile: "+917338080855",
-      part_name: "Aakash Shah",
-    });
-    setResponse(res);
-  }, []);
 
   const handlePostAttendance = useCallback(async () => {
     const uuid = Date.now();
@@ -90,15 +64,10 @@ const Template = () => {
     });
     setResponse(res);
   }, []);
+
   return (
     <div>
       <div style={{ display: "flex", gap: 10 }}>
-        <button onClick={fetchAbhyasiData} type="button">
-          Fetch Abhyasi Data
-        </button>
-        <button type="button" onClick={handleIsCheckedIn}>
-          Is Checked In
-        </button>
         <button type="button" onClick={handleSearchUser}>
           Search User
         </button>
@@ -114,6 +83,3 @@ const Template = () => {
     </div>
   );
 };
-
-export const apiStory = Template.bind({});
-(apiStory as any).storyName = "API Story";
