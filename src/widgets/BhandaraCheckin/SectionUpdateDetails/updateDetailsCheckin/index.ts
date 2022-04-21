@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState, ThunkApiConfig } from "../../store";
 import { updateDetailsSectionSlice } from "../../store/slices";
-// import { checkinAbhyasi } from "../async-thunks";
 import { handleCheckinMobileOrEmailUser } from "./checkinMobileOrEmailUser";
 import { isAbhyasiId } from "../../store/actions/utils";
 import { checkinAbhyasi } from "./checkinAbhyasi";
@@ -20,6 +19,9 @@ export const updateDetailsCheckin = createAsyncThunk<
     }
   } else {
     const res = await dispatch(handleCheckinMobileOrEmailUser());
+    if (res.meta.requestStatus === "rejected") {
+      console.error(res.payload);
+    }
   }
   dispatch(updateDetailsSectionSlice.actions.stopProcessing());
 });
