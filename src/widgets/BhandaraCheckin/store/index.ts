@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
 import { BhandaraCheckinAPIs } from "../types";
-import { mainSectionSlice } from "../SectionMain/mainSectionSlice";
+import { mainSectionSlice } from "./slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "./slices/updateDetailsSectionSlice";
 import { bhandaraCheckinSlice } from "../BhandaraCheckin/bhandaraCheckinSlice";
 

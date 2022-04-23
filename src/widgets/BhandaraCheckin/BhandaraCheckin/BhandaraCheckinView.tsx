@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   getMainSectionInitialState,
   mainSectionSlice,
-} from "../SectionMain/mainSectionSlice";
+} from "../store/slices/mainSectionSlice";
 import { startCheckin } from "../store/actions/startCheckin";
 
 export type BhandaraCheckinWidgetProps = {

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SectionMainStateProps } from "./SectionMain";
+import { SectionMainStateProps } from "../../SectionMain/SectionMain";
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   return {
