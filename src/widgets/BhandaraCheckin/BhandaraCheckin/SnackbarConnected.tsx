@@ -1,7 +1,7 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import { RootState } from "../store";
 import { Snackbar, SnackbarProps } from "../../../components";
-import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
+import { snackbarSlice } from "../store/slices/snackbarSlice";
 
 const mapStateToProps: MapStateToProps<SnackbarProps, {}, RootState> = ({
   snackbar: { open, vertical, horizontal, severity, children, variant },

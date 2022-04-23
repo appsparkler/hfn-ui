@@ -8,7 +8,7 @@ import {
   AttendanceExistEnumType,
   isCheckedinAbhyasi,
 } from "../../api-async-thunks/attendanceExists";
-import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice";
+import { snackbarSlice } from "../../slices/snackbarSlice";
 import { searchAbhyasi } from "../../api-async-thunks";
 import { getConfiguredUserDetails } from "./utils";
 import { onFileText } from "../../../constants";

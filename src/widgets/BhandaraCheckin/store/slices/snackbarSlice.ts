@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SnackbarProps } from "./Snackbar";
+import { SnackbarProps } from "../../../../components/Snackbar/Snackbar";
 
 type PickedSnackbarProps = Pick<
   SnackbarProps,
@@ -47,3 +47,9 @@ export const snackbarSlice = createSlice({
     },
   },
 });
+
+export const {
+  actions: snackbarActions,
+  reducer: snackbarReducer,
+  name: snackbarName,
+} = snackbarSlice;

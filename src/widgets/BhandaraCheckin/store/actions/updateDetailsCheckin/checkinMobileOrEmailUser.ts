@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice";
+import { snackbarSlice } from "../../slices/snackbarSlice";
 import { UserDetails } from "../../../types";
 import { postAttendance } from "../../api-async-thunks";
 import { RootState, ThunkApiConfig } from "../../index";

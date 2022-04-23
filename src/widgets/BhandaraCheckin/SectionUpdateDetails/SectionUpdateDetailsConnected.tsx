@@ -5,8 +5,7 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
-import { updateDetailsActions, resetAppState } from "../store";
+import { updateDetailsActions, snackbarActions, resetAppState } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -26,7 +25,7 @@ const mapDispatchToProps: MapDispatchToProps<
       resetAppState(dispatch);
     },
     onChange: (userDetails) => {
-      dispatch(snackbarSlice.actions.closeSnackbar());
+      dispatch(snackbarActions.closeSnackbar());
       dispatch(
         updateDetailsActions.setState({
           userDetails,
