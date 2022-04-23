@@ -1,11 +1,7 @@
 import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState } from "../store";
-import {
-  getMainSectionInitialState,
-  mainSectionSlice,
-} from "../store/slices/mainSectionSlice";
-import { startCheckin } from "../store/actions";
+import { getMainSectionInitialState } from "../store/slices/mainSectionSlice";
+import { startCheckin, mainSectionActions, RootState } from "../store";
 import {
   SectionMain,
   SectionMainDispatchProps,
@@ -21,7 +17,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   return {
     onChange: (value) => {
       dispatch(
-        mainSectionSlice.actions.setState({
+        mainSectionActions.setState({
           ...getMainSectionInitialState(),
           value,
         })
