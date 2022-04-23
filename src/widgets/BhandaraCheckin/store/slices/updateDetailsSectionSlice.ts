@@ -2,44 +2,43 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ageGroupOptions, genderOptions, onFileOptions } from "../../constants";
 import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails/SectionUpdateDetails";
 
-export const getUpdateDetailsSectionInitialState =
-  (): SectionUpdateDetailsStateProps => {
-    return {
-      genderOptions,
-      ageGroupOptions,
-      userDetails: {
-        fullName: {
-          show: true,
-          value: "",
-        },
-        mobile: {
-          show: true,
-          value: "",
-        },
-        email: {
-          show: true,
-          value: "",
-        },
-        location: {
-          show: true,
-        },
-        ageGroup: {
-          show: true,
-          value: "",
-        },
-        gender: {
-          show: true,
-          value: "",
-        },
+const getInitialState = (): SectionUpdateDetailsStateProps => {
+  return {
+    genderOptions,
+    ageGroupOptions,
+    userDetails: {
+      fullName: {
+        show: true,
+        value: "",
       },
-    };
+      mobile: {
+        show: true,
+        value: "",
+      },
+      email: {
+        show: true,
+        value: "",
+      },
+      location: {
+        show: true,
+      },
+      ageGroup: {
+        show: true,
+        value: "",
+      },
+      gender: {
+        show: true,
+        value: "",
+      },
+    },
   };
+};
 
-export const updateDetailsSectionSlice = createSlice({
+const updateDetailsSectionSlice = createSlice({
   name: "updateDetailsSectionSlice",
-  initialState: getUpdateDetailsSectionInitialState(),
+  initialState: getInitialState(),
   reducers: {
-    reset: () => getUpdateDetailsSectionInitialState(),
+    reset: () => getInitialState(),
     stopProcessing: (state) => {
       state.isProcessing = false;
     },
@@ -72,4 +71,5 @@ export const {
   actions: updateDetailsActions,
   reducer: updateDetailsReducer,
   name: updateDetailsName,
+  getInitialState: getUpdateDetailsSectionInitialState,
 } = updateDetailsSectionSlice;

@@ -1,9 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { snackbarSlice } from "../../slices/snackbarSlice";
 import { UserDetails } from "../../../types";
 import { postAttendance } from "../../api-async-thunks";
 import { RootState, ThunkApiConfig } from "../../index";
-import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
+import { bhandaraCheckinActions, snackbarActions } from "../../slices";
 
 const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   if (!userDetails.email.value) return {};
@@ -42,12 +41,12 @@ export const handleCheckinMobileOrEmailUser = createAsyncThunk<
     );
     if (res.meta.requestStatus === "rejected") {
       dispatch(
-        snackbarSlice.actions.openSnackbar({
+        snackbarActions.openSnackbar({
           children: res.payload as string,
         })
       );
     } else {
-      dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
+      dispatch(bhandaraCheckinActions.goToCheckinSuccess());
     }
   }
 );

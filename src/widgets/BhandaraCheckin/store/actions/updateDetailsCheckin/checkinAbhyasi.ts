@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState, ThunkApiConfig } from "../..";
-import { snackbarSlice } from "../../slices/snackbarSlice";
 import { postAttendance } from "../../api-async-thunks";
 import { UserDetails } from "../../../types";
 import { RefinedCityStateCountryLocation } from "../../../../../components/LocationTextField/locations";
-import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
-import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
+import {
+  bhandaraCheckinActions,
+  snackbarActions,
+  updateDetailsName,
+} from "../../slices";
 
 const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   if (userDetails.email.value?.match(/\*/)) {
@@ -59,7 +61,7 @@ export const checkinAbhyasi = createAsyncThunk<
   undefined,
   ThunkApiConfig
 >(
-  `${updateDetailsSectionSlice.name}/checkinAbhyasi`,
+  `${updateDetailsName}/checkinAbhyasi`,
   async (_, { getState, dispatch, rejectWithValue }) => {
     const {
       updateDetailsSection: { userDetails },
@@ -78,13 +80,13 @@ export const checkinAbhyasi = createAsyncThunk<
     );
     if (res.meta.requestStatus === "rejected") {
       dispatch(
-        snackbarSlice.actions.openSnackbar({
+        snackbarActions.openSnackbar({
           children: res.payload as string,
         })
       );
       return rejectWithValue("could not post attendance");
     } else {
-      dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
+      dispatch(bhandaraCheckinActions.goToCheckinSuccess());
       return true;
     }
   }

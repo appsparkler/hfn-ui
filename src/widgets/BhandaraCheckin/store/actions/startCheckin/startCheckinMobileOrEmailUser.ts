@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkApiConfig } from "../../index";
 import { getUserDetailsForEmailOrMobile } from "../utils";
-import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
-import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
+import { bhandaraCheckinActions, updateDetailsActions } from "../../slices";
 
 export const startCheckinMobileOrEmailUser = createAsyncThunk<
   boolean,
@@ -12,8 +11,8 @@ export const startCheckinMobileOrEmailUser = createAsyncThunk<
   "bhandara-checkin/startCheckinMobileOrEmailUser",
   async (emailOrMobile, { dispatch }) => {
     const userDetails = getUserDetailsForEmailOrMobile(emailOrMobile);
-    dispatch(updateDetailsSectionSlice.actions.setState({ userDetails }));
-    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    dispatch(updateDetailsActions.setState({ userDetails }));
+    dispatch(bhandaraCheckinActions.goToUpdateDetails());
     return true;
   }
 );

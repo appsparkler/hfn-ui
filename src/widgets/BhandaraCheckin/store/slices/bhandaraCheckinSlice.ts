@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { CurrentSectionEnum } from "../../types";
 import { BhandaraCheckinViewStateProps } from "../../BhandaraCheckin/BhandaraCheckinView";
 
-export const getInitialState = (): BhandaraCheckinViewStateProps => {
+const getInitialState = (): BhandaraCheckinViewStateProps => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
   };
 };
 
-export const bhandaraCheckinSlice = createSlice({
+const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getInitialState(),
   reducers: {

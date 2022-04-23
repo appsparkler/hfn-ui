@@ -1,12 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { mainSectionName, RootState, ThunkApiConfig } from "../../index";
-import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 import { UserSRCM } from "../../../types";
 import {
   AttendanceExistEnumType,
   isCheckedinAbhyasi,
 } from "../../api-async-thunks/attendanceExists";
-import { snackbarSlice } from "../../slices/snackbarSlice";
 import { searchAbhyasi } from "../../api-async-thunks";
 import { getConfiguredUserDetails } from "./utils";
 import { onFileText } from "../../../constants";
@@ -15,7 +13,12 @@ import {
   errorAbhyasiNotFound,
   errorServer,
 } from "../../../utils";
-import { bhandaraCheckinActions, mainSectionActions } from "../../slices";
+import {
+  bhandaraCheckinActions,
+  mainSectionActions,
+  snackbarActions,
+  updateDetailsActions,
+} from "../../slices";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
@@ -27,13 +30,13 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
     // VISIT UPDATE DETAILS SECTION for updating details before checkin
     const configuredUserDetails = getConfiguredUserDetails(abhyasi);
     if (configuredUserDetails.ageGroup.value === onFileText) {
-      dispatch(updateDetailsSectionSlice.actions.setAgeOnFileOption());
+      dispatch(updateDetailsActions.setAgeOnFileOption());
     }
     if (configuredUserDetails.gender.value === onFileText) {
-      dispatch(updateDetailsSectionSlice.actions.setGenderOnFileOption());
+      dispatch(updateDetailsActions.setGenderOnFileOption());
     }
     dispatch(
-      updateDetailsSectionSlice.actions.setState({
+      updateDetailsActions.setState({
         userDetails: configuredUserDetails,
       })
     );
@@ -58,7 +61,7 @@ export const continueCheckinFoundAbhyasi = createAsyncThunk<
       // ERROR HANDLING
       if (res.payload === AttendanceExistEnumType.SERVER_ERROR) {
         dispatch(
-          snackbarSlice.actions.openSnackbar({
+          snackbarActions.openSnackbar({
             children: errorServer(),
           })
         );

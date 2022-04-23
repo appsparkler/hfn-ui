@@ -23,7 +23,7 @@ const getInitialState = (): SnackbarStateProps => {
   };
 };
 
-export const snackbarSlice = createSlice({
+const snackbarSlice = createSlice({
   name: "snackbar",
   initialState: getInitialState(),
   reducers: {
