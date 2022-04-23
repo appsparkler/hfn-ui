@@ -1,11 +1,10 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState } from "../store";
 import {
   SectionCheckinSuccess,
   SectionCheckinStateProps,
   SectionCheckinDispatchProps,
 } from "./SectionCheckInSuccess";
-import { resetAppState } from "../store";
+import { resetAppState, RootState } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,
