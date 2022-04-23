@@ -2,17 +2,20 @@ import {
   API_URL,
   CLIENT_ID,
   CLIENT_SECRET,
+  GRANT_TYPE,
   USER_NAME,
   USER_PASSWORD,
 } from "./env-variables";
 
 export const login = () => {
   const formdata = new FormData();
-  formdata.append("grant_type", "password");
   formdata.append("client_id", CLIENT_ID);
   formdata.append("client_secret", CLIENT_SECRET);
-  formdata.append("username", USER_NAME);
-  formdata.append("password", USER_PASSWORD);
+  formdata.append("grant_type", GRANT_TYPE);
+  if (GRANT_TYPE === "password") {
+    formdata.append("username", USER_NAME);
+    formdata.append("password", USER_PASSWORD);
+  }
 
   var requestOptions: RequestInit = {
     method: "POST",
