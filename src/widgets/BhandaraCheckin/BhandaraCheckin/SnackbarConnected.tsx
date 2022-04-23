@@ -1,26 +1,17 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import { RootState } from "../store";
 import { Snackbar, SnackbarProps } from "../../../components";
-import { snackbarSlice } from "../store/slices/snackbarSlice";
+import { snackbarActions } from "../store";
 
 const mapStateToProps: MapStateToProps<SnackbarProps, {}, RootState> = ({
-  snackbar: { open, vertical, horizontal, severity, children, variant },
-}) => {
-  return {
-    open,
-    vertical,
-    horizontal,
-    severity,
-    children,
-    variant,
-  };
-};
+  snackbar,
+}) => snackbar;
 
 const mapDispatchToProps: MapDispatchToProps<SnackbarProps, {}> = (
   dispatch
 ) => {
   return {
-    onClose: () => dispatch(snackbarSlice.actions.closeSnackbar()),
+    onClose: () => dispatch(snackbarActions.closeSnackbar()),
   };
 };
 

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SnackbarProps } from "../../../../components/Snackbar/Snackbar";
+import { SnackbarStateProps } from "../../../../components/Snackbar/Snackbar";
 
 type PickedSnackbarProps = Pick<
-  SnackbarProps,
+  SnackbarStateProps,
   | "children"
   | "vertical"
   | "horizontal"
@@ -11,7 +11,7 @@ type PickedSnackbarProps = Pick<
   | "autoHideDuration"
 >;
 
-const getInitialState = (): SnackbarProps => {
+const getInitialState = (): SnackbarStateProps => {
   return {
     open: false,
     autoHideDuration: 5000,

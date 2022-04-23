@@ -6,12 +6,11 @@ import {
   SnackbarProps as MUISnackbarProps,
 } from "@mui/material";
 
-export type SnackbarProps = {
+export type SnackbarStateProps = {
   // SNACKBAR PROPS
   open?: MUISnackbarProps["open"];
   autoHideDuration?: MUISnackbarProps["autoHideDuration"];
   snackbarProps?: MUISnackbarProps;
-  onClose?: MUISnackbarProps["onClose"];
   vertical?: SnackbarOrigin["vertical"];
   horizontal?: SnackbarOrigin["horizontal"];
   // ALERT PROPS
@@ -20,6 +19,12 @@ export type SnackbarProps = {
   alertProps?: AlertProps;
   children?: AlertProps["children"];
 };
+
+export type SnackbarDispatchProps = {
+  onClose?: MUISnackbarProps["onClose"];
+};
+
+export type SnackbarProps = SnackbarStateProps & SnackbarDispatchProps;
 
 export const Snackbar = ({
   open,

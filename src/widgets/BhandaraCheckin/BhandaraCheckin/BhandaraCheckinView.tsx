@@ -10,7 +10,7 @@ import {
   getMainSectionInitialState,
   mainSectionSlice,
 } from "../store/slices/mainSectionSlice";
-import { startCheckin } from "../store/actions/startCheckin";
+import { startCheckin } from "../store";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
