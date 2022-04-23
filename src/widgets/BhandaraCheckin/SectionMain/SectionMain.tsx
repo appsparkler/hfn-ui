@@ -3,12 +3,7 @@ import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport } from "../../../components";
 import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
 import { ClickHandler, InputChangeHandler } from "../../../types";
-import {
-  isAbhyasiId,
-  isAbhyasiIdTemp,
-  isEmail,
-  isMobile,
-} from "../../../utils";
+import { isAbhyasiId, isEmail, isMobile } from "../../../utils";
 import { maxWidth } from "../constants";
 
 export type SectionMainStateProps = {
@@ -36,11 +31,7 @@ export const SectionMain = ({
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
   const isValidValue = useMemo(
-    () =>
-      isEmail(value) ||
-      isMobile(value) ||
-      isAbhyasiIdTemp(value) ||
-      isAbhyasiId(value),
+    () => isEmail(value) || isMobile(value) || isAbhyasiId(value),
     [value]
   );
 

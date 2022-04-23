@@ -14,5 +14,8 @@ export const isMobile = (value: string): boolean =>
 export const isAbhyasiIdTemp = (value: string): boolean =>
   Boolean(value.match(abhyasiIdTempRegex));
 
-export const isAbhyasiId = (value: string): boolean =>
+export const isAbhyasiIdPermanent = (value: string): boolean =>
   Boolean(value.match(abhyasiIdRegex));
+
+export const isAbhyasiId = (value: string): boolean =>
+  isAbhyasiIdTemp(value) || isAbhyasiIdPermanent(value);

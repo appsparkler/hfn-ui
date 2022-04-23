@@ -1,14 +1,6 @@
-import {
-  isAbhyasiId as matchesAbhyasiId,
-  isAbhyasiIdTemp,
-  isEmail,
-  isMobile,
-} from "../../../../utils";
+import { isEmail, isMobile } from "../../../../utils";
 import { getUpdateDetailsSectionInitialState } from "../slices/updateDetailsSectionSlice";
 import { UserDetails } from "../../types";
-
-export const isAbhyasiId = (value: string) =>
-  matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
 
 export const getUserDetailsForEmailOrMobile = (
   emailOrMobile: string
