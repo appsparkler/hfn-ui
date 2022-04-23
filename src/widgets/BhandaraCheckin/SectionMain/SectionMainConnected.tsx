@@ -20,8 +20,8 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
     onChange: (value) => {
       dispatch<any>(handleChangeCheckinWithValue(value));
     },
-    onClickStart: () => {
-      dispatch<any>(startCheckin());
+    onClickStart: (value) => {
+      dispatch<any>(startCheckin(value));
     },
   };
 };
