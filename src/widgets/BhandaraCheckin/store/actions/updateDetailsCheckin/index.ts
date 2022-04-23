@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState, ThunkApiConfig } from "../../store";
+import { RootState, ThunkApiConfig } from "../..";
 import { handleCheckinMobileOrEmailUser } from "./checkinMobileOrEmailUser";
-import { isAbhyasiId } from "../../store/actions/utils";
+import { isAbhyasiId } from "../utils";
 import { checkinAbhyasi } from "./checkinAbhyasi";
-import { updateDetailsSectionSlice } from "../updateDetailsSectionSlice";
+import { updateDetailsSectionSlice } from "../../../SectionUpdateDetails/updateDetailsSectionSlice";
 
 export const updateDetailsCheckin = createAsyncThunk<
   void,
