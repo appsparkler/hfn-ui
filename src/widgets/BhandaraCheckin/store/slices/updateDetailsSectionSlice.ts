@@ -67,3 +67,9 @@ export const updateDetailsSectionSlice = createSlice({
     },
   },
 });
+
+export const {
+  actions: updateDetailsActions,
+  reducer: updateDetailsReducer,
+  name: updateDetailsName,
+} = updateDetailsSectionSlice;

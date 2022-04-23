@@ -6,9 +6,7 @@ import {
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
 import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
-import { updateDetailsSectionSlice } from "../store/slices/updateDetailsSectionSlice";
-import { Action } from "@reduxjs/toolkit";
-import { resetAppState } from "../store/actions";
+import { updateDetailsActions, resetAppState } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -22,7 +20,7 @@ const mapDispatchToProps: MapDispatchToProps<
 > = (dispatch) => {
   return {
     onClickCheckin: () => {
-      dispatch(updateDetailsCheckin() as unknown as Action<any>);
+      dispatch<any>(updateDetailsCheckin());
     },
     onClickCancel: () => {
       resetAppState(dispatch);
@@ -30,7 +28,7 @@ const mapDispatchToProps: MapDispatchToProps<
     onChange: (userDetails) => {
       dispatch(snackbarSlice.actions.closeSnackbar());
       dispatch(
-        updateDetailsSectionSlice.actions.setState({
+        updateDetailsActions.setState({
           userDetails,
         })
       );
