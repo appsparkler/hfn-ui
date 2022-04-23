@@ -1,10 +1,11 @@
+import { ACCESS_TOKEN } from "./env-variables";
 import { login } from "./login";
 
 export const setAccessTokenOnLocalStorage = () => {
   const accessTokenObj = localStorage.getItem("srcmToken");
   if (!accessTokenObj) {
     const tokenObj = {
-      access_token: "MTq9doPD3xRZEJnZZbflzh2ZCsKq67",
+      access_token: ACCESS_TOKEN,
     };
     localStorage.setItem("srcmToken", JSON.stringify(tokenObj));
   }

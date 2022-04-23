@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
-import { postAttendance, searchUser } from "./server-apis/index";
+import { searchUser } from "./searchUser";
 import { attendanceExists } from "./attendanceExitsts";
+import { postAttendance } from "./postAttendance";
 
 export const ApiExample = () => {
   const [response, setResponse] = useState<any>({});

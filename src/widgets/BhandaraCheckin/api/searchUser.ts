@@ -1,6 +1,6 @@
-import { SearchUserParams, SearchUserResponse } from "../../types";
-import { fetchWithToken } from "../utils";
-import { API_URL } from "../env-variables";
+import { SearchUserParams, SearchUserResponse } from "../types";
+import { fetchWithToken } from "./utils";
+import { API_URL } from "./env-variables";
 
 export const searchUser = (
   searchParams: SearchUserParams

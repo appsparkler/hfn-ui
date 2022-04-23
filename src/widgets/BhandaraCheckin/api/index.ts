@@ -1,6 +1,7 @@
 import { BhandaraCheckinAPIs } from "../types";
-import { postAttendance, searchUser } from "./server-apis";
 import { attendanceExists } from "./attendanceExitsts";
+import { searchUser } from "./searchUser";
+import { postAttendance } from "./postAttendance";
 import { setAccessTokenOnLocalStorage } from "./utils";
 
 setAccessTokenOnLocalStorage();
