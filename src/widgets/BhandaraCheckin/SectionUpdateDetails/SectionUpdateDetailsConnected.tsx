@@ -4,8 +4,12 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { resetAppState, RootState, updateDetailsCheckin } from "../store";
-import { handleChangeUserDetails } from "../store/actions/handleChangeUserDetails";
+import {
+  resetAppState,
+  RootState,
+  handleChangeUserDetails,
+  updateDetailsCheckin,
+} from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -22,10 +26,10 @@ const mapDispatchToProps: MapDispatchToProps<
       dispatch<any>(updateDetailsCheckin());
     },
     onClickCancel: () => {
-      resetAppState();
+      dispatch<any>(resetAppState());
     },
     onChange: (userDetails) => {
-      handleChangeUserDetails(userDetails);
+      dispatch<any>(handleChangeUserDetails(userDetails));
     },
   };
 };

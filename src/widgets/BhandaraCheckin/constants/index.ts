@@ -7,9 +7,9 @@ export const onFileOptions: SelectFieldOption[] = [
 ];
 
 export const genderOptions: SelectFieldOption[] = [
-  { label: "Female", value: "female" },
-  { label: "Male", value: "male" },
-  { label: "Unspecified", value: "unspecified" },
+  { label: "Female", value: "F" },
+  { label: "Male", value: "M" },
+  { label: "Unspecified", value: "U" },
 ];
 
 export const maxWidth = 350;
