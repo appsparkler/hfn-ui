@@ -1,5 +1,5 @@
 import { Alert, Button, TextField, Typography } from "@mui/material";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   CenterOfViewport,
   AsyncButton,
@@ -40,6 +40,8 @@ export const SectionUpdateDetails = ({
   onClickCheckin,
   onClickCancel,
 }: SectionUpdateDetailsProps) => {
+  const fullNameInputRef = useRef<HTMLInputElement>(null);
+
   const { fullName, ageGroup, email, gender, location, mobile } = useMemo(
     () => userDetails,
     [userDetails]
@@ -148,6 +150,10 @@ export const SectionUpdateDetails = ({
     [onChange, userDetails]
   );
 
+  useEffect(() => {
+    fullNameInputRef.current?.focus();
+  }, []);
+
   return (
     <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       <Typography variant="h4">Update Details</Typography>
@@ -164,7 +170,7 @@ export const SectionUpdateDetails = ({
           onChange={handleChange}
           value={fullName.value}
           disabled={fullName.disabled}
-          focused
+          inputRef={fullNameInputRef}
         />
         <Horizontal gap={3}>
           <SelectField
