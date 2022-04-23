@@ -1,10 +1,8 @@
-import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import {
   startCheckin,
-  mainSectionActions,
   RootState,
-  getMainSectionInitialState,
+  handleChangeCheckinWithValue,
 } from "../store";
 import {
   SectionMain,
@@ -20,15 +18,10 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
 ) => {
   return {
     onChange: (value) => {
-      dispatch(
-        mainSectionActions.setState({
-          ...getMainSectionInitialState(),
-          value,
-        })
-      );
+      dispatch<any>(handleChangeCheckinWithValue(value));
     },
     onClickStart: () => {
-      dispatch(startCheckin() as unknown as Action<any>);
+      dispatch<any>(startCheckin());
     },
   };
 };
