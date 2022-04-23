@@ -30,42 +30,42 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
     const {
       mainSection: { value: abhyasiId },
     } = getState() as RootState;
-    const canAbhyasiCheckinDirectly = canCheckinDirectly(abhyasi);
+    // const canAbhyasiCheckinDirectly = canCheckinDirectly(abhyasi);
     // IF ABHYASI CAN CHECKIN DIRECTLY
-    if (canAbhyasiCheckinDirectly) {
-      const res = await dispatch(
-        postAttendance({
-          name: abhyasi.name,
-          ref: abhyasiId.toUpperCase(),
-          city_id: abhyasi.city.id,
-          age_group: abhyasi.age_group,
-        })
-      );
-      if (res.meta.requestStatus === "rejected") {
-        dispatch(
-          snackbarSlice.actions.openSnackbar({
-            children: errorServer(),
-          })
-        );
-      } else {
-        dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
-      }
-    } else {
-      // VISIT UPDATE DETAILS SECTION for updating details before checkin
-      const configuredUserDetails = getConfiguredUserDetails(abhyasi);
-      if (configuredUserDetails.ageGroup.value === onFileText) {
-        dispatch(updateDetailsSectionSlice.actions.setAgeOnFileOption());
-      }
-      if (configuredUserDetails.gender.value === onFileText) {
-        dispatch(updateDetailsSectionSlice.actions.setGenderOnFileOption());
-      }
-      dispatch(
-        updateDetailsSectionSlice.actions.setState({
-          userDetails: configuredUserDetails,
-        })
-      );
-      dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    // if (canAbhyasiCheckinDirectly) {
+    //   const res = await dispatch(
+    //     postAttendance({
+    //       name: abhyasi.name,
+    //       ref: abhyasiId.toUpperCase(),
+    //       city_id: abhyasi.city.id,
+    //       age_group: abhyasi.age_group,
+    //     })
+    //   );
+    //   if (res.meta.requestStatus === "rejected") {
+    //     dispatch(
+    //       snackbarSlice.actions.openSnackbar({
+    //         children: errorServer(),
+    //       })
+    //     );
+    //   } else {
+    //     dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
+    //   }
+    // } else {
+    // VISIT UPDATE DETAILS SECTION for updating details before checkin
+    const configuredUserDetails = getConfiguredUserDetails(abhyasi);
+    if (configuredUserDetails.ageGroup.value === onFileText) {
+      dispatch(updateDetailsSectionSlice.actions.setAgeOnFileOption());
     }
+    if (configuredUserDetails.gender.value === onFileText) {
+      dispatch(updateDetailsSectionSlice.actions.setGenderOnFileOption());
+    }
+    dispatch(
+      updateDetailsSectionSlice.actions.setState({
+        userDetails: configuredUserDetails,
+      })
+    );
+    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    // }
   }
 );
 
