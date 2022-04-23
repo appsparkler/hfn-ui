@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkApiConfig } from "../../index";
 import { getUserDetailsForEmailOrMobile } from "../utils";
-import { updateDetailsSectionSlice } from "../../../SectionUpdateDetails/updateDetailsSectionSlice";
+import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 import { bhandaraCheckinSlice } from "../../../BhandaraCheckin/bhandaraCheckinSlice";
 
 export const startCheckinMobileOrEmailUser = createAsyncThunk<

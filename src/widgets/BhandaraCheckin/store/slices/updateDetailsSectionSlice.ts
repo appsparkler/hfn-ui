@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ageGroupOptions, genderOptions, onFileOptions } from "../constants";
-import { SectionUpdateDetailsStateProps } from "./SectionUpdateDetails";
+import { ageGroupOptions, genderOptions, onFileOptions } from "../../constants";
+import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails/SectionUpdateDetails";
 
 export const getUpdateDetailsSectionInitialState =
   (): SectionUpdateDetailsStateProps => {

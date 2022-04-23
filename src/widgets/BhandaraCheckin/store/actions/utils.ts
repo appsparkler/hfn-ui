@@ -4,7 +4,7 @@ import {
   isEmail,
   isMobile,
 } from "../../../../utils";
-import { getUpdateDetailsSectionInitialState } from "../../SectionUpdateDetails/updateDetailsSectionSlice";
+import { getUpdateDetailsSectionInitialState } from "../slices/updateDetailsSectionSlice";
 import { UserDetails } from "../../types";
 
 export const isAbhyasiId = (value: string) =>

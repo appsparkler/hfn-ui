@@ -3,7 +3,7 @@ import { RootState, ThunkApiConfig } from "../..";
 import { handleCheckinMobileOrEmailUser } from "./checkinMobileOrEmailUser";
 import { isAbhyasiId } from "../utils";
 import { checkinAbhyasi } from "./checkinAbhyasi";
-import { updateDetailsSectionSlice } from "../../../SectionUpdateDetails/updateDetailsSectionSlice";
+import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 
 export const updateDetailsCheckin = createAsyncThunk<
   void,

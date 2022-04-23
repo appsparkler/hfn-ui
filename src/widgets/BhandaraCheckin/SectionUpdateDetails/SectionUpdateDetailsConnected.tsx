@@ -6,7 +6,7 @@ import {
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
 import { snackbarSlice } from "../../../components/Snackbar/snackbarSlice";
-import { updateDetailsSectionSlice } from "./updateDetailsSectionSlice";
+import { updateDetailsSectionSlice } from "../store/slices/updateDetailsSectionSlice";
 import { Action } from "@reduxjs/toolkit";
 import { resetAppState } from "../store/actions";
 

@@ -4,7 +4,7 @@ import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice"
 import { postAttendance } from "../../api-async-thunks";
 import { UserDetails } from "../../../types";
 import { RefinedCityStateCountryLocation } from "../../../../../components/LocationTextField/locations";
-import { updateDetailsSectionSlice } from "../../../SectionUpdateDetails/updateDetailsSectionSlice";
+import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 import { bhandaraCheckinSlice } from "../../../BhandaraCheckin/bhandaraCheckinSlice";
 
 const getEmailValue = (userDetails: UserDetails): { email?: string } => {
