@@ -27,7 +27,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
         })
       );
     },
-    onClickStart: (userId) => {
+    onClickStart: () => {
       dispatch(startCheckin() as unknown as Action<any>);
     },
   };
