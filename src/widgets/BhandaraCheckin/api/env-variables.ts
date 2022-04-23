@@ -1,4 +1,4 @@
-import { getEnvVariable } from "../../../../utils/add-hoc";
+import { getEnvVariable } from "../../../utils/add-hoc";
 
 export const API_URL = getEnvVariable("API_URL") as string;
 export const API_VERSION = getEnvVariable("API_VERSION") as string;

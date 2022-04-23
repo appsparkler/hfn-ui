@@ -4,7 +4,7 @@ import {
   PostAttendanceUser,
 } from "../../types";
 import { fetchWithToken } from "../utils";
-import { API_URL, API_VERSION, EVENT_ID } from "./env-variables";
+import { API_URL, API_VERSION, EVENT_ID } from "../env-variables";
 
 export const postAttendance = (
   user: PostAttendanceUser
