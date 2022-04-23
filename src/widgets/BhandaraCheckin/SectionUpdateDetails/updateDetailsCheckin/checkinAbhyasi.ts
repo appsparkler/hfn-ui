@@ -50,7 +50,7 @@ const getGenderValue = (userDetails: UserDetails): { gender?: string } => {
 const getCityId = (userDetails: UserDetails): { city_id?: number } => {
   return {
     city_id: (userDetails.location.value as RefinedCityStateCountryLocation)
-      .c_id as number,
+      .c_id,
   };
 };
 
