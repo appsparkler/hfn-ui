@@ -4,13 +4,8 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import {
-  updateDetailsActions,
-  snackbarActions,
-  resetAppState,
-  RootState,
-  updateDetailsCheckin,
-} from "../store";
+import { resetAppState, RootState, updateDetailsCheckin } from "../store";
+import { handleChangeUserDetails } from "../store/actions/handleChangeUserDetails";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -27,15 +22,10 @@ const mapDispatchToProps: MapDispatchToProps<
       dispatch<any>(updateDetailsCheckin());
     },
     onClickCancel: () => {
-      resetAppState(dispatch);
+      resetAppState();
     },
     onChange: (userDetails) => {
-      dispatch(snackbarActions.closeSnackbar());
-      dispatch(
-        updateDetailsActions.setState({
-          userDetails,
-        })
-      );
+      handleChangeUserDetails(userDetails);
     },
   };
 };

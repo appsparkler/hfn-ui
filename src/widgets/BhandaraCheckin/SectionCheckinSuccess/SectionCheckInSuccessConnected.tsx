@@ -16,7 +16,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
   (dispatch) => {
     return {
       onClickReturn: () => {
-        resetAppState(dispatch);
+        resetAppState();
       },
     };
   };
