@@ -2,18 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { CurrentSectionEnum } from "../../types";
 import { BhandaraCheckinViewStateProps } from "../../BhandaraCheckin/BhandaraCheckinView";
 
-export const getBhandaraCheckinInitialState =
-  (): BhandaraCheckinViewStateProps => {
-    return {
-      currentSection: CurrentSectionEnum.MAIN,
-    };
+export const getInitialState = (): BhandaraCheckinViewStateProps => {
+  return {
+    currentSection: CurrentSectionEnum.MAIN,
   };
+};
 
 export const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
-  initialState: getBhandaraCheckinInitialState(),
+  initialState: getInitialState(),
   reducers: {
-    reset: () => getBhandaraCheckinInitialState(),
+    reset: () => getInitialState(),
     goToMain: (state) => {
       state.currentSection = CurrentSectionEnum.MAIN;
     },
@@ -25,3 +24,10 @@ export const bhandaraCheckinSlice = createSlice({
     },
   },
 });
+
+export const {
+  actions: bhandaraCheckinActions,
+  getInitialState: getBhandaraCheckinInitialState,
+  name: bhandaraCheckinName,
+  reducer: bhandaraCheckinReducer,
+} = bhandaraCheckinSlice;

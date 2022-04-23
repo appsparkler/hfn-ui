@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { snackbarSlice } from "./slices/snackbarSlice";
 import { BhandaraCheckinAPIs } from "../types";
-import { mainSectionSlice } from "./slices/mainSectionSlice";
-import { updateDetailsSectionSlice } from "./slices/updateDetailsSectionSlice";
-import { bhandaraCheckinSlice } from "./slices/bhandaraCheckinSlice";
+import {
+  bhandaraCheckinReducer,
+  mainSectionReducer,
+  snackbarReducer,
+  updateDetailsReducer,
+} from "./slices";
 
 export const rootReducer = {
-  bhandaraCheckin: bhandaraCheckinSlice.reducer,
-  mainSection: mainSectionSlice.reducer,
-  updateDetailsSection: updateDetailsSectionSlice.reducer,
-  snackbar: snackbarSlice.reducer,
+  bhandaraCheckin: bhandaraCheckinReducer,
+  mainSection: mainSectionReducer,
+  updateDetailsSection: updateDetailsReducer,
+  snackbar: snackbarReducer,
 };
 
 const exampleStore = configureStore({

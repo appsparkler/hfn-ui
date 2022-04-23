@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SectionMainStateProps } from "../../SectionMain/SectionMain";
 
-export const getInitialState = (): SectionMainStateProps => {
+const getInitialState = (): SectionMainStateProps => {
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
@@ -10,7 +10,7 @@ export const getInitialState = (): SectionMainStateProps => {
   };
 };
 
-export const mainSectionSlice = createSlice({
+const mainSectionSlice = createSlice({
   name: "main-section",
   initialState: getInitialState(),
   reducers: {

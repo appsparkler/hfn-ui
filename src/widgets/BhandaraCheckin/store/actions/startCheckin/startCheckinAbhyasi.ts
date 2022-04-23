@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState, ThunkApiConfig } from "../../index";
-import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
-import { mainSectionSlice } from "../../slices/mainSectionSlice";
+import { mainSectionName, RootState, ThunkApiConfig } from "../../index";
 import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 import { UserSRCM } from "../../../types";
 import {
@@ -17,13 +15,14 @@ import {
   errorAbhyasiNotFound,
   errorServer,
 } from "../../../utils";
+import { bhandaraCheckinActions, mainSectionActions } from "../../slices";
 
 const continueCheckinAbhyasiFinal = createAsyncThunk<
   void,
   UserSRCM,
   ThunkApiConfig
 >(
-  `${mainSectionSlice.name}/continue-checkin-abhyasi`,
+  `${mainSectionName}/continue-checkin-abhyasi`,
   async (abhyasi, { dispatch, getState }) => {
     // VISIT UPDATE DETAILS SECTION for updating details before checkin
     const configuredUserDetails = getConfiguredUserDetails(abhyasi);
@@ -38,7 +37,7 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
         userDetails: configuredUserDetails,
       })
     );
-    dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
+    dispatch(bhandaraCheckinActions.goToUpdateDetails());
   }
 );
 
@@ -47,7 +46,7 @@ export const continueCheckinFoundAbhyasi = createAsyncThunk<
   UserSRCM,
   ThunkApiConfig
 >(
-  `${mainSectionSlice.name}/continueCheckinFoundAbhyasi`,
+  `${mainSectionName}/continueCheckinFoundAbhyasi`,
   async (abhyasi, { dispatch, getState, rejectWithValue }) => {
     // CHECK IF ABHYASI IS ALREADY CHECKED IN
     const {
@@ -55,7 +54,7 @@ export const continueCheckinFoundAbhyasi = createAsyncThunk<
     } = getState() as RootState;
     const res = await dispatch(isCheckedinAbhyasi(abhyasiId));
     if (res.meta.requestStatus === "rejected") {
-      dispatch(mainSectionSlice.actions.stopProcessing());
+      dispatch(mainSectionActions.stopProcessing());
       // ERROR HANDLING
       if (res.payload === AttendanceExistEnumType.SERVER_ERROR) {
         dispatch(
@@ -65,7 +64,7 @@ export const continueCheckinFoundAbhyasi = createAsyncThunk<
         );
       } else if (res.payload === AttendanceExistEnumType.USER_EXISTS) {
         dispatch(
-          mainSectionSlice.actions.setState({
+          mainSectionActions.setState({
             error: true,
             helperText: errorAbhyasiAlreadyCheckedin(abhyasiId),
             isProcessing: false,
@@ -88,14 +87,14 @@ export const startCheckinAbhyasi = createAsyncThunk<
   string,
   ThunkApiConfig
 >(
-  `${mainSectionSlice.name}/startCheckinAbhyasi`,
+  `${mainSectionName}/startCheckinAbhyasi`,
   async (abhyasiId, { dispatch, rejectWithValue }) => {
     // CHECK IF USER EXISTS IN SRCM DB
     const searchAbhyasiRes = await dispatch(searchAbhyasi(abhyasiId));
     if (searchAbhyasiRes.meta.requestStatus === "rejected") {
       // SHOW ERROR IF ABHYASI NOT FOUND
       dispatch(
-        mainSectionSlice.actions.setState({
+        mainSectionActions.setState({
           error: true,
           helperText: errorAbhyasiNotFound(abhyasiId),
           isProcessing: false,
