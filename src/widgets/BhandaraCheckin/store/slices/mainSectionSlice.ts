@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SectionMainStateProps } from "../../SectionMain/SectionMain";
 
-export const getMainSectionInitialState = (): SectionMainStateProps => {
+export const getInitialState = (): SectionMainStateProps => {
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
@@ -12,12 +12,12 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
 
 export const mainSectionSlice = createSlice({
   name: "main-section",
-  initialState: getMainSectionInitialState(),
+  initialState: getInitialState(),
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
     },
-    reset: () => getMainSectionInitialState(),
+    reset: () => getInitialState(),
     setError: (state, { payload }: { payload: string }) => {
       state.helperText = payload;
       state.error = true;
@@ -43,4 +43,5 @@ export const {
   actions: mainSectionActions,
   reducer: mainSectionReducer,
   name: mainSectionName,
+  getInitialState: getMainSectionInitialState,
 } = mainSectionSlice;

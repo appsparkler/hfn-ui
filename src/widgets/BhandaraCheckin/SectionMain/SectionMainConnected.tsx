@@ -1,7 +1,11 @@
 import { Action } from "@reduxjs/toolkit";
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { getMainSectionInitialState } from "../store/slices/mainSectionSlice";
-import { startCheckin, mainSectionActions, RootState } from "../store";
+import {
+  startCheckin,
+  mainSectionActions,
+  RootState,
+  getMainSectionInitialState,
+} from "../store";
 import {
   SectionMain,
   SectionMainDispatchProps,
