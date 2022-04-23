@@ -1,11 +1,16 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
-import { RootState, updateDetailsCheckin } from "../store";
 import {
   SectionUpdateDetails,
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
-import { updateDetailsActions, snackbarActions, resetAppState } from "../store";
+import {
+  updateDetailsActions,
+  snackbarActions,
+  resetAppState,
+  RootState,
+  updateDetailsCheckin,
+} from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
