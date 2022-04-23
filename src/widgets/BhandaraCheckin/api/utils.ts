@@ -1,4 +1,4 @@
-import { login } from "./server-apis/login";
+import { login } from "./login";
 
 export const setAccessTokenOnLocalStorage = () => {
   const accessTokenObj = localStorage.getItem("srcmToken");

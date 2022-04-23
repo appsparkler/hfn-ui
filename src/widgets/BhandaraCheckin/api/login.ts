@@ -5,7 +5,7 @@ import {
   GRANT_TYPE,
   USER_NAME,
   USER_PASSWORD,
-} from "./env-variables";
+} from "./server-apis/env-variables";
 
 export const login = () => {
   const formdata = new FormData();
