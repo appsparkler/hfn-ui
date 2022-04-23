@@ -5,7 +5,7 @@ import { postAttendance } from "../../api-async-thunks";
 import { UserDetails } from "../../../types";
 import { RefinedCityStateCountryLocation } from "../../../../../components/LocationTextField/locations";
 import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
-import { bhandaraCheckinSlice } from "../../../BhandaraCheckin/bhandaraCheckinSlice";
+import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
 
 const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   if (userDetails.email.value?.match(/\*/)) {

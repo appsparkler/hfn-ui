@@ -3,7 +3,7 @@ import { snackbarSlice } from "../../../../../components/Snackbar/snackbarSlice"
 import { UserDetails } from "../../../types";
 import { postAttendance } from "../../api-async-thunks";
 import { RootState, ThunkApiConfig } from "../../index";
-import { bhandaraCheckinSlice } from "../../../BhandaraCheckin/bhandaraCheckinSlice";
+import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
 
 const getEmailValue = (userDetails: UserDetails): { email?: string } => {
   if (!userDetails.email.value) return {};

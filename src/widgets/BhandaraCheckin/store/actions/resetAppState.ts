@@ -1,5 +1,5 @@
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
-import { bhandaraCheckinSlice } from "../../BhandaraCheckin/bhandaraCheckinSlice";
+import { bhandaraCheckinSlice } from "../slices/bhandaraCheckinSlice";
 import { mainSectionSlice } from "../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../slices/updateDetailsSectionSlice";
 

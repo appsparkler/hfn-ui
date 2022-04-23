@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState, ThunkApiConfig } from "../../index";
-import { bhandaraCheckinSlice } from "../../../BhandaraCheckin/bhandaraCheckinSlice";
+import { bhandaraCheckinSlice } from "../../slices/bhandaraCheckinSlice";
 import { mainSectionSlice } from "../../slices/mainSectionSlice";
 import { updateDetailsSectionSlice } from "../../slices/updateDetailsSectionSlice";
 import { UserSRCM } from "../../../types";
