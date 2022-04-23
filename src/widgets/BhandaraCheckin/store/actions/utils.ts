@@ -5,7 +5,7 @@ import {
   isMobile,
 } from "../../../../utils";
 import { getUpdateDetailsSectionInitialState } from "../../SectionUpdateDetails/updateDetailsSectionSlice";
-import { UserDetails, UserSRCM } from "../../types";
+import { UserDetails } from "../../types";
 
 export const isAbhyasiId = (value: string) =>
   matchesAbhyasiId(value) || isAbhyasiIdTemp(value);
@@ -30,11 +30,4 @@ export const getUserDetailsForEmailOrMobile = (
       ? { ...defaultUserDetails.mobile, disabled: true, value: emailOrMobile }
       : defaultUserDetails.mobile,
   };
-};
-
-export const canCheckinDirectly = (user: UserSRCM) => {
-  const { email, mobile, age_group, gender, city } = user;
-  const hasMobileOrEmail = Boolean(email || mobile);
-  const hasCity = Boolean(city && city.id);
-  return Boolean(hasMobileOrEmail && hasCity && age_group && gender);
 };

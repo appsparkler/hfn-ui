@@ -11,7 +11,6 @@ import {
   mainSectionSlice,
 } from "../SectionMain/mainSectionSlice";
 import { startCheckin } from "../SectionMain/startCheckin";
-import { Action } from "@reduxjs/toolkit";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;

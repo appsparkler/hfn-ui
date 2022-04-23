@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { canCheckinDirectly } from "../../store/actions/utils";
 import { RootState, ThunkApiConfig } from "../../store/index";
 import { bhandaraCheckinSlice } from "../../BhandaraCheckin/bhandaraCheckinSlice";
 import { mainSectionSlice } from "../mainSectionSlice";
@@ -10,8 +9,7 @@ import {
   isCheckedinAbhyasi,
 } from "../../store/api-async-thunks/attendanceExists";
 import { snackbarSlice } from "../../../../components/Snackbar/snackbarSlice";
-import { postAttendance, searchAbhyasi } from "../../store/api-async-thunks";
-// import { getBhandaraCheckinActionName } from "../../store/utils";
+import { searchAbhyasi } from "../../store/api-async-thunks";
 import { getConfiguredUserDetails } from "./utils";
 import { onFileText } from "../../constants";
 import {
@@ -27,30 +25,6 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
 >(
   `${mainSectionSlice.name}/continue-checkin-abhyasi`,
   async (abhyasi, { dispatch, getState }) => {
-    const {
-      mainSection: { value: abhyasiId },
-    } = getState() as RootState;
-    // const canAbhyasiCheckinDirectly = canCheckinDirectly(abhyasi);
-    // IF ABHYASI CAN CHECKIN DIRECTLY
-    // if (canAbhyasiCheckinDirectly) {
-    //   const res = await dispatch(
-    //     postAttendance({
-    //       name: abhyasi.name,
-    //       ref: abhyasiId.toUpperCase(),
-    //       city_id: abhyasi.city.id,
-    //       age_group: abhyasi.age_group,
-    //     })
-    //   );
-    //   if (res.meta.requestStatus === "rejected") {
-    //     dispatch(
-    //       snackbarSlice.actions.openSnackbar({
-    //         children: errorServer(),
-    //       })
-    //     );
-    //   } else {
-    //     dispatch(bhandaraCheckinSlice.actions.goToCheckinSuccess());
-    //   }
-    // } else {
     // VISIT UPDATE DETAILS SECTION for updating details before checkin
     const configuredUserDetails = getConfiguredUserDetails(abhyasi);
     if (configuredUserDetails.ageGroup.value === onFileText) {
@@ -65,7 +39,6 @@ const continueCheckinAbhyasiFinal = createAsyncThunk<
       })
     );
     dispatch(bhandaraCheckinSlice.actions.goToUpdateDetails());
-    // }
   }
 );
 
