@@ -15,4 +15,7 @@ main.args = {
   value: "INEEIW837",
   helperText: "",
   isProcessing: false,
+  isScannerOn: true,
+  scanBtnDisabled: false,
+  scanBtnProcessing: false,
 };

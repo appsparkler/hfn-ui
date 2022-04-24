@@ -1,6 +1,6 @@
-import { TextField, Typography } from "@mui/material";
+import { FormControlLabel, Switch, TextField, Typography } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
-import { CenterOfViewport } from "../../../components";
+import { CenterOfViewport, Horizontal } from "../../../components";
 import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
 import { ClickHandler, InputChangeHandler } from "../../../types";
 import { isAbhyasiId, isEmail, isMobile } from "../../../utils";
@@ -11,11 +11,15 @@ export type SectionMainStateProps = {
   helperText?: string;
   value: string;
   isProcessing?: boolean;
+  isScannerOn?: boolean;
+  scanBtnDisabled?: boolean;
+  scanBtnProcessing?: boolean;
 };
 
 export type SectionMainDispatchProps = {
   onChange: (updatedValue: string) => void;
   onClickStart: (userId: string) => void;
+  onClickScan: () => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -23,6 +27,10 @@ export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
 export const SectionMain = ({
   onClickStart,
   onChange,
+  onClickScan,
+  scanBtnDisabled,
+  scanBtnProcessing,
+  isScannerOn,
   isProcessing,
   error,
   helperText,
@@ -72,14 +80,42 @@ export const SectionMain = ({
         inputRef={idFieldRef}
         fullWidth
       />
-      <AsyncButton
-        type="button"
-        onClick={handleClickStart}
-        disabled={!isStartButtonEnabled}
-        isProcessing={isProcessing}
-      >
-        START CHECK IN
-      </AsyncButton>
+      <Horizontal gap={3}>
+        <AsyncButton
+          type="button"
+          onClick={handleClickStart}
+          disabled={!isStartButtonEnabled}
+          isProcessing={isProcessing}
+        >
+          START CHECK IN
+        </AsyncButton>
+        <AsyncButton
+          color="warning"
+          startIcon={<BarcodeSVG />}
+          disabled={scanBtnProcessing || scanBtnDisabled}
+          isProcessing={scanBtnProcessing}
+          onClick={onClickScan}
+        >
+          Scan
+        </AsyncButton>
+      </Horizontal>
+
+      <FormControlLabel
+        control={<Switch checked={isScannerOn} />}
+        label="Scanner"
+      />
     </CenterOfViewport>
   );
 };
+
+const BarcodeSVG = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    viewBox="0 0 16 16"
+  >
+    <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z" />
+  </svg>
+);
