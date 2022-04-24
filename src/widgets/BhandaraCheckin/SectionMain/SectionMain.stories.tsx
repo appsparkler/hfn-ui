@@ -16,4 +16,7 @@ main.args = {
   helperText: "",
   isProcessing: false,
   isDarkMode: false,
+  isScannerOn: true,
+  scanBtnDisabled: false,
+  scanBtnProcessing: false,
 };
