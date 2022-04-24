@@ -8,6 +8,9 @@ const getInitialState = (): SectionMainStateProps => {
     error: false,
     isProcessing: false,
     isDarkMode: false,
+    isScannerOn: false,
+    scanBtnDisabled: true,
+    scanBtnProcessing: false,
   };
 };
 
