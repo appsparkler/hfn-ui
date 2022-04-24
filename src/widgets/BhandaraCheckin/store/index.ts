@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "../types";
 import {
+  barcodeScannerReducer,
   bhandaraCheckinReducer,
   mainSectionReducer,
   snackbarReducer,
@@ -12,6 +13,7 @@ export const rootReducer = {
   mainSection: mainSectionReducer,
   updateDetailsSection: updateDetailsReducer,
   snackbar: snackbarReducer,
+  barcodeScanner: barcodeScannerReducer,
 };
 
 const exampleStore = configureStore({
