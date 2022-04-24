@@ -9,6 +9,7 @@ import {
   handleMountScanner,
   handleClickScannerCancel,
   handlePlayScannerVideo,
+  handleScan,
 } from "widgets/BhandaraCheckin/store";
 
 const mapStateToProps: MapStateToProps<
@@ -23,7 +24,7 @@ const mapDispatchToProps: MapDispatchToProps<BarcodeScannerDispatchProps, {}> =
       onCancel: () => dispatch<any>(handleClickScannerCancel()),
       onMount: () => dispatch<any>(handleMountScanner()),
       onPlayVideo: () => dispatch<any>(handlePlayScannerVideo()),
-      onScan: console.log,
+      onScan: (value) => dispatch<any>(handleScan(value)),
     };
   };
 

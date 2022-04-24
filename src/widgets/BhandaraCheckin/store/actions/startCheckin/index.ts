@@ -10,6 +10,7 @@ export const startCheckin = createAsyncThunk<void, string, ThunkApiConfig>(
   "bhandara-checkin/start-checkin",
   async (value, { dispatch, getState }) => {
     dispatch(mainSectionActions.startProcessing());
+    dispatch(mainSectionActions.resetError());
     const isEmailOrMobile = isEmail(value) || isMobile(value);
     if (isAbhyasiId(value)) {
       await dispatch(startCheckinAbhyasi(value));

@@ -34,6 +34,11 @@ const mainSectionSlice = createSlice({
     stopProcessing: (state) => {
       state.isProcessing = false;
     },
+    resetError: (state) => {
+      const initialState = getInitialState();
+      state.error = false;
+      state.helperText = initialState.helperText;
+    },
     startProcessing: (state) => {
       state.isProcessing = true;
     },
