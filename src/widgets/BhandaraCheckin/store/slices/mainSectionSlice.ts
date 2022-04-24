@@ -1,14 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { SectionMainStateProps } from "../../SectionMain/SectionMain";
 
 const getInitialState = (): SectionMainStateProps => {
+  const isScannerOn = Boolean(
+    localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
+  );
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
     error: false,
     isProcessing: false,
-    isScannerOn: false,
-    scanBtnDisabled: true,
+    isScannerOn,
+    scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
   };
 };

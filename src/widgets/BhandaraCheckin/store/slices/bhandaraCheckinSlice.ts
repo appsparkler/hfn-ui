@@ -23,6 +23,12 @@ const bhandaraCheckinSlice = createSlice({
     goToCheckinSuccess: (state) => {
       state.currentSection = CurrentSectionEnum.CHECKIN_SUCCESS;
     },
+    renderScanner: (state) => {
+      state.renderScanner = true;
+    },
+    unmountScanner: (state) => {
+      state.renderScanner = false;
+    },
   },
 });
 
