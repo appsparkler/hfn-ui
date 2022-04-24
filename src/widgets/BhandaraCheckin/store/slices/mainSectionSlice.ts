@@ -33,6 +33,14 @@ const mainSectionSlice = createSlice({
     startProcessing: (state) => {
       state.isProcessing = true;
     },
+    turnOnScanner: (state) => {
+      state.isScannerOn = true;
+      state.scanBtnDisabled = false;
+    },
+    turnOffScanner: (state) => {
+      state.isScannerOn = false;
+      state.scanBtnDisabled = true;
+    },
     setState: (
       state,
       { payload }: { payload: Partial<SectionMainStateProps> }
