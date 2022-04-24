@@ -5,6 +5,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export type BarcodeScannerDispatchProps = {
+  onMount: () => void;
   onScan: (value: string) => void;
   onCancel: () => void;
   onPlayVideo: () => void;
@@ -19,6 +20,7 @@ export type BarcodeScannerProps = BarcodeScannerStateProps &
 
 export const BarcodeScanner = ({
   show,
+  onMount,
   onPlayVideo,
   onCancel,
   onScan,
@@ -77,7 +79,8 @@ export const BarcodeScanner = ({
   // );
 
   useEffect(() => {
-    codeReader.getVideoInputDevices().then((devices) => {
+    onMount();
+    codeReader.listVideoInputDevices().then((devices) => {
       // TODO - NEED TO HANDLE THIS FOR MULTIPLE CAMS ON DEVICE
       if (devices.length > 0 && videoRef.current) {
         // setDevices(devices);
@@ -88,7 +91,7 @@ export const BarcodeScanner = ({
     return () => {
       codeReader.reset();
     };
-  }, [codeReader, startCodeReader]);
+  }, [codeReader, onMount, startCodeReader]);
 
   useEffect(() => {
     startCodeReader();
