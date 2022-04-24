@@ -17,6 +17,8 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   dispatch
 ) => {
   return {
+    onClickScan: console.log,
+    onSwitchScanner: console.log,
     onChange: (value) => {
       dispatch<any>(handleChangeCheckinWithValue(value));
     },
