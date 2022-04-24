@@ -7,6 +7,9 @@ const getInitialState = (): SectionMainStateProps => {
     helperText: "For mobile, please use country code.  For ex. +91868...",
     error: false,
     isProcessing: false,
+    isScannerOn: false,
+    scanBtnDisabled: true,
+    scanBtnProcessing: false,
   };
 };
 
