@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { CurrentSectionEnum } from "../../types";
 import { BhandaraCheckinViewStateProps } from "../../BhandaraCheckin/BhandaraCheckinView";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 
 const getInitialState = (): BhandaraCheckinViewStateProps => {
+  const renderScanner = Boolean(
+    localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
+  );
   return {
     currentSection: CurrentSectionEnum.MAIN,
-    renderScanner: false,
+    renderScanner,
   };
 };
 
