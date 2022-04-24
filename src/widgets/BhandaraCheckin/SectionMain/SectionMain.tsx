@@ -1,4 +1,10 @@
-import { FormControlLabel, Switch, TextField, Typography } from "@mui/material";
+import {
+  FormControlLabel,
+  Switch,
+  SwitchProps,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport, Horizontal } from "../../../components";
 import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
@@ -20,6 +26,7 @@ export type SectionMainDispatchProps = {
   onChange: (updatedValue: string) => void;
   onClickStart: (userId: string) => void;
   onClickScan: () => void;
+  onSwitchScanner: (checked: boolean) => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -28,6 +35,7 @@ export const SectionMain = ({
   onClickStart,
   onChange,
   onClickScan,
+  onSwitchScanner,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -58,6 +66,13 @@ export const SectionMain = ({
   const handleClickStart = useCallback<ClickHandler>(() => {
     onClickStart(value);
   }, [onClickStart, value]);
+
+  const handleSwitchScanner = useCallback<NonNullable<SwitchProps["onChange"]>>(
+    (evt, checked) => {
+      onSwitchScanner(checked);
+    },
+    [onSwitchScanner]
+  );
 
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
@@ -101,7 +116,9 @@ export const SectionMain = ({
       </Horizontal>
 
       <FormControlLabel
-        control={<Switch checked={isScannerOn} />}
+        control={
+          <Switch checked={isScannerOn} onChange={handleSwitchScanner} />
+        }
         label="Scanner"
       />
     </CenterOfViewport>
