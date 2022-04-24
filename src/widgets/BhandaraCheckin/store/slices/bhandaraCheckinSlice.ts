@@ -5,6 +5,7 @@ import { BhandaraCheckinViewStateProps } from "../../BhandaraCheckin/BhandaraChe
 const getInitialState = (): BhandaraCheckinViewStateProps => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
+    renderScanner: false,
   };
 };
 

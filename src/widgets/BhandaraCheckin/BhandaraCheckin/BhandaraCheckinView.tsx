@@ -5,7 +5,7 @@ import { BhandaraCheckinAPIs, CurrentSectionEnum } from "../types";
 import { SnackbarConnected } from "./SnackbarConnected";
 import { useMemo } from "react";
 import { Box } from "@mui/material";
-// import { BarcodeScanner } from "../../../components/BarcodeScanner/BarcodeScanner";
+import { BarcodeScannerConnected } from "./BarcodeScannerConnected";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -18,6 +18,7 @@ export type BhandaraCheckinViewStateProps = {
 
 export const BhandaraCheckinView = ({
   currentSection,
+  renderScanner,
 }: BhandaraCheckinViewStateProps) => {
   const { showMain, showUpdateDetails, showCheckinSuccess } = useMemo<{
     showMain: boolean;
@@ -36,7 +37,7 @@ export const BhandaraCheckinView = ({
       {showMain ? <SectionMainConnected /> : null}
       {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
       {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
-      {/* {renderScanner ? <BarcodeScanner />} */}
+      {renderScanner && <BarcodeScannerConnected />}
       <SnackbarConnected />
     </Box>
   );
