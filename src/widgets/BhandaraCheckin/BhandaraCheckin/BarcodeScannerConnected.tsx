@@ -4,8 +4,12 @@ import {
   BarcodeScannerDispatchProps,
   BarcodeScannerStateProps,
 } from "components/BarcodeScanner/BarcodeScanner";
-import { RootState, handleMountScanner } from "widgets/BhandaraCheckin/store";
-import { handlePlayScannerVideo } from "../store/actions/handlePlayScannerVideo";
+import {
+  RootState,
+  handleMountScanner,
+  handleClickScannerCancel,
+  handlePlayScannerVideo,
+} from "widgets/BhandaraCheckin/store";
 
 const mapStateToProps: MapStateToProps<
   BarcodeScannerStateProps,
@@ -16,7 +20,7 @@ const mapStateToProps: MapStateToProps<
 const mapDispatchToProps: MapDispatchToProps<BarcodeScannerDispatchProps, {}> =
   (dispatch) => {
     return {
-      onCancel: console.log,
+      onCancel: () => dispatch<any>(handleClickScannerCancel()),
       onMount: () => dispatch<any>(handleMountScanner()),
       onPlayVideo: () => dispatch<any>(handlePlayScannerVideo()),
       onScan: console.log,
