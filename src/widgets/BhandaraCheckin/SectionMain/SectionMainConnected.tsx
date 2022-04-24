@@ -5,6 +5,7 @@ import {
   handleChangeCheckinWithValue,
   handleSwitchScanner,
 } from "../store";
+import { handleClickScan } from "../store/actions/handleClickScan";
 import {
   SectionMain,
   SectionMainDispatchProps,
@@ -18,7 +19,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   dispatch
 ) => {
   return {
-    onClickScan: console.log,
+    onClickScan: () => dispatch<any>(handleClickScan()),
     onSwitchScanner: (checked) => dispatch<any>(handleSwitchScanner(checked)),
     onChange: (value) => {
       dispatch<any>(handleChangeCheckinWithValue(value));
