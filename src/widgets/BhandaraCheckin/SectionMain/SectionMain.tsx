@@ -4,6 +4,7 @@ import {
   TextField,
   Typography,
   Box,
+  SwitchProps,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport, Horizontal } from "../../../components";
@@ -29,6 +30,7 @@ export type SectionMainDispatchProps = {
   onClickStart: (userId: string) => void;
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickScan: () => void;
+  onSwitchScanner: (checked: boolean) => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -39,6 +41,7 @@ export const SectionMain = ({
   onSwitchMode,
   isDarkMode,
   onClickScan,
+  onSwitchScanner,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -69,6 +72,13 @@ export const SectionMain = ({
   const handleClickStart = useCallback<ClickHandler>(() => {
     onClickStart(value);
   }, [onClickStart, value]);
+
+  const handleSwitchScanner = useCallback<NonNullable<SwitchProps["onChange"]>>(
+    (evt, checked) => {
+      onSwitchScanner(checked);
+    },
+    [onSwitchScanner]
+  );
 
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
@@ -123,7 +133,9 @@ export const SectionMain = ({
       </Horizontal>
 
       <FormControlLabel
-        control={<Switch checked={isScannerOn} />}
+        control={
+          <Switch checked={isScannerOn} onChange={handleSwitchScanner} />
+        }
         label="Scanner"
       />
     </CenterOfViewport>
