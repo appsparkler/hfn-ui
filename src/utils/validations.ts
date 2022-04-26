@@ -3,6 +3,7 @@ import {
   abhyasiIdTempRegex,
   emailRegEx,
   mobileNumberRegex,
+  pnrRegex,
 } from "../constants";
 
 export const isEmail = (value: string): boolean =>
@@ -19,3 +20,6 @@ export const isAbhyasiIdPermanent = (value: string): boolean =>
 
 export const isAbhyasiId = (value: string): boolean =>
   isAbhyasiIdTemp(value) || isAbhyasiIdPermanent(value);
+
+export const isRegex = (value: string): boolean =>
+  Boolean(value.match(pnrRegex));
