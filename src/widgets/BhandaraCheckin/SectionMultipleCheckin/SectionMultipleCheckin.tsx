@@ -12,7 +12,7 @@ import {
   CenterOfViewport,
   AsyncButton,
 } from "components";
-import { times } from "lodash/fp";
+import { map } from "lodash/fp";
 import { maxWidth } from "../constants";
 
 export type SectionCheckinStateProps = {};
@@ -37,15 +37,26 @@ export const SectionMultipleCheckin = ({
           maxHeight="70%"
           overflow="auto"
         >
-          {times((index) => (
-            <FormControlLabel
-              key={index}
-              control={
-                <Checkbox checked={false} onChange={console.log} name="jason" />
-              }
-              label="Hello"
-            />
-          ))(50)}
+          {map(({ id, checked, name, disabled }) => {
+            return (
+              <FormControlLabel
+                key={id}
+                disabled={disabled}
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={console.log}
+                    name="multiple-checkin"
+                  />
+                }
+                label={name}
+              />
+            );
+          })([
+            { id: 1, checked: false, name: "A***Y C***A" },
+            { id: 2, checked: true, name: "M**** J****SON", disabled: true },
+            { id: 3, checked: true, name: "A***H B*****N" },
+          ])}
         </Box>
         <Horizontal gap={3}>
           <Button type="button" variant="outlined">
