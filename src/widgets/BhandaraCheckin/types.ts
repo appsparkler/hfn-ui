@@ -202,31 +202,11 @@ export type BhandaraCheckinAPIs = {
   attendanceExists: (
     user: AttendanceExistsUser
   ) => Promise<AttendanceExistsResponse>;
-  maskedPnrs: (obj: {
-    email?: string;
-    mobile?: string;
-    pnr?: string;
-  }) => Promise<{
+  maskedPnrs: (
+    obj: { email: string } | { mobile: string } | { pnr: string }
+  ) => Promise<{
     results: { id: string; name: string; checkedIn: boolean }[];
   }>;
-  // Previous
-  // checkinMobileOrEmailUser: (
-  //   user: UserWithEmail | UserWithMobile | UserWithEmailAndMobile
-  // ) => Promise<boolean>;
-  // checkinAbhyasi: (user: User) => Promise<boolean>;
-  // isMobileOrEmailUserCheckedIn: ({
-  //   fullName,
-  //   email,
-  //   mobile,
-  // }: {
-  //   fullName: string;
-  //   email?: string;
-  //   mobile?: string;
-  // }) => Promise<boolean>;
-  // isAbhyasiCheckedIn: (userId: string) => Promise<boolean>;
-  // getAbhyasiData: (
-  //   userId: string
-  // ) => Promise<UserWithEmail | UserWithMobile | UserWithEmailAndMobile>;
 };
 
 export type MobileOrEmailUser = {
