@@ -1,7 +1,18 @@
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Button, ButtonProps, Typography } from "@mui/material";
-import { Vertical } from "../../../components";
-import { CenterOfViewport } from "../../../components/CenterOfViewport/CenterOfViewport";
+import {
+  Box,
+  Button,
+  ButtonProps,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+} from "@mui/material";
+import {
+  Horizontal,
+  Vertical,
+  CenterOfViewport,
+  AsyncButton,
+} from "components";
+import { times } from "lodash/fp";
 import { maxWidth } from "../constants";
 
 export type SectionCheckinStateProps = {};
@@ -17,19 +28,32 @@ export const SectionMultipleCheckin = ({
   onClickReturn,
 }: SectionCheckinSuccessProps) => {
   return (
-    <CenterOfViewport gap={10} paddingX={1} maxWidth={maxWidth}>
-      <Vertical alignItems={"center"}>
-        <CheckCircleIcon color="success" sx={{ fontSize: 80 }} />
-        <Typography variant="h5">{`Checked In`}</Typography>
+    <CenterOfViewport paddingY={2} maxWidth={maxWidth}>
+      <Vertical gap={3} justifyContent="space-between" height={"100%"}>
+        <Typography variant="h4">Registrations</Typography>
+        <Box
+          display="flex"
+          flexDirection="column"
+          maxHeight="70%"
+          overflow="auto"
+        >
+          {times((index) => (
+            <FormControlLabel
+              key={index}
+              control={
+                <Checkbox checked={false} onChange={console.log} name="jason" />
+              }
+              label="Hello"
+            />
+          ))(50)}
+        </Box>
+        <Horizontal gap={3}>
+          <Button type="button" variant="outlined">
+            CANCEL
+          </Button>
+          <AsyncButton type="button">CHECK IN</AsyncButton>
+        </Horizontal>
       </Vertical>
-      <Button
-        type="button"
-        variant="contained"
-        size="large"
-        onClick={onClickReturn}
-      >
-        Return to main page
-      </Button>
     </CenterOfViewport>
   );
 };

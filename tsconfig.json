@@ -16,6 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "outDir": "./dist",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src"
   }
 }
