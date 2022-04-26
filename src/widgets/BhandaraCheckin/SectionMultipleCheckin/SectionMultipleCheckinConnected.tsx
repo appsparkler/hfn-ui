@@ -21,7 +21,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
     };
   };
 
-export const SectionCheckinSuccessConnected = connect(
+export const SectionMultipleCheckinConnected = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SectionMultipleCheckin);
