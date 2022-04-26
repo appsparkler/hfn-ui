@@ -1,25 +1,29 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import {
   SectionMultipleCheckin,
-  SectionCheckinStateProps,
-  SectionCheckinDispatchProps,
+  SectionMultiCheckinStateProps,
+  SectionMultiCheckinDispatchProps,
 } from "./SectionMultipleCheckin";
 import { resetAppState, RootState } from "../store";
 
 const mapStateToProps: MapStateToProps<
-  SectionCheckinStateProps,
+  SectionMultiCheckinStateProps,
   {},
   RootState
-> = () => ({});
+> = () => ({
+  items: [],
+});
 
-const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
-  (dispatch) => {
-    return {
-      onClickReturn: () => {
-        dispatch<any>(resetAppState());
-      },
-    };
+const mapDispatchToProps: MapDispatchToProps<
+  SectionMultiCheckinDispatchProps,
+  {}
+> = (dispatch) => {
+  return {
+    onClickReturn: () => {
+      dispatch<any>(resetAppState());
+    },
   };
+};
 
 export const SectionMultipleCheckinConnected = connect(
   mapStateToProps,

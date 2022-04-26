@@ -15,18 +15,26 @@ import {
 import { map } from "lodash/fp";
 import { maxWidth } from "../constants";
 
-export type SectionCheckinStateProps = {};
+export type SectionMultiCheckinStateProps = {
+  items: {
+    id: number;
+    name: string;
+    checked?: boolean;
+    disabled?: boolean;
+  }[];
+};
 
-export type SectionCheckinDispatchProps = {
+export type SectionMultiCheckinDispatchProps = {
   onClickReturn: ButtonProps["onClick"];
 };
 
-export type SectionCheckinSuccessProps = SectionCheckinStateProps &
-  SectionCheckinDispatchProps;
+export type SectionMultiCheckinProps = SectionMultiCheckinStateProps &
+  SectionMultiCheckinDispatchProps;
 
 export const SectionMultipleCheckin = ({
+  items,
   onClickReturn,
-}: SectionCheckinSuccessProps) => {
+}: SectionMultiCheckinProps) => {
   return (
     <CenterOfViewport paddingY={2} maxWidth={maxWidth}>
       <Vertical gap={3} justifyContent="space-between" height={"100%"}>
@@ -52,11 +60,7 @@ export const SectionMultipleCheckin = ({
                 label={name}
               />
             );
-          })([
-            { id: 1, checked: false, name: "A***Y C***A" },
-            { id: 2, checked: true, name: "M**** J****SON", disabled: true },
-            { id: 3, checked: true, name: "A***H B*****N" },
-          ])}
+          })(items)}
         </Box>
         <Horizontal gap={3}>
           <Button type="button" variant="outlined">
