@@ -19,9 +19,11 @@ const mapDispatchToProps: MapDispatchToProps<
   {}
 > = (dispatch) => {
   return {
-    onClickReturn: () => {
+    onClickCancel: () => {
       dispatch<any>(resetAppState());
     },
+    onClickCheckin: () => {},
+    onChange: () => {},
   };
 };
 
