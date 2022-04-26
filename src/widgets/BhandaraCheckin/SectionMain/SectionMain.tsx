@@ -3,7 +3,7 @@ import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport } from "../../../components";
 import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
 import { ClickHandler, InputChangeHandler } from "../../../types";
-import { isAbhyasiId, isEmail, isMobile } from "../../../utils";
+import { isAbhyasiId, isEmail, isMobile, isPnr } from "../../../utils";
 import { maxWidth } from "../constants";
 
 export type SectionMainStateProps = {
@@ -31,7 +31,8 @@ export const SectionMain = ({
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
   const isValidValue = useMemo(
-    () => isEmail(value) || isMobile(value) || isAbhyasiId(value),
+    () =>
+      isEmail(value) || isMobile(value) || isAbhyasiId(value) || isPnr(value),
     [value]
   );
 
@@ -62,7 +63,7 @@ export const SectionMain = ({
       </Typography>
       <TextField
         type="text"
-        label="Abhyasi ID / Mobile # / Email"
+        label="PNR / Abhyasi ID / Mobile # / Email"
         variant="outlined"
         autoComplete="off"
         error={error}

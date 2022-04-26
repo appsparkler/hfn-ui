@@ -21,5 +21,5 @@ export const isAbhyasiIdPermanent = (value: string): boolean =>
 export const isAbhyasiId = (value: string): boolean =>
   isAbhyasiIdTemp(value) || isAbhyasiIdPermanent(value);
 
-export const isRegex = (value: string): boolean =>
-  Boolean(value.match(pnrRegex));
+export const isPnr = (value: string): boolean =>
+  Boolean(value.toUpperCase().match(pnrRegex));
