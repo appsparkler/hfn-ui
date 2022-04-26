@@ -202,6 +202,13 @@ export type BhandaraCheckinAPIs = {
   attendanceExists: (
     user: AttendanceExistsUser
   ) => Promise<AttendanceExistsResponse>;
+  maskedPnrs: (obj: {
+    email?: string;
+    mobile?: string;
+    pnr?: string;
+  }) => Promise<{
+    results: { id: string; name: string; checkedIn: boolean }[];
+  }>;
   // Previous
   // checkinMobileOrEmailUser: (
   //   user: UserWithEmail | UserWithMobile | UserWithEmailAndMobile
