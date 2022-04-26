@@ -12,9 +12,13 @@ import {
   CenterOfViewport,
   AsyncButton,
 } from "components";
-import { map, some } from "lodash/fp";
+import { map } from "lodash/fp";
 import { useCallback, useMemo } from "react";
-import { maxWidth } from "../constants";
+import { maxWidth } from "widgets/BhandaraCheckin/constants";
+import {
+  mapToUpdatedCheckedItem,
+  someAreCheckedAndNotDisabled,
+} from "widgets/BhandaraCheckin/utils";
 
 type CheckboxItem = {
   id: string;
@@ -33,19 +37,6 @@ export type SectionMultiCheckinDispatchProps = {
   onClickCheckin: () => void;
   onChange: (items: CheckboxItem[]) => void;
 };
-
-export const mapToUpdatedCheckedItem = <
-  T extends { checked?: boolean; id: string }
->(
-  idToUpdate: string,
-  checked: boolean
-) =>
-  map<T, T>((item) => (item.id === idToUpdate ? { ...item, checked } : item));
-
-export const someAreCheckedAndNotDisabled = some<{
-  checked?: boolean;
-  disabled?: boolean;
-}>((item) => Boolean(item.checked && !item.disabled));
 
 export type SectionMultiCheckinProps = SectionMultiCheckinStateProps &
   SectionMultiCheckinDispatchProps;
