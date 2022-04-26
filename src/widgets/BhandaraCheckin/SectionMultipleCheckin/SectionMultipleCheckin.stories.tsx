@@ -9,5 +9,5 @@ export default {
 const Template: ComponentStory<typeof SectionMultipleCheckin> = (args) => (
   <SectionMultipleCheckin {...args} />
 );
-export const checkInSuccess = Template.bind({});
-checkInSuccess.args = {};
+export const multipleCheckin = Template.bind({});
+multipleCheckin.args = {};
