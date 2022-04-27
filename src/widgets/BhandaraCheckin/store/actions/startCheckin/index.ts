@@ -7,9 +7,19 @@ import { startCheckinAbhyasi } from "./startCheckinAbhyasi";
 import { startCheckinMobileOrEmailUser } from "./startCheckinMobileOrEmailUser";
 import { isAbhyasiId, isEmail, isMobile, isPnr } from "utils";
 import { errorUnrecognizedInput } from "widgets/BhandaraCheckin/utils";
+import { bhandaraCheckinName, mainSectionName } from "../../slices";
 
 export const startCheckin = createAsyncThunk<void, string, ThunkApiConfig>(
-  "bhandara-checkin/start-checkin",
+  `${mainSectionName}/startCheckin`,
+  async () => {}
+);
+
+export const startCheckinIfNotMultiple = createAsyncThunk<
+  void,
+  string,
+  ThunkApiConfig
+>(
+  `${bhandaraCheckinName}/startCheckinIfNotMultiple`,
   async (value, { dispatch, getState }) => {
     dispatch(mainSectionActions.startProcessing());
     const isEmailOrMobile = isEmail(value) || isMobile(value);
