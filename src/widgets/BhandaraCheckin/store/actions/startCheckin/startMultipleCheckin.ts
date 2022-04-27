@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { CheckboxItem } from "widgets/BhandaraCheckin/SectionMultipleCheckin/SectionMultipleCheckin";
 import {
   errorServer,
   errorUnrecognizedInput,
@@ -11,6 +12,7 @@ import {
 import {
   mainSectionActions,
   mainSectionName,
+  multipleCheckinActions,
   snackbarActions,
 } from "../../slices";
 
@@ -36,6 +38,7 @@ export const startMultipleCheckin = createAsyncThunk<
           return rejectWithValue("unknown");
       }
     } else {
+      dispatch(multipleCheckinActions.setItems(res.payload as CheckboxItem[]));
     }
   }
 );
