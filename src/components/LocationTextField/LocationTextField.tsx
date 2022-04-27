@@ -137,7 +137,7 @@ export const LocationTextField = ({
       disabled={disabled}
       onInputChange={handleAutocompleteInputChange}
       value={value || null}
-      noOptionsText="Please start typing to see options..."
+      noOptionsText="Please type city name..."
       onOpen={() => {
         if (!query) setOpen(false);
         setOpen(true);

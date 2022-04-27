@@ -199,6 +199,7 @@ export const SectionUpdateDetails = ({
           />
         </Horizontal>
         <LocationTextField
+          helperText="Please type in city name..."
           onChange={handleChangeLocation}
           label="City / State / Country"
           required
