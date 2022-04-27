@@ -10,9 +10,7 @@ const mapStateToProps: MapStateToProps<
   SectionMultiCheckinStateProps,
   {},
   RootState
-> = () => ({
-  items: [],
-});
+> = ({ multiCheckin }) => multiCheckin;
 
 const mapDispatchToProps: MapDispatchToProps<
   SectionMultiCheckinDispatchProps,

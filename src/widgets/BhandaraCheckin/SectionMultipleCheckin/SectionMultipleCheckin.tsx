@@ -20,7 +20,7 @@ import {
   someAreCheckedAndNotDisabled,
 } from "widgets/BhandaraCheckin/utils";
 
-type CheckboxItem = {
+export type CheckboxItem = {
   id: string;
   name: string;
   checked?: boolean;

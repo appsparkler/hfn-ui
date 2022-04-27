@@ -3,6 +3,7 @@ import { BhandaraCheckinAPIs } from "../types";
 import {
   bhandaraCheckinReducer,
   mainSectionReducer,
+  multipleCheckinReducer,
   snackbarReducer,
   updateDetailsReducer,
 } from "./slices";
@@ -12,6 +13,7 @@ export const rootReducer = {
   mainSection: mainSectionReducer,
   updateDetailsSection: updateDetailsReducer,
   snackbar: snackbarReducer,
+  multiCheckin: multipleCheckinReducer,
 };
 
 const exampleStore = configureStore({
