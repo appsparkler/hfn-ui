@@ -13,8 +13,6 @@ export const startCheckin = createAsyncThunk<void, string, ThunkApiConfig>(
   async (value, { dispatch, getState }) => {
     dispatch(mainSectionActions.startProcessing());
     const isEmailOrMobile = isEmail(value) || isMobile(value);
-    // has registrations
-    // const res = await dispatch(hasRegistrations());
     if (isAbhyasiId(value)) {
       await dispatch(startCheckinAbhyasi(value));
     } else if (isEmailOrMobile) {
