@@ -13,6 +13,9 @@ const bhandaraCheckinSlice = createSlice({
   initialState: getInitialState(),
   reducers: {
     reset: () => getInitialState(),
+    goToMultipleCheckin: (state) => {
+      state.currentSection = CurrentSectionEnum.MULTIPLE_CHECKIN;
+    },
     goToMain: (state) => {
       state.currentSection = CurrentSectionEnum.MAIN;
     },

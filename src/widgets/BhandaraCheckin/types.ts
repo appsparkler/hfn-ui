@@ -3,6 +3,7 @@ import { RefinedCityStateCountryLocation } from "../../components/LocationTextFi
 export enum CurrentSectionEnum {
   MAIN,
   UPDATE_DETAILS,
+  MULTIPLE_CHECKIN,
   CHECKIN_SUCCESS,
 }
 
@@ -194,6 +195,16 @@ export type SearchUserResponse = {
   results: UserSRCM[];
 };
 
+export type MaskedPnrResponseItem = {
+  id: string;
+  name: string;
+  checkedIn: boolean;
+};
+
+export type MaskedPnrResponse = {
+  results: MaskedPnrResponseItem[];
+};
+
 export type BhandaraCheckinAPIs = {
   searchUser: (searchParams: SearchUserParams) => Promise<SearchUserResponse>;
   postAttendance: (
@@ -204,9 +215,7 @@ export type BhandaraCheckinAPIs = {
   ) => Promise<AttendanceExistsResponse>;
   maskedPnrs: (
     obj: { email: string } | { mobile: string } | { pnr: string }
-  ) => Promise<{
-    results: { id: string; name: string; checkedIn: boolean }[];
-  }>;
+  ) => Promise<MaskedPnrResponse>;
 };
 
 export type MobileOrEmailUser = {

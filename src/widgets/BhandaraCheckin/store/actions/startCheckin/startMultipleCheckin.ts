@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { map } from "lodash/fp";
 import { CheckboxItem } from "widgets/BhandaraCheckin/SectionMultipleCheckin/SectionMultipleCheckin";
+import { MaskedPnrResponseItem } from "widgets/BhandaraCheckin/types";
 import {
   errorServer,
   errorUnrecognizedInput,
@@ -10,11 +12,22 @@ import {
   maskedPnrs,
 } from "../../api-async-thunks/maskedPnrs";
 import {
+  bhandaraCheckinActions,
   mainSectionActions,
   mainSectionName,
   multipleCheckinActions,
   snackbarActions,
 } from "../../slices";
+
+export const mapMaskedPnrResultsToCheckboxItem = map<
+  MaskedPnrResponseItem,
+  CheckboxItem
+>(({ checkedIn, id, name }) => ({
+  id,
+  name,
+  checked: checkedIn,
+  disabled: checkedIn,
+}));
 
 export const startMultipleCheckin = createAsyncThunk<
   void,
@@ -38,7 +51,11 @@ export const startMultipleCheckin = createAsyncThunk<
           return rejectWithValue("unknown");
       }
     } else {
-      dispatch(multipleCheckinActions.setItems(res.payload as CheckboxItem[]));
+      const items = mapMaskedPnrResultsToCheckboxItem(
+        res.payload as MaskedPnrResponseItem[]
+      );
+      dispatch(multipleCheckinActions.setItems(items));
+      dispatch(bhandaraCheckinActions.goToMultipleCheckin());
     }
   }
 );
