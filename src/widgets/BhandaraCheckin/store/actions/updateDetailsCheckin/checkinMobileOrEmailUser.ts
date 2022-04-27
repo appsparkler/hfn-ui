@@ -33,7 +33,7 @@ export const handleCheckinMobileOrEmailUser = createAsyncThunk<
       postAttendance({
         name: String(fullName.value),
         age_group: ageGroup.value,
-        city_id: location.value?.c_id,
+        city_id: location.value?.id,
         gender: gender.value,
         ...getEmailValue(userDetails),
         ...getMobileValue(userDetails),

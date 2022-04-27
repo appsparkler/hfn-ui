@@ -42,10 +42,6 @@ const removeItemsThatDonotstartWithQuery = (query: string) =>
         .indexOf(query.toLowerCase()) > -1
   );
 
-const filterOutItemsWithCityId0 = filter<RefinedCityStateCountryLocation>(
-  (location) => location.c_id !== 0
-);
-
 export const getUniqLocations = (
   allLocations: CityStateCountryLocation[],
   query: string
@@ -69,7 +65,6 @@ export const getUniqLocations = (
     RefinedCityStateCountryLocation[],
     string[],
     string[],
-    readonly RefinedCityStateCountryLocation[],
     readonly RefinedCityStateCountryLocation[]
   >(
     map((location) => location.id),
@@ -87,7 +82,6 @@ export const getUniqLocations = (
         findWithCityStateCountry(cityStateCountry)(
           refinedLocations
         ) as RefinedCityStateCountryLocation
-    ),
-    filterOutItemsWithCityId0
+    )
   )(refinedLocations);
 };
