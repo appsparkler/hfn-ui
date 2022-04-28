@@ -1,5 +1,6 @@
 {
   "zenMode.hideTabs": false,
   "workbench.editor.scrollToSwitchTabs": true,
-  "workbench.editor.highlightModifiedTabs": true
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.showTabs": true
 }

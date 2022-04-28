@@ -1,17 +1,19 @@
 import Box, { BoxProps } from "@mui/material/Box";
+import React from "react";
 
 export type CenterOfViewportProps = BoxProps;
 
 /** A layout utility that places the children
  * at the center of the viewport.
  **/
-export const CenterOfViewport = ({
-  children,
-  ...restProps
-}: CenterOfViewportProps) => {
+export const CenterOfViewport = React.forwardRef<
+  HTMLDivElement,
+  CenterOfViewportProps
+>(({ children, ...restProps }, ref) => {
   return (
     <Box
       marginX="auto"
+      ref={ref}
       sx={{
         position: "fixed",
         top: 0,
@@ -30,4 +32,4 @@ export const CenterOfViewport = ({
       {children}
     </Box>
   );
-};
+});
