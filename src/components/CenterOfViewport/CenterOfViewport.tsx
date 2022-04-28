@@ -22,10 +22,10 @@ export const CenterOfViewport = React.forwardRef<
         right: 0,
         overflow: "auto",
         display: "flex",
-        justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
       }}
+      justifyContent="center"
       boxSizing="border-box"
       {...restProps}
     >

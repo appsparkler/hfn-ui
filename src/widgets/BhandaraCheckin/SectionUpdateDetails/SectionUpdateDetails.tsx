@@ -155,9 +155,18 @@ export const SectionUpdateDetails = ({
   }, []);
 
   return (
-    <CenterOfViewport gap={5} width={"100%"} maxWidth={maxWidth} paddingX={1}>
-      <Typography variant="h4">Update Details</Typography>
+    <CenterOfViewport
+      gap={5}
+      width={"100%"}
+      maxWidth={maxWidth}
+      paddingX={1}
+      paddingY={1}
+      justifyContent="initial"
+    >
       <Vertical gap={3} width={"100%"}>
+        <Typography variant="h4" textAlign={"center"}>
+          Update Details
+        </Typography>
         <TextField
           label="Full Name"
           color="info"
