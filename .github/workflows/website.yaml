@@ -79,6 +79,8 @@ jobs:
           yarn global add netlify-cli
       - name: Build & Deploy Website
         run: |
-          yarn deploy
-        with:
-          NETLIFY_AUTH_TOKEN: ${{ env.NETLIFY_AUTH_TOKEN }}
+          echo $NODE_ENV
+        # run: |
+        #   yarn deploy
+        # uses:
+        #   NETLIFY_AUTH_TOKEN: ${{ env.NETLIFY_AUTH_TOKEN }}
