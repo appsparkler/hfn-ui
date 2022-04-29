@@ -54,31 +54,31 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      # - name: Get yarn cache directory path
+      #   id: yarn-cache-dir-path
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Install Netlify CLI
-        run: |
-          yarn global add netlify-cli
+      # - name: Install Netlify CLI
+      #   run: |
+      #     yarn global add netlify-cli
 
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-cache-${{ hashFiles('./yarn.lock') }}
-          restore-keys: |
-            yarn-cache-${{ hashFiles('./yarn.lock') }}
+      # - uses: actions/cache@v1
+      #   id: yarn-cache
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+      #     key: yarn-cache-${{ hashFiles('./yarn.lock') }}
+      #     restore-keys: |
+      #       yarn-cache-${{ hashFiles('./yarn.lock') }}
 
-      - name: Install dependencies
-        run: |
-          yarn install --immutable
-      - name: Run typecheck
-        run: |
-          yarn run typecheck
-      - name: Run linter
-        run: |
-          yarn run lint --max-warnings 0
+      # - name: Install dependencies
+      #   run: |
+      #     yarn install --immutable
+      # - name: Run typecheck
+      #   run: |
+      #     yarn run typecheck
+      # - name: Run linter
+      #   run: |
+      #     yarn run lint --max-warnings 0
       - name: Build & Deploy Website
         run: |
           echo "$NODE_ENV"
