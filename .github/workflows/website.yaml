@@ -43,7 +43,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: test
+      name: development
       url: http://github.com
     strategy:
       matrix:
