@@ -83,7 +83,6 @@ jobs:
         run: |
           yarn deploy
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NODE_ENV: ${{ secrets.NODE_ENV }}
           REACT_APP_EVENT_ID: ${{ secrets.REACT_APP_EVENT_ID }}
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
