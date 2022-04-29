@@ -1,3 +1,4 @@
+import { ThemeProvider, createTheme } from '@mui/material'
 import { Provider } from 'react-redux'
 // import { store } from '../src/store'
 
@@ -12,6 +13,11 @@ export const parameters = {
   layout: 'fullscreen'
 }
 
+const darkTheme = createTheme({ palette: { mode: 'dark' } })
+
 export const decorators = [
+  (Story) => <ThemeProvider theme={darkTheme}>
+    <Story />
+  </ThemeProvider>
   // (Story) => <Provider store={store}><Story /></Provider>
 ]
