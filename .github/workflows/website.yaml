@@ -1,0 +1,100 @@
+name: "CI: website"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # lint-typecheck-test:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.14]
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+
+  #     - name: Get yarn cache directory path
+  #       id: yarn-cache-dir-path
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+
+  #     - uses: actions/cache@v1
+  #       id: yarn-cache
+  #       with:
+  #         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: yarn-cache-${{ hashFiles('./yarn.lock') }}
+  #         restore-keys: |
+  #           yarn-cache-${{ hashFiles('./yarn.lock') }}
+  #     - name: Install dependencies
+  #       run: |
+  #         yarn install --immutable
+  #     - name: Run typecheck
+  #       run: |
+  #         yarn run typecheck
+  #     - name: Run linter
+  #       run: |
+  #         yarn run lint --max-warnings 0
+
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: development
+      url: http://github.com
+    strategy:
+      matrix:
+        node-version: [16.14]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-${{ hashFiles('./yarn.lock') }}
+          restore-keys: |
+            yarn-cache-${{ hashFiles('./yarn.lock') }}
+      - name: Install Netlify CLI
+        run: |
+          yarn global add netlify-cli
+      - name: Install dependencies
+        run: |
+          yarn install --immutable
+      - name: Run typecheck
+        run: |
+          yarn run typecheck
+      - name: Run linter
+        run: |
+          yarn run lint --max-warnings 0
+      - name: Build & Deploy Website
+        run: |
+          yarn deploy
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          REACT_APP_EVENT_ID: ${{ secrets.REACT_APP_EVENT_ID }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_API_VERSION: ${{ secrets.REACT_APP_API_VERSION }}
+          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+          REACT_APP_CLIENT_SECRET: ${{ secrets.REACT_APP_CLIENT_SECRET }}
+          REACT_APP_GRANT_TYPE: ${{ secrets.REACT_APP_GRANT_TYPE }}
+          REACT_APP_ACCESS_TOKEN: ${{ secrets.REACT_APP_ACCESS_TOKEN }}
+
+          # CI-CD
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+          # UNIQUE to DEV
+          REACT_APP_USER_NAME: ${{ secrets.REACT_APP_USER_NAME }}
+          REACT_APP_USER_PASSWORD: ${{ secrets.REACT_APP_USER_PASSWORD }}
