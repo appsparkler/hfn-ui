@@ -49,45 +49,38 @@ jobs:
       matrix:
         node-version: [16.14]
     steps:
-      - name: Env Variables
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-${{ hashFiles('./yarn.lock') }}
+          restore-keys: |
+            yarn-cache-${{ hashFiles('./yarn.lock') }}
+      - name: Install Netlify CLI
         run: |
-          echo $GITHUB_ACTOR
-          echo ${{secrets.FOO}}
-      # - uses: actions/checkout@v2
-
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-
-      # - name: Get yarn cache directory path
-      #   id: yarn-cache-dir-path
-      #   run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      # - name: Install Netlify CLI
-      #   run: |
-      #     yarn global add netlify-cli
-
-      # - uses: actions/cache@v1
-      #   id: yarn-cache
-      #   with:
-      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-      #     key: yarn-cache-${{ hashFiles('./yarn.lock') }}
-      #     restore-keys: |
-      #       yarn-cache-${{ hashFiles('./yarn.lock') }}
-
-      # - name: Install dependencies
-      #   run: |
-      #     yarn install --immutable
-      # - name: Run typecheck
-      #   run: |
-      #     yarn run typecheck
-      # - name: Run linter
-      #   run: |
-      #     yarn run lint --max-warnings 0
+          yarn global add netlify-cli
+      - name: Install dependencies
+        run: |
+          yarn install --immutable
+      - name: Run typecheck
+        run: |
+          yarn run typecheck
+      - name: Run linter
+        run: |
+          yarn run lint --max-warnings 0
       - name: Build & Deploy Website
-        run: env
-        # run: |
-        #   yarn deploy
-        # uses:
-        #   NETLIFY_AUTH_TOKEN: ${{ env.NETLIFY_AUTH_TOKEN }}
+        run: |
+          yarn deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
