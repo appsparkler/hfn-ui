@@ -1,6 +1,6 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Vertical } from "../../../components";
 import { CenterOfViewport } from "../../../components/CenterOfViewport/CenterOfViewport";
 import { TimedConfetti } from "../../../components/TimedConfetti";
@@ -18,12 +18,11 @@ export type SectionCheckinSuccessProps = SectionCheckinStateProps &
 export const SectionCheckinSuccess = ({
   onClickReturn,
 }: SectionCheckinSuccessProps) => {
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (wrapperRef.current) {
-      const { offsetHeight, offsetWidth, clientHeight, clientWidth } =
-        wrapperRef.current;
-      console.log({ offsetHeight, offsetWidth, clientHeight, clientWidth });
+      setShowConfetti(true);
     }
   }, []);
 
@@ -46,10 +45,12 @@ export const SectionCheckinSuccess = ({
       >
         Return to main page
       </Button>
-      <TimedConfetti
-        height={wrapperRef.current?.offsetHeight}
-        width={wrapperRef.current?.offsetWidth}
-      />
+      {showConfetti ? (
+        <TimedConfetti
+          height={wrapperRef.current?.offsetHeight}
+          width={wrapperRef.current?.offsetWidth}
+        />
+      ) : null}
     </CenterOfViewport>
   );
 };

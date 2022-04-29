@@ -6,8 +6,12 @@ export default {
   component: TimedConfetti,
 } as ComponentMeta<typeof TimedConfetti>;
 
-const Template: ComponentStory<typeof TimedConfetti> = () => <TimedConfetti />;
-export const asyncButton = Template.bind({});
-asyncButton.args = {
+const Template: ComponentStory<typeof TimedConfetti> = (args) => (
+  <TimedConfetti {...args} />
+);
+
+export const confetti = Template.bind({});
+confetti.args = {
   ms: 100000,
+  numberOfPieces: 500,
 };
