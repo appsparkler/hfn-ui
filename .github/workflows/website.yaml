@@ -52,7 +52,7 @@ jobs:
       - name: Env Variables
         run: |
           echo $GITHUB_ACTOR
-          echo ${{env.secrets.FOO}}
+          echo ${{secrets.FOO}}
       # - uses: actions/checkout@v2
 
       # - name: Use Node.js ${{ matrix.node-version }}
