@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof Horizontal>;
 
 const Template: ComponentStory<typeof Horizontal> = () => (
-  <Horizontal gap={5}>
+  <Horizontal gap={5} color="text.primary">
     <Box>Horizontal</Box>
     <Box>Horizontal</Box>
     <Box>Horizontal</Box>
