@@ -42,7 +42,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    environment: development
+    environment: test
     strategy:
       matrix:
         node-version: [16.14]
@@ -80,9 +80,7 @@ jobs:
       #   run: |
       #     yarn run lint --max-warnings 0
       - name: Build & Deploy Website
-        run: |
-          echo "$NODE_ENV"
-          echo "${{ environment.NODE_ENV}}"
+        run: env
         # run: |
         #   yarn deploy
         # uses:
