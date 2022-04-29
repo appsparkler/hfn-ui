@@ -42,14 +42,16 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    environment: test
+    environment:
+      name: test
+      url: http://github.com
     strategy:
       matrix:
         node-version: [16.14]
     steps:
       - name: Env Variables
         run: |
-          echo ${{env.test.FOO}}
+          echo $GITHUB_ACTOR
       # - uses: actions/checkout@v2
 
       # - name: Use Node.js ${{ matrix.node-version }}
