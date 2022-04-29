@@ -9,10 +9,10 @@
     "dist"
   ],
   "dependencies": {
-    "@emotion/react": "^11.8.2",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.5.1",
-    "@mui/material": "^5.5.0",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.3",
     "@reduxjs/toolkit": "^1.8.1",
     "@sekmet/react-confetti": "^6.0.1",
     "@types/react-redux": "^7.1.23",

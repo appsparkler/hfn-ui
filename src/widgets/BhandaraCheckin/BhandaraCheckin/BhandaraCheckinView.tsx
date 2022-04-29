@@ -30,7 +30,7 @@ export const BhandaraCheckinView = ({
     [currentSection]
   );
   return (
-    <Box bgcolor={"white"}>
+    <Box>
       {showMain ? <SectionMainConnected /> : null}
       {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
       {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}

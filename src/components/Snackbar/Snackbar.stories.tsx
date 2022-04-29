@@ -17,4 +17,5 @@ snackbar.args = {
   open: true,
   severity: "success",
   variant: "filled",
+  autoHideDuration: 5000
 };

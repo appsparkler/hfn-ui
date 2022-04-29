@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { BhandaraCheckinAPIs } from "../types";
 import { BhandaraCheckinViewConnected } from "./BhandaraCheckinViewConnected";
 import { rootReducer } from "../store";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -33,8 +34,10 @@ export const BhandaraCheckinWidget = ({ apis }: BhandaraCheckinWidgetProps) => {
   );
 
   return (
-    <Provider store={store}>
-      <BhandaraCheckinViewConnected />
-    </Provider>
+    <ThemeProvider theme={createTheme({palette: {mode: 'light'}})}>
+      <Provider store={store}>
+        <BhandaraCheckinViewConnected />
+      </Provider>
+    </ThemeProvider>
   );
 };
