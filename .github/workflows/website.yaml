@@ -82,7 +82,7 @@ jobs:
       - name: Build & Deploy Website
         run: |
           echo "$NODE_ENV"
-          echo "${{ env.NODE_ENV}}"
+          echo "${{ environment.NODE_ENV}}"
         # run: |
         #   yarn deploy
         # uses:
