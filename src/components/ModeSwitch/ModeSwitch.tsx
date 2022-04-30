@@ -80,7 +80,9 @@ export const ModeSwitch = ({
   return (
     <FormControlLabel
       onChange={handleChange}
-      control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} />}
+      control={
+        <MaterialUISwitch sx={{ m: 1 }} checked={checked} {...restProps} />
+      }
       label=""
     />
   );
