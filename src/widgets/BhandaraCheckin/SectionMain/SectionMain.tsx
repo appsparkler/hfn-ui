@@ -1,7 +1,8 @@
-import { TextField, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport } from "../../../components";
 import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
+import { ModeSwitch } from "../../../components/ModeSwitch";
 import { ClickHandler, InputChangeHandler } from "../../../types";
 import { isAbhyasiId, isEmail, isMobile } from "../../../utils";
 import { maxWidth } from "../constants";
@@ -80,6 +81,9 @@ export const SectionMain = ({
       >
         START CHECK IN
       </AsyncButton>
+      <Box position="fixed" right={20} top={20}>
+        <ModeSwitch checked onChange={console.log} />
+      </Box>
     </CenterOfViewport>
   );
 };
