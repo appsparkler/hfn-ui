@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import { Alert, Button, TextField, Typography } from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
@@ -165,7 +164,11 @@ export const SectionUpdateDetails = ({
       justifyContent="initial"
     >
       <Vertical gap={3} width={"100%"}>
-        <Typography variant="h4" textAlign={"center"} sx={{color: 'text.primary'}}>
+        <Typography
+          variant="h4"
+          textAlign={"center"}
+          sx={{ color: "text.primary" }}
+        >
           Update Details
         </Typography>
         <TextField
