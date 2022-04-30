@@ -12,7 +12,12 @@ import {
 } from "./SectionMain";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
-  ({ mainSection }) => mainSection;
+  ({ mainSection, mode }) => {
+    return {
+      ...mainSection,
+      isDarkMode: mode ? true : false,
+    };
+  };
 
 const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
   dispatch

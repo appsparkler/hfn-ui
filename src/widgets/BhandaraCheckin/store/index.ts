@@ -5,6 +5,7 @@ import {
   mainSectionReducer,
   snackbarReducer,
   updateDetailsReducer,
+  modeReducer,
 } from "./slices";
 
 export const rootReducer = {
@@ -12,6 +13,7 @@ export const rootReducer = {
   mainSection: mainSectionReducer,
   updateDetailsSection: updateDetailsReducer,
   snackbar: snackbarReducer,
+  mode: modeReducer,
 };
 
 const exampleStore = configureStore({

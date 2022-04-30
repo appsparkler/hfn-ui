@@ -15,4 +15,5 @@ main.args = {
   value: "INEEIW837",
   helperText: "",
   isProcessing: false,
+  isDarkMode: false,
 };
