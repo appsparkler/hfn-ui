@@ -81,7 +81,7 @@ export const SectionMain = ({
       >
         START CHECK IN
       </AsyncButton>
-      <Box position="fixed" right={20} top={20}>
+      <Box position="fixed" right={0} top={0}>
         <ModeSwitch checked onChange={console.log} />
       </Box>
     </CenterOfViewport>
