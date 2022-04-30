@@ -34,24 +34,19 @@ export const ThemeContextProvider = ({ mode: $mode, children }) => {
   }, [])
   return <ThemeContext.Provider value={{ mode, setDarkTheme, setLightTheme, toggleTheme }}>
     <ThemeProvider theme={theme}>
-      <Box display="flex" alignItems="end">
+      {children}
+      <Box position="fixed" sx={{ right: 30, bottom: 30 }}>
         <FormControlLabel label="Dark Mode" control={<Switch checked={mode === 'dark'} onChange={handleSwitchMode} />}>
-
         </FormControlLabel>
       </Box>
-      {children}
     </ThemeProvider>
-  </ThemeContext.Provider>
+  </ThemeContext.Provider >
 }
-
-const darkTheme = createTheme({ palette: { mode: 'dark' } })
 
 export const decorators = [
   (Story) =>
-    // <÷ThemeProvider theme={darkTheme}>
     <ThemeContextProvider mode="light">
       <CssBaseline />
       <Story />
     </ThemeContextProvider>
-  // </ThemeProvider>
 ]
