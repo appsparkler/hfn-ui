@@ -3,6 +3,7 @@ import {
   startCheckin,
   RootState,
   handleChangeCheckinWithValue,
+  handleSwitchMode,
 } from "../store";
 import {
   SectionMain,
@@ -23,6 +24,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
     onClickStart: (value) => {
       dispatch<any>(startCheckin(value));
     },
+    onSwitchMode: (checked) => dispatch<any>(handleSwitchMode(checked)),
   };
 };
 

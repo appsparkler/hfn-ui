@@ -7,10 +7,10 @@ export enum Modes {
 
 const modeSlice = createSlice({
   name: "mode",
-  initialState: Modes.DARK,
+  initialState: false,
   reducers: {
-    setDarkTheme: () => Modes.DARK,
-    setLightTheme: () => Modes.LIGHT,
+    setDarkTheme: () => true,
+    setLightTheme: () => false,
   },
 });
 

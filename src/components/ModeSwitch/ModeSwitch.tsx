@@ -57,7 +57,7 @@ export type ModeSwitchStateProps = {
 };
 
 export type ModeSwitchDispatchProps = {
-  onChange: (checked: boolean) => void;
+  onSwitch: (checked: boolean) => void;
 };
 
 export type ModeSwitchProps = ModeSwitchStateProps &
@@ -66,7 +66,7 @@ export type ModeSwitchProps = ModeSwitchStateProps &
 
 export const ModeSwitch = ({
   checked,
-  onChange,
+  onSwitch: onChange,
   ...restProps
 }: ModeSwitchProps) => {
   const handleChange = useCallback<

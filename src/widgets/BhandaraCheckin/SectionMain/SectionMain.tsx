@@ -2,7 +2,7 @@ import { Box, TextField, Typography } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport } from "../../../components";
 import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
-import { ModeSwitch } from "../../../components/ModeSwitch";
+import { ModeSwitch, ModeSwitchDispatchProps } from "../../../components";
 import { ClickHandler, InputChangeHandler } from "../../../types";
 import { isAbhyasiId, isEmail, isMobile } from "../../../utils";
 import { maxWidth } from "../constants";
@@ -12,11 +12,13 @@ export type SectionMainStateProps = {
   helperText?: string;
   value: string;
   isProcessing?: boolean;
+  isDarkMode?: boolean;
 };
 
 export type SectionMainDispatchProps = {
   onChange: (updatedValue: string) => void;
   onClickStart: (userId: string) => void;
+  onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -24,6 +26,8 @@ export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
 export const SectionMain = ({
   onClickStart,
   onChange,
+  onSwitchMode,
+  isDarkMode,
   isProcessing,
   error,
   helperText,
@@ -82,7 +86,7 @@ export const SectionMain = ({
         START CHECK IN
       </AsyncButton>
       <Box position="fixed" right={0} top={0}>
-        <ModeSwitch checked onChange={console.log} />
+        <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
       </Box>
     </CenterOfViewport>
   );
