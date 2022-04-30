@@ -4,6 +4,7 @@ import {
   RootState,
   handleChangeCheckinWithValue,
   handleSwitchMode,
+  Modes,
 } from "../store";
 import {
   SectionMain,
@@ -15,7 +16,7 @@ const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({ mainSection, mode }) => {
     return {
       ...mainSection,
-      isDarkMode: mode ? true : false,
+      isDarkMode: mode === Modes.DARK ? true : false,
     };
   };
 

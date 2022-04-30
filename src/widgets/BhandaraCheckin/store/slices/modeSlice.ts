@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export enum Modes {
-  LIGHT,
   DARK,
+  LIGHT,
 }
 
 const modeSlice = createSlice({
   name: "mode",
-  initialState: false,
+  initialState: Modes.LIGHT,
   reducers: {
-    setDarkTheme: () => true,
-    setLightTheme: () => false,
+    setDarkTheme: () => Modes.DARK,
+    setLightTheme: () => Modes.LIGHT,
   },
 });
 
