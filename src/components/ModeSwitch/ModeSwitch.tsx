@@ -1,7 +1,9 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControlLabel, {
+  FormControlLabelProps,
+} from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
+import { useCallback } from "react";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -50,16 +52,34 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export const MUISwitch = ({
+export type ModeSwitchStateProps = {
+  checked?: boolean;
+};
+
+export type ModeSwitchDispatchProps = {
+  onChange: (checked: boolean) => void;
+};
+
+export type ModeSwitchProps = ModeSwitchStateProps &
+  ModeSwitchDispatchProps &
+  SwitchProps;
+
+export const ModeSwitch = ({
   checked,
   onChange,
-}: {
-  checked: any;
-  onChange: any;
-}) => {
+  ...restProps
+}: ModeSwitchProps) => {
+  const handleChange = useCallback<
+    NonNullable<FormControlLabelProps["onChange"]>
+  >(
+    (_evt, checked) => {
+      onChange(checked);
+    },
+    [onChange]
+  );
   return (
     <FormControlLabel
-      onChange={onChange}
+      onChange={handleChange}
       control={<MaterialUISwitch sx={{ m: 1 }} checked={checked} />}
       label=""
     />
