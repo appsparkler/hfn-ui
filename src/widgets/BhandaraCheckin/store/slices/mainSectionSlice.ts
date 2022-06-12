@@ -13,7 +13,7 @@ const getInitialState = (): SectionMainStateProps => {
     isProcessing: false,
     isDarkMode: false,
     isScannerOn,
-    scanBtnDisabled: true,
+    scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
   };
 };
