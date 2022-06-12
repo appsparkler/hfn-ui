@@ -101,17 +101,6 @@ export const SectionMain = ({
         inputRef={idFieldRef}
         fullWidth
       />
-      <AsyncButton
-        type="button"
-        onClick={handleClickStart}
-        disabled={!isStartButtonEnabled}
-        isProcessing={isProcessing}
-      >
-        START CHECK IN
-      </AsyncButton>
-      <Box position="fixed" right={0} top={0}>
-        <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
-      </Box>
       <Horizontal gap={3}>
         <AsyncButton
           type="button"
@@ -138,6 +127,9 @@ export const SectionMain = ({
         }
         label="Scanner"
       />
+      <Box position="fixed" right={0} top={0}>
+        <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
+      </Box>
     </CenterOfViewport>
   );
 };

@@ -111,7 +111,7 @@ export const BarcodeScanner = ({
       flexDirection={"column"}
       justifyContent="space-between"
       alignItems={"center"}
-      bgcolor="white"
+      bgcolor="background.default"
     >
       <video ref={videoRef} width="100%" />
       <Button
