@@ -1,4 +1,3 @@
-import { SectionMainConnected } from "../SectionMain/SectionMainConnected";
 import { SectionUpdateDetailsConnected } from "../SectionUpdateDetails/SectionUpdateDetailsConnected";
 import { SectionCheckinSuccessConnected } from "../SectionCheckinSuccess/SectionCheckInSuccessConnected";
 import { BhandaraCheckinAPIs, CurrentSectionEnum } from "../types";
@@ -6,6 +5,7 @@ import { SnackbarConnected } from "./SnackbarConnected";
 import { useMemo } from "react";
 import { Box } from "@mui/material";
 import { BarcodeScannerConnected } from "./BarcodeScannerConnected";
+import { SectionMainConnectedV2 } from "../SectionMain/SectionMainConnectedV2";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -34,7 +34,7 @@ export const BhandaraCheckinView = ({
   );
   return (
     <Box>
-      {showMain ? <SectionMainConnected /> : null}
+      {showMain ? <SectionMainConnectedV2 /> : null}
       {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
       {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
       {renderScanner && <BarcodeScannerConnected />}
