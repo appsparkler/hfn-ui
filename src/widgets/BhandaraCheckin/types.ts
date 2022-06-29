@@ -61,6 +61,15 @@ export type UserDetails = {
   gender: UserDetailsValueWrapper<string>;
 };
 
+export type UserDetailsV2 = {
+  fullName: UserDetailsValueWrapper<string>;
+  mobile: UserDetailsValueWrapper<string>;
+  email: UserDetailsValueWrapper<string>;
+  location: UserDetailsValueWrapper<string>;
+  ageGroup: UserDetailsValueWrapper<string>;
+  gender: UserDetailsValueWrapper<string>;
+};
+
 // const user: User = {
 //   id: "id",
 //   ageGroup: "19-209",
