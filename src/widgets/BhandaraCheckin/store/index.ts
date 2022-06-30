@@ -7,12 +7,14 @@ import {
   snackbarReducer,
   updateDetailsReducer,
   modeReducer,
+  updateDetailsV2Reducer,
 } from "./slices";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
   mainSection: mainSectionReducer,
   updateDetailsSection: updateDetailsReducer,
+  updateDetailsV2Section: updateDetailsV2Reducer,
   snackbar: snackbarReducer,
   mode: modeReducer,
   barcodeScanner: barcodeScannerReducer,

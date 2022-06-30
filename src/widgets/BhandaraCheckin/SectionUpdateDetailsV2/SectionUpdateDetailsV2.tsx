@@ -39,7 +39,6 @@ export const SectionUpdateDetailsV2 = ({
   onClickCancel,
 }: SectionUpdateDetailsProps) => {
   const fullNameInputRef = useRef<HTMLInputElement>(null);
-
   const { fullName, ageGroup, email, gender, location, mobile } = useMemo(
     () => userDetails,
     [userDetails]

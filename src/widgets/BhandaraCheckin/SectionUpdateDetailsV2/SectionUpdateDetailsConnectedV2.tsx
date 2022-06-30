@@ -4,18 +4,13 @@ import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetailsV2";
-import {
-  resetAppState,
-  RootState,
-  handleChangeUserDetails,
-  updateDetailsCheckin,
-} from "../store";
+import { resetAppState, RootState, updateDetailsCheckin } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
   {},
   RootState
-> = ({ updateDetailsSection }) => updateDetailsSection;
+> = ({ updateDetailsV2Section }) => updateDetailsV2Section;
 
 const mapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
@@ -28,9 +23,7 @@ const mapDispatchToProps: MapDispatchToProps<
     onClickCancel: () => {
       dispatch<any>(resetAppState());
     },
-    onChange: (userDetails) => {
-      dispatch<any>(handleChangeUserDetails(userDetails));
-    },
+    onChange: (userDetails) => {},
   };
 };
 
