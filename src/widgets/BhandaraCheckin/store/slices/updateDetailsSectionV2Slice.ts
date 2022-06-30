@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ageGroupOptions, genderOptions, onFileOptions } from "../../constants";
+import { ageGroupOptions, genderOptions } from "../../constants";
 import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetailsV2/SectionUpdateDetailsV2";
 
 const getInitialState = (): SectionUpdateDetailsStateProps => {
@@ -39,12 +39,12 @@ const updateDetailsSectionSlice = createSlice({
   initialState: getInitialState(),
   reducers: {
     reset: () => getInitialState(),
-    stopProcessing: (state) => {
-      state.isProcessing = false;
-    },
-    startProcessing: (state) => {
-      state.isProcessing = true;
-    },
+    // stopProcessing: (state) => {
+    //   state.isProcessing = false;
+    // },
+    // startProcessing: (state) => {
+    //   state.isProcessing = true;
+    // },
     setState: (
       state,
       { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
@@ -52,15 +52,15 @@ const updateDetailsSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
-    setAgeOnFileOption: (state) => {
-      state.ageGroupOptions = [...onFileOptions];
-    },
+    // setAgeOnFileOption: (state) => {
+    //   state.ageGroupOptions = [...onFileOptions];
+    // },
     setDefaultAgeOptions: (state) => {
       state.ageGroupOptions = { ...ageGroupOptions };
     },
-    setGenderOnFileOption: (state) => {
-      state.genderOptions = { ...onFileOptions };
-    },
+    // setGenderOnFileOption: (state) => {
+    //   state.genderOptions = { ...onFileOptions };
+    // },
     setDefaultGenderOptions: (state) => {
       state.genderOptions = { ...genderOptions };
     },

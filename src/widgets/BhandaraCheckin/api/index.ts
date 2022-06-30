@@ -6,8 +6,16 @@ import { setAccessTokenOnLocalStorage } from "./utils";
 
 setAccessTokenOnLocalStorage();
 
+const checkedInAbhyasis: string[] = [];
+
 export const apis: BhandaraCheckinAPIs = {
   attendanceExists: attendanceExists,
   postAttendance: postAttendance,
   searchUser: searchUser,
+  checkinAbhyasi: (abhyasiId) =>
+    new Promise((resolve, reject) => {
+      checkedInAbhyasis.push(abhyasiId);
+      resolve(true);
+      // reject(false);
+    }),
 };
