@@ -11,3 +11,4 @@ export { handleClickScannerCancel } from "./handleClickScannerCancel";
 export { handlePlayScannerVideo } from "./handlePlayScannerVideo";
 export { handleScan } from "./handleScan";
 export * from "./mainSection";
+export * from "./updateDetailsSection";
