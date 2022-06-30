@@ -16,6 +16,5 @@ export const apis: BhandaraCheckinAPIs = {
     new Promise((resolve, reject) => {
       checkedInAbhyasis.push(abhyasiId);
       resolve(true);
-      // reject(false);
     }),
 };

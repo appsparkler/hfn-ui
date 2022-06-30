@@ -25,7 +25,7 @@ export const mainSectionMapDispatchToProps: MapDispatchToProps<
     const $isAbhyasiId = isAbhyasiId(userId);
     if ($isAbhyasiId) {
       const res = await dispatch<any>(checkinWithAbhyasiId(userId));
-      if (res.meta === "fulfilled") {
+      if (res.meta.requestStatus === "fulfilled") {
         dispatch(bhandaraCheckinActions.goToCheckinSuccess());
       } else {
         dispatch(

@@ -2,11 +2,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkApiConfig } from "..";
 
 export const checkinWithAbhyasiId = createAsyncThunk<
-  void,
+  any,
   string,
   ThunkApiConfig
 >(
-  "api/checkinWithAbhyasi",
+  "api/checkinWithAbhyasiId",
   async (
     abhyasiId,
     {
@@ -17,11 +17,13 @@ export const checkinWithAbhyasiId = createAsyncThunk<
       rejectWithValue,
     }
   ) => {
-    const checkInSuccess = await checkinAbhyasi(abhyasiId);
-    if (checkInSuccess) {
-      fulfillWithValue(true);
-    } else {
-      rejectWithValue(false);
+    try {
+      const checkInSuccess = await checkinAbhyasi(abhyasiId);
+      if (checkInSuccess) {
+        return fulfillWithValue(true);
+      }
+    } catch (error) {
+      return rejectWithValue(false);
     }
   }
 );
