@@ -4,9 +4,10 @@ import {
   getMainSectionInitialState,
 } from "widgets/BhandaraCheckin/store";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/SectionMain/SectionMain";
-import { isAbhyasiId } from "utils";
+import { isAbhyasiId, isMobileOrEmail } from "utils";
 import { bhandaraCheckinActions, snackbarActions } from "../../slices";
 import { checkinWithAbhyasiId } from "../../api-async-thunks";
+import { Action, Dispatch } from "redux";
 
 export const mainSectionMapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -21,21 +22,31 @@ export const mainSectionMapDispatchToProps: MapDispatchToProps<
     );
   },
   onClickScan: () => {},
-  onClickStart: async (userId) => {
-    const $isAbhyasiId = isAbhyasiId(userId);
+  onClickStart: async (inputValue) => {
+    const $isAbhyasiId = isAbhyasiId(inputValue);
     if ($isAbhyasiId) {
-      const res = await dispatch<any>(checkinWithAbhyasiId(userId));
-      if (res.meta.requestStatus === "fulfilled") {
-        dispatch(bhandaraCheckinActions.goToCheckinSuccess());
-      } else {
-        dispatch(
-          snackbarActions.openSnackbar({
-            children: "Ooops! Something went wrong!!",
-          })
-        );
-      }
+      checkinAbhyasi(dispatch, inputValue);
+    }
+
+    const $isMobileOrEmail = isMobileOrEmail(inputValue);
+    alert($isMobileOrEmail);
+    if ($isMobileOrEmail) {
+      dispatch(bhandaraCheckinActions.goToUpdateDetails());
     }
   },
   onSwitchMode: () => {},
   onSwitchScanner: () => {},
 });
+
+async function checkinAbhyasi(dispatch: Dispatch<Action<any>>, userId: string) {
+  const res = await dispatch<any>(checkinWithAbhyasiId(userId));
+  if (res.meta.requestStatus === "fulfilled") {
+    dispatch(bhandaraCheckinActions.goToCheckinSuccess());
+  } else {
+    dispatch(
+      snackbarActions.openSnackbar({
+        children: "Ooops! Something went wrong!!",
+      })
+    );
+  }
+}
