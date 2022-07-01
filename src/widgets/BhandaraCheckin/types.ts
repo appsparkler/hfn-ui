@@ -203,6 +203,18 @@ export type SearchUserResponse = {
   results: UserSRCM[];
 };
 
+type EmailOrMobileDetail =
+  | { mobile: string }
+  | { email: string }
+  | { email: string; mobile: string };
+
+export type CheckinEmailOrMobileUserDetails = {
+  name: string;
+  ageGroup: string;
+  gender: string;
+  location: string;
+} & EmailOrMobileDetail;
+
 export type BhandaraCheckinAPIs = {
   searchUser: (searchParams: SearchUserParams) => Promise<SearchUserResponse>;
   postAttendance: (
@@ -212,6 +224,9 @@ export type BhandaraCheckinAPIs = {
     user: AttendanceExistsUser
   ) => Promise<AttendanceExistsResponse>;
   checkinAbhyasi: (abhyasiId: string) => Promise<boolean>;
+  checkinWithEmailOrMobile: (
+    userDetails: CheckinEmailOrMobileUserDetails
+  ) => Promise<boolean>;
 };
 
 export type MobileOrEmailUser = {
