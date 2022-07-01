@@ -9,6 +9,6 @@ export { handleMountScanner } from "./handleMountScanner";
 export { handleClickScan } from "./handleClickScan";
 export { handleClickScannerCancel } from "./handleClickScannerCancel";
 export { handlePlayScannerVideo } from "./handlePlayScannerVideo";
-export { handleScan } from "./handleScan";
+export { handleScanV2 } from "./handleScan";
 export * from "./mainSection";
 export * from "./updateDetailsSection";

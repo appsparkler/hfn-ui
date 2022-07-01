@@ -60,7 +60,10 @@ function setDarkMode(dispatch: Dispatch<Action<any>>) {
   dispatch(mainSectionActions.setDarkMode());
 }
 
-async function checkinAbhyasi(dispatch: Dispatch<Action<any>>, userId: string) {
+export async function checkinAbhyasi(
+  dispatch: Dispatch<Action<any>>,
+  userId: string
+) {
   const res = await dispatch<any>(checkinWithAbhyasiId(userId));
   if (res.meta.requestStatus === "fulfilled") {
     dispatch(bhandaraCheckinActions.goToCheckinSuccess());
