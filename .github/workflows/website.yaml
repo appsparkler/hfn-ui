@@ -67,9 +67,9 @@ jobs:
           key: yarn-cache-${{ hashFiles('./yarn.lock') }}
           restore-keys: |
             yarn-cache-${{ hashFiles('./yarn.lock') }}
-      - name: Install Netlify CLI
-        run: |
-          yarn global add netlify-cli
+      # - name: Install Netlify CLI
+      #   run: |
+      #     yarn global add netlify-cli
       - name: Install dependencies
         run: |
           yarn install --immutable

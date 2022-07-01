@@ -36,7 +36,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "compile": "rimraf dist && yarn rollup -c",
-    "deploy": "yarn build && netlify deploy -d build",
+    "deploy": "yarn build && npx netlify deploy -d build",
     "deploy-prod": "yarn deploy --prod",
     "lint": "yarn eslint --ext .ts,.tsx src",
     "typecheck": "tsc --project ./tsconfig.json --noEmit --skipLibCheck"
