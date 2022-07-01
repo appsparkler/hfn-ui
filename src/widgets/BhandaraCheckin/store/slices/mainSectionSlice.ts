@@ -6,12 +6,14 @@ const getInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(
     localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
   );
+  const mode = localStorage.getItem(LocalStorageKeys.MODE);
+  const isDarkMode = mode === "dark";
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
     error: false,
     isProcessing: false,
-    isDarkMode: false,
+    isDarkMode,
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
@@ -24,6 +26,12 @@ const mainSectionSlice = createSlice({
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
+    },
+    setDarkMode: (state) => {
+      state.isDarkMode = true;
+    },
+    setLightMode: (state) => {
+      state.isDarkMode = false;
     },
     reset: () => getInitialState(),
     setError: (state, { payload }: { payload: string }) => {

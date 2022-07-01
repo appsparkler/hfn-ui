@@ -5,12 +5,10 @@ import {
 } from "widgets/BhandaraCheckin/store";
 import { SectionMain, SectionMainStateProps } from "./SectionMain";
 
-const mapStateToPropsV2: MapStateToProps<SectionMainStateProps, {}, RootState> =
-  ({ mainSection }) => {
-    return mainSection;
-  };
+const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
+  ({ mainSection }) => mainSection;
 
 export const SectionMainConnectedV2 = connect(
-  mapStateToPropsV2,
+  mapStateToProps,
   mainSectionMapDispatchToProps
 )(SectionMain);

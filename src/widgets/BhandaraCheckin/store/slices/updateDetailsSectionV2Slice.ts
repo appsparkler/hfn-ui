@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { isEmail, isMobile } from "utils";
 import { ageGroupOptions, genderOptions } from "../../constants";
 import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetailsV2/SectionUpdateDetailsV2";
 
@@ -63,6 +64,33 @@ const updateDetailsSectionSlice = createSlice({
     // },
     setDefaultGenderOptions: (state) => {
       state.genderOptions = { ...genderOptions };
+    },
+    prepare: (state, { payload }: { payload: string }) => {
+      const updateDetailsInitialState = getInitialState();
+      return {
+        ...updateDetailsInitialState,
+        userDetails: {
+          ...updateDetailsInitialState.userDetails,
+          ...(isMobile(payload)
+            ? {
+                mobile: {
+                  ...updateDetailsInitialState.userDetails.mobile,
+                  disabled: true,
+                  value: payload,
+                },
+              }
+            : {}),
+          ...(isEmail(payload)
+            ? {
+                email: {
+                  ...updateDetailsInitialState.userDetails.email,
+                  disabled: true,
+                  value: payload,
+                },
+              }
+            : {}),
+        },
+      };
     },
   },
 });
