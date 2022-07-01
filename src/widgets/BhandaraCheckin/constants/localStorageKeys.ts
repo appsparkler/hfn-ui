@@ -1,4 +1,4 @@
 export enum LocalStorageKeys {
-  TURN_ON_SCANNER = "turnOnScanner",
+  TURN_ON_SCANNER = "isOnScanner",
   MODE = "mode",
 }
