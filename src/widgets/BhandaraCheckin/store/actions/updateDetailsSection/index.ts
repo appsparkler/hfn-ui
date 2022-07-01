@@ -5,6 +5,7 @@ import { checkinWithEmailOrMobile } from "../../api-async-thunks";
 import {
   bhandaraCheckinActions,
   mainSectionActions,
+  snackbarActions,
   updateDetailsV2Actions,
 } from "../../slices";
 
@@ -36,5 +37,22 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       name: String(fullName.value),
     };
     const res = await dispatch<any>(checkinWithEmailOrMobile(userDetails));
+    if (res.meta.requestStatus === "fulfilled") {
+      if (res.payload) {
+        dispatch(bhandaraCheckinActions.goToCheckinSuccess());
+      } else {
+        dispatch(
+          snackbarActions.openSnackbar({
+            children: "Request Failed",
+          })
+        );
+      }
+    } else if (res.meta.requestStatus === "rejected") {
+      dispatch(
+        snackbarActions.openSnackbar({
+          children: "Server Error",
+        })
+      );
+    }
   },
 });
