@@ -9,6 +9,12 @@ import {
   modeReducer,
   updateDetailsV2Reducer,
 } from "./slices";
+import {
+  locationReducer,
+  locationEnhancer,
+  locationMiddleware,
+  pageReducer,
+} from "./pageAndLocationReducers";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
@@ -18,18 +24,23 @@ export const rootReducer = {
   snackbar: snackbarReducer,
   mode: modeReducer,
   barcodeScanner: barcodeScannerReducer,
+  location: locationReducer,
+  page: pageReducer,
 };
 
 const exampleStore = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
+  enhancers: [locationEnhancer],
+  middleware: (getDefaultMiddleware) => [
+    ...getDefaultMiddleware({
       thunk: {
         extraArgument: {
           apis: {} as BhandaraCheckinAPIs,
         } as ThunkApiConfig["extra"],
       },
     }),
+    locationMiddleware,
+  ],
 });
 
 export type RootState = ReturnType<typeof exampleStore.getState>;

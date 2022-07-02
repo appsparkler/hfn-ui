@@ -10,6 +10,7 @@ const getInitialState = (): BhandaraCheckinViewStateProps => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
     renderScanner,
+    locationActionType: "Home",
   };
 };
 

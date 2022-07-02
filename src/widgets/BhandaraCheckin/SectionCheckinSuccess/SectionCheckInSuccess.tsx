@@ -24,6 +24,9 @@ export const SectionCheckinSuccess = ({
     if (wrapperRef.current) {
       setShowConfetti(true);
     }
+    return () => {
+      setShowConfetti(false);
+    };
   }, []);
 
   return (
