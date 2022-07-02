@@ -2,6 +2,7 @@ import { BhandaraCheckinAPIs, CurrentSectionEnum } from "../types";
 import { SnackbarConnected } from "./SnackbarConnected";
 import { pages } from "../pages";
 import { Box } from "@mui/material";
+import { NOT_FOUND } from "redux-first-router";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -17,18 +18,20 @@ export type BhandaraCheckinViewStateProps = {
   renderScanner?: boolean;
   locationActionType: LocationActionType;
   currentSection: CurrentSectionEnum;
+  page?: any;
 };
 
 export const BhandaraCheckinView = ({
   currentSection,
+  page = "Home",
   renderScanner,
   locationActionType,
 }: BhandaraCheckinViewStateProps) => {
-  if (locationActionType === "@@redux-first-router/NOT_FOUND") {
+  if (page === NOT_FOUND) {
     const Nf = pages.NotFound;
     return <Nf />;
   }
-  const Component = pages[locationActionType];
+  const Component = (pages as any)[page] as any;
   return (
     <Box>
       <Component />

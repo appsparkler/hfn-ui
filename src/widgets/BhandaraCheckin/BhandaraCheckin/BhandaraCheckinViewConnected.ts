@@ -10,9 +10,10 @@ const mapStateToProps: MapStateToProps<
   BhandaraCheckinViewStateProps,
   {},
   RootState
-> = ({ bhandaraCheckin, location }) => ({
+> = ({ bhandaraCheckin, location, page }) => ({
   ...bhandaraCheckin,
   locationActionType: location.type as LocationActionType,
+  page,
 });
 
 export const BhandaraCheckinViewConnected =

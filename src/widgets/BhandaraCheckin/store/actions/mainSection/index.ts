@@ -15,11 +15,15 @@ import {
 } from "../../slices";
 import { checkinWithAbhyasiId } from "../../api-async-thunks";
 import { Action, Dispatch } from "redux";
+import { pageActions } from "../../pageAndLocationReducers";
 
 export const mainSectionMapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
+  goToCheckinSuccess: () => {
+    dispatch(pageActions.CheckInSuccess());
+  },
   onChange: (updatedValue) => {
     dispatch(
       mainSectionActions.setState({

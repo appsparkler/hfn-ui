@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "../types";
 import {
   barcodeScannerReducer,
@@ -15,6 +15,7 @@ import {
   locationMiddleware,
   pageReducer,
 } from "./pageAndLocationReducers";
+import { NOT_FOUND } from "redux-first-router";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,

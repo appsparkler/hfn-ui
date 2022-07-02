@@ -5,6 +5,7 @@ import {
   Typography,
   Box,
   SwitchProps,
+  Button,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import { CenterOfViewport, Horizontal } from "../../../components";
@@ -31,6 +32,7 @@ export type SectionMainDispatchProps = {
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickScan: () => void;
   onSwitchScanner: (checked: boolean) => void;
+  goToCheckinSuccess?: any;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -49,6 +51,7 @@ export const SectionMain = ({
   error,
   helperText,
   value = "",
+  goToCheckinSuccess,
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
@@ -130,6 +133,9 @@ export const SectionMain = ({
       <Box position="fixed" right={0} top={0}>
         <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
       </Box>
+      <Button type="button" onClick={goToCheckinSuccess}>
+        Go to checkin success
+      </Button>
     </CenterOfViewport>
   );
 };
