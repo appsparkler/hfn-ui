@@ -66,7 +66,13 @@ export async function checkinAbhyasi(
 ) {
   const res = await dispatch<any>(checkinWithAbhyasiId(userId));
   if (res.meta.requestStatus === "fulfilled") {
-    dispatch(bhandaraCheckinActions.goToCheckinSuccess());
+    dispatch({
+      type: "CheckInSuccess",
+      payload: {
+        location: {},
+      },
+    });
+    // dispatch(bhandaraCheckinActions.goToCheckinSuccess());
   } else {
     dispatch(
       snackbarActions.openSnackbar({

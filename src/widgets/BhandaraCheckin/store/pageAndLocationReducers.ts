@@ -1,8 +1,8 @@
-import { connectRoutes, NOT_FOUND } from "redux-first-router";
+import { connectRoutes, NOT_FOUND, LocationState } from "redux-first-router";
 
 const routesMap = {
   Home: "/",
-  UpdateDetails: "/update-details-section",
+  UpdateDetails: "/update-details",
   CheckInSuccess: "/check-in-success",
 };
 
@@ -13,7 +13,7 @@ type PageComponents = {
   [NOT_FOUND]: string;
 };
 
-const components: PageComponents = {
+const components: Record<keyof PageComponents, string> = {
   Home: "Home",
   UpdateDetails: "UpdateDetails",
   CheckInSuccess: "CheckInSuccess",
@@ -29,4 +29,6 @@ export const {
   reducer: locationReducer,
   middleware: locationMiddleware,
   enhancer: locationEnhancer,
+  thunk: locationThunk,
+  initialDispatch,
 } = connectRoutes(routesMap);
