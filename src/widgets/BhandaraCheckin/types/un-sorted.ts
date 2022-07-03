@@ -215,13 +215,6 @@ export type CheckinEmailOrMobileUserDetails = {
   location: string;
 } & EmailOrMobileDetail;
 
-export type BhandaraCheckinAPIs = {
-  checkinAbhyasi: (abhyasiId: string) => Promise<boolean>;
-  checkinWithEmailOrMobile: (
-    userDetails: CheckinEmailOrMobileUserDetails
-  ) => Promise<boolean>;
-};
-
 export type MobileOrEmailUser = {
   fullName: string;
   email?: string | undefined;
