@@ -1,1 +1,3 @@
-export * from "./components/BhandaraCheckin/BhandaraCheckinWidget";
+import { init } from "./utils";
+export { BhandaraCheckinWidgetDemo } from "./components/BhandaraCheckin/BhandaraCheckinDemo";
+init();

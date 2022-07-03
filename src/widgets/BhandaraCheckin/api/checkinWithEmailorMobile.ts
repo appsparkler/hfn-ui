@@ -4,6 +4,7 @@ import {
 } from "widgets/BhandaraCheckin/types";
 import { v4 as uuid } from "uuid";
 import { db } from "widgets/BhandaraCheckin/dexie";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
@@ -25,7 +26,7 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = async (
       id: uuid(),
       ...attendee,
       timestamp: Date.now(),
-      deviceId: String(localStorage.getItem("deviceId")),
+      deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
     });
     return true;
   } catch (e) {

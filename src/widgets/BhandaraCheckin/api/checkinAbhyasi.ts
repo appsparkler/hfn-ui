@@ -2,6 +2,7 @@ import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
 // import { db } from "widgets/BhandaraCheckin/firebase";
 import { db } from "widgets/BhandaraCheckin/dexie";
 import { v4 as uuid } from "uuid";
+import { LocalStorageKeys } from "../constants";
 // import { addDoc, collection } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
@@ -19,7 +20,7 @@ export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
     await db.abhyasiIdCheckins.add({
       id: uuid(),
       abhyasiId,
-      deviceId: String(localStorage.getItem("deviceId")),
+      deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
     });
     return true;

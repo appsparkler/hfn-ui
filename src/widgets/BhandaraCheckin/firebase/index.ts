@@ -37,7 +37,6 @@ export const analytics = getAnalytics(app);
 enableIndexedDbPersistence(db)
   .then(async () => {
     await $disableNetwork(db);
-    alert("network is disabled");
   })
   .catch((err) => {
     if (err.code === "failed-precondition") {
