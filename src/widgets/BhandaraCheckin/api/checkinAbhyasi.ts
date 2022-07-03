@@ -1,9 +1,10 @@
-import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
-// import { db } from "widgets/BhandaraCheckin/firebase";
-import { db } from "widgets/BhandaraCheckin/dexie";
-import { v4 as uuid } from "uuid";
+import {
+  CheckinAbhyasiApi,
+  FirestoreCollections,
+} from "widgets/BhandaraCheckin/types";
 import { LocalStorageKeys } from "../constants";
-// import { addDoc, collection } from "firebase/firestore";
+import { firestoreDb } from "widgets/BhandaraCheckin/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
 
@@ -17,12 +18,16 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) =>
 
 export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
   try {
-    await db.abhyasiIdCheckins.add({
-      id: uuid(),
+    const data = {
       abhyasiId,
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
-    });
+    };
+    const abhyasiIdCollection = collection(
+      firestoreDb,
+      FirestoreCollections.ABHYASI_ID_CHECKINS
+    );
+    addDoc(abhyasiIdCollection, data);
     return true;
   } catch (e) {
     console.error("Error adding document: ", e);

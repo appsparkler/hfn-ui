@@ -22,6 +22,7 @@ const getInitialState = (): SectionUpdateDetailsStateProps => {
       },
       location: {
         show: true,
+        value: "",
       },
       ageGroup: {
         show: true,

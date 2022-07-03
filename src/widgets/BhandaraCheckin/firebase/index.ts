@@ -28,13 +28,13 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const db = initializeFirestore(app, {
+export const firestoreDb = initializeFirestore(app, {
   cacheSizeBytes: CACHE_SIZE_UNLIMITED,
 });
 
 export const analytics = getAnalytics(app);
 
-enableIndexedDbPersistence(db).catch((err) => {
+enableIndexedDbPersistence(firestoreDb).catch((err) => {
   if (err.code === "failed-precondition") {
     // Multiple tabs open, persistence can only be enabled
     // in one tab at a a time.
@@ -48,10 +48,10 @@ enableIndexedDbPersistence(db).catch((err) => {
 
 export const turnOffOfflineMode = () => {
   localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);
-  $disableNetwork(db);
+  $enableNetwork(firestoreDb);
 };
 
 export const turnOnOfflineMode = () => {
   localStorage.setItem(LocalStorageKeys.OFFLINE_MODE, "true");
-  $enableNetwork(db);
+  $disableNetwork(firestoreDb);
 };
