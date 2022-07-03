@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { BhandaraCheckinAPIs } from "../types";
+import { BhandaraCheckinAPIs, ThunkApiConfig } from "../types";
 import {
   locationReducer,
   locationMiddleware,
-  pageReducer,
   locationEnhancer,
+  pageReducer,
 } from "widgets/BhandaraCheckin/routing";
 import {
   barcodeScannerReducer,
@@ -44,12 +44,6 @@ const exampleStore = configureStore({
 export type RootState = ReturnType<typeof exampleStore.getState>;
 
 export type RootDispatch = typeof exampleStore.dispatch;
-
-export type ThunkApiConfig = {
-  extra: {
-    apis: BhandaraCheckinAPIs;
-  };
-};
 
 export * from "./actions";
 export * from "./slices";

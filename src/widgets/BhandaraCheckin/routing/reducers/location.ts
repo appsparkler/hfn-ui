@@ -10,6 +10,4 @@ export const {
   reducer: locationReducer,
   middleware: locationMiddleware,
   enhancer: locationEnhancer,
-  thunk: locationThunk,
-  initialDispatch,
 } = connectRoutes(routesMap);

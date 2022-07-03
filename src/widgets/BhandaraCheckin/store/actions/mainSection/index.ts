@@ -21,7 +21,7 @@ export const mapDispatchToProps: MapDispatchToProps<
   {}
 > = (dispatch) => ({
   goToCheckinSuccess: () => {
-    dispatch(pageActions.CHECKIN_SUCCESS());
+    dispatch({ type: "CHECKIN_SUCCESS" });
   },
   onChange: (updatedValue) => {
     dispatch(

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ThunkApiConfig } from "..";
+import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 
 export const checkinWithAbhyasiId = createAsyncThunk<
   any,

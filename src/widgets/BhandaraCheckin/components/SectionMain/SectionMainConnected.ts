@@ -1,16 +1,12 @@
-import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
+import { connect, MapStateToProps } from "react-redux";
 import { RootState } from "widgets/BhandaraCheckin/store";
-import {
-  SectionMain,
-  SectionMainDispatchProps,
-  SectionMainStateProps,
-} from "./SectionMain";
+import { SectionMain, SectionMainStateProps } from "./SectionMain";
 import { mapDispatchToProps } from "./mapDispatchToProps";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({ mainSection }) => mainSection;
 
-export const SectionMainConnectedV2 = connect(
+export const SectionMainConnected = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SectionMain);

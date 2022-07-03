@@ -1,12 +1,12 @@
 import {
   SectionCheckinSuccessConnected,
-  SectionMainConnectedV2,
+  SectionMainConnected,
   SectionUpdateDetailsConnected,
 } from "widgets/BhandaraCheckin/components";
 import { Page } from "widgets/BhandaraCheckin/types";
 
 export const pages: Page = {
-  Home: SectionMainConnectedV2,
+  Home: SectionMainConnected,
   UpdateDetails: SectionUpdateDetailsConnected,
   CheckInSuccess: SectionCheckinSuccessConnected,
   NotFound: () => <div>404</div>,
