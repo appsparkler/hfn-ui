@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useCallback, useState } from "react";
 import { ageGroupOptions, genderOptions } from "../../constants";
-import { UserDetailsV2 } from "../../types";
+import { FormUserDetails } from "../../types";
 import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsV2,
@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof SectionUpdateDetailsV2> = ({
   userDetails,
   ...args
 }) => {
-  const [$userDetails, setUserDetails] = useState<UserDetailsV2>(userDetails);
+  const [$userDetails, setUserDetails] = useState<FormUserDetails>(userDetails);
 
   const handleChange = useCallback<
     SectionUpdateDetailsDispatchProps["onChange"]

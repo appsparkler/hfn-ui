@@ -10,20 +10,20 @@ import {
 } from "../../../../components";
 import { ClickHandler, InputChangeHandler } from "../../../../types";
 import { maxWidth } from "../../constants";
-import { UserDetails, UserDetailsV2 } from "../../types";
-import { isFieldValueValid, isFieldValueValidV2 } from "../../utils";
+import { FormUserDetails } from "../../types";
+import { isFieldValueValidV2 } from "../../utils";
 
 export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;
-  userDetails: UserDetailsV2;
+  userDetails: FormUserDetails;
   ageGroupOptions: SelectFieldProps["options"];
   genderOptions: SelectFieldProps["options"];
 };
 
 export type SectionUpdateDetailsDispatchProps = {
-  onClickCheckin: (userDetails: UserDetailsV2) => void;
+  onClickCheckin: (userDetails: FormUserDetails) => void;
   onClickCancel: () => void;
-  onChange: (userDetails: UserDetailsV2) => void;
+  onChange: (userDetails: FormUserDetails) => void;
 };
 
 export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
@@ -49,8 +49,8 @@ export const SectionUpdateDetailsV2 = ({
     const disabledMobile = Boolean(userDetails.mobile.disabled);
     const hasEmail = Boolean(userDetails.email.value);
     const hasMobile = Boolean(userDetails.mobile.value);
-    const hasValidEmail = isFieldValueValid("email", userDetails.email.value);
-    const hasValidMobile = isFieldValueValid(
+    const hasValidEmail = isFieldValueValidV2("email", userDetails.email.value);
+    const hasValidMobile = isFieldValueValidV2(
       "mobile",
       userDetails.mobile.value
     );
@@ -109,9 +109,9 @@ export const SectionUpdateDetailsV2 = ({
       onChange({
         ...userDetails,
         [name]: {
-          ...userDetails[name as keyof UserDetails],
+          ...userDetails[name as keyof FormUserDetails],
           value: name === "email" ? (value as string).toLowerCase() : value,
-          isValid: isFieldValueValidV2(name as keyof UserDetailsV2, value),
+          isValid: isFieldValueValidV2(name as keyof FormUserDetails, value),
         },
       });
     },
@@ -123,10 +123,10 @@ export const SectionUpdateDetailsV2 = ({
       onChange({
         ...userDetails,
         [name]: {
-          ...userDetails[name as keyof UserDetails],
+          ...userDetails[name as keyof FormUserDetails],
           value: optionValue,
           isValid: isFieldValueValidV2(
-            name as keyof UserDetailsV2,
+            name as keyof FormUserDetails,
             optionValue as string
           ),
         },
