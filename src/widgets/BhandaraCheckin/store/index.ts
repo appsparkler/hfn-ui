@@ -11,7 +11,6 @@ import {
   bhandaraCheckinReducer,
   mainSectionReducer,
   snackbarReducer,
-  updateDetailsReducer,
   modeReducer,
   updateDetailsV2Reducer,
 } from "./slices";
@@ -19,7 +18,6 @@ import {
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
   mainSection: mainSectionReducer,
-  updateDetailsSection: updateDetailsReducer,
   updateDetailsV2Section: updateDetailsV2Reducer,
   snackbar: snackbarReducer,
   mode: modeReducer,

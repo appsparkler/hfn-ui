@@ -216,13 +216,6 @@ export type CheckinEmailOrMobileUserDetails = {
 } & EmailOrMobileDetail;
 
 export type BhandaraCheckinAPIs = {
-  searchUser: (searchParams: SearchUserParams) => Promise<SearchUserResponse>;
-  postAttendance: (
-    user: PostAttendanceUser
-  ) => Promise<PostAttendanceSuccess | PostAttendanceFailure>;
-  attendanceExists: (
-    user: AttendanceExistsUser
-  ) => Promise<AttendanceExistsResponse>;
   checkinAbhyasi: (abhyasiId: string) => Promise<boolean>;
   checkinWithEmailOrMobile: (
     userDetails: CheckinEmailOrMobileUserDetails

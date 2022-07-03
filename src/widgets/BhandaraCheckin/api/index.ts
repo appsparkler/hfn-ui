@@ -10,9 +10,6 @@ setAccessTokenOnLocalStorage();
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
 export const apis: BhandaraCheckinAPIs = {
-  attendanceExists,
-  postAttendance,
-  searchUser,
   checkinAbhyasi,
   checkinWithEmailOrMobile: (userDetails) =>
     new Promise((resolve, reject) => {

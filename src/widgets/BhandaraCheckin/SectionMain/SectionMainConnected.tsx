@@ -1,6 +1,5 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import {
-  startCheckin,
   RootState,
   handleChangeCheckinWithValue,
   handleSwitchMode,
@@ -31,9 +30,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionMainDispatchProps, {}> = (
     onChange: (value) => {
       dispatch<any>(handleChangeCheckinWithValue(value));
     },
-    onClickStart: (value) => {
-      dispatch<any>(startCheckin(value));
-    },
+    onClickStart: (value) => {},
     onSwitchMode: (checked) => dispatch<any>(handleSwitchMode(checked)),
   };
 };

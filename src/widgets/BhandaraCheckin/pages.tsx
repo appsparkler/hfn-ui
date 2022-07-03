@@ -1,7 +1,7 @@
 import { ConnectedComponent } from "react-redux";
 import { SectionCheckinSuccessConnected } from "./SectionCheckinSuccess/SectionCheckInSuccessConnected";
 import { SectionMainConnectedV2 } from "./SectionMain/SectionMainConnectedV2";
-import { SectionUpdateDetailsConnected } from "./SectionUpdateDetailsV2/SectionUpdateDetailsConnectedV2";
+import { SectionUpdateDetailsConnected } from "./SectionUpdateDetails/SectionUpdateDetailsConnectedV2";
 
 export type Pages = {
   NotFound: () => JSX.Element;
