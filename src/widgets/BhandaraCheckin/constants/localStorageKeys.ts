@@ -1,6 +1,6 @@
 export enum LocalStorageKeys {
   TURN_ON_SCANNER = "isOnScanner",
   MODE = "mode",
-  NETWORK_ENABLED = "isNetworkOn",
+  OFFLINE_MODE = "isOfflineMode",
   DEVICE_ID = "deviceId",
 }

@@ -34,27 +34,24 @@ export const db = initializeFirestore(app, {
 
 export const analytics = getAnalytics(app);
 
-enableIndexedDbPersistence(db)
-  .then(async () => {
-    await $disableNetwork(db);
-  })
-  .catch((err) => {
-    if (err.code === "failed-precondition") {
-      // Multiple tabs open, persistence can only be enabled
-      // in one tab at a a time.
-      // ...
-    } else if (err.code === "unimplemented") {
-      // The current browser does not support all of the
-      // features required to enable persistence
-      // ...
-    }
-  });
+enableIndexedDbPersistence(db).catch((err) => {
+  if (err.code === "failed-precondition") {
+    // Multiple tabs open, persistence can only be enabled
+    // in one tab at a a time.
+    // ...
+  } else if (err.code === "unimplemented") {
+    // The current browser does not support all of the
+    // features required to enable persistence
+    // ...
+  }
+});
 
-export const enableNetwork = () => {
-  localStorage.setItem(LocalStorageKeys.NETWORK_ENABLED, "true");
-  $enableNetwork(db);
-};
-export const disableNetwork = () => {
-  localStorage.removeItem(LocalStorageKeys.NETWORK_ENABLED);
+export const turnOffOfflineMode = () => {
+  localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);
   $disableNetwork(db);
+};
+
+export const turnOnOfflineMode = () => {
+  localStorage.setItem(LocalStorageKeys.OFFLINE_MODE, "true");
+  $enableNetwork(db);
 };

@@ -149,7 +149,7 @@ export const SectionMain = ({
           control={
             <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
           }
-          label="Network"
+          label="Offline Mode"
         />
       </Vertical>
       <Box position="fixed" right={0} top={0}>
