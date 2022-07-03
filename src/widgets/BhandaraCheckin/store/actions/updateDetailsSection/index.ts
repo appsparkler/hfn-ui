@@ -1,6 +1,6 @@
 import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
-import { CHECKIN_SUCCESS, HOME } from "widgets/BhandaraCheckin/routing";
+import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
 import { checkinWithEmailOrMobile } from "../../api-async-thunks";
 import {
@@ -18,7 +18,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   },
   onClickCancel: () => {
     dispatch(mainSectionActions.reset());
-    dispatch(HOME());
+    dispatch(pageActions.HOME());
   },
   onClickCheckin: async ({
     ageGroup,
@@ -39,7 +39,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
     const res = await dispatch<any>(checkinWithEmailOrMobile(userDetails));
     if (res.meta.requestStatus === "fulfilled") {
       if (res.payload) {
-        dispatch(CHECKIN_SUCCESS());
+        dispatch(pageActions.CHECKIN_SUCCESS());
       } else {
         dispatch(
           snackbarActions.openSnackbar({

@@ -14,17 +14,14 @@ import {
 } from "widgets/BhandaraCheckin/store/slices";
 import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
-import {
-  CHECKIN_SUCCESS,
-  UPDATE_DETAILS,
-} from "widgets/BhandaraCheckin/routing";
+import { pageActions } from "widgets/BhandaraCheckin/routing";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
   goToCheckinSuccess: () => {
-    dispatch(CHECKIN_SUCCESS());
+    dispatch(pageActions.CHECKIN_SUCCESS());
   },
   onChange: (updatedValue) => {
     dispatch(
@@ -43,7 +40,7 @@ export const mapDispatchToProps: MapDispatchToProps<
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
       dispatch(updateDetailsV2Actions.prepare(inputValue));
-      dispatch(UPDATE_DETAILS());
+      dispatch(pageActions.UPDATE_DETAILS());
     }
   },
   onSwitchMode: (checked: boolean) => {
