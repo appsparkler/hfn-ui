@@ -5,7 +5,7 @@ import {
   locationMiddleware,
   pageReducer,
   locationEnhancer,
-} from "widgets/BhandaraCheckin/routing";
+} from "widgets/BhandaraCheckinV2/routing";
 import {
   barcodeScannerReducer,
   bhandaraCheckinReducer,

@@ -7,7 +7,7 @@ import {
   Modes,
   handleSwitchScanner,
   handleClickScan,
-} from "widgets/BhandaraCheckin/store";
+} from "widgets/BhandaraCheckinV2/store";
 import {
   SectionMain,
   SectionMainDispatchProps,

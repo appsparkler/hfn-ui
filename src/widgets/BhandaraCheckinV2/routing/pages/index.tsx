@@ -2,8 +2,8 @@ import {
   SectionCheckinSuccessConnected,
   SectionMainConnectedV2,
   SectionUpdateDetailsConnected,
-} from "widgets/BhandaraCheckin/components";
-import { Page } from "widgets/BhandaraCheckin/types";
+} from "widgets/BhandaraCheckinV2/components";
+import { Page } from "widgets/BhandaraCheckinV2/types";
 
 export const pages: Page = {
   Home: SectionMainConnectedV2,

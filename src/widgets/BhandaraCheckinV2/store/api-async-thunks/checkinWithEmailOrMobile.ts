@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
+import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckinV2/types";
 import { ThunkApiConfig } from "..";
 
 export const checkinWithEmailOrMobile = createAsyncThunk<

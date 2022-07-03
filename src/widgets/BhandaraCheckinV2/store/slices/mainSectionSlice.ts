@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { LocalStorageKeys } from "widgets/BhandaraCheckinV2/constants";
 import { SectionMainStateProps } from "../../SectionMain/SectionMain";
 
 const getInitialState = (): SectionMainStateProps => {

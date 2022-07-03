@@ -10,7 +10,7 @@ import {
   handleClickScannerCancel,
   handlePlayScannerVideo,
   handleScanV2,
-} from "widgets/BhandaraCheckin/store";
+} from "widgets/BhandaraCheckinV2/store";
 
 const mapStateToProps: MapStateToProps<
   BarcodeScannerStateProps,

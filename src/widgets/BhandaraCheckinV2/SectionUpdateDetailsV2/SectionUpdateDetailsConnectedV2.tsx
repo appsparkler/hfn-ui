@@ -6,7 +6,7 @@ import {
 import {
   RootState,
   updateDetailsSectionMapDispatchToProps,
-} from "widgets/BhandaraCheckin/store";
+} from "widgets/BhandaraCheckinV2/store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,

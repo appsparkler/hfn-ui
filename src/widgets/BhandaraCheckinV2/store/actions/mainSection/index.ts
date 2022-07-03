@@ -4,18 +4,18 @@ import {
   getMainSectionInitialState,
   handleSwitchScanner,
   handleClickScan,
-} from "widgets/BhandaraCheckin/store";
-import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/SectionMain/SectionMain";
+} from "widgets/BhandaraCheckinV2/store";
+import { SectionMainDispatchProps } from "widgets/BhandaraCheckinV2/SectionMain/SectionMain";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   bhandaraCheckinActions,
   modeActions,
   snackbarActions,
   updateDetailsV2Actions,
-} from "widgets/BhandaraCheckin/store/slices";
-import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
+} from "widgets/BhandaraCheckinV2/store/slices";
+import { checkinWithAbhyasiId } from "widgets/BhandaraCheckinV2/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
-import { pageActions } from "widgets/BhandaraCheckin/routing";
+import { pageActions } from "widgets/BhandaraCheckinV2/routing";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,

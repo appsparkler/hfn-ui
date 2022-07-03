@@ -1,5 +1,5 @@
 import { AnyAction, Dispatch } from "redux";
-import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { LocalStorageKeys } from "widgets/BhandaraCheckinV2/constants";
 import { bhandaraCheckinActions, mainSectionActions } from "../../slices";
 
 export const handleSwitchScanner =
