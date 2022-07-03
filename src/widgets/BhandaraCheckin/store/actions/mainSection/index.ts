@@ -14,7 +14,7 @@ import {
 } from "widgets/BhandaraCheckin/store/slices";
 import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
-import { pageActions } from "widgets/BhandaraCheckin/routing";
+import { UPDATE_DETAILS } from "widgets/BhandaraCheckin/routing";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -40,7 +40,7 @@ export const mapDispatchToProps: MapDispatchToProps<
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
       dispatch(updateDetailsV2Actions.prepare(inputValue));
-      dispatch(pageActions.UPDATE_DETAILS());
+      dispatch(UPDATE_DETAILS());
     }
   },
   onSwitchMode: (checked: boolean) => {

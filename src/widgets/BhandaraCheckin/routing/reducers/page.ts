@@ -1,18 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
 import { NOT_FOUND } from "redux-first-router";
 import { PageEnum } from "widgets/BhandaraCheckin/types";
 
-const getInitialState = (): PageEnum => PageEnum.Home;
+const actionTypeToComponentsMap: Record<string, PageEnum> = {
+  HOME: PageEnum.Home,
+  UPDATE_DETAILS: PageEnum.UpdateDetails,
+  CHECKIN_SUCCESS: PageEnum.CheckInSuccess,
+  [NOT_FOUND]: PageEnum.NotFound,
+};
 
-const pageSlice = createSlice({
-  name: "page",
-  initialState: getInitialState(),
-  reducers: {
-    HOME: () => PageEnum.Home,
-    UPDATE_DETAILS: () => PageEnum.UpdateDetails,
-    CHECKIN_SUCCESS: () => PageEnum.CheckInSuccess,
-    [NOT_FOUND]: () => PageEnum.NotFound,
-  },
-});
-
-export const { reducer: pageReducer, actions: pageActions } = pageSlice;
+export const pageReducer = (state = "Home", { type } = { type: "HOME" }) =>
+  actionTypeToComponentsMap[type] || state;
