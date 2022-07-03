@@ -31,3 +31,16 @@ export type FormUserDetails = {
   ageGroup: FormUserDetailsValueWrapper<string>;
   gender: FormUserDetailsValueWrapper<string>;
 };
+
+export type AbhyasiCheckinData = {
+  id: string;
+  abhyasiId: string;
+  timestamp: number;
+  deviceId: string;
+};
+
+export type CheckinEmailOrMobileUserData = {
+  id: string;
+  timestamp: number;
+  deviceId: string;
+} & CheckinEmailOrMobileUserDetails;

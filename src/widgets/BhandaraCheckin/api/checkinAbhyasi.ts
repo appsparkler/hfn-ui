@@ -1,6 +1,8 @@
 import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
-import { db } from "widgets/BhandaraCheckin/firebase";
-import { addDoc, collection } from "firebase/firestore";
+// import { db } from "widgets/BhandaraCheckin/firebase";
+import { db } from "widgets/BhandaraCheckin/dexie";
+import { v4 as uuid } from "uuid";
+// import { addDoc, collection } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
 
@@ -14,9 +16,10 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) =>
 
 export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
   try {
-    const abhyasiIdCheckinsCollection = collection(db, "abhyasiId-checkins");
-    await addDoc(abhyasiIdCheckinsCollection, {
+    await db.abhyasiIdCheckins.add({
+      id: uuid(),
       abhyasiId,
+      deviceId: String(localStorage.getItem("deviceId")),
       timestamp: Date.now(),
     });
     return true;

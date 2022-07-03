@@ -2,8 +2,8 @@ import {
   CheckinEmailOrMobileUserDetails,
   CheckinWithEmailOrMobileApi,
 } from "widgets/BhandaraCheckin/types";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "widgets/BhandaraCheckin/firebase";
+import { v4 as uuid } from "uuid";
+import { db } from "widgets/BhandaraCheckin/dexie";
 
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
@@ -21,9 +21,11 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = async (
   attendee
 ) => {
   try {
-    await addDoc(collection(db, "other-checkins"), {
+    db.otherCheckins.add({
+      id: uuid(),
       ...attendee,
       timestamp: Date.now(),
+      deviceId: String(localStorage.getItem("deviceId")),
     });
     return true;
   } catch (e) {
