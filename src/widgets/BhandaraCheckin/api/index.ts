@@ -1,19 +1,8 @@
-import { BhandaraCheckinAPIs, CheckinEmailOrMobileUserDetails } from "../types";
-import { attendanceExists } from "./attendanceExitsts";
-import { searchUser } from "./searchUser";
-import { postAttendance } from "./postAttendance";
-import { setAccessTokenOnLocalStorage } from "./utils";
-import { checkinAbhyasi } from "./checkinAbhyasi";
-
-setAccessTokenOnLocalStorage();
-
-const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
+import { BhandaraCheckinAPIs } from "widgets/BhandaraCheckin/types";
+import { mockedCheckinAbhyasi } from "./checkinAbhyasi";
+import { mockedCheckinWithEmailOrMobile } from "./checkinWithEmailorMobile";
 
 export const apis: BhandaraCheckinAPIs = {
-  checkinAbhyasi,
-  checkinWithEmailOrMobile: (userDetails) =>
-    new Promise((resolve, reject) => {
-      checkedInEmailOreMobileUsers.push(userDetails);
-      resolve(true);
-    }),
+  checkinAbhyasi: mockedCheckinAbhyasi,
+  checkinWithEmailOrMobile: mockedCheckinWithEmailOrMobile,
 };
