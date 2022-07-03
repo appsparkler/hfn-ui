@@ -24,7 +24,7 @@ export type SectionMainStateProps = {
   isScannerOn?: boolean;
   scanBtnDisabled?: boolean;
   scanBtnProcessing?: boolean;
-  isNetworkOn?: boolean;
+  isOfflineMode?: boolean;
 };
 
 export type SectionMainDispatchProps = {
@@ -33,7 +33,7 @@ export type SectionMainDispatchProps = {
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickScan: () => void;
   onSwitchScanner?: (checked: boolean) => void;
-  onSwitchNetwork?: (checked: boolean) => void;
+  onSwitchOfflineMode?: (checked: boolean) => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -45,12 +45,12 @@ export const SectionMain = ({
   isDarkMode,
   onClickScan,
   onSwitchScanner = noop,
-  onSwitchNetwork = noop,
+  onSwitchOfflineMode = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
   isProcessing,
-  isNetworkOn,
+  isOfflineMode,
   error,
   helperText,
   value = "",
@@ -87,9 +87,9 @@ export const SectionMain = ({
 
   const handleSwitchNetwork = useCallback<NonNullable<SwitchProps["onChange"]>>(
     (evt, checked) => {
-      onSwitchNetwork(checked);
+      onSwitchOfflineMode(checked);
     },
-    [onSwitchNetwork]
+    [onSwitchOfflineMode]
   );
 
   useEffect(() => {
@@ -147,7 +147,7 @@ export const SectionMain = ({
 
         <FormControlLabel
           control={
-            <Switch checked={isNetworkOn} onChange={handleSwitchNetwork} />
+            <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
           }
           label="Network"
         />

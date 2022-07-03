@@ -24,7 +24,7 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
-    isNetworkOn,
+    isOfflineMode: isNetworkOn,
   };
 };
 
@@ -81,11 +81,11 @@ const mainSectionSlice = createSlice({
     }),
     enableNetwork: (state) => {
       enableNetwork();
-      state.isNetworkOn = true;
+      state.isOfflineMode = true;
     },
     disableNetwork: (state) => {
       disableNetwork();
-      state.isNetworkOn = false;
+      state.isOfflineMode = false;
     },
   },
 });

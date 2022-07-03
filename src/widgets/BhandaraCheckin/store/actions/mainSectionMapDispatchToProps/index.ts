@@ -20,7 +20,7 @@ export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
-  onSwitchNetwork: (isNetworkOn) => {
+  onSwitchOfflineMode: (isNetworkOn) => {
     if (isNetworkOn) {
       dispatch(mainSectionActions.enableNetwork());
     } else {
