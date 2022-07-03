@@ -5,7 +5,7 @@ import { FormUserDetails } from "../../types";
 import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsV2,
-} from "./SectionUpdateDetailsV2";
+} from "./SectionUpdateDetails";
 
 export default {
   title: "Widgets/Bhandara Checkin/Sections/Update Details V2",

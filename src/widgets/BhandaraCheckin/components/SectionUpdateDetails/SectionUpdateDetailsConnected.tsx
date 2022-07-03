@@ -2,7 +2,7 @@ import { connect, MapStateToProps } from "react-redux";
 import {
   SectionUpdateDetailsV2,
   SectionUpdateDetailsStateProps,
-} from "./SectionUpdateDetailsV2";
+} from "./SectionUpdateDetails";
 import {
   RootState,
   updateDetailsSectionMapDispatchToProps,

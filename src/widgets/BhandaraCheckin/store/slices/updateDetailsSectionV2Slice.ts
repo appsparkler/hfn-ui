@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { isEmail, isMobile } from "utils";
 import { ageGroupOptions, genderOptions } from "../../constants";
-import { SectionUpdateDetailsStateProps } from "../../components/SectionUpdateDetails/SectionUpdateDetailsV2";
+import { SectionUpdateDetailsStateProps } from "../../components/SectionUpdateDetails/SectionUpdateDetails";
 
 const getInitialState = (): SectionUpdateDetailsStateProps => {
   return {

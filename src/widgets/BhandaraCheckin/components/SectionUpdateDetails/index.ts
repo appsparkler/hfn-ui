@@ -1,1 +1,1 @@
-export * from "./SectionUpdateDetailsConnectedV2";
+export * from "./SectionUpdateDetailsConnected";
