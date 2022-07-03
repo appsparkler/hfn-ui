@@ -20,9 +20,6 @@ export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
-  goToCheckinSuccess: () => {
-    dispatch(pageActions.CHECKIN_SUCCESS());
-  },
   onChange: (updatedValue) => {
     dispatch(
       mainSectionActions.setState({
@@ -35,7 +32,9 @@ export const mapDispatchToProps: MapDispatchToProps<
   onClickStart: async (inputValue) => {
     const $isAbhyasiId = isAbhyasiId(inputValue);
     if ($isAbhyasiId) {
-      checkinAbhyasi(dispatch, inputValue);
+      dispatch(mainSectionActions.startProcessing());
+      await checkinAbhyasi(dispatch, inputValue);
+      dispatch(mainSectionActions.stopProcessing());
     }
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {

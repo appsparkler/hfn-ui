@@ -4,6 +4,8 @@ let checkedInAbhyasis: string[] = [];
 
 export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) =>
   new Promise((resolve, reject) => {
-    checkedInAbhyasis.push(abhyasiId);
-    resolve(true);
+    setTimeout(() => {
+      checkedInAbhyasis.push(abhyasiId);
+      resolve(true);
+    }, 1000);
   });

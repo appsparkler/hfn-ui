@@ -36,6 +36,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       mobile: String(mobile.value),
       name: String(fullName.value),
     };
+    dispatch(updateDetailsActions.startProcessing());
     const res = await dispatch<any>(checkinWithEmailOrMobile(userDetails));
     if (res.meta.requestStatus === "fulfilled") {
       if (res.payload) {
@@ -54,5 +55,6 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
         })
       );
     }
+    dispatch(updateDetailsActions.stopProcessing());
   },
 });

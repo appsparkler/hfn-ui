@@ -47,6 +47,12 @@ const updateDetailsSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
+    startProcessing: (state) => {
+      state.isProcessing = true;
+    },
+    stopProcessing: (state) => {
+      state.isProcessing = false;
+    },
     setDefaultAgeOptions: (state) => {
       state.ageGroupOptions = { ...ageGroupOptions };
     },

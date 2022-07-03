@@ -9,6 +9,8 @@ export const mockedCheckinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
   userDetails
 ) =>
   new Promise((resolve, reject) => {
-    checkedInEmailOreMobileUsers.push(userDetails);
-    resolve(true);
+    setTimeout(() => {
+      checkedInEmailOreMobileUsers.push(userDetails);
+      resolve(true);
+    }, 1000);
   });
