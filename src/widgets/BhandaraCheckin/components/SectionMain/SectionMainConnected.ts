@@ -1,7 +1,7 @@
 import { connect, MapStateToProps } from "react-redux";
-import { RootState } from "widgets/BhandaraCheckin/store";
+import { RootState, mapDispatchToProps } from "widgets/BhandaraCheckin/store";
 import { SectionMain, SectionMainStateProps } from "./SectionMain";
-import { mapDispatchToProps } from "./mapDispatchToProps";
+// import { mapDispatchToProps } from "./mapDispatchToProps";
 
 const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({ mainSection }) => mainSection;

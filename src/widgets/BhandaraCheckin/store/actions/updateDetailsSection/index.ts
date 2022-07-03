@@ -6,7 +6,7 @@ import { checkinWithEmailOrMobile } from "../../api-async-thunks";
 import {
   mainSectionActions,
   snackbarActions,
-  updateDetailsV2Actions,
+  updateDetailsActions,
 } from "../../slices";
 
 export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
@@ -14,7 +14,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   {}
 > = (dispatch) => ({
   onChange: (userDetails) => {
-    dispatch(updateDetailsV2Actions.setState({ userDetails }));
+    dispatch(updateDetailsActions.setState({ userDetails }));
   },
   onClickCancel: () => {
     dispatch(mainSectionActions.reset());

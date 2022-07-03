@@ -10,7 +10,7 @@ import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   modeActions,
   snackbarActions,
-  updateDetailsV2Actions,
+  updateDetailsActions,
 } from "widgets/BhandaraCheckin/store/slices";
 import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
@@ -39,7 +39,7 @@ export const mapDispatchToProps: MapDispatchToProps<
     }
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
-      dispatch(updateDetailsV2Actions.prepare(inputValue));
+      dispatch(updateDetailsActions.prepare(inputValue));
       dispatch(pageActions.UPDATE_DETAILS());
     }
   },

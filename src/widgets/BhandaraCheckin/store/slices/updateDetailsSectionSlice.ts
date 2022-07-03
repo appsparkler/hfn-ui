@@ -40,12 +40,6 @@ const updateDetailsSectionSlice = createSlice({
   initialState: getInitialState(),
   reducers: {
     reset: () => getInitialState(),
-    // stopProcessing: (state) => {
-    //   state.isProcessing = false;
-    // },
-    // startProcessing: (state) => {
-    //   state.isProcessing = true;
-    // },
     setState: (
       state,
       { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
@@ -53,15 +47,9 @@ const updateDetailsSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
-    // setAgeOnFileOption: (state) => {
-    //   state.ageGroupOptions = [...onFileOptions];
-    // },
     setDefaultAgeOptions: (state) => {
       state.ageGroupOptions = { ...ageGroupOptions };
     },
-    // setGenderOnFileOption: (state) => {
-    //   state.genderOptions = { ...onFileOptions };
-    // },
     setDefaultGenderOptions: (state) => {
       state.genderOptions = { ...genderOptions };
     },
@@ -96,8 +84,8 @@ const updateDetailsSectionSlice = createSlice({
 });
 
 export const {
-  actions: updateDetailsV2Actions,
-  reducer: updateDetailsV2Reducer,
+  actions: updateDetailsActions,
+  reducer: updateDetailsReducer,
   name: updateDetailsV2Name,
-  getInitialState: getUpdateDetailsV2SectionInitialState,
+  getInitialState: getUpdateDetailsSectionInitialState,
 } = updateDetailsSectionSlice;

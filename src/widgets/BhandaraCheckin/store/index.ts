@@ -12,13 +12,13 @@ import {
   mainSectionReducer,
   snackbarReducer,
   modeReducer,
-  updateDetailsV2Reducer,
+  updateDetailsReducer,
 } from "./slices";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
   mainSection: mainSectionReducer,
-  updateDetailsV2Section: updateDetailsV2Reducer,
+  updateDetailsV2Section: updateDetailsReducer,
   snackbar: snackbarReducer,
   mode: modeReducer,
   barcodeScanner: barcodeScannerReducer,
