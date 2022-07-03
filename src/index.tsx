@@ -1,5 +1,5 @@
 import { render } from "react-dom";
-import { BhandaraCheckinWidgetDemo } from "./widgets/BhandaraCheckin/BhandaraCheckinV2/BhandaraCheckinDemo";
+import { BhandaraCheckinWidgetDemo } from "./widgets/BhandaraCheckin/components/BhandaraCheckin/BhandaraCheckinDemo";
 
 const root = document.getElementById("root");
 

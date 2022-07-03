@@ -1,10 +1,10 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { Vertical } from "../../../components";
-import { CenterOfViewport } from "../../../components/CenterOfViewport/CenterOfViewport";
-import { TimedConfetti } from "../../../components/TimedConfetti";
-import { maxWidth } from "../constants";
+import { Vertical } from "../../../../components";
+import { CenterOfViewport } from "../../../../components/CenterOfViewport/CenterOfViewport";
+import { TimedConfetti } from "../../../../components/TimedConfetti";
+import { maxWidth } from "../../constants";
 
 export type SectionCheckinStateProps = {};
 

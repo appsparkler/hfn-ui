@@ -7,11 +7,11 @@ import {
   Vertical,
   SelectField,
   SelectFieldProps,
-} from "../../../components";
-import { ClickHandler, InputChangeHandler } from "../../../types";
-import { maxWidth } from "../constants";
-import { UserDetails, UserDetailsV2 } from "../types";
-import { isFieldValueValid, isFieldValueValidV2 } from "../utils";
+} from "../../../../components";
+import { ClickHandler, InputChangeHandler } from "../../../../types";
+import { maxWidth } from "../../constants";
+import { UserDetails, UserDetailsV2 } from "../../types";
+import { isFieldValueValid, isFieldValueValidV2 } from "../../utils";
 
 export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;

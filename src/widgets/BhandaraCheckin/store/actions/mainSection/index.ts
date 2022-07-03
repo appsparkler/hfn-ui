@@ -5,7 +5,7 @@ import {
   handleSwitchScanner,
   handleClickScan,
 } from "widgets/BhandaraCheckin/store";
-import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/SectionMain/SectionMain";
+import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/components/SectionMain/SectionMain";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   bhandaraCheckinActions,

@@ -1,5 +1,5 @@
 import { MapDispatchToProps } from "react-redux";
-import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/SectionUpdateDetails/SectionUpdateDetailsV2";
+import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetailsV2";
 import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
 import { checkinWithEmailOrMobile } from "../../api-async-thunks";
 import {

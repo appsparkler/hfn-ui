@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
-import { SectionMainStateProps } from "../../SectionMain/SectionMain";
+import { SectionMainStateProps } from "../../components/SectionMain/SectionMain";
 
 const getInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(

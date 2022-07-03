@@ -1,6 +1,6 @@
 import { connect, MapStateToProps } from "react-redux";
-import { ModeProvider, ModeProviderStateProps } from "../../../components";
-import { Modes, RootState } from "../store";
+import { ModeProvider, ModeProviderStateProps } from "../../../../components";
+import { Modes, RootState } from "../../store";
 
 const mapStateToProps: MapStateToProps<ModeProviderStateProps, {}, RootState> =
   ({ mode }) => ({

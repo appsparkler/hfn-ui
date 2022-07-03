@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useCallback, useState } from "react";
-import { ageGroupOptions, genderOptions } from "../constants";
-import { UserDetailsV2 } from "../types";
+import { ageGroupOptions, genderOptions } from "../../constants";
+import { UserDetailsV2 } from "../../types";
 import {
   SectionUpdateDetailsDispatchProps,
   SectionUpdateDetailsV2,

@@ -4,7 +4,7 @@ import {
   SectionCheckinStateProps,
   SectionCheckinDispatchProps,
 } from "./SectionCheckInSuccess";
-import { resetAppState, RootState } from "../store";
+import { resetAppState, RootState } from "../../store";
 
 const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,

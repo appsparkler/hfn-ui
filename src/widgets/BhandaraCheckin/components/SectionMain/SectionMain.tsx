@@ -8,12 +8,12 @@ import {
   Button,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
-import { CenterOfViewport, Horizontal } from "../../../components";
-import { AsyncButton } from "../../../components/AsyncButton/AsyncButton";
-import { ModeSwitch, ModeSwitchDispatchProps } from "../../../components";
-import { ClickHandler, InputChangeHandler } from "../../../types";
-import { isAbhyasiId, isEmail, isMobile } from "../../../utils";
-import { maxWidth } from "../constants";
+import { CenterOfViewport, Horizontal } from "../../../../components";
+import { AsyncButton } from "../../../../components/AsyncButton/AsyncButton";
+import { ModeSwitch, ModeSwitchDispatchProps } from "../../../../components";
+import { ClickHandler, InputChangeHandler } from "../../../../types";
+import { isAbhyasiId, isEmail, isMobile } from "../../../../utils";
+import { maxWidth } from "../../constants";
 
 export type SectionMainStateProps = {
   error?: boolean;

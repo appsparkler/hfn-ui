@@ -1,4 +1,4 @@
-import { BhandaraCheckinAPIs, PageEnum } from "../types";
+import { BhandaraCheckinAPIs, PageEnum } from "../../types";
 import { SnackbarConnected } from "./SnackbarConnected";
 import { pages } from "widgets/BhandaraCheckin/routing";
 import { Box } from "@mui/material";
