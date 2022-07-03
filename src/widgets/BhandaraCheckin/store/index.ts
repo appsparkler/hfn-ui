@@ -1,5 +1,11 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "../types";
+import {
+  locationReducer,
+  locationMiddleware,
+  pageReducer,
+  locationEnhancer,
+} from "widgets/BhandaraCheckin/routing";
 import {
   barcodeScannerReducer,
   bhandaraCheckinReducer,
@@ -9,13 +15,6 @@ import {
   modeReducer,
   updateDetailsV2Reducer,
 } from "./slices";
-import {
-  locationReducer,
-  locationEnhancer,
-  locationMiddleware,
-  pageReducer,
-} from "./pageAndLocationReducers";
-import { NOT_FOUND } from "redux-first-router";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,

@@ -9,6 +9,6 @@ const mapStateToProps: MapStateToProps<SectionMainStateProps, {}, RootState> =
   ({ mainSection }) => mainSection;
 
 export const SectionMainConnectedV2 = connect(
-  mapStateToProps,
-  mainSectionMapDispatchToProps
+  mapStateToProps
+  // mainSectionMapDispatchToProps
 )(SectionMain);

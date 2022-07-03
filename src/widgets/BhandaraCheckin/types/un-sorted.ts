@@ -1,4 +1,4 @@
-import { RefinedCityStateCountryLocation } from "../../components/LocationTextField/locations";
+import { RefinedCityStateCountryLocation } from "components/LocationTextField/locations";
 
 export enum CurrentSectionEnum {
   MAIN,
