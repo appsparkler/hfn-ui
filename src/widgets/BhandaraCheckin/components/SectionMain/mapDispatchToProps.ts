@@ -8,7 +8,6 @@ import {
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/components/SectionMain/SectionMain";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
-  bhandaraCheckinActions,
   modeActions,
   snackbarActions,
   updateDetailsV2Actions,
@@ -41,7 +40,7 @@ export const mapDispatchToProps: MapDispatchToProps<
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
       dispatch(updateDetailsV2Actions.prepare(inputValue));
-      dispatch(bhandaraCheckinActions.goToUpdateDetails());
+      dispatch(pageActions.UPDATE_DETAILS());
     }
   },
   onSwitchMode: (checked: boolean) => {

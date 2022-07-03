@@ -1,4 +1,4 @@
-import { CheckinEmailOrMobileUserDetails } from "./un-sorted";
+import { CheckinEmailOrMobileUserDetails } from "./index";
 
 export interface CheckinWithEmailOrMobileApi {
   (userDetails: CheckinEmailOrMobileUserDetails): Promise<boolean>;
