@@ -1,6 +1,5 @@
-import { RefinedCityStateCountryLocation } from "../../../components/LocationTextField/locations";
-import { isEmail, isMobile } from "../../../utils";
-import { FormUserDetails } from "../types";
+import { isEmail, isMobile } from "utils";
+import { FormUserDetails } from "widgets/BhandaraCheckin/types";
 
 export const isFieldValueValidV2 = (
   name: keyof FormUserDetails,
