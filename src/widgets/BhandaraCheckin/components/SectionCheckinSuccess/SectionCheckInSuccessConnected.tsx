@@ -5,6 +5,7 @@ import {
   SectionCheckinDispatchProps,
 } from "./SectionCheckInSuccess";
 import { resetAppState, RootState } from "../../store";
+import { pageActions } from "widgets/BhandaraCheckin/routing";
 
 const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,
@@ -17,6 +18,7 @@ const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
     return {
       onClickReturn: () => {
         dispatch<any>(resetAppState());
+        dispatch<any>(pageActions.HOME());
       },
     };
   };

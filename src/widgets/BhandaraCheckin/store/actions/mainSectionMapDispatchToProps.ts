@@ -75,7 +75,7 @@ export async function checkinAbhyasi(
         location: {},
       },
     });
-    // dispatch(bhandaraCheckinActions.goToCheckinSuccess());
+    dispatch(pageActions.CHECKIN_SUCCESS());
   } else {
     dispatch(
       snackbarActions.openSnackbar({
