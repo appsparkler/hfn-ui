@@ -11,7 +11,9 @@ const mapStateToProps: MapStateToProps<
   SectionCheckinStateProps,
   {},
   RootState
-> = () => ({});
+> = (rootState) => ({
+  enableConfetti: !rootState.mainSection.isScannerOn,
+});
 
 const mapDispatchToProps: MapDispatchToProps<SectionCheckinDispatchProps, {}> =
   (dispatch) => {

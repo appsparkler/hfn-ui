@@ -1,12 +1,14 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Vertical } from "../../../../components";
 import { CenterOfViewport } from "../../../../components/CenterOfViewport/CenterOfViewport";
 import { TimedConfetti } from "../../../../components/TimedConfetti";
 import { maxWidth } from "../../constants";
 
-export type SectionCheckinStateProps = {};
+export type SectionCheckinStateProps = {
+  enableConfetti?: boolean;
+};
 
 export type SectionCheckinDispatchProps = {
   onClickReturn: ButtonProps["onClick"];
@@ -16,6 +18,7 @@ export type SectionCheckinSuccessProps = SectionCheckinStateProps &
   SectionCheckinDispatchProps;
 
 export const SectionCheckinSuccess = ({
+  enableConfetti = true,
   onClickReturn,
 }: SectionCheckinSuccessProps) => {
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
@@ -28,6 +31,11 @@ export const SectionCheckinSuccess = ({
       setShowConfetti(false);
     };
   }, []);
+
+  const confettiEnabled = useMemo(
+    () => enableConfetti && showConfetti,
+    [enableConfetti, showConfetti]
+  );
 
   return (
     <CenterOfViewport
@@ -48,7 +56,7 @@ export const SectionCheckinSuccess = ({
       >
         Return to main page
       </Button>
-      {showConfetti ? (
+      {confettiEnabled ? (
         <TimedConfetti
           height={wrapperRef.current?.offsetHeight}
           width={wrapperRef.current?.offsetWidth}

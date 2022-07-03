@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { SectionMainStateProps } from "../../components/SectionMain/SectionMain";
 
-const getInitialState = (): SectionMainStateProps => {
+export const getMainSectionInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(
     localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
   );
@@ -22,7 +22,7 @@ const getInitialState = (): SectionMainStateProps => {
 
 const mainSectionSlice = createSlice({
   name: "main-section",
-  initialState: getInitialState(),
+  initialState: getMainSectionInitialState(),
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
@@ -33,7 +33,7 @@ const mainSectionSlice = createSlice({
     setLightMode: (state) => {
       state.isDarkMode = false;
     },
-    reset: () => getInitialState(),
+    reset: () => getMainSectionInitialState(),
     setError: (state, { payload }: { payload: string }) => {
       state.helperText = payload;
       state.error = true;
@@ -43,7 +43,7 @@ const mainSectionSlice = createSlice({
       state.isProcessing = false;
     },
     resetError: (state) => {
-      const initialState = getInitialState();
+      const initialState = getMainSectionInitialState();
       state.error = false;
       state.helperText = initialState.helperText;
     },
@@ -78,5 +78,5 @@ export const {
   actions: mainSectionActions,
   reducer: mainSectionReducer,
   name: mainSectionName,
-  getInitialState: getMainSectionInitialState,
+  // getInitialState: getMainSectionInitialState,
 } = mainSectionSlice;
