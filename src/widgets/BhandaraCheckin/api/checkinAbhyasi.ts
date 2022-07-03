@@ -1,6 +1,6 @@
 import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
 import { db } from "widgets/BhandaraCheckin/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
 
@@ -14,7 +14,8 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) =>
 
 export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
   try {
-    await addDoc(collection(db, "abhyasiId-checkins"), {
+    const abhyasiIdCheckinsCollection = collection(db, "abhyasiId-checkins");
+    await addDoc(abhyasiIdCheckinsCollection, {
       abhyasiId,
       timestamp: Date.now(),
     });

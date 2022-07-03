@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import {
+  disableNetwork,
+  enableNetwork,
+} from "widgets/BhandaraCheckin/firebase";
 import { SectionMainStateProps } from "../../components/SectionMain/SectionMain";
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(
     localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
+  );
+  const isNetworkOn = Boolean(
+    localStorage.getItem(LocalStorageKeys.NETWORK_ENABLED)
   );
   const mode = localStorage.getItem(LocalStorageKeys.MODE);
   const isDarkMode = mode === "dark";
@@ -17,6 +24,7 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
+    isNetworkOn,
   };
 };
 
@@ -71,6 +79,14 @@ const mainSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
+    enableNetwork: (state) => {
+      enableNetwork();
+      state.isNetworkOn = true;
+    },
+    disableNetwork: (state) => {
+      disableNetwork();
+      state.isNetworkOn = false;
+    },
   },
 });
 

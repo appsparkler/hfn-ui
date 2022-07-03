@@ -1,7 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import {
+  enableIndexedDbPersistence,
+  initializeFirestore,
+  CACHE_SIZE_UNLIMITED,
+  disableNetwork as $disableNetwork,
+  enableNetwork as $enableNetwork,
+} from "firebase/firestore";
+import { LocalStorageKeys } from "../constants";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -20,5 +27,35 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+
+export const db = initializeFirestore(app, {
+  cacheSizeBytes: CACHE_SIZE_UNLIMITED,
+});
+
 export const analytics = getAnalytics(app);
+
+enableIndexedDbPersistence(db)
+  .then(async () => {
+    await $disableNetwork(db);
+    alert("network is disabled");
+  })
+  .catch((err) => {
+    if (err.code === "failed-precondition") {
+      // Multiple tabs open, persistence can only be enabled
+      // in one tab at a a time.
+      // ...
+    } else if (err.code === "unimplemented") {
+      // The current browser does not support all of the
+      // features required to enable persistence
+      // ...
+    }
+  });
+
+export const enableNetwork = () => {
+  localStorage.setItem(LocalStorageKeys.NETWORK_ENABLED, "true");
+  $enableNetwork(db);
+};
+export const disableNetwork = () => {
+  localStorage.removeItem(LocalStorageKeys.NETWORK_ENABLED);
+  $disableNetwork(db);
+};

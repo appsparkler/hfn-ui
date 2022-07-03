@@ -7,12 +7,13 @@ import {
   SwitchProps,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
-import { CenterOfViewport, Horizontal } from "../../../../components";
+import { CenterOfViewport, Horizontal, Vertical } from "../../../../components";
 import { AsyncButton } from "../../../../components/AsyncButton/AsyncButton";
 import { ModeSwitch, ModeSwitchDispatchProps } from "../../../../components";
 import { ClickHandler, InputChangeHandler } from "../../../../types";
 import { isAbhyasiId, isEmail, isMobile } from "../../../../utils";
 import { maxWidth } from "../../constants";
+import { noop } from "lodash/fp";
 
 export type SectionMainStateProps = {
   error?: boolean;
@@ -23,6 +24,7 @@ export type SectionMainStateProps = {
   isScannerOn?: boolean;
   scanBtnDisabled?: boolean;
   scanBtnProcessing?: boolean;
+  isNetworkOn?: boolean;
 };
 
 export type SectionMainDispatchProps = {
@@ -30,7 +32,8 @@ export type SectionMainDispatchProps = {
   onClickStart: (userId: string) => void;
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickScan: () => void;
-  onSwitchScanner: (checked: boolean) => void;
+  onSwitchScanner?: (checked: boolean) => void;
+  onSwitchNetwork?: (checked: boolean) => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -41,11 +44,13 @@ export const SectionMain = ({
   onSwitchMode,
   isDarkMode,
   onClickScan,
-  onSwitchScanner,
+  onSwitchScanner = noop,
+  onSwitchNetwork = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
   isProcessing,
+  isNetworkOn,
   error,
   helperText,
   value = "",
@@ -78,6 +83,13 @@ export const SectionMain = ({
       onSwitchScanner(checked);
     },
     [onSwitchScanner]
+  );
+
+  const handleSwitchNetwork = useCallback<NonNullable<SwitchProps["onChange"]>>(
+    (evt, checked) => {
+      onSwitchNetwork(checked);
+    },
+    [onSwitchNetwork]
   );
 
   useEffect(() => {
@@ -121,16 +133,25 @@ export const SectionMain = ({
         </AsyncButton>
       </Horizontal>
 
-      <FormControlLabel
-        control={
-          <Switch
-            checked={isScannerOn}
-            disabled={scanBtnProcessing}
-            onChange={handleSwitchScanner}
-          />
-        }
-        label="Scanner"
-      />
+      <Vertical>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={isScannerOn}
+              disabled={scanBtnProcessing}
+              onChange={handleSwitchScanner}
+            />
+          }
+          label="Scanner"
+        />
+
+        <FormControlLabel
+          control={
+            <Switch checked={isNetworkOn} onChange={handleSwitchNetwork} />
+          }
+          label="Network"
+        />
+      </Vertical>
       <Box position="fixed" right={0} top={0}>
         <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
       </Box>
