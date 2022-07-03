@@ -1,6 +1,6 @@
 import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
 import { db } from "widgets/BhandaraCheckin/firebase";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
 
