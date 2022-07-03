@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { CurrentSectionEnum } from "../../types";
 import { BhandaraCheckinViewStateProps } from "../../BhandaraCheckin/BhandaraCheckinView";
-import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { LocalStorageKeys } from "widgets/BhandaraCheckinV0/constants";
 
 const getInitialState = (): BhandaraCheckinViewStateProps => {
   const renderScanner = Boolean(
@@ -10,7 +10,6 @@ const getInitialState = (): BhandaraCheckinViewStateProps => {
   return {
     currentSection: CurrentSectionEnum.MAIN,
     renderScanner,
-    locationActionType: "Home",
   };
 };
 

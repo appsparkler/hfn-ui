@@ -4,26 +4,22 @@ import {
   getMainSectionInitialState,
   handleSwitchScanner,
   handleClickScan,
-} from "widgets/BhandaraCheckin/store";
-import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/SectionMain/SectionMain";
+} from "widgets/BhandaraCheckinV0/store";
+import { SectionMainDispatchProps } from "widgets/BhandaraCheckinV0/SectionMain/SectionMain";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   bhandaraCheckinActions,
   modeActions,
   snackbarActions,
   updateDetailsV2Actions,
-} from "widgets/BhandaraCheckin/store/slices";
-import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
+} from "../../slices";
+import { checkinWithAbhyasiId } from "../../api-async-thunks";
 import { Action, Dispatch } from "redux";
-import { pageActions } from "widgets/BhandaraCheckin/routing";
 
-export const mapDispatchToProps: MapDispatchToProps<
+export const mainSectionMapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
-  goToCheckinSuccess: () => {
-    dispatch(pageActions.CHECKIN_SUCCESS());
-  },
   onChange: (updatedValue) => {
     dispatch(
       mainSectionActions.setState({
@@ -70,13 +66,7 @@ export async function checkinAbhyasi(
 ) {
   const res = await dispatch<any>(checkinWithAbhyasiId(userId));
   if (res.meta.requestStatus === "fulfilled") {
-    dispatch({
-      type: "CheckInSuccess",
-      payload: {
-        location: {},
-      },
-    });
-    // dispatch(bhandaraCheckinActions.goToCheckinSuccess());
+    dispatch(bhandaraCheckinActions.goToCheckinSuccess());
   } else {
     dispatch(
       snackbarActions.openSnackbar({

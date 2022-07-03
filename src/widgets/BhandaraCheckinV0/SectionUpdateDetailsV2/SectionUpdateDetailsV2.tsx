@@ -8,7 +8,7 @@ import {
   SelectField,
   SelectFieldProps,
 } from "../../../components";
-import { ClickHandler, InputChangeHandler } from "../../../types";
+import { InputChangeHandler } from "../../../types";
 import { maxWidth } from "../constants";
 import { UserDetails, UserDetailsV2 } from "../types";
 import { isFieldValueValid, isFieldValueValidV2 } from "../utils";
@@ -21,7 +21,7 @@ export type SectionUpdateDetailsStateProps = {
 };
 
 export type SectionUpdateDetailsDispatchProps = {
-  onClickCheckin: (userDetails: UserDetailsV2) => void;
+  onClickCheckin: () => void;
   onClickCancel: () => void;
   onChange: (userDetails: UserDetailsV2) => void;
 };
@@ -135,10 +135,6 @@ export const SectionUpdateDetailsV2 = ({
     [onChange, userDetails]
   );
 
-  const handleClickCheckin = useCallback<ClickHandler>(() => {
-    onClickCheckin(userDetails);
-  }, [onClickCheckin, userDetails]);
-
   useEffect(() => {
     fullNameInputRef.current?.focus();
   }, []);
@@ -250,7 +246,7 @@ export const SectionUpdateDetailsV2 = ({
         <AsyncButton
           type="button"
           size="large"
-          onClick={handleClickCheckin}
+          onClick={onClickCheckin}
           isProcessing={isProcessing}
           disabled={!isCheckinButtonEnabled}
         >

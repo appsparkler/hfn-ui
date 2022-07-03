@@ -1,12 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { BhandaraCheckinAPIs } from "../types";
 import {
-  locationReducer,
-  locationMiddleware,
-  pageReducer,
-  locationEnhancer,
-} from "widgets/BhandaraCheckin/routing";
-import {
   barcodeScannerReducer,
   bhandaraCheckinReducer,
   mainSectionReducer,
@@ -24,23 +18,18 @@ export const rootReducer = {
   snackbar: snackbarReducer,
   mode: modeReducer,
   barcodeScanner: barcodeScannerReducer,
-  location: locationReducer,
-  page: pageReducer,
 };
 
 const exampleStore = configureStore({
   reducer: rootReducer,
-  enhancers: [locationEnhancer],
-  middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       thunk: {
         extraArgument: {
           apis: {} as BhandaraCheckinAPIs,
         } as ThunkApiConfig["extra"],
       },
     }),
-    locationMiddleware,
-  ],
 });
 
 export type RootState = ReturnType<typeof exampleStore.getState>;

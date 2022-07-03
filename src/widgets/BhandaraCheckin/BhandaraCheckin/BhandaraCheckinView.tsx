@@ -1,43 +1,40 @@
-import { SectionUpdateDetailsConnected } from "../SectionUpdateDetailsV2";
-import { SectionCheckinSuccessConnected } from "../SectionCheckinSuccess/SectionCheckInSuccessConnected";
 import { BhandaraCheckinAPIs, CurrentSectionEnum } from "../types";
 import { SnackbarConnected } from "./SnackbarConnected";
-import { useMemo } from "react";
+import { pages } from "../pages";
 import { Box } from "@mui/material";
-import { BarcodeScannerConnected } from "./BarcodeScannerConnected";
-import { SectionMainConnectedV2 } from "../SectionMain/SectionMainConnectedV2";
+import { NOT_FOUND } from "redux-first-router";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
 };
 
+export type LocationActionType =
+  | "Home"
+  | "UpdateDetails"
+  | "CheckInSuccess"
+  | "@@redux-first-router/NOT_FOUND";
+
 export type BhandaraCheckinViewStateProps = {
   renderScanner?: boolean;
+  locationActionType: LocationActionType;
   currentSection: CurrentSectionEnum;
+  page?: any;
 };
 
 export const BhandaraCheckinView = ({
   currentSection,
+  page = "Home",
   renderScanner,
+  locationActionType,
 }: BhandaraCheckinViewStateProps) => {
-  const { showMain, showUpdateDetails, showCheckinSuccess } = useMemo<{
-    showMain: boolean;
-    showUpdateDetails: boolean;
-    showCheckinSuccess: boolean;
-  }>(
-    () => ({
-      showMain: currentSection === CurrentSectionEnum.MAIN,
-      showUpdateDetails: currentSection === CurrentSectionEnum.UPDATE_DETAILS,
-      showCheckinSuccess: currentSection === CurrentSectionEnum.CHECKIN_SUCCESS,
-    }),
-    [currentSection]
-  );
+  if (page === NOT_FOUND) {
+    const Nf = pages.NotFound;
+    return <Nf />;
+  }
+  const Component = (pages as any)[page] as any;
   return (
     <Box>
-      {showMain ? <SectionMainConnectedV2 /> : null}
-      {showUpdateDetails ? <SectionUpdateDetailsConnected /> : null}
-      {showCheckinSuccess ? <SectionCheckinSuccessConnected /> : null}
-      {renderScanner && <BarcodeScannerConnected />}
+      <Component />
       <SnackbarConnected />
     </Box>
   );

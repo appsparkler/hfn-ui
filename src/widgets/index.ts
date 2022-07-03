@@ -1,1 +1,1 @@
-export * from "./BhandaraCheckinV2";
+export * from "./BhandaraCheckin";

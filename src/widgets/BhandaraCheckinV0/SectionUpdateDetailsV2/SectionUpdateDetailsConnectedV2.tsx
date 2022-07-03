@@ -3,10 +3,7 @@ import {
   SectionUpdateDetailsV2,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetailsV2";
-import {
-  RootState,
-  updateDetailsSectionMapDispatchToProps,
-} from "widgets/BhandaraCheckin/store";
+import { RootState, updateDetailsSectionMapDispatchToProps } from "../store";
 
 const mapStateToProps: MapStateToProps<
   SectionUpdateDetailsStateProps,
@@ -15,6 +12,6 @@ const mapStateToProps: MapStateToProps<
 > = ({ updateDetailsV2Section }) => updateDetailsV2Section;
 
 export const SectionUpdateDetailsConnected = connect(
-  mapStateToProps
-  // updateDetailsSectionMapDispatchToProps
+  mapStateToProps,
+  updateDetailsSectionMapDispatchToProps
 )(SectionUpdateDetailsV2);
