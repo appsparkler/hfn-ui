@@ -7,5 +7,4 @@ export { handleClickScan } from "./handleClickScan";
 export { handleClickScannerCancel } from "./handleClickScannerCancel";
 export { handlePlayScannerVideo } from "./handlePlayScannerVideo";
 export { handleScan as handleScanV2 } from "./handleScan";
-export * from "./mainSection";
 export * from "./updateDetailsSection";
