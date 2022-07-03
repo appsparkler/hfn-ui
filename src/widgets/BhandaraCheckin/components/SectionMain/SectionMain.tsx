@@ -123,7 +123,11 @@ export const SectionMain = ({
 
       <FormControlLabel
         control={
-          <Switch checked={isScannerOn} onChange={handleSwitchScanner} />
+          <Switch
+            checked={isScannerOn}
+            disabled={scanBtnProcessing}
+            onChange={handleSwitchScanner}
+          />
         }
         label="Scanner"
       />

@@ -32,9 +32,7 @@ export const mapDispatchToProps: MapDispatchToProps<
   onClickStart: async (inputValue) => {
     const $isAbhyasiId = isAbhyasiId(inputValue);
     if ($isAbhyasiId) {
-      dispatch(mainSectionActions.startProcessing());
       await checkinAbhyasi(dispatch, inputValue);
-      dispatch(mainSectionActions.stopProcessing());
     }
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
@@ -66,6 +64,7 @@ export async function checkinAbhyasi(
   dispatch: Dispatch<Action<any>>,
   userId: string
 ) {
+  dispatch(mainSectionActions.startProcessing());
   const res = await dispatch<any>(checkinWithAbhyasiId(userId));
   if (res.meta.requestStatus === "fulfilled") {
     dispatch({
@@ -82,4 +81,5 @@ export async function checkinAbhyasi(
       })
     );
   }
+  dispatch(mainSectionActions.stopProcessing());
 }
