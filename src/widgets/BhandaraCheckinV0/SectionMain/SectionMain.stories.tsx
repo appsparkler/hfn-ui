@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { SectionMain } from "./SectionMain";
 
 export default {
-  title: "Widgets/Bhandara Checkin/Sections/Main",
+  title: "WidgetsV0/Bhandara Checkin/Sections/Main",
   component: SectionMain,
 } as ComponentMeta<typeof SectionMain>;
 

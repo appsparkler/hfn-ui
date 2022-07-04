@@ -14,6 +14,7 @@ import {
   modeReducer,
   updateDetailsReducer,
 } from "./slices";
+import { offlineDataReducer } from "./slices/offlineData";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
@@ -24,6 +25,7 @@ export const rootReducer = {
   barcodeScanner: barcodeScannerReducer,
   location: locationReducer,
   page: pageReducer,
+  offlineData: offlineDataReducer,
 };
 
 const exampleStore = configureStore({

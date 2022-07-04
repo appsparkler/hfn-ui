@@ -3,7 +3,7 @@ import { onFileOptions, onFileText } from "../constants";
 import { SectionUpdateDetails } from "./SectionUpdateDetails";
 
 export default {
-  title: "Widgets/Bhandara Checkin/Sections/Update Details",
+  title: "WidgetsV0/Bhandara Checkin/Sections/Update Details",
   component: SectionUpdateDetails,
 } as ComponentMeta<typeof SectionUpdateDetails>;
 

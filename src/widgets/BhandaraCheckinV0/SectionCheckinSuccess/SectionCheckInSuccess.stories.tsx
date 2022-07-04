@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { SectionCheckinSuccess } from "./SectionCheckInSuccess";
 
 export default {
-  title: "Widgets/Bhandara Checkin/Sections/Check In Success",
+  title: "WidgetsV0/Bhandara Checkin/Sections/Check In Success",
   component: SectionCheckinSuccess,
 } as ComponentMeta<typeof SectionCheckinSuccess>;
 

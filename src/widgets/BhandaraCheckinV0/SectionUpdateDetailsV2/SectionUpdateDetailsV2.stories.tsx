@@ -8,7 +8,7 @@ import {
 } from "./SectionUpdateDetailsV2";
 
 export default {
-  title: "Widgets/Bhandara Checkin/Sections/Update Details V2",
+  title: "WidgetsV0/Bhandara Checkin/Sections/Update Details V2",
   component: SectionUpdateDetailsV2,
 } as ComponentMeta<typeof SectionUpdateDetailsV2>;
 
