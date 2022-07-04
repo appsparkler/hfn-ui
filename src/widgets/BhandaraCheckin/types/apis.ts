@@ -11,6 +11,7 @@ export interface CheckinAbhyasiApi {
 export type BhandaraCheckinAPIs = {
   checkinAbhyasi: CheckinAbhyasiApi;
   checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi;
+  getDataFromCache: GetDataFromCacheApi;
 };
 
 export type OfflineCacheData = Record<
