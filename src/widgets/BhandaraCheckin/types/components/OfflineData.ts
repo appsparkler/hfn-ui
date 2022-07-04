@@ -10,6 +10,7 @@ export interface OfflineDataStateProps {
 export interface OfflineDataDispatchProps {
   onRefresh?: () => void;
   onMount?: () => void;
+  onReturn?: () => void;
 }
 
 export type OfflineDataProps = OfflineDataStateProps & OfflineDataDispatchProps;

@@ -18,7 +18,7 @@ export const getDataFromCache: GetDataFromCacheApi = async () => {
     const docs = await getDocsFromCache(abhyasIdCollection);
     docs.forEach((doc) => {
       if (doc.metadata.hasPendingWrites) {
-        data.push(doc.data as unknown as AbhyasiCheckinData);
+        data.push(doc.data() as AbhyasiCheckinData);
       }
     });
 
@@ -30,7 +30,7 @@ export const getDataFromCache: GetDataFromCacheApi = async () => {
     const otherCheckinDocs = await getDocsFromCache(otherCheckinsCollection);
     otherCheckinDocs.forEach((doc) => {
       if (doc.metadata.hasPendingWrites) {
-        data.push(doc.data as unknown as CheckinEmailOrMobileUserDetails);
+        data.push(doc.data() as CheckinEmailOrMobileUserDetails);
       }
     });
     return data;

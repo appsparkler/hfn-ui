@@ -3,9 +3,6 @@ import {
   CheckinWithEmailOrMobileApi,
   FirestoreCollections,
 } from "widgets/BhandaraCheckin/types";
-import { v4 as uuid } from "uuid";
-import { db } from "widgets/BhandaraCheckin/dexie";
-import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { firestoreDb } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
 

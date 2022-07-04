@@ -10,15 +10,18 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Horizontal, Vertical } from "components";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { CenterOfViewport, Horizontal } from "components";
 import { noop } from "lodash/fp";
 import { useEffect, useMemo } from "react";
 import { OfflineDataProps } from "widgets/BhandaraCheckin/types/components/OfflineData";
+import { maxWidth } from "widgets/BhandaraCheckin/constants";
 
 export const OfflineData = ({
   data = [],
   onMount = noop,
-  onRefresh,
+  onRefresh = noop,
+  onReturn = noop,
 }: OfflineDataProps) => {
   const hasData = useMemo(() => data.length, [data]);
   useEffect(() => {
@@ -26,14 +29,25 @@ export const OfflineData = ({
   }, [onMount]);
 
   return (
-    <Vertical gap={2} p={1}>
+    <CenterOfViewport
+      gap={2}
+      width={"100%"}
+      maxWidth={maxWidth}
+      paddingX={1}
+      justifyContent="initial"
+    >
       <Horizontal alignItems={"center"} justifyContent="space-between">
         <Typography variant="h5">Offline Checkins</Typography>
-        {hasData ? (
-          <IconButton onClick={onRefresh}>
-            <Refresh />
+        <Horizontal>
+          <IconButton onClick={onReturn}>
+            <ArrowBackIcon />
           </IconButton>
-        ) : null}
+          {hasData ? (
+            <IconButton onClick={onRefresh}>
+              <Refresh />
+            </IconButton>
+          ) : null}
+        </Horizontal>
       </Horizontal>
       {hasData ? (
         <Box>
@@ -56,6 +70,6 @@ export const OfflineData = ({
           <i>All checkins are synced.</i>
         </Typography>
       )}
-    </Vertical>
+    </CenterOfViewport>
   );
 };

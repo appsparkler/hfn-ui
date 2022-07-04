@@ -34,17 +34,19 @@ export const firestoreDb = initializeFirestore(app, {
 
 export const analytics = getAnalytics(app);
 
-enableIndexedDbPersistence(firestoreDb).catch((err) => {
-  if (err.code === "failed-precondition") {
-    // Multiple tabs open, persistence can only be enabled
-    // in one tab at a a time.
-    // ...
-  } else if (err.code === "unimplemented") {
-    // The current browser does not support all of the
-    // features required to enable persistence
-    // ...
-  }
-});
+enableIndexedDbPersistence(firestoreDb)
+  // .then(() => $disableNetwork(firestoreDb))
+  .catch((err) => {
+    if (err.code === "failed-precondition") {
+      // Multiple tabs open, persistence can only be enabled
+      // in one tab at a a time.
+      // ...
+    } else if (err.code === "unimplemented") {
+      // The current browser does not support all of the
+      // features required to enable persistence
+      // ...
+    }
+  });
 
 export const turnOffOfflineMode = () => {
   localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);

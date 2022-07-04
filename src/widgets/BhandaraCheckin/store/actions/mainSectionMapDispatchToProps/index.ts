@@ -15,11 +15,15 @@ import {
 import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
+import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
+  onClickOfflineData: () => {
+    dispatch(OFFLINE_DATA());
+  },
   onSwitchOfflineMode: (isOfflineMode) => {
     if (isOfflineMode) {
       dispatch(mainSectionActions.enableOfflineMode());

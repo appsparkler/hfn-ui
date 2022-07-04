@@ -8,9 +8,7 @@ export const mapStateToProps: MapStateToProps<
   OfflineDataStateProps,
   {},
   RootState
-> = () => {
-  return {};
-};
+> = ({ offlineData }) => offlineData;
 
 export const OfflineDataConnected = connect(
   mapStateToProps,

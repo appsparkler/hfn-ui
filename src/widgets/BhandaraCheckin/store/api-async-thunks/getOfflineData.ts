@@ -23,6 +23,7 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
   ) => {
     try {
       const cachedData = await getDataFromCache();
+      console.log({ cachedData });
       if (cachedData !== false) {
         const getOfflineData = map<OfflineCacheData, OfflineDataItem>(
           (dataItem) => {
@@ -41,8 +42,8 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
               email: string;
               mobile: string;
             };
-            const emailString = email ? ` ,${email}` : "";
-            const mobileString = mobile ? ` ,${mobile}` : "";
+            const emailString = email ? `, ${email}` : "";
+            const mobileString = mobile ? `, ${mobile}` : "";
             const info = `${name}${emailString}${mobileString}`;
             return {
               id: uuid(),

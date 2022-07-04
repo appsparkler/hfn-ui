@@ -5,14 +5,20 @@ import {
   Typography,
   Box,
   SwitchProps,
+  Button,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
-import { CenterOfViewport, Horizontal, Vertical } from "../../../../components";
-import { AsyncButton } from "../../../../components/AsyncButton/AsyncButton";
-import { ModeSwitch, ModeSwitchDispatchProps } from "../../../../components";
-import { ClickHandler, InputChangeHandler } from "../../../../types";
-import { isAbhyasiId, isEmail, isMobile } from "../../../../utils";
-import { maxWidth } from "../../constants";
+import {
+  AsyncButton,
+  ModeSwitch,
+  ModeSwitchDispatchProps,
+  CenterOfViewport,
+  Horizontal,
+  Vertical,
+} from "components";
+import { ClickHandler, InputChangeHandler } from "types";
+import { isAbhyasiId, isEmail, isMobile } from "utils";
+import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 
 export type SectionMainStateProps = {
@@ -34,6 +40,7 @@ export type SectionMainDispatchProps = {
   onClickScan: () => void;
   onSwitchScanner?: (checked: boolean) => void;
   onSwitchOfflineMode?: (checked: boolean) => void;
+  onClickOfflineData?: () => void;
 };
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
@@ -46,6 +53,7 @@ export const SectionMain = ({
   onClickScan,
   onSwitchScanner = noop,
   onSwitchOfflineMode = noop,
+  onClickOfflineData = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -145,16 +153,21 @@ export const SectionMain = ({
           label="Scanner"
         />
 
-        <FormControlLabel
-          control={
-            <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
-          }
-          label="Offline Mode"
-        />
+        {false && (
+          <FormControlLabel
+            control={
+              <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
+            }
+            label="Offline Mode"
+          />
+        )}
       </Vertical>
       <Box position="fixed" right={0} top={0}>
         <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
       </Box>
+      <Button variant="outlined" onClick={onClickOfflineData}>
+        Offline Data
+      </Button>
     </CenterOfViewport>
   );
 };
