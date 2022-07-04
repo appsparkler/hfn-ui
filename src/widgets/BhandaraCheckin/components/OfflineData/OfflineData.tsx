@@ -11,17 +11,26 @@ import {
   Typography,
 } from "@mui/material";
 import { Horizontal, Vertical } from "components";
-import { useMemo } from "react";
+import { noop } from "lodash/fp";
+import { useEffect, useMemo } from "react";
 import { OfflineDataProps } from "widgets/BhandaraCheckin/types/components/OfflineData";
 
-export const OfflineData = ({ data = [] }: OfflineDataProps) => {
+export const OfflineData = ({
+  data = [],
+  onMount = noop,
+  onRefresh,
+}: OfflineDataProps) => {
   const hasData = useMemo(() => data.length, [data]);
+  useEffect(() => {
+    onMount();
+  }, [onMount]);
+
   return (
     <Vertical gap={2} p={1}>
       <Horizontal alignItems={"center"} justifyContent="space-between">
         <Typography variant="h5">Offline Checkins</Typography>
         {hasData ? (
-          <IconButton>
+          <IconButton onClick={onRefresh}>
             <Refresh />
           </IconButton>
         ) : null}

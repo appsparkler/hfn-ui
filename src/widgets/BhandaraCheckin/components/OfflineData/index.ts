@@ -1,1 +1,1 @@
-export const x = "offline-data";
+export * from "./OfflineDataConnected";

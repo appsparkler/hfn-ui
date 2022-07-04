@@ -4,6 +4,7 @@ export enum PageEnum {
   Home = "Home",
   UpdateDetails = "UpdateDetails",
   CheckInSuccess = "CheckInSuccess",
+  OfflineData = "OfflineData",
   NotFound = "NotFound",
 }
 

@@ -4,6 +4,7 @@ const routesMap: RoutesMap = {
   HOME: "/",
   UPDATE_DETAILS: "/update-details",
   CHECKIN_SUCCESS: "/check-in-success",
+  OFFLINE_DATA: "/offline-data",
 };
 
 export const {
