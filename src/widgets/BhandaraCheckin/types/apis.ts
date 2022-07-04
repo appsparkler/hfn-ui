@@ -14,11 +14,10 @@ export type BhandaraCheckinAPIs = {
   getDataFromCache: GetDataFromCacheApi;
 };
 
-export type OfflineCacheData = Record<
-  string,
-  CheckinEmailOrMobileUserDetails | AbhyasiCheckinData
->;
+export type OfflineCacheData =
+  | CheckinEmailOrMobileUserDetails
+  | AbhyasiCheckinData;
 
 export interface GetDataFromCacheApi {
-  (): Promise<OfflineCacheData | false>;
+  (): Promise<OfflineCacheData[] | false>;
 }
