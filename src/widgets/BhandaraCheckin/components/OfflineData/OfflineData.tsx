@@ -1,6 +1,5 @@
 import { Refresh } from "@mui/icons-material";
 import {
-  Box,
   IconButton,
   Paper,
   Table,
@@ -50,21 +49,19 @@ export const OfflineData = ({
         </Horizontal>
       </Horizontal>
       {hasData ? (
-        <Box>
-          <TableContainer component={Paper}>
-            <Table stickyHeader>
-              <TableBody>
-                {data.map(({ id, info }) => {
-                  return (
-                    <TableRow key={id}>
-                      <TableCell>{info}</TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
+        <TableContainer component={Paper}>
+          <Table stickyHeader>
+            <TableBody>
+              {data.map(({ id, info }) => {
+                return (
+                  <TableRow key={id}>
+                    <TableCell>{info}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       ) : (
         <Typography align="center" py={3}>
           <i>All checkins are synced.</i>

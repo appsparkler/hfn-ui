@@ -153,7 +153,7 @@ export const SectionMain = ({
           label="Scanner"
         />
 
-        {false && (
+        {true && (
           <FormControlLabel
             control={
               <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
