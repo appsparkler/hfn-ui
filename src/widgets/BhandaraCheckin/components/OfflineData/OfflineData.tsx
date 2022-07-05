@@ -35,7 +35,11 @@ export const OfflineData = ({
       paddingX={1}
       justifyContent="initial"
     >
-      <Horizontal alignItems={"center"} justifyContent="space-between">
+      <Horizontal
+        alignItems={"center"}
+        justifyContent="space-between"
+        width="100%"
+      >
         <Typography variant="h5">Offline Checkins</Typography>
         <Horizontal>
           <IconButton onClick={onReturn}>
@@ -50,7 +54,7 @@ export const OfflineData = ({
       </Horizontal>
       {hasData ? (
         <TableContainer component={Paper}>
-          <Table stickyHeader>
+          <Table>
             <TableBody>
               {data.map(({ id, info }) => {
                 return (

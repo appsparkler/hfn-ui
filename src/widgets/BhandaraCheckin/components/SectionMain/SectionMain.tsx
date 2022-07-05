@@ -10,7 +10,6 @@ import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import {
   AsyncButton,
   ModeSwitch,
-  ModeSwitchDispatchProps,
   CenterOfViewport,
   Horizontal,
   Vertical,
@@ -20,32 +19,10 @@ import { isAbhyasiId, isEmail, isMobile } from "utils";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
-
-export type SectionMainStateProps = {
-  error?: boolean;
-  helperText?: string;
-  value: string;
-  isProcessing?: boolean;
-  isDarkMode?: boolean;
-  isScannerOn?: boolean;
-  scanBtnDisabled?: boolean;
-  scanBtnProcessing?: boolean;
-  isOfflineMode?: boolean;
-};
-
-export type SectionMainDispatchProps = {
-  onChange: (updatedValue: string) => void;
-  onClickStart: (userId: string) => void;
-  onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
-  onClickScan: () => void;
-  onSwitchScanner?: (checked: boolean) => void;
-  onSwitchOfflineMode?: (checked: boolean) => void;
-  onClickOfflineData?: () => void;
-};
-
-export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;
+import { ENVS, SectionMainProps } from "widgets/BhandaraCheckin/types";
 
 export const SectionMain = ({
+  env,
   onClickStart,
   onChange,
   onSwitchMode,
@@ -54,6 +31,7 @@ export const SectionMain = ({
   onSwitchScanner = noop,
   onSwitchOfflineMode = noop,
   onClickOfflineData = noop,
+  onMount = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -102,7 +80,8 @@ export const SectionMain = ({
 
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
-  }, []);
+    onMount();
+  }, [onMount]);
 
   return (
     <CenterOfViewport gap={10} width={"100%"} maxWidth={maxWidth} paddingX={1}>
@@ -153,7 +132,7 @@ export const SectionMain = ({
           label="Scanner"
         />
 
-        {true && (
+        {env?.ENV === ENVS.DEV_LOCAL && (
           <FormControlLabel
             control={
               <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />

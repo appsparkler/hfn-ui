@@ -5,7 +5,6 @@ import {
   handleSwitchScanner,
   handleClickScan,
 } from "widgets/BhandaraCheckin/store";
-import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/components/SectionMain/SectionMain";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   modeActions,
@@ -16,6 +15,7 @@ import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-th
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
+import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,

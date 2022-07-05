@@ -9,6 +9,7 @@ import {
   enableNetwork as $enableNetwork,
 } from "firebase/firestore";
 import { LocalStorageKeys } from "../constants";
+import { ENVS } from "../types";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -34,19 +35,21 @@ export const firestoreDb = initializeFirestore(app, {
 
 export const analytics = getAnalytics(app);
 
-enableIndexedDbPersistence(firestoreDb)
-  // .then(() => $disableNetwork(firestoreDb))
-  .catch((err) => {
-    if (err.code === "failed-precondition") {
-      // Multiple tabs open, persistence can only be enabled
-      // in one tab at a a time.
-      // ...
-    } else if (err.code === "unimplemented") {
-      // The current browser does not support all of the
-      // features required to enable persistence
-      // ...
-    }
-  });
+export const initFirebase = (env: ENVS) => {
+  enableIndexedDbPersistence(firestoreDb)
+    .then(() => (env === ENVS.DEV_LOCAL ? turnOnOfflineMode() : undefined))
+    .catch((err) => {
+      if (err.code === "failed-precondition") {
+        // Multiple tabs open, persistence can only be enabled
+        // in one tab at a a time.
+        // ...
+      } else if (err.code === "unimplemented") {
+        // The current browser does not support all of the
+        // features required to enable persistence
+        // ...
+      }
+    });
+};
 
 export const turnOffOfflineMode = () => {
   localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);

@@ -13,6 +13,7 @@ import {
   snackbarReducer,
   modeReducer,
   updateDetailsReducer,
+  envReducer,
 } from "./slices";
 import { offlineDataReducer } from "./slices/offlineData";
 
@@ -26,6 +27,7 @@ export const rootReducer = {
   location: locationReducer,
   page: pageReducer,
   offlineData: offlineDataReducer,
+  env: envReducer,
 };
 
 const exampleStore = configureStore({

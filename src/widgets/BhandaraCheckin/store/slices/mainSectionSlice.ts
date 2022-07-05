@@ -4,7 +4,7 @@ import {
   turnOnOfflineMode,
   turnOffOfflineMode,
 } from "widgets/BhandaraCheckin/firebase";
-import { SectionMainStateProps } from "../../components/SectionMain/SectionMain";
+import { SectionMainStateProps } from "widgets/BhandaraCheckin/types";
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(
