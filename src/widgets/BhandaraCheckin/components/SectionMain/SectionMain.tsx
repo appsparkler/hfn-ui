@@ -5,7 +5,6 @@ import {
   Typography,
   Box,
   SwitchProps,
-  Button,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import {
@@ -20,6 +19,7 @@ import { ClickHandler, InputChangeHandler } from "types";
 import { isAbhyasiId, isEmail, isMobile } from "utils";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
+import { CustomMenu } from "./CustomMenu";
 
 export type SectionMainStateProps = {
   error?: boolean;
@@ -163,11 +163,11 @@ export const SectionMain = ({
         )}
       </Vertical>
       <Box position="fixed" right={0} top={0}>
-        <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
+        <Horizontal alignItems={"center"}>
+          <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
+          <CustomMenu onClickOfflineData={onClickOfflineData} />
+        </Horizontal>
       </Box>
-      <Button variant="outlined" onClick={onClickOfflineData}>
-        Offline Data
-      </Button>
     </CenterOfViewport>
   );
 };
