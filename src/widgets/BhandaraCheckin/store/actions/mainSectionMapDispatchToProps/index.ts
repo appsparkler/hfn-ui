@@ -19,7 +19,11 @@ import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
-import { isOfflineMode } from "widgets/BhandaraCheckin/utils";
+import {
+  errorAbhyasiAlreadyCheckedin,
+  isOfflineMode,
+} from "widgets/BhandaraCheckin/utils";
+import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -82,34 +86,35 @@ function setDarkMode(dispatch: Dispatch<Action<any>>) {
 
 export async function checkinAbhyasi(
   dispatch: Dispatch<Action<any>>,
-  userId: string
+  abhyasiId: string
 ) {
   dispatch(mainSectionActions.startProcessing());
-  const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(userId));
-  if (isCheckedInRes.meta.requestStatus === "fulfilled") {
-    if (isCheckedInRes.payload) {
-      alert("is checked in");
-      return;
+  const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
+  if (isCheckedInRes.meta.requestStatus === "rejected") {
+    if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREAY_EXISTS) {
+      const errorAction = mainSectionActions.setError(
+        errorAbhyasiAlreadyCheckedin(abhyasiId)
+      );
+      dispatch(errorAction);
+    }
+  } else {
+    const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
+    if (res.meta.requestStatus === "fulfilled") {
+      dispatch({
+        type: "CheckInSuccess",
+        payload: {
+          location: {},
+        },
+      });
+      dispatch(pageActions.CHECKIN_SUCCESS());
+    } else {
+      dispatch(
+        snackbarActions.openSnackbar({
+          children: "Ooops! Something went wrong!!",
+        })
+      );
     }
   }
-  if (isCheckedInRes.meta.requestStatus === "rejected") {
-    alert("server issue");
-  }
-  const res = await dispatch<any>(checkinWithAbhyasiId(userId));
-  if (res.meta.requestStatus === "fulfilled") {
-    dispatch({
-      type: "CheckInSuccess",
-      payload: {
-        location: {},
-      },
-    });
-    dispatch(pageActions.CHECKIN_SUCCESS());
-  } else {
-    dispatch(
-      snackbarActions.openSnackbar({
-        children: "Ooops! Something went wrong!!",
-      })
-    );
-  }
+
   dispatch(mainSectionActions.stopProcessing());
 }

@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/system";
 
 export const theme = createTheme({
-    palette: {
-        mode: 'dark'
-    }
-})
+  palette: {
+    mode: "dark",
+  },
+});

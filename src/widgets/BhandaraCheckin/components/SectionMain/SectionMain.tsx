@@ -99,6 +99,11 @@ export const SectionMain = ({
         helperText={helperText}
         inputRef={idFieldRef}
         fullWidth
+        FormHelperTextProps={{
+          sx: {
+            maxHeight: "5px",
+          },
+        }}
       />
       <Horizontal gap={3}>
         <AsyncButton

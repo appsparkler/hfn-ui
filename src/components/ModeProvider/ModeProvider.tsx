@@ -17,7 +17,17 @@ export const ModeProvider = ({
 }: ModeProviderProps) => {
   const theme = useMemo(() => createTheme({ palette: { mode } }), [mode]);
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider
+      theme={{
+        ...theme,
+        palette: {
+          ...theme.palette,
+          error: {
+            ...theme.palette.success,
+          },
+        },
+      }}
+    >
       <CssBaseline />
       {children}
     </ThemeProvider>

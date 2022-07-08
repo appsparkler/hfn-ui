@@ -17,7 +17,7 @@ export const isAbhyasiCheckedIn = createAsyncThunk<any, string, ThunkApiConfig>(
   ) => {
     try {
       const isCheckedIn = await isAbhyasiCheckedIn(abhyasiId);
-      isCheckedIn
+      return isCheckedIn
         ? rejectWithValue(ErrorCodes.ABHYASI_ALREAY_EXISTS)
         : fulfillWithValue(true);
     } catch (error) {
