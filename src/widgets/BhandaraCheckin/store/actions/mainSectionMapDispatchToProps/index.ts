@@ -16,11 +16,16 @@ import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
+import { isOfflineMode } from "widgets/BhandaraCheckin/utils";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
+  onMount: () => {
+    const { enableOfflineMode, disableOfflineMode } = mainSectionActions;
+    dispatch(isOfflineMode() ? enableOfflineMode() : disableOfflineMode());
+  },
   onClickOfflineData: () => {
     dispatch(OFFLINE_DATA());
   },
@@ -43,7 +48,8 @@ export const mapDispatchToProps: MapDispatchToProps<
   onClickStart: async (inputValue) => {
     const $isAbhyasiId = isAbhyasiId(inputValue);
     if ($isAbhyasiId) {
-      await checkinAbhyasi(dispatch, inputValue);
+      const refinedValue = inputValue.trim().toUpperCase();
+      await checkinAbhyasi(dispatch, refinedValue);
     }
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
