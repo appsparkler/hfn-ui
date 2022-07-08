@@ -10,12 +10,6 @@ export type CheckinEmailOrMobileUserDetails = {
   location: string;
 } & EmailOrMobileDetail;
 
-export type MobileOrEmailUser = {
-  fullName: string;
-  email?: string | undefined;
-  mobile?: string | undefined;
-};
-
 export type FormUserDetailsValueWrapper<T> = {
   show?: boolean;
   isValid?: boolean;
