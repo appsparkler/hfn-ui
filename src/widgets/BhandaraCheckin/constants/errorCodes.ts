@@ -1,4 +1,5 @@
 export const ErrorCodes = {
   SERVER_ERROR: "Server Error",
-  ABHYASI_ALREAY_EXISTS: "Abhyasi already checked In",
+  ABHYASI_ALREADY_CHECKED_IN: "Abhyasi already checked in.",
+  USER_ALREADY_CHECKED_IN: "User has already checked in.",
 };

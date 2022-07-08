@@ -1,24 +1,31 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import {
+  CheckinEmailOrMobileUserData,
+  ThunkApiConfig,
+} from "widgets/BhandaraCheckin/types";
 import {} from "@reduxjs/toolkit";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 
-export const isAbhyasiCheckedIn = createAsyncThunk<any, string, ThunkApiConfig>(
-  "api/isAbhyasiCheckedIn",
+export const isUserCheckedIn = createAsyncThunk<
+  any,
+  CheckinEmailOrMobileUserData,
+  ThunkApiConfig
+>(
+  "api/isUserCheckedIn",
   async (
-    abhyasiId,
+    user,
     {
       extra: {
-        apis: { isAbhyasiCheckedIn },
+        apis: { isUserAlreadyCheckedIn },
       },
       fulfillWithValue,
       rejectWithValue,
     }
   ) => {
     try {
-      const isCheckedIn = await isAbhyasiCheckedIn(abhyasiId);
+      const isCheckedIn = await isUserAlreadyCheckedIn(user);
       return isCheckedIn
-        ? rejectWithValue(ErrorCodes.ABHYASI_ALREADY_CHECKED_IN)
+        ? rejectWithValue(ErrorCodes.USER_ALREADY_CHECKED_IN)
         : fulfillWithValue(true);
     } catch (error) {
       return rejectWithValue(ErrorCodes.SERVER_ERROR);

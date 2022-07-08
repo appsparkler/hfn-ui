@@ -91,7 +91,7 @@ export async function checkinAbhyasi(
   dispatch(mainSectionActions.startProcessing());
   const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
   if (isCheckedInRes.meta.requestStatus === "rejected") {
-    if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREAY_EXISTS) {
+    if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
       const errorAction = mainSectionActions.setError(
         errorAbhyasiAlreadyCheckedin(abhyasiId)
       );
