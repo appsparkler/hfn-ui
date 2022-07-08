@@ -11,7 +11,10 @@ import {
   snackbarActions,
   updateDetailsActions,
 } from "widgets/BhandaraCheckin/store/slices";
-import { checkinWithAbhyasiId } from "widgets/BhandaraCheckin/store/api-async-thunks";
+import {
+  checkinWithAbhyasiId,
+  isAbhyasiCheckedIn,
+} from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
@@ -82,6 +85,16 @@ export async function checkinAbhyasi(
   userId: string
 ) {
   dispatch(mainSectionActions.startProcessing());
+  const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(userId));
+  if (isCheckedInRes.meta.requestStatus === "fulfilled") {
+    if (isCheckedInRes.payload) {
+      alert("is checked in");
+      return;
+    }
+  }
+  if (isCheckedInRes.meta.requestStatus === "rejected") {
+    alert("server issue");
+  }
   const res = await dispatch<any>(checkinWithAbhyasiId(userId));
   if (res.meta.requestStatus === "fulfilled") {
     dispatch({

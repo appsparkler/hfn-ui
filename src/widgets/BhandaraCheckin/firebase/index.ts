@@ -7,9 +7,10 @@ import {
   CACHE_SIZE_UNLIMITED,
   disableNetwork as $disableNetwork,
   enableNetwork as $enableNetwork,
+  collection,
 } from "firebase/firestore";
-import { LocalStorageKeys } from "../constants";
-import { ENVS } from "../types";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { ENVS, FirestoreCollections } from "widgets/BhandaraCheckin/types";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -60,3 +61,13 @@ export const turnOnOfflineMode = () => {
   localStorage.setItem(LocalStorageKeys.OFFLINE_MODE, "true");
   $disableNetwork(firestoreDb);
 };
+
+export const abhyasiIdCollection = collection(
+  firestoreDb,
+  FirestoreCollections.ABHYASI_ID_CHECKINS
+);
+
+export const otherCheckinsCollection = collection(
+  firestoreDb,
+  FirestoreCollections.OTHER_CHECKINS
+);

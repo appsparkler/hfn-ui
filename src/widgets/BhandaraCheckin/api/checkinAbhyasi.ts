@@ -1,10 +1,7 @@
-import {
-  CheckinAbhyasiApi,
-  FirestoreCollections,
-} from "widgets/BhandaraCheckin/types";
+import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
 import { LocalStorageKeys } from "../constants";
-import { firestoreDb } from "widgets/BhandaraCheckin/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { abhyasiIdCollection } from "widgets/BhandaraCheckin/firebase";
+import { addDoc } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
 
@@ -23,10 +20,7 @@ export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
     };
-    const abhyasiIdCollection = collection(
-      firestoreDb,
-      FirestoreCollections.ABHYASI_ID_CHECKINS
-    );
+
     addDoc(abhyasiIdCollection, data);
     return true;
   } catch (e) {

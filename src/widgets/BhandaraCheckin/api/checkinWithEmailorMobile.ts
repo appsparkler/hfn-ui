@@ -1,10 +1,9 @@
 import {
   CheckinEmailOrMobileUserDetails,
   CheckinWithEmailOrMobileApi,
-  FirestoreCollections,
 } from "widgets/BhandaraCheckin/types";
-import { firestoreDb } from "../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { otherCheckinsCollection } from "../firebase";
+import { addDoc } from "firebase/firestore";
 
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
@@ -22,10 +21,7 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = async (
   attendee
 ) => {
   try {
-    addDoc(
-      collection(firestoreDb, FirestoreCollections.OTHER_CHECKINS),
-      attendee
-    );
+    addDoc(otherCheckinsCollection, attendee);
     return true;
   } catch (e) {
     console.error("Error adding document: ", e);
