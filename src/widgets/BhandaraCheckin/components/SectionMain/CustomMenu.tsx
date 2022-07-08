@@ -27,10 +27,10 @@ export const CustomMenu = ({
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = React.useCallback<(fn: Function) => any>(
+  const handleClose = React.useCallback<(fn?: Function) => any>(
     (fn) => () => {
       setAnchorEl(null);
-      fn();
+      if (fn) fn();
     },
     []
   );
@@ -54,7 +54,7 @@ export const CustomMenu = ({
         }}
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={handleClose()}
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
