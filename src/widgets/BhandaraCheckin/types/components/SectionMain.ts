@@ -1,4 +1,5 @@
 import { ModeSwitchDispatchProps } from "components";
+import { ReturnVoid } from "types";
 import { Env } from "../env";
 
 export interface SectionMainStateProps {
@@ -23,6 +24,7 @@ export interface SectionMainDispatchProps {
   onSwitchOfflineMode?: (checked: boolean) => void;
   onClickOfflineData?: () => void;
   onMount?: () => void;
+  onRefresh?: ReturnVoid;
 }
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;

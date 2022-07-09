@@ -19,6 +19,7 @@ import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
+import * as serviceWorkerRegistration from "serviceWorkerRegistration";
 import {
   errorAbhyasiAlreadyCheckedin,
   isOfflineMode,
@@ -29,6 +30,14 @@ export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
   {}
 > = (dispatch) => ({
+  onRefresh: async () => {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    registrations.forEach((registration) => {
+      registration.unregister();
+    });
+    serviceWorkerRegistration.register();
+    window.location.reload();
+  },
   onMount: () => {
     const { enableOfflineMode, disableOfflineMode } = mainSectionActions;
     dispatch(isOfflineMode() ? enableOfflineMode() : disableOfflineMode());

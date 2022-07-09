@@ -32,6 +32,7 @@ export const SectionMain = ({
   onSwitchOfflineMode = noop,
   onClickOfflineData = noop,
   onMount = noop,
+  onRefresh = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -86,7 +87,7 @@ export const SectionMain = ({
   return (
     <CenterOfViewport gap={10} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       <Typography variant="h4" color="goldenrod" align="center">
-        Golden Book Registration.
+        Golden Book Registration
       </Typography>
       <TextField
         type="text"
@@ -149,7 +150,10 @@ export const SectionMain = ({
       <Box position="fixed" right={0} top={0}>
         <Horizontal alignItems={"center"}>
           <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
-          <CustomMenu onClickOfflineData={onClickOfflineData} />
+          <CustomMenu
+            onClickOfflineData={onClickOfflineData}
+            onRefreshApp={onRefresh}
+          />
         </Horizontal>
       </Box>
     </CenterOfViewport>

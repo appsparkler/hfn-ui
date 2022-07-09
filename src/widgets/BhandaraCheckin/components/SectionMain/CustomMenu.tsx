@@ -4,21 +4,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { noop } from "lodash/fp";
+import { CustomMenuProps } from "widgets/BhandaraCheckin/types";
 
 const ITEM_HEIGHT = 48;
 
-type ReturnVoid = () => void;
-
-export interface CustomMenuDispatchProps {
-  onClickOfflineData?: ReturnVoid;
-  onClickDashboard?: () => void;
-}
-
-export interface CustomMenuStateProps {}
-
-export type CustomMenuProps = CustomMenuDispatchProps & CustomMenuStateProps;
-
 export const CustomMenu = ({
+  onRefreshApp = noop,
   onClickOfflineData = noop,
   onClickDashboard = noop,
 }: CustomMenuProps) => {
@@ -66,6 +57,7 @@ export const CustomMenu = ({
           Offline Data
         </MenuItem>
         <MenuItem onClick={handleClose(onClickDashboard)}>Dashboard</MenuItem>
+        <MenuItem onClick={handleClose(onRefreshApp)}>Refresh App</MenuItem>
       </Menu>
     </div>
   );
