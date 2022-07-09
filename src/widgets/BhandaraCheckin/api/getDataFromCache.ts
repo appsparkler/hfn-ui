@@ -1,9 +1,7 @@
-import { collection, getDocsFromCache } from "firebase/firestore";
-import { firestoreDb } from "../firebase";
+import { getDocsFromCache } from "firebase/firestore";
+import { checkinsCollection } from "../firebase";
 import {
   AbhyasiCheckinData,
-  CheckinEmailOrMobileUserDetails,
-  FirestoreCollections,
   GetDataFromCacheApi,
   OfflineCacheData,
 } from "widgets/BhandaraCheckin/types";
@@ -11,26 +9,11 @@ import {
 export const getDataFromCache: GetDataFromCacheApi = async () => {
   try {
     let data: OfflineCacheData[] = [];
-    const abhyasIdCollection = collection(
-      firestoreDb,
-      FirestoreCollections.ABHYASI_ID_CHECKINS
-    );
-    const docs = await getDocsFromCache(abhyasIdCollection);
-    docs.forEach((doc) => {
+
+    const checkinDocs = await getDocsFromCache(checkinsCollection);
+    checkinDocs.forEach((doc) => {
       if (doc.metadata.hasPendingWrites) {
         data.push(doc.data() as AbhyasiCheckinData);
-      }
-    });
-
-    // Other Checkins
-    const otherCheckinsCollection = collection(
-      firestoreDb,
-      FirestoreCollections.OTHER_CHECKINS
-    );
-    const otherCheckinDocs = await getDocsFromCache(otherCheckinsCollection);
-    otherCheckinDocs.forEach((doc) => {
-      if (doc.metadata.hasPendingWrites) {
-        data.push(doc.data() as CheckinEmailOrMobileUserDetails);
       }
     });
     return data;

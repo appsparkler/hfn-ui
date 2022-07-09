@@ -37,19 +37,17 @@ export const firestoreDb = initializeFirestore(app, {
 export const analytics = getAnalytics(app);
 
 export const initFirebase = (env: ENVS) => {
-  enableIndexedDbPersistence(firestoreDb)
-    .then(() => (env === ENVS.DEV_LOCAL ? turnOnOfflineMode() : undefined))
-    .catch((err) => {
-      if (err.code === "failed-precondition") {
-        // Multiple tabs open, persistence can only be enabled
-        // in one tab at a a time.
-        // ...
-      } else if (err.code === "unimplemented") {
-        // The current browser does not support all of the
-        // features required to enable persistence
-        // ...
-      }
-    });
+  enableIndexedDbPersistence(firestoreDb).catch((err) => {
+    if (err.code === "failed-precondition") {
+      // Multiple tabs open, persistence can only be enabled
+      // in one tab at a a time.
+      // ...
+    } else if (err.code === "unimplemented") {
+      // The current browser does not support all of the
+      // features required to enable persistence
+      // ...
+    }
+  });
 };
 
 export const turnOffOfflineMode = async () => {
@@ -62,12 +60,7 @@ export const turnOnOfflineMode = async () => {
   await $disableNetwork(firestoreDb);
 };
 
-export const abhyasiIdCollection = collection(
+export const checkinsCollection = collection(
   firestoreDb,
-  FirestoreCollections.ABHYASI_ID_CHECKINS
-);
-
-export const otherCheckinsCollection = collection(
-  firestoreDb,
-  FirestoreCollections.OTHER_CHECKINS
+  FirestoreCollections.CHECKINS
 );

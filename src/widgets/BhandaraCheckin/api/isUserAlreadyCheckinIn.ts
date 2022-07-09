@@ -1,5 +1,5 @@
 import { IsUserAlreadyCheckedInApi } from "widgets/BhandaraCheckin/types";
-import { otherCheckinsCollection } from "widgets/BhandaraCheckin/firebase";
+import { checkinsCollection } from "widgets/BhandaraCheckin/firebase";
 import { getDocsFromCache, query, where } from "firebase/firestore";
 
 export const isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi = async (
@@ -7,12 +7,12 @@ export const isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi = async (
 ) => {
   try {
     const queryForUserWithEmail = query(
-      otherCheckinsCollection,
+      checkinsCollection,
       where("name", "==", user.fullName),
       where("email", "==", (user as { email: string }).email)
     );
     const queryForUserWithMobile = query(
-      otherCheckinsCollection,
+      checkinsCollection,
       where("name", "==", user.fullName),
       where("mobile", "==", (user as { mobile: string }).mobile)
     );

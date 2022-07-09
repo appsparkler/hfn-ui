@@ -1,9 +1,11 @@
 import {
   CheckinEmailOrMobileUserDetails,
+  CheckinType,
   CheckinWithEmailOrMobileApi,
 } from "widgets/BhandaraCheckin/types";
-import { otherCheckinsCollection } from "../firebase";
+import { checkinsCollection } from "../firebase";
 import { addDoc } from "firebase/firestore";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
@@ -21,7 +23,12 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = async (
   attendee
 ) => {
   try {
-    addDoc(otherCheckinsCollection, attendee);
+    addDoc(checkinsCollection, {
+      ...attendee,
+      deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
+      timestamp: Date.now(),
+      type: CheckinType.EMAIL_OR_MOBILE,
+    });
     return true;
   } catch (e) {
     console.error("Error adding document: ", e);

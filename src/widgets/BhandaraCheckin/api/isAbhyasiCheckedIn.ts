@@ -1,13 +1,13 @@
 import { IsAbhyasiCheckedInApi } from "widgets/BhandaraCheckin/types";
 import { getDocsFromCache, query, where } from "firebase/firestore";
-import { abhyasiIdCollection } from "../firebase";
+import { checkinsCollection } from "../firebase";
 
 export const isAbhyasiCheckedIn: IsAbhyasiCheckedInApi = async (
   abhyasiId: string
 ) => {
   try {
     const $query = query(
-      abhyasiIdCollection,
+      checkinsCollection,
       where("abhyasiId", "==", abhyasiId)
     );
     const docs = await getDocsFromCache($query);

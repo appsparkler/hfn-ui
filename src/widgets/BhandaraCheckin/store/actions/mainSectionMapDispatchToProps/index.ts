@@ -26,7 +26,10 @@ import {
   isOfflineMode,
 } from "widgets/BhandaraCheckin/utils";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
-import { turnOnOfflineMode } from "widgets/BhandaraCheckin/firebase";
+import {
+  turnOffOfflineMode,
+  turnOnOfflineMode,
+} from "widgets/BhandaraCheckin/firebase";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -42,23 +45,24 @@ export const mapDispatchToProps: MapDispatchToProps<
   },
   onMount: async () => {
     if (isLocalDevEnv()) {
-      const { enableOfflineMode, disableOfflineMode } = mainSectionActions;
       if (isOfflineMode()) {
         await turnOnOfflineMode();
-        dispatch(enableOfflineMode());
+        dispatch(mainSectionActions.enableOfflineMode());
       } else {
-        await turnOnOfflineMode();
-        dispatch(disableOfflineMode());
+        await turnOffOfflineMode();
+        dispatch(mainSectionActions.disableOfflineMode());
       }
     }
   },
   onClickOfflineData: () => {
     dispatch(OFFLINE_DATA());
   },
-  onSwitchOfflineMode: (isOfflineMode) => {
+  onSwitchOfflineMode: async (isOfflineMode) => {
     if (isOfflineMode) {
+      await turnOnOfflineMode();
       dispatch(mainSectionActions.enableOfflineMode());
     } else {
+      await turnOffOfflineMode();
       dispatch(mainSectionActions.disableOfflineMode());
     }
   },
