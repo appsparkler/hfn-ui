@@ -5,11 +5,15 @@ import { abhyasiIdCollection } from "../firebase";
 export const isAbhyasiCheckedIn: IsAbhyasiCheckedInApi = async (
   abhyasiId: string
 ) => {
-  const $query = query(
-    abhyasiIdCollection,
-    where("abhyasiId", "==", abhyasiId)
-  );
-  const docs = await getDocsFromCache($query);
-  if (docs.empty) return false;
-  return true;
+  try {
+    const $query = query(
+      abhyasiIdCollection,
+      where("abhyasiId", "==", abhyasiId)
+    );
+    const docs = await getDocsFromCache($query);
+    if (docs.empty) return false;
+    return true;
+  } catch (error) {
+    throw new Error("Firebase Error");
+  }
 };

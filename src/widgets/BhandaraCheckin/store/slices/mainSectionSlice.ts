@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
-import {
-  turnOnOfflineMode,
-  turnOffOfflineMode,
-} from "widgets/BhandaraCheckin/firebase";
 import { SectionMainStateProps } from "widgets/BhandaraCheckin/types";
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
@@ -80,11 +76,9 @@ const mainSectionSlice = createSlice({
       ...payload,
     }),
     enableOfflineMode: (state) => {
-      turnOnOfflineMode();
       state.isOfflineMode = true;
     },
     disableOfflineMode: (state) => {
-      turnOffOfflineMode();
       state.isOfflineMode = false;
     },
   },

@@ -22,9 +22,11 @@ import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 import * as serviceWorkerRegistration from "serviceWorkerRegistration";
 import {
   errorAbhyasiAlreadyCheckedin,
+  isLocalDevEnv,
   isOfflineMode,
 } from "widgets/BhandaraCheckin/utils";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
+import { turnOnOfflineMode } from "widgets/BhandaraCheckin/firebase";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -38,9 +40,17 @@ export const mapDispatchToProps: MapDispatchToProps<
     serviceWorkerRegistration.register();
     window.location.reload();
   },
-  onMount: () => {
-    const { enableOfflineMode, disableOfflineMode } = mainSectionActions;
-    dispatch(isOfflineMode() ? enableOfflineMode() : disableOfflineMode());
+  onMount: async () => {
+    if (isLocalDevEnv()) {
+      const { enableOfflineMode, disableOfflineMode } = mainSectionActions;
+      if (isOfflineMode()) {
+        await turnOnOfflineMode();
+        dispatch(enableOfflineMode());
+      } else {
+        await turnOnOfflineMode();
+        dispatch(disableOfflineMode());
+      }
+    }
   },
   onClickOfflineData: () => {
     dispatch(OFFLINE_DATA());
@@ -109,17 +119,11 @@ export async function checkinAbhyasi(
   } else {
     const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
     if (res.meta.requestStatus === "fulfilled") {
-      dispatch({
-        type: "CheckInSuccess",
-        payload: {
-          location: {},
-        },
-      });
       dispatch(pageActions.CHECKIN_SUCCESS());
     } else {
       dispatch(
         snackbarActions.openSnackbar({
-          children: "Ooops! Something went wrong!!",
+          children: ErrorCodes.SERVER_ERROR,
         })
       );
     }

@@ -52,14 +52,14 @@ export const initFirebase = (env: ENVS) => {
     });
 };
 
-export const turnOffOfflineMode = () => {
+export const turnOffOfflineMode = async () => {
   localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);
-  $enableNetwork(firestoreDb);
+  await $enableNetwork(firestoreDb);
 };
 
-export const turnOnOfflineMode = () => {
+export const turnOnOfflineMode = async () => {
   localStorage.setItem(LocalStorageKeys.OFFLINE_MODE, "true");
-  $disableNetwork(firestoreDb);
+  await $disableNetwork(firestoreDb);
 };
 
 export const abhyasiIdCollection = collection(
