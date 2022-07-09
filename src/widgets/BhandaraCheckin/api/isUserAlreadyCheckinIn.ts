@@ -18,7 +18,7 @@ export const isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi = async (
     );
     const docsMatchingEmail = await getDocsFromCache(queryForUserWithEmail);
     const docsMatchingMobile = await getDocsFromCache(queryForUserWithMobile);
-    if (docsMatchingEmail.empty && docsMatchingMobile.empty) return true;
+    if (!docsMatchingEmail.empty || !docsMatchingMobile.empty) return true;
     return false;
   } catch (e) {
     console.error("Error adding document: ", e);

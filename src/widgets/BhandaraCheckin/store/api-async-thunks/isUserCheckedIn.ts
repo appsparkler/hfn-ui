@@ -1,14 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  CheckinEmailOrMobileUserData,
+  CheckinEmailOrMobileUserDetails,
   ThunkApiConfig,
 } from "widgets/BhandaraCheckin/types";
-import {} from "@reduxjs/toolkit";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 
 export const isUserCheckedIn = createAsyncThunk<
   any,
-  CheckinEmailOrMobileUserData,
+  CheckinEmailOrMobileUserDetails,
   ThunkApiConfig
 >(
   "api/isUserCheckedIn",
