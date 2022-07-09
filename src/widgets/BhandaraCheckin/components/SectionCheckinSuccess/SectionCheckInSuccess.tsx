@@ -22,7 +22,7 @@ export const SectionCheckinSuccess = ({
   onClickReturn,
 }: SectionCheckinSuccessProps) => {
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (wrapperRef.current) {
       setShowConfetti(true);
@@ -36,6 +36,12 @@ export const SectionCheckinSuccess = ({
     () => enableConfetti && showConfetti,
     [enableConfetti, showConfetti]
   );
+
+  useEffect(() => {
+    return () => {
+      setShowConfetti(false);
+    };
+  }, []);
 
   return (
     <CenterOfViewport
