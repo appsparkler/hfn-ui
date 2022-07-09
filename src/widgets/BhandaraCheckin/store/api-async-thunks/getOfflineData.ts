@@ -34,7 +34,7 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
               };
             }
             const {
-              name,
+              fullName,
               email = "",
               mobile = "",
             } = dataItem as CheckinEmailOrMobileUserDetails & {
@@ -43,7 +43,7 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
             };
             const emailString = email ? `, ${email}` : "";
             const mobileString = mobile ? `, ${mobile}` : "";
-            const info = `${name}${emailString}${mobileString}`;
+            const info = `${fullName}${emailString}${mobileString}`;
             return {
               id: uuid(),
               info,

@@ -15,7 +15,11 @@ export const isFieldValueValidV2 = (
       return Boolean((value as string).trim());
     case "gender":
       return Boolean((value as string).trim());
-    case "location":
+    case "city":
+      return Boolean((value as string).trim());
+    case "state":
+      return Boolean((value as string).trim());
+    case "country":
       return Boolean((value as string).trim());
     case "mobile":
       if (isMobile((value as string).trim())) return true;

@@ -8,7 +8,7 @@ import {
 } from "./SectionUpdateDetails";
 
 export default {
-  title: "Widgets/Bhandara Checkin/Sections/Update Details V2",
+  title: "Widgets/Bhandara Checkin/Sections/Update Details",
   component: SectionUpdateDetailsV2,
 } as ComponentMeta<typeof SectionUpdateDetailsV2>;
 
@@ -56,7 +56,15 @@ updateDetailsV2.args = {
       show: true,
       disabled: false,
     },
-    location: {
+    city: {
+      value: "",
+      show: true,
+    },
+    state: {
+      value: "",
+      show: true,
+    },
+    country: {
       value: "",
       show: true,
     },

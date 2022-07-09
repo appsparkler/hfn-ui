@@ -4,10 +4,12 @@ type EmailOrMobileDetail =
   | { email: string; mobile: string };
 
 export type CheckinEmailOrMobileUserDetails = {
-  name: string;
+  fullName: string;
   ageGroup: string;
   gender: string;
-  location: string;
+  city: string;
+  state: string;
+  country: string;
 } & EmailOrMobileDetail;
 
 export type FormUserDetailsValueWrapper<T> = {
@@ -21,7 +23,9 @@ export type FormUserDetails = {
   fullName: FormUserDetailsValueWrapper<string>;
   mobile: FormUserDetailsValueWrapper<string>;
   email: FormUserDetailsValueWrapper<string>;
-  location: FormUserDetailsValueWrapper<string>;
+  city: FormUserDetailsValueWrapper<string>;
+  state: FormUserDetailsValueWrapper<string>;
+  country: FormUserDetailsValueWrapper<string>;
   ageGroup: FormUserDetailsValueWrapper<string>;
   gender: FormUserDetailsValueWrapper<string>;
 };

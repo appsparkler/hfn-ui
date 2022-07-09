@@ -20,7 +20,15 @@ const getInitialState = (): SectionUpdateDetailsStateProps => {
         show: true,
         value: "",
       },
-      location: {
+      city: {
+        show: true,
+        value: "",
+      },
+      state: {
+        show: true,
+        value: "",
+      },
+      country: {
         show: true,
         value: "",
       },

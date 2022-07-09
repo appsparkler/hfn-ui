@@ -39,10 +39,8 @@ export const SectionUpdateDetailsV2 = ({
   onClickCancel,
 }: SectionUpdateDetailsProps) => {
   const fullNameInputRef = useRef<HTMLInputElement>(null);
-  const { fullName, ageGroup, email, gender, location, mobile } = useMemo(
-    () => userDetails,
-    [userDetails]
-  );
+  const { fullName, ageGroup, email, gender, city, state, country, mobile } =
+    useMemo(() => userDetails, [userDetails]);
 
   const areEmailAndMobileValid = useMemo<boolean>(() => {
     const disabledEmail = Boolean(userDetails.email.disabled);
@@ -87,7 +85,9 @@ export const SectionUpdateDetailsV2 = ({
         userDetails.ageGroup.isValid &&
           userDetails.fullName.isValid &&
           userDetails.gender.isValid &&
-          userDetails.location.isValid &&
+          userDetails.city.isValid &&
+          userDetails.state.isValid &&
+          userDetails.country.isValid &&
           areEmailAndMobileValid
       ),
     [
@@ -95,7 +95,9 @@ export const SectionUpdateDetailsV2 = ({
       userDetails.ageGroup.isValid,
       userDetails.fullName.isValid,
       userDetails.gender.isValid,
-      userDetails.location.isValid,
+      userDetails.city.isValid,
+      userDetails.state.isValid,
+      userDetails.country.isValid,
     ]
   );
 
@@ -172,6 +174,7 @@ export const SectionUpdateDetailsV2 = ({
           onChange={handleChange}
           value={fullName.value}
           inputRef={fullNameInputRef}
+          size="small"
         />
         <Horizontal gap={3}>
           <SelectField
@@ -184,6 +187,7 @@ export const SectionUpdateDetailsV2 = ({
             options={ageGroupOptions}
             required
             value={ageGroup.value}
+            size="small"
           />
           <SelectField
             autoWidth
@@ -196,19 +200,47 @@ export const SectionUpdateDetailsV2 = ({
             required
             value={gender.value}
             disabled={gender.disabled}
+            size="small"
           />
         </Horizontal>
         <TextField
-          label="City, State, Country"
+          label="City"
           color="info"
           required
           autoComplete="off"
-          name="location"
+          name="city"
           type="text"
           variant="outlined"
           fullWidth
           onChange={handleChange}
-          value={location.value}
+          value={city.value}
+          size="small"
+        />
+        <TextField
+          label="State"
+          color="info"
+          required
+          autoComplete="off"
+          name="state"
+          type="text"
+          variant="outlined"
+          fullWidth
+          onChange={handleChange}
+          value={state.value}
+          size="small"
+        />
+        <TextField
+          label="Country"
+          color="info"
+          required
+          autoComplete="off"
+          name="country"
+          type="text"
+          variant="outlined"
+          fullWidth
+          onChange={handleChange}
+          value={country.value}
+          size="small"
         />
         <Alert severity="info" variant="standard">
           Please enter <strong>atleast one</strong> of <strong>Mobile</strong>{" "}
@@ -225,6 +257,7 @@ export const SectionUpdateDetailsV2 = ({
           value={mobile.value}
           disabled={mobile.disabled}
           onChange={handleChange}
+          size="small"
         />
         <TextField
           label="Email"
@@ -236,6 +269,7 @@ export const SectionUpdateDetailsV2 = ({
           value={email.value}
           disabled={email.disabled}
           onChange={handleChange}
+          size="small"
         />
       </Vertical>
       <Horizontal gap={3}>

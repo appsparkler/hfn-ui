@@ -28,16 +28,20 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
     email,
     fullName,
     gender,
-    location,
+    city,
+    state,
+    country,
     mobile,
   }) => {
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
       email: String(email.value?.toLowerCase()),
       gender: String(gender.value),
-      location: String(location.value?.toUpperCase()),
+      city: String(city.value?.toUpperCase()),
+      state: String(state.value?.toUpperCase()),
+      country: String(country.value?.toUpperCase()),
       mobile: String(mobile.value),
-      name: String(fullName.value?.toUpperCase()),
+      fullName: String(fullName.value?.toUpperCase()),
     };
     dispatch(updateDetailsActions.startProcessing());
     const isUserCheckedInRes = await dispatch<any>(

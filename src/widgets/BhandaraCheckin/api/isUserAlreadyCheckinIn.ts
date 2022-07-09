@@ -8,12 +8,12 @@ export const isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi = async (
   try {
     const queryForUserWithEmail = query(
       otherCheckinsCollection,
-      where("name", "==", user.name),
+      where("name", "==", user.fullName),
       where("email", "==", (user as { email: string }).email)
     );
     const queryForUserWithMobile = query(
       otherCheckinsCollection,
-      where("name", "==", user.name),
+      where("name", "==", user.fullName),
       where("mobile", "==", (user as { mobile: string }).mobile)
     );
     const docsMatchingEmail = await getDocsFromCache(queryForUserWithEmail);
