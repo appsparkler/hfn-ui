@@ -23,7 +23,6 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
   ) => {
     try {
       const cachedData = await getDataFromCache();
-      console.log({ cachedData });
       if (cachedData !== false) {
         const getOfflineData = map<OfflineCacheData, OfflineDataItem>(
           (dataItem) => {
