@@ -1,6 +1,6 @@
 import { connect, MapStateToProps } from "react-redux";
 import {
-  SectionUpdateDetailsV2,
+  SectionUpdateDetails,
   SectionUpdateDetailsStateProps,
 } from "./SectionUpdateDetails";
 import { RootState } from "widgets/BhandaraCheckin/store";
@@ -15,4 +15,4 @@ const mapStateToProps: MapStateToProps<
 export const SectionUpdateDetailsConnected = connect(
   mapStateToProps,
   updateDetailsSectionMapDispatchToProps
-)(SectionUpdateDetailsV2);
+)(SectionUpdateDetails);

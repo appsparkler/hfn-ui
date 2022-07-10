@@ -29,7 +29,7 @@ export type SectionUpdateDetailsDispatchProps = {
 export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
   SectionUpdateDetailsDispatchProps;
 
-export const SectionUpdateDetailsV2 = ({
+export const SectionUpdateDetails = ({
   isProcessing,
   userDetails,
   ageGroupOptions,

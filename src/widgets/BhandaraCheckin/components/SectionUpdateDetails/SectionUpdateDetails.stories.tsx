@@ -4,15 +4,15 @@ import { ageGroupOptions, genderOptions } from "../../constants";
 import { FormUserDetails } from "../../types";
 import {
   SectionUpdateDetailsDispatchProps,
-  SectionUpdateDetailsV2,
+  SectionUpdateDetails,
 } from "./SectionUpdateDetails";
 
 export default {
   title: "Widgets/Bhandara Checkin/Sections/Update Details",
-  component: SectionUpdateDetailsV2,
-} as ComponentMeta<typeof SectionUpdateDetailsV2>;
+  component: SectionUpdateDetails,
+} as ComponentMeta<typeof SectionUpdateDetails>;
 
-const Template: ComponentStory<typeof SectionUpdateDetailsV2> = ({
+const Template: ComponentStory<typeof SectionUpdateDetails> = ({
   userDetails,
   ...args
 }) => {
@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof SectionUpdateDetailsV2> = ({
   }, []);
 
   return (
-    <SectionUpdateDetailsV2
+    <SectionUpdateDetails
       {...args}
       userDetails={$userDetails}
       onChange={handleChange}
@@ -34,8 +34,8 @@ const Template: ComponentStory<typeof SectionUpdateDetailsV2> = ({
   );
 };
 
-export const updateDetailsV2 = Template.bind({});
-updateDetailsV2.args = {
+export const updateDetails = Template.bind({});
+updateDetails.args = {
   genderOptions: [...genderOptions],
   ageGroupOptions: [...ageGroupOptions],
   isProcessing: false,
