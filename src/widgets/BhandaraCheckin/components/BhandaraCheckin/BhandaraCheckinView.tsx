@@ -18,11 +18,15 @@ export const BhandaraCheckinView = ({
   renderScanner,
 }: BhandaraCheckinViewStateProps) => {
   const Component = (pages as any)[page] as any;
+
   return (
     <Box>
       <Component />
       <SnackbarConnected />
       {renderScanner ? <BarcodeScannerConnected /> : null}
+      <Box position="fixed" sx={{ top: 0, left: 0 }}>
+        Status
+      </Box>
     </Box>
   );
 };
