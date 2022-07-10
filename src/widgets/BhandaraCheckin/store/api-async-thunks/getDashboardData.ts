@@ -1,28 +1,26 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 
-export const checkinWithAbhyasiId = createAsyncThunk<
+export const getDashboardData = createAsyncThunk<
   any,
-  string,
+  undefined,
   ThunkApiConfig
 >(
-  "api/checkinWithAbhyasiId",
+  "api/isUserCheckedIn",
   async (
-    abhyasiId,
+    _,
     {
       extra: {
-        apis: { checkinAbhyasi },
+        apis: { getDashboardData },
       },
       fulfillWithValue,
       rejectWithValue,
     }
   ) => {
     try {
-      const checkInSuccess = await checkinAbhyasi(abhyasiId);
-      if (checkInSuccess) {
-        return fulfillWithValue(true);
-      }
+      const docsSize = await getDashboardData();
+      return fulfillWithValue(docsSize);
     } catch (error) {
       return rejectWithValue(ErrorCodes.SERVER_ERROR);
     }

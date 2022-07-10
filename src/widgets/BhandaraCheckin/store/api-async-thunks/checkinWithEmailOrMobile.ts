@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 
@@ -24,7 +25,7 @@ export const checkinWithEmailOrMobile = createAsyncThunk<
         return fulfillWithValue(true);
       }
     } catch (error) {
-      return rejectWithValue(false);
+      return rejectWithValue(ErrorCodes.SERVER_ERROR);
     }
   }
 );

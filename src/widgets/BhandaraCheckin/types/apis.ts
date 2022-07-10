@@ -24,10 +24,15 @@ export interface IsUserAlreadyCheckedInApi {
   (user: CheckinEmailOrMobileUserDetails): Promise<boolean>;
 }
 
+export interface GetDashboardDataApi {
+  (): Promise<number>;
+}
+
 export type BhandaraCheckinAPIs = {
   checkinAbhyasi: CheckinAbhyasiApi;
   checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi;
   getDataFromCache: GetDataFromCacheApi;
   isAbhyasiCheckedIn: IsAbhyasiCheckedInApi;
   isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi;
+  getDashboardData: GetDashboardDataApi;
 };

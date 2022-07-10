@@ -8,6 +8,7 @@ import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { DashboardProps } from "widgets/BhandaraCheckin/types";
 
 export const Dashboard = ({
+  total = 0,
   password = "",
   onMount = noop,
   onRefresh = noop,
@@ -50,7 +51,7 @@ export const Dashboard = ({
             total
           </Typography>
           <Typography align="center" variant="h1">
-            {(24098).toLocaleString()}
+            {total.toLocaleString()}
           </Typography>
         </>
       ) : (

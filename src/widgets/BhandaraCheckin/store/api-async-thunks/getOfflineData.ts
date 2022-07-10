@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { map } from "lodash/fp";
 import { v4 as uuid } from "uuid";
+import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import {
   AbhyasiCheckinData,
   CheckinEmailOrMobileUserDetails,
@@ -53,7 +54,7 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
         return fulfillWithValue(getOfflineData(cachedData));
       }
     } catch (error) {
-      return rejectWithValue(false);
+      return rejectWithValue(ErrorCodes.SERVER_ERROR);
     }
   }
 );

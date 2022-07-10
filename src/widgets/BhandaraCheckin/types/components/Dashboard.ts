@@ -1,5 +1,6 @@
 export interface DashboardStateProps {
   password?: string;
+  total?: number;
 }
 
 export interface DashboardDispatchProps {
