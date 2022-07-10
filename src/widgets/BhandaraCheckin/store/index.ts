@@ -14,6 +14,7 @@ import {
   modeReducer,
   updateDetailsReducer,
   envReducer,
+  dashboardReducer,
 } from "./slices";
 import { offlineDataReducer } from "./slices/offlineData";
 
@@ -28,6 +29,7 @@ export const rootReducer = {
   page: pageReducer,
   offlineData: offlineDataReducer,
   env: envReducer,
+  dashboard: dashboardReducer,
 };
 
 const exampleStore = configureStore({

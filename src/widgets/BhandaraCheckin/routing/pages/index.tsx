@@ -1,4 +1,5 @@
 import {
+  DashboardConnected,
   SectionCheckinSuccessConnected,
   SectionMainConnected,
   SectionUpdateDetailsConnected,
@@ -11,5 +12,6 @@ export const pages: Page = {
   UpdateDetails: SectionUpdateDetailsConnected,
   CheckInSuccess: SectionCheckinSuccessConnected,
   OfflineData: OfflineDataConnected,
+  Dashboard: DashboardConnected,
   NotFound: () => <div>404</div>,
 };

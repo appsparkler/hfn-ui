@@ -17,7 +17,10 @@ import {
 } from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
-import { OFFLINE_DATA } from "widgets/BhandaraCheckin/routing/actions/page";
+import {
+  DASHBOARD,
+  OFFLINE_DATA,
+} from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 import * as serviceWorkerRegistration from "serviceWorkerRegistration";
 import {
@@ -53,6 +56,9 @@ export const mapDispatchToProps: MapDispatchToProps<
         dispatch(mainSectionActions.disableOfflineMode());
       }
     }
+  },
+  onClickDashboard: () => {
+    dispatch(DASHBOARD());
   },
   onClickOfflineData: () => {
     dispatch(OFFLINE_DATA());

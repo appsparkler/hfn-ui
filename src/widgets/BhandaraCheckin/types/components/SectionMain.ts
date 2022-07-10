@@ -23,6 +23,7 @@ export interface SectionMainDispatchProps {
   onSwitchScanner?: (checked: boolean) => void;
   onSwitchOfflineMode?: (checked: boolean) => void;
   onClickOfflineData?: () => void;
+  onClickDashboard?: () => void;
   onMount?: () => void;
   onRefresh?: ReturnVoid;
 }

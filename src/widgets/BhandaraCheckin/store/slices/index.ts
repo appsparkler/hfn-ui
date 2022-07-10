@@ -5,3 +5,4 @@ export * from "./modeSlice";
 export * from "./barcodeScannerSlice";
 export * from "./updateDetailsSectionSlice";
 export * from "./envSlice";
+export * from "./dashboardSlice";

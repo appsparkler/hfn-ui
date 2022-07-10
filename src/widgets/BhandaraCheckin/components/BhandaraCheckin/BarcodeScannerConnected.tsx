@@ -17,7 +17,6 @@ const mapStateToProps: MapStateToProps<
   {},
   RootState
 > = ({ barcodeScanner }) => barcodeScanner;
-
 const mapDispatchToProps: MapDispatchToProps<BarcodeScannerDispatchProps, {}> =
   (dispatch) => {
     return {

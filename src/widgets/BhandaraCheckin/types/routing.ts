@@ -6,6 +6,7 @@ export enum PageEnum {
   CheckInSuccess = "CheckInSuccess",
   OfflineData = "OfflineData",
   NotFound = "NotFound",
+  Dashboard = "Dashboard",
 }
 
 export type Page = Record<

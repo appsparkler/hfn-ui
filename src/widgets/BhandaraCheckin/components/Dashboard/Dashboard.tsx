@@ -3,7 +3,7 @@ import { IconButton, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { CenterOfViewport, Horizontal } from "components";
 import { noop } from "lodash/fp";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { DashboardProps } from "widgets/BhandaraCheckin/types";
 
@@ -15,12 +15,28 @@ export const Dashboard = ({
   onReturn = noop,
 }: DashboardProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
+  const handleLogin = useCallback(() => {
     const res = prompt();
     if (res === password) {
       setIsLoggedIn(true);
+      return true;
+    } else {
+      setIsLoggedIn(false);
+      return false;
     }
   }, [password]);
+
+  const handleRefresh = useCallback(() => {
+    const isLoggedIn = handleLogin();
+    if (isLoggedIn) {
+      onRefresh();
+    }
+  }, [handleLogin, onRefresh]);
+
+  useEffect(() => {
+    const isLoggedIn = handleLogin();
+    isLoggedIn ? onMount() : noop();
+  }, [handleLogin, onMount, password]);
 
   return (
     <CenterOfViewport
@@ -40,7 +56,7 @@ export const Dashboard = ({
           <IconButton onClick={onReturn}>
             <ArrowBackIcon />
           </IconButton>
-          <IconButton onClick={onRefresh}>
+          <IconButton onClick={handleRefresh}>
             <Refresh />
           </IconButton>
         </Horizontal>

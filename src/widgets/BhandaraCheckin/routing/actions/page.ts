@@ -7,3 +7,7 @@ export const UPDATE_DETAILS = () => ({ type: "UPDATE_DETAILS" });
 export const OFFLINE_DATA = () => ({
   type: "OFFLINE_DATA",
 });
+
+export const DASHBOARD = () => ({
+  type: "DASHBOARD",
+});

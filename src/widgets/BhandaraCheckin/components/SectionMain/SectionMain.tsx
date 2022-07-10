@@ -27,6 +27,7 @@ export const SectionMain = ({
   onChange,
   onSwitchMode,
   isDarkMode,
+  onClickDashboard,
   onClickScan,
   onSwitchScanner = noop,
   onSwitchOfflineMode = noop,
@@ -152,6 +153,7 @@ export const SectionMain = ({
           <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
           <CustomMenu
             onClickOfflineData={onClickOfflineData}
+            onClickDashboard={onClickDashboard}
             onRefreshApp={onRefresh}
           />
         </Horizontal>
