@@ -1,31 +1,25 @@
 import { Refresh } from "@mui/icons-material";
-import {
-  IconButton,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { CenterOfViewport, Horizontal } from "components";
 import { noop } from "lodash/fp";
-import { useEffect, useMemo } from "react";
-import { OfflineDataProps } from "widgets/BhandaraCheckin/types/components/OfflineData";
+import { useEffect, useState } from "react";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
+import { DashboardProps } from "widgets/BhandaraCheckin/types";
 
-export const OfflineData = ({
-  data = [],
+export const Dashboard = ({
+  password = "",
   onMount = noop,
   onRefresh = noop,
   onReturn = noop,
-}: OfflineDataProps) => {
-  const hasData = useMemo(() => data.length, [data]);
+}: DashboardProps) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    onMount();
-  }, [onMount]);
+    const res = prompt();
+    if (res === password) {
+      setIsLoggedIn(true);
+    }
+  }, [password]);
 
   return (
     <CenterOfViewport
@@ -40,35 +34,28 @@ export const OfflineData = ({
         justifyContent="space-between"
         width="100%"
       >
-        <Typography variant="h5">Offline Checkins</Typography>
+        <Typography variant="h5">Dashboard</Typography>
         <Horizontal>
           <IconButton onClick={onReturn}>
             <ArrowBackIcon />
           </IconButton>
-          {hasData ? (
-            <IconButton onClick={onRefresh}>
-              <Refresh />
-            </IconButton>
-          ) : null}
+          <IconButton onClick={onRefresh}>
+            <Refresh />
+          </IconButton>
         </Horizontal>
       </Horizontal>
-      {hasData ? (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableBody>
-              {data.map(({ id, info }) => {
-                return (
-                  <TableRow key={id}>
-                    <TableCell>{info}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+      {isLoggedIn ? (
+        <>
+          <Typography align="center" variant="overline">
+            total
+          </Typography>
+          <Typography align="center" variant="h1">
+            {(24098).toLocaleString()}
+          </Typography>
+        </>
       ) : (
-        <Typography align="center" py={3}>
-          <i>All checkins are synced.</i>
+        <Typography color="warning.light">
+          <i>Please login</i>
         </Typography>
       )}
     </CenterOfViewport>

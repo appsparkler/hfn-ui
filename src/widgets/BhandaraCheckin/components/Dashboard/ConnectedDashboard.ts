@@ -1,7 +1,7 @@
 import { connect, MapStateToProps } from "react-redux";
 import { RootState } from "widgets/BhandaraCheckin/store";
 import { OfflineDataStateProps } from "widgets/BhandaraCheckin/types/components/OfflineData";
-import { OfflineData } from "./Dashboard";
+import { Dashboard } from "./Dashboard";
 import { mapOfflineDataDispatchToProps } from "widgets/BhandaraCheckin/store/actions/mapOfflineDataDispatchToProps";
 
 export const mapStateToProps: MapStateToProps<
@@ -13,4 +13,4 @@ export const mapStateToProps: MapStateToProps<
 export const OfflineDataConnected = connect(
   mapStateToProps,
   mapOfflineDataDispatchToProps
-)(OfflineData);
+)(Dashboard);

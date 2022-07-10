@@ -1,32 +1,16 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { uniqueId } from "lodash/fp";
-import { OfflineDataItem } from "widgets/BhandaraCheckin/types/components/OfflineData";
-import { OfflineData } from "./Dashboard";
+import { Dashboard } from "./Dashboard";
 
 const Story = {
-  component: OfflineData,
+  component: Dashboard,
   title: "Widgets/Bhandara Checkin/Sections/Dashboard",
-} as ComponentMeta<typeof OfflineData>;
+} as ComponentMeta<typeof Dashboard>;
 
-const Template: ComponentStory<typeof OfflineData> = (args = {}) => (
-  <OfflineData {...args} />
+const Template: ComponentStory<typeof Dashboard> = (args = {}) => (
+  <Dashboard {...args} />
 );
 
-export const offlineData: ComponentStory<typeof OfflineData> = Template.bind(
-  {}
-);
-offlineData.args = {
-  data: [createData("INAAAE393"), createData("Aakash Shah, +917338080855")],
-};
-
-export const withoutData: ComponentStory<typeof OfflineData> = Template.bind(
-  {}
-);
-withoutData.args = {
-  data: [],
-};
+export const dashboard: ComponentStory<typeof Dashboard> = Template.bind({});
+dashboard.args = {};
 
 export default Story;
-function createData(info: string): OfflineDataItem {
-  return { id: uniqueId("offline-checkin-data"), info };
-}
