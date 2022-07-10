@@ -1,7 +1,7 @@
 import { SvgIconTypeMap } from "@mui/material";
 import { CellTower } from "@mui/icons-material";
 import React, { useEffect, useMemo, useState } from "react";
-export const AppStatusIndicator = () => {
+export const AppStatusIndicator = (props: SvgIconTypeMap["props"]) => {
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const AppStatusIndicator = () => {
   );
   return (
     <>
-      <CellTower color={iconColor} />
+      <CellTower color={iconColor} {...props} />
     </>
   );
 };

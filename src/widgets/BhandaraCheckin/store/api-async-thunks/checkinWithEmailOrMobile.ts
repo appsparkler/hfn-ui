@@ -9,7 +9,7 @@ export const checkinWithEmailOrMobile = createAsyncThunk<
   ThunkApiConfig
 >(
   "api/checkinWithEmailOrMobile",
-  async (
+  (
     userDetails,
     {
       extra: {
@@ -20,7 +20,7 @@ export const checkinWithEmailOrMobile = createAsyncThunk<
     }
   ) => {
     try {
-      const checkInSuccess = await checkinWithEmailOrMobile(userDetails);
+      const checkInSuccess = checkinWithEmailOrMobile(userDetails);
       if (checkInSuccess) {
         return fulfillWithValue(true);
       }

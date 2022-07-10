@@ -6,12 +6,16 @@ const Story = {
   title: "Components/AppStatusIndicator",
 } as ComponentMeta<typeof AppStatusIndicator>;
 
-const Template: ComponentStory<typeof AppStatusIndicator> = () => (
-  <AppStatusIndicator />
+const Template: ComponentStory<typeof AppStatusIndicator> = (args) => (
+  <AppStatusIndicator {...args} />
 );
 
 export const appStatusIndicator: ComponentStory<typeof AppStatusIndicator> =
   Template.bind({});
-appStatusIndicator.args = {};
+appStatusIndicator.args = {
+  sx: {
+    fontSize: 30,
+  },
+};
 
 export default Story;

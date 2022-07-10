@@ -8,7 +8,7 @@ export const checkinWithAbhyasiId = createAsyncThunk<
   ThunkApiConfig
 >(
   "api/checkinWithAbhyasiId",
-  async (
+  (
     abhyasiId,
     {
       extra: {
@@ -19,7 +19,7 @@ export const checkinWithAbhyasiId = createAsyncThunk<
     }
   ) => {
     try {
-      const checkInSuccess = await checkinAbhyasi(abhyasiId);
+      const checkInSuccess = checkinAbhyasi(abhyasiId);
       if (checkInSuccess) {
         return fulfillWithValue(true);
       }

@@ -51,8 +51,11 @@ export const Dashboard = ({
         justifyContent="space-between"
         width="100%"
       >
-        <Typography variant="h5">Dashboard</Typography>
-        <Horizontal>
+        <Typography variant="h5" justifyContent={"center"} display="flex">
+          <IconButton size="small"></IconButton>
+          <span>Dashboard</span>
+        </Typography>
+        <Horizontal alignItems={"center"}>
           <IconButton onClick={onReturn}>
             <ArrowBackIcon />
           </IconButton>

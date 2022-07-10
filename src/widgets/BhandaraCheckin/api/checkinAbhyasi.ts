@@ -5,15 +5,12 @@ import { addDoc } from "firebase/firestore";
 
 let checkedInAbhyasis: string[] = [];
 
-export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      checkedInAbhyasis.push(abhyasiId);
-      resolve(true);
-    }, 1000);
-  });
+export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
+  checkedInAbhyasis.push(abhyasiId);
+  return true;
+};
 
-export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
+export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
   try {
     const data = {
       abhyasiId,
@@ -25,7 +22,6 @@ export const checkinAbhyasi: CheckinAbhyasiApi = async (abhyasiId) => {
     addDoc(checkinsCollection, data);
     return true;
   } catch (e) {
-    console.error("Error adding document: ", e);
-    return false;
+    throw new Error("Server Error: Abhyasi ID Checkin");
   }
 };

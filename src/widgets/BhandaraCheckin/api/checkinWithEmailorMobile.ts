@@ -11,15 +11,12 @@ const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
 export const mockedCheckinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
   userDetails
-) =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      checkedInEmailOreMobileUsers.push(userDetails);
-      resolve(true);
-    }, 1000);
-  });
+) => {
+  checkedInEmailOreMobileUsers.push(userDetails);
+  return true;
+};
 
-export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = async (
+export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
   attendee
 ) => {
   try {
@@ -31,7 +28,6 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = async (
     });
     return true;
   } catch (e) {
-    console.error("Error adding document: ", e);
-    return false;
+    throw new Error("Server Error: Email/Mobile Checkin");
   }
 };

@@ -1,11 +1,11 @@
 import { AbhyasiCheckinData, CheckinEmailOrMobileUserDetails } from "./index";
 
 export interface CheckinWithEmailOrMobileApi {
-  (userDetails: CheckinEmailOrMobileUserDetails): Promise<boolean>;
+  (userDetails: CheckinEmailOrMobileUserDetails): boolean;
 }
 
 export interface CheckinAbhyasiApi {
-  (abhyasiId: string): Promise<boolean>;
+  (abhyasiId: string): boolean;
 }
 
 export type OfflineCacheData =

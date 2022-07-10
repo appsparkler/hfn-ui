@@ -23,11 +23,7 @@ import {
 } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 import * as serviceWorkerRegistration from "serviceWorkerRegistration";
-import {
-  errorAbhyasiAlreadyCheckedin,
-  isLocalDevEnv,
-  isOfflineMode,
-} from "widgets/BhandaraCheckin/utils";
+import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import {
   turnOffOfflineMode,
@@ -46,17 +42,7 @@ export const mapDispatchToProps: MapDispatchToProps<
     serviceWorkerRegistration.register();
     window.location.reload();
   },
-  onMount: async () => {
-    if (isLocalDevEnv()) {
-      if (isOfflineMode()) {
-        await turnOnOfflineMode();
-        dispatch(mainSectionActions.enableOfflineMode());
-      } else {
-        await turnOffOfflineMode();
-        dispatch(mainSectionActions.disableOfflineMode());
-      }
-    }
-  },
+  onMount: async () => {},
   onClickDashboard: () => {
     dispatch(DASHBOARD());
   },
