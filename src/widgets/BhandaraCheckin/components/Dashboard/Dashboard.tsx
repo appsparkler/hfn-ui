@@ -16,7 +16,7 @@ export const Dashboard = ({
 }: DashboardProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = useCallback(() => {
-    const res = prompt();
+    const res = prompt("Please enter password:");
     if (res === password) {
       setIsLoggedIn(true);
       return true;
