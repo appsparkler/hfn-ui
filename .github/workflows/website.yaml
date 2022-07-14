@@ -84,17 +84,9 @@ jobs:
           yarn deploy
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
-          REACT_APP_EVENT_ID: ${{ secrets.REACT_APP_EVENT_ID }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_API_VERSION: ${{ secrets.REACT_APP_API_VERSION }}
-          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
-          REACT_APP_CLIENT_SECRET: ${{ secrets.REACT_APP_CLIENT_SECRET }}
-          REACT_APP_GRANT_TYPE: ${{ secrets.REACT_APP_GRANT_TYPE }}
-          REACT_APP_ACCESS_TOKEN: ${{ secrets.REACT_APP_ACCESS_TOKEN }}
+          REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
+          REACT_APP_FIREBASE: ${{ secrets.REACT_APP_FIREBASE }}
+          REACT_APP_DASHBOARD_PASSWORD: ${{ secrets.REACT_APP_DASHBOARD_PASSWORD }}
 
           # CI-CD
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-
-          # UNIQUE to DEV
-          REACT_APP_USER_NAME: ${{ secrets.REACT_APP_USER_NAME }}
-          REACT_APP_USER_PASSWORD: ${{ secrets.REACT_APP_USER_PASSWORD }}
