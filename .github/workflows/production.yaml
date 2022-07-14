@@ -1,7 +1,7 @@
-name: "CI: website"
+name: "CI: production-website"
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -43,8 +43,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: development
-      url: http://github.com
+      name: production
+      url: http://hfn-checkin.netlify.app
     strategy:
       matrix:
         node-version: [16.14]
@@ -67,9 +67,6 @@ jobs:
           key: yarn-cache-${{ hashFiles('./yarn.lock') }}
           restore-keys: |
             yarn-cache-${{ hashFiles('./yarn.lock') }}
-      # - name: Install Netlify CLI
-      #   run: |
-      #     yarn global add netlify-cli
       - name: Install dependencies
         run: |
           yarn install --immutable
@@ -81,7 +78,7 @@ jobs:
           yarn run lint --max-warnings 0
       - name: Build & Deploy Website
         run: |
-          yarn deploy
+          yarn deploy --prod
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
