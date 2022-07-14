@@ -5,5 +5,15 @@ export enum ENVS {
 }
 
 export interface Env {
-  ENV: ENVS;
+  ENV?: ENVS;
+  DASHBOARD_PASSWORD?: string;
+  FIREBASE: {
+    apiKey: string;
+    authDomain: string;
+    projectId: string;
+    storageBucket: string;
+    messagingSenderId: string;
+    appId: string;
+    measurementId: string;
+  };
 }

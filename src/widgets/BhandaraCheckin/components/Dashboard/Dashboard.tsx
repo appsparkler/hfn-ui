@@ -67,7 +67,7 @@ export const Dashboard = ({
       {isLoggedIn ? (
         <>
           <Typography align="center" variant="overline">
-            total
+            total checkins
           </Typography>
           <Typography align="center" variant="h1">
             {total.toLocaleString()}
