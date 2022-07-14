@@ -6,6 +6,7 @@ const routesMap: RoutesMap = {
   CHECKIN_SUCCESS: "/check-in-success",
   OFFLINE_DATA: "/offline-data",
   DASHBOARD: "/dashboard",
+  REFRESH_APP: "/refresh-app",
 };
 
 export const {

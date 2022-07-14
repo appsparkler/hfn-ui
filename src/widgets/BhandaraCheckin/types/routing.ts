@@ -7,6 +7,7 @@ export enum PageEnum {
   OfflineData = "OfflineData",
   NotFound = "NotFound",
   Dashboard = "Dashboard",
+  RefreshApp = "RefreshApp",
 }
 
 export type Page = Record<

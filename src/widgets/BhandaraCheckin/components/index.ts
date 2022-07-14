@@ -3,3 +3,4 @@ export { SectionUpdateDetailsConnected } from "./SectionUpdateDetails/SectionUpd
 export { SectionMainConnected } from "./SectionMain/SectionMainConnected";
 export { OfflineDataConnected } from "./OfflineData";
 export { DashboardConnected } from "./Dashboard";
+export { ConnectedRefreshApp } from "./RefreshApp";

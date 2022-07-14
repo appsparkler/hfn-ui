@@ -11,3 +11,7 @@ export const OFFLINE_DATA = () => ({
 export const DASHBOARD = () => ({
   type: "DASHBOARD",
 });
+
+export const REFRESH_APP = () => ({
+  type: "REFRESH_APP",
+});
