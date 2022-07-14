@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ageGroupOptions, genderOptions, onFileOptions } from "../../constants";
-import { SectionUpdateDetailsStateProps } from "../../SectionUpdateDetails/SectionUpdateDetails";
+import { isEmail, isMobile } from "utils";
+import { ageGroupOptions, genderOptions } from "../../constants";
+import { SectionUpdateDetailsStateProps } from "../../components/SectionUpdateDetails/SectionUpdateDetails";
 
 const getInitialState = (): SectionUpdateDetailsStateProps => {
   return {
@@ -19,8 +20,17 @@ const getInitialState = (): SectionUpdateDetailsStateProps => {
         show: true,
         value: "",
       },
-      location: {
+      city: {
         show: true,
+        value: "",
+      },
+      state: {
+        show: true,
+        value: "",
+      },
+      country: {
+        show: true,
+        value: "",
       },
       ageGroup: {
         show: true,
@@ -39,12 +49,6 @@ const updateDetailsSectionSlice = createSlice({
   initialState: getInitialState(),
   reducers: {
     reset: () => getInitialState(),
-    stopProcessing: (state) => {
-      state.isProcessing = false;
-    },
-    startProcessing: (state) => {
-      state.isProcessing = true;
-    },
     setState: (
       state,
       { payload }: { payload: Partial<SectionUpdateDetailsStateProps> }
@@ -52,17 +56,44 @@ const updateDetailsSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
-    setAgeOnFileOption: (state) => {
-      state.ageGroupOptions = [...onFileOptions];
+    startProcessing: (state) => {
+      state.isProcessing = true;
+    },
+    stopProcessing: (state) => {
+      state.isProcessing = false;
     },
     setDefaultAgeOptions: (state) => {
       state.ageGroupOptions = { ...ageGroupOptions };
     },
-    setGenderOnFileOption: (state) => {
-      state.genderOptions = { ...onFileOptions };
-    },
     setDefaultGenderOptions: (state) => {
       state.genderOptions = { ...genderOptions };
+    },
+    prepare: (state, { payload }: { payload: string }) => {
+      const updateDetailsInitialState = getInitialState();
+      return {
+        ...updateDetailsInitialState,
+        userDetails: {
+          ...updateDetailsInitialState.userDetails,
+          ...(isMobile(payload)
+            ? {
+                mobile: {
+                  ...updateDetailsInitialState.userDetails.mobile,
+                  disabled: true,
+                  value: payload,
+                },
+              }
+            : {}),
+          ...(isEmail(payload)
+            ? {
+                email: {
+                  ...updateDetailsInitialState.userDetails.email,
+                  disabled: true,
+                  value: payload,
+                },
+              }
+            : {}),
+        },
+      };
     },
   },
 });
@@ -70,6 +101,6 @@ const updateDetailsSectionSlice = createSlice({
 export const {
   actions: updateDetailsActions,
   reducer: updateDetailsReducer,
-  name: updateDetailsName,
+  name: updateDetailsV2Name,
   getInitialState: getUpdateDetailsSectionInitialState,
 } = updateDetailsSectionSlice;

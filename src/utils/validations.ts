@@ -19,3 +19,6 @@ export const isAbhyasiIdPermanent = (value: string): boolean =>
 
 export const isAbhyasiId = (value: string): boolean =>
   isAbhyasiIdTemp(value) || isAbhyasiIdPermanent(value);
+
+export const isMobileOrEmail = (value: string): boolean =>
+  isMobile(value) || isEmail(value);

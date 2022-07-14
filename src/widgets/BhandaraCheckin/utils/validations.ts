@@ -1,10 +1,9 @@
-import { RefinedCityStateCountryLocation } from "../../../components/LocationTextField/locations";
-import { isEmail, isMobile } from "../../../utils";
-import { UserDetails } from "../types";
+import { isEmail, isMobile } from "utils";
+import { FormUserDetails } from "widgets/BhandaraCheckin/types";
 
-export const isFieldValueValid = (
-  name: keyof UserDetails,
-  value: string | RefinedCityStateCountryLocation | undefined
+export const isFieldValueValidV2 = (
+  name: keyof FormUserDetails,
+  value: string | undefined
 ): boolean => {
   switch (name) {
     case "ageGroup":
@@ -16,8 +15,12 @@ export const isFieldValueValid = (
       return Boolean((value as string).trim());
     case "gender":
       return Boolean((value as string).trim());
-    case "location":
-      return Boolean(value);
+    case "city":
+      return Boolean((value as string).trim());
+    case "state":
+      return Boolean((value as string).trim());
+    case "country":
+      return Boolean((value as string).trim());
     case "mobile":
       if (isMobile((value as string).trim())) return true;
       return false;

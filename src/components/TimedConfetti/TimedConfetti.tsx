@@ -11,9 +11,13 @@ export const TimedConfetti = ({
   const [recycle, setRecycle] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setRecycle(false);
     }, ms);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [ms]);
 
   return (

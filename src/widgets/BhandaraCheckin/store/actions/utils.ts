@@ -1,11 +1,11 @@
 import { isEmail, isMobile } from "../../../../utils";
-import { getUpdateDetailsSectionInitialState } from "../slices/updateDetailsSectionSlice";
-import { UserDetails } from "../../types";
+import { FormUserDetails } from "../../types";
+import { getUpdateDetailsSectionInitialState } from "../slices";
 
 export const getUserDetailsForEmailOrMobile = (
   emailOrMobile: string
-): UserDetails => {
-  const defaultUserDetails: UserDetails =
+): FormUserDetails => {
+  const defaultUserDetails: FormUserDetails =
     getUpdateDetailsSectionInitialState().userDetails;
   const isEmailString = isEmail(emailOrMobile);
   const isMobileString = isMobile(emailOrMobile);

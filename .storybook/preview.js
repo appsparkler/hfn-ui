@@ -1,5 +1,4 @@
-import { Provider } from 'react-redux'
-// import { store } from '../src/store'
+import { themeSwitcher } from "./themeswitcher"
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -13,5 +12,5 @@ export const parameters = {
 }
 
 export const decorators = [
-  // (Story) => <Provider store={store}><Story /></Provider>
+  themeSwitcher
 ]

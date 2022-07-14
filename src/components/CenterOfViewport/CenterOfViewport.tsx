@@ -27,6 +27,7 @@ export const CenterOfViewport = React.forwardRef<
       }}
       justifyContent="center"
       boxSizing="border-box"
+      bgcolor='background.default'
       {...restProps}
     >
       {children}

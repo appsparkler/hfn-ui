@@ -1,23 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SectionMainStateProps } from "../../SectionMain/SectionMain";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { turnOnOfflineMode } from "widgets/BhandaraCheckin/firebase";
+import { SectionMainStateProps } from "widgets/BhandaraCheckin/types";
 
-const getInitialState = (): SectionMainStateProps => {
+export const getMainSectionInitialState = (): SectionMainStateProps => {
+  const isScannerOn = Boolean(
+    localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
+  );
+  const isOfflineMode = Boolean(
+    localStorage.getItem(LocalStorageKeys.OFFLINE_MODE)
+  );
+  if (isOfflineMode) {
+    turnOnOfflineMode();
+  }
+  const mode = localStorage.getItem(LocalStorageKeys.MODE);
+  const isDarkMode = mode === "dark";
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
     error: false,
     isProcessing: false,
+    isDarkMode,
+    isScannerOn,
+    scanBtnDisabled: !isScannerOn,
+    scanBtnProcessing: false,
+    isOfflineMode,
   };
 };
 
 const mainSectionSlice = createSlice({
   name: "main-section",
-  initialState: getInitialState(),
+  initialState: getMainSectionInitialState(),
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
     },
-    reset: () => getInitialState(),
+    setDarkMode: (state) => {
+      state.isDarkMode = true;
+    },
+    setLightMode: (state) => {
+      state.isDarkMode = false;
+    },
+    reset: () => getMainSectionInitialState(),
     setError: (state, { payload }: { payload: string }) => {
       state.helperText = payload;
       state.error = true;
@@ -26,8 +50,27 @@ const mainSectionSlice = createSlice({
     stopProcessing: (state) => {
       state.isProcessing = false;
     },
+    resetError: (state) => {
+      const initialState = getMainSectionInitialState();
+      state.error = false;
+      state.helperText = initialState.helperText;
+    },
     startProcessing: (state) => {
       state.isProcessing = true;
+    },
+    turnOnScanner: (state) => {
+      state.isScannerOn = true;
+      state.scanBtnDisabled = false;
+    },
+    turnOffScanner: (state) => {
+      state.isScannerOn = false;
+      state.scanBtnDisabled = true;
+    },
+    startProcessingScanButton: (state) => {
+      state.scanBtnProcessing = true;
+    },
+    stopProcessingScanButton: (state) => {
+      state.scanBtnProcessing = false;
     },
     setState: (
       state,
@@ -36,6 +79,12 @@ const mainSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
+    enableOfflineMode: (state) => {
+      state.isOfflineMode = true;
+    },
+    disableOfflineMode: (state) => {
+      state.isOfflineMode = false;
+    },
   },
 });
 
@@ -43,5 +92,5 @@ export const {
   actions: mainSectionActions,
   reducer: mainSectionReducer,
   name: mainSectionName,
-  getInitialState: getMainSectionInitialState,
+  // getInitialState: getMainSectionInitialState,
 } = mainSectionSlice;
