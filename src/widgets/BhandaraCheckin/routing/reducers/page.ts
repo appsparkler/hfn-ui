@@ -7,6 +7,7 @@ const actionTypeToComponentsMap: Record<string, PageEnum> = {
   CHECKIN_SUCCESS: PageEnum.CheckInSuccess,
   OFFLINE_DATA: PageEnum.OfflineData,
   DASHBOARD: PageEnum.Dashboard,
+  REFRESH_APP: PageEnum.RefreshApp,
   [NOT_FOUND]: PageEnum.NotFound,
 };
 

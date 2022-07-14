@@ -20,9 +20,9 @@ import { pageActions } from "widgets/BhandaraCheckin/routing";
 import {
   DASHBOARD,
   OFFLINE_DATA,
+  REFRESH_APP,
 } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
-import * as serviceWorkerRegistration from "serviceWorkerRegistration";
 import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import {
@@ -35,12 +35,7 @@ export const mapDispatchToProps: MapDispatchToProps<
   {}
 > = (dispatch) => ({
   onRefresh: async () => {
-    const registrations = await navigator.serviceWorker.getRegistrations();
-    registrations.forEach((registration) => {
-      registration.unregister();
-    });
-    serviceWorkerRegistration.register();
-    window.location.reload();
+    dispatch(REFRESH_APP());
   },
   onMount: async () => {},
   onClickDashboard: () => {
