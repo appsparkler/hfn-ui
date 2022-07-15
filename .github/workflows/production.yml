@@ -1,0 +1,89 @@
+name: "CI: production-website"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # lint-typecheck-test:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.14]
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+
+  #     - name: Get yarn cache directory path
+  #       id: yarn-cache-dir-path
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
+
+  #     - uses: actions/cache@v1
+  #       id: yarn-cache
+  #       with:
+  #         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: yarn-cache-${{ hashFiles('./yarn.lock') }}
+  #         restore-keys: |
+  #           yarn-cache-${{ hashFiles('./yarn.lock') }}
+  #     - name: Install dependencies
+  #       run: |
+  #         yarn install --immutable
+  #     - name: Run typecheck
+  #       run: |
+  #         yarn run typecheck
+  #     - name: Run linter
+  #       run: |
+  #         yarn run lint --max-warnings 0
+
+  build:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: http://hfn-checkin.netlify.app
+    strategy:
+      matrix:
+        node-version: [16.14]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-${{ hashFiles('./yarn.lock') }}
+          restore-keys: |
+            yarn-cache-${{ hashFiles('./yarn.lock') }}
+      - name: Install dependencies
+        run: |
+          yarn install --immutable
+      - name: Run typecheck
+        run: |
+          yarn run typecheck
+      - name: Run linter
+        run: |
+          yarn run lint --max-warnings 0
+      - name: Build & Deploy Website
+        run: |
+          yarn deploy --prod
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
+          REACT_APP_FIREBASE: ${{ secrets.REACT_APP_FIREBASE }}
+          REACT_APP_DASHBOARD_PASSWORD: ${{ secrets.REACT_APP_DASHBOARD_PASSWORD }}
+
+          # CI-CD
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
