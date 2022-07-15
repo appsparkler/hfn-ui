@@ -1,4 +1,4 @@
-name: "CI: dev-website"
+name: "CI:website"
 
 on:
   pull_request:
