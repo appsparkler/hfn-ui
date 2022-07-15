@@ -2,8 +2,7 @@ name: "CI: website"
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   # lint-typecheck-test:
