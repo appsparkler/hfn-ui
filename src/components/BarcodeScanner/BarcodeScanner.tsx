@@ -3,9 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 
 export type BarcodeScannerDispatchProps = {
   onMount: (videoRef: React.MutableRefObject<HTMLVideoElement | null>) => void;
-  onScan: (value: string) => void;
   onCancel: () => void;
-  onPlayVideo: () => void;
 };
 
 export type BarcodeScannerStateProps = {
@@ -19,7 +17,6 @@ export const BarcodeScanner = ({
   show,
   onMount,
   onCancel,
-  onScan,
 }: BarcodeScannerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const topBottomPosition = useMemo<number>(() => (show ? 0 : 10000), [show]);
