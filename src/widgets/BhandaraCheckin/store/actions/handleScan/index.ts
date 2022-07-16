@@ -1,6 +1,6 @@
 import { AnyAction, Dispatch } from "redux";
 import { isAbhyasiId } from "utils";
-import { barcodeScannerActions, mainSectionActions } from "../../slices";
+import { barcodeScannerV0Actions, mainSectionActions } from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
 
 export const handleScan =
@@ -9,7 +9,7 @@ export const handleScan =
     const $isAbhyasiId = isAbhyasiId(refinedValue);
     if ($isAbhyasiId) {
       dispatch(mainSectionActions.setValue(refinedValue));
-      dispatch(barcodeScannerActions.hide());
+      dispatch(barcodeScannerV0Actions.hide());
       checkinAbhyasi(dispatch, refinedValue);
     }
   };
