@@ -9,3 +9,4 @@ export * from "./ModeSwitch";
 export * from "./ModeProvider";
 export * from "./BarcodeScannerV0";
 export * from "./AppStatusIndicator";
+export * from "./BarcodeScanner";
