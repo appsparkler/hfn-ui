@@ -1,7 +1,16 @@
-import { AnyAction, Dispatch } from "redux";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { mainSectionActions } from "../../slices";
 
-export const handleMountScanner = () => (dispatch: Dispatch<AnyAction>) => {
-  dispatch(mainSectionActions.startProcessingScanButton());
-  dispatch(mainSectionActions.turnOnScanner());
-};
+export const handleMountScanner = createAsyncThunk(
+  "handleMountScanner",
+  async (_, { dispatch }) => {
+    try {
+      dispatch(mainSectionActions.startProcessingScanButton());
+      dispatch(mainSectionActions.turnOnScanner());
+      await navigator.mediaDevices.getUserMedia({ video: true });
+    } catch (error) {
+      dispatch(mainSectionActions.stopProcessingScanButton());
+      dispatch(mainSectionActions.turnOffScanner());
+    }
+  }
+);
