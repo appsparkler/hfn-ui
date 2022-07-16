@@ -81,7 +81,7 @@ export const mapDispatchToProps: MapDispatchToProps<
       setLightMode(dispatch);
     }
   },
-  onSwitchScanner: (checked) => handleSwitchScanner(checked)(dispatch),
+  onSwitchScanner: (checked) => dispatch<any>(handleSwitchScanner(checked)),
 });
 
 function setLightMode(dispatch: Dispatch<Action<any>>) {
