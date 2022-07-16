@@ -29,7 +29,6 @@ import {
   turnOffOfflineMode,
   turnOnOfflineMode,
 } from "widgets/BhandaraCheckin/firebase";
-import { AsyncThunkAction } from "@reduxjs/toolkit";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
