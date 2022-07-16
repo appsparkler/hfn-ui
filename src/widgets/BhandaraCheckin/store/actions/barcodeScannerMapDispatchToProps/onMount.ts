@@ -5,7 +5,8 @@ import {
   setScannerOnKey,
 } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
-import { mainSectionActions } from "../..";
+import { mainSectionActions, snackbarActions } from "../..";
+import { handleScan } from "../handleScan";
 
 export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
   "onMountBarcodeScanner",
@@ -26,12 +27,17 @@ export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
       }, 300);
       codeReader.decodeFromVideoDevice("", videoEl, (result, error) => {
         if (!error) {
-          alert(result.getText());
+          dispatch(handleScan(result.toString()));
         }
       });
     } catch (e) {
       dispatch(mainSectionActions.turnOffScanner());
       dispatch(mainSectionActions.stopProcessingScanButton());
+      dispatch(
+        snackbarActions.openSnackbar({
+          children: `Scanner cannot be turned on without camera permission.  Please reset the permissions and try again.`,
+        })
+      );
       removeScannerOnKey();
     }
   }
