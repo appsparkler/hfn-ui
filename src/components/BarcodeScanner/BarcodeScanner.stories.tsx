@@ -12,7 +12,6 @@ const Template: ComponentStory<typeof BarcodeScanner> = (args) => {
     (videoRef) => {
       args.onMount(videoRef);
       if (videoRef.current) {
-        videoRef.current.autoplay = true;
         videoRef.current.controls = true;
         videoRef.current.innerHTML = `<source src = "https://www.w3schools.com/html/mov_bbb.mp4">`;
       }
