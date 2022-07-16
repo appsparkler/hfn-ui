@@ -29,6 +29,7 @@ import {
   turnOffOfflineMode,
   turnOnOfflineMode,
 } from "widgets/BhandaraCheckin/firebase";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -81,7 +82,7 @@ export const mapDispatchToProps: MapDispatchToProps<
       setLightMode(dispatch);
     }
   },
-  onSwitchScanner: (checked) => handleSwitchScanner(checked)(dispatch),
+  onSwitchScanner: (checked) => dispatch<any>(handleSwitchScanner(checked)),
 });
 
 function setLightMode(dispatch: Dispatch<Action<any>>) {
