@@ -3,7 +3,7 @@ import {
   BarcodeScanner,
   BarcodeScannerDispatchProps,
   BarcodeScannerStateProps,
-} from "components/BarcodeScanner/BarcodeScanner";
+} from "components/BarcodeScannerV0/BarcodeScanner";
 import {
   RootState,
   handleMountScanner,
