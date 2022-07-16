@@ -27,6 +27,7 @@ export const handleSwitchScanner = createAsyncThunk<
             "Scanner cannot be turned on without camera permisson. Please reset the permissions and try again.",
         })
       );
+      dispatch(mainSectionActions.stopProcessingScanButton());
       dispatch(mainSectionActions.turnOffScanner());
     }
   }
