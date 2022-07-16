@@ -18,7 +18,7 @@ export type BarcodeScannerStateProps = {
 export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
-export const BarcodeScanner = ({
+export const BarcodeScannerV0 = ({
   show,
   onMount,
   onPlayVideo,
