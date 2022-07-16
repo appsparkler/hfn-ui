@@ -4,19 +4,19 @@ import {
 } from "@zxing/library/esm";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-export type BarcodeScannerDispatchProps = {
+export type BarcodeScannerV0DispatchProps = {
   onMount: () => void;
   onScan: (value: string) => void;
   onCancel: () => void;
   onPlayVideo: () => void;
 };
 
-export type BarcodeScannerStateProps = {
+export type BarcodeScannerV0StateProps = {
   show?: boolean;
 };
 
-export type BarcodeScannerProps = BarcodeScannerStateProps &
-  BarcodeScannerDispatchProps;
+export type BarcodeScannerV0Props = BarcodeScannerV0StateProps &
+  BarcodeScannerV0DispatchProps;
 
 export const BarcodeScannerV0 = ({
   show,
@@ -24,7 +24,7 @@ export const BarcodeScannerV0 = ({
   onPlayVideo,
   onCancel,
   onScan,
-}: BarcodeScannerProps) => {
+}: BarcodeScannerV0Props) => {
   // const [devices, setDevices] = useState<VideoInputDevice[]>([]);
   const videoRef = useRef(null);
   const codeReader = useMemo(() => new BrowserBarcodeReader(), []);
