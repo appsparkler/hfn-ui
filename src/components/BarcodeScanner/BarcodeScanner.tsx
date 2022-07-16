@@ -1,8 +1,5 @@
 import { Box, Button /**SelectProps */ } from "@mui/material";
-import {
-  /**VideoInputDevice, */ BrowserBarcodeReader,
-} from "@zxing/library/esm";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 export type BarcodeScannerDispatchProps = {
   onMount: (videoRef: React.MutableRefObject<HTMLVideoElement | null>) => void;
