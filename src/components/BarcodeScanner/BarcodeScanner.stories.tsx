@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { BrowserBarcodeReader } from "@zxing/library";
 import { useCallback } from "react";
 import { BarcodeScanner, BarcodeScannerProps } from "./BarcodeScanner";
 
@@ -9,12 +10,36 @@ export default {
 
 const Template: ComponentStory<typeof BarcodeScanner> = (args) => {
   const handleMount = useCallback<BarcodeScannerProps["onMount"]>(
-    (videoRef) => {
-      args.onMount(videoRef);
-      if (videoRef.current) {
-        videoRef.current.controls = true;
-        videoRef.current.innerHTML = `<source src = "https://www.w3schools.com/html/mov_bbb.mp4">`;
+    async (videoRef) => {
+      try {
+        await navigator.mediaDevices.getUserMedia({ video: true });
+        if (videoRef.current) {
+          const codeReader = new BrowserBarcodeReader();
+          const intervalId = setInterval(() => {
+            if (videoRef.current) {
+              const isVideoPlaying = codeReader.isVideoPlaying(
+                videoRef.current
+              );
+              if (isVideoPlaying) {
+                clearInterval(intervalId);
+                alert("video has started playing");
+              }
+            }
+          }, 300);
+          codeReader.decodeFromVideoDevice(
+            "",
+            videoRef.current,
+            (result, error) => {
+              if (!error) {
+                alert(result.getText());
+              }
+            }
+          );
+        }
+      } catch (e) {
+        alert("lets turn off the scanner as user has not given permission");
       }
+      args.onMount(videoRef);
     },
     [args]
   );
