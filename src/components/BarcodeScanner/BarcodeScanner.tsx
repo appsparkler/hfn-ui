@@ -30,7 +30,9 @@ export const BarcodeScanner = ({
 
   useEffect(() => {
     onMount(videoRef);
-    return () => onUnmount();
+    return () => {
+      onUnmount();
+    };
   }, [onMount, onUnmount]);
 
   return (
