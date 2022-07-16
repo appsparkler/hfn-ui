@@ -1,6 +1,6 @@
 import { AnyAction, Dispatch } from "redux";
-import { barcodeScannerActions } from "../../slices";
+import { codeReader } from "widgets/BhandaraCheckin/constants";
 
 export const onUnmount = (dispatch: Dispatch<AnyAction>) => {
-  dispatch(barcodeScannerActions.usetCodeReader());
+  codeReader.reset();
 };
