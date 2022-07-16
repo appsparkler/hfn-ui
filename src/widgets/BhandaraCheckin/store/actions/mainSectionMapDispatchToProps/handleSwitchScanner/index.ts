@@ -1,8 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  LocalStorageKeys,
-  removeScannerOnKey,
-} from "widgets/BhandaraCheckin/constants";
+import { removeScannerOnKey } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 import { bhandaraCheckinActions, mainSectionActions } from "../../../slices";
 
