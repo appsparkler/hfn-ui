@@ -1,6 +1,6 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import {
-  BarcodeScanner,
+  BarcodeScannerV0,
   BarcodeScannerDispatchProps,
   BarcodeScannerStateProps,
 } from "components/BarcodeScannerV0/BarcodeScanner";
@@ -30,4 +30,4 @@ const mapDispatchToProps: MapDispatchToProps<BarcodeScannerDispatchProps, {}> =
 export const BarcodeScannerConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(BarcodeScanner);
+)(BarcodeScannerV0);
