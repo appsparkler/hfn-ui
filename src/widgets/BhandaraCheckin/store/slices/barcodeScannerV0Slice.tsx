@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BarcodeScannerV0StateProps } from "components";
 
-export const barcodeScannerSlice = createSlice({
+const barcodeScannerV0Slice = createSlice({
   name: "barcodeScanner",
   initialState: {
     show: false,
@@ -21,4 +21,4 @@ export const {
   reducer: barcodeScannerV0Reducer,
   getInitialState: getBarcodeScannerV0InitialState,
   name: barcodeScannerV0Name,
-} = barcodeScannerSlice;
+} = barcodeScannerV0Slice;
