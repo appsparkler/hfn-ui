@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { BrowserMultiFormatReader } from "@zxing/library";
 import {
-  codeReader,
+  ErrorCodes,
   removeScannerOnKey,
   setScannerOnKey,
 } from "widgets/BhandaraCheckin/constants";
@@ -12,9 +13,9 @@ import {
 } from "../..";
 import { handleScan } from "../handleScan";
 
-export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
+export const onMount = createAsyncThunk<any, HTMLVideoElement, ThunkApiConfig>(
   "onMountBarcodeScanner",
-  async (videoEl, { dispatch }) => {
+  async (videoEl, { dispatch, rejectWithValue, fulfillWithValue }) => {
     try {
       dispatch(mainSectionActions.turnOnScanner());
       dispatch(mainSectionActions.startProcessingScanButton());
@@ -29,11 +30,13 @@ export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
           }
         }
       }, 300);
+      const codeReader = new BrowserMultiFormatReader();
       codeReader.decodeFromVideoDevice("", videoEl, (result, error) => {
         if (!error) {
           dispatch(handleScan(result.toString()));
         }
       });
+      return fulfillWithValue(codeReader);
     } catch (e) {
       dispatch(mainSectionActions.turnOffScanner());
       dispatch(mainSectionActions.stopProcessingScanButton());
@@ -44,6 +47,7 @@ export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
       );
       removeScannerOnKey();
       dispatch(bhandaraCheckinActions.unmountScanner());
+      return rejectWithValue(ErrorCodes.CAMERA_PERMISSION_DENIED);
     }
   }
 );

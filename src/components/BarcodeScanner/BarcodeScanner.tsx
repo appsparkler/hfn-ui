@@ -1,16 +1,18 @@
 import { Box, Button /**SelectProps */ } from "@mui/material";
-import { useEffect, useMemo, useRef } from "react";
+import { BrowserMultiFormatReader } from "@zxing/library";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export type BarcodeScannerDispatchProps = {
-  onMount: (videoRef: React.MutableRefObject<HTMLVideoElement | null>) => void;
+  onMount: (
+    videoRef: React.MutableRefObject<HTMLVideoElement | null>
+  ) => Promise<BrowserMultiFormatReader | null>;
   onCancel: () => void;
-  onUnmount: () => void;
+  onUnmount: (codeReader: BrowserMultiFormatReader | null) => void;
 };
 
 export type BarcodeScannerStateProps = {
   show?: boolean;
 };
-
 export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
@@ -20,6 +22,7 @@ export const BarcodeScanner = ({
   onUnmount,
   onCancel,
 }: BarcodeScannerProps) => {
+  const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader>();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const topBottomPosition = useMemo<number>(() => (show ? 0 : 10000), [show]);
 
@@ -29,11 +32,17 @@ export const BarcodeScanner = ({
   );
 
   useEffect(() => {
-    onMount(videoRef);
+    onMount(videoRef).then((codeReader) => {
+      if (codeReader) {
+        setCodeReader(codeReader);
+      }
+    });
     return () => {
-      onUnmount();
+      if (codeReader) {
+        codeReader.reset();
+      }
     };
-  }, [onMount, onUnmount]);
+  }, [codeReader, onMount]);
 
   return (
     <Box
