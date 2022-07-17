@@ -2,7 +2,6 @@ export { handleChangeCheckinWithValue } from "./handleChangeCheckinWithValue";
 export { resetAppState } from "./resetAppState";
 export { handleSwitchMode } from "./handleSwitchMode";
 export { handleSwitchScanner } from "./mainSectionMapDispatchToProps/handleSwitchScanner";
-export { handleMountScanner } from "./handleMountScanner";
 export { handleClickScan } from "./handleClickScan";
 export { handleClickScannerCancel } from "./handleClickScannerCancel";
 export { handlePlayScannerVideo } from "./handlePlayScannerVideo";

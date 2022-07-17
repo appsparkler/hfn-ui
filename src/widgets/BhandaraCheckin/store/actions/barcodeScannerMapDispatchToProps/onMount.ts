@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { BrowserMultiFormatReader } from "@zxing/library";
 import {
-  codeReader,
   removeScannerOnKey,
   setScannerOnKey,
 } from "widgets/BhandaraCheckin/constants";
@@ -12,14 +12,26 @@ import {
 } from "../..";
 import { handleScan } from "../handleScan";
 
-export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
+export const onMount = createAsyncThunk<
+  any,
+  {
+    videoEl: HTMLVideoElement;
+    codeReader: BrowserMultiFormatReader;
+  },
+  ThunkApiConfig
+>(
   "onMountBarcodeScanner",
-  async (videoEl, { dispatch }) => {
+  async (
+    { videoEl, codeReader },
+    { dispatch, rejectWithValue, fulfillWithValue }
+  ) => {
     try {
       dispatch(mainSectionActions.turnOnScanner());
       dispatch(mainSectionActions.startProcessingScanButton());
-      await navigator.mediaDevices.getUserMedia({ video: true });
-      setScannerOnKey();
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach((track) => {
+        track.stop();
+      });
       const intervalId = setInterval(() => {
         if (videoEl) {
           const isVideoPlaying = codeReader.isVideoPlaying(videoEl);
@@ -29,17 +41,21 @@ export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
           }
         }
       }, 300);
-      codeReader.decodeFromVideoDevice("", videoEl, (result, error) => {
+      codeReader.decodeFromVideoDevice(null, videoEl, (result, error) => {
         if (!error) {
           dispatch(handleScan(result.toString()));
         }
       });
+      setScannerOnKey();
     } catch (e) {
+      const err = e as Error;
       dispatch(mainSectionActions.turnOffScanner());
       dispatch(mainSectionActions.stopProcessingScanButton());
       dispatch(
         snackbarActions.openSnackbar({
-          children: `Scanner cannot be turned on without camera permission.  Please reset the permissions and try again.`,
+          children:
+            err.message ||
+            `Scanner cannot be turned on without camera permission.  Please reset the permissions and try again.`,
         })
       );
       removeScannerOnKey();
