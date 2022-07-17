@@ -4,10 +4,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export type BarcodeScannerDispatchProps = {
   onMount: (
-    videoRef: React.MutableRefObject<HTMLVideoElement | null>
-  ) => Promise<BrowserMultiFormatReader | null>;
+    videoRef: React.MutableRefObject<HTMLVideoElement | null>,
+    codeReader: BrowserMultiFormatReader
+  ) => void;
   onCancel: () => void;
-  onUnmount: (codeReader: BrowserMultiFormatReader | null) => void;
 };
 
 export type BarcodeScannerStateProps = {
@@ -19,10 +19,11 @@ export type BarcodeScannerProps = BarcodeScannerStateProps &
 export const BarcodeScanner = ({
   show,
   onMount,
-  onUnmount,
   onCancel,
 }: BarcodeScannerProps) => {
-  const [codeReader, setCodeReader] = useState<BrowserMultiFormatReader>();
+  const [codeReader] = useState<BrowserMultiFormatReader>(
+    new BrowserMultiFormatReader()
+  );
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const topBottomPosition = useMemo<number>(() => (show ? 0 : 10000), [show]);
 
@@ -32,15 +33,9 @@ export const BarcodeScanner = ({
   );
 
   useEffect(() => {
-    onMount(videoRef).then((codeReader) => {
-      if (codeReader) {
-        setCodeReader(codeReader);
-      }
-    });
+    onMount(videoRef, codeReader);
     return () => {
-      if (codeReader) {
-        codeReader.reset();
-      }
+      codeReader.reset();
     };
   }, [codeReader, onMount]);
 

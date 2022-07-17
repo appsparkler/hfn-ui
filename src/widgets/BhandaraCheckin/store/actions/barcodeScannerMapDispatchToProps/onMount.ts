@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import {
-  ErrorCodes,
   removeScannerOnKey,
   setScannerOnKey,
 } from "widgets/BhandaraCheckin/constants";
@@ -13,14 +12,23 @@ import {
 } from "../..";
 import { handleScan } from "../handleScan";
 
-export const onMount = createAsyncThunk<any, HTMLVideoElement, ThunkApiConfig>(
+export const onMount = createAsyncThunk<
+  any,
+  { videoEl: HTMLVideoElement; codeReader: BrowserMultiFormatReader },
+  ThunkApiConfig
+>(
   "onMountBarcodeScanner",
-  async (videoEl, { dispatch, rejectWithValue, fulfillWithValue }) => {
+  async (
+    { videoEl, codeReader },
+    { dispatch, rejectWithValue, fulfillWithValue }
+  ) => {
     try {
       dispatch(mainSectionActions.turnOnScanner());
       dispatch(mainSectionActions.startProcessingScanButton());
-      await navigator.mediaDevices.getUserMedia({ video: true });
-      setScannerOnKey();
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach((track) => {
+        track.stop();
+      });
       const intervalId = setInterval(() => {
         if (videoEl) {
           const isVideoPlaying = codeReader.isVideoPlaying(videoEl);
@@ -30,12 +38,12 @@ export const onMount = createAsyncThunk<any, HTMLVideoElement, ThunkApiConfig>(
           }
         }
       }, 300);
-      const codeReader = new BrowserMultiFormatReader();
-      codeReader.decodeFromVideoDevice("", videoEl, (result, error) => {
+      codeReader.decodeFromVideoDevice(null, videoEl, (result, error) => {
         if (!error) {
           dispatch(handleScan(result.toString()));
         }
       });
+      setScannerOnKey();
       return fulfillWithValue(codeReader);
     } catch (e) {
       dispatch(mainSectionActions.turnOffScanner());
@@ -47,7 +55,6 @@ export const onMount = createAsyncThunk<any, HTMLVideoElement, ThunkApiConfig>(
       );
       removeScannerOnKey();
       dispatch(bhandaraCheckinActions.unmountScanner());
-      return rejectWithValue(ErrorCodes.CAMERA_PERMISSION_DENIED);
     }
   }
 );

@@ -11,10 +11,11 @@ export const barcodeScannerMapDispatchtToProps: MapDispatchToProps<
 > = (dispatch) => {
   return {
     onCancel: () => onCancel(dispatch),
-    onMount: async (videoRef) => {
-      // videoRef.current ? await dispatch<any>(onMount(videoRef.current)) : noop;
+    onMount: async (videoRef, codeReader) => {
       if (videoRef.current) {
-        const res = await dispatch<any>(onMount(videoRef.current));
+        const res = await dispatch<any>(
+          onMount({ videoEl: videoRef.current, codeReader })
+        );
         if (!isRejectedWithValue(onMount)) {
           return res.payload as BrowserMultiFormatReader;
         } else {
@@ -23,6 +24,5 @@ export const barcodeScannerMapDispatchtToProps: MapDispatchToProps<
       }
       return null;
     },
-    onUnmount: () => {},
   };
 };
