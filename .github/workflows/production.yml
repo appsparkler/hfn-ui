@@ -80,6 +80,7 @@ jobs:
         run: |
           yarn deploy --prod
         env:
+          GENERATE_SOURCEMAP: false
           NODE_ENV: ${{ secrets.NODE_ENV }}
           REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
           REACT_APP_FIREBASE: ${{ secrets.REACT_APP_FIREBASE }}
