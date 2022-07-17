@@ -5,7 +5,11 @@ import {
   setScannerOnKey,
 } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
-import { mainSectionActions, snackbarActions } from "../..";
+import {
+  bhandaraCheckinActions,
+  mainSectionActions,
+  snackbarActions,
+} from "../..";
 import { handleScan } from "../handleScan";
 
 export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
@@ -39,6 +43,7 @@ export const onMount = createAsyncThunk<void, HTMLVideoElement, ThunkApiConfig>(
         })
       );
       removeScannerOnKey();
+      dispatch(bhandaraCheckinActions.unmountScanner());
     }
   }
 );
