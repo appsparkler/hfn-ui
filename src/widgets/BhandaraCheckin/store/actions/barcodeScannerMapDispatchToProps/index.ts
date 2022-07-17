@@ -1,11 +1,9 @@
 import { isRejectedWithValue } from "@reduxjs/toolkit";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { BarcodeScannerDispatchProps } from "components";
-import { noop } from "lodash";
 import { MapDispatchToProps } from "react-redux";
 import { onCancel } from "./onCancel";
 import { onMount } from "./onMount";
-import { onUnmount } from "./onUnmount";
 
 export const barcodeScannerMapDispatchtToProps: MapDispatchToProps<
   BarcodeScannerDispatchProps,
