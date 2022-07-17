@@ -47,13 +47,15 @@ export const onMount = createAsyncThunk<
         }
       });
       setScannerOnKey();
-      return fulfillWithValue(codeReader);
     } catch (e) {
+      const err = e as Error;
       dispatch(mainSectionActions.turnOffScanner());
       dispatch(mainSectionActions.stopProcessingScanButton());
       dispatch(
         snackbarActions.openSnackbar({
-          children: `Scanner cannot be turned on without camera permission.  Please reset the permissions and try again.`,
+          children:
+            err.message ||
+            `Scanner cannot be turned on without camera permission.  Please reset the permissions and try again.`,
         })
       );
       removeScannerOnKey();
