@@ -7,7 +7,7 @@ import {
   pageReducer,
 } from "widgets/BhandaraCheckin/routing";
 import {
-  barcodeScannerV0Reducer,
+  barcodeScannerReducer,
   bhandaraCheckinReducer,
   mainSectionReducer,
   snackbarReducer,
@@ -17,7 +17,6 @@ import {
   dashboardReducer,
 } from "./slices";
 import { offlineDataReducer } from "./slices/offlineData";
-import { barcodeScannerReducer } from "widgets/BhandaraCheckinV0/store";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
@@ -25,7 +24,6 @@ export const rootReducer = {
   updateDetailsV2Section: updateDetailsReducer,
   snackbar: snackbarReducer,
   mode: modeReducer,
-  barcodeScannerV0: barcodeScannerV0Reducer,
   barcodeScanner: barcodeScannerReducer,
   location: locationReducer,
   page: pageReducer,

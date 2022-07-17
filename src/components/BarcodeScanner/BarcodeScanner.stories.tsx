@@ -1,51 +1,14 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { BrowserBarcodeReader } from "@zxing/library";
-import { useCallback } from "react";
-import { BarcodeScanner, BarcodeScannerProps } from "./BarcodeScanner";
+import { BarcodeScanner } from "./BarcodeScanner";
 
 export default {
   title: "Components/Scanners/Barcode Scanner",
   component: BarcodeScanner,
 } as ComponentMeta<typeof BarcodeScanner>;
 
-const Template: ComponentStory<typeof BarcodeScanner> = (args) => {
-  const handleMount = useCallback<BarcodeScannerProps["onMount"]>(
-    async (videoRef) => {
-      try {
-        await navigator.mediaDevices.getUserMedia({ video: true });
-        if (videoRef.current) {
-          const codeReader = new BrowserBarcodeReader();
-          const intervalId = setInterval(() => {
-            if (videoRef.current) {
-              const isVideoPlaying = codeReader.isVideoPlaying(
-                videoRef.current
-              );
-              if (isVideoPlaying) {
-                clearInterval(intervalId);
-                alert("video has started playing");
-              }
-            }
-          }, 300);
-          codeReader.decodeFromVideoDevice(
-            "",
-            videoRef.current,
-            (result, error) => {
-              if (!error) {
-                alert(result.getText());
-              }
-            }
-          );
-        }
-      } catch (e) {
-        alert("lets turn off the scanner as user has not given permission");
-      }
-      args.onMount(videoRef);
-    },
-    [args]
-  );
-
-  return <BarcodeScanner {...args} onMount={handleMount} />;
-};
+const Template: ComponentStory<typeof BarcodeScanner> = (args) => (
+  <BarcodeScanner {...args} />
+);
 export const barcodeScanner = Template.bind({});
 barcodeScanner.args = {
   show: true,

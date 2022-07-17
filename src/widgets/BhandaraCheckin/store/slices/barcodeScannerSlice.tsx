@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BarcodeScannerStateProps } from "components";
 
-const barcodeScannerSlice = createSlice({
+export const barcodeScannerSlice = createSlice({
   name: "barcodeScanner",
   initialState: {
     show: false,

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { removeScannerOnKey } from "widgets/BhandaraCheckin/constants";
+import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { snackbarActions } from "widgets/BhandaraCheckinV0/store";
 import { bhandaraCheckinActions, mainSectionActions } from "../../../slices";
 
 export const handleSwitchScanner = createAsyncThunk<
@@ -11,8 +12,23 @@ export const handleSwitchScanner = createAsyncThunk<
   if (!checked) {
     dispatch(mainSectionActions.turnOffScanner());
     dispatch(bhandaraCheckinActions.unmountScanner());
-    removeScannerOnKey();
+    localStorage.removeItem(LocalStorageKeys.TURN_ON_SCANNER);
   } else {
-    dispatch(bhandaraCheckinActions.renderScanner());
+    try {
+      dispatch(mainSectionActions.startProcessingScanButton());
+      dispatch(mainSectionActions.turnOnScanner());
+      await navigator.mediaDevices.getUserMedia({ video: true });
+      dispatch(bhandaraCheckinActions.renderScanner());
+      localStorage.setItem(LocalStorageKeys.TURN_ON_SCANNER, "true");
+    } catch (e) {
+      dispatch(
+        snackbarActions.openSnackbar({
+          children:
+            "Scanner cannot be turned on without camera permisson. Please reset the permissions and try again.",
+        })
+      );
+      dispatch(mainSectionActions.stopProcessingScanButton());
+      dispatch(mainSectionActions.turnOffScanner());
+    }
   }
 });

@@ -1,7 +1,7 @@
 import { AnyAction, Dispatch } from "redux";
-import { barcodeScannerV0Actions } from "../../slices";
+import { barcodeScannerActions } from "../../slices";
 
 export const handleClickScannerCancel =
   () => (dispatch: Dispatch<AnyAction>) => {
-    dispatch(barcodeScannerV0Actions.hide());
+    dispatch(barcodeScannerActions.hide());
   };
