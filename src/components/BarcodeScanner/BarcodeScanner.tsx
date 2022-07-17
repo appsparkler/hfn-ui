@@ -1,14 +1,10 @@
 import { Box, Button /**SelectProps */ } from "@mui/material";
-import {
-  /**VideoInputDevice, */ BrowserBarcodeReader,
-} from "@zxing/library/esm";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 export type BarcodeScannerDispatchProps = {
-  onMount: () => void;
-  onScan: (value: string) => void;
+  onMount: (videoRef: React.MutableRefObject<HTMLVideoElement | null>) => void;
   onCancel: () => void;
-  onPlayVideo: () => void;
+  onUnmount: () => void;
 };
 
 export type BarcodeScannerStateProps = {
@@ -21,15 +17,10 @@ export type BarcodeScannerProps = BarcodeScannerStateProps &
 export const BarcodeScanner = ({
   show,
   onMount,
-  onPlayVideo,
+  onUnmount,
   onCancel,
-  onScan,
 }: BarcodeScannerProps) => {
-  // const [devices, setDevices] = useState<VideoInputDevice[]>([]);
-  const videoRef = useRef(null);
-  const codeReader = useMemo(() => new BrowserBarcodeReader(), []);
-  const [selectedDeviceId, setSelectedDeviceId] = useState<string>();
-
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const topBottomPosition = useMemo<number>(() => (show ? 0 : 10000), [show]);
 
   const leftRightPosition = useMemo<string | number>(
@@ -37,68 +28,12 @@ export const BarcodeScanner = ({
     [show]
   );
 
-  const startCodeReader = useCallback(() => {
-    if (videoRef.current && selectedDeviceId) {
-      const intervalId = setInterval(() => {
-        if (videoRef.current) {
-          const isVideoPlaying = codeReader.isVideoPlaying(videoRef.current);
-          if (isVideoPlaying) {
-            onPlayVideo();
-            clearInterval(intervalId);
-          }
-        }
-      }, 300);
-      return (
-        codeReader
-          // .decodeOnceFromVideoDevice(undefined, videoRef.current)
-          .decodeFromVideoDevice(
-            // selectedDeviceId,
-            "",
-            videoRef.current,
-            (result, error) => {
-              if (!error) {
-                onScan(result.getText());
-              }
-            }
-          )
-      );
-      // .then((result) => result.getText())
-      // .then((result) => {
-      //   onScan(result);
-      // })
-      // .then(() => setOpen(false))
-      // .catch(console.log);
-    }
-  }, [codeReader, onPlayVideo, onScan, selectedDeviceId]);
-
-  // const handleChangeDevice = useCallback<NonNullable<SelectProps["onChange"]>>(
-  //   ({ target: { value } }) => {
-  //     setSelectedDeviceId(value as string);
-  //   },
-  //   []
-  // );
-
   useEffect(() => {
-    onMount();
-    codeReader.listVideoInputDevices().then((devices) => {
-      // TODO - NEED TO HANDLE THIS FOR MULTIPLE CAMS ON DEVICE
-      if (devices.length > 0 && videoRef.current) {
-        // setDevices(devices);
-      }
-      const selectedDeviceId = devices[0].deviceId;
-      setSelectedDeviceId(selectedDeviceId);
-    });
+    onMount(videoRef);
     return () => {
-      codeReader.reset();
+      onUnmount();
     };
-  }, [codeReader, onMount, startCodeReader]);
-
-  useEffect(() => {
-    startCodeReader();
-    return () => {
-      codeReader.reset();
-    };
-  }, [codeReader, startCodeReader]);
+  }, [onMount, onUnmount]);
 
   return (
     <Box

@@ -1,9 +1,9 @@
 import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 import {
-  BarcodeScanner,
-  BarcodeScannerDispatchProps,
-  BarcodeScannerStateProps,
-} from "components/BarcodeScanner/BarcodeScanner";
+  BarcodeScannerV0,
+  BarcodeScannerV0DispatchProps,
+  BarcodeScannerV0StateProps,
+} from "components/BarcodeScannerV0/BarcodeScanner";
 import {
   RootState,
   handleMountScanner,
@@ -13,22 +13,24 @@ import {
 } from "widgets/BhandaraCheckinV0/store";
 
 const mapStateToProps: MapStateToProps<
-  BarcodeScannerStateProps,
+  BarcodeScannerV0StateProps,
   {},
   RootState
 > = ({ barcodeScanner }) => barcodeScanner;
 
-const mapDispatchToProps: MapDispatchToProps<BarcodeScannerDispatchProps, {}> =
-  (dispatch) => {
-    return {
-      onCancel: () => dispatch<any>(handleClickScannerCancel()),
-      onMount: () => dispatch<any>(handleMountScanner()),
-      onPlayVideo: () => dispatch<any>(handlePlayScannerVideo()),
-      onScan: (value) => dispatch<any>(handleScanV2(value)),
-    };
+const mapDispatchToProps: MapDispatchToProps<
+  BarcodeScannerV0DispatchProps,
+  {}
+> = (dispatch) => {
+  return {
+    onCancel: () => dispatch<any>(handleClickScannerCancel()),
+    onMount: () => dispatch<any>(handleMountScanner()),
+    onPlayVideo: () => dispatch<any>(handlePlayScannerVideo()),
+    onScan: (value) => dispatch<any>(handleScanV2(value)),
   };
+};
 
 export const BarcodeScannerConnected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(BarcodeScanner);
+)(BarcodeScannerV0);

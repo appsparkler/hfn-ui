@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { AnyAction } from "redux";
-import { barcodeScannerActions } from "../../slices";
+import { barcodeScannerV0Actions } from "../../slices";
 
 export const handleClickScan = () => (dispatch: Dispatch<AnyAction>) => {
-  dispatch(barcodeScannerActions.show());
+  dispatch(barcodeScannerV0Actions.show());
 };
