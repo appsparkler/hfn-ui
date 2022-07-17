@@ -14,7 +14,10 @@ import { handleScan } from "../handleScan";
 
 export const onMount = createAsyncThunk<
   any,
-  { videoEl: HTMLVideoElement; codeReader: BrowserMultiFormatReader },
+  {
+    videoEl: HTMLVideoElement;
+    codeReader: BrowserMultiFormatReader;
+  },
   ThunkApiConfig
 >(
   "onMountBarcodeScanner",
