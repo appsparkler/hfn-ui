@@ -3,7 +3,6 @@ import {
   mainSectionActions,
   getMainSectionInitialState,
   handleSwitchScanner,
-  handleClickScan,
 } from "widgets/BhandaraCheckin/store";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
@@ -29,6 +28,7 @@ import {
   turnOffOfflineMode,
   turnOnOfflineMode,
 } from "widgets/BhandaraCheckin/firebase";
+import { handleClickScan } from "./handleClickScan";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
