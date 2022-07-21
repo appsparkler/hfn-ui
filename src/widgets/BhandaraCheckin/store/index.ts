@@ -7,7 +7,6 @@ import {
   pageReducer,
 } from "widgets/BhandaraCheckin/routing";
 import {
-  barcodeScannerV0Reducer,
   bhandaraCheckinReducer,
   mainSectionReducer,
   snackbarReducer,
@@ -25,7 +24,6 @@ export const rootReducer = {
   updateDetailsV2Section: updateDetailsReducer,
   snackbar: snackbarReducer,
   mode: modeReducer,
-  barcodeScannerV0: barcodeScannerV0Reducer,
   barcodeScanner: barcodeScannerReducer,
   location: locationReducer,
   page: pageReducer,
