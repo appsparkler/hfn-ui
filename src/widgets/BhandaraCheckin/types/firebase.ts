@@ -4,7 +4,7 @@ export const FirestoreCollections = {
   CHECKINS: `checkins-${process.env.REACT_APP_ENV}`,
 };
 
-export const CheckinType = {
-  ABHYASI_ID: "AbhyasiId",
-  EMAIL_OR_MOBILE: "EmailOrMobile",
-};
+export enum CheckinTypesEnum {
+  AbhyasiId = "AbhyasiId",
+  EmailOrMobile = "EmailOrMobile",
+}
