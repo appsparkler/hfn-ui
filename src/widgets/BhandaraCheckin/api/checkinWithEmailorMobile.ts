@@ -1,7 +1,8 @@
 import {
   CheckinEmailOrMobileUserDetails,
-  CheckinType,
+  CheckinTypesEnum,
   CheckinWithEmailOrMobileApi,
+  CheckinWithEmailOrMobileApiStoreData,
 } from "widgets/BhandaraCheckin/types";
 import { checkinsCollection } from "../firebase";
 import { addDoc } from "firebase/firestore";
@@ -20,12 +21,13 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
   attendee
 ) => {
   try {
-    addDoc(checkinsCollection, {
+    const emailOrMobileCheckinData: CheckinWithEmailOrMobileApiStoreData = {
       ...attendee,
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
-      type: CheckinType.EMAIL_OR_MOBILE,
-    });
+      type: CheckinTypesEnum.EmailOrMobile,
+    };
+    addDoc(checkinsCollection, emailOrMobileCheckinData);
     return true;
   } catch (e) {
     throw new Error("Server Error: Email/Mobile Checkin");

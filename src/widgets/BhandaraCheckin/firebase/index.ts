@@ -8,9 +8,10 @@ import {
   disableNetwork as $disableNetwork,
   enableNetwork as $enableNetwork,
   collection,
+  connectFirestoreEmulator,
 } from "firebase/firestore";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
-import { ENVS, FirestoreCollections } from "widgets/BhandaraCheckin/types";
+import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
 import { getEnv } from "../utils";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -27,21 +28,23 @@ export const firestoreDb = initializeFirestore(app, {
   cacheSizeBytes: CACHE_SIZE_UNLIMITED,
 });
 
+if (getEnv().ENV === "developmentLocal") {
+  connectFirestoreEmulator(firestoreDb, "localhost", 8080);
+}
+
 export const analytics = getAnalytics(app);
 
-export const initFirebase = (env: ENVS) => {
-  enableIndexedDbPersistence(firestoreDb).catch((err) => {
-    if (err.code === "failed-precondition") {
-      // Multiple tabs open, persistence can only be enabled
-      // in one tab at a a time.
-      // ...
-    } else if (err.code === "unimplemented") {
-      // The current browser does not support all of the
-      // features required to enable persistence
-      // ...
-    }
-  });
-};
+enableIndexedDbPersistence(firestoreDb).catch((err) => {
+  if (err.code === "failed-precondition") {
+    // Multiple tabs open, persistence can only be enabled
+    // in one tab at a a time.
+    // ...
+  } else if (err.code === "unimplemented") {
+    // The current browser does not support all of the
+    // features required to enable persistence
+    // ...
+  }
+});
 
 export const turnOffOfflineMode = async () => {
   localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);

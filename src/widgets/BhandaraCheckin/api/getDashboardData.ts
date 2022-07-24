@@ -1,17 +1,24 @@
-import { GetDashboardDataApi } from "widgets/BhandaraCheckin/types";
-import { checkinsCollection } from "widgets/BhandaraCheckin/firebase";
-import { getDocs, query } from "firebase/firestore";
+import {
+  CheckinsAggregateData,
+  GetDashboardDataApi,
+} from "widgets/BhandaraCheckin/types";
+import { firestoreDb } from "widgets/BhandaraCheckin/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export const getDashboardData: GetDashboardDataApi = async () => {
   try {
-    const queryForUserWithEmail = query(checkinsCollection);
+    // const queryForUserWithEmail = query(checkinsCollection);
+
     if (navigator.onLine) {
-      const docs = await getDocs(queryForUserWithEmail);
-      return docs.size;
+      const aggregationsDocRef = doc(firestoreDb, "aggregations", "checkins");
+      const aggregationsDoc = await getDoc(aggregationsDocRef);
+      return aggregationsDoc.data() as CheckinsAggregateData;
     }
-    return 0;
+    throw new Error("Offline Mode");
   } catch (e) {
     console.error("Error adding document: ", e);
-    throw new Error("Oops! Couldn't get Docs Size");
+    throw new Error(
+      (e as unknown as Error)?.message || "Oops! Couldn't get Docs Size"
+    );
   }
 };

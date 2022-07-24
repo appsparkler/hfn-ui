@@ -1,3 +1,5 @@
+import { CheckinTypesEnum } from "./firebase";
+
 type EmailOrMobileDetail =
   | { mobile: string }
   | { email: string }
@@ -40,3 +42,17 @@ export type CheckinEmailOrMobileUserData = {
   timestamp: number;
   deviceId: string;
 } & CheckinEmailOrMobileUserDetails;
+
+export type AbhyasiCheckinApiStoreData = {
+  abhyasiId: string;
+  deviceId: string;
+  timestamp: number;
+  type: CheckinTypesEnum.AbhyasiId;
+};
+
+export type CheckinWithEmailOrMobileApiStoreData =
+  CheckinEmailOrMobileUserDetails & {
+    deviceId: string;
+    timestamp: number;
+    type: CheckinTypesEnum.EmailOrMobile;
+  };

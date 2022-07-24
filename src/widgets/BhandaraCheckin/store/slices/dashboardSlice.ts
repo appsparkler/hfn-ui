@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DashboardStateProps } from "widgets/BhandaraCheckin/types";
+import {
+  CheckinsAggregateData,
+  DashboardStateProps,
+} from "widgets/BhandaraCheckin/types";
 import { getEnv } from "widgets/BhandaraCheckin/utils";
 
 const getInitialState = (): DashboardStateProps => ({
@@ -11,8 +14,8 @@ const dashboardSlice = createSlice({
   name: "dashboard",
   initialState: getInitialState(),
   reducers: {
-    updateTotal: (state, { payload }) => {
-      state.total = payload;
+    updateTotal: (state, { payload }: { payload: CheckinsAggregateData }) => {
+      state.total = payload.emailOrMobileCheckin + payload.abhyasiIdCheckin;
     },
   },
 });

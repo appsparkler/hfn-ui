@@ -1,4 +1,8 @@
-import { AbhyasiCheckinData, CheckinEmailOrMobileUserDetails } from "./index";
+import {
+  AbhyasiCheckinData,
+  CheckinEmailOrMobileUserDetails,
+  CheckinsAggregateData,
+} from "./index";
 
 export interface CheckinWithEmailOrMobileApi {
   (userDetails: CheckinEmailOrMobileUserDetails): boolean;
@@ -25,7 +29,7 @@ export interface IsUserAlreadyCheckedInApi {
 }
 
 export interface GetDashboardDataApi {
-  (): Promise<number>;
+  (): Promise<CheckinsAggregateData>;
 }
 
 export type BhandaraCheckinAPIs = {
