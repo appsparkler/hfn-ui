@@ -1,42 +1,51 @@
 import { Refresh } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { CenterOfViewport, Horizontal } from "components";
+import { CenterOfViewport, Horizontal, Vertical } from "components";
 import { noop } from "lodash/fp";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
-import { DashboardProps } from "widgets/BhandaraCheckin/types";
+import {
+  DashboardProps,
+  DashboardV0Props,
+} from "widgets/BhandaraCheckin/types";
 
 export const Dashboard = ({
-  total = 0,
-  password = "",
-  onMount = noop,
+  stats,
   onRefresh = noop,
   onReturn = noop,
 }: DashboardProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogin = useCallback(() => {
-    const res = prompt("Please enter password:");
-    if (res === password) {
-      setIsLoggedIn(true);
-      return true;
-    } else {
-      setIsLoggedIn(false);
-      return false;
-    }
-  }, [password]);
+  const totalCheckins = useMemo(
+    () =>
+      (stats.abhyasiIdCheckin + stats.emailOrMobileCheckin).toLocaleString(),
+    [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]
+  );
 
-  const handleRefresh = useCallback(() => {
-    const isLoggedIn = handleLogin();
-    if (isLoggedIn) {
-      onRefresh();
-    }
-  }, [handleLogin, onRefresh]);
+  const emailOrMobileCheckinPercent = useMemo<string>(() => {
+    const percent =
+      (stats.emailOrMobileCheckin /
+        (stats.abhyasiIdCheckin + stats.emailOrMobileCheckin)) *
+      100;
+    return `${percent.toFixed(2)}%`;
+  }, [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]);
 
-  useEffect(() => {
-    const isLoggedIn = handleLogin();
-    isLoggedIn ? onMount() : noop();
-  }, [handleLogin, onMount, password]);
+  const abhyasiIdCheckinPercent = useMemo<string>(() => {
+    const percent =
+      (stats.abhyasiIdCheckin /
+        (stats.abhyasiIdCheckin + stats.emailOrMobileCheckin)) *
+      100;
+    return `${percent.toFixed(2)}%`;
+  }, [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]);
 
   return (
     <CenterOfViewport
@@ -52,32 +61,58 @@ export const Dashboard = ({
         width="100%"
       >
         <Typography variant="h5" justifyContent={"center"} display="flex">
-          <IconButton size="small"></IconButton>
           <span>Dashboard</span>
         </Typography>
         <Horizontal alignItems={"center"}>
           <IconButton onClick={onReturn}>
             <ArrowBackIcon />
           </IconButton>
-          <IconButton onClick={handleRefresh}>
+          <IconButton onClick={onRefresh}>
             <Refresh />
           </IconButton>
         </Horizontal>
       </Horizontal>
-      {isLoggedIn ? (
-        <>
+      <Typography align="center" variant="overline">
+        total checkins
+      </Typography>
+      <Typography align="center" variant="h1">
+        {totalCheckins}
+      </Typography>
+      <Horizontal sx={{ width: "100%" }} justifyContent="space-between">
+        <Vertical alignItems={"center"}>
+          <Typography variant="overline" textAlign={"center"} align="center">
+            Abhyasi ID
+          </Typography>
+          <Typography align="center" variant="h3">
+            {stats.abhyasiIdCheckin.toLocaleString()}
+          </Typography>
+          <Typography align="center" variant="h6">
+            {abhyasiIdCheckinPercent}
+          </Typography>
+        </Vertical>
+        <Vertical alignItems={"center"}>
           <Typography align="center" variant="overline">
-            total checkins
+            Email Or Mobile
           </Typography>
-          <Typography align="center" variant="h1">
-            {total.toLocaleString()}
+          <Typography align="center" variant="h3">
+            {stats.emailOrMobileCheckin.toLocaleString()}
           </Typography>
-        </>
-      ) : (
-        <Typography color="warning.light">
-          <i>Please login</i>
-        </Typography>
-      )}
+          <Typography align="center" variant="h6">
+            {emailOrMobileCheckinPercent}
+          </Typography>
+        </Vertical>
+      </Horizontal>
+      <TableContainer component={Paper} sx={{ p: 1 }}>
+        <Typography variant="h4">State</Typography>
+        <Table sx={{ width: "100%" }}>
+          <TableBody>
+            <TableRow>
+              <TableCell>Andhra Pradesh</TableCell>
+              <TableCell align="center">10</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
     </CenterOfViewport>
   );
 };

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   CheckinsAggregateData,
-  DashboardStateProps,
+  DashboardV0StateProps,
 } from "widgets/BhandaraCheckin/types";
 import { getEnv } from "widgets/BhandaraCheckin/utils";
 
-const getInitialState = (): DashboardStateProps => ({
+const getInitialState = (): DashboardV0StateProps => ({
   password: getEnv().DASHBOARD_PASSWORD,
   total: 0,
 });

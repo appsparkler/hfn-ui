@@ -5,7 +5,7 @@ import { CenterOfViewport, Horizontal } from "components";
 import { noop } from "lodash/fp";
 import { useCallback, useEffect, useState } from "react";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
-import { DashboardProps } from "widgets/BhandaraCheckin/types";
+import { DashboardV0Props } from "widgets/BhandaraCheckin/types";
 
 export const DashboardV0 = ({
   total = 0,
@@ -13,7 +13,7 @@ export const DashboardV0 = ({
   onMount = noop,
   onRefresh = noop,
   onReturn = noop,
-}: DashboardProps) => {
+}: DashboardV0Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleLogin = useCallback(() => {
     const res = prompt("Please enter password:");
