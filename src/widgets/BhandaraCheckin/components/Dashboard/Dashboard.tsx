@@ -48,7 +48,7 @@ export const Dashboard = ({
   useEffect(onRefresh, [onRefresh]);
 
   const noData = useMemo(
-    () => stats.abhyasiIdCheckin === 0 || stats.emailOrMobileCheckin === 0,
+    () => stats.abhyasiIdCheckin === 0 && stats.emailOrMobileCheckin === 0,
     [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]
   );
 

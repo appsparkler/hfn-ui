@@ -8,7 +8,7 @@ import {
   disableNetwork as $disableNetwork,
   enableNetwork as $enableNetwork,
   collection,
-  connectFirestoreEmulator,
+  // connectFirestoreEmulator,
 } from "firebase/firestore";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
@@ -28,9 +28,9 @@ export const firestoreDb = initializeFirestore(app, {
   cacheSizeBytes: CACHE_SIZE_UNLIMITED,
 });
 
-if (getEnv().ENV === "developmentLocal") {
-  connectFirestoreEmulator(firestoreDb, "localhost", 8080);
-}
+// if (getEnv().ENV === "developmentLocal") {
+//   connectFirestoreEmulator(firestoreDb, "localhost", 8080);
+// }
 
 export const analytics = getAnalytics(app);
 
