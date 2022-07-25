@@ -17,13 +17,27 @@ dashboard.args = {
     emailOrMobileCheckin: 3400,
     checkinsWithEmail: 400,
     checkinsWithMobile: 3000,
-    city: {},
-    country: {},
+    city: {
+      Ahmedabad: 10,
+      Bangalore: 20,
+      Chennai: 30,
+    },
+    country: {
+      India: 20354,
+      USA: 3400,
+    },
     female: 0,
     male: 0,
-    state: {},
+    state: {
+      Karnataka: 10,
+      "Madhya Pradesh": 20,
+      Telangana: 40,
+    },
     unspecified: 0,
   },
 };
+
+export const loadingState: ComponentStory<typeof Dashboard> = Template.bind({});
+loadingState.args = {};
 
 export default Story;

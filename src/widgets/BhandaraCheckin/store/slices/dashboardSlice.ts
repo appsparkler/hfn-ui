@@ -1,21 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { initialStats } from "widgets/BhandaraCheckin/constants";
 import {
   CheckinsAggregateData,
-  DashboardV0StateProps,
+  DashboardStateProps,
 } from "widgets/BhandaraCheckin/types";
-import { getEnv } from "widgets/BhandaraCheckin/utils";
 
-const getInitialState = (): DashboardV0StateProps => ({
-  password: getEnv().DASHBOARD_PASSWORD,
-  total: 0,
+const getInitialState = (): DashboardStateProps => ({
+  stats: initialStats,
 });
 
 const dashboardSlice = createSlice({
   name: "dashboard",
   initialState: getInitialState(),
   reducers: {
-    updateTotal: (state, { payload }: { payload: CheckinsAggregateData }) => {
-      state.total = payload.emailOrMobileCheckin + payload.abhyasiIdCheckin;
+    updateStats: (state, { payload }: { payload: CheckinsAggregateData }) => {
+      state.stats = payload;
     },
   },
 });

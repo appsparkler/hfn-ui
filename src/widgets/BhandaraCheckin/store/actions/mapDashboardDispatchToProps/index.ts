@@ -15,13 +15,13 @@ export const mapDashboardDispatchToProps: MapDispatchToProps<
     onRefresh: async () => {
       const res = await dispatch<any>(getDashboardData());
       if (res.meta.requestStatus === "fulfilled") {
-        dispatch(dashboardActions.updateTotal(res.payload));
+        dispatch(dashboardActions.updateStats(res.payload));
       }
     },
     onMount: async () => {
       const res = await dispatch<any>(getDashboardData());
       if (res.meta.requestStatus === "fulfilled") {
-        dispatch(dashboardActions.updateTotal(res.payload));
+        dispatch(dashboardActions.updateStats(res.payload));
       }
     },
   };

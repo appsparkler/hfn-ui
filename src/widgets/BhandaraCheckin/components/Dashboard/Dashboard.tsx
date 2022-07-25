@@ -1,6 +1,6 @@
 import { Refresh } from "@mui/icons-material";
 import {
-  Box,
+  CircularProgress,
   IconButton,
   Paper,
   Table,
@@ -11,18 +11,15 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { CenterOfViewport, Horizontal, Vertical } from "components";
+import { Horizontal, Vertical } from "components";
 import { noop } from "lodash/fp";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { maxWidth } from "widgets/BhandaraCheckin/constants";
-import {
-  DashboardProps,
-  DashboardV0Props,
-} from "widgets/BhandaraCheckin/types";
+import { useEffect, useMemo } from "react";
+import { initialStats, maxWidth } from "widgets/BhandaraCheckin/constants";
+import { DashboardProps } from "widgets/BhandaraCheckin/types";
 import { uuidv4 } from "@firebase/util";
 
 export const Dashboard = ({
-  stats,
+  stats = initialStats,
   onRefresh = noop,
   onReturn = noop,
 }: DashboardProps) => {
@@ -48,13 +45,20 @@ export const Dashboard = ({
     return `${percent.toFixed(2)}%`;
   }, [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]);
 
+  useEffect(onRefresh, [onRefresh]);
+
+  const noData = useMemo(
+    () => stats.abhyasiIdCheckin === 0 || stats.emailOrMobileCheckin === 0,
+    [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]
+  );
+
   return (
-    <CenterOfViewport
+    <Vertical
       gap={2}
       width={"100%"}
       maxWidth={maxWidth}
       paddingX={1}
-      justifyContent="initial"
+      marginX="auto"
     >
       <Horizontal
         alignItems={"center"}
@@ -73,42 +77,64 @@ export const Dashboard = ({
           </IconButton>
         </Horizontal>
       </Horizontal>
-      <Typography align="center" variant="overline">
-        total checkins
-      </Typography>
-      <Typography align="center" variant="h1">
-        {totalCheckins}
-      </Typography>
-      <Horizontal sx={{ width: "100%" }} justifyContent="space-between">
-        <Vertical alignItems={"center"}>
-          <Typography variant="overline" textAlign={"center"} align="center">
-            Abhyasi ID
-          </Typography>
-          <Typography align="center" variant="h3">
-            {stats.abhyasiIdCheckin.toLocaleString()}
-          </Typography>
-          <Typography align="center" variant="h6">
-            {abhyasiIdCheckinPercent}
-          </Typography>
+
+      {noData ? (
+        <Vertical alignItems={"center"} mt={5}>
+          <CircularProgress />
         </Vertical>
-        <Vertical alignItems={"center"}>
+      ) : (
+        <>
           <Typography align="center" variant="overline">
-            Email Or Mobile
+            total checkins
           </Typography>
-          <Typography align="center" variant="h3">
-            {stats.emailOrMobileCheckin.toLocaleString()}
+          <Typography align="center" variant="h1">
+            {totalCheckins}
           </Typography>
-          <Typography align="center" variant="h6">
-            {emailOrMobileCheckinPercent}
-          </Typography>
-        </Vertical>
-      </Horizontal>
-      <InfoTable
-        title={"State"}
-        data={[{ id: uuidv4(), name: "Andhra Pradesh", value: 10 }]}
-      />
-    </CenterOfViewport>
+          <Horizontal sx={{ width: "100%" }} justifyContent="space-between">
+            <Vertical alignItems={"center"}>
+              <Typography
+                variant="overline"
+                textAlign={"center"}
+                align="center"
+              >
+                Abhyasi ID
+              </Typography>
+              <Typography align="center" variant="h3">
+                {stats.abhyasiIdCheckin.toLocaleString()}
+              </Typography>
+              <Typography align="center" variant="h6">
+                {abhyasiIdCheckinPercent}
+              </Typography>
+            </Vertical>
+            <Vertical alignItems={"center"}>
+              <Typography align="center" variant="overline">
+                Email Or Mobile
+              </Typography>
+              <Typography align="center" variant="h3">
+                {stats.emailOrMobileCheckin.toLocaleString()}
+              </Typography>
+              <Typography align="center" variant="h6">
+                {emailOrMobileCheckinPercent}
+              </Typography>
+            </Vertical>
+          </Horizontal>
+          <Vertical gap={2}>
+            <InfoTable title={"Country"} data={getSortedData(stats.country)} />
+            <InfoTable title={"State"} data={getSortedData(stats.state)} />
+            <InfoTable title={"City"} data={getSortedData(stats.city)} />
+          </Vertical>
+        </>
+      )}
+    </Vertical>
   );
+};
+
+// Sort an object with values as numbers with response of id, name and value
+const getSortedData = (
+  data: Record<string, number>
+): { name: string; value: number; id: string }[] => {
+  const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
+  return sortedData.map(([name, value]) => ({ name, value, id: uuidv4() }));
 };
 
 function InfoTable({
