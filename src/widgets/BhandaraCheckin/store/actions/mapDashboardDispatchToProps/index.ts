@@ -1,11 +1,11 @@
 import { MapDispatchToProps } from "react-redux";
 import { getDashboardData } from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
-import { DashboardDispatchProps } from "widgets/BhandaraCheckin/types";
+import { DashboardV0DispatchProps } from "widgets/BhandaraCheckin/types";
 import { dashboardActions } from "../../slices";
 
 export const mapDashboardDispatchToProps: MapDispatchToProps<
-  DashboardDispatchProps,
+  DashboardV0DispatchProps,
   {}
 > = (dispatch) => {
   return {
@@ -15,13 +15,13 @@ export const mapDashboardDispatchToProps: MapDispatchToProps<
     onRefresh: async () => {
       const res = await dispatch<any>(getDashboardData());
       if (res.meta.requestStatus === "fulfilled") {
-        dispatch(dashboardActions.updateTotal(res.payload));
+        dispatch(dashboardActions.updateStats(res.payload));
       }
     },
     onMount: async () => {
       const res = await dispatch<any>(getDashboardData());
       if (res.meta.requestStatus === "fulfilled") {
-        dispatch(dashboardActions.updateTotal(res.payload));
+        dispatch(dashboardActions.updateStats(res.payload));
       }
     },
   };

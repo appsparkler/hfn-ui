@@ -1,50 +1,64 @@
 import { Refresh } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { CenterOfViewport, Horizontal } from "components";
+import { Horizontal, Vertical } from "components";
 import { noop } from "lodash/fp";
-import { useCallback, useEffect, useState } from "react";
-import { maxWidth } from "widgets/BhandaraCheckin/constants";
+import { useEffect, useMemo } from "react";
+import { initialStats, maxWidth } from "widgets/BhandaraCheckin/constants";
 import { DashboardProps } from "widgets/BhandaraCheckin/types";
+import { uuidv4 } from "@firebase/util";
 
 export const Dashboard = ({
-  total = 0,
-  password = "",
-  onMount = noop,
+  stats = initialStats,
   onRefresh = noop,
   onReturn = noop,
 }: DashboardProps) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogin = useCallback(() => {
-    const res = prompt("Please enter password:");
-    if (res === password) {
-      setIsLoggedIn(true);
-      return true;
-    } else {
-      setIsLoggedIn(false);
-      return false;
-    }
-  }, [password]);
+  const totalCheckins = useMemo(
+    () =>
+      (stats.abhyasiIdCheckin + stats.emailOrMobileCheckin).toLocaleString(),
+    [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]
+  );
 
-  const handleRefresh = useCallback(() => {
-    const isLoggedIn = handleLogin();
-    if (isLoggedIn) {
-      onRefresh();
-    }
-  }, [handleLogin, onRefresh]);
+  const emailOrMobileCheckinPercent = useMemo<string>(() => {
+    const percent =
+      (stats.emailOrMobileCheckin /
+        (stats.abhyasiIdCheckin + stats.emailOrMobileCheckin)) *
+      100;
+    return `${percent.toFixed(2)}%`;
+  }, [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]);
 
-  useEffect(() => {
-    const isLoggedIn = handleLogin();
-    isLoggedIn ? onMount() : noop();
-  }, [handleLogin, onMount, password]);
+  const abhyasiIdCheckinPercent = useMemo<string>(() => {
+    const percent =
+      (stats.abhyasiIdCheckin /
+        (stats.abhyasiIdCheckin + stats.emailOrMobileCheckin)) *
+      100;
+    return `${percent.toFixed(2)}%`;
+  }, [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]);
+
+  useEffect(onRefresh, [onRefresh]);
+
+  const noData = useMemo(
+    () => stats.abhyasiIdCheckin === 0 && stats.emailOrMobileCheckin === 0,
+    [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]
+  );
 
   return (
-    <CenterOfViewport
+    <Vertical
       gap={2}
       width={"100%"}
       maxWidth={maxWidth}
       paddingX={1}
-      justifyContent="initial"
+      marginX="auto"
     >
       <Horizontal
         alignItems={"center"}
@@ -52,32 +66,97 @@ export const Dashboard = ({
         width="100%"
       >
         <Typography variant="h5" justifyContent={"center"} display="flex">
-          <IconButton size="small"></IconButton>
           <span>Dashboard</span>
         </Typography>
         <Horizontal alignItems={"center"}>
           <IconButton onClick={onReturn}>
             <ArrowBackIcon />
           </IconButton>
-          <IconButton onClick={handleRefresh}>
+          <IconButton onClick={onRefresh}>
             <Refresh />
           </IconButton>
         </Horizontal>
       </Horizontal>
-      {isLoggedIn ? (
+
+      {noData ? (
+        <Vertical alignItems={"center"} mt={5}>
+          <CircularProgress />
+        </Vertical>
+      ) : (
         <>
           <Typography align="center" variant="overline">
             total checkins
           </Typography>
           <Typography align="center" variant="h1">
-            {total.toLocaleString()}
+            {totalCheckins}
           </Typography>
+          <Horizontal sx={{ width: "100%" }} justifyContent="space-between">
+            <Vertical alignItems={"center"}>
+              <Typography
+                variant="overline"
+                textAlign={"center"}
+                align="center"
+              >
+                Abhyasi ID
+              </Typography>
+              <Typography align="center" variant="h3">
+                {stats.abhyasiIdCheckin.toLocaleString()}
+              </Typography>
+              <Typography align="center" variant="h6">
+                {abhyasiIdCheckinPercent}
+              </Typography>
+            </Vertical>
+            <Vertical alignItems={"center"}>
+              <Typography align="center" variant="overline">
+                Email Or Mobile
+              </Typography>
+              <Typography align="center" variant="h3">
+                {stats.emailOrMobileCheckin.toLocaleString()}
+              </Typography>
+              <Typography align="center" variant="h6">
+                {emailOrMobileCheckinPercent}
+              </Typography>
+            </Vertical>
+          </Horizontal>
+          <Vertical gap={2}>
+            <InfoTable title={"Country"} data={getSortedData(stats.country)} />
+            <InfoTable title={"State"} data={getSortedData(stats.state)} />
+            <InfoTable title={"City"} data={getSortedData(stats.city)} />
+          </Vertical>
         </>
-      ) : (
-        <Typography color="warning.light">
-          <i>Please login</i>
-        </Typography>
       )}
-    </CenterOfViewport>
+    </Vertical>
   );
 };
+
+// Sort an object with values as numbers with response of id, name and value
+const getSortedData = (
+  data: Record<string, number>
+): { name: string; value: number; id: string }[] => {
+  const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
+  return sortedData.map(([name, value]) => ({ name, value, id: uuidv4() }));
+};
+
+function InfoTable({
+  title = "",
+  data = [],
+}: {
+  title: string;
+  data: { id: string; name: string; value: number }[];
+}) {
+  return (
+    <TableContainer component={Paper} sx={{ p: 1 }}>
+      <Typography variant="h4">{title}</Typography>
+      <Table sx={{ width: "100%" }}>
+        <TableBody>
+          {data.map(({ name, value, id }, index) => (
+            <TableRow key={id}>
+              <TableCell>{name}</TableCell>
+              <TableCell align="center">{value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

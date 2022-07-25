@@ -19,8 +19,8 @@ export const getDashboardData = createAsyncThunk<
     }
   ) => {
     try {
-      const docsSize = await getDashboardData();
-      return fulfillWithValue(docsSize);
+      const dashboardStats = await getDashboardData();
+      return fulfillWithValue(dashboardStats);
     } catch (error) {
       return rejectWithValue(ErrorCodes.SERVER_ERROR);
     }
