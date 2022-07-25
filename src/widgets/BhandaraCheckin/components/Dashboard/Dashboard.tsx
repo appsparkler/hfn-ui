@@ -19,6 +19,7 @@ import {
   DashboardProps,
   DashboardV0Props,
 } from "widgets/BhandaraCheckin/types";
+import { uuidv4 } from "@firebase/util";
 
 export const Dashboard = ({
   stats,
@@ -102,17 +103,34 @@ export const Dashboard = ({
           </Typography>
         </Vertical>
       </Horizontal>
-      <TableContainer component={Paper} sx={{ p: 1 }}>
-        <Typography variant="h4">State</Typography>
-        <Table sx={{ width: "100%" }}>
-          <TableBody>
-            <TableRow>
-              <TableCell>Andhra Pradesh</TableCell>
-              <TableCell align="center">10</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <InfoTable
+        title={"State"}
+        data={[{ id: uuidv4(), name: "Andhra Pradesh", value: 10 }]}
+      />
     </CenterOfViewport>
   );
 };
+
+function InfoTable({
+  title = "",
+  data = [],
+}: {
+  title: string;
+  data: { id: string; name: string; value: number }[];
+}) {
+  return (
+    <TableContainer component={Paper} sx={{ p: 1 }}>
+      <Typography variant="h4">{title}</Typography>
+      <Table sx={{ width: "100%" }}>
+        <TableBody>
+          {data.map(({ name, value, id }, index) => (
+            <TableRow key={id}>
+              <TableCell>{name}</TableCell>
+              <TableCell align="center">{value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
