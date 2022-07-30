@@ -19,7 +19,7 @@ import { isAbhyasiId, isEmail, isMobile } from "utils";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
-import { ENVS, SectionMainProps } from "widgets/BhandaraCheckin/types";
+import { SectionMainProps } from "widgets/BhandaraCheckin/types";
 
 export const SectionMain = ({
   env,
@@ -71,13 +71,6 @@ export const SectionMain = ({
       onSwitchScanner(checked);
     },
     [onSwitchScanner]
-  );
-
-  const handleSwitchNetwork = useCallback<NonNullable<SwitchProps["onChange"]>>(
-    (evt, checked) => {
-      onSwitchOfflineMode(checked);
-    },
-    [onSwitchOfflineMode]
   );
 
   useEffect(() => {
@@ -139,14 +132,14 @@ export const SectionMain = ({
           label="Scanner"
         />
 
-        {env?.ENV === ENVS.DEV_LOCAL && (
+        {/* {env?.ENV === ENVS.DEV_LOCAL && (
           <FormControlLabel
             control={
               <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
             }
             label="Offline Mode"
           />
-        )}
+        )} */}
       </Vertical>
       <Box position="fixed" right={0} top={0}>
         <Horizontal alignItems={"center"}>

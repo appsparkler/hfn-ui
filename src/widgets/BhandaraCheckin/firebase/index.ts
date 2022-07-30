@@ -29,7 +29,7 @@ export const firestoreDb = initializeFirestore(app, {
   cacheSizeBytes: CACHE_SIZE_UNLIMITED,
 });
 
-if (getEnv().ENV === "developmentLocal") {
+if (getEnv().EMULATOR) {
   connectFirestoreEmulator(firestoreDb, "localhost", 8080);
 }
 
