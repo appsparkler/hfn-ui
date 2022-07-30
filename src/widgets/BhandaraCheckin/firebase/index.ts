@@ -5,13 +5,9 @@ import {
   enableIndexedDbPersistence,
   initializeFirestore,
   CACHE_SIZE_UNLIMITED,
-  disableNetwork as $disableNetwork,
-  enableNetwork as $enableNetwork,
   collection,
   connectFirestoreEmulator,
-  // connectFirestoreEmulator,
 } from "firebase/firestore";
-import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
 import { getEnv } from "../utils";
 
@@ -46,16 +42,6 @@ enableIndexedDbPersistence(firestoreDb).catch((err) => {
     // ...
   }
 });
-
-export const turnOffOfflineMode = async () => {
-  localStorage.removeItem(LocalStorageKeys.OFFLINE_MODE);
-  await $enableNetwork(firestoreDb);
-};
-
-export const turnOnOfflineMode = async () => {
-  localStorage.setItem(LocalStorageKeys.OFFLINE_MODE, "true");
-  await $disableNetwork(firestoreDb);
-};
 
 export const checkinsCollection = collection(
   firestoreDb,
