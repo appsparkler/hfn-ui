@@ -1,6 +1,7 @@
+export type Environments = "development" | "production" | "test";
+
 export interface Env {
-  NODE_ENV: "development" | "production" | "test";
-  DASHBOARD_PASSWORD?: string;
+  NODE_ENV: Environments;
   EMULATOR: boolean;
   FIREBASE: {
     apiKey: string;
