@@ -1,11 +1,11 @@
-import {
-  IAbhyasiCheckinApiStoreData,
-  CheckinAbhyasiApi,
-} from "widgets/BhandaraCheckin/types";
+import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
 import { LocalStorageKeys } from "../constants";
 import { checkinsCollection } from "widgets/BhandaraCheckin/firebase";
 import { addDoc } from "firebase/firestore";
-import { CheckinTypesEnum } from "@hfn-checkins/types";
+import {
+  CheckinTypesEnum,
+  IAbhyasiCheckinApiStoreData,
+} from "@hfn-checkins/types";
 
 let checkedInAbhyasis: string[] = [];
 
