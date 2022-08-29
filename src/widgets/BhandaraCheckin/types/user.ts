@@ -1,4 +1,4 @@
-import { CheckinTypesEnum } from "./firebase";
+import { CheckinTypesEnum } from "@hfn-checkins/types";
 
 type EmailOrMobileDetail =
   | { mobile: string }

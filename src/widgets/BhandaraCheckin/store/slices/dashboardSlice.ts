@@ -1,9 +1,7 @@
+import { CheckinsAggregateData } from "@hfn-checkins/types";
 import { createSlice } from "@reduxjs/toolkit";
 import { initialStats } from "widgets/BhandaraCheckin/constants";
-import {
-  CheckinsAggregateData,
-  DashboardStateProps,
-} from "widgets/BhandaraCheckin/types";
+import { DashboardStateProps } from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): DashboardStateProps => ({
   stats: initialStats,

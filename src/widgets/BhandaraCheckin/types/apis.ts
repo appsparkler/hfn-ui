@@ -1,8 +1,5 @@
-import {
-  AbhyasiCheckinData,
-  CheckinEmailOrMobileUserDetails,
-  CheckinsAggregateData,
-} from "./index";
+import { CheckinsAggregateData } from "@hfn-checkins/types";
+import { AbhyasiCheckinData, CheckinEmailOrMobileUserDetails } from "./index";
 
 export interface CheckinWithEmailOrMobileApi {
   (userDetails: CheckinEmailOrMobileUserDetails): boolean;

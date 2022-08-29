@@ -1,4 +1,6 @@
-export const initialStats = {
+import { CheckinsAggregateData } from "@hfn-checkins/types";
+
+export const initialStats: CheckinsAggregateData = {
   abhyasiIdCheckin: 0,
   checkinsWithEmail: 0,
   checkinsWithMobile: 0,
@@ -9,4 +11,5 @@ export const initialStats = {
   female: 0,
   male: 0,
   unspecified: 0,
+  dataAppendedForPreviousCheckins: false,
 };

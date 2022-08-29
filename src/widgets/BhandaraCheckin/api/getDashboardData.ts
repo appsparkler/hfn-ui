@@ -1,9 +1,7 @@
-import {
-  CheckinsAggregateData,
-  GetDashboardDataApi,
-} from "widgets/BhandaraCheckin/types";
+import { GetDashboardDataApi } from "widgets/BhandaraCheckin/types";
 import { firestoreDb } from "widgets/BhandaraCheckin/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { CheckinsAggregateData } from "@hfn-checkins/types";
 
 export const getDashboardData: GetDashboardDataApi = async () => {
   try {

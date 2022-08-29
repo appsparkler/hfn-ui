@@ -1,4 +1,4 @@
-import { CheckinsAggregateData } from "../aggregations";
+import { CheckinsAggregateData } from "@hfn-checkins/types";
 
 export interface DashboardStateProps {
   stats: CheckinsAggregateData;

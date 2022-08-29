@@ -34,6 +34,7 @@ dashboard.args = {
       Telangana: 40,
     },
     unspecified: 0,
+    dataAppendedForPreviousCheckins: false,
   },
 };
 
