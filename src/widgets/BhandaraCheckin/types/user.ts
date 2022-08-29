@@ -1,5 +1,3 @@
-import { CheckinEmailOrMobileUserDetails } from "@hfn-checkins/types";
-
 export type FormUserDetailsValueWrapper<T> = {
   show?: boolean;
   isValid?: boolean;
@@ -17,14 +15,3 @@ export type FormUserDetails = {
   ageGroup: FormUserDetailsValueWrapper<string>;
   gender: FormUserDetailsValueWrapper<string>;
 };
-
-export type AbhyasiCheckinData = {
-  abhyasiId: string;
-  timestamp: number;
-  deviceId: string;
-};
-
-export type CheckinEmailOrMobileUserData = {
-  timestamp: number;
-  deviceId: string;
-} & CheckinEmailOrMobileUserDetails;

@@ -1,10 +1,12 @@
-import { CheckinEmailOrMobileUserDetails } from "@hfn-checkins/types";
+import {
+  CheckinEmailOrMobileUserDetails,
+  IAbhyasiCheckinApiStoreData,
+} from "@hfn-checkins/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { map } from "lodash/fp";
 import { v4 as uuid } from "uuid";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import {
-  AbhyasiCheckinData,
   OfflineCacheData,
   ThunkApiConfig,
 } from "widgets/BhandaraCheckin/types";
@@ -27,8 +29,8 @@ export const getOfflineData = createAsyncThunk<any, undefined, ThunkApiConfig>(
       if (cachedData !== false) {
         const getOfflineData = map<OfflineCacheData, OfflineDataItem>(
           (dataItem) => {
-            if ((dataItem as AbhyasiCheckinData).abhyasiId) {
-              const { abhyasiId } = dataItem as AbhyasiCheckinData;
+            if ((dataItem as IAbhyasiCheckinApiStoreData).abhyasiId) {
+              const { abhyasiId } = dataItem as IAbhyasiCheckinApiStoreData;
               return {
                 id: uuid(),
                 info: abhyasiId,
