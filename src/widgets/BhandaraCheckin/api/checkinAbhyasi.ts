@@ -1,5 +1,5 @@
 import {
-  AbhyasiCheckinApiStoreData,
+  IAbhyasiCheckinApiStoreData,
   CheckinAbhyasiApi,
 } from "widgets/BhandaraCheckin/types";
 import { LocalStorageKeys } from "../constants";
@@ -16,7 +16,7 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
 
 export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
   try {
-    const data: AbhyasiCheckinApiStoreData = {
+    const data: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),

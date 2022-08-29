@@ -1,7 +1,10 @@
+import {
+  CheckinEmailOrMobileUserDetails,
+  GenderType,
+} from "@hfn-checkins/types";
 import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
-import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
 import {
   checkinWithEmailOrMobile,
   isUserCheckedIn,
@@ -36,7 +39,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
       email: String(email.value?.toLowerCase()),
-      gender: String(gender.value),
+      gender: String(gender.value) as GenderType,
       city: String(city.value?.toUpperCase()),
       state: String(state.value?.toUpperCase()),
       country: String(country.value?.toUpperCase()),
@@ -73,6 +76,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
         );
       }
     }
+
     dispatch(updateDetailsActions.stopProcessing());
   },
 });

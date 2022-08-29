@@ -1,18 +1,7 @@
-import { CheckinTypesEnum } from "@hfn-checkins/types";
-
-type EmailOrMobileDetail =
-  | { mobile: string }
-  | { email: string }
-  | { email: string; mobile: string };
-
-export type CheckinEmailOrMobileUserDetails = {
-  fullName: string;
-  ageGroup: string;
-  gender: string;
-  city: string;
-  state: string;
-  country: string;
-} & EmailOrMobileDetail;
+import {
+  CheckinEmailOrMobileUserDetails,
+  CheckinTypesEnum,
+} from "@hfn-checkins/types";
 
 export type FormUserDetailsValueWrapper<T> = {
   show?: boolean;
@@ -43,12 +32,12 @@ export type CheckinEmailOrMobileUserData = {
   deviceId: string;
 } & CheckinEmailOrMobileUserDetails;
 
-export type AbhyasiCheckinApiStoreData = {
+export interface IAbhyasiCheckinApiStoreData {
   abhyasiId: string;
   deviceId: string;
   timestamp: number;
   type: CheckinTypesEnum.AbhyasiId;
-};
+}
 
 export type CheckinWithEmailOrMobileApiStoreData =
   CheckinEmailOrMobileUserDetails & {

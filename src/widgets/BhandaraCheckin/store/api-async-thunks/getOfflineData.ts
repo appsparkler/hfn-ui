@@ -1,10 +1,10 @@
+import { CheckinEmailOrMobileUserDetails } from "@hfn-checkins/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { map } from "lodash/fp";
 import { v4 as uuid } from "uuid";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import {
   AbhyasiCheckinData,
-  CheckinEmailOrMobileUserDetails,
   OfflineCacheData,
   ThunkApiConfig,
 } from "widgets/BhandaraCheckin/types";

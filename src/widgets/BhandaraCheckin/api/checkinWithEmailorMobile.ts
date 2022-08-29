@@ -1,12 +1,14 @@
 import {
-  CheckinEmailOrMobileUserDetails,
   CheckinWithEmailOrMobileApi,
   CheckinWithEmailOrMobileApiStoreData,
 } from "widgets/BhandaraCheckin/types";
 import { checkinsCollection } from "../firebase";
 import { addDoc } from "firebase/firestore";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
-import { CheckinTypesEnum } from "@hfn-checkins/types";
+import {
+  CheckinEmailOrMobileUserDetails,
+  CheckinTypesEnum,
+} from "@hfn-checkins/types";
 
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
