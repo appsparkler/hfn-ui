@@ -118,6 +118,37 @@ export const Dashboard = ({
               </Typography>
             </Vertical>
           </Horizontal>
+          <InfoTable
+            title="Summary"
+            data={[
+              {
+                id: "abhyasi-id-checkins",
+                name: "Abhyasi ID Checkins",
+                value: stats.abhyasiIdCheckin,
+              },
+              {
+                id: "email-or-mobile-checkins-count",
+                name: "Email or Mobile Checkins",
+                value: stats.emailOrMobileCheckin,
+              },
+              {
+                id: "email-checkins-count",
+                name: "Email Checkins",
+                value: stats.checkinsWithEmail,
+              },
+              {
+                id: "mobile-checkins-count",
+                name: "Mobile Checkins",
+                value: stats.checkinsWithMobile,
+              },
+              {
+                id: "email-and-mobile-checkins-count",
+                name: "Email and Mobile Checkins",
+                value: stats.checkinsWithEmailAndMobile,
+              },
+            ]}
+          />
+
           <Vertical gap={2}>
             <InfoTable title={"Country"} data={getSortedData(stats.country)} />
             <InfoTable title={"State"} data={getSortedData(stats.state)} />
@@ -145,7 +176,7 @@ function InfoTable({
   data: { id: string; name: string; value: number }[];
 }) {
   return (
-    <TableContainer component={Paper} sx={{ p: 1 }}>
+    <TableContainer component={Paper} sx={{ p: 1, maxHeight: 250 }}>
       <Typography variant="h4">{title}</Typography>
       <Table sx={{ width: "100%" }}>
         <TableBody>
