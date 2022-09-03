@@ -4,6 +4,7 @@ export const initialStats: CheckinsAggregateData = {
   abhyasiIdCheckin: 0,
   checkinsWithEmail: 0,
   checkinsWithMobile: 0,
+  checkinsWithEmailAndMobile: 0,
   city: {},
   country: {},
   state: {},

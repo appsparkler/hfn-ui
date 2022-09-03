@@ -2021,10 +2021,10 @@
     protobufjs "^6.11.3"
     yargs "^16.2.0"
 
-"@hfn-checkins/types@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@hfn-checkins/types/-/types-1.2.0.tgz#f0cc77da47b2547e277dd594866fde1b1f0c4311"
-  integrity sha512-+EziC8z+eIaHA8gHbeRW5xEzEZC/TnetWvJvH4Ew/5NPPquflOwj1EVKJz4bdm3XVxeWWqm3iYLClJnqaFk8Dw==
+"@hfn-checkins/types@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hfn-checkins/types/-/types-2.0.0.tgz#a4adf64f4d7eb0bcc6833fdc94b6eafb5bf9c167"
+  integrity sha512-ZerHuV+vhzmagiOUG5oAmOEPYf6LY/uQa+HhKNpp/tP46MGNQnWenpDAKW20hvo2h0ylQuiH7XssvD9WNtJU9Q==
   dependencies:
     "@rushstack/eslint-config" "^2.6.2"
     "@rushstack/heft" "0.45.2"

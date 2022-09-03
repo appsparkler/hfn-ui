@@ -21,6 +21,7 @@ export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
       type: CheckinTypesEnum.AbhyasiId,
+      updatedInReport: false,
     };
 
     addDoc(checkinsCollection, data);

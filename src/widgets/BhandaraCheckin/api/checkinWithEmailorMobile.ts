@@ -26,6 +26,7 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
       type: CheckinTypesEnum.EmailOrMobile,
+      updatedInReport: false,
     };
     addDoc(checkinsCollection, emailOrMobileCheckinData);
     return true;

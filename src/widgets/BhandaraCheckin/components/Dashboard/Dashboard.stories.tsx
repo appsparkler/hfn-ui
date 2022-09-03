@@ -35,6 +35,7 @@ dashboard.args = {
     },
     unspecified: 0,
     dataAppendedForPreviousCheckins: false,
+    checkinsWithEmailAndMobile: 2200,
   },
 };
 
