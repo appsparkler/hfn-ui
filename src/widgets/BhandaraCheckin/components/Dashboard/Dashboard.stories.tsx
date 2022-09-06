@@ -17,11 +17,7 @@ dashboard.args = {
     emailOrMobileCheckin: 3400,
     checkinsWithEmail: 400,
     checkinsWithMobile: 3000,
-    city: {
-      Ahmedabad: 10,
-      Bangalore: 20,
-      Chennai: 30,
-    },
+    city: {},
     country: {
       India: 100,
       USA: 200,

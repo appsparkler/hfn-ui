@@ -150,9 +150,21 @@ export const Dashboard = ({
           />
 
           <Vertical gap={2}>
-            <InfoTable title={"Country"} data={getSortedData(stats.country)} />
-            <InfoTable title={"State"} data={getSortedData(stats.state)} />
-            <InfoTable title={"City"} data={getSortedData(stats.city)} />
+            <InfoTable
+              title={"Country"}
+              data={getSortedData(stats.country)}
+              hideIfNoData
+            />
+            <InfoTable
+              title={"State"}
+              data={getSortedData(stats.state)}
+              hideIfNoData
+            />
+            <InfoTable
+              title={"City"}
+              data={getSortedData(stats.city)}
+              hideIfNoData
+            />
           </Vertical>
         </>
       )}
@@ -171,10 +183,15 @@ const getSortedData = (
 function InfoTable({
   title = "",
   data = [],
+  hideIfNoData,
 }: {
   title: string;
   data: { id: string; name: string; value: number }[];
+  hideIfNoData?: boolean;
 }) {
+  if (Object.keys(data).length === 0 && hideIfNoData) {
+    return null;
+  }
   return (
     <TableContainer component={Paper} sx={{ p: 1, maxHeight: 250 }}>
       <Typography variant="h4">{title}</Typography>
