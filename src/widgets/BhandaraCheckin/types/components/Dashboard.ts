@@ -2,6 +2,7 @@ import { CheckinsAggregateData } from "@hfn-checkins/types";
 
 export interface DashboardStateProps {
   stats: CheckinsAggregateData;
+  isFetching?: boolean;
 }
 
 export interface DashboardDispatchProps {

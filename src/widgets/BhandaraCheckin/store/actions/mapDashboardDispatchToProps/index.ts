@@ -13,16 +13,20 @@ export const mapDashboardDispatchToProps: MapDispatchToProps<
       dispatch(HOME());
     },
     onRefresh: async () => {
+      dispatch(dashboardActions.fetchStart());
       const res = await dispatch<any>(getDashboardData());
       if (res.meta.requestStatus === "fulfilled") {
         dispatch(dashboardActions.updateStats(res.payload));
       }
+      dispatch(dashboardActions.fetchEnd());
     },
     onMount: async () => {
+      dispatch(dashboardActions.fetchStart());
       const res = await dispatch<any>(getDashboardData());
       if (res.meta.requestStatus === "fulfilled") {
         dispatch(dashboardActions.updateStats(res.payload));
       }
+      dispatch(dashboardActions.fetchEnd());
     },
   };
 };

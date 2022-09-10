@@ -5,6 +5,7 @@ import { DashboardStateProps } from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): DashboardStateProps => ({
   stats: initialStats,
+  isFetching: false,
 });
 
 const dashboardSlice = createSlice({
@@ -13,6 +14,12 @@ const dashboardSlice = createSlice({
   reducers: {
     updateStats: (state, { payload }: { payload: CheckinsAggregateData }) => {
       state.stats = payload;
+    },
+    fetchStart: (state) => {
+      state.isFetching = true;
+    },
+    fetchEnd: (state) => {
+      state.isFetching = false;
     },
   },
 });
