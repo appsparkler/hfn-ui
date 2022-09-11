@@ -2006,6 +2006,11 @@
     protobufjs "^6.11.3"
     yargs "^16.2.0"
 
+"@hfn-checkins/types@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@hfn-checkins/types/-/types-2.0.1.tgz#dbc6bddbcf9d78862dd6910cd8c1fb03d360090f"
+  integrity sha512-bSwuDrSdcl9CDUDksEmoGR27T9vrROc6dMFQfoAu3GLM8O2p/izQgsuP5/9DxiVnfQA58zJk0sQEjcJVLbI79A==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"

@@ -1,12 +1,12 @@
-import {
-  CheckinEmailOrMobileUserDetails,
-  CheckinTypesEnum,
-  CheckinWithEmailOrMobileApi,
-  CheckinWithEmailOrMobileApiStoreData,
-} from "widgets/BhandaraCheckin/types";
+import { CheckinWithEmailOrMobileApi } from "widgets/BhandaraCheckin/types";
 import { checkinsCollection } from "../firebase";
 import { addDoc } from "firebase/firestore";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import {
+  CheckinEmailOrMobileUserDetails,
+  CheckinTypesEnum,
+  CheckinWithEmailOrMobileApiStoreData,
+} from "@hfn-checkins/types";
 
 const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
 
@@ -26,6 +26,7 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
       deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
       type: CheckinTypesEnum.EmailOrMobile,
+      updatedInReport: false,
     };
     addDoc(checkinsCollection, emailOrMobileCheckinData);
     return true;

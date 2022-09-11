@@ -20,6 +20,7 @@ import { uuidv4 } from "@firebase/util";
 
 export const Dashboard = ({
   stats = initialStats,
+  isFetching = false,
   onRefresh = noop,
   onReturn = noop,
 }: DashboardProps) => {
@@ -45,12 +46,24 @@ export const Dashboard = ({
     return `${percent.toFixed(2)}%`;
   }, [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]);
 
-  useEffect(onRefresh, [onRefresh]);
+  const showSummary = useMemo<boolean>(() => {
+    const {
+      abhyasiIdCheckin,
+      emailOrMobileCheckin,
+      checkinsWithEmail,
+      checkinsWithMobile,
+      checkinsWithEmailAndMobile,
+    } = stats;
+    return (
+      Boolean(abhyasiIdCheckin) ||
+      Boolean(emailOrMobileCheckin) ||
+      Boolean(checkinsWithEmail) ||
+      Boolean(checkinsWithMobile) ||
+      Boolean(checkinsWithEmailAndMobile)
+    );
+  }, [stats]);
 
-  const noData = useMemo(
-    () => stats.abhyasiIdCheckin === 0 && stats.emailOrMobileCheckin === 0,
-    [stats.abhyasiIdCheckin, stats.emailOrMobileCheckin]
-  );
+  useEffect(onRefresh, [onRefresh]);
 
   return (
     <Vertical
@@ -78,7 +91,7 @@ export const Dashboard = ({
         </Horizontal>
       </Horizontal>
 
-      {noData ? (
+      {isFetching ? (
         <Vertical alignItems={"center"} mt={5}>
           <CircularProgress />
         </Vertical>
@@ -118,10 +131,55 @@ export const Dashboard = ({
               </Typography>
             </Vertical>
           </Horizontal>
+          {showSummary ? (
+            <InfoTable
+              title="Summary"
+              data={[
+                {
+                  id: "abhyasi-id-checkins",
+                  name: "Abhyasi ID Checkins",
+                  value: stats.abhyasiIdCheckin,
+                },
+                {
+                  id: "email-or-mobile-checkins-count",
+                  name: "Email or Mobile Checkins",
+                  value: stats.emailOrMobileCheckin,
+                },
+                {
+                  id: "email-checkins-count",
+                  name: "Email Checkins",
+                  value: stats.checkinsWithEmail,
+                },
+                {
+                  id: "mobile-checkins-count",
+                  name: "Mobile Checkins",
+                  value: stats.checkinsWithMobile,
+                },
+                {
+                  id: "email-and-mobile-checkins-count",
+                  name: "Email and Mobile Checkins",
+                  value: stats.checkinsWithEmailAndMobile,
+                },
+              ]}
+            />
+          ) : null}
+
           <Vertical gap={2}>
-            <InfoTable title={"Country"} data={getSortedData(stats.country)} />
-            <InfoTable title={"State"} data={getSortedData(stats.state)} />
-            <InfoTable title={"City"} data={getSortedData(stats.city)} />
+            <InfoTable
+              title={"Country"}
+              data={getSortedData(stats.country)}
+              hideIfNoData
+            />
+            <InfoTable
+              title={"State"}
+              data={getSortedData(stats.state)}
+              hideIfNoData
+            />
+            <InfoTable
+              title={"City"}
+              data={getSortedData(stats.city)}
+              hideIfNoData
+            />
           </Vertical>
         </>
       )}
@@ -140,12 +198,17 @@ const getSortedData = (
 function InfoTable({
   title = "",
   data = [],
+  hideIfNoData,
 }: {
   title: string;
   data: { id: string; name: string; value: number }[];
+  hideIfNoData?: boolean;
 }) {
+  if (Object.keys(data).length === 0 && hideIfNoData) {
+    return null;
+  }
   return (
-    <TableContainer component={Paper} sx={{ p: 1 }}>
+    <TableContainer component={Paper} sx={{ p: 1, maxHeight: 250 }}>
       <Typography variant="h4">{title}</Typography>
       <Table sx={{ width: "100%" }}>
         <TableBody>

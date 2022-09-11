@@ -1,12 +1,8 @@
-export enum ENVS {
-  PROD = "production",
-  DEV = "development",
-  DEV_LOCAL = "developmentLocal",
-}
+export type Environments = "development" | "production" | "test";
 
 export interface Env {
-  ENV?: ENVS;
-  DASHBOARD_PASSWORD?: string;
+  NODE_ENV: Environments;
+  EMULATOR: boolean;
   FIREBASE: {
     apiKey: string;
     authDomain: string;

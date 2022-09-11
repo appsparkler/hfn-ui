@@ -24,10 +24,6 @@ import {
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
-import {
-  turnOffOfflineMode,
-  turnOnOfflineMode,
-} from "widgets/BhandaraCheckin/firebase";
 import { handleClickScan } from "./handleClickScan";
 
 export const mapDispatchToProps: MapDispatchToProps<
@@ -43,15 +39,6 @@ export const mapDispatchToProps: MapDispatchToProps<
   },
   onClickOfflineData: () => {
     dispatch(OFFLINE_DATA());
-  },
-  onSwitchOfflineMode: async (isOfflineMode) => {
-    if (isOfflineMode) {
-      await turnOnOfflineMode();
-      dispatch(mainSectionActions.enableOfflineMode());
-    } else {
-      await turnOffOfflineMode();
-      dispatch(mainSectionActions.disableOfflineMode());
-    }
   },
   onChange: (updatedValue) => {
     dispatch(

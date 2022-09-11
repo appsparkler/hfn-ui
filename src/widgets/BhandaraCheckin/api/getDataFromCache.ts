@@ -1,10 +1,10 @@
 import { getDocsFromCache } from "firebase/firestore";
 import { checkinsCollection } from "../firebase";
 import {
-  AbhyasiCheckinData,
   GetDataFromCacheApi,
   OfflineCacheData,
 } from "widgets/BhandaraCheckin/types";
+import { IAbhyasiCheckinApiStoreData } from "@hfn-checkins/types";
 
 export const getDataFromCache: GetDataFromCacheApi = async () => {
   try {
@@ -13,7 +13,7 @@ export const getDataFromCache: GetDataFromCacheApi = async () => {
     const checkinDocs = await getDocsFromCache(checkinsCollection);
     checkinDocs.forEach((doc) => {
       if (doc.metadata.hasPendingWrites) {
-        data.push(doc.data() as AbhyasiCheckinData);
+        data.push(doc.data() as IAbhyasiCheckinApiStoreData);
       }
     });
     return data;

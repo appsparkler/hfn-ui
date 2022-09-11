@@ -1,20 +1,8 @@
-import { CheckinsAggregateData } from "../aggregations";
-
-export interface DashboardV0StateProps {
-  password?: string;
-  total?: number;
-}
-
-export interface DashboardV0DispatchProps {
-  onRefresh?: () => void;
-  onMount?: () => void;
-  onReturn?: () => void;
-}
-
-export type DashboardV0Props = DashboardV0StateProps & DashboardV0DispatchProps;
+import { CheckinsAggregateData } from "@hfn-checkins/types";
 
 export interface DashboardStateProps {
   stats: CheckinsAggregateData;
+  isFetching?: boolean;
 }
 
 export interface DashboardDispatchProps {

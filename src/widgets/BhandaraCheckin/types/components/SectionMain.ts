@@ -12,7 +12,6 @@ export interface SectionMainStateProps {
   isScannerOn?: boolean;
   scanBtnDisabled?: boolean;
   scanBtnProcessing?: boolean;
-  isOfflineMode?: boolean;
 }
 
 export interface SectionMainDispatchProps {
@@ -21,7 +20,6 @@ export interface SectionMainDispatchProps {
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickScan: () => void;
   onSwitchScanner?: (checked: boolean) => void;
-  onSwitchOfflineMode?: (checked: boolean) => void;
   onClickOfflineData?: () => void;
   onClickDashboard?: () => void;
   onMount?: () => void;

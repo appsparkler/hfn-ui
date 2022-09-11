@@ -1,8 +1,8 @@
 import {
-  AbhyasiCheckinData,
   CheckinEmailOrMobileUserDetails,
   CheckinsAggregateData,
-} from "./index";
+  IAbhyasiCheckinApiStoreData,
+} from "@hfn-checkins/types";
 
 export interface CheckinWithEmailOrMobileApi {
   (userDetails: CheckinEmailOrMobileUserDetails): boolean;
@@ -14,7 +14,7 @@ export interface CheckinAbhyasiApi {
 
 export type OfflineCacheData =
   | CheckinEmailOrMobileUserDetails
-  | AbhyasiCheckinData;
+  | IAbhyasiCheckinApiStoreData;
 
 export interface GetDataFromCacheApi {
   (): Promise<OfflineCacheData[] | false>;

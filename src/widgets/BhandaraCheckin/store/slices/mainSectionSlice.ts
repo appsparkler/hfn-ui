@@ -1,18 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
-import { turnOnOfflineMode } from "widgets/BhandaraCheckin/firebase";
 import { SectionMainStateProps } from "widgets/BhandaraCheckin/types";
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(
     localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
   );
-  const isOfflineMode = Boolean(
-    localStorage.getItem(LocalStorageKeys.OFFLINE_MODE)
-  );
-  if (isOfflineMode) {
-    turnOnOfflineMode();
-  }
   const mode = localStorage.getItem(LocalStorageKeys.MODE);
   const isDarkMode = mode === "dark";
   return {
@@ -24,7 +17,6 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
-    isOfflineMode,
   };
 };
 
@@ -79,12 +71,6 @@ const mainSectionSlice = createSlice({
       ...state,
       ...payload,
     }),
-    enableOfflineMode: (state) => {
-      state.isOfflineMode = true;
-    },
-    disableOfflineMode: (state) => {
-      state.isOfflineMode = false;
-    },
   },
 });
 
