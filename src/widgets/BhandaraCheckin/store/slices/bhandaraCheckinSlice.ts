@@ -8,6 +8,7 @@ const getInitialState = (): BhandaraCheckinStateProps => {
   );
   return {
     renderScanner,
+    renderApp: false,
   };
 };
 
@@ -21,6 +22,9 @@ const bhandaraCheckinSlice = createSlice({
     },
     unmountScanner: (state) => {
       state.renderScanner = false;
+    },
+    renderApp: (state) => {
+      state.renderApp = true;
     },
   },
 });
