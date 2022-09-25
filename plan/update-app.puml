@@ -1,0 +1,14 @@
+@startuml updating the app
+title Updating the app
+
+start
+:GET latest version of app;
+:GET version installed on device;
+if (latest version > installed version) then (yes)
+  :download latest version;
+  :install latest version;
+else (no)
+  :do nothing;
+endif
+stop
+@enduml
