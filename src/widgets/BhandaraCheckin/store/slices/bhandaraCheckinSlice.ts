@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BhandaraCheckinViewStateProps } from "../../components/BhandaraCheckin/BhandaraCheckinView";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { BhandaraCheckinViewStateProps } from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): BhandaraCheckinViewStateProps => {
   const renderScanner = Boolean(
