@@ -1,1 +1,1 @@
-export * from "./AppUpdater";
+export * from "./ConnectedAppUpdater";
