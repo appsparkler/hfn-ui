@@ -4,7 +4,7 @@ import { pages } from "widgets/BhandaraCheckin/routing";
 import { Box } from "@mui/material";
 import { BarcodeScannerConnected } from "./BarcodeScannerConnected";
 import { AppStatusIndicator } from "components";
-import { AppUpdater } from "../AppUpdater";
+import { ConnectedAppUpdater } from "../AppUpdater";
 
 export type BhandaraCheckinWidgetProps = {
   apis: BhandaraCheckinAPIs;
@@ -31,7 +31,7 @@ export const BhandaraCheckinView = ({
           {renderScanner ? <BarcodeScannerConnected /> : null}
         </>
       ) : (
-        <AppUpdater />
+        <ConnectedAppUpdater />
       )}
       <Box position="fixed" left={2} bottom={2}>
         <AppStatusIndicator />
