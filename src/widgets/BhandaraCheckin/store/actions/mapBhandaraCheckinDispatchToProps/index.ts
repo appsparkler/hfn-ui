@@ -1,5 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { noop } from "lodash/fp";
+import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
 import { BhandaraCheckinDispatchProps } from "widgets/BhandaraCheckin/types";
 import { getAppVersionNumber } from "../../api-async-thunks";
 import {
