@@ -24,6 +24,7 @@ export const mapBhandaraCheckinDispatchToProps = (
           setAppVersionNumberOnLocalStorage(appVersionNumberOnApi);
           dispatch(appUpdaterActions.updatingApp());
           setTimeout(() => {
+            dispatch(bhandaraCheckinActions.renderApp());
             refreshApp(dispatch);
           }, 1000);
         } else {
