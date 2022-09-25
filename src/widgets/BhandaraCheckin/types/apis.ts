@@ -32,6 +32,10 @@ export interface GetDashboardDataApi {
   (): Promise<CheckinsAggregateData>;
 }
 
+export interface GetAppVersion {
+  (): Promise<string>;
+}
+
 export type BhandaraCheckinAPIs = {
   checkinAbhyasi: CheckinAbhyasiApi;
   checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi;
@@ -39,4 +43,5 @@ export type BhandaraCheckinAPIs = {
   isAbhyasiCheckedIn: IsAbhyasiCheckedInApi;
   isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi;
   getDashboardData: GetDashboardDataApi;
+  getAppVersion: GetAppVersion;
 };
