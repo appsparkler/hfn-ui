@@ -1,15 +1,15 @@
 import { PageEnum } from "../routing";
 
-export type BhandaraCheckinViewStateProps = {
+export type BhandaraCheckinStateProps = {
   renderApp?: boolean;
   renderScanner?: boolean;
   page?: PageEnum;
 };
 
-export interface BhandaraCheckinViewActionProps {
+export interface BhandaraCheckinDispatchProps {
   onMount?: () => void;
   onUnmount?: () => void;
 }
 
-export type BhandaraCheckinViewProps = BhandaraCheckinViewStateProps &
-  BhandaraCheckinViewActionProps;
+export type BhandaraCheckinViewProps = BhandaraCheckinStateProps &
+  BhandaraCheckinDispatchProps;
