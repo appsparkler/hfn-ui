@@ -22,18 +22,23 @@ export const mapBhandaraCheckinDispatchToProps = (
         const appVersionNumberOnApi = Number(response.payload);
         if (appVersionNumberOnApi > appVersionNumberInLocalStorage) {
           setAppVersionNumberOnLocalStorage(appVersionNumberOnApi);
-          dispatch(bhandaraCheckinActions.renderApp());
-          await refreshApp(dispatch);
+          dispatch(appUpdaterActions.updatingApp());
+          setTimeout(() => {
+            refreshApp(dispatch);
+          }, 1000);
         } else {
           dispatch(appUpdaterActions.appIsUpdated());
-          dispatch(bhandaraCheckinActions.renderApp());
-          dispatch(HOME());
+          setTimeout(() => {
+            dispatch(bhandaraCheckinActions.renderApp());
+            dispatch(HOME());
+          }, 1000);
         }
       }
     } else {
       dispatch(
         snackbarActions.openSnackbar({
-          children: "You do not seem to have a stable internet connection.",
+          children:
+            "The app on your device may be outdated.  Please connect to the internet and refresh the app.",
         })
       );
       dispatch(bhandaraCheckinActions.renderApp());

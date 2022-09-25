@@ -3,6 +3,9 @@ import { AppUpdaterProps } from "widgets/BhandaraCheckin/types";
 
 const initialState: AppUpdaterProps = {
   progressText: "Checking for updates...",
+  inProgress: true,
+  success: false,
+  warning: false,
 };
 
 const appUpdaterSlice = createSlice({
@@ -11,12 +14,21 @@ const appUpdaterSlice = createSlice({
   reducers: {
     checkForUpdates: (state) => {
       state.progressText = "Checking for updates...";
+      state.inProgress = true;
+      state.warning = false;
+      state.success = false;
     },
     updatingApp: (state) => {
-      state.progressText = "Updating app...";
+      state.progressText = "App is out of date.  Updating...";
+      state.inProgress = false;
+      state.warning = true;
+      state.success = false;
     },
     appIsUpdated: (state) => {
-      state.progressText = "App is updated";
+      state.progressText = "App is up to date";
+      state.inProgress = false;
+      state.warning = false;
+      state.success = true;
     },
   },
 });

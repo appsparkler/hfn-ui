@@ -14,10 +14,9 @@ export const apis: BhandaraCheckinAPIs = {
   isUserAlreadyCheckedIn,
   getDashboardData,
   getAppVersion: () => {
-    // 1000 ms delayed promise
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve("1");
+        resolve("6");
       }, 1000);
     });
   },
