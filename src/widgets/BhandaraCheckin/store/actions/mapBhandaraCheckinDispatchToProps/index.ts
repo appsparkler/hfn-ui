@@ -23,9 +23,9 @@ export const mapBhandaraCheckinDispatchToProps = (
         if (appVersionNumberOnApi > appVersionNumberInLocalStorage) {
           setAppVersionNumberOnLocalStorage(appVersionNumberOnApi);
           dispatch(appUpdaterActions.updatingApp());
-          setTimeout(() => {
+          setTimeout(async () => {
+            await refreshApp(dispatch);
             dispatch(bhandaraCheckinActions.renderApp());
-            refreshApp(dispatch);
           }, 1000);
         } else {
           dispatch(appUpdaterActions.appIsUpdated());

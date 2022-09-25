@@ -28,12 +28,14 @@ export const getUserDetailsForEmailOrMobile = (
 };
 
 export async function refreshApp(dispatch: Dispatch<Action<any>>) {
-  const registrations = await navigator.serviceWorker.getRegistrations();
-  const unregistrationPromises = registrations.map((registration) =>
-    registration.unregister()
-  );
-  await Promise.all(unregistrationPromises);
-  register();
-  dispatch(HOME());
-  window.location.reload();
+  if (navigator.serviceWorker) {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    const unregistrationPromises = registrations.map((registration) =>
+      registration.unregister()
+    );
+    await Promise.all(unregistrationPromises);
+    register();
+    dispatch(HOME());
+    window.location.reload();
+  }
 }
