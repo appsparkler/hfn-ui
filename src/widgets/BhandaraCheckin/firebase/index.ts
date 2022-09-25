@@ -46,3 +46,8 @@ export const checkinsCollection = collection(
   firestoreDb,
   FirestoreCollections.CHECKINS
 );
+
+export const metaCollection = collection(
+  firestoreDb,
+  FirestoreCollections.META
+);
