@@ -1,8 +1,12 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { noop } from "lodash/fp";
 import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
 import { BhandaraCheckinDispatchProps } from "widgets/BhandaraCheckin/types";
-import { getAppVersionNumber } from "../../api-async-thunks";
+import {
+  getAppVersionNumber,
+  signOutAnonymously,
+  signInAnonymously,
+} from "widgets/BhandaraCheckin/store/api-async-thunks";
+
 import {
   appUpdaterActions,
   bhandaraCheckinActions,
@@ -15,6 +19,7 @@ export const mapBhandaraCheckinDispatchToProps = (
 ): BhandaraCheckinDispatchProps => ({
   onMount: async () => {
     if (navigator.onLine) {
+      await dispatch<any>(signInAnonymously());
       const appVersionNumberInLocalStorage: number =
         getAppVersionNumberFromLocalStorage();
       const response = await dispatch<any>(getAppVersionNumber());
@@ -39,13 +44,17 @@ export const mapBhandaraCheckinDispatchToProps = (
       dispatch(
         snackbarActions.openSnackbar({
           children:
-            "The app on your device may be outdated.  Please connect to the internet and refresh the app.",
+            "The app on your device may be outdated due to which your entries might not get checked in.  Please connect to the internet and refresh the app.",
+          severity: "warning",
+          autoHideDuration: 10000,
         })
       );
       dispatch(bhandaraCheckinActions.renderApp());
     }
   },
-  onUnmount: noop,
+  onUnmount: () => {
+    dispatch<any>(signOutAnonymously());
+  },
 });
 
 function setAppVersionNumberOnLocalStorage(appVersionNumber: number) {

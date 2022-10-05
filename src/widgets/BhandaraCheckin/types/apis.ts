@@ -3,6 +3,7 @@ import {
   CheckinsAggregateData,
   IAbhyasiCheckinApiStoreData,
 } from "@hfn-checkins/types";
+import { noop } from "lodash/fp";
 
 export interface CheckinWithEmailOrMobileApi {
   (userDetails: CheckinEmailOrMobileUserDetails): boolean;
@@ -44,4 +45,6 @@ export type BhandaraCheckinAPIs = {
   isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi;
   getDashboardData: GetDashboardDataApi;
   getAppVersion: GetAppVersion;
+  signInAnonymously: () => Promise<void>;
+  signOutAnonymously: typeof noop;
 };
