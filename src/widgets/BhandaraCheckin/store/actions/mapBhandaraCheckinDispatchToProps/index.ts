@@ -1,8 +1,11 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { noop } from "lodash/fp";
 import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
 import { BhandaraCheckinDispatchProps } from "widgets/BhandaraCheckin/types";
-import { getAppVersionNumber } from "../../api-async-thunks";
+import {
+  getAppVersionNumber,
+  signOutAnonymously,
+} from "widgets/BhandaraCheckin/store/api-async-thunks";
+
 import {
   appUpdaterActions,
   bhandaraCheckinActions,
@@ -15,6 +18,7 @@ export const mapBhandaraCheckinDispatchToProps = (
 ): BhandaraCheckinDispatchProps => ({
   onMount: async () => {
     if (navigator.onLine) {
+      await dispatch<any>(signOutAnonymously());
       const appVersionNumberInLocalStorage: number =
         getAppVersionNumberFromLocalStorage();
       const response = await dispatch<any>(getAppVersionNumber());
@@ -45,7 +49,9 @@ export const mapBhandaraCheckinDispatchToProps = (
       dispatch(bhandaraCheckinActions.renderApp());
     }
   },
-  onUnmount: noop,
+  onUnmount: () => {
+    dispatch<any>(signOutAnonymously());
+  },
 });
 
 function setAppVersionNumberOnLocalStorage(appVersionNumber: number) {
