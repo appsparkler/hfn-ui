@@ -1,7 +1,7 @@
 import { MapDispatchToProps } from "react-redux";
-import { register } from "serviceWorkerRegistration";
 import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
 import { RefreshAppDispatchProps } from "widgets/BhandaraCheckin/types";
+import { refreshApp } from "../utils";
 
 export const mapRefreshAppDispatchToProps: MapDispatchToProps<
   RefreshAppDispatchProps,
@@ -13,14 +13,7 @@ export const mapRefreshAppDispatchToProps: MapDispatchToProps<
     },
     onRefresh: async () => {
       if (navigator.onLine) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        const unregistrationPromises = registrations.map((registration) =>
-          registration.unregister()
-        );
-        await Promise.all(unregistrationPromises);
-        register();
-        dispatch(HOME());
-        window.location.reload();
+        await refreshApp(dispatch);
       } else {
         alert("You do not seem to have a stable internet connection.");
       }

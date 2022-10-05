@@ -6,3 +6,4 @@ export * from "./updateDetailsSectionSlice";
 export * from "./envSlice";
 export * from "./dashboardSlice";
 export * from "./barcodeScannerSlice";
+export * from "./appUpdaterSlice";

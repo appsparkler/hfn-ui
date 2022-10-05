@@ -1,6 +1,7 @@
 import { BhandaraCheckinAPIs } from "widgets/BhandaraCheckin/types";
 import { checkinAbhyasi } from "./checkinAbhyasi";
 import { checkinWithEmailOrMobile } from "./checkinWithEmailorMobile";
+import { getAppVersion } from "./getAppVersion";
 import { getDashboardData } from "./getDashboardData";
 import { getDataFromCache } from "./getDataFromCache";
 import { isAbhyasiCheckedIn } from "./isAbhyasiCheckedIn";
@@ -13,4 +14,5 @@ export const apis: BhandaraCheckinAPIs = {
   isAbhyasiCheckedIn,
   isUserAlreadyCheckedIn,
   getDashboardData,
+  getAppVersion,
 };

@@ -1,0 +1,13 @@
+@startuml updating the app
+title Updating the app
+start
+:GET latest version of app from Firestore;
+:GET version installed on device from LocalStorage;
+if (latest version > installed version  && internetIsAvailable) then (yes)
+  :update (refresh) the app;
+  :update the version number in LocalStorage;
+else (no)
+  :do nothing;
+endif
+stop
+@enduml

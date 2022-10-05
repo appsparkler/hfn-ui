@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BhandaraCheckinViewStateProps } from "../../components/BhandaraCheckin/BhandaraCheckinView";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
+import { BhandaraCheckinStateProps } from "widgets/BhandaraCheckin/types";
 
-const getInitialState = (): BhandaraCheckinViewStateProps => {
+const getInitialState = (): BhandaraCheckinStateProps => {
   const renderScanner = Boolean(
     localStorage.getItem(LocalStorageKeys.TURN_ON_SCANNER)
   );
   return {
     renderScanner,
+    renderApp: false,
   };
 };
 
@@ -21,6 +22,9 @@ const bhandaraCheckinSlice = createSlice({
     },
     unmountScanner: (state) => {
       state.renderScanner = false;
+    },
+    renderApp: (state) => {
+      state.renderApp = true;
     },
   },
 });
