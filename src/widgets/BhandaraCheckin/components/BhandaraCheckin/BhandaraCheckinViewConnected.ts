@@ -2,6 +2,7 @@ import { connect, MapStateToProps } from "react-redux";
 import { RootState } from "../../store";
 import { BhandaraCheckinView } from "./BhandaraCheckinView";
 import { BhandaraCheckinViewStateProps } from "widgets/BhandaraCheckin/types";
+import { mapBhandaraCheckinViewDispatchToProps } from "widgets/BhandaraCheckin/store/actions/mapBhandaracheckinViewDispatchToProps";
 
 const mapStateToProps: MapStateToProps<
   BhandaraCheckinViewStateProps,
@@ -12,5 +13,7 @@ const mapStateToProps: MapStateToProps<
   page,
 });
 
-export const BhandaraCheckinViewConnected =
-  connect(mapStateToProps)(BhandaraCheckinView);
+export const BhandaraCheckinViewConnected = connect(
+  mapStateToProps,
+  mapBhandaraCheckinViewDispatchToProps
+)(BhandaraCheckinView);
