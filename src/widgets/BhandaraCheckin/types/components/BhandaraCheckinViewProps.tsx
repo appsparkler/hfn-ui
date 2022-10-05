@@ -6,10 +6,10 @@ export type BhandaraCheckinViewStateProps = {
   page?: PageEnum;
 };
 
-export type BhandaraCheckinDispatchProps = {
+export type BhandaraCheckinViewDispatchProps = {
   onMount?: typeof noop;
   onUnmount?: typeof noop;
 };
 
 export type BhandaraCheckinViewProps = BhandaraCheckinViewStateProps &
-  BhandaraCheckinDispatchProps;
+  BhandaraCheckinViewDispatchProps;
