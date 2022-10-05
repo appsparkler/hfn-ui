@@ -6,6 +6,4 @@ import { AppUpdater } from "./AppUpdater";
 export const mapStateToProps: MapStateToProps<AppUpdaterProps, {}, RootState> =
   ({ appUpdaterProps }) => appUpdaterProps;
 
-export const ConnectedAppUpdater = connect(mapStateToProps, () => {})(
-  AppUpdater
-);
+export const ConnectedAppUpdater = connect(mapStateToProps)(AppUpdater);

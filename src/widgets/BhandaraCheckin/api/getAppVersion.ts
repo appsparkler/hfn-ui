@@ -7,7 +7,8 @@ export const getAppVersion: GetAppVersion = async () => {
     const appMetaDocRef = doc(metaCollection, "app");
     const appMetaDoc = await getDoc(appMetaDocRef);
     if (appMetaDoc.exists()) {
-      return appMetaDoc.data()?.version;
+      const versionNumber = appMetaDoc.data()?.version;
+      return Number(versionNumber);
     }
     throw new Error("App Version not found");
   } catch (error) {

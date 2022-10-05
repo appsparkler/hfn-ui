@@ -33,7 +33,7 @@ export interface GetDashboardDataApi {
 }
 
 export interface GetAppVersion {
-  (): Promise<string>;
+  (): Promise<number>;
 }
 
 export type BhandaraCheckinAPIs = {
