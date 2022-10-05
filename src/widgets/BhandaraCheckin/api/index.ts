@@ -6,6 +6,8 @@ import { getDashboardData } from "./getDashboardData";
 import { getDataFromCache } from "./getDataFromCache";
 import { isAbhyasiCheckedIn } from "./isAbhyasiCheckedIn";
 import { isUserAlreadyCheckedIn } from "./isUserAlreadyCheckinIn";
+import { signInAnonymously } from "./signInAnonymously";
+import { signOutAnonymously } from "./signOutAnonymously";
 
 export const apis: BhandaraCheckinAPIs = {
   checkinAbhyasi,
@@ -15,4 +17,6 @@ export const apis: BhandaraCheckinAPIs = {
   isUserAlreadyCheckedIn,
   getDashboardData,
   getAppVersion,
+  signInAnonymously,
+  signOutAnonymously,
 };
