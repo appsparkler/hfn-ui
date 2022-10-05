@@ -4,6 +4,7 @@ import { BhandaraCheckinDispatchProps } from "widgets/BhandaraCheckin/types";
 import {
   getAppVersionNumber,
   signOutAnonymously,
+  signInAnonymously,
 } from "widgets/BhandaraCheckin/store/api-async-thunks";
 
 import {
@@ -18,7 +19,7 @@ export const mapBhandaraCheckinDispatchToProps = (
 ): BhandaraCheckinDispatchProps => ({
   onMount: async () => {
     if (navigator.onLine) {
-      await dispatch<any>(signOutAnonymously());
+      await dispatch<any>(signInAnonymously());
       const appVersionNumberInLocalStorage: number =
         getAppVersionNumberFromLocalStorage();
       const response = await dispatch<any>(getAppVersionNumber());
