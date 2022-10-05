@@ -8,19 +8,7 @@ import { useEffect } from "react";
 import { getAuth, signInAnonymously, signOut } from "firebase/auth";
 import { noop } from "lodash/fp";
 import { onUnmount } from "widgets/BhandaraCheckin/store/actions/barcodeScannerMapDispatchToProps/onUnmount";
-
-export type BhandaraCheckinViewStateProps = {
-  renderScanner?: boolean;
-  page?: PageEnum;
-};
-
-export type BhandaraCheckinDispatchProps = {
-  onMount?: typeof noop;
-  onUnmount?: typeof noop;
-};
-
-export type BhandaraCheckinViewProps = BhandaraCheckinViewStateProps &
-  BhandaraCheckinDispatchProps;
+import { BhandaraCheckinViewProps } from "widgets/BhandaraCheckin/types";
 
 export const BhandaraCheckinView = ({
   page = PageEnum.Home,
