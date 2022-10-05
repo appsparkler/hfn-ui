@@ -5,6 +5,7 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "browser": "dist/hfn-ui.min.js",
+  "license": "MIT",
   "files": [
     "dist"
   ],

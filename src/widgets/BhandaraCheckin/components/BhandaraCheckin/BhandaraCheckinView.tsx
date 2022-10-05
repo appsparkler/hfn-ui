@@ -1,13 +1,11 @@
-import { BhandaraCheckinAPIs, PageEnum } from "../../types";
+import { PageEnum } from "../../types";
 import { SnackbarConnected } from "./SnackbarConnected";
 import { pages } from "widgets/BhandaraCheckin/routing";
 import { Box } from "@mui/material";
 import { BarcodeScannerConnected } from "./BarcodeScannerConnected";
 import { AppStatusIndicator } from "components";
 import { useEffect } from "react";
-import { getAuth, signInAnonymously, signOut } from "firebase/auth";
 import { noop } from "lodash/fp";
-import { onUnmount } from "widgets/BhandaraCheckin/store/actions/barcodeScannerMapDispatchToProps/onUnmount";
 import { BhandaraCheckinViewProps } from "widgets/BhandaraCheckin/types";
 
 export const BhandaraCheckinView = ({

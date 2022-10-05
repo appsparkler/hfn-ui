@@ -3,7 +3,6 @@ import {
   CheckinsAggregateData,
   IAbhyasiCheckinApiStoreData,
 } from "@hfn-checkins/types";
-import { UserCredential } from "firebase/auth";
 import { noop } from "lodash/fp";
 
 export interface CheckinWithEmailOrMobileApi {
