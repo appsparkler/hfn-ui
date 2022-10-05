@@ -16,7 +16,9 @@ const bhandaraCheckinSlice = createSlice({
   name: "bhandara-checkin",
   initialState: getInitialState(),
   reducers: {
-    reset: () => getInitialState(),
+    reset: (state) => {
+      state.renderScanner = getInitialState().renderScanner;
+    },
     renderScanner: (state) => {
       state.renderScanner = true;
     },

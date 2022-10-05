@@ -44,7 +44,9 @@ export const mapBhandaraCheckinDispatchToProps = (
       dispatch(
         snackbarActions.openSnackbar({
           children:
-            "The app on your device may be outdated.  Please connect to the internet and refresh the app.",
+            "The app on your device may be outdated due to which your entries might not get checked in.  Please connect to the internet and refresh the app.",
+          severity: "warning",
+          autoHideDuration: 10000,
         })
       );
       dispatch(bhandaraCheckinActions.renderApp());
