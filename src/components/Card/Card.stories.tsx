@@ -16,6 +16,8 @@ export const card: ComponentStory<typeof MultiActionAreaCard> = Template.bind(
 card.args = {
   fullName: "Shekhar Kapoor",
   id: "tile-1",
+  birthPreference: "LB",
+  dormPreference: "East Comform Dorm - B1",
 };
 
 export default Story;
