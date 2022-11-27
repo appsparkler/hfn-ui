@@ -12,7 +12,7 @@ import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 import { noop } from "lodash/fp";
 
-export function Tiles() {
+export function CheckinInfoTiles() {
   return [
     {
       id: "tile-1",
@@ -51,7 +51,7 @@ export const CheckinInfoTile: React.FC<{
   onChangeDormAllocation,
 }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardContent>
         <Vertical gap={1}>
           <FormControlLabel
