@@ -1,18 +1,16 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import {
-  Button,
-  CardActionArea,
-  CardActions,
   Checkbox,
   FormControlLabel,
-  Input,
+  FormControlLabelProps,
   TextField,
+  TextFieldProps,
 } from "@mui/material";
-import { Horizontal, Vertical } from "components/Boxes";
+import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
+import { noop } from "lodash/fp";
 
 export function Tiles() {
   return [
@@ -28,23 +26,36 @@ export function Tiles() {
       dormPreference: "German Tent",
       birthPreference: "LB",
     },
-  ].map((tileData) => <MultiActionAreaCard key={tileData.id} {...tileData} />);
+  ].map((tileData) => (
+    <CheckinInfoTile
+      key={tileData.id}
+      {...tileData}
+      onCheck={noop}
+      onChangeDormAllocation={noop}
+    />
+  ));
 }
 
-export const MultiActionAreaCard: React.FC<{
+export const CheckinInfoTile: React.FC<{
   fullName: string;
   id: string;
   dormPreference: string;
   birthPreference: string;
-}> = ({ fullName, dormPreference, birthPreference }) => {
+  onCheck: FormControlLabelProps["onChange"];
+  onChangeDormAllocation: TextFieldProps["onChange"];
+}> = ({
+  fullName,
+  dormPreference,
+  birthPreference,
+  onCheck,
+  onChangeDormAllocation,
+}) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardContent>
         <Vertical gap={1}>
           <FormControlLabel
-            control={
-              <Checkbox checked={true} onChange={() => {}} name="jason" />
-            }
+            control={<Checkbox checked={true} onChange={onCheck} />}
             label={fullName}
           />
           <Box>
@@ -59,6 +70,7 @@ export const MultiActionAreaCard: React.FC<{
               variant="outlined"
               placeholder="Please enter allocated dorm and birth..."
               fullWidth
+              onChange={onChangeDormAllocation}
             />
           </Box>
         </Vertical>
