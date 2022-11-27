@@ -48,13 +48,13 @@ export const MultiActionAreaCard: React.FC<{
             label={fullName}
           />
           <Box>
-            <Typography variant="subtitle2">Dorm Preference</Typography>
+            <Typography variant="subtitle2">Dorm Preference:</Typography>
             <Typography variant="body2" color="text.secondary">
               {dormPreference}, {birthPreference}
             </Typography>
           </Box>
           <Box width="100%">
-            <Typography variant="subtitle2">Dorm Allocation</Typography>
+            <Typography variant="subtitle2">Dorm Allocation:</Typography>
             <TextField
               variant="outlined"
               placeholder="Please enter allocated dorm and birth..."
