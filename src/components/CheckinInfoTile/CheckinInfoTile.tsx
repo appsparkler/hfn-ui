@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
-import { CheckinInfoTileProps } from "types";
+import { CheckinInfoTileComponent } from "types";
 
-export const CheckinInfoTile: CheckinInfoTileProps = ({
+export const CheckinInfoTile: CheckinInfoTileComponent = ({
   fullName,
   dormPreference,
   birthPreference,

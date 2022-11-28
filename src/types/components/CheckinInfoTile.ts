@@ -17,4 +17,4 @@ interface ICheckinInfoTileDispatchProps {
 type TCheckinInfoTileProps = ICheckinInfoTileStateProps &
   ICheckinInfoTileDispatchProps;
 
-export type CheckinInfoTileProps = React.FC<TCheckinInfoTileProps>;
+export type CheckinInfoTileComponent = React.FC<TCheckinInfoTileProps>;
