@@ -1,34 +1,12 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import {
-  Checkbox,
-  FormControlLabel,
-  FormControlLabelProps,
-  TextField,
-  TextFieldProps,
-} from "@mui/material";
+import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
+import { CheckinInfoTileProps } from "types";
 
-interface CheckinTileInfo {
-  fullName: string;
-  id: string;
-  dormPreference: string;
-  birthPreference: string;
-}
-
-export type CheckinInfoTileStateProps = {} & CheckinTileInfo;
-
-interface CheckinInfoTileDispatchProps {
-  onCheck: FormControlLabelProps["onChange"];
-  onChangeDormAllocation: TextFieldProps["onChange"];
-}
-
-type CheckinInfoTileProps = CheckinInfoTileStateProps &
-  CheckinInfoTileDispatchProps;
-
-export const CheckinInfoTile: React.FC<CheckinInfoTileProps> = ({
+export const CheckinInfoTile: CheckinInfoTileProps = ({
   fullName,
   dormPreference,
   birthPreference,
