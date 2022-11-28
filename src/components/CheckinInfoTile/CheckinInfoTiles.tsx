@@ -1,32 +1,30 @@
 import { Vertical } from "components/Boxes";
+import { TCheckinTileInfo } from "types";
 import { CheckinInfoTile } from "./CheckinInfoTile";
 
-export const CheckinInfoTiles: React.FC<{}> = () => {
+export interface ICheckinInfoTilesStateProps {
+  data: TCheckinTileInfo[];
+}
+
+export interface ICheckinInfoTilesDispatchProps {}
+
+export interface ICheckinInfoTilesProps
+  extends ICheckinInfoTilesStateProps,
+    ICheckinInfoTilesDispatchProps {}
+
+export const CheckinInfoTiles: React.FC<ICheckinInfoTilesProps> = ({
+  data,
+}) => {
   return (
     <Vertical gap={3} px={2}>
-      {(
-        [
-          {
-            id: "tile-1",
-            fullName: "Jane Mathew",
-            dormPreference: "East Comform Dorm - B1",
-            birthPreference: "LB",
-          },
-          {
-            id: "tile-2",
-            fullName: "Shekhar Kapoor",
-            dormPreference: "German Tent",
-            birthPreference: "LB",
-          },
-          {
-            id: "tile-3",
-            fullName: "Shekhar Kapoor",
-            dormPreference: "German Tent",
-            birthPreference: "LB",
-          },
-        ] as any[]
-      ).map((dataProps) => {
-        return <CheckinInfoTile {...dataProps} />;
+      {data.map((dataProps) => {
+        return (
+          <CheckinInfoTile
+            {...dataProps}
+            onCheck={console.log}
+            onChangeDormAllocation={console.log}
+          />
+        );
       })}
     </Vertical>
   );

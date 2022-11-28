@@ -12,6 +12,27 @@ export interface MultiCheckinScreenDispatchProps {
 export type MultiCheckinScreenProps = MultiCheckinScreenStateProps &
   MultiCheckinScreenDispatchProps;
 
+const data = [
+  {
+    id: "tile-1",
+    fullName: "Jane Mathew",
+    dormPreference: "East Comform Dorm - B1",
+    birthPreference: "LB",
+  },
+  {
+    id: "tile-2",
+    fullName: "Shekhar Kapoor",
+    dormPreference: "German Tent",
+    birthPreference: "LB",
+  },
+  {
+    id: "tile-3",
+    fullName: "Shekhar Kapoor",
+    dormPreference: "German Tent",
+    birthPreference: "LB",
+  },
+];
+
 export const MultiCheckinScreen: React.FC<MultiCheckinScreenProps> = ({
   onClickCheckin,
   onClickCancel,
@@ -24,7 +45,7 @@ export const MultiCheckinScreen: React.FC<MultiCheckinScreenProps> = ({
         </Typography>
       </Box>
       <Box sx={{ flex: 1, overflow: "auto", py: 2 }}>
-        <CheckinInfoTiles />
+        <CheckinInfoTiles data={data} />
       </Box>
       <Horizontal
         sx={{
