@@ -1,20 +1,8 @@
 import { Vertical } from "components/Boxes";
-import { TCheckinTileInfo } from "types";
+import { CheckinInfoTilesComponent } from "types";
 import { CheckinInfoTile } from "./CheckinInfoTile";
 
-export interface ICheckinInfoTilesStateProps {
-  data: TCheckinTileInfo[];
-}
-
-export interface ICheckinInfoTilesDispatchProps {}
-
-export interface ICheckinInfoTilesProps
-  extends ICheckinInfoTilesStateProps,
-    ICheckinInfoTilesDispatchProps {}
-
-export const CheckinInfoTiles: React.FC<ICheckinInfoTilesProps> = ({
-  data,
-}) => {
+export const CheckinInfoTiles: CheckinInfoTilesComponent = ({ data }) => {
   return (
     <Vertical gap={3} px={2}>
       {data.map((dataProps) => {
