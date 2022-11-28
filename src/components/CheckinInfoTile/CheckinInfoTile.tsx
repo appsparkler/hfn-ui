@@ -11,12 +11,14 @@ import {
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 
-interface CheckinInfoTileStateProps {
+interface CheckinTileInfo {
   fullName: string;
   id: string;
   dormPreference: string;
   birthPreference: string;
 }
+
+export type CheckinInfoTileStateProps = {} & CheckinTileInfo;
 
 interface CheckinInfoTileDispatchProps {
   onCheck: FormControlLabelProps["onChange"];
