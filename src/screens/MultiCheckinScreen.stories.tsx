@@ -1,9 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useCallback, useState } from "react";
-import {
-  MultiCheckinScreen,
-  MultiCheckinScreenProps,
-} from "./MultiCheckinScreen";
+import { MultiCheckinScreenProps } from "types";
+import { MultiCheckinScreen } from "./MultiCheckinScreen";
 
 const Story = {
   component: MultiCheckinScreen,
