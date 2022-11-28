@@ -11,14 +11,22 @@ import {
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 
-export const CheckinInfoTile: React.FC<{
+interface CheckinInfoTileStateProps {
   fullName: string;
   id: string;
   dormPreference: string;
   birthPreference: string;
+}
+
+interface CheckinInfoTileDispatchProps {
   onCheck: FormControlLabelProps["onChange"];
   onChangeDormAllocation: TextFieldProps["onChange"];
-}> = ({
+}
+
+type CheckinInfoTileProps = CheckinInfoTileStateProps &
+  CheckinInfoTileDispatchProps;
+
+export const CheckinInfoTile: React.FC<CheckinInfoTileProps> = ({
   fullName,
   dormPreference,
   birthPreference,
