@@ -1,22 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Horizontal, Vertical } from "components";
 import { CheckinInfoTiles } from "components/CheckinInfoTile";
-import { TCheckinTileInfo } from "types";
-
-export interface MultiCheckinScreenStateProps {
-  data: TCheckinTileInfo[];
-}
-
-export interface MultiCheckinScreenDispatchProps {
-  onClickCheckin: () => void;
-  onClickCancel: () => void;
-  onChangeData: (data: TCheckinTileInfo[]) => void;
-}
-
-export type MultiCheckinScreenProps = MultiCheckinScreenStateProps &
-  MultiCheckinScreenDispatchProps;
-
-type TMultiCheckinScreenComponent = React.FC<MultiCheckinScreenProps>;
+import { TMultiCheckinScreenComponent } from "types";
 
 export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
   data,
