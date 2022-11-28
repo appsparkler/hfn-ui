@@ -6,8 +6,8 @@ const Story = {
   title: "Screents/MultiCheckinScreen",
 } as ComponentMeta<typeof MultiCheckinScreen>;
 
-const Template: ComponentStory<typeof MultiCheckinScreen> = () => (
-  <MultiCheckinScreen />
+const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => (
+  <MultiCheckinScreen {...args} />
 );
 
 export const multiCheckinScreen: ComponentStory<typeof MultiCheckinScreen> =
