@@ -10,6 +10,7 @@ export interface MultiCheckinScreenStateProps {
 export interface MultiCheckinScreenDispatchProps {
   onClickCheckin: () => void;
   onClickCancel: () => void;
+  onChangeData: (data: TCheckinTileInfo[]) => void;
 }
 
 export type MultiCheckinScreenProps = MultiCheckinScreenStateProps &
@@ -21,6 +22,7 @@ export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
   data,
   onClickCheckin,
   onClickCancel,
+  onChangeData,
 }) => {
   return (
     <Vertical sx={{ display: "flex", height: "100vh" }}>

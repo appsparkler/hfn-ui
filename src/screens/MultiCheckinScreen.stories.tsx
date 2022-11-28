@@ -1,14 +1,30 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MultiCheckinScreen } from "./MultiCheckinScreen";
+import { useCallback, useState } from "react";
+import {
+  MultiCheckinScreen,
+  MultiCheckinScreenProps,
+} from "./MultiCheckinScreen";
 
 const Story = {
   component: MultiCheckinScreen,
   title: "Screents/MultiCheckinScreen",
 } as ComponentMeta<typeof MultiCheckinScreen>;
 
-const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => (
-  <MultiCheckinScreen {...args} />
-);
+const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {
+  const [$data, setData] = useState<MultiCheckinScreenProps["data"]>(args.data);
+  const handleCheckin = useCallback<MultiCheckinScreenProps["onClickCheckin"]>(
+    (...args2) => {
+      console.log("Checkin");
+      // args.onClickCheckin(...args2);
+      args.onClickCheckin(args.data);
+    },
+    [args]
+  );
+
+  return (
+    <MultiCheckinScreen {...args} data={$data} onClickCheckin={handleCheckin} />
+  );
+};
 
 export const multiCheckinScreen: ComponentStory<typeof MultiCheckinScreen> =
   Template.bind({});
