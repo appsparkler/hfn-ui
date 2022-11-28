@@ -10,31 +10,6 @@ import {
 } from "@mui/material";
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
-import { noop } from "lodash/fp";
-
-export function CheckinInfoTiles() {
-  return [
-    {
-      id: "tile-1",
-      fullName: "Jane Mathew",
-      dormPreference: "East Comform Dorm - B1",
-      birthPreference: "LB",
-    },
-    {
-      id: "tile-2",
-      fullName: "Shekhar Kapoor",
-      dormPreference: "German Tent",
-      birthPreference: "LB",
-    },
-  ].map((tileData) => (
-    <CheckinInfoTile
-      key={tileData.id}
-      {...tileData}
-      onCheck={noop}
-      onChangeDormAllocation={noop}
-    />
-  ));
-}
 
 export const CheckinInfoTile: React.FC<{
   fullName: string;

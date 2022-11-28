@@ -18,6 +18,12 @@ export const CheckinInfoTiles: React.FC<{}> = () => {
             dormPreference: "German Tent",
             birthPreference: "LB",
           },
+          {
+            id: "tile-3",
+            fullName: "Shekhar Kapoor",
+            dormPreference: "German Tent",
+            birthPreference: "LB",
+          },
         ] as any[]
       ).map((dataProps) => {
         return <CheckinInfoTile {...dataProps} />;
