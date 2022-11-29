@@ -1,4 +1,4 @@
-import { FormControlLabelProps, TextFieldProps } from "@mui/material";
+import { TextFieldProps } from "@mui/material";
 
 export interface TCheckinTileInfo {
   checked: boolean;
@@ -11,10 +11,6 @@ export interface TCheckinTileInfo {
 export type ICheckinInfoTileStateProps = {} & TCheckinTileInfo;
 
 type TextFieldChangeHandler = NonNullable<TextFieldProps["onChange"]>;
-
-type FormControlLabelChangeHandler = NonNullable<
-  FormControlLabelProps["onChange"]
->;
 
 export interface ICheckinInfoTileDispatchProps {
   onCheck: (id: string, checked: boolean) => void;
