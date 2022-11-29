@@ -5,20 +5,27 @@ import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 import { CheckinInfoTileComponent } from "types";
+import { useCallback } from "react";
 
 export const CheckinInfoTile: CheckinInfoTileComponent = ({
+  checked,
   fullName,
   dormPreference,
   birthPreference,
   onCheck,
   onChangeDormAllocation,
+  id,
 }) => {
+  const handleChange = useCallback(
+    (evt, checked) => onCheck(id, checked),
+    [id, onCheck]
+  );
   return (
     <Card>
       <CardContent>
         <Vertical gap={1}>
           <FormControlLabel
-            control={<Checkbox checked={true} onChange={onCheck} />}
+            control={<Checkbox checked={checked} onChange={handleChange} />}
             label={fullName}
           />
           <Box>

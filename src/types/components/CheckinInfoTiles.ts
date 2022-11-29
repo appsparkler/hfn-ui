@@ -4,7 +4,9 @@ export interface ICheckinInfoTilesStateProps {
   data: TCheckinTileInfo[];
 }
 
-export interface ICheckinInfoTilesDispatchProps {}
+export interface ICheckinInfoTilesDispatchProps {
+  onChange: (data: TCheckinTileInfo[]) => void;
+}
 
 export interface ICheckinInfoTilesProps
   extends ICheckinInfoTilesStateProps,
