@@ -17,7 +17,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
   id,
 }) => {
   const handleChange = useCallback(
-    (evt, checked) => onCheck(id, checked),
+    (_evt, checked) => onCheck(id, checked),
     [id, onCheck]
   );
   return (
