@@ -22,6 +22,22 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
     },
     [data, onChange]
   );
+
+  const handleChangeDormAllocation = useCallback<
+    ICheckinInfoTileDispatchProps["onChangeDormAllocation"]
+  >(
+    (id, dormAllocation) => {
+      const newData = data.map((item) => {
+        if (item.id === id) {
+          return { ...item, dormAllocation };
+        }
+        return item;
+      });
+      onChange(newData);
+    },
+    [data, onChange]
+  );
+
   return (
     <Vertical gap={3} px={2}>
       {data.map((dataProps) => {
@@ -29,7 +45,7 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
           <CheckinInfoTile
             {...dataProps}
             onCheck={handleCheck}
-            onChangeDormAllocation={console.log}
+            onChangeDormAllocation={handleChangeDormAllocation}
           />
         );
       })}
