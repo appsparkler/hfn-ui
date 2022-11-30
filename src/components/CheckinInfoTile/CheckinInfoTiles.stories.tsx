@@ -1,4 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
+import { useCallback } from "react";
+import { ICheckinInfoTilesProps } from "types";
 import { CheckinInfoTiles } from "./CheckinInfoTiles";
 
 const Story = {
@@ -7,7 +10,17 @@ const Story = {
 } as ComponentMeta<typeof CheckinInfoTiles>;
 
 const Template: ComponentStory<typeof CheckinInfoTiles> = (args) => {
-  return <CheckinInfoTiles {...args} />;
+  const [$data, setData] = React.useState<ICheckinInfoTilesProps["data"]>(
+    args.data
+  );
+  const handleChange = useCallback<ICheckinInfoTilesProps["onChange"]>(
+    (updatedData) => {
+      setData(updatedData);
+      args.onChange(updatedData);
+    },
+    [args]
+  );
+  return <CheckinInfoTiles data={$data} onChange={handleChange} />;
 };
 
 export const checkinInfoTiles: ComponentStory<typeof CheckinInfoTiles> =

@@ -12,4 +12,4 @@ export interface ICheckinInfoTilesProps
   extends ICheckinInfoTilesStateProps,
     ICheckinInfoTilesDispatchProps {}
 
-export type CheckinInfoTilesComponent = React.FC<ICheckinInfoTilesProps>;
+export type TCheckinInfoTilesComponent = React.FC<ICheckinInfoTilesProps>;

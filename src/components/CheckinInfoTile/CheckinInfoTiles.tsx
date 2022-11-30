@@ -1,12 +1,12 @@
 import { Vertical } from "components/Boxes";
 import { useCallback } from "react";
 import {
-  CheckinInfoTilesComponent,
+  TCheckinInfoTilesComponent,
   ICheckinInfoTileDispatchProps,
 } from "types";
 import { CheckinInfoTile } from "./CheckinInfoTile";
 
-export const CheckinInfoTiles: CheckinInfoTilesComponent = ({
+export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
   data,
   onChange,
 }) => {
