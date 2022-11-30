@@ -1,5 +1,3 @@
-import { TextFieldProps } from "@mui/material";
-
 export interface TCheckinTileInfo {
   checked: boolean;
   fullName: string;
@@ -10,11 +8,9 @@ export interface TCheckinTileInfo {
 
 export type ICheckinInfoTileStateProps = {} & TCheckinTileInfo;
 
-type TextFieldChangeHandler = NonNullable<TextFieldProps["onChange"]>;
-
 export interface ICheckinInfoTileDispatchProps {
   onCheck: (id: string, checked: boolean) => void;
-  onChangeDormAllocation: TextFieldChangeHandler;
+  onChangeDormAllocation: (id: string, dormAllocation: string) => void;
 }
 
 export type TCheckinInfoTileProps = ICheckinInfoTileStateProps &

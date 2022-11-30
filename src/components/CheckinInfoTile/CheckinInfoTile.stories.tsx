@@ -6,9 +6,15 @@ const Story = {
   title: "Components/Checkin Info Tile",
 } as ComponentMeta<typeof CheckinInfoTile>;
 
-const Template: ComponentStory<typeof CheckinInfoTile> = (args) => (
-  <CheckinInfoTile {...args} onCheck={args.onCheck} />
-);
+const Template: ComponentStory<typeof CheckinInfoTile> = (args) => {
+  return (
+    <CheckinInfoTile
+      {...args}
+      onCheck={args.onCheck}
+      onChangeDormAllocation={args.onChangeDormAllocation}
+    />
+  );
+};
 
 export const checkinInfoTile: ComponentStory<typeof CheckinInfoTile> =
   Template.bind({});
