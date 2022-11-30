@@ -9,14 +9,16 @@ const Story = {
 } as ComponentMeta<typeof MultiCheckinScreen>;
 
 const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {
-  const [$data, setData] = useState<MultiCheckinScreenProps["data"]>(args.data);
+  const [$data, _setData] = useState<MultiCheckinScreenProps["data"]>(
+    args.data
+  );
   const handleCheckin = useCallback<MultiCheckinScreenProps["onClickCheckin"]>(
     (...args2) => {
-      console.log("Checkin");
-      // args.onClickCheckin(...args2);
-      args.onClickCheckin(args.data);
+      // console.log("Checkin");
+      // args.onChangeData(args.data);
+      // args.onClickCheckin();
     },
-    [args]
+    []
   );
 
   return (
@@ -33,18 +35,21 @@ multiCheckinScreen.args = {
       fullName: "Jane Mathew",
       dormPreference: "East Comform Dorm - B1",
       birthPreference: "LB",
+      checked: false,
     },
     {
       id: "tile-2",
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       birthPreference: "LB",
+      checked: false,
     },
     {
       id: "tile-3",
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       birthPreference: "LB",
+      checked: false,
     },
   ],
 };
