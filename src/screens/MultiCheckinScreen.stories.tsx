@@ -12,17 +12,21 @@ const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {
   const [$data, _setData] = useState<MultiCheckinScreenProps["data"]>(
     args.data
   );
-  const handleCheckin = useCallback<MultiCheckinScreenProps["onClickCheckin"]>(
-    (...args2) => {
-      // console.log("Checkin");
-      // args.onChangeData(args.data);
-      // args.onClickCheckin();
+
+  const handleChangeData = useCallback<MultiCheckinScreenProps["onChangeData"]>(
+    (data) => {
+      _setData(data);
+      args.onChangeData(data);
     },
-    []
+    [args]
   );
 
   return (
-    <MultiCheckinScreen {...args} data={$data} onClickCheckin={handleCheckin} />
+    <MultiCheckinScreen
+      {...args}
+      data={$data}
+      onChangeData={handleChangeData}
+    />
   );
 };
 
