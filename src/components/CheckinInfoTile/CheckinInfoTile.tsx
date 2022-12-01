@@ -20,7 +20,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
   onChangeDormAllocation,
   id,
 }) => {
-  const handleChange = useCallback<TFormControlLabelPropsOnChange>(
+  const handleChangeCheckinStatus = useCallback<TFormControlLabelPropsOnChange>(
     (_evt, checked) => onCheck(id, checked),
     [id, onCheck]
   );
@@ -37,7 +37,12 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
       <CardContent>
         <Vertical gap={1}>
           <FormControlLabel
-            control={<Checkbox checked={checked} onChange={handleChange} />}
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={handleChangeCheckinStatus}
+              />
+            }
             label={fullName}
           />
           <Box>
