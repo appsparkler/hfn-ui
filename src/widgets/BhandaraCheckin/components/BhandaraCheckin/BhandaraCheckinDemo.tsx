@@ -1,6 +1,6 @@
 import { BhandaraCheckinWidget } from "./BhandaraCheckinWidget";
-import { apis } from "../../api";
+import { mockedApis } from "widgets/BhandaraCheckin/mocked-api";
 
 export const BhandaraCheckinWidgetDemo = () => {
-  return <BhandaraCheckinWidget apis={apis} />;
+  return <BhandaraCheckinWidget apis={mockedApis} />;
 };
