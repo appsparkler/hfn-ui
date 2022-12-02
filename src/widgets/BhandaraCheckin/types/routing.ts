@@ -8,6 +8,7 @@ export enum PageEnum {
   NotFound = "NotFound",
   Dashboard = "Dashboard",
   RefreshApp = "RefreshApp",
+  MultiCheckinPage = "MultiCheckinPage",
 }
 
 export type Page = Record<
