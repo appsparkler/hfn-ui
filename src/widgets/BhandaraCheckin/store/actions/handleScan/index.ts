@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId } from "utils";
 import { MULTI_CHECKIN_SCREEN } from "widgets/BhandaraCheckin/routing/actions/page";
-import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { IQRUserInfo, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { IQREventInfo } from "widgets/BhandaraCheckin/types";
 import { RootState } from "../..";
 import { barcodeScannerActions, mainSectionActions } from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
@@ -39,28 +40,29 @@ function isValidPNR(pnr: string) {
   return pnr.match(/[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/);
 }
 
-function getUsers(scannedValue: string) {
+function getUsers(scannedValue: string): IQRUserInfo[] {
   const [, ...userRows] = scannedValue.split(";");
   const users = userRows.reduce((acc, userRow) => {
     if (!userRow) return acc;
     const [regId, abhyasiId, fullName] = userRow.split("|");
-    const user = {
-      fullName: !!fullName && refineScannedValue(fullName),
-      regId: !!regId && refineScannedValue(regId),
-      abhyasiId: !!abhyasiId && refineScannedValue(abhyasiId),
+    if (!regId || !abhyasiId || !fullName) return acc;
+    const user: Partial<IQRUserInfo> = {
+      fullName: fullName ? refineScannedValue(fullName) : undefined,
+      regId: regId ? refineScannedValue(regId) : undefined,
+      abhyasiId: abhyasiId ? refineScannedValue(abhyasiId) : undefined,
     };
     return [...acc, user];
   }, [] as any[]);
-  const filteredUsers = users.filter(
+  const filteredUsers: IQRUserInfo[] = users.filter(
     (user) => !!user.abhyasiId || !!user.regId
   );
   return filteredUsers;
 }
 
-function getEventInfo(scannedValue: string) {
+function getEventInfo(scannedValue: string): IQREventInfo {
   const [eventInfoRow] = scannedValue.split(";");
   const [eventName, pnr, eventId] = eventInfoRow.split("|");
-  const eventInfo = {
+  const eventInfo: IQREventInfo = {
     eventName,
     eventId,
     pnr,

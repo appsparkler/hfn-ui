@@ -6,3 +6,4 @@ export * from "./firebase";
 export * from "./env";
 export * from "./components";
 export * from "./screens";
+export * from "./QRData";
