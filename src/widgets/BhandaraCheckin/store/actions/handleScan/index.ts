@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId } from "utils";
+import { MULTI_CHECKIN_SCREEN } from "widgets/BhandaraCheckin/routing/actions/page";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 import { RootState } from "../..";
 import { barcodeScannerActions, mainSectionActions } from "../../slices";
@@ -26,6 +27,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
       const eventInfo = getEventInfo(scannedValue);
       const users = getUsers(scannedValue);
       alert(JSON.stringify({ eventInfo, users }, null, 2));
+      dispatch(MULTI_CHECKIN_SCREEN());
     }
     if (isScannerShown && isAbhyasiId(refinedValue)) {
       dispatch(barcodeScannerActions.hide());

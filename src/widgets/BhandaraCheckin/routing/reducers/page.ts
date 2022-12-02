@@ -4,7 +4,7 @@ import { PageEnum } from "widgets/BhandaraCheckin/types";
 const actionTypeToComponentsMap: Record<string, PageEnum> = {
   HOME: PageEnum.Home,
   UPDATE_DETAILS: PageEnum.UpdateDetails,
-  MULTI_CHECKIN_PAGE: PageEnum.MultiCheckinPage,
+  MULTI_CHECKIN_SCREEN: PageEnum.MultiCheckinScreen,
   CHECKIN_SUCCESS: PageEnum.CheckInSuccess,
   OFFLINE_DATA: PageEnum.OfflineData,
   DASHBOARD: PageEnum.Dashboard,
