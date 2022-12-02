@@ -6,7 +6,7 @@ import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 import { CheckinInfoTileComponent } from "widgets/BhandaraCheckin/types";
 import { TextFieldPropsOnChange, TFormControlLabelPropsOnChange } from "types";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 export const CheckinInfoTile: CheckinInfoTileComponent = ({
   checked,
@@ -29,6 +29,10 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
     [id, onChangeDormAllocation]
   );
 
+  const showPreference = useMemo(() => {
+    return Boolean(dormPreference) && Boolean(birthPreference);
+  }, [birthPreference, dormPreference]);
+
   return (
     <Card>
       <CardContent>
@@ -42,12 +46,14 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
             }
             label={fullName}
           />
-          <Box>
-            <Typography variant="subtitle2">Dorm Preference:</Typography>
-            <Typography variant="body2" color="text.secondary">
-              {dormPreference}, {birthPreference}
-            </Typography>
-          </Box>
+          {showPreference ? (
+            <Box>
+              <Typography variant="subtitle2">Dorm Preference:</Typography>
+              <Typography variant="body2" color="text.secondary">
+                {dormPreference}, {birthPreference}
+              </Typography>
+            </Box>
+          ) : null}
           <Box width="100%">
             <Typography variant="subtitle2">Dorm Allocation:</Typography>
             <TextField
