@@ -1,7 +1,9 @@
+import { IQREventInfo } from "..";
 import { TCheckinTileInfo } from "../components";
 
 export interface MultiCheckinScreenStateProps {
-  data: TCheckinTileInfo[];
+  userData: TCheckinTileInfo[];
+  eventInfo: IQREventInfo;
 }
 
 export interface MultiCheckinScreenDispatchProps {

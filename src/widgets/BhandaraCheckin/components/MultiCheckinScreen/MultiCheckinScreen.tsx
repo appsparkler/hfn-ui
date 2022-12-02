@@ -1,10 +1,11 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { Horizontal, Vertical } from "components";
 import { CheckinInfoTiles } from "./CheckinInfoTile";
 import { TMultiCheckinScreenComponent } from "widgets/BhandaraCheckin/types";
 
 export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
-  data,
+  userData,
+  eventInfo: { eventId, eventName, pnr },
   onClickCheckin,
   onClickCancel,
   onChangeData,
@@ -17,7 +18,19 @@ export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
         </Typography>
       </Box>
       <Box sx={{ flex: 1, overflow: "auto", py: 2 }}>
-        <CheckinInfoTiles data={data} onChange={onChangeData} />
+        <Box m={2}>
+          <Card elevation={1}>
+            <CardContent>
+              <Typography variant="h5" align="center">
+                {eventName}
+              </Typography>
+              <Typography variant="h6" align="center">
+                PNR: {pnr}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+        <CheckinInfoTiles data={userData} onChange={onChangeData} />
       </Box>
       <Horizontal
         sx={{

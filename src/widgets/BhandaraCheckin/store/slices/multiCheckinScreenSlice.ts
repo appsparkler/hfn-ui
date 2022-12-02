@@ -7,7 +7,12 @@ import {
 } from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
-  data: [],
+  userData: [],
+  eventInfo: {
+    eventId: "",
+    eventName: "",
+    pnr: "",
+  },
 });
 
 const mapUserAndEventInfoToCheckinTileData = (
@@ -35,7 +40,7 @@ export const multiCheckinScreenSlice = createSlice({
         payload.event,
         payload.users
       );
-      state.data = updatedData;
+      state.userData = updatedData;
     },
   },
 });

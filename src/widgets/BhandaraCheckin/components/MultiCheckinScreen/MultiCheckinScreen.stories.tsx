@@ -9,8 +9,8 @@ const Story = {
 } as ComponentMeta<typeof MultiCheckinScreen>;
 
 const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {
-  const [$data, _setData] = useState<MultiCheckinScreenProps["data"]>(
-    args.data
+  const [$data, _setData] = useState<MultiCheckinScreenProps["userData"]>(
+    args.userData
   );
 
   const handleChangeData = useCallback<MultiCheckinScreenProps["onChangeData"]>(
@@ -24,7 +24,7 @@ const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {
   return (
     <MultiCheckinScreen
       {...args}
-      data={$data}
+      userData={$data}
       onChangeData={handleChangeData}
     />
   );
@@ -33,7 +33,12 @@ const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {
 export const multiCheckinScreen: ComponentStory<typeof MultiCheckinScreen> =
   Template.bind({});
 multiCheckinScreen.args = {
-  data: [
+  eventInfo: {
+    eventId: "383821",
+    eventName: "Bhandara 2021",
+    pnr: "AE-IDDK-IWQ",
+  },
+  userData: [
     {
       id: "tile-1",
       fullName: "Jane Mathew",
