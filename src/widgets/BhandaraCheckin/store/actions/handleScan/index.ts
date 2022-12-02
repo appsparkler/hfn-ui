@@ -44,17 +44,24 @@ function getUsers(scannedValue: string): IQRUserInfo[] {
   const [, ...userRows] = scannedValue.split(";");
   const users = userRows.reduce((acc, userRow) => {
     if (!userRow) return acc;
-    const [regId, abhyasiId, fullName] = userRow.split("|");
+    const [regId, abhyasiId, fullName, dormPrference, birthPreference] =
+      userRow.split("|");
     if (!regId || !abhyasiId || !fullName) return acc;
     const user: Partial<IQRUserInfo> = {
       fullName: fullName ? refineScannedValue(fullName) : undefined,
       regId: regId ? refineScannedValue(regId) : undefined,
       abhyasiId: abhyasiId ? refineScannedValue(abhyasiId) : undefined,
+      dormPrference: dormPrference
+        ? refineScannedValue(dormPrference)
+        : undefined,
+      birthPreference: birthPreference
+        ? refineScannedValue(birthPreference)
+        : undefined,
     };
     return [...acc, user];
   }, [] as any[]);
   const filteredUsers: IQRUserInfo[] = users.filter(
-    (user) => !!user.abhyasiId || !!user.regId
+    (user) => !!user.abhyasiId || !!user.regId || !!user.fullName
   );
   return filteredUsers;
 }

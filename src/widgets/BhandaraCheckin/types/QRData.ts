@@ -8,4 +8,6 @@ export interface IQRUserInfo {
   abhyasiId: string;
   fullName: string;
   regId: string;
+  dormPrference?: string;
+  birthPreference?: string;
 }

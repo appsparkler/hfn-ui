@@ -1,9 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MultiCheckinScreenStateProps } from "widgets/BhandaraCheckin/types";
+import {
+  ICheckinInfoTilesStateProps,
+  IQREventInfo,
+  IQRUserInfo,
+  MultiCheckinScreenStateProps,
+} from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
   data: [],
 });
+
+const mapUserAndEventInfoToCheckinTileData = (
+  eventInfo: IQREventInfo,
+  users: IQRUserInfo[]
+): ICheckinInfoTilesStateProps["data"] => {
+  return users.map((user) => ({
+    dormPreference: user.dormPrference,
+    birthPreference: user.birthPreference,
+    checked: false,
+    fullName: user.fullName,
+    id: user.abhyasiId,
+  }));
+};
 
 export const multiCheckinScreenSlice = createSlice({
   name: "multiCheckinScreen",
@@ -11,9 +29,13 @@ export const multiCheckinScreenSlice = createSlice({
   reducers: {
     setData: (
       state,
-      { payload }: { payload: MultiCheckinScreenStateProps["data"] }
+      { payload }: { payload: { event: IQREventInfo; users: IQRUserInfo[] } }
     ) => {
-      state.data = payload;
+      const updatedData = mapUserAndEventInfoToCheckinTileData(
+        payload.event,
+        payload.users
+      );
+      state.data = updatedData;
     },
   },
 });

@@ -2,8 +2,8 @@ export interface TCheckinTileInfo {
   checked: boolean;
   fullName: string;
   id: string;
-  dormPreference: string;
-  birthPreference: string;
+  dormPreference?: string;
+  birthPreference?: string;
 }
 
 export type ICheckinInfoTileStateProps = {} & TCheckinTileInfo;
