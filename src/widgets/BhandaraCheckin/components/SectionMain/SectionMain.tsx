@@ -20,6 +20,7 @@ import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
 import { SectionMainProps } from "widgets/BhandaraCheckin/types";
+import { QrCode2 } from "@mui/icons-material";
 
 export const SectionMain = ({
   env,
@@ -113,9 +114,8 @@ export const SectionMain = ({
           disabled={scanBtnProcessing || scanBtnDisabled}
           isProcessing={scanBtnProcessing}
           onClick={onClickScan}
-        >
-          Scan
-        </AsyncButton>
+          endIcon={<QrCode2 />}
+        ></AsyncButton>
       </Horizontal>
 
       <Vertical>
@@ -129,15 +129,6 @@ export const SectionMain = ({
           }
           label="Scanner"
         />
-
-        {/* {env?.ENV === ENVS.DEV_LOCAL && (
-          <FormControlLabel
-            control={
-              <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
-            }
-            label="Offline Mode"
-          />
-        )} */}
       </Vertical>
       <Box position="fixed" right={0} top={0}>
         <Horizontal alignItems={"center"}>

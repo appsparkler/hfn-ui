@@ -14,12 +14,15 @@ import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
 const refineScannedValue = (value: string) => value.replace(/\n/g, "");
 
 const isValidQRCode = (scannedValue: string) => {
-  const users = getUsers(scannedValue);
-  const eventInfo = getEventInfo(scannedValue);
-  if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
-    return true;
+  try {
+    const users = getUsers(scannedValue);
+    const eventInfo = getEventInfo(scannedValue);
+    if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
+      return true;
+    }
+  } finally {
+    return false;
   }
-  return false;
 };
 
 export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
@@ -39,6 +42,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
       dispatch(MULTI_CHECKIN_SCREEN());
     }
     if (isScannerShown && isAbhyasiId(refinedValue)) {
+      console.log({ refinedValue });
       dispatch(barcodeScannerActions.hide());
       dispatch(mainSectionActions.setValue(refinedValue));
       checkinAbhyasi(dispatch, refinedValue);
