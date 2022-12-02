@@ -24,15 +24,12 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     const refinedValue = scannedValue.trim();
     const isScannerShown = rootState.barcodeScanner.show;
     if (isScannerShown && isValidQRCode(refinedValue)) {
-      const eventInfo = getEventInfo(scannedValue);
-      const users = getUsers(scannedValue);
-      alert(JSON.stringify({ eventInfo, users }, null, 2));
+      dispatch(barcodeScannerActions.hide());
       dispatch(MULTI_CHECKIN_SCREEN());
     }
     if (isScannerShown && isAbhyasiId(refinedValue)) {
       dispatch(barcodeScannerActions.hide());
       dispatch(mainSectionActions.setValue(refinedValue));
-      dispatch(barcodeScannerActions.hide());
       checkinAbhyasi(dispatch, refinedValue);
     }
   }
