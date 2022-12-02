@@ -5,7 +5,7 @@ import { RootState } from "../..";
 import { barcodeScannerActions, mainSectionActions } from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
 
-const refineScannedValue = (value: string) => value.replace("\n", "");
+const refineScannedValue = (value: string) => value.replace(/\n/g, "");
 
 const isValidQRCode = (scannedValue: string) => {
   const users = getUsers(scannedValue);
