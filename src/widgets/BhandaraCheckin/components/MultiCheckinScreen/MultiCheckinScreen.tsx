@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { Horizontal, Vertical } from "components";
-import { CheckinInfoTiles } from "components/CheckinInfoTile";
+import { CheckinInfoTiles } from "./CheckinInfoTile";
 import { TMultiCheckinScreenComponent } from "widgets/BhandaraCheckin/types";
 
 export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({

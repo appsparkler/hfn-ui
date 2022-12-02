@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useCallback, useState } from "react";
-import { MultiCheckinScreenProps } from "types";
+import { MultiCheckinScreenProps } from "widgets/BhandaraCheckin/types";
 import { MultiCheckinScreen } from "./MultiCheckinScreen";
 
 const Story = {
   component: MultiCheckinScreen,
-  title: "Screents/MultiCheckinScreen",
+  title: "Widgets/Bhandara Checkin/Sections/Multi Checkin Screen",
 } as ComponentMeta<typeof MultiCheckinScreen>;
 
 const Template: ComponentStory<typeof MultiCheckinScreen> = (args) => {

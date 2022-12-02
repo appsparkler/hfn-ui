@@ -1,12 +1,13 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { useCallback } from "react";
-import { ICheckinInfoTilesProps } from "types";
+import { ICheckinInfoTilesProps } from "widgets/BhandaraCheckin/types";
 import { CheckinInfoTiles } from "./CheckinInfoTiles";
 
 const Story = {
   component: CheckinInfoTiles,
-  title: "components/Checkin Info Tiles",
+  title:
+    "widgets/Bhandara Checkin/Sections/Multi Checkin Screen/Checkin Info Tiles",
 } as ComponentMeta<typeof CheckinInfoTiles>;
 
 const Template: ComponentStory<typeof CheckinInfoTiles> = (args) => {

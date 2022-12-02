@@ -3,7 +3,8 @@ import { CheckinInfoTile } from "./CheckinInfoTile";
 
 const Story = {
   component: CheckinInfoTile,
-  title: "Components/Checkin Info Tile",
+  title:
+    "Widgets/Bhandara Checkin/Sections/Multi Checkin Screen/Checkin Info Tile",
 } as ComponentMeta<typeof CheckinInfoTile>;
 
 const Template: ComponentStory<typeof CheckinInfoTile> = (args) => {

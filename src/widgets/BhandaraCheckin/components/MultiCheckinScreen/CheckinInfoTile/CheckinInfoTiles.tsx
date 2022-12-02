@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import {
   TCheckinInfoTilesComponent,
   ICheckinInfoTileDispatchProps,
-} from "types";
+} from "widgets/BhandaraCheckin/types";
 import { CheckinInfoTile } from "./CheckinInfoTile";
 
 export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({

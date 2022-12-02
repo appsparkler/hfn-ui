@@ -4,11 +4,8 @@ import Typography from "@mui/material/Typography";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
-import {
-  CheckinInfoTileComponent,
-  TextFieldPropsOnChange,
-  TFormControlLabelPropsOnChange,
-} from "types";
+import { CheckinInfoTileComponent } from "widgets/BhandaraCheckin/types";
+import { TextFieldPropsOnChange, TFormControlLabelPropsOnChange } from "types";
 import { useCallback } from "react";
 
 export const CheckinInfoTile: CheckinInfoTileComponent = ({
