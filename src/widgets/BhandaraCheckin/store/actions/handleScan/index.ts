@@ -52,7 +52,10 @@ function getUsers(scannedValue: string) {
     };
     return [...acc, user];
   }, [] as any[]);
-  return users;
+  const filteredUsers = users.filter(
+    (user) => !!user.abhyasiId || !!user.regId
+  );
+  return filteredUsers;
 }
 
 function getEventInfo(scannedValue: string) {
