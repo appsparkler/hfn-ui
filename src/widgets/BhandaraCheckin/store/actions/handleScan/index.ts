@@ -4,7 +4,11 @@ import { MULTI_CHECKIN_SCREEN } from "widgets/BhandaraCheckin/routing/actions/pa
 import { IQRUserInfo, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 import { IQREventInfo } from "widgets/BhandaraCheckin/types";
 import { RootState } from "../..";
-import { barcodeScannerActions, mainSectionActions } from "../../slices";
+import {
+  barcodeScannerActions,
+  mainSectionActions,
+  multiCheckinScreenActions,
+} from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
 
 const refineScannedValue = (value: string) => value.replace(/\n/g, "");
@@ -26,6 +30,12 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     const isScannerShown = rootState.barcodeScanner.show;
     if (isScannerShown && isValidQRCode(refinedValue)) {
       dispatch(barcodeScannerActions.hide());
+      dispatch(
+        multiCheckinScreenActions.setData({
+          event: getEventInfo(refinedValue),
+          users: getUsers(refinedValue),
+        })
+      );
       dispatch(MULTI_CHECKIN_SCREEN());
     }
     if (isScannerShown && isAbhyasiId(refinedValue)) {
