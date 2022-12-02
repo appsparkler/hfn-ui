@@ -1,4 +1,4 @@
-import { TCheckinTileInfo } from "types/components";
+import { TCheckinTileInfo } from "../components";
 
 export interface MultiCheckinScreenStateProps {
   data: TCheckinTileInfo[];

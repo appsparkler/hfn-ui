@@ -15,9 +15,9 @@ import {
   envReducer,
   dashboardReducer,
   appUpdaterReducer,
+  barcodeScannerReducer,
 } from "./slices";
 import { offlineDataReducer } from "./slices/offlineData";
-import { barcodeScannerReducer } from "widgets/BhandaraCheckinV0/store";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
