@@ -1,4 +1,5 @@
 import {
+  ConnectedMultiCheckinScreen,
   ConnectedRefreshApp,
   DashboardConnected,
   SectionCheckinSuccessConnected,
@@ -16,5 +17,5 @@ export const pages: Page = {
   Dashboard: DashboardConnected,
   RefreshApp: ConnectedRefreshApp,
   NotFound: () => <div>404</div>,
-  MultiCheckinScreen: () => <div>MultiCheckinScreen</div>,
+  MultiCheckinScreen: ConnectedMultiCheckinScreen,
 };

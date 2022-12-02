@@ -16,7 +16,6 @@ const getInitialState = (): MultiCheckinScreenStateProps => ({
 });
 
 const mapUserAndEventInfoToCheckinTileData = (
-  eventInfo: IQREventInfo,
   users: IQRUserInfo[]
 ): ICheckinInfoTilesStateProps["data"] => {
   return users.map((user) => ({
@@ -36,11 +35,16 @@ export const multiCheckinScreenSlice = createSlice({
       state,
       { payload }: { payload: { event: IQREventInfo; users: IQRUserInfo[] } }
     ) => {
-      const updatedData = mapUserAndEventInfoToCheckinTileData(
-        payload.event,
-        payload.users
-      );
-      state.userData = updatedData;
+      const userData = mapUserAndEventInfoToCheckinTileData(payload.users);
+      state.userData = userData;
+      state.eventInfo = payload.event;
     },
   },
 });
+
+export const {
+  actions: multiCheckinScreenActions,
+  reducer: multiCheckinScreenReducer,
+  getInitialState: getMultiCheckinScreenState,
+  name: multiCheckinScreenName,
+} = multiCheckinScreenSlice;

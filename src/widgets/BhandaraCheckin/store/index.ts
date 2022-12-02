@@ -16,6 +16,7 @@ import {
   dashboardReducer,
   appUpdaterReducer,
   barcodeScannerReducer,
+  multiCheckinScreenReducer,
 } from "./slices";
 import { offlineDataReducer } from "./slices/offlineData";
 
@@ -32,6 +33,7 @@ export const rootReducer = {
   env: envReducer,
   dashboard: dashboardReducer,
   appUpdaterProps: appUpdaterReducer,
+  multiCheckinScreen: multiCheckinScreenReducer,
 };
 
 const exampleStore = configureStore({

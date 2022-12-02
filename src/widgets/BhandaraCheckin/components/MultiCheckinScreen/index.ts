@@ -1,1 +1,1 @@
-export * from "./MultiCheckinScreen";
+export * from "./ConnectedMultiCheckinScreen";
