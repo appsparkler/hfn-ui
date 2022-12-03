@@ -6,13 +6,15 @@ const Story = {
   title: "Widgets/Bhandara Checkin/Sections/AbhyasiIDCheckinScreen",
 } as ComponentMeta<typeof AbhyasiIDCheckinScreen>;
 
-const Template: ComponentStory<typeof AbhyasiIDCheckinScreen> = (args = {}) => (
+const Template: ComponentStory<typeof AbhyasiIDCheckinScreen> = (args) => (
   <AbhyasiIDCheckinScreen {...args} />
 );
 
 export const abhyasiIdCheckinScreen: ComponentStory<
   typeof AbhyasiIDCheckinScreen
 > = Template.bind({});
-abhyasiIdCheckinScreen.args = {};
+abhyasiIdCheckinScreen.args = {
+  abhyasiId: "INSAAE769",
+};
 
 export default Story;

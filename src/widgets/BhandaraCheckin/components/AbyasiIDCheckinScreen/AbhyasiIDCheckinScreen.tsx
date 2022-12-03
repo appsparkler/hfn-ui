@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CenterOfViewport, Horizontal, Vertical } from "components";
+import { TextFieldPropsOnChange } from "types";
 
 export interface IAbhyasiIDCheckinTileStateProps {
   abhyasiId: string;
@@ -15,6 +16,7 @@ export interface IAbhyasiIDCheckinTileStateProps {
 export interface IAbhyasiIDCheckinTileDispatchProps {
   onCheckin: () => void;
   onCancel: () => void;
+  onChangeDormAndBirthAllocation: TextFieldPropsOnChange;
 }
 
 export type TAbhyasiIDCheckinTileProps = IAbhyasiIDCheckinTileStateProps &
@@ -27,6 +29,7 @@ export const AbhyasiIDCheckinTile: TAbhyasiIDCheckinTileComponentProps = ({
   abhyasiId,
   onCheckin,
   onCancel,
+  onChangeDormAndBirthAllocation,
 }) => {
   return (
     <Box width="100%" p={2}>
@@ -47,7 +50,7 @@ export const AbhyasiIDCheckinTile: TAbhyasiIDCheckinTileComponentProps = ({
                 variant="outlined"
                 placeholder="Please enter allocated dorm and birth..."
                 fullWidth
-                onChange={console.log}
+                onChange={onChangeDormAndBirthAllocation}
               />
             </Box>
           </Vertical>
@@ -79,13 +82,19 @@ export const AbhyasiIDCheckinTile: TAbhyasiIDCheckinTileComponentProps = ({
   );
 };
 
-export const AbhyasiIDCheckinScreen = ({}) => {
+export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinTileComponentProps = ({
+  onCheckin,
+  onCancel,
+  abhyasiId,
+  onChangeDormAndBirthAllocation,
+}) => {
   return (
     <CenterOfViewport>
       <AbhyasiIDCheckinTile
-        abhyasiId=""
-        onCancel={console.log}
-        onCheckin={console.log}
+        abhyasiId={abhyasiId}
+        onCancel={onCancel}
+        onCheckin={onCheckin}
+        onChangeDormAndBirthAllocation={onChangeDormAndBirthAllocation}
       />
     </CenterOfViewport>
   );
