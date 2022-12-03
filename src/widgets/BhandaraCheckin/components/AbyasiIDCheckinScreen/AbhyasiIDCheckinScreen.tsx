@@ -7,9 +7,9 @@ import {
   Typography,
 } from "@mui/material";
 import { CenterOfViewport, Horizontal, Vertical } from "components";
-import { TAbhyasiIDCheckinTileComponentProps } from "widgets/BhandaraCheckin/types/screens";
+import { TAbhyasiIDCheckinScreenComponentProps } from "widgets/BhandaraCheckin/types/screens";
 
-export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinTileComponentProps = ({
+export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
   onCheckin,
   onCancel,
   abhyasiId,
