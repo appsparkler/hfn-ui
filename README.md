@@ -1,3 +1,9 @@
+# SETTING UP A ROUTE
+
+1. Create the screen component
+2. Connect it to Redux store with `mapStateToProps` and `mapDispatchToProps`.
+3. Setup the route in routing folder
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

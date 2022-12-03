@@ -1,17 +1,18 @@
 import { TextFieldPropsOnChange } from "types";
 
-export interface IAbhyasiIDCheckinTileStateProps {
+export interface IAbhyasiIDCheckinScreenStateProps {
   abhyasiId: string;
+  dormAndBirthAllocation: string;
 }
 
-export interface IAbhyasiIDCheckinTileDispatchProps {
+export interface IAbhyasiIDCheckinScreenDispatchProps {
   onCheckin: () => void;
   onCancel: () => void;
   onChangeDormAndBirthAllocation: TextFieldPropsOnChange;
 }
 
-export type TAbhyasiIDCheckinTileProps = IAbhyasiIDCheckinTileStateProps &
-  IAbhyasiIDCheckinTileDispatchProps;
+export type TAbhyasiIDCheckinScreenProps = IAbhyasiIDCheckinScreenStateProps &
+  IAbhyasiIDCheckinScreenDispatchProps;
 
-export type TAbhyasiIDCheckinTileComponentProps =
-  React.FC<TAbhyasiIDCheckinTileProps>;
+export type TAbhyasiIDCheckinScreenComponentProps =
+  React.FC<TAbhyasiIDCheckinScreenProps>;

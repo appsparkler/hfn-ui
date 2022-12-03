@@ -19,6 +19,7 @@ import {
   multiCheckinScreenReducer,
 } from "./slices";
 import { offlineDataReducer } from "./slices/offlineData";
+import { abhyasiIdCheckinScreenReducer } from "./slices/abhyasiIdCheckinScreen";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
@@ -34,6 +35,7 @@ export const rootReducer = {
   dashboard: dashboardReducer,
   appUpdaterProps: appUpdaterReducer,
   multiCheckinScreen: multiCheckinScreenReducer,
+  abhyasiIdCheckinScreen: abhyasiIdCheckinScreenReducer,
 };
 
 const exampleStore = configureStore({
