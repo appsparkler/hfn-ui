@@ -5,6 +5,7 @@ const actionTypeToComponentsMap: Record<string, PageEnum> = {
   HOME: PageEnum.Home,
   UPDATE_DETAILS: PageEnum.UpdateDetails,
   MULTI_CHECKIN_SCREEN: PageEnum.MultiCheckinScreen,
+  ABHYASI_ID_CHECKIN_SCREEN: PageEnum.AbhyasiIdCheckinScreen,
   CHECKIN_SUCCESS: PageEnum.CheckInSuccess,
   OFFLINE_DATA: PageEnum.OfflineData,
   DASHBOARD: PageEnum.Dashboard,

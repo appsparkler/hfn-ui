@@ -8,6 +8,10 @@ export const MULTI_CHECKIN_SCREEN = () => ({
   type: "MULTI_CHECKIN_SCREEN",
 });
 
+export const ABHYASI_ID_CHECKIN_SCREEN = () => ({
+  type: "ABHYASI_ID_CHECKIN_SCREEN",
+});
+
 export const OFFLINE_DATA = () => ({
   type: "OFFLINE_DATA",
 });

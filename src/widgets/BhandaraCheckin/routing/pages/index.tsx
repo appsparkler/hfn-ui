@@ -18,4 +18,5 @@ export const pages: Page = {
   RefreshApp: ConnectedRefreshApp,
   NotFound: () => <div>404</div>,
   MultiCheckinScreen: ConnectedMultiCheckinScreen,
+  AbhyasiIdCheckinScreen: () => <div>AbhyasiIdCheckinScreen</div>,
 };
