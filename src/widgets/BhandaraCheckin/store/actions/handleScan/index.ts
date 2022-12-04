@@ -42,7 +42,6 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
       dispatch(MULTI_CHECKIN_SCREEN());
     }
     if (isScannerShown && isAbhyasiId(refinedValue)) {
-      console.log({ refinedValue });
       dispatch(barcodeScannerActions.hide());
       dispatch(mainSectionActions.setValue(refinedValue));
       checkinAbhyasi(dispatch, refinedValue);

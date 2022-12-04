@@ -85,27 +85,27 @@ export async function checkinAbhyasi(
   dispatch: Dispatch<Action<any>>,
   abhyasiId: string
 ) {
-  dispatch(mainSectionActions.startProcessing());
-  const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
-  if (isCheckedInRes.meta.requestStatus === "rejected") {
-    if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
-      const errorAction = mainSectionActions.setError(
-        errorAbhyasiAlreadyCheckedin(abhyasiId)
-      );
-      dispatch(errorAction);
-    }
-  } else {
-    const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
-    if (res.meta.requestStatus === "fulfilled") {
-      dispatch(pageActions.CHECKIN_SUCCESS());
-    } else {
-      dispatch(
-        snackbarActions.openSnackbar({
-          children: ErrorCodes.SERVER_ERROR,
-        })
-      );
-    }
-  }
+  // dispatch(mainSectionActions.startProcessing());
+  // const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
+  // if (isCheckedInRes.meta.requestStatus === "rejected") {
+  //   if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
+  //     const errorAction = mainSectionActions.setError(
+  //       errorAbhyasiAlreadyCheckedin(abhyasiId)
+  //     );
+  //     dispatch(errorAction);
+  //   }
+  // } else {
+  //   const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
+  //   if (res.meta.requestStatus === "fulfilled") {
+  //     // dispatch(pageActions.CHECKIN_SUCCESS());
+  //   } else {
+  //     dispatch(
+  //       snackbarActions.openSnackbar({
+  //         children: ErrorCodes.SERVER_ERROR,
+  //       })
+  //     );
+  //   }
+  // }
 
   dispatch(mainSectionActions.stopProcessing());
 }
