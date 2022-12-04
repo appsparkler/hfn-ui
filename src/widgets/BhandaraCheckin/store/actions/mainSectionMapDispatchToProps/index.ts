@@ -7,13 +7,8 @@ import {
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   modeActions,
-  snackbarActions,
   updateDetailsActions,
 } from "widgets/BhandaraCheckin/store/slices";
-import {
-  checkinWithAbhyasiId,
-  isAbhyasiCheckedIn,
-} from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import {
@@ -23,8 +18,6 @@ import {
   REFRESH_APP,
 } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
-import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
-import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { handleClickScan } from "./handleClickScan";
 import { abhyasiIdCheckinScreenActions } from "../../slices/abhyasiIdCheckinScreen";
 
