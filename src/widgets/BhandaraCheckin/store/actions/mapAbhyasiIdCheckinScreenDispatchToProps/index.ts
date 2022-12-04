@@ -14,7 +14,7 @@ export const mapAbhyasiIDCheckinScreenDispatchToProps: MapDispatchToProps<
       dispatch(mainSectionActions.reset());
       dispatch(pageActions.HOME());
     },
-    onCheckin: console.log,
+    onCheckin: () => {},
     onChangeDormAndBirthAllocation: ({ target: { value } }) => {
       dispatch(abhyasiIdCheckinScreenActions.setDormAndBirthAllocation(value));
     },
