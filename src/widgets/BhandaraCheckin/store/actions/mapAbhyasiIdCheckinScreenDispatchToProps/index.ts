@@ -4,9 +4,10 @@ import { IAbhyasiIDCheckinScreenDispatchProps } from "widgets/BhandaraCheckin/ty
 export const mapAbhyasiIDCheckinScreenDispatchToProps: MapDispatchToProps<
   IAbhyasiIDCheckinScreenDispatchProps,
   {}
-> = (dispatch, ownProps) => ({
-  onCancel: console.log,
-  onCheckin: console.log,
-  onChangeDormAndBirthAllocation: console.log,
-});
-//
+> = () => {
+  return {
+    onCancel: console.log,
+    onCheckin: console.log,
+    onChangeDormAndBirthAllocation: console.log,
+  };
+};

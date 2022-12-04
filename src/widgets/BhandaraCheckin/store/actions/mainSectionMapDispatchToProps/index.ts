@@ -17,6 +17,7 @@ import {
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import {
+  ABHYASI_ID_CHECKIN_SCREEN,
   DASHBOARD,
   OFFLINE_DATA,
   REFRESH_APP,
@@ -25,6 +26,7 @@ import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { handleClickScan } from "./handleClickScan";
+import { abhyasiIdCheckinScreenActions } from "../../slices/abhyasiIdCheckinScreen";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -85,6 +87,8 @@ export async function checkinAbhyasi(
   dispatch: Dispatch<Action<any>>,
   abhyasiId: string
 ) {
+  dispatch(abhyasiIdCheckinScreenActions.setAbhyasiId(abhyasiId));
+  dispatch(ABHYASI_ID_CHECKIN_SCREEN());
   // dispatch(mainSectionActions.startProcessing());
   // const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
   // if (isCheckedInRes.meta.requestStatus === "rejected") {
