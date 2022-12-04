@@ -10,7 +10,7 @@ export interface CheckinWithEmailOrMobileApi {
 }
 
 export interface CheckinAbhyasiApi {
-  (abhyasiId: string): boolean;
+  (abhyasiId: string, dormAndBirthAllocation: string): boolean;
 }
 
 export type OfflineCacheData =
