@@ -13,13 +13,14 @@ const checkedInPeople: (
 )[] = [];
 
 export const mockedApis: BhandaraCheckinAPIs = {
-  checkinAbhyasi: (abhyasiId: string) => {
+  checkinAbhyasi: (abhyasiId: string, dormAndBirthAllocation: string = "") => {
     checkedInPeople.push({
       abhyasiId,
       deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
+      dormAndBirthAllocation,
     });
     return true;
   },
@@ -30,6 +31,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.EmailOrMobile,
       updatedInReport: false,
+      dormAndBirthAllocation: "", // TODO: Add dormAndBirthAllocation
     });
     return true;
   },
