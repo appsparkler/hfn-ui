@@ -5,3 +5,4 @@ export { handleSwitchScanner } from "./mainSectionMapDispatchToProps/handleSwitc
 export { handlePlayScannerVideo } from "./handlePlayScannerVideo";
 export { handleScan as handleScanV2 } from "./handleScan";
 export * from "./mapBhandaraCheckinDispatchToProps";
+export * from "./mapAbhyasiIdCheckinScreenDispatchToProps";

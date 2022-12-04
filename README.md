@@ -1,8 +1,10 @@
 # SETTING UP A ROUTE
 
 1. Create the screen component
-2. Connect it to Redux store with `mapStateToProps` and `mapDispatchToProps`.
-3. Setup the route in routing folder
+1. Create the slice (reducer, actions and name).
+1. Create the route.
+1. Connect it to Redux store with `mapStateToProps` and `mapDispatchToProps`.
+1. Setup the route in routing folder which points to the connected-screen component.
 
 # Getting Started with Create React App
 
