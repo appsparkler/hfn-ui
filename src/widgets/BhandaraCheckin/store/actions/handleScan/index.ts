@@ -20,7 +20,8 @@ const isValidQRCode = (scannedValue: string) => {
     if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
       return true;
     }
-  } finally {
+  } catch (error) {
+    console.error(error);
     return false;
   }
 };
@@ -50,7 +51,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
 );
 
 function isValidPNR(pnr: string) {
-  return pnr.match(/[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/);
+  return Boolean(pnr.match(/[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/));
 }
 
 function getUsers(scannedValue: string): IQRUserInfo[] {
