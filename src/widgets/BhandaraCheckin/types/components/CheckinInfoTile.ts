@@ -5,6 +5,7 @@ export interface ICheckinTileInfo {
   registrationId: string;
   dormPreference?: string;
   birthPreference?: string;
+  dormAllocation?: string;
 }
 
 export type ICheckinInfoTileStateProps = {} & ICheckinTileInfo;

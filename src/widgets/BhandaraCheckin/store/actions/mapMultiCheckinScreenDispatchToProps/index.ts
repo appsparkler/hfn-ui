@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import { MapDispatchToProps } from "react-redux";
 import {
   ICheckinTileInfo,
+  IQREventInfo,
   MultiCheckinScreenDispatchProps,
 } from "widgets/BhandaraCheckin/types";
 import {
@@ -10,8 +11,8 @@ import {
   RootState,
 } from "widgets/BhandaraCheckin/store";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
-import { map } from "lodash/fp";
-import { IQRCheckinUser } from "@hfn-checkins/types";
+import { filter, map, pipe } from "lodash/fp";
+import { CheckinTypesEnum, IQRCheckinUser } from "@hfn-checkins/types";
 
 export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   MultiCheckinScreenDispatchProps,
@@ -32,12 +33,32 @@ export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
 const onClickCheckinAction =
   () => async (dispatch: Dispatch, getState: () => RootState) => {
     const rootState = getState();
-    const { userData } = rootState.multiCheckinScreen;
+    const { userData, eventInfo } = rootState.multiCheckinScreen;
     alert(JSON.stringify(userData, null, 2));
-    // const apiData = mapCheckinTileInfoToApiData(userData);
+    const apiData = getAPIDataFromCheckinTileInfo(eventInfo)(userData);
+    alert(JSON.stringify(apiData, null, 2));
   };
 
-// const mapCheckinTileInfoToApiData = map<ICheckinTileInfo, IQRCheckinUser>(tileInfo => ({
-//   abhyasiId: tileInfo.abhyasiId,
-//   allottedBed: tileInfo.
-// }))
+const filterOutUnChecked = filter<ICheckinTileInfo>(
+  (checkin) => checkin.checked
+);
+
+const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo) =>
+  map<ICheckinTileInfo, IQRCheckinUser>((tileInfo) => ({
+    abhyasiId: tileInfo.abhyasiId,
+    dormAndBirthAllocation: String(tileInfo.dormAllocation),
+    fullName: tileInfo.fullName,
+    birthPreference: String(tileInfo.birthPreference || ""),
+    dormPreference: String(tileInfo.dormPreference || ""),
+    eventName: String(eventInfo.eventName),
+    name: String(tileInfo.fullName || ""),
+    pnr: String(eventInfo.pnr),
+    regId: String(tileInfo.registrationId),
+    type: CheckinTypesEnum.QR,
+  }));
+
+const getAPIDataFromCheckinTileInfo = (eventInfo: IQREventInfo) =>
+  pipe<[ICheckinTileInfo[]], ICheckinTileInfo[], IQRCheckinUser[]>(
+    filterOutUnChecked,
+    mapCheckinTileInfoToApiData(eventInfo)
+  );
