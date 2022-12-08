@@ -1,5 +1,8 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
+import {
+  HOME,
+  MULTI_CHECKIN_SCREEN,
+} from "widgets/BhandaraCheckin/routing/actions/page";
 import { BhandaraCheckinDispatchProps } from "widgets/BhandaraCheckin/types";
 import {
   getAppVersionNumber,
@@ -10,9 +13,33 @@ import {
 import {
   appUpdaterActions,
   bhandaraCheckinActions,
+  multiCheckinScreenActions,
   snackbarActions,
 } from "../../slices";
 import { refreshApp } from "../utils";
+import { delay } from "lodash/fp";
+
+const setupApp = (dispatch: Dispatch) => {
+  delay(2000, () => {
+    dispatch(MULTI_CHECKIN_SCREEN());
+    dispatch(
+      multiCheckinScreenActions.setData({
+        event: {
+          eventId: "121212",
+          eventName: "Bhandara",
+          pnr: "ABIK-JIEK-IIW",
+        },
+        users: [
+          {
+            abhyasiId: "INAAAE478",
+            fullName: "Aakash Shah",
+            regId: "BJEi39339",
+          },
+        ],
+      })
+    );
+  });
+};
 
 export const mapBhandaraCheckinDispatchToProps = (
   dispatch: Dispatch
@@ -51,6 +78,7 @@ export const mapBhandaraCheckinDispatchToProps = (
       );
       dispatch(bhandaraCheckinActions.renderApp());
     }
+    setupApp(dispatch);
   },
   onUnmount: () => {
     dispatch<any>(signOutAnonymously());
