@@ -25,14 +25,21 @@ export const mockedApis: BhandaraCheckinAPIs = {
     return true;
   },
   checkinWithEmailOrMobile: (userDetails) => {
-    checkedInPeople.push({
+    const $user = {
       ...userDetails,
       deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.EmailOrMobile,
       updatedInReport: false,
-      dormAndBirthAllocation: "", // TODO: Add dormAndBirthAllocation
-    });
+    };
+    checkedInPeople.push(
+      $user as
+        | CheckinWithEmailOrMobileApiStoreData
+        | IAbhyasiCheckinApiStoreData
+    );
+    setTimeout(() => {
+      alert(JSON.stringify($user, null, 2));
+    }, 1000);
     return true;
   },
   getDataFromCache: () => {

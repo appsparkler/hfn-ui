@@ -48,9 +48,8 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       country: String(country.value?.toUpperCase()),
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
-      dormAndBirthAllocation: String(dormAndBirthAllocation),
+      dormAndBirthAllocation: String(dormAndBirthAllocation.value),
     };
-    dispatch(updateDetailsActions.startProcessing());
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)
     );
@@ -80,7 +79,5 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
         );
       }
     }
-
-    dispatch(updateDetailsActions.stopProcessing());
   },
 });
