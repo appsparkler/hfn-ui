@@ -13,6 +13,8 @@ import {
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { filter, map, pipe } from "lodash/fp";
 import { CheckinTypesEnum, IQRCheckinUser } from "@hfn-checkins/types";
+import { multiCheckinWithQRCode } from "../../api-async-thunks";
+import { CHECKIN_SUCCESS } from "widgets/BhandaraCheckin/routing/actions/page";
 
 export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   MultiCheckinScreenDispatchProps,
@@ -34,9 +36,9 @@ const onClickCheckinAction =
   () => async (dispatch: Dispatch, getState: () => RootState) => {
     const rootState = getState();
     const { userData, eventInfo } = rootState.multiCheckinScreen;
-    alert(JSON.stringify(userData, null, 2));
     const apiData = getAPIDataFromCheckinTileInfo(eventInfo)(userData);
-    alert(JSON.stringify(apiData, null, 2));
+    dispatch<any>(multiCheckinWithQRCode(apiData));
+    dispatch(CHECKIN_SUCCESS());
   };
 
 const filterOutUnChecked = filter<ICheckinTileInfo>(

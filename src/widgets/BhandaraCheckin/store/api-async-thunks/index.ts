@@ -7,3 +7,4 @@ export * from "./getDashboardData";
 export * from "./getAppVersionNumber";
 export * from "./signInAnonymously";
 export * from "./signOutAnonymously";
+export * from "./checkinWithQRCode";
