@@ -4,6 +4,7 @@ import {
   IAbhyasiCheckinApiStoreData,
   IQRCheckinUser,
 } from "@hfn-checkins/types";
+import { delay } from "lodash/fp";
 import { BhandaraCheckinAPIs } from "../types";
 
 const APP_VERSION = 1;
@@ -49,8 +50,10 @@ export const mockedApis: BhandaraCheckinAPIs = {
     return true;
   },
   checkinWithQRCode: (qrCodeUsers) => {
-    alert(JSON.stringify(qrCodeUsers, null, 2));
     checkedInPeople.push(...qrCodeUsers);
+    delay(2000, () => {
+      alert(JSON.stringify(qrCodeUsers, null, 2));
+    });
   },
   getDataFromCache: () => {
     return Promise.resolve(checkedInPeople);
