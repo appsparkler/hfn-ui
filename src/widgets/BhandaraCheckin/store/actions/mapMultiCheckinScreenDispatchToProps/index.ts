@@ -1,7 +1,11 @@
 import { Dispatch } from "redux";
 import { MapDispatchToProps } from "react-redux";
 import { MultiCheckinScreenDispatchProps } from "widgets/BhandaraCheckin/types";
-import { multiCheckinScreenActions } from "../../slices";
+import {
+  mainSectionActions,
+  multiCheckinScreenActions,
+} from "widgets/BhandaraCheckin/store";
+import { pageActions } from "widgets/BhandaraCheckin/routing";
 
 export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   MultiCheckinScreenDispatchProps,
@@ -10,6 +14,9 @@ export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   onChangeData: (checkins) => {
     dispatch(multiCheckinScreenActions.setUserData(checkins));
   },
-  onClickCancel: () => {},
+  onClickCancel: () => {
+    dispatch(mainSectionActions.reset());
+    dispatch(pageActions.HOME());
+  },
   onClickCheckin: () => {},
 });
