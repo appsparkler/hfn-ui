@@ -19,7 +19,7 @@ import {
 import { refreshApp } from "../utils";
 import { delay } from "lodash/fp";
 
-const setupApp = (dispatch: Dispatch) => {
+const setupAppForDeveloperMode = (dispatch: Dispatch) => {
   delay(2000, () => {
     dispatch(MULTI_CHECKIN_SCREEN());
     dispatch(
@@ -78,7 +78,7 @@ export const mapBhandaraCheckinDispatchToProps = (
       );
       dispatch(bhandaraCheckinActions.renderApp());
     }
-    setupApp(dispatch);
+    setupAppForDeveloperMode(dispatch);
   },
   onUnmount: () => {
     dispatch<any>(signOutAnonymously());
