@@ -26,16 +26,19 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
     dispatch(mainSectionActions.reset());
     dispatch(pageActions.HOME());
   },
-  onClickCheckin: async ({
-    ageGroup,
-    email,
-    fullName,
-    gender,
-    city,
-    state,
-    country,
-    mobile,
-  }) => {
+  onClickCheckin: async ($userDetails) => {
+    const {
+      ageGroup,
+      email,
+      fullName,
+      gender,
+      city,
+      state,
+      country,
+      mobile,
+      dormAndBirthAllocation,
+    } = $userDetails;
+
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
       email: String(email.value?.toLowerCase()),
@@ -45,6 +48,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       country: String(country.value?.toUpperCase()),
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
+      dormAndBirthAllocation: String(dormAndBirthAllocation),
     };
     dispatch(updateDetailsActions.startProcessing());
     const isUserCheckedInRes = await dispatch<any>(

@@ -1,7 +1,7 @@
-import { CheckinsAggregateData } from "@hfn-checkins/types";
+import { ICheckinsAggregateData } from "@hfn-checkins/types";
 
 export interface DashboardStateProps {
-  stats: CheckinsAggregateData;
+  stats: ICheckinsAggregateData;
   isFetching?: boolean;
 }
 

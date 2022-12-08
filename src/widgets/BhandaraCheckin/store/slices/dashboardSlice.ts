@@ -1,4 +1,4 @@
-import { CheckinsAggregateData } from "@hfn-checkins/types";
+import { ICheckinsAggregateData } from "@hfn-checkins/types";
 import { createSlice } from "@reduxjs/toolkit";
 import { initialStats } from "widgets/BhandaraCheckin/constants";
 import { DashboardStateProps } from "widgets/BhandaraCheckin/types";
@@ -12,7 +12,7 @@ const dashboardSlice = createSlice({
   name: "dashboard",
   initialState: getInitialState(),
   reducers: {
-    updateStats: (state, { payload }: { payload: CheckinsAggregateData }) => {
+    updateStats: (state, { payload }: { payload: ICheckinsAggregateData }) => {
       state.stats = payload;
     },
     fetchStart: (state) => {

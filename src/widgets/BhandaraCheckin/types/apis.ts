@@ -1,6 +1,6 @@
 import {
   CheckinEmailOrMobileUserDetails,
-  CheckinsAggregateData,
+  ICheckinsAggregateData,
   IAbhyasiCheckinApiStoreData,
 } from "@hfn-checkins/types";
 import { noop } from "lodash/fp";
@@ -30,7 +30,7 @@ export interface IsUserAlreadyCheckedInApi {
 }
 
 export interface GetDashboardDataApi {
-  (): Promise<CheckinsAggregateData>;
+  (): Promise<ICheckinsAggregateData>;
 }
 
 export interface GetAppVersion {

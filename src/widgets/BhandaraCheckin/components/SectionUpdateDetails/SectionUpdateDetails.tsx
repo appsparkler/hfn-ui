@@ -48,7 +48,7 @@ export const SectionUpdateDetails = ({
     state,
     country,
     mobile,
-    comfortDormAndBirthAllocation,
+    dormAndBirthAllocation: comfortDormAndBirthAllocation,
   } = useMemo(() => userDetails, [userDetails]);
 
   const areEmailAndMobileValid = useMemo<boolean>(() => {

@@ -24,7 +24,7 @@ export const isFieldValueValidV2 = (
     case "mobile":
       if (isMobile((value as string).trim())) return true;
       else return false;
-    case "comfortDormAndBirthAllocation":
+    case "dormAndBirthAllocation":
       return true;
 
     default:
