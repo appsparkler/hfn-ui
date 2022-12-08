@@ -48,5 +48,5 @@ export type BhandaraCheckinAPIs = {
   getAppVersion: GetAppVersion;
   signInAnonymously: () => Promise<void>;
   signOutAnonymously: typeof noop;
-  checkinWithQRCode: (users: IQRCheckinUser) => Promise<void>;
+  checkinWithQRCode: (users: IQRCheckinUser) => void;
 };

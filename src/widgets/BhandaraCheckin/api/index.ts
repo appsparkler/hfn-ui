@@ -19,5 +19,5 @@ export const apis: BhandaraCheckinAPIs = {
   getAppVersion,
   signInAnonymously,
   signOutAnonymously,
-  checkinWithQRCode: () => new Promise(() => {}),
+  checkinWithQRCode: () => {},
 };
