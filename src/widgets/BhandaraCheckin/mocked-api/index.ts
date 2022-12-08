@@ -2,6 +2,7 @@ import {
   CheckinTypesEnum,
   CheckinWithEmailOrMobileApiStoreData,
   IAbhyasiCheckinApiStoreData,
+  IQRCheckinUser,
 } from "@hfn-checkins/types";
 import { BhandaraCheckinAPIs } from "../types";
 
@@ -10,6 +11,7 @@ const APP_VERSION = 1;
 const checkedInPeople: (
   | IAbhyasiCheckinApiStoreData
   | CheckinWithEmailOrMobileApiStoreData
+  | IQRCheckinUser
 )[] = [];
 
 export const mockedApis: BhandaraCheckinAPIs = {
@@ -46,7 +48,10 @@ export const mockedApis: BhandaraCheckinAPIs = {
     }, 1000);
     return true;
   },
-  checkinWithQRCode: () => {},
+  checkinWithQRCode: (qrCodeUsers) => {
+    alert(JSON.stringify(qrCodeUsers, null, 2));
+    checkedInPeople.push(...qrCodeUsers);
+  },
   getDataFromCache: () => {
     return Promise.resolve(checkedInPeople);
   },

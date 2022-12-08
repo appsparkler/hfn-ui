@@ -16,6 +16,7 @@ export interface CheckinAbhyasiApi {
 
 export type OfflineCacheData =
   | CheckinEmailOrMobileUserDetails
+  | IQRCheckinUser
   | IAbhyasiCheckinApiStoreData;
 
 export interface GetDataFromCacheApi {
