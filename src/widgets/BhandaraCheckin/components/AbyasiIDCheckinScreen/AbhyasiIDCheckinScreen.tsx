@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { CenterOfViewport, Horizontal, Vertical } from "components";
+import { useEffect, useRef } from "react";
 import { TAbhyasiIDCheckinScreenComponentProps } from "widgets/BhandaraCheckin/types/screens";
 
 export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
@@ -15,6 +16,10 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
   abhyasiId,
   onChangeDormAndBirthAllocation,
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
   return (
     <CenterOfViewport>
       <Box width="100%" p={2}>
@@ -35,6 +40,7 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
                   variant="outlined"
                   placeholder="Please enter allocated dorm and birth..."
                   fullWidth
+                  inputRef={inputRef}
                   onChange={onChangeDormAndBirthAllocation}
                 />
               </Box>
