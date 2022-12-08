@@ -14,14 +14,18 @@ const checkedInPeople: (
 
 export const mockedApis: BhandaraCheckinAPIs = {
   checkinAbhyasi: (abhyasiId: string, dormAndBirthAllocation: string = "") => {
-    checkedInPeople.push({
+    const $user = {
       abhyasiId,
       deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
       dormAndBirthAllocation,
-    });
+    };
+    checkedInPeople.push($user as any);
+    setTimeout(() => {
+      alert(JSON.stringify($user, null, 2));
+    }, 1000);
     return true;
   },
   checkinWithEmailOrMobile: (userDetails) => {
