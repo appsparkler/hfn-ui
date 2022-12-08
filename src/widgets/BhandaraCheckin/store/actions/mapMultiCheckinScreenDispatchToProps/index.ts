@@ -1,11 +1,17 @@
 import { Dispatch } from "redux";
 import { MapDispatchToProps } from "react-redux";
-import { MultiCheckinScreenDispatchProps } from "widgets/BhandaraCheckin/types";
+import {
+  ICheckinTileInfo,
+  MultiCheckinScreenDispatchProps,
+} from "widgets/BhandaraCheckin/types";
 import {
   mainSectionActions,
   multiCheckinScreenActions,
+  RootState,
 } from "widgets/BhandaraCheckin/store";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
+import { map } from "lodash/fp";
+import { IQRCheckinUser } from "@hfn-checkins/types";
 
 export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   MultiCheckinScreenDispatchProps,
@@ -18,5 +24,20 @@ export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
     dispatch(mainSectionActions.reset());
     dispatch(pageActions.HOME());
   },
-  onClickCheckin: () => {},
+  onClickCheckin: () => {
+    dispatch<any>(onClickCheckinAction());
+  },
 });
+
+const onClickCheckinAction =
+  () => async (dispatch: Dispatch, getState: () => RootState) => {
+    const rootState = getState();
+    const { userData } = rootState.multiCheckinScreen;
+    alert(JSON.stringify(userData, null, 2));
+    // const apiData = mapCheckinTileInfoToApiData(userData);
+  };
+
+// const mapCheckinTileInfoToApiData = map<ICheckinTileInfo, IQRCheckinUser>(tileInfo => ({
+//   abhyasiId: tileInfo.abhyasiId,
+//   allottedBed: tileInfo.
+// }))

@@ -25,9 +25,9 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
 
   const handleChangeDormAllocation = useCallback<TextFieldPropsOnChange>(
     (evt) => {
-      onChangeDormAllocation(abhyasiId, evt.target.value);
+      onChangeDormAllocation(registrationId, evt.target.value);
     },
-    [abhyasiId, onChangeDormAllocation]
+    [registrationId, onChangeDormAllocation]
   );
 
   const showPreference = useMemo(() => {
