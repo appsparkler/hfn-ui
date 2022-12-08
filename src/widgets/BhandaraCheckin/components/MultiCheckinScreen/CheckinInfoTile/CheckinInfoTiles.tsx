@@ -11,9 +11,9 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
   onChange,
 }) => {
   const handleCheck = useCallback<ICheckinInfoTileDispatchProps["onCheck"]>(
-    (id, checked) => {
+    (registrationId, checked) => {
       const newData = data.map((item) => {
-        if (item.id === id) {
+        if (item.registrationId === registrationId) {
           return { ...item, checked };
         }
         return item;
@@ -26,9 +26,9 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
   const handleChangeDormAllocation = useCallback<
     ICheckinInfoTileDispatchProps["onChangeDormAllocation"]
   >(
-    (id, dormAllocation) => {
+    (registrationId, dormAllocation) => {
       const newData = data.map((item) => {
-        if (item.id === id) {
+        if (item.registrationId === registrationId) {
           return { ...item, dormAllocation };
         }
         return item;

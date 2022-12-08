@@ -15,18 +15,19 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
   birthPreference,
   onCheck,
   onChangeDormAllocation,
-  id,
+  abhyasiId,
+  registrationId,
 }) => {
   const handleChangeCheckinStatus = useCallback<TFormControlLabelPropsOnChange>(
-    (_evt, checked) => onCheck(id, checked),
-    [id, onCheck]
+    (_evt, checked) => onCheck(registrationId, checked),
+    [registrationId, onCheck]
   );
 
   const handleChangeDormAllocation = useCallback<TextFieldPropsOnChange>(
     (evt) => {
-      onChangeDormAllocation(id, evt.target.value);
+      onChangeDormAllocation(abhyasiId, evt.target.value);
     },
-    [id, onChangeDormAllocation]
+    [abhyasiId, onChangeDormAllocation]
   );
 
   const showPreference = useMemo(() => {
@@ -46,16 +47,30 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
             }
             label={fullName}
           />
+          <Box>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Abhyasi Id:&nbsp;</strong>
+              {abhyasiId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Reg Id:&nbsp;</strong>
+              {registrationId}&nbsp;&nbsp;
+            </Typography>
+          </Box>
           {showPreference ? (
             <Box>
-              <Typography variant="subtitle2">Dorm Preference:</Typography>
+              <Typography variant="body2" color="text.secondary">
+                <strong>Dorm Preference:</strong>
+              </Typography>
               <Typography variant="body2" color="text.secondary">
                 {dormPreference}, {birthPreference}
               </Typography>
             </Box>
           ) : null}
           <Box width="100%">
-            <Typography variant="subtitle2">Dorm Allocation:</Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Dorm Allocation:</strong>
+            </Typography>
             <TextField
               variant="outlined"
               placeholder="Please enter allocated dorm and birth..."

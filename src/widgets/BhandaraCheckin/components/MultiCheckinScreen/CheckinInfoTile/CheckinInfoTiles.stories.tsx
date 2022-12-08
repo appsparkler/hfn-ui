@@ -29,25 +29,28 @@ export const checkinInfoTiles: ComponentStory<typeof CheckinInfoTiles> =
 checkinInfoTiles.args = {
   data: [
     {
-      id: "tile-1",
+      abhyasiId: "tile-1",
       checked: false,
       fullName: "Jane Mathew",
       dormPreference: "East Comform Dorm - B1",
       birthPreference: "LB",
+      registrationId: "AAV1234",
     },
     {
-      id: "tile-2",
+      abhyasiId: "tile-2",
       checked: false,
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       birthPreference: "LB",
+      registrationId: "AAV2314",
     },
     {
-      id: "tile-3",
+      abhyasiId: "tile-3",
       checked: false,
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       birthPreference: "LB",
+      registrationId: "A32sde34",
     },
   ],
 };

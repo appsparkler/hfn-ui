@@ -1,15 +1,16 @@
-export interface TCheckinTileInfo {
+export interface ICheckinTileInfo {
   checked: boolean;
   fullName: string;
-  id: string;
+  abhyasiId: string;
+  registrationId: string;
   dormPreference?: string;
   birthPreference?: string;
 }
 
-export type ICheckinInfoTileStateProps = {} & TCheckinTileInfo;
+export type ICheckinInfoTileStateProps = {} & ICheckinTileInfo;
 
 export interface ICheckinInfoTileDispatchProps {
-  onCheck: (id: string, checked: boolean) => void;
+  onCheck: (registrationId: string, checked: boolean) => void;
   onChangeDormAllocation: (id: string, dormAllocation: string) => void;
 }
 

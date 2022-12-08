@@ -32,6 +32,13 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     const rootState = getState() as RootState;
     const refinedValue = scannedValue.trim();
     const isScannerShown = rootState.barcodeScanner.show;
+    alert(
+      JSON.stringify({
+        scannedValue,
+        isScannerShown,
+        isValid: isValidQRCode(refinedValue),
+      })
+    );
     if (isScannerShown && isValidQRCode(refinedValue)) {
       dispatch(barcodeScannerActions.hide());
       dispatch(

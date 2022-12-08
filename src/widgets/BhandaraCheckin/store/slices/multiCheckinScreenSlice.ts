@@ -4,6 +4,7 @@ import {
   IQREventInfo,
   IQRUserInfo,
   MultiCheckinScreenStateProps,
+  ICheckinTileInfo,
 } from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
@@ -15,7 +16,7 @@ const getInitialState = (): MultiCheckinScreenStateProps => ({
   },
 });
 
-const mapUserAndEventInfoToCheckinTileData = (
+const mapUserToCheckinTileData = (
   users: IQRUserInfo[]
 ): ICheckinInfoTilesStateProps["data"] => {
   return users.map((user) => ({
@@ -23,7 +24,8 @@ const mapUserAndEventInfoToCheckinTileData = (
     birthPreference: user.birthPreference,
     checked: false,
     fullName: user.fullName,
-    id: user.abhyasiId,
+    registrationId: user.regId,
+    abhyasiId: user.abhyasiId,
   }));
 };
 
@@ -35,9 +37,13 @@ export const multiCheckinScreenSlice = createSlice({
       state,
       { payload }: { payload: { event: IQREventInfo; users: IQRUserInfo[] } }
     ) => {
-      const userData = mapUserAndEventInfoToCheckinTileData(payload.users);
+      const userData = mapUserToCheckinTileData(payload.users);
       state.userData = userData;
       state.eventInfo = payload.event;
+    },
+    setUserData: (state, { payload }: { payload: ICheckinTileInfo[] }) => {
+      // const userData = mapUserToCheckinTileData(payload);
+      // state.userData = userData;
     },
   },
 });

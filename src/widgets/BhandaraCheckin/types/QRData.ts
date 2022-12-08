@@ -6,8 +6,8 @@ export interface IQREventInfo {
 
 export interface IQRUserInfo {
   abhyasiId: string;
-  fullName: string;
   regId: string;
+  fullName: string;
   dormPrference?: string;
   birthPreference?: string;
 }

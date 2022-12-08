@@ -40,21 +40,24 @@ multiCheckinScreen.args = {
   },
   userData: [
     {
-      id: "tile-1",
+      abhyasiId: "tile-1",
       fullName: "Jane Mathew",
       dormPreference: "East Comform Dorm - B1",
       birthPreference: "LB",
       checked: false,
+      registrationId: "AAV1234",
     },
     {
-      id: "tile-2",
+      abhyasiId: "tile-2",
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       birthPreference: "LB",
       checked: false,
+      registrationId: "AAV1234",
     },
     {
-      id: "tile-3",
+      abhyasiId: "tile-3",
+      registrationId: "BCD1234",
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       birthPreference: "LB",

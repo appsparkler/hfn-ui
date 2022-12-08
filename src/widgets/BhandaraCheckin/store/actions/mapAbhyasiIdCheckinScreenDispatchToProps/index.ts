@@ -57,6 +57,7 @@ export const mapAbhyasiIDCheckinScreenDispatchToProps: MapDispatchToProps<
       dispatch(mainSectionActions.reset());
       dispatch(pageActions.HOME());
     },
+
     onCheckin: () => {
       dispatch<any>(handleCheckinWithAbhyasiId());
 

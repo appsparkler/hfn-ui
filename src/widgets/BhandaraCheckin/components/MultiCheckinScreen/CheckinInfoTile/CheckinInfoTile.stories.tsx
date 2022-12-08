@@ -21,7 +21,7 @@ export const checkinInfoTile: ComponentStory<typeof CheckinInfoTile> =
   Template.bind({});
 checkinInfoTile.args = {
   fullName: "Shekhar Kapoor",
-  id: "tile-1",
+  abhyasiId: "tile-1",
   birthPreference: "LB",
   dormPreference: "East Comform Dorm - B1",
 };

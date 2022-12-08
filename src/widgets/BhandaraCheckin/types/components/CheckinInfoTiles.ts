@@ -1,11 +1,11 @@
-import { TCheckinTileInfo } from "./CheckinInfoTile";
+import { ICheckinTileInfo } from "./CheckinInfoTile";
 
 export interface ICheckinInfoTilesStateProps {
-  data: TCheckinTileInfo[];
+  data: ICheckinTileInfo[];
 }
 
 export interface ICheckinInfoTilesDispatchProps {
-  onChange: (data: TCheckinTileInfo[]) => void;
+  onChange: (data: ICheckinTileInfo[]) => void;
 }
 
 export interface ICheckinInfoTilesProps
