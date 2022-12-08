@@ -77,5 +77,9 @@ updateDetails.args = {
       value: "",
       show: true,
     },
+    comfortDormAndBirthAllocation: {
+      value: "",
+      show: true,
+    },
   },
 };

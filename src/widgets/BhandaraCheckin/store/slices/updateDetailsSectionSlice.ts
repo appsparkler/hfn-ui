@@ -40,6 +40,10 @@ const getInitialState = (): SectionUpdateDetailsStateProps => {
         show: true,
         value: "",
       },
+      comfortDormAndBirthAllocation: {
+        show: true,
+        value: "",
+      },
     },
   };
 };

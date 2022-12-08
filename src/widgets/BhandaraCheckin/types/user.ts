@@ -14,4 +14,5 @@ export type FormUserDetails = {
   country: FormUserDetailsValueWrapper<string>;
   ageGroup: FormUserDetailsValueWrapper<string>;
   gender: FormUserDetailsValueWrapper<string>;
+  comfortDormAndBirthAllocation: FormUserDetailsValueWrapper<string>;
 };
