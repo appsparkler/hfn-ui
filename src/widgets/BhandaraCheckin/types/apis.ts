@@ -2,6 +2,7 @@ import {
   CheckinEmailOrMobileUserDetails,
   ICheckinsAggregateData,
   IAbhyasiCheckinApiStoreData,
+  IQRCheckinUser,
 } from "@hfn-checkins/types";
 import { noop } from "lodash/fp";
 
@@ -47,4 +48,5 @@ export type BhandaraCheckinAPIs = {
   getAppVersion: GetAppVersion;
   signInAnonymously: () => Promise<void>;
   signOutAnonymously: typeof noop;
+  checkinWithQRCode: (users: IQRCheckinUser) => Promise<void>;
 };

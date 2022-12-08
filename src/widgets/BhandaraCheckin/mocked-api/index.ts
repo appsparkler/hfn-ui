@@ -46,6 +46,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
     }, 1000);
     return true;
   },
+  checkinWithQRCode: () => new Promise(() => {}),
   getDataFromCache: () => {
     return Promise.resolve(checkedInPeople);
   },
