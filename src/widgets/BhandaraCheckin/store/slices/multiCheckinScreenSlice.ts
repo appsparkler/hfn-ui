@@ -42,8 +42,7 @@ export const multiCheckinScreenSlice = createSlice({
       state.eventInfo = payload.event;
     },
     setUserData: (state, { payload }: { payload: ICheckinTileInfo[] }) => {
-      // const userData = mapUserToCheckinTileData(payload);
-      // state.userData = userData;
+      state.userData = payload;
     },
   },
 });
