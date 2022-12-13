@@ -21,7 +21,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
     dormAndBirthAllocation: string = "",
     batch: string
   ) => {
-    const $user = {
+    const $user: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
       deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),

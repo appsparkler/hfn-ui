@@ -1919,10 +1919,10 @@
     protobufjs "^6.11.3"
     yargs "^16.2.0"
 
-"@hfn-checkins/types@^3.0.9":
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/@hfn-checkins/types/-/types-3.0.9.tgz#d30e69a9d55a9244925e0a2bb77f68e11eaa96d2"
-  integrity sha512-oXtzwRfIrgmopMK5Vogig0a/MnCb2pKhQ+MRq9cJB4qeaeDBh+RxINnuiP8Ej/x2OpmtVGlpemrYRj1PkPknbA==
+"@hfn-checkins/types@^3.0.10":
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/@hfn-checkins/types/-/types-3.0.10.tgz#4f95938b167b10558224ad0f42251b3a6264434f"
+  integrity sha512-hS7LyFiFxDagdgvQOWYBLZexOy6uNEXkKHN+afiZgMDBK7/9iNzEQV+sWnQ4T/6fMPza6EQ/6rTOVUiWFGSU/w==
 
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
