@@ -49,6 +49,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
       dormAndBirthAllocation: String(dormAndBirthAllocation.value),
+      batch: "", // TODO: get batch from store
     };
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)

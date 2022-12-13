@@ -36,7 +36,11 @@ const onClickCheckinAction =
   () => async (dispatch: Dispatch, getState: () => RootState) => {
     const rootState = getState();
     const { userData, eventInfo } = rootState.multiCheckinScreen;
-    const apiData = getAPIDataFromCheckinTileInfo(eventInfo)(userData);
+    const { selectedBatch } = rootState.mainSection;
+    const apiData = getAPIDataFromCheckinTileInfo(
+      eventInfo,
+      String(selectedBatch)
+    )(userData);
     dispatch<any>(multiCheckinWithQRCode(apiData));
     dispatch(CHECKIN_SUCCESS());
   };
@@ -45,7 +49,7 @@ const filterOutUnChecked = filter<ICheckinTileInfo>(
   (checkin) => checkin.checked
 );
 
-const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo) =>
+const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo, batch: string) =>
   map<ICheckinTileInfo, IQRCheckinUser>((tileInfo) => ({
     abhyasiId: tileInfo.abhyasiId,
     dormAndBirthAllocation: String(tileInfo.dormAllocation),
@@ -57,10 +61,14 @@ const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo) =>
     pnr: String(eventInfo.pnr),
     regId: String(tileInfo.registrationId),
     type: CheckinTypesEnum.QR,
+    batch,
   }));
 
-const getAPIDataFromCheckinTileInfo = (eventInfo: IQREventInfo) =>
+const getAPIDataFromCheckinTileInfo = (
+  eventInfo: IQREventInfo,
+  batch: string
+) =>
   pipe<[ICheckinTileInfo[]], ICheckinTileInfo[], IQRCheckinUser[]>(
     filterOutUnChecked,
-    mapCheckinTileInfoToApiData(eventInfo)
+    mapCheckinTileInfoToApiData(eventInfo, batch)
   );
