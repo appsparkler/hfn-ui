@@ -16,7 +16,11 @@ const checkedInPeople: (
 )[] = [];
 
 export const mockedApis: BhandaraCheckinAPIs = {
-  checkinAbhyasi: (abhyasiId: string, dormAndBirthAllocation: string = "") => {
+  checkinAbhyasi: (
+    abhyasiId: string,
+    dormAndBirthAllocation: string = "",
+    batch: string
+  ) => {
     const $user = {
       abhyasiId,
       deviceId: "mocked-device-id",
@@ -24,6 +28,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
       dormAndBirthAllocation,
+      batch,
     };
     checkedInPeople.push($user as any);
     setTimeout(() => {

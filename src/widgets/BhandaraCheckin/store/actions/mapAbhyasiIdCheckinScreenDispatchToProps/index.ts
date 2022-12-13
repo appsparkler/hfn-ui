@@ -33,8 +33,13 @@ const handleCheckinWithAbhyasiId = createAsyncThunk<
       dispatch(errorAction);
     }
   } else {
+    const { selectedBatch } = rootState.mainSection;
     const res = await dispatch<any>(
-      checkinWithAbhyasiId({ abhyasiId, dormAndBirthAllocation })
+      checkinWithAbhyasiId({
+        abhyasiId,
+        dormAndBirthAllocation,
+        batch: String(selectedBatch),
+      })
     );
     if (res.meta.requestStatus === "fulfilled") {
       dispatch(pageActions.CHECKIN_SUCCESS());
@@ -57,30 +62,8 @@ export const mapAbhyasiIDCheckinScreenDispatchToProps: MapDispatchToProps<
       dispatch(mainSectionActions.reset());
       dispatch(pageActions.HOME());
     },
-
     onCheckin: () => {
       dispatch<any>(handleCheckinWithAbhyasiId());
-
-      // const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
-      // if (isCheckedInRes.meta.requestStatus === "rejected") {
-      //   if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
-      //     const errorAction = mainSectionActions.setError(
-      //       errorAbhyasiAlreadyCheckedin(abhyasiId)
-      //     );
-      //     dispatch(errorAction);
-      //   }
-      // } else {
-      //   const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
-      //   if (res.meta.requestStatus === "fulfilled") {
-      //     // dispatch(pageActions.CHECKIN_SUCCESS());
-      //   } else {
-      //     dispatch(
-      //       snackbarActions.openSnackbar({
-      //         children: ErrorCodes.SERVER_ERROR,
-      //       })
-      //     );
-      //   }
-      // }
     },
     onChangeDormAndBirthAllocation: ({ target: { value } }) => {
       dispatch(abhyasiIdCheckinScreenActions.setDormAndBirthAllocation(value));
