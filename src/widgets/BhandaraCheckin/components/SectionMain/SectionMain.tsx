@@ -13,6 +13,7 @@ import {
   CenterOfViewport,
   Horizontal,
   Vertical,
+  SelectField,
 } from "components";
 import { ClickHandler, InputChangeHandler } from "types";
 import { isAbhyasiId, isEmail, isMobile } from "utils";
@@ -41,6 +42,9 @@ export const SectionMain = ({
   error,
   helperText,
   value = "",
+  batches,
+  selectedBatch,
+  onChangeBatch,
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
@@ -50,8 +54,8 @@ export const SectionMain = ({
   );
 
   const isStartButtonEnabled = useMemo(
-    () => isValidValue && !isProcessing,
-    [isProcessing, isValidValue]
+    () => isValidValue && !isProcessing && !!selectedBatch,
+    [isProcessing, isValidValue, selectedBatch]
   );
 
   const handleChange = useCallback<InputChangeHandler>(
@@ -78,10 +82,21 @@ export const SectionMain = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport gap={10} width={"100%"} maxWidth={maxWidth} paddingX={1}>
+    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} paddingX={1}>
       <Typography variant="h4" color="goldenrod" align="center">
         Golden Book Registration
       </Typography>
+      <SelectField
+        label="Batch"
+        labelId="bhandara-batch"
+        name="selectedBatch"
+        onChange={onChangeBatch}
+        value={selectedBatch}
+        required
+        options={batches}
+        helperText="Select the batch you are registering for"
+        fullWidth
+      />
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"
@@ -95,7 +110,8 @@ export const SectionMain = ({
         fullWidth
         FormHelperTextProps={{
           sx: {
-            maxHeight: "5px",
+            maxHeight: 38,
+            height: 38,
           },
         }}
       />
