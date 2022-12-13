@@ -5,6 +5,8 @@ import {
 import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
+import { FormUserDetails, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { RootState } from "../..";
 import {
   checkinWithEmailOrMobile,
   isUserCheckedIn,
@@ -14,6 +16,7 @@ import {
   snackbarActions,
   updateDetailsActions,
 } from "../../slices";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
@@ -27,6 +30,17 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
     dispatch(pageActions.HOME());
   },
   onClickCheckin: async ($userDetails) => {
+    await dispatch<any>(onClickCheckinAction($userDetails));
+  },
+});
+
+const onClickCheckinAction = createAsyncThunk<
+  any,
+  FormUserDetails,
+  ThunkApiConfig
+>(
+  "updateDetailsSectionMapDispatchToProps/onClickCheckin",
+  async ($userDetails, { dispatch, getState }) => {
     const {
       ageGroup,
       email,
@@ -39,6 +53,8 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       dormAndBirthAllocation,
     } = $userDetails;
 
+    const { selectedBatch } = (getState() as RootState).mainSection;
+
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
       email: String(email.value?.toLowerCase()),
@@ -49,7 +65,7 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
       dormAndBirthAllocation: String(dormAndBirthAllocation.value),
-      batch: "", // TODO: get batch from store
+      batch: String(selectedBatch),
     };
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)
@@ -80,5 +96,5 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
         );
       }
     }
-  },
-});
+  }
+);
