@@ -65,7 +65,7 @@ const onClickCheckinAction = createAsyncThunk<
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
       dormAndBirthAllocation: String(dormAndBirthAllocation.value),
-      batch: String(selectedBatch),
+      eventName: String(selectedBatch),
     };
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)

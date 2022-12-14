@@ -28,7 +28,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
       dormAndBirthAllocation,
-      batch,
+      eventName: batch,
     };
     checkedInPeople.push($user as any);
     setTimeout(() => {

@@ -61,7 +61,6 @@ const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo, batch: string) =>
     pnr: String(eventInfo.pnr),
     regId: String(tileInfo.registrationId),
     type: CheckinTypesEnum.QR,
-    batch,
   }));
 
 const getAPIDataFromCheckinTileInfo = (

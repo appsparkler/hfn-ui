@@ -23,7 +23,7 @@ export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
       dormAndBirthAllocation: "", // TODO: Add dormAndBirthAllocation,
-      batch: "", // TODO: Add batch
+      eventName: "", // TODO: Add batch
     };
 
     addDoc(checkinsCollection, data);
