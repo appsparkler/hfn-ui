@@ -22,67 +22,62 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
     inputRef.current?.focus();
   }, []);
   return (
-    <Vertical maxWidth={maxWidth} marginX="auto">
-      <Vertical gap={2}>
-        <Box
-          boxShadow="0px 2px 5px black"
-          zIndex={2000}
-          position="sticky"
-          top={0}
-          p={1}
-          sx={{ backgroundColor: "background.paper" }}
-        >
-          <Typography align="center" variant="h6" py="2">
-            Abhyasi ID Checkin
+    <Vertical maxWidth={maxWidth} marginX="auto" gap={2}>
+      <Card elevation={1}>
+        <CardContent>
+          <Typography variant="h4" color="goldenrod" align="center">
+            Abhyasi ID
+            <br />
+            Checkin
           </Typography>
-        </Box>
-        <Card elevation={1}>
-          <CardContent>
-            <Vertical gap={1}>
-              <Box>
-                <Typography variant="subtitle2">Abhyasi ID:</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {abhyasiId}
-                </Typography>
-              </Box>
-              <Box width="100%">
-                <Typography variant="subtitle2">
-                  Dorm and Birth Allocation:
-                </Typography>
-                <TextField
-                  variant="outlined"
-                  placeholder="Please enter allocated dorm and birth..."
-                  fullWidth
-                  inputRef={inputRef}
-                  onChange={onChangeDormAndBirthAllocation}
-                />
-              </Box>
-            </Vertical>
-            <Horizontal
-              justifyContent={"space-around"}
-              alignItems="center"
-              mt={2}
-            >
-              <Button
+        </CardContent>
+      </Card>
+      <Card elevation={1}>
+        <CardContent>
+          <Vertical gap={1}>
+            <Box>
+              <Typography variant="subtitle2">Abhyasi ID:</Typography>
+              <Typography variant="body2" color="text.secondary">
+                {abhyasiId}
+              </Typography>
+            </Box>
+            <Box width="100%">
+              <Typography variant="subtitle2">
+                Dorm and Birth Allocation:
+              </Typography>
+              <TextField
                 variant="outlined"
-                color="secondary"
-                onClick={onCancel}
-                size={"large"}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={onCheckin}
-              >
-                Checkin
-              </Button>
-            </Horizontal>
-          </CardContent>
-        </Card>
-      </Vertical>
+                placeholder="Please enter allocated dorm and birth..."
+                fullWidth
+                inputRef={inputRef}
+                onChange={onChangeDormAndBirthAllocation}
+              />
+            </Box>
+          </Vertical>
+          <Horizontal
+            justifyContent={"space-around"}
+            alignItems="center"
+            mt={2}
+          >
+            <Button
+              variant="outlined"
+              color="secondary"
+              onClick={onCancel}
+              size={"large"}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              onClick={onCheckin}
+            >
+              Checkin
+            </Button>
+          </Horizontal>
+        </CardContent>
+      </Card>
     </Vertical>
   );
 };

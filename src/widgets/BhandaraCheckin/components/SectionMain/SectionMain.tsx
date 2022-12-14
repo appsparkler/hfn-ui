@@ -94,13 +94,13 @@ export const SectionMain = ({
         value={selectedBatch}
         required
         options={batches}
-        helperText="Select the batch you are registering for"
         fullWidth
       />
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"
         variant="outlined"
+        required
         autoComplete="off"
         error={error}
         value={value}
