@@ -26,8 +26,6 @@ export interface SectionMainDispatchProps {
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickScan: () => void;
   onSwitchScanner?: (checked: boolean) => void;
-  onClickOfflineData?: () => void;
-  onClickDashboard?: () => void;
   onMount?: () => void;
   onRefresh?: ReturnVoid;
   onChangeBatch: (name: string, value: OptionValue) => void;

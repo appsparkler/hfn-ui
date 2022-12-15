@@ -13,8 +13,6 @@ import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import {
   ABHYASI_ID_CHECKIN_SCREEN,
-  DASHBOARD,
-  OFFLINE_DATA,
   REFRESH_APP,
 } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
@@ -29,12 +27,6 @@ export const mapDispatchToProps: MapDispatchToProps<
     dispatch(REFRESH_APP());
   },
   onMount: async () => {},
-  onClickDashboard: () => {
-    dispatch(DASHBOARD());
-  },
-  onClickOfflineData: () => {
-    dispatch(OFFLINE_DATA());
-  },
   onChange: (updatedValue) => {
     dispatch(
       mainSectionActions.setState({

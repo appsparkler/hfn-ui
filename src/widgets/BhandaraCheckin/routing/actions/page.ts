@@ -12,14 +12,6 @@ export const ABHYASI_ID_CHECKIN_SCREEN = () => ({
   type: "ABHYASI_ID_CHECKIN_SCREEN",
 });
 
-export const OFFLINE_DATA = () => ({
-  type: "OFFLINE_DATA",
-});
-
-export const DASHBOARD = () => ({
-  type: "DASHBOARD",
-});
-
 export const REFRESH_APP = () => ({
   type: "REFRESH_APP",
 });

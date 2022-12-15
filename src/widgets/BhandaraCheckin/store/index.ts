@@ -13,12 +13,10 @@ import {
   modeReducer,
   updateDetailsReducer,
   envReducer,
-  dashboardReducer,
   appUpdaterReducer,
   barcodeScannerReducer,
   multiCheckinScreenReducer,
 } from "./slices";
-import { offlineDataReducer } from "./slices/offlineData";
 import { abhyasiIdCheckinScreenReducer } from "./slices/abhyasiIdCheckinScreen";
 
 export const rootReducer = {
@@ -30,9 +28,7 @@ export const rootReducer = {
   barcodeScanner: barcodeScannerReducer,
   location: locationReducer,
   page: pageReducer,
-  offlineData: offlineDataReducer,
   env: envReducer,
-  dashboard: dashboardReducer,
   appUpdaterProps: appUpdaterReducer,
   multiCheckinScreen: multiCheckinScreenReducer,
   abhyasiIdCheckinScreen: abhyasiIdCheckinScreenReducer,

@@ -5,8 +5,6 @@ const routesMap: RoutesMap = {
   UPDATE_DETAILS: "/update-details",
   MULTI_CHECKIN_SCREEN: "/multi-checkin",
   CHECKIN_SUCCESS: "/check-in-success",
-  OFFLINE_DATA: "/offline-data",
-  DASHBOARD: "/dashboard",
   REFRESH_APP: "/refresh-app",
   ABHYASI_ID_CHECKIN_SCREEN: "/abhyasi-id-checkin",
 };
