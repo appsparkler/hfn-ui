@@ -1,10 +1,8 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Vertical } from "../../../../components";
-import { CenterOfViewport } from "../../../../components/CenterOfViewport/CenterOfViewport";
-import { TimedConfetti } from "../../../../components/TimedConfetti";
-import { maxWidth } from "../../constants";
+import { Vertical, CenterOfViewport, TimedConfetti } from "components";
+import { maxWidth } from "widgets/BhandaraCheckin/constants";
 
 export type SectionCheckinStateProps = {
   enableConfetti?: boolean;
