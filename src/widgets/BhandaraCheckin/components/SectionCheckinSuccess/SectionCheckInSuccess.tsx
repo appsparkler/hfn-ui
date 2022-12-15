@@ -62,8 +62,16 @@ export const SectionCheckinSuccess = ({
       </Button>
       {confettiEnabled ? (
         <TimedConfetti
-          height={wrapperRef.current?.offsetHeight}
-          width={wrapperRef.current?.offsetWidth}
+          height={window.screen.height}
+          width={window.screen.width}
+          style={{
+            overflow: "hidden",
+            position: "fixed",
+            top: 0,
+            right: 0,
+            left: 0,
+            bottom: 0,
+          }}
         />
       ) : null}
     </CenterOfViewport>
