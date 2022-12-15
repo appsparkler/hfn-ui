@@ -39,7 +39,7 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
   );
 
   return (
-    <Vertical gap={3} px={2}>
+    <Vertical gap={2}>
       {data.map((dataProps) => {
         return (
           <CheckinInfoTile

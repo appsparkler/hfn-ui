@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@mui/material";
 import { Horizontal, Vertical } from "components";
 import { CheckinInfoTiles } from "./CheckinInfoTile";
 import { TMultiCheckinScreenComponent } from "widgets/BhandaraCheckin/types";
 import { maxWidth } from "widgets/BhandaraCheckin/constants";
+import { QrCode2 } from "@mui/icons-material";
 
 export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
   userData,
@@ -18,34 +19,20 @@ export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
         maxWidth,
         marginX: "auto",
       }}
+      gap={2}
     >
-      <Box
-        boxShadow="0px 2px 5px black"
-        zIndex={2000}
-        position="sticky"
-        top={0}
-        p={1}
-        sx={{ backgroundColor: "background.paper" }}
-      >
-        <Typography align="center" variant="h6" py="2">
-          QR Code Checkin
-        </Typography>
-      </Box>
-      <Box sx={{ flex: 1, overflow: "auto", py: 2 }}>
-        <Box m={2}>
-          <Card elevation={1}>
-            <CardContent>
-              <Typography variant="h5" align="center">
-                {eventName}
-              </Typography>
-              <Typography variant="h6" align="center">
-                PNR: {pnr}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Box>
-        <CheckinInfoTiles data={userData} onChange={onChangeData} />
-      </Box>
+      <Card>
+        <CardContent>
+          <Typography variant="h4" color="goldenrod" align="center">
+            <QrCode2 fontSize={"large"} />
+            <br />
+            {eventName}
+            <br />
+            {pnr}
+          </Typography>
+        </CardContent>
+      </Card>
+      <CheckinInfoTiles data={userData} onChange={onChangeData} />
       <Horizontal
         sx={{
           justifyContent: "space-around",
