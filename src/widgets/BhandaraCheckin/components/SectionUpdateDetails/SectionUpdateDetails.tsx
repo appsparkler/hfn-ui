@@ -164,11 +164,7 @@ export const SectionUpdateDetails = ({
       justifyContent="initial"
     >
       <Vertical gap={3} width={"100%"}>
-        <Typography
-          variant="h4"
-          textAlign={"center"}
-          sx={{ color: "text.primary" }}
-        >
+        <Typography variant="h4" color="goldenrod" align="center">
           Update Details
         </Typography>
         <TextField
