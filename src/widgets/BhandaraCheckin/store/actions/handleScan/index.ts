@@ -60,7 +60,7 @@ function getUsers(scannedValue: string): IQRUserInfo[] {
   const [, ...userRows] = scannedValue.split(";");
   const users = userRows.reduce((acc, userRow) => {
     if (!userRow) return acc;
-    const [regId, abhyasiId, fullName, dormPrference, birthPreference] =
+    const [regId, abhyasiId, fullName, dormPrference, berthPreference] =
       userRow.split("|");
     if (!regId || !abhyasiId || !fullName) return acc;
     const user: Partial<IQRUserInfo> = {
@@ -70,8 +70,8 @@ function getUsers(scannedValue: string): IQRUserInfo[] {
       dormPrference: dormPrference
         ? refineScannedValue(dormPrference)
         : undefined,
-      birthPreference: birthPreference
-        ? refineScannedValue(birthPreference)
+      berthPreference: berthPreference
+        ? refineScannedValue(berthPreference)
         : undefined,
     };
     return [...acc, user];

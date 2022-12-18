@@ -27,7 +27,7 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
       timestamp: Date.now(),
       type: CheckinTypesEnum.EmailOrMobile,
       updatedInReport: false,
-      dormAndBirthAllocation: "", // TODO: Add dormAndBirthAllocation
+      dormAndBerthAllocation: attendee.dormAndBerthAllocation,
     };
     addDoc(checkinsCollection, emailOrMobileCheckinData);
     return true;

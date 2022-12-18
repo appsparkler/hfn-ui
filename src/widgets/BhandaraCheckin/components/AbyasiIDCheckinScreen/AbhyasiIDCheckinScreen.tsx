@@ -15,7 +15,7 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
   onCheckin,
   onCancel,
   abhyasiId,
-  onChangeDormAndBirthAllocation,
+  onChangeDormAndBerthAllocation,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -43,14 +43,14 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
             </Box>
             <Box width="100%">
               <Typography variant="subtitle2">
-                Dorm and Birth Allocation:
+                Dorm and Berth Allocation:
               </Typography>
               <TextField
                 variant="outlined"
-                placeholder="Please enter allocated dorm and birth..."
+                placeholder="Please enter allocated dorm and berth..."
                 fullWidth
                 inputRef={inputRef}
-                onChange={onChangeDormAndBirthAllocation}
+                onChange={onChangeDormAndBerthAllocation}
               />
             </Box>
           </Vertical>

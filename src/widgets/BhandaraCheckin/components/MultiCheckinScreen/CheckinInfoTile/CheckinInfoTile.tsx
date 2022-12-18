@@ -12,7 +12,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
   checked,
   fullName,
   dormPreference,
-  birthPreference,
+  berthPreference,
   onCheck,
   onChangeDormAllocation,
   abhyasiId,
@@ -31,8 +31,8 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
   );
 
   const showPreference = useMemo(() => {
-    return Boolean(dormPreference) && Boolean(birthPreference);
-  }, [birthPreference, dormPreference]);
+    return Boolean(dormPreference) && Boolean(berthPreference);
+  }, [berthPreference, dormPreference]);
 
   return (
     <Card>
@@ -63,7 +63,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
                 <strong>Dorm Preference:</strong>
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {dormPreference}, {birthPreference}
+                {dormPreference}, {berthPreference}
               </Typography>
             </Box>
           ) : null}
@@ -73,7 +73,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
             </Typography>
             <TextField
               variant="outlined"
-              placeholder="Please enter allocated dorm and birth..."
+              placeholder="Please enter allocated dorm and berth..."
               fullWidth
               onChange={handleChangeDormAllocation}
             />

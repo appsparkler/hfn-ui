@@ -2,13 +2,13 @@ import { TextFieldPropsOnChange } from "types";
 
 export interface IAbhyasiIDCheckinScreenStateProps {
   abhyasiId: string;
-  dormAndBirthAllocation: string;
+  dormAndBerthAllocation: string;
 }
 
 export interface IAbhyasiIDCheckinScreenDispatchProps {
   onCheckin: () => void;
   onCancel: () => void;
-  onChangeDormAndBirthAllocation: TextFieldPropsOnChange;
+  onChangeDormAndBerthAllocation: TextFieldPropsOnChange;
 }
 
 export type TAbhyasiIDCheckinScreenProps = IAbhyasiIDCheckinScreenStateProps &

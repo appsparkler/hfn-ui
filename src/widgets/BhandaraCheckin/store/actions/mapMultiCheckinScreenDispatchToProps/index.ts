@@ -52,9 +52,9 @@ const filterOutUnChecked = filter<ICheckinTileInfo>(
 const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo, batch: string) =>
   map<ICheckinTileInfo, IQRCheckinUser>((tileInfo) => ({
     abhyasiId: tileInfo.abhyasiId,
-    dormAndBirthAllocation: String(tileInfo.dormAllocation),
+    dormAndBerthAllocation: String(tileInfo.dormAllocation),
     fullName: tileInfo.fullName,
-    birthPreference: String(tileInfo.birthPreference || ""),
+    berthPreference: String(tileInfo.berthPreference || ""),
     dormPreference: String(tileInfo.dormPreference || ""),
     eventName: String(eventInfo.eventName),
     name: String(tileInfo.fullName || ""),

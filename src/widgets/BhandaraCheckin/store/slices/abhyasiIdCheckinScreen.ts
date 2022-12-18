@@ -3,7 +3,7 @@ import { IAbhyasiIDCheckinScreenStateProps } from "widgets/BhandaraCheckin/types
 
 const getInitialState = (): IAbhyasiIDCheckinScreenStateProps => ({
   abhyasiId: "",
-  dormAndBirthAllocation: "",
+  dormAndBerthAllocation: "",
 });
 
 const slice = createSlice({
@@ -13,8 +13,8 @@ const slice = createSlice({
     setAbhyasiId: (state, action: PayloadAction<string>) => {
       state.abhyasiId = action.payload;
     },
-    setDormAndBirthAllocation: (state, action: PayloadAction<string>) => {
-      state.dormAndBirthAllocation = action.payload;
+    setDormAndBerthAllocation: (state, action: PayloadAction<string>) => {
+      state.dormAndBerthAllocation = action.payload;
     },
   },
 });

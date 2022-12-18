@@ -22,7 +22,7 @@ const handleCheckinWithAbhyasiId = createAsyncThunk<
   ThunkApiConfig
 >("handleAbhyasiIDCheckin", async (_, { getState, dispatch }) => {
   const rootState = getState() as unknown as RootState;
-  const { abhyasiId, dormAndBirthAllocation } =
+  const { abhyasiId, dormAndBerthAllocation } =
     rootState.abhyasiIdCheckinScreen;
   const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
   if (isCheckedInRes.meta.requestStatus === "rejected") {
@@ -37,7 +37,7 @@ const handleCheckinWithAbhyasiId = createAsyncThunk<
     const res = await dispatch<any>(
       checkinWithAbhyasiId({
         abhyasiId,
-        dormAndBirthAllocation,
+        dormAndBerthAllocation,
         batch: String(selectedBatch),
       })
     );
@@ -65,8 +65,8 @@ export const mapAbhyasiIDCheckinScreenDispatchToProps: MapDispatchToProps<
     onCheckin: () => {
       dispatch<any>(handleCheckinWithAbhyasiId());
     },
-    onChangeDormAndBirthAllocation: ({ target: { value } }) => {
-      dispatch(abhyasiIdCheckinScreenActions.setDormAndBirthAllocation(value));
+    onChangeDormAndBerthAllocation: ({ target: { value } }) => {
+      dispatch(abhyasiIdCheckinScreenActions.setDormAndBerthAllocation(value));
     },
   };
 };

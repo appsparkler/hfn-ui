@@ -9,5 +9,5 @@ export interface IQRUserInfo {
   regId: string;
   fullName: string;
   dormPrference?: string;
-  birthPreference?: string;
+  berthPreference?: string;
 }

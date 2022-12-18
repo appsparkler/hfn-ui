@@ -33,7 +33,7 @@ checkinInfoTiles.args = {
       checked: false,
       fullName: "Jane Mathew",
       dormPreference: "East Comform Dorm - B1",
-      birthPreference: "LB",
+      berthPreference: "LB",
       registrationId: "AAV1234",
     },
     {
@@ -41,7 +41,7 @@ checkinInfoTiles.args = {
       checked: false,
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
-      birthPreference: "LB",
+      berthPreference: "LB",
       registrationId: "AAV2314",
     },
     {
@@ -49,7 +49,7 @@ checkinInfoTiles.args = {
       checked: false,
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
-      birthPreference: "LB",
+      berthPreference: "LB",
       registrationId: "A32sde34",
     },
   ],

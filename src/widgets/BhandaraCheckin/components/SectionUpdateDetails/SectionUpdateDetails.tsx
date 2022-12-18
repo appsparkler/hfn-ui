@@ -48,7 +48,7 @@ export const SectionUpdateDetails = ({
     state,
     country,
     mobile,
-    dormAndBirthAllocation,
+    dormAndBerthAllocation,
   } = useMemo(() => userDetails, [userDetails]);
 
   const areEmailAndMobileValid = useMemo<boolean>(() => {
@@ -277,14 +277,14 @@ export const SectionUpdateDetails = ({
           size="small"
         />
         <TextField
-          label="Comfort Dorm and Birth Allocation"
+          label="Comfort Dorm and Berth Allocation"
           autoComplete="off"
           type="text"
-          name="dormAndBirthAllocation"
+          name="dormAndBerthAllocation"
           variant="outlined"
           fullWidth
-          value={dormAndBirthAllocation.value}
-          disabled={dormAndBirthAllocation.disabled}
+          value={dormAndBerthAllocation.value}
+          disabled={dormAndBerthAllocation.disabled}
           onChange={handleChangeInputField}
           size="small"
         />

@@ -14,7 +14,11 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
   return true;
 };
 
-export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
+export const checkinAbhyasi: CheckinAbhyasiApi = (
+  abhyasiId,
+  dormAndBerthAllocation,
+  batch
+) => {
   try {
     const data: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
@@ -22,8 +26,8 @@ export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
       timestamp: Date.now(),
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
-      dormAndBirthAllocation: "", // TODO: Add dormAndBirthAllocation,
-      eventName: "", // TODO: Add batch
+      dormAndBerthAllocation,
+      eventName: batch,
     };
 
     addDoc(checkinsCollection, data);

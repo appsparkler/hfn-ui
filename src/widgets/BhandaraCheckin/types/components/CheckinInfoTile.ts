@@ -4,7 +4,7 @@ export interface ICheckinTileInfo {
   abhyasiId: string;
   registrationId: string;
   dormPreference?: string;
-  birthPreference?: string;
+  berthPreference?: string;
   dormAllocation?: string;
 }
 

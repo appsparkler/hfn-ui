@@ -4,12 +4,12 @@ import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 
 export const checkinWithAbhyasiId = createAsyncThunk<
   any,
-  { abhyasiId: string; dormAndBirthAllocation: string; batch: string },
+  { abhyasiId: string; dormAndBerthAllocation: string; batch: string },
   ThunkApiConfig
 >(
   "api/checkinWithAbhyasiId",
   (
-    { abhyasiId, dormAndBirthAllocation, batch },
+    { abhyasiId, dormAndBerthAllocation, batch },
     {
       extra: {
         apis: { checkinAbhyasi },
@@ -21,7 +21,7 @@ export const checkinWithAbhyasiId = createAsyncThunk<
     try {
       const checkInSuccess = checkinAbhyasi(
         abhyasiId,
-        dormAndBirthAllocation,
+        dormAndBerthAllocation,
         batch
       );
       if (checkInSuccess) {

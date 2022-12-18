@@ -21,7 +21,7 @@ const mapUserToCheckinTileData = (
 ): ICheckinInfoTilesStateProps["data"] => {
   return users.map((user) => ({
     dormPreference: user.dormPrference,
-    birthPreference: user.birthPreference,
+    berthPreference: user.berthPreference,
     checked: false,
     fullName: user.fullName,
     registrationId: user.regId,

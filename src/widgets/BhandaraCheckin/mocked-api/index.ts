@@ -18,7 +18,7 @@ const checkedInPeople: (
 export const mockedApis: BhandaraCheckinAPIs = {
   checkinAbhyasi: (
     abhyasiId: string,
-    dormAndBirthAllocation: string = "",
+    dormAndBerthAllocation: string = "",
     batch: string
   ) => {
     const $user: IAbhyasiCheckinApiStoreData = {
@@ -27,7 +27,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
-      dormAndBirthAllocation,
+      dormAndBerthAllocation,
       eventName: batch,
     };
     checkedInPeople.push($user as any);

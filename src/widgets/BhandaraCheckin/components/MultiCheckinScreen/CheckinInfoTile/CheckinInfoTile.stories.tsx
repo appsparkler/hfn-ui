@@ -22,7 +22,7 @@ export const checkinInfoTile: ComponentStory<typeof CheckinInfoTile> =
 checkinInfoTile.args = {
   fullName: "Shekhar Kapoor",
   abhyasiId: "tile-1",
-  birthPreference: "LB",
+  berthPreference: "LB",
   dormPreference: "East Comform Dorm - B1",
 };
 

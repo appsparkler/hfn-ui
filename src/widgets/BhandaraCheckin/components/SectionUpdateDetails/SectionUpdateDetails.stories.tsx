@@ -77,7 +77,7 @@ updateDetails.args = {
       value: "",
       show: true,
     },
-    dormAndBirthAllocation: {
+    dormAndBerthAllocation: {
       value: "",
       show: true,
     },

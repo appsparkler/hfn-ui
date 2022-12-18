@@ -50,7 +50,7 @@ const onClickCheckinAction = createAsyncThunk<
       state,
       country,
       mobile,
-      dormAndBirthAllocation,
+      dormAndBerthAllocation,
     } = $userDetails;
 
     const { selectedBatch } = (getState() as RootState).mainSection;
@@ -64,7 +64,7 @@ const onClickCheckinAction = createAsyncThunk<
       country: String(country.value?.toUpperCase()),
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
-      dormAndBirthAllocation: String(dormAndBirthAllocation.value),
+      dormAndBerthAllocation: String(dormAndBerthAllocation.value),
       eventName: String(selectedBatch),
     };
     const isUserCheckedInRes = await dispatch<any>(
