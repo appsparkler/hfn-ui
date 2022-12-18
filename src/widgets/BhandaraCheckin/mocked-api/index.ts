@@ -32,7 +32,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
     };
     checkedInPeople.push($user as any);
     setTimeout(() => {
-      alert(JSON.stringify($user, null, 2));
+      console.log(JSON.stringify($user, null, 2));
     }, 1000);
     return true;
   },
@@ -50,14 +50,14 @@ export const mockedApis: BhandaraCheckinAPIs = {
         | IAbhyasiCheckinApiStoreData
     );
     setTimeout(() => {
-      alert(JSON.stringify($user, null, 2));
+      console.log(JSON.stringify($user, null, 2));
     }, 1000);
     return true;
   },
   checkinWithQRCode: (qrCodeUsers) => {
     checkedInPeople.push(...qrCodeUsers);
     delay(2000, () => {
-      alert(JSON.stringify(qrCodeUsers, null, 2));
+      console.log(JSON.stringify(qrCodeUsers, null, 2));
     });
   },
   getDataFromCache: () => {
