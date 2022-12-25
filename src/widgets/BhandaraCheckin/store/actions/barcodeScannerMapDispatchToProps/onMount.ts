@@ -43,7 +43,7 @@ export const onMount = createAsyncThunk<
       }, 300);
       codeReader.decodeFromVideoDevice(null, videoEl, (result, error) => {
         if (!error) {
-          dispatch(handleScan(result.toString()));
+          dispatch(handleScan(result.getText()));
         }
       });
       setScannerOnKey();
