@@ -39,6 +39,8 @@ export interface GetAppVersion {
   (): Promise<number>;
 }
 
+export type CheckinWithQRApi = (users: IQRCheckinUser[]) => void;
+
 export type BhandaraCheckinAPIs = {
   checkinAbhyasi: CheckinAbhyasiApi;
   checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi;
@@ -49,5 +51,5 @@ export type BhandaraCheckinAPIs = {
   getAppVersion: GetAppVersion;
   signInAnonymously: () => Promise<void>;
   signOutAnonymously: typeof noop;
-  checkinWithQRCode: (users: IQRCheckinUser[]) => void;
+  checkinWithQRCode: CheckinWithQRApi;
 };

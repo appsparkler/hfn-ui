@@ -7,9 +7,11 @@ import {
   CACHE_SIZE_UNLIMITED,
   collection,
   connectFirestoreEmulator,
+  doc,
 } from "firebase/firestore";
 import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
 import { getEnv } from "../utils";
+import { ICheckinWIthQRApiStoreData } from "@hfn-checkins/types";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -51,3 +53,7 @@ export const metaCollection = collection(
   firestoreDb,
   FirestoreCollections.META
 );
+
+export function getCheckinDocRef(id: string) {
+  return doc(firestoreDb, "checkins", id);
+}

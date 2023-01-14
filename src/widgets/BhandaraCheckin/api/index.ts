@@ -1,6 +1,7 @@
 import { BhandaraCheckinAPIs } from "widgets/BhandaraCheckin/types";
 import { checkinAbhyasi } from "./checkinAbhyasi";
 import { checkinWithEmailOrMobile } from "./checkinWithEmailorMobile";
+import { checkinWithQRCode } from "./checkinWithQRCode";
 import { getAppVersion } from "./getAppVersion";
 import { getDashboardData } from "./getDashboardData";
 import { getDataFromCache } from "./getDataFromCache";
@@ -12,6 +13,7 @@ import { signOutAnonymously } from "./signOutAnonymously";
 export const apis: BhandaraCheckinAPIs = {
   checkinAbhyasi,
   checkinWithEmailOrMobile,
+  checkinWithQRCode,
   getDataFromCache,
   isAbhyasiCheckedIn,
   isUserAlreadyCheckedIn,
@@ -19,5 +21,4 @@ export const apis: BhandaraCheckinAPIs = {
   getAppVersion,
   signInAnonymously,
   signOutAnonymously,
-  checkinWithQRCode: () => {},
 };
