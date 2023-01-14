@@ -6,15 +6,11 @@ import {
   IAbhyasiIDCheckinScreenDispatchProps,
   ThunkApiConfig,
 } from "widgets/BhandaraCheckin/types";
-import {
-  checkinWithAbhyasiId,
-  isAbhyasiCheckedIn,
-} from "../../api-async-thunks";
+import { checkinWithAbhyasiId } from "../../api-async-thunks";
 import { mainSectionActions, snackbarActions } from "../../slices";
 import { abhyasiIdCheckinScreenActions } from "../../slices/abhyasiIdCheckinScreen";
-import { RootState } from "../../index";
+import { RootState } from "widgets/BhandaraCheckin/store";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
-import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
 
 const handleCheckinWithAbhyasiId = createAsyncThunk<
   void,
@@ -24,33 +20,36 @@ const handleCheckinWithAbhyasiId = createAsyncThunk<
   const rootState = getState() as unknown as RootState;
   const { abhyasiId, dormAndBerthAllocation } =
     rootState.abhyasiIdCheckinScreen;
-  const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
-  if (isCheckedInRes.meta.requestStatus === "rejected") {
-    if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
-      const errorAction = mainSectionActions.setError(
-        errorAbhyasiAlreadyCheckedin(abhyasiId)
-      );
-      dispatch(errorAction);
-    }
+  const { selectedBatch } = rootState.mainSection;
+  const res = await dispatch<any>(
+    checkinWithAbhyasiId({
+      abhyasiId,
+      dormAndBerthAllocation,
+      batch: String(selectedBatch),
+    })
+  );
+  if (res.meta.requestStatus === "fulfilled") {
+    dispatch(pageActions.CHECKIN_SUCCESS());
   } else {
-    const { selectedBatch } = rootState.mainSection;
-    const res = await dispatch<any>(
-      checkinWithAbhyasiId({
-        abhyasiId,
-        dormAndBerthAllocation,
-        batch: String(selectedBatch),
+    dispatch(
+      snackbarActions.openSnackbar({
+        children: ErrorCodes.SERVER_ERROR,
       })
     );
-    if (res.meta.requestStatus === "fulfilled") {
-      dispatch(pageActions.CHECKIN_SUCCESS());
-    } else {
-      dispatch(
-        snackbarActions.openSnackbar({
-          children: ErrorCodes.SERVER_ERROR,
-        })
-      );
-    }
   }
+
+  // const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
+  // if (isCheckedInRes.meta.requestStatus === "rejected") {
+  //   alert("checking in with abhyasi id");
+  //   if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
+  //     const errorAction = mainSectionActions.setError(
+  //       errorAbhyasiAlreadyCheckedin(abhyasiId)
+  //     );
+  //     dispatch(errorAction);
+  //   }
+  // } else {
+
+  // }
 });
 
 export const mapAbhyasiIDCheckinScreenDispatchToProps: MapDispatchToProps<
