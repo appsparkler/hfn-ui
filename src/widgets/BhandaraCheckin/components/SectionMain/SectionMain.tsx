@@ -80,10 +80,17 @@ export const SectionMain = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} paddingX={1}>
-      <Typography variant="h4" color="goldenrod" align="center">
-        Golden Book Registration
-      </Typography>
+    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} p={1}>
+      <Vertical marginTop={1} display="flex" alignItems={"center"}>
+        <img
+          src="150logo_gold.png"
+          alt="Celebrating 150 years of Lalaji Maharaj"
+          width="200"
+        />
+        <Typography variant="h4" color="goldenrod" align="center">
+          Golden Book Registration
+        </Typography>
+      </Vertical>
       <SelectField
         label="Batch"
         labelId="bhandara-batch"
