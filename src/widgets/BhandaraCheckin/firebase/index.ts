@@ -7,6 +7,7 @@ import {
   CACHE_SIZE_UNLIMITED,
   collection,
   connectFirestoreEmulator,
+  doc,
 } from "firebase/firestore";
 import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
 import { getEnv } from "../utils";
@@ -51,3 +52,7 @@ export const metaCollection = collection(
   firestoreDb,
   FirestoreCollections.META
 );
+
+export function getCheckinDocRef(id: string) {
+  return doc(firestoreDb, "checkins", id);
+}

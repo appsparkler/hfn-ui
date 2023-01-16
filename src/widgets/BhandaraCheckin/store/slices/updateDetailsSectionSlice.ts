@@ -40,6 +40,10 @@ const getInitialState = (): SectionUpdateDetailsStateProps => {
         show: true,
         value: "",
       },
+      dormAndBerthAllocation: {
+        show: true,
+        value: "",
+      },
     },
   };
 };

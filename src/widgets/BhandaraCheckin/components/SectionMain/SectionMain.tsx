@@ -13,6 +13,7 @@ import {
   CenterOfViewport,
   Horizontal,
   Vertical,
+  SelectField,
 } from "components";
 import { ClickHandler, InputChangeHandler } from "types";
 import { isAbhyasiId, isEmail, isMobile } from "utils";
@@ -20,6 +21,8 @@ import { maxWidth } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
 import { SectionMainProps } from "widgets/BhandaraCheckin/types";
+import { QrCode2 } from "@mui/icons-material";
+import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const SectionMain = ({
   env,
@@ -27,10 +30,8 @@ export const SectionMain = ({
   onChange,
   onSwitchMode,
   isDarkMode,
-  onClickDashboard,
   onClickScan,
   onSwitchScanner = noop,
-  onClickOfflineData = noop,
   onMount = noop,
   onRefresh = noop,
   scanBtnDisabled,
@@ -40,6 +41,9 @@ export const SectionMain = ({
   error,
   helperText,
   value = "",
+  batches,
+  selectedBatch,
+  onChangeBatch,
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
@@ -49,8 +53,8 @@ export const SectionMain = ({
   );
 
   const isStartButtonEnabled = useMemo(
-    () => isValidValue && !isProcessing,
-    [isProcessing, isValidValue]
+    () => isValidValue && !isProcessing && !!selectedBatch,
+    [isProcessing, isValidValue, selectedBatch]
   );
 
   const handleChange = useCallback<InputChangeHandler>(
@@ -77,14 +81,32 @@ export const SectionMain = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport gap={10} width={"100%"} maxWidth={maxWidth} paddingX={1}>
-      <Typography variant="h4" color="goldenrod" align="center">
-        Golden Book Registration
-      </Typography>
+    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} p={1}>
+      <Vertical marginTop={1} display="flex" alignItems={"center"}>
+        <img
+          src="150logo_gold.png"
+          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
+          width="200"
+        />
+        <Typography variant="h4" color="goldenrod" align="center">
+          Golden Book Registration
+        </Typography>
+      </Vertical>
+      <SelectField
+        label="Batch"
+        labelId="bhandara-batch"
+        name="selectedBatch"
+        onChange={onChangeBatch}
+        value={selectedBatch}
+        required
+        options={batches}
+        fullWidth
+      />
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"
         variant="outlined"
+        required
         autoComplete="off"
         error={error}
         value={value}
@@ -94,7 +116,8 @@ export const SectionMain = ({
         fullWidth
         FormHelperTextProps={{
           sx: {
-            maxHeight: "5px",
+            maxHeight: 38,
+            height: 38,
           },
         }}
       />
@@ -113,9 +136,8 @@ export const SectionMain = ({
           disabled={scanBtnProcessing || scanBtnDisabled}
           isProcessing={scanBtnProcessing}
           onClick={onClickScan}
-        >
-          Scan
-        </AsyncButton>
+          endIcon={<QrCode2 />}
+        ></AsyncButton>
       </Horizontal>
 
       <Vertical>
@@ -129,24 +151,11 @@ export const SectionMain = ({
           }
           label="Scanner"
         />
-
-        {/* {env?.ENV === ENVS.DEV_LOCAL && (
-          <FormControlLabel
-            control={
-              <Switch checked={isOfflineMode} onChange={handleSwitchNetwork} />
-            }
-            label="Offline Mode"
-          />
-        )} */}
       </Vertical>
       <Box position="fixed" right={0} top={0}>
         <Horizontal alignItems={"center"}>
           <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
-          <CustomMenu
-            onClickOfflineData={onClickOfflineData}
-            onClickDashboard={onClickDashboard}
-            onRefreshApp={onRefresh}
-          />
+          <CustomMenu onRefreshApp={onRefresh} />
         </Horizontal>
       </Box>
     </CenterOfViewport>

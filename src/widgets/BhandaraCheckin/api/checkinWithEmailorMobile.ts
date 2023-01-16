@@ -1,21 +1,11 @@
 import { CheckinWithEmailOrMobileApi } from "widgets/BhandaraCheckin/types";
-import { checkinsCollection } from "../firebase";
-import { addDoc } from "firebase/firestore";
+import { getCheckinDocRef } from "../firebase";
+import { setDoc } from "firebase/firestore";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import {
-  CheckinEmailOrMobileUserDetails,
   CheckinTypesEnum,
   CheckinWithEmailOrMobileApiStoreData,
 } from "@hfn-checkins/types";
-
-const checkedInEmailOreMobileUsers: CheckinEmailOrMobileUserDetails[] = [];
-
-export const mockedCheckinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
-  userDetails
-) => {
-  checkedInEmailOreMobileUsers.push(userDetails);
-  return true;
-};
 
 export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
   attendee
@@ -27,8 +17,13 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
       timestamp: Date.now(),
       type: CheckinTypesEnum.EmailOrMobile,
       updatedInReport: false,
+      dormAndBerthAllocation: attendee.dormAndBerthAllocation,
     };
-    addDoc(checkinsCollection, emailOrMobileCheckinData);
+    const mobileOrEmail =
+      (attendee as { mobile: string }).mobile ||
+      (attendee as { email: string }).email;
+    const docRef = getCheckinDocRef(`${attendee.fullName}-${mobileOrEmail}`);
+    setDoc(docRef, emailOrMobileCheckinData);
     return true;
   } catch (e) {
     throw new Error("Server Error: Email/Mobile Checkin");

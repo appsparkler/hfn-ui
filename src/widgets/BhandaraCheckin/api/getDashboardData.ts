@@ -1,7 +1,7 @@
 import { GetDashboardDataApi } from "widgets/BhandaraCheckin/types";
 import { firestoreDb } from "widgets/BhandaraCheckin/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { CheckinsAggregateData } from "@hfn-checkins/types";
+import { ICheckinsAggregateData } from "@hfn-checkins/types";
 
 export const getDashboardData: GetDashboardDataApi = async () => {
   try {
@@ -10,7 +10,7 @@ export const getDashboardData: GetDashboardDataApi = async () => {
     if (navigator.onLine) {
       const aggregationsDocRef = doc(firestoreDb, "aggregations", "checkins");
       const aggregationsDoc = await getDoc(aggregationsDocRef);
-      return aggregationsDoc.data() as CheckinsAggregateData;
+      return aggregationsDoc.data() as ICheckinsAggregateData;
     }
     throw new Error("Offline Mode");
   } catch (e) {

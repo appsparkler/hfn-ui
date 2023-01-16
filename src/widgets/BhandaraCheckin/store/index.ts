@@ -13,11 +13,11 @@ import {
   modeReducer,
   updateDetailsReducer,
   envReducer,
-  dashboardReducer,
   appUpdaterReducer,
+  barcodeScannerReducer,
+  multiCheckinScreenReducer,
 } from "./slices";
-import { offlineDataReducer } from "./slices/offlineData";
-import { barcodeScannerReducer } from "widgets/BhandaraCheckinV0/store";
+import { abhyasiIdCheckinScreenReducer } from "./slices/abhyasiIdCheckinScreen";
 
 export const rootReducer = {
   bhandaraCheckin: bhandaraCheckinReducer,
@@ -28,10 +28,10 @@ export const rootReducer = {
   barcodeScanner: barcodeScannerReducer,
   location: locationReducer,
   page: pageReducer,
-  offlineData: offlineDataReducer,
   env: envReducer,
-  dashboard: dashboardReducer,
   appUpdaterProps: appUpdaterReducer,
+  multiCheckinScreen: multiCheckinScreenReducer,
+  abhyasiIdCheckinScreen: abhyasiIdCheckinScreenReducer,
 };
 
 const exampleStore = configureStore({

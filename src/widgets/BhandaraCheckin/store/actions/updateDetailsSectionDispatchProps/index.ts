@@ -5,6 +5,8 @@ import {
 import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
+import { FormUserDetails, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { RootState } from "../..";
 import {
   checkinWithEmailOrMobile,
   isUserCheckedIn,
@@ -14,6 +16,7 @@ import {
   snackbarActions,
   updateDetailsActions,
 } from "../../slices";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
@@ -26,16 +29,32 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
     dispatch(mainSectionActions.reset());
     dispatch(pageActions.HOME());
   },
-  onClickCheckin: async ({
-    ageGroup,
-    email,
-    fullName,
-    gender,
-    city,
-    state,
-    country,
-    mobile,
-  }) => {
+  onClickCheckin: async ($userDetails) => {
+    await dispatch<any>(onClickCheckinAction($userDetails));
+  },
+});
+
+const onClickCheckinAction = createAsyncThunk<
+  any,
+  FormUserDetails,
+  ThunkApiConfig
+>(
+  "updateDetailsSectionMapDispatchToProps/onClickCheckin",
+  async ($userDetails, { dispatch, getState }) => {
+    const {
+      ageGroup,
+      email,
+      fullName,
+      gender,
+      city,
+      state,
+      country,
+      mobile,
+      dormAndBerthAllocation,
+    } = $userDetails;
+
+    const { selectedBatch } = (getState() as RootState).mainSection;
+
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
       email: String(email.value?.toLowerCase()),
@@ -45,8 +64,9 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
       country: String(country.value?.toUpperCase()),
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
+      dormAndBerthAllocation: String(dormAndBerthAllocation.value),
+      eventName: String(selectedBatch),
     };
-    dispatch(updateDetailsActions.startProcessing());
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)
     );
@@ -76,7 +96,5 @@ export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
         );
       }
     }
-
-    dispatch(updateDetailsActions.stopProcessing());
-  },
-});
+  }
+);

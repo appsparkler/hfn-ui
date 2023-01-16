@@ -1,7 +1,7 @@
 import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
 import { LocalStorageKeys } from "../constants";
-import { checkinsCollection } from "widgets/BhandaraCheckin/firebase";
-import { addDoc } from "firebase/firestore";
+import { getCheckinDocRef } from "widgets/BhandaraCheckin/firebase";
+import { setDoc } from "firebase/firestore";
 import {
   CheckinTypesEnum,
   IAbhyasiCheckinApiStoreData,
@@ -14,7 +14,11 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
   return true;
 };
 
-export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
+export const checkinAbhyasi: CheckinAbhyasiApi = (
+  abhyasiId,
+  dormAndBerthAllocation,
+  batch
+) => {
   try {
     const data: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
@@ -22,9 +26,12 @@ export const checkinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
       timestamp: Date.now(),
       type: CheckinTypesEnum.AbhyasiId,
       updatedInReport: false,
+      dormAndBerthAllocation,
+      eventName: batch,
     };
 
-    addDoc(checkinsCollection, data);
+    const docRef = getCheckinDocRef(abhyasiId);
+    setDoc(docRef, data);
     return true;
   } catch (e) {
     throw new Error("Server Error: Abhyasi ID Checkin");

@@ -1,10 +1,8 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Vertical } from "../../../../components";
-import { CenterOfViewport } from "../../../../components/CenterOfViewport/CenterOfViewport";
-import { TimedConfetti } from "../../../../components/TimedConfetti";
-import { maxWidth } from "../../constants";
+import { Vertical, CenterOfViewport, TimedConfetti } from "components";
+import { maxWidth, textStrings } from "widgets/BhandaraCheckin/constants";
 
 export type SectionCheckinStateProps = {
   enableConfetti?: boolean;
@@ -51,6 +49,11 @@ export const SectionCheckinSuccess = ({
       maxWidth={maxWidth}
     >
       <Vertical alignItems={"center"}>
+        <img
+          src="150logo_gold.png"
+          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
+          width="200"
+        />
         <CheckCircleIcon color="success" sx={{ fontSize: 80 }} />
         <Typography variant="h5">{`Checked In`}</Typography>
       </Vertical>
@@ -64,8 +67,16 @@ export const SectionCheckinSuccess = ({
       </Button>
       {confettiEnabled ? (
         <TimedConfetti
-          height={wrapperRef.current?.offsetHeight}
-          width={wrapperRef.current?.offsetWidth}
+          height={window.screen.height}
+          width={window.screen.width}
+          style={{
+            overflow: "hidden",
+            position: "fixed",
+            top: 0,
+            right: 0,
+            left: 0,
+            bottom: 0,
+          }}
         />
       ) : null}
     </CenterOfViewport>

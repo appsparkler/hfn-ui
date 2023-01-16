@@ -4,6 +4,6 @@ export * from "./bhandaraCheckinSlice";
 export * from "./modeSlice";
 export * from "./updateDetailsSectionSlice";
 export * from "./envSlice";
-export * from "./dashboardSlice";
 export * from "./barcodeScannerSlice";
 export * from "./appUpdaterSlice";
+export * from "./multiCheckinScreenSlice";

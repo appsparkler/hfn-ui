@@ -7,24 +7,17 @@ import {
 import { isAbhyasiId, isMobileOrEmail } from "utils";
 import {
   modeActions,
-  snackbarActions,
   updateDetailsActions,
 } from "widgets/BhandaraCheckin/store/slices";
-import {
-  checkinWithAbhyasiId,
-  isAbhyasiCheckedIn,
-} from "widgets/BhandaraCheckin/store/api-async-thunks";
 import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import {
-  DASHBOARD,
-  OFFLINE_DATA,
+  ABHYASI_ID_CHECKIN_SCREEN,
   REFRESH_APP,
 } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
-import { errorAbhyasiAlreadyCheckedin } from "widgets/BhandaraCheckin/utils";
-import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { handleClickScan } from "./handleClickScan";
+import { abhyasiIdCheckinScreenActions } from "../../slices/abhyasiIdCheckinScreen";
 
 export const mapDispatchToProps: MapDispatchToProps<
   SectionMainDispatchProps,
@@ -34,12 +27,6 @@ export const mapDispatchToProps: MapDispatchToProps<
     dispatch(REFRESH_APP());
   },
   onMount: async () => {},
-  onClickDashboard: () => {
-    dispatch(DASHBOARD());
-  },
-  onClickOfflineData: () => {
-    dispatch(OFFLINE_DATA());
-  },
   onChange: (updatedValue) => {
     dispatch(
       mainSectionActions.setState({
@@ -69,6 +56,9 @@ export const mapDispatchToProps: MapDispatchToProps<
     }
   },
   onSwitchScanner: (checked) => dispatch<any>(handleSwitchScanner(checked)),
+  onChangeBatch: (_name, value) => {
+    dispatch(mainSectionActions.setBatch(String(value)));
+  },
 });
 
 function setLightMode(dispatch: Dispatch<Action<any>>) {
@@ -85,27 +75,29 @@ export async function checkinAbhyasi(
   dispatch: Dispatch<Action<any>>,
   abhyasiId: string
 ) {
-  dispatch(mainSectionActions.startProcessing());
-  const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
-  if (isCheckedInRes.meta.requestStatus === "rejected") {
-    if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
-      const errorAction = mainSectionActions.setError(
-        errorAbhyasiAlreadyCheckedin(abhyasiId)
-      );
-      dispatch(errorAction);
-    }
-  } else {
-    const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
-    if (res.meta.requestStatus === "fulfilled") {
-      dispatch(pageActions.CHECKIN_SUCCESS());
-    } else {
-      dispatch(
-        snackbarActions.openSnackbar({
-          children: ErrorCodes.SERVER_ERROR,
-        })
-      );
-    }
-  }
+  dispatch(abhyasiIdCheckinScreenActions.setAbhyasiId(abhyasiId));
+  dispatch(ABHYASI_ID_CHECKIN_SCREEN());
+  // dispatch(mainSectionActions.startProcessing());
+  // const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));
+  // if (isCheckedInRes.meta.requestStatus === "rejected") {
+  //   if (isCheckedInRes.payload === ErrorCodes.ABHYASI_ALREADY_CHECKED_IN) {
+  //     const errorAction = mainSectionActions.setError(
+  //       errorAbhyasiAlreadyCheckedin(abhyasiId)
+  //     );
+  //     dispatch(errorAction);
+  //   }
+  // } else {
+  //   const res = await dispatch<any>(checkinWithAbhyasiId(abhyasiId));
+  //   if (res.meta.requestStatus === "fulfilled") {
+  //     // dispatch(pageActions.CHECKIN_SUCCESS());
+  //   } else {
+  //     dispatch(
+  //       snackbarActions.openSnackbar({
+  //         children: ErrorCodes.SERVER_ERROR,
+  //       })
+  //     );
+  //   }
+  // }
 
-  dispatch(mainSectionActions.stopProcessing());
+  // dispatch(mainSectionActions.stopProcessing());
 }

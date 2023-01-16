@@ -11,6 +11,10 @@ function getTheme(mode: ModeProviderStateProps["mode"]) {
     ...theme,
     palette: {
       ...theme.palette,
+      background: {
+        ...theme.palette.background,
+        default: mode === "dark" ? "#222222" : "#efefef",
+      },
       error: {
         ...theme.palette.success,
       },

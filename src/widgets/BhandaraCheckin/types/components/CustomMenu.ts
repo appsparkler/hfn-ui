@@ -1,8 +1,6 @@
 type ReturnVoid = () => void;
 
 export interface CustomMenuDispatchProps {
-  onClickOfflineData?: ReturnVoid;
-  onClickDashboard?: ReturnVoid;
   onRefreshApp?: ReturnVoid;
 }
 

@@ -13,10 +13,24 @@ export const main = Template.bind({});
 main.args = {
   error: false,
   value: "INEEIW837",
-  helperText: "",
+  helperText: "For mobile, please use country code. For ex. +91868...",
   isProcessing: false,
   isDarkMode: false,
   isScannerOn: true,
   scanBtnDisabled: false,
   scanBtnProcessing: false,
+  batches: [
+    {
+      label: "Batch 1",
+      value: "batch-1",
+    },
+    {
+      label: "Batch 2",
+      value: "batch-2",
+    },
+    {
+      label: "Both Batches",
+      value: "both-batches",
+    },
+  ],
 };

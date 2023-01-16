@@ -17,6 +17,21 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
+    batches: [
+      {
+        label: "Batch 1",
+        value: "batch-1",
+      },
+      {
+        label: "Batch 2",
+        value: "batch-2",
+      },
+      {
+        label: "Both Batches",
+        value: "both-batches",
+      },
+    ],
+    selectedBatch: "batch-1",
   };
 };
 
@@ -26,6 +41,9 @@ const mainSectionSlice = createSlice({
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
+    },
+    setBatch: (state, { payload }: { payload: string }) => {
+      state.selectedBatch = payload;
     },
     setDarkMode: (state) => {
       state.isDarkMode = true;

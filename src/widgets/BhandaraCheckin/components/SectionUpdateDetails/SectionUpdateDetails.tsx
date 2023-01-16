@@ -39,8 +39,17 @@ export const SectionUpdateDetails = ({
   onClickCancel,
 }: SectionUpdateDetailsProps) => {
   const fullNameInputRef = useRef<HTMLInputElement>(null);
-  const { fullName, ageGroup, email, gender, city, state, country, mobile } =
-    useMemo(() => userDetails, [userDetails]);
+  const {
+    fullName,
+    ageGroup,
+    email,
+    gender,
+    city,
+    state,
+    country,
+    mobile,
+    dormAndBerthAllocation,
+  } = useMemo(() => userDetails, [userDetails]);
 
   const areEmailAndMobileValid = useMemo<boolean>(() => {
     const disabledEmail = Boolean(userDetails.email.disabled);
@@ -106,7 +115,7 @@ export const SectionUpdateDetails = ({
     [isProcessing, isValid]
   );
 
-  const handleChange = useCallback<InputChangeHandler>(
+  const handleChangeInputField = useCallback<InputChangeHandler>(
     ({ currentTarget: { name, value } }) => {
       onChange({
         ...userDetails,
@@ -155,11 +164,7 @@ export const SectionUpdateDetails = ({
       justifyContent="initial"
     >
       <Vertical gap={3} width={"100%"}>
-        <Typography
-          variant="h4"
-          textAlign={"center"}
-          sx={{ color: "text.primary" }}
-        >
+        <Typography variant="h4" color="goldenrod" align="center">
           Update Details
         </Typography>
         <TextField
@@ -171,7 +176,7 @@ export const SectionUpdateDetails = ({
           type="text"
           variant="outlined"
           fullWidth
-          onChange={handleChange}
+          onChange={handleChangeInputField}
           value={fullName.value}
           inputRef={fullNameInputRef}
           size="small"
@@ -212,7 +217,7 @@ export const SectionUpdateDetails = ({
           type="text"
           variant="outlined"
           fullWidth
-          onChange={handleChange}
+          onChange={handleChangeInputField}
           value={city.value}
           size="small"
         />
@@ -225,7 +230,7 @@ export const SectionUpdateDetails = ({
           type="text"
           variant="outlined"
           fullWidth
-          onChange={handleChange}
+          onChange={handleChangeInputField}
           value={state.value}
           size="small"
         />
@@ -238,7 +243,7 @@ export const SectionUpdateDetails = ({
           type="text"
           variant="outlined"
           fullWidth
-          onChange={handleChange}
+          onChange={handleChangeInputField}
           value={country.value}
           size="small"
         />
@@ -256,7 +261,7 @@ export const SectionUpdateDetails = ({
           helperText="Please include the country code - for ex. +9183392..."
           value={mobile.value}
           disabled={mobile.disabled}
-          onChange={handleChange}
+          onChange={handleChangeInputField}
           size="small"
         />
         <TextField
@@ -268,7 +273,19 @@ export const SectionUpdateDetails = ({
           fullWidth
           value={email.value}
           disabled={email.disabled}
-          onChange={handleChange}
+          onChange={handleChangeInputField}
+          size="small"
+        />
+        <TextField
+          label="Comfort Dorm and Berth Allocation"
+          autoComplete="off"
+          type="text"
+          name="dormAndBerthAllocation"
+          variant="outlined"
+          fullWidth
+          value={dormAndBerthAllocation.value}
+          disabled={dormAndBerthAllocation.disabled}
+          onChange={handleChangeInputField}
           size="small"
         />
       </Vertical>
