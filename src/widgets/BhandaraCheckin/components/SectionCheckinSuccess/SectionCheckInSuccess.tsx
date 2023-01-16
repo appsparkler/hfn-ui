@@ -2,7 +2,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Button, ButtonProps, Typography } from "@mui/material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Vertical, CenterOfViewport, TimedConfetti } from "components";
-import { maxWidth } from "widgets/BhandaraCheckin/constants";
+import { maxWidth, textStrings } from "widgets/BhandaraCheckin/constants";
 
 export type SectionCheckinStateProps = {
   enableConfetti?: boolean;
@@ -49,6 +49,11 @@ export const SectionCheckinSuccess = ({
       maxWidth={maxWidth}
     >
       <Vertical alignItems={"center"}>
+        <img
+          src="150logo_gold.png"
+          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
+          width="200"
+        />
         <CheckCircleIcon color="success" sx={{ fontSize: 80 }} />
         <Typography variant="h5">{`Checked In`}</Typography>
       </Vertical>

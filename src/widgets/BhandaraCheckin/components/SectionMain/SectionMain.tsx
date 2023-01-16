@@ -22,6 +22,7 @@ import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
 import { SectionMainProps } from "widgets/BhandaraCheckin/types";
 import { QrCode2 } from "@mui/icons-material";
+import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const SectionMain = ({
   env,
@@ -84,7 +85,7 @@ export const SectionMain = ({
       <Vertical marginTop={1} display="flex" alignItems={"center"}>
         <img
           src="150logo_gold.png"
-          alt="Celebrating 150 years of Lalaji Maharaj"
+          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
           width="200"
         />
         <Typography variant="h4" color="goldenrod" align="center">
