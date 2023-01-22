@@ -59,6 +59,7 @@ export const mapDispatchToProps: MapDispatchToProps<
   onChangeBatch: (_name, value) => {
     dispatch(mainSectionActions.setBatch(String(value)));
   },
+  onClickDashboard: () => {},
 });
 
 function setLightMode(dispatch: Dispatch<Action<any>>) {
