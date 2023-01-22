@@ -22,7 +22,6 @@ import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
 import { SectionMainProps } from "widgets/BhandaraCheckin/types";
 import { QrCode2 } from "@mui/icons-material";
-import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const SectionMain = ({
   env,
@@ -30,6 +29,7 @@ export const SectionMain = ({
   onChange,
   onSwitchMode,
   isDarkMode,
+  onClickDashboard,
   onClickScan,
   onSwitchScanner = noop,
   onMount = noop,
@@ -81,17 +81,10 @@ export const SectionMain = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} p={1}>
-      <Vertical marginTop={1} display="flex" alignItems={"center"}>
-        <img
-          src="150logo_gold.png"
-          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
-          width="200"
-        />
-        <Typography variant="h4" color="goldenrod" align="center">
-          Golden Book Registration
-        </Typography>
-      </Vertical>
+    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} paddingX={1}>
+      <Typography variant="h4" color="goldenrod" align="center">
+        Golden Book Registration
+      </Typography>
       <SelectField
         label="Batch"
         labelId="bhandara-batch"
@@ -100,13 +93,13 @@ export const SectionMain = ({
         value={selectedBatch}
         required
         options={batches}
+        helperText="Select the batch you are registering for"
         fullWidth
       />
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"
         variant="outlined"
-        required
         autoComplete="off"
         error={error}
         value={value}
@@ -155,7 +148,10 @@ export const SectionMain = ({
       <Box position="fixed" right={0} top={0}>
         <Horizontal alignItems={"center"}>
           <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
-          <CustomMenu onRefreshApp={onRefresh} />
+          <CustomMenu
+            onClickDashboard={onClickDashboard}
+            onRefreshApp={onRefresh}
+          />
         </Horizontal>
       </Box>
     </CenterOfViewport>
