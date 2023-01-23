@@ -5,6 +5,7 @@ import {
   IQRCheckinUser,
 } from "@hfn-checkins/types";
 import { noop } from "lodash/fp";
+import { ICheckinsMetaData } from "./firebase";
 
 export interface CheckinWithEmailOrMobileApi {
   (userDetails: CheckinEmailOrMobileUserDetails): boolean;
@@ -52,6 +53,6 @@ export type BhandaraCheckinAPIs = {
   signInAnonymously: () => Promise<void>;
   signOutAnonymously: typeof noop;
   checkinWithQRCode: CheckinWithQRApi;
-  updateMetadata: () => Promise<void>;
+  updateMetadata: () => Promise<ICheckinsMetaData>;
   getMetadata: () => Promise<any>;
 };

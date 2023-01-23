@@ -100,6 +100,11 @@ export const mockedApis: BhandaraCheckinAPIs = {
   signOutAnonymously: () => {
     return Promise.resolve();
   },
-  updateMetadata: async () => {},
+  updateMetadata: async () => ({
+    abhyasiIdCheckins: 0,
+    emailOrMobileCheckins: 0,
+    totalCheckins: 0,
+    QRCodeCheckins: 0,
+  }),
   getMetadata: async () => {},
 };

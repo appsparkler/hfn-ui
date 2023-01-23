@@ -7,7 +7,7 @@ export const getDashboardData = createAsyncThunk<
   undefined,
   ThunkApiConfig
 >(
-  "api/isUserCheckedIn",
+  "api/dashboard",
   async (
     _,
     {

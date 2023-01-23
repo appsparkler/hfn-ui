@@ -5,10 +5,12 @@ import { checkinWithQRCode } from "./checkinWithQRCode";
 import { getAppVersion } from "./getAppVersion";
 import { getDashboardData } from "./getDashboardData";
 import { getDataFromCache } from "./getDataFromCache";
+import { getMetadata } from "./getMetadata";
 import { isAbhyasiCheckedIn } from "./isAbhyasiCheckedIn";
 import { isUserAlreadyCheckedIn } from "./isUserAlreadyCheckinIn";
 import { signInAnonymously } from "./signInAnonymously";
 import { signOutAnonymously } from "./signOutAnonymously";
+import { updateMetadata } from "./updateMetadata";
 
 export const apis: BhandaraCheckinAPIs = {
   checkinAbhyasi,
@@ -21,6 +23,6 @@ export const apis: BhandaraCheckinAPIs = {
   getAppVersion,
   signInAnonymously,
   signOutAnonymously,
-  updateMetadata: () => Promise.resolve(),
-  getMetadata: () => Promise.resolve(),
+  updateMetadata,
+  getMetadata,
 };

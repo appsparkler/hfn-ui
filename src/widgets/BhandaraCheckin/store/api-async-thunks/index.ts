@@ -7,3 +7,5 @@ export * from "./getAppVersionNumber";
 export * from "./signInAnonymously";
 export * from "./signOutAnonymously";
 export * from "./checkinWithQRCode";
+export * from "./updateMetadata";
+export * from "./getMetadata";
