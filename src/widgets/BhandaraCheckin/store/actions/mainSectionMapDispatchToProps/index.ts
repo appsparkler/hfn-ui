@@ -13,6 +13,7 @@ import { Action, Dispatch } from "redux";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import {
   ABHYASI_ID_CHECKIN_SCREEN,
+  DASHBOARD,
   REFRESH_APP,
 } from "widgets/BhandaraCheckin/routing/actions/page";
 import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
@@ -59,7 +60,7 @@ export const mapDispatchToProps: MapDispatchToProps<
   onChangeBatch: (_name, value) => {
     dispatch(mainSectionActions.setBatch(String(value)));
   },
-  onClickDashboard: () => {},
+  onClickDashboard: () => dispatch(DASHBOARD()),
 });
 
 function setLightMode(dispatch: Dispatch<Action<any>>) {

@@ -21,4 +21,6 @@ export const apis: BhandaraCheckinAPIs = {
   getAppVersion,
   signInAnonymously,
   signOutAnonymously,
+  updateMetadata: () => Promise.resolve(),
+  getMetadata: () => Promise.resolve(),
 };

@@ -1,5 +1,6 @@
 import {
   ConnectedAbhyasiIdCheckinScreen,
+  ConnectedDashboard,
   ConnectedMultiCheckinScreen,
   ConnectedRefreshApp,
   SectionCheckinSuccessConnected,
@@ -16,4 +17,5 @@ export const pages: Page = {
   NotFound: () => <div>404</div>,
   MultiCheckinScreen: ConnectedMultiCheckinScreen,
   AbhyasiIdCheckinScreen: ConnectedAbhyasiIdCheckinScreen,
+  Dashboard: ConnectedDashboard,
 };

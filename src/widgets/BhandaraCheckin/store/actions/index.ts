@@ -6,3 +6,4 @@ export { handlePlayScannerVideo } from "./handlePlayScannerVideo";
 export { handleScan } from "./handleScan";
 export * from "./mapBhandaraCheckinDispatchToProps";
 export * from "./mapAbhyasiIdCheckinScreenDispatchToProps";
+export * from "./dashboardMapDispatchToProps";

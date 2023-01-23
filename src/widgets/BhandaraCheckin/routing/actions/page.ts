@@ -15,3 +15,7 @@ export const ABHYASI_ID_CHECKIN_SCREEN = () => ({
 export const REFRESH_APP = () => ({
   type: "REFRESH_APP",
 });
+
+export const DASHBOARD = () => ({
+  type: "DASHBOARD",
+});
