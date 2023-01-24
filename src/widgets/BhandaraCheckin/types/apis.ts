@@ -54,5 +54,4 @@ export type BhandaraCheckinAPIs = {
   signOutAnonymously: typeof noop;
   checkinWithQRCode: CheckinWithQRApi;
   updateMetadata: () => Promise<ICheckinsMetaData>;
-  getMetadata: () => Promise<any>;
 };

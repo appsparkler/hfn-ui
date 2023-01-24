@@ -106,5 +106,4 @@ export const mockedApis: BhandaraCheckinAPIs = {
     totalCheckins: 0,
     QRCodeCheckins: 0,
   }),
-  getMetadata: async () => {},
 };
