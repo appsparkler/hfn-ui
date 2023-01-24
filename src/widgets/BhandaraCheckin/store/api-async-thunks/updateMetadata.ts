@@ -1,11 +1,24 @@
-import { BhandaraCheckinAPIs } from "widgets/BhandaraCheckin/types";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
+import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 
-export const updateMetadata: BhandaraCheckinAPIs["updateMetadata"] =
-  async () => {
-    return {
-      abhyasiIdCheckins: 0,
-      emailOrMobileCheckins: 0,
-      QRCodeCheckins: 0,
-      totalCheckins: 0,
-    };
-  };
+export const updateMetadata = createAsyncThunk<any, void, ThunkApiConfig>(
+  "dashboard/updateMetadata",
+  async (
+    _,
+    {
+      extra: {
+        apis: { updateMetadata },
+      },
+      rejectWithValue,
+      fulfillWithValue,
+    }
+  ) => {
+    try {
+      const metadata = await updateMetadata();
+      return fulfillWithValue(metadata);
+    } catch {
+      return rejectWithValue(ErrorCodes.SERVER_ERROR);
+    }
+  }
+);
