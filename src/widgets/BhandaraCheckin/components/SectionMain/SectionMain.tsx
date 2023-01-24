@@ -30,6 +30,7 @@ export const SectionMain = ({
   onChange,
   onSwitchMode,
   isDarkMode,
+  onClickDashboard,
   onClickScan,
   onSwitchScanner = noop,
   onMount = noop,
@@ -155,7 +156,10 @@ export const SectionMain = ({
       <Box position="fixed" right={0} top={0}>
         <Horizontal alignItems={"center"}>
           <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
-          <CustomMenu onRefreshApp={onRefresh} />
+          <CustomMenu
+            onClickDashboard={onClickDashboard}
+            onRefreshApp={onRefresh}
+          />
         </Horizontal>
       </Box>
     </CenterOfViewport>

@@ -56,3 +56,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ## Deploying `build` with development variables:
 
 Copy paste `.env.development > .env.production.local` and run `yarn deploy --prod`. `.env.production.local` has higher priority than `.env.production`.
+
+## DEPLOYMENT REQUIREMENTS
+
+- [ ] Update Firebase Rules
+- [ ] Ensure Environment Variables are set
+- [ ] Update `meta/app/version` in Firestore

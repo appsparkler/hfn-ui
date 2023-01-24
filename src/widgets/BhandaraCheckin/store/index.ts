@@ -16,6 +16,7 @@ import {
   appUpdaterReducer,
   barcodeScannerReducer,
   multiCheckinScreenReducer,
+  dashboardReducer,
 } from "./slices";
 import { abhyasiIdCheckinScreenReducer } from "./slices/abhyasiIdCheckinScreen";
 
@@ -32,6 +33,7 @@ export const rootReducer = {
   appUpdaterProps: appUpdaterReducer,
   multiCheckinScreen: multiCheckinScreenReducer,
   abhyasiIdCheckinScreen: abhyasiIdCheckinScreenReducer,
+  dashboard: dashboardReducer,
 };
 
 const exampleStore = configureStore({

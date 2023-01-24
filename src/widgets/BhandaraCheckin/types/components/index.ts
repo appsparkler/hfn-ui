@@ -5,3 +5,4 @@ export * from "./AppUpdater";
 export * from "./BhandaraCheckinView";
 export * from "./CheckinInfoTile";
 export * from "./CheckinInfoTiles";
+export * from "./Dashboard";

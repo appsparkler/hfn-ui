@@ -7,3 +7,4 @@ export * from "./envSlice";
 export * from "./barcodeScannerSlice";
 export * from "./appUpdaterSlice";
 export * from "./multiCheckinScreenSlice";
+export * from "./dashboard";

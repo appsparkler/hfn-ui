@@ -8,6 +8,7 @@ const actionTypeToComponentsMap: Record<string, PageEnum> = {
   ABHYASI_ID_CHECKIN_SCREEN: PageEnum.AbhyasiIdCheckinScreen,
   CHECKIN_SUCCESS: PageEnum.CheckInSuccess,
   REFRESH_APP: PageEnum.RefreshApp,
+  DASHBOARD: PageEnum.Dashboard,
   [NOT_FOUND]: PageEnum.NotFound,
 };
 

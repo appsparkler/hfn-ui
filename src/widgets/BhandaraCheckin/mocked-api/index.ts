@@ -69,28 +69,6 @@ export const mockedApis: BhandaraCheckinAPIs = {
   isUserAlreadyCheckedIn: () => {
     return Promise.resolve(false);
   },
-  getDashboardData: () => {
-    return Promise.resolve({
-      total: 0,
-      totalAbhyasis: 0,
-      totalGuests: 0,
-      totalGuestsCheckedIn: 0,
-      totalAbhyasisCheckedIn: 0,
-      totalCheckedIn: 0,
-      emailOrMobileCheckin: 0,
-      abhyasiIdCheckin: 0,
-      city: {},
-      state: {},
-      country: {},
-      checkinsWithEmail: 10,
-      checkinsWithMobile: 10,
-      checkinsWithEmailAndMobile: 10,
-      male: 10,
-      female: 10,
-      dataAppendedForPreviousCheckins: false,
-      unspecified: 10,
-    });
-  },
   getAppVersion: () => {
     return Promise.resolve(APP_VERSION);
   },
@@ -100,4 +78,10 @@ export const mockedApis: BhandaraCheckinAPIs = {
   signOutAnonymously: () => {
     return Promise.resolve();
   },
+  updateMetadata: async () => ({
+    abhyasiIdCheckins: 0,
+    emailOrMobileCheckins: 0,
+    totalCheckins: 0,
+    QRCodeCheckins: 0,
+  }),
 };

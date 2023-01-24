@@ -54,5 +54,5 @@ export const metaCollection = collection(
 );
 
 export function getCheckinDocRef(id: string) {
-  return doc(firestoreDb, "checkins", id);
+  return doc(firestoreDb, FirestoreCollections.CHECKINS, id);
 }

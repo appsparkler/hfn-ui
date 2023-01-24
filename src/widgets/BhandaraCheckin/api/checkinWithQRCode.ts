@@ -25,7 +25,7 @@ export const checkinWithQRCode: CheckinWithQRApi = (attendees) => {
 
     forEach<ICheckinWIthQRApiStoreData>((eachCheckin) => {
       const docRef = getCheckinDocRef(eachCheckin.regId);
-      setDoc(docRef, eachCheckin);
+      setDoc(docRef, eachCheckin, { merge: true });
     })(currentCheckins);
   } catch (e) {
     throw new Error("Server Error: QR Checkin Failed");

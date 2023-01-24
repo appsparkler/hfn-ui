@@ -23,7 +23,7 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
       (attendee as { mobile: string }).mobile ||
       (attendee as { email: string }).email;
     const docRef = getCheckinDocRef(`${attendee.fullName}-${mobileOrEmail}`);
-    setDoc(docRef, emailOrMobileCheckinData);
+    setDoc(docRef, emailOrMobileCheckinData, { merge: true });
     return true;
   } catch (e) {
     throw new Error("Server Error: Email/Mobile Checkin");

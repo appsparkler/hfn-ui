@@ -8,6 +8,7 @@ export enum PageEnum {
   RefreshApp = "RefreshApp",
   MultiCheckinScreen = "MultiCheckinScreen",
   AbhyasiIdCheckinScreen = "AbhyasiIdCheckinScreen",
+  Dashboard = "Dashboard",
 }
 
 export type Page = Record<

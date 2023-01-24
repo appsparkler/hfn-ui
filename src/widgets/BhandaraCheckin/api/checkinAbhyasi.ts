@@ -31,7 +31,7 @@ export const checkinAbhyasi: CheckinAbhyasiApi = (
     };
 
     const docRef = getCheckinDocRef(abhyasiId);
-    setDoc(docRef, data);
+    setDoc(docRef, data, { merge: true });
     return true;
   } catch (e) {
     throw new Error("Server Error: Abhyasi ID Checkin");
