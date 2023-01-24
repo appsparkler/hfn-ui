@@ -25,7 +25,7 @@ export const Dashboard: DashboardComponent = ({
         <Button
           onClick={onClickGoBack}
           variant="outlined"
-          color="secondary"
+          color="primary"
           size="large"
         >
           Go Back
