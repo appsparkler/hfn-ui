@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof Dashboard> = (args) => (
 
 export const dashboard: ComponentStory<typeof Dashboard> = Template.bind({});
 dashboard.args = {
-  totalCheckins: 40000,
+  totalCheckins: 42936,
 };
 
 export default Story;
