@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
-import { AsyncButton, CenterOfViewport } from "components";
+import { Button, Typography } from "@mui/material";
+import { CenterOfViewport, Horizontal } from "components";
 import { useEffect } from "react";
 import { DashboardComponent } from "widgets/BhandaraCheckin/types";
 
@@ -7,6 +7,7 @@ export const Dashboard: DashboardComponent = ({
   totalCheckins,
   onMount,
   onClickRefresh,
+  onClickGoBack,
 }) => {
   useEffect(() => {
     onMount();
@@ -24,15 +25,24 @@ export const Dashboard: DashboardComponent = ({
         {totalCheckins}
       </Typography>
       {/* Refresh Button */}
-      <AsyncButton
-        onClick={onClickRefresh}
-        variant="contained"
-        color="primary"
-        size="large"
-        sx={{ mt: 2 }}
-      >
-        Refresh
-      </AsyncButton>
+      <Horizontal gap={2}>
+        <Button
+          onClick={onClickGoBack}
+          variant="outlined"
+          color="secondary"
+          size="large"
+        >
+          GO BACK
+        </Button>
+        <Button
+          onClick={onClickRefresh}
+          variant="contained"
+          color="primary"
+          size="large"
+        >
+          Refresh
+        </Button>
+      </Horizontal>
     </CenterOfViewport>
   );
 };

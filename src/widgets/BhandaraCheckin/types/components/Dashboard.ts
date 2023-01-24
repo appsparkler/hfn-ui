@@ -5,6 +5,7 @@ export interface DashboardComponentStateProps {
 export interface DashboardComponentDispatchProps {
   onMount: () => void;
   onClickRefresh: () => void;
+  onClickGoBack: () => void;
 }
 
 export type DashboardComponent = React.FC<
