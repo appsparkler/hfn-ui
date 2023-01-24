@@ -50,9 +50,10 @@ const getMetaCountSnapshot = async (): Promise<
 };
 
 const reduceCheckinsToMetaData = reduce<
-  { type: CheckinTypesEnum },
+  { type: CheckinTypesEnum; updatedInReportOnce?: boolean },
   ICheckinsMetaData
 >((acc, doc) => {
+  if (doc.updatedInReportOnce) return acc;
   switch (doc.type) {
     case CheckinTypesEnum.AbhyasiId:
       return {
@@ -82,6 +83,7 @@ export const updateMetaCountDoc = async (
     const checkinDocsSnapshot = (await getDocs(query_)) as QuerySnapshot<{
       type: CheckinTypesEnum;
       [UPDATED_IN_REPORT]: boolean;
+      updatedInReportOnce: boolean;
     }>;
     const checkins = checkinDocsSnapshot.docs.map((doc) => doc.data());
     const updatedCheckins =
@@ -93,6 +95,7 @@ export const updateMetaCountDoc = async (
       async (doc) => {
         await updateDoc(doc.ref, {
           [UPDATED_IN_REPORT]: true,
+          updatedInReportOnce: true,
         });
       }
     );
@@ -110,55 +113,9 @@ export const updateMetadata: BhandaraCheckinAPIs["updateMetadata"] =
     // get the document
     // if it exists, update it
     // if it doesn't exist, create it
-    // update the document
+    // update the meta-count document
+    // update the checkin docs
     const metaCountSnapshot = await getMetaCountSnapshot();
     const data = await updateMetaCountDoc(metaCountSnapshot);
     return data;
-    // console.log({ metaData });
-    // const metaDataData: ICheckinsMetaData = metaData.data() || {
-    //   totalCheckins: 0,
-    //   emailOrMobileCheckins: 0,
-    //   QRCodeCheckins: 0,
-    //   abhyasiIdCheckins: 0,
-    // };
-    // const IS_META_UPDATED = "isMetaUpdated";
-    // const whereMetaIsNotUpdated = where(IS_META_UPDATED, "==", false);
-    // const query_ = query(checkinsCollection, whereMetaIsNotUpdated);
-    // const snapshot = (await getDocs(query_)) as QuerySnapshot<{
-    //   type: CheckinTypesEnum;
-    // }>;
-    // const checkinDocs = snapshot.docs.map((doc) => doc.data());
-    // const reduceCheckininsToMetaData = reduce<
-    //   { type: CheckinTypesEnum },
-    //   ICheckinsMetaData
-    // >((acc, doc) => {
-    //   switch (doc.type) {
-    //     case CheckinTypesEnum.AbhyasiId:
-    //       return {
-    //         ...acc,
-    //         abhyasiIdCheckins: acc.abhyasiIdCheckins + 1,
-    //       };
-    //     case CheckinTypesEnum.EmailOrMobile:
-    //       return {
-    //         ...acc,
-    //         emailOrMobileCheckins: acc.emailOrMobileCheckins + 1,
-    //       };
-    //     case CheckinTypesEnum.QR:
-    //       return {
-    //         ...acc,
-    //         QRCodeCheckins: acc.QRCodeCheckins + 1,
-    //       };
-    //   }
-    // });
-    // const updatedCheckins = reduceCheckininsToMetaData(
-    //   metaDataData,
-    //   checkinDocs
-    // );
-    // console.log({
-    //   updatedCheckins,
-    // });
-    // return updatedCheckins;
-    // const updatedMeta = reduceCheckininsToMetaData(metaDataData, checkinDocs);
-    // await setDoc(metadataDoc, updatedMeta);
-    // return updatedMeta;
   };
