@@ -48,7 +48,6 @@ export type BhandaraCheckinAPIs = {
   getDataFromCache: GetDataFromCacheApi;
   isAbhyasiCheckedIn: IsAbhyasiCheckedInApi;
   isUserAlreadyCheckedIn: IsUserAlreadyCheckedInApi;
-  getDashboardData: GetDashboardDataApi;
   getAppVersion: GetAppVersion;
   signInAnonymously: () => Promise<void>;
   signOutAnonymously: typeof noop;
