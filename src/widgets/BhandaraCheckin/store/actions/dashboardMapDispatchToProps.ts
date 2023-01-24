@@ -1,21 +1,33 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { MapDispatchToProps } from "react-redux";
-import { DashboardComponentDispatchProps } from "widgets/BhandaraCheckin/types";
+import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
+import {
+  DashboardComponentDispatchProps,
+  ThunkApiConfig,
+} from "widgets/BhandaraCheckin/types";
 import { updateMetadata } from "../api-async-thunks";
 import { dashboardActions } from "../slices";
 
-export const dashboardMapDispatchToProps: MapDispatchToProps<
-  DashboardComponentDispatchProps,
-  {}
-> = (dispatch) => ({
-  onMount: async () => {
-    const response = await dispatch<any>(updateMetadata());
+const handleRefreshData = createAsyncThunk<void, void, ThunkApiConfig>(
+  "dashboard/handleRefreshData",
+  async (_, { dispatch }) => {
+    const response = await dispatch(updateMetadata());
     if (response.meta.requestStatus === "fulfilled") {
       const { emailOrMobileCheckins, QRCodeCheckins, abhyasiIdCheckins } =
         response.payload;
       const totalCheckins =
         emailOrMobileCheckins + QRCodeCheckins + abhyasiIdCheckins;
       dispatch(dashboardActions.setTotalCheckins(totalCheckins));
+    } else if (response.meta.requestStatus === "rejected") {
     }
-  },
-  onClickRefresh: () => dispatch<any>(updateMetadata()),
+  }
+);
+
+export const dashboardMapDispatchToProps: MapDispatchToProps<
+  DashboardComponentDispatchProps,
+  {}
+> = (dispatch) => ({
+  onMount: () => dispatch<any>(handleRefreshData()),
+  onClickRefresh: () => dispatch<any>(handleRefreshData()),
+  onClickGoBack: () => dispatch(HOME()),
 });

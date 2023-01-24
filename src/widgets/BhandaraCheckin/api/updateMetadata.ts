@@ -84,7 +84,6 @@ export const updateMetaCountDoc = async (
       [UPDATED_IN_REPORT]: boolean;
     }>;
     const checkins = checkinDocsSnapshot.docs.map((doc) => doc.data());
-    console.log({ currentMetaCountData, checkins });
     const updatedCheckins =
       reduceCheckinsToMetaData(currentMetaCountData)(checkins);
     await updateDoc(snapshot.ref, updatedCheckins);
