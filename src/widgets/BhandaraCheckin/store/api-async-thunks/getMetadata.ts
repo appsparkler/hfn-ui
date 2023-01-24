@@ -16,7 +16,6 @@ export const getMetadata = createAsyncThunk<any, void, ThunkApiConfig>(
   ) => {
     try {
       const metadata = await updateMetadata();
-      console.log({ metadata });
       return fulfillWithValue(metadata);
     } catch {
       return rejectWithValue(ErrorCodes.SERVER_ERROR);
