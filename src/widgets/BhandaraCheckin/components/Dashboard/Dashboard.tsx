@@ -1,5 +1,5 @@
 import { Button, Typography } from "@mui/material";
-import { CenterOfViewport, Horizontal } from "components";
+import { CenterOfViewport, Horizontal, Vertical } from "components";
 import { useEffect } from "react";
 import { DashboardComponent } from "widgets/BhandaraCheckin/types";
 
@@ -14,17 +14,13 @@ export const Dashboard: DashboardComponent = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport>
-      <Typography variant="h3">T O T A L</Typography>
-      <Typography
-        variant="h1"
-        fontWeight={"bold"}
-        letterSpacing={3}
-        fontFamily="monospace"
-      >
-        {totalCheckins}
-      </Typography>
-      {/* Refresh Button */}
+    <CenterOfViewport gap={2}>
+      <Vertical alignItems={"center"}>
+        <Typography variant="h4">T O T A L</Typography>
+        <Typography variant="h2" fontWeight={"bold"} fontFamily="monospace">
+          {totalCheckins.toLocaleString()}
+        </Typography>
+      </Vertical>
       <Horizontal gap={2}>
         <Button
           onClick={onClickGoBack}
@@ -32,7 +28,7 @@ export const Dashboard: DashboardComponent = ({
           color="secondary"
           size="large"
         >
-          GO BACK
+          Go Back
         </Button>
         <Button
           onClick={onClickRefresh}
