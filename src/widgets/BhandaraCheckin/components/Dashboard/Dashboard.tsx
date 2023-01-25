@@ -22,10 +22,7 @@ export const Dashboard: DashboardComponent = ({
   }, [onRefresh]);
 
   useEffect(() => {
-    setIsProcessing(true);
-    handleRefresh().then(() => {
-      setIsProcessing(false);
-    });
+    handleRefresh();
   }, [handleRefresh]);
 
   const display = useMemo(
