@@ -10,22 +10,23 @@ import { DashboardComponent } from "widgets/BhandaraCheckin/types";
 
 export const Dashboard: DashboardComponent = ({
   totalCheckins,
-  onMount,
-  onClickRefresh,
+  onRefresh,
   onClickGoBack,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+
   const handleRefresh = useCallback(async () => {
     setIsProcessing(true);
-    await onClickRefresh();
+    await onRefresh();
     setIsProcessing(false);
-  }, [onClickRefresh]);
+  }, [onRefresh]);
+
   useEffect(() => {
     setIsProcessing(true);
     handleRefresh().then(() => {
       setIsProcessing(false);
     });
-  }, [handleRefresh, onMount]);
+  }, [handleRefresh]);
 
   const display = useMemo(
     () => (isProcessing ? "---" : totalCheckins.toLocaleString()),

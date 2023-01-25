@@ -3,8 +3,7 @@ export interface DashboardComponentStateProps {
 }
 
 export interface DashboardComponentDispatchProps {
-  onMount: () => void;
-  onClickRefresh: () => void;
+  onRefresh: () => void;
   onClickGoBack: () => void;
 }
 
