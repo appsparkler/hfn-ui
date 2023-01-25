@@ -27,7 +27,6 @@ export const dashboardMapDispatchToProps: MapDispatchToProps<
   DashboardComponentDispatchProps,
   {}
 > = (dispatch) => ({
-  onMount: () => dispatch<any>(handleRefreshData()),
-  onClickRefresh: () => dispatch<any>(handleRefreshData()),
+  onRefresh: () => dispatch<any>(handleRefreshData()),
   onClickGoBack: () => dispatch(HOME()),
 });
