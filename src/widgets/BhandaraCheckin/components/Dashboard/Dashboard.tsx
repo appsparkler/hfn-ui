@@ -1,6 +1,11 @@
 import { Button, Typography } from "@mui/material";
-import { CenterOfViewport, Horizontal, Vertical } from "components";
-import { useEffect } from "react";
+import {
+  AsyncButton,
+  CenterOfViewport,
+  Horizontal,
+  Vertical,
+} from "components";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { DashboardComponent } from "widgets/BhandaraCheckin/types";
 
 export const Dashboard: DashboardComponent = ({
@@ -9,16 +14,30 @@ export const Dashboard: DashboardComponent = ({
   onClickRefresh,
   onClickGoBack,
 }) => {
+  const [isProcessing, setIsProcessing] = useState(false);
+  const handleRefresh = useCallback(async () => {
+    setIsProcessing(true);
+    await onClickRefresh();
+    setIsProcessing(false);
+  }, [onClickRefresh]);
   useEffect(() => {
-    onMount();
-  }, [onMount]);
+    setIsProcessing(true);
+    handleRefresh().then(() => {
+      setIsProcessing(false);
+    });
+  }, [handleRefresh, onMount]);
+
+  const display = useMemo(
+    () => (isProcessing ? "---" : totalCheckins.toLocaleString()),
+    [isProcessing, totalCheckins]
+  );
 
   return (
     <CenterOfViewport gap={2}>
       <Vertical alignItems={"center"}>
         <Typography variant="h4">T O T A L</Typography>
         <Typography variant="h2" fontWeight={"bold"} fontFamily="monospace">
-          {totalCheckins.toLocaleString()}
+          {display}
         </Typography>
       </Vertical>
       <Horizontal gap={2}>
@@ -30,14 +49,16 @@ export const Dashboard: DashboardComponent = ({
         >
           Go Back
         </Button>
-        <Button
-          onClick={onClickRefresh}
+        <AsyncButton
+          disabled={isProcessing}
+          onClick={handleRefresh}
+          isProcessing={isProcessing}
           variant="contained"
           color="primary"
           size="large"
         >
           Refresh
-        </Button>
+        </AsyncButton>
       </Horizontal>
     </CenterOfViewport>
   );
