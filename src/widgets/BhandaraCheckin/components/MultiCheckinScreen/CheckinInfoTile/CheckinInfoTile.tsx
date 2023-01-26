@@ -48,10 +48,12 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
             label={fullName}
           />
           <Box>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Abhyasi Id:&nbsp;</strong>
-              {abhyasiId}
-            </Typography>
+            {abhyasiId ? (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Abhyasi Id:&nbsp;</strong>
+                {abhyasiId}
+              </Typography>
+            ) : null}
             <Typography variant="body2" color="text.secondary">
               <strong>Reg Id:&nbsp;</strong>
               {registrationId}&nbsp;&nbsp;
