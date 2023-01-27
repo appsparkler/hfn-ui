@@ -13,6 +13,10 @@ const handleRefreshData = createAsyncThunk<void, void, ThunkApiConfig>(
   "dashboard/handleRefreshData",
   async (_, { dispatch }) => {
     const password = prompt("Enter Password:");
+    console.log({
+      password,
+      refreshPassword: process.env.REACT_APP_REFRESH_PASSWORD,
+    });
     if (password !== process.env.REACT_APP_REFRESH_PASSWORD) return;
     const response = await dispatch(updateMetadata());
     if (response.meta.requestStatus === "fulfilled") {
