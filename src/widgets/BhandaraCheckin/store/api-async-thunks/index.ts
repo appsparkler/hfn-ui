@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 import { errorServer } from "widgets/BhandaraCheckin/utils";
 
