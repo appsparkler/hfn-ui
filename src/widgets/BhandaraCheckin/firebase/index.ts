@@ -24,6 +24,7 @@ const app = initializeApp(firebaseConfig);
 
 export const firestoreDb = initializeFirestore(app, {
   cacheSizeBytes: CACHE_SIZE_UNLIMITED,
+  ignoreUndefinedProperties: true,
 });
 if (getEnv().EMULATOR) {
   connectFirestoreEmulator(firestoreDb, "localhost", 8080);
