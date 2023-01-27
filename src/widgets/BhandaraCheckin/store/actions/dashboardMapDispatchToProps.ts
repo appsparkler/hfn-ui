@@ -11,6 +11,8 @@ import { dashboardActions } from "../slices";
 const handleRefreshData = createAsyncThunk<void, void, ThunkApiConfig>(
   "dashboard/handleRefreshData",
   async (_, { dispatch }) => {
+    const password = prompt("Enter Password:");
+    if (password !== process.env.REACT_APP_REFRESH_PASSWORD) return;
     const response = await dispatch(updateMetadata());
     if (response.meta.requestStatus === "fulfilled") {
       const { emailOrMobileCheckins, QRCodeCheckins, abhyasiIdCheckins } =

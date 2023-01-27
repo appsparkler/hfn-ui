@@ -5,7 +5,7 @@ import {
   IQRCheckinUser,
 } from "@hfn-checkins/types";
 import { delay } from "lodash/fp";
-import { BhandaraCheckinAPIs } from "../types";
+import { BhandaraCheckinAPIs, ICheckinsMetaData } from "../types";
 
 const APP_VERSION = 1;
 
@@ -78,6 +78,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
   signOutAnonymously: () => {
     return Promise.resolve();
   },
+  getMetadata: async () => ({} as ICheckinsMetaData),
   updateMetadata: async () => ({
     abhyasiIdCheckins: 0,
     emailOrMobileCheckins: 0,

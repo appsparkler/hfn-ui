@@ -1,4 +1,10 @@
-import { BhandaraCheckinAPIs } from "widgets/BhandaraCheckin/types";
+import { doc, DocumentReference, getDoc } from "firebase/firestore";
+import {
+  BhandaraCheckinAPIs,
+  FirestoreCollections,
+  ICheckinsMetaData,
+} from "widgets/BhandaraCheckin/types";
+import { firestoreDb } from "../firebase";
 import { checkinAbhyasi } from "./checkinAbhyasi";
 import { checkinWithEmailOrMobile } from "./checkinWithEmailorMobile";
 import { checkinWithQRCode } from "./checkinWithQRCode";
@@ -21,4 +27,16 @@ export const apis: BhandaraCheckinAPIs = {
   signInAnonymously,
   signOutAnonymously,
   updateMetadata,
+  getMetadata: async () => {
+    const docRef = doc(
+      firestoreDb,
+      FirestoreCollections.META,
+      "count"
+    ) as DocumentReference<ICheckinsMetaData>;
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    throw new Error("Unable to fetch count metadata");
+  },
 };
