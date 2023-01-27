@@ -11,19 +11,23 @@ import { DashboardComponent } from "widgets/BhandaraCheckin/types";
 export const Dashboard: DashboardComponent = ({
   totalCheckins,
   onRefresh,
+  onMount,
   onClickGoBack,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleRefresh = useCallback(async () => {
-    setIsProcessing(true);
-    await onRefresh();
-    setIsProcessing(false);
-  }, [onRefresh]);
+  const asyncHandler = useCallback(
+    (fn: () => void) => async () => {
+      setIsProcessing(true);
+      await fn();
+      setIsProcessing(false);
+    },
+    []
+  );
 
   useEffect(() => {
-    handleRefresh();
-  }, [handleRefresh]);
+    asyncHandler(onMount)();
+  }, [asyncHandler, onMount]);
 
   const display = useMemo(
     () => (isProcessing ? "---" : totalCheckins.toLocaleString()),
@@ -49,7 +53,7 @@ export const Dashboard: DashboardComponent = ({
         </Button>
         <AsyncButton
           disabled={isProcessing}
-          onClick={handleRefresh}
+          onClick={asyncHandler(onRefresh)}
           isProcessing={isProcessing}
           variant="contained"
           color="primary"

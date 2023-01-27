@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { sum, values } from "lodash/fp";
 import { MapDispatchToProps } from "react-redux";
 import { HOME } from "widgets/BhandaraCheckin/routing/actions/page";
 import {
   DashboardComponentDispatchProps,
   ThunkApiConfig,
 } from "widgets/BhandaraCheckin/types";
-import { updateMetadata } from "../api-async-thunks";
+import { getMetadataAsyncThunk, updateMetadata } from "../api-async-thunks";
 import { dashboardActions } from "../slices";
 
 const handleRefreshData = createAsyncThunk<void, void, ThunkApiConfig>(
@@ -15,10 +16,19 @@ const handleRefreshData = createAsyncThunk<void, void, ThunkApiConfig>(
     if (password !== process.env.REACT_APP_REFRESH_PASSWORD) return;
     const response = await dispatch(updateMetadata());
     if (response.meta.requestStatus === "fulfilled") {
-      const { emailOrMobileCheckins, QRCodeCheckins, abhyasiIdCheckins } =
-        response.payload;
-      const totalCheckins =
-        emailOrMobileCheckins + QRCodeCheckins + abhyasiIdCheckins;
+      const totalCheckins = sum(values(response.payload));
+      dispatch(dashboardActions.setTotalCheckins(totalCheckins));
+    } else if (response.meta.requestStatus === "rejected") {
+    }
+  }
+);
+
+const handleMount = createAsyncThunk<void, void, ThunkApiConfig>(
+  "dashboard/handleMount",
+  async (_, { dispatch }) => {
+    const response = await dispatch(getMetadataAsyncThunk());
+    if (response.meta.requestStatus === "fulfilled") {
+      const totalCheckins = sum(values(response.payload));
       dispatch(dashboardActions.setTotalCheckins(totalCheckins));
     } else if (response.meta.requestStatus === "rejected") {
     }
@@ -31,4 +41,5 @@ export const dashboardMapDispatchToProps: MapDispatchToProps<
 > = (dispatch) => ({
   onRefresh: () => dispatch<any>(handleRefreshData()),
   onClickGoBack: () => dispatch(HOME()),
+  onMount: () => dispatch<any>(handleMount()),
 });
