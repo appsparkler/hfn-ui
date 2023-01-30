@@ -8,6 +8,20 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
   );
   const mode = localStorage.getItem(LocalStorageKeys.MODE);
   const isDarkMode = mode === "dark";
+  const batches = [
+    {
+      label: "Batch 1",
+      value: "batch-1",
+    },
+    {
+      label: "Batch 2",
+      value: "batch-2",
+    },
+    {
+      label: "Both Batches",
+      value: "both-batches",
+    },
+  ];
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
@@ -17,21 +31,8 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
-    batches: [
-      {
-        label: "Batch 1",
-        value: "batch-1",
-      },
-      {
-        label: "Batch 2",
-        value: "batch-2",
-      },
-      {
-        label: "Both Batches",
-        value: "both-batches",
-      },
-    ],
-    selectedBatch: "batch-1",
+    batches,
+    selectedBatch: batches[1].value,
   };
 };
 
