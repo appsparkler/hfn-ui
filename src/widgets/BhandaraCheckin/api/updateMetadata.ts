@@ -55,7 +55,7 @@ interface IPropsInEveryCheckinDoc {
   updatedInReport: boolean;
 }
 
-const updateMetaCountDocTransaction = async (
+const updateMetaCountDocTransaction = (
   checkinDocs: QuerySnapshot<IPropsInEveryCheckinDoc>,
   metaCountDocSnapshot: DocumentSnapshot<ICheckinsMetaData>,
   transaction: Transaction
@@ -125,7 +125,6 @@ const runUpdateAndGetMetadataTransaction =
       await setCheckinDocsWithTransaction(checkinDocs, transaction);
     });
     const metaCountData = await getMetaCountData();
-    // resolve(metaCountData);
     return metaCountData;
   };
 
