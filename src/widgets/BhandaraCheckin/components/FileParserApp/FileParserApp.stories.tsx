@@ -1,5 +1,6 @@
+import { CheckinTypesEnum } from "@hfn-checkins/types";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, writeBatch } from "firebase/firestore";
 import { firestoreDb } from "widgets/BhandaraCheckin/firebase";
 import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
 import { FileParserApp } from "./FileParserApp";
@@ -11,15 +12,30 @@ const Story = {
 
 const Template: ComponentStory<typeof FileParserApp> = (args) => {
   const SELECTED_SHEET = "Sorted";
-  const onData = (sheetName: string, data: Record<any, any>[]) => {
+  const batch = writeBatch(firestoreDb);
+  const handleData = async (sheetName: string, data: Record<any, any>[]) => {
     if (sheetName === SELECTED_SHEET) {
       const first10Items = data.slice(0, 10);
-      const docRef = doc(firestoreDb, FirestoreCollections.CHECKINS);
+      console.log(first10Items);
+      // first10Items.forEach((eachItem) => {
+      //   const uniqueId = eachItem.uniqueId;
+      //   const docRef = doc(
+      //     firestoreDb,
+      //     FirestoreCollections.CHECKINS,
+      //     uniqueId
+      //   );
+      //   batch.set(docRef, {
+      //     ...eachItem,
+      //     timestamp: Date.now(),
+      //     type: "FileUpload",
+      //   });
+      // });
+      // await batch.commit();
     }
   };
-  args.onData = onData;
+  args.onData = handleData;
 
-  return <FileParserApp {...args} />;
+  return <FileParserApp {...args} onData={handleData} />;
 };
 
 export const fileParserApp: ComponentStory<typeof FileParserApp> =

@@ -5,6 +5,7 @@ import {
   DocumentSnapshot,
   getDoc,
   getDocs,
+  limit,
   query,
   QuerySnapshot,
   runTransaction,
@@ -39,7 +40,7 @@ const getMetaCountSnapshotWithTransaction = async (
 
 const getCheckinsDocsNotUpdatedInReportSnapshot = async () => {
   const whereMetaIsNotUpdated = where(UPDATED_IN_REPORT, "!=", true);
-  const query_ = query(checkinsCollection, whereMetaIsNotUpdated);
+  const query_ = query(checkinsCollection, whereMetaIsNotUpdated, limit(450));
   const checkinDocsSnapshot = (await getDocs(query_)) as QuerySnapshot<{
     type: CheckinTypesEnum;
     [UPDATED_IN_REPORT]: boolean;
@@ -104,29 +105,24 @@ const ensureMetaCountDocExists = async () => {
 };
 
 const runUpdateAndGetMetadataTransaction =
-  async (): Promise<ICheckinsMetaData> =>
-    new Promise(async (resolve, reject) => {
-      // get meta-count doc (if it doesn't exist; create it and get it)
-      // get the checkin-docs that have updatedInReport = false
-      // update the count doc by getting information from checkin-docs
-      // set the checkins docs with merge
-      // return the updated meta count doc
-      await ensureMetaCountDocExists();
-      const checkinDocs = await getCheckinsDocsNotUpdatedInReportSnapshot();
-      await runTransaction(firestoreDb, async (transaction) => {
-        const metaCountDocSnapshot = await getMetaCountSnapshotWithTransaction(
-          transaction
-        );
-        await updateMetaCountDocTransaction(
-          checkinDocs,
-          metaCountDocSnapshot,
-          transaction
-        );
-        await setCheckinDocsWithTransaction(checkinDocs, transaction);
-      });
-      const metaCountData = await getMetaCountData();
-      resolve(metaCountData);
+  async (): Promise<ICheckinsMetaData> => {
+    await ensureMetaCountDocExists();
+    const checkinDocs = await getCheckinsDocsNotUpdatedInReportSnapshot();
+    await runTransaction(firestoreDb, async (transaction) => {
+      const metaCountDocSnapshot = await getMetaCountSnapshotWithTransaction(
+        transaction
+      );
+      await updateMetaCountDocTransaction(
+        checkinDocs,
+        metaCountDocSnapshot,
+        transaction
+      );
+      await setCheckinDocsWithTransaction(checkinDocs, transaction);
     });
+    const metaCountData = await getMetaCountData();
+    // resolve(metaCountData);
+    return metaCountData;
+  };
 
 const reduceCheckinsToMetaData = reduce<
   { type: CheckinTypesEnum; updatedInReportOnce?: boolean },
