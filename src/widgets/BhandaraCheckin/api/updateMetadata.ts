@@ -106,6 +106,11 @@ const ensureMetaCountDocExists = async () => {
 
 const runUpdateAndGetMetadataTransaction =
   async (): Promise<ICheckinsMetaData> => {
+    // get meta-count doc (if it doesn't exist; create it and get it)
+    // get the checkin-docs that have updatedInReport = false
+    // update the count doc by getting information from checkin-docs
+    // set the checkins docs with merge
+    // return the updated meta count doc
     await ensureMetaCountDocExists();
     const checkinDocs = await getCheckinsDocsNotUpdatedInReportSnapshot();
     await runTransaction(firestoreDb, async (transaction) => {
