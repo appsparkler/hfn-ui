@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { CheckinTypesEnum } from "@hfn-checkins/types";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { doc, setDoc, writeBatch } from "firebase/firestore";
