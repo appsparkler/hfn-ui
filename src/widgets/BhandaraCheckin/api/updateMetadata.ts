@@ -128,7 +128,7 @@ const reduceCheckinsToMetaData = reduce<
   { type: CheckinTypesEnum; [UPDATED_IN_REPORT_ONCE]?: boolean },
   ICheckinsMetaData
 >((acc, doc) => {
-  if (doc.updatedInReportOnce) return acc;
+  if (doc[UPDATED_IN_REPORT_ONCE]) return acc;
   switch (doc.type) {
     case CheckinTypesEnum.AbhyasiId:
       return {
