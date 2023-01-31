@@ -5,12 +5,12 @@ import {
   DocumentSnapshot,
   getDoc,
   getDocs,
+  limit,
   query,
   QuerySnapshot,
   runTransaction,
   setDoc,
   Transaction,
-  updateDoc,
   where,
 } from "firebase/firestore";
 import { reduce } from "lodash/fp";
@@ -25,36 +25,35 @@ const UPDATED_IN_REPORT = "updatedInReport";
 
 const UPDATED_IN_REPORT_ONCE = "updatedInReportOnce";
 
+const QUERY_LIMIT = 450;
+
 const metaCountDocRef = doc(
   firestoreDb,
   `${FirestoreCollections.META}/count`
 ) as DocumentReference<ICheckinsMetaData>;
 
-const getMetaCountSnapshotWithTransaction = async (
-  transaction: Transaction
-): Promise<DocumentSnapshot<ICheckinsMetaData>> => {
-  const metaDataCountSnapshot = await transaction.get(metaCountDocRef);
-  return metaDataCountSnapshot;
-};
-
 const getCheckinsDocsNotUpdatedInReportSnapshot = async () => {
   const whereMetaIsNotUpdated = where(UPDATED_IN_REPORT, "!=", true);
-  const query_ = query(checkinsCollection, whereMetaIsNotUpdated);
+  const query_ = query(
+    checkinsCollection,
+    whereMetaIsNotUpdated,
+    limit(QUERY_LIMIT)
+  );
   const checkinDocsSnapshot = (await getDocs(query_)) as QuerySnapshot<{
     type: CheckinTypesEnum;
     [UPDATED_IN_REPORT]: boolean;
-    updatedInReportOnce: boolean;
+    [UPDATED_IN_REPORT_ONCE]: boolean;
   }>;
   return checkinDocsSnapshot;
 };
 
 interface IPropsInEveryCheckinDoc {
   type: CheckinTypesEnum;
-  updatedInReportOnce: boolean;
-  updatedInReport: boolean;
+  [UPDATED_IN_REPORT_ONCE]: boolean;
+  [UPDATED_IN_REPORT]: boolean;
 }
 
-const updateMetaCountDocTransaction = async (
+const updateMetaCountDocTransaction = (
   checkinDocs: QuerySnapshot<IPropsInEveryCheckinDoc>,
   metaCountDocSnapshot: DocumentSnapshot<ICheckinsMetaData>,
   transaction: Transaction
@@ -72,14 +71,14 @@ const updateMetaCountDocTransaction = async (
   transaction.set(metaCountDocRef, { ...updatedMetaCountDoc });
 };
 
-const setCheckinDocsWithTransaction = async (
+const setCheckinDocsWithTransaction = (
   checkinDocs: QuerySnapshot<IPropsInEveryCheckinDoc>,
   transaction: Transaction
 ) => {
-  await checkinDocs.docs.map((doc) => {
-    return transaction.set(
+  checkinDocs.docs.forEach((doc) => {
+    transaction.set(
       doc.ref,
-      { updatedInReport: true, updatedInReportOnce: true },
+      { [UPDATED_IN_REPORT]: true, [UPDATED_IN_REPORT_ONCE]: true },
       { merge: true }
     );
   });
@@ -104,35 +103,32 @@ const ensureMetaCountDocExists = async () => {
 };
 
 const runUpdateAndGetMetadataTransaction =
-  async (): Promise<ICheckinsMetaData> =>
-    new Promise(async (resolve, reject) => {
-      // get meta-count doc (if it doesn't exist; create it and get it)
-      // get the checkin-docs that have updatedInReport = false
-      // update the count doc by getting information from checkin-docs
-      // set the checkins docs with merge
-      // return the updated meta count doc
-      await ensureMetaCountDocExists();
-      const checkinDocs = await getCheckinsDocsNotUpdatedInReportSnapshot();
-      await runTransaction(firestoreDb, async (transaction) => {
-        const metaCountDocSnapshot = await getMetaCountSnapshotWithTransaction(
-          transaction
-        );
-        await updateMetaCountDocTransaction(
-          checkinDocs,
-          metaCountDocSnapshot,
-          transaction
-        );
-        await setCheckinDocsWithTransaction(checkinDocs, transaction);
-      });
-      const metaCountData = await getMetaCountData();
-      resolve(metaCountData);
+  async (): Promise<ICheckinsMetaData> => {
+    // get meta-count doc (if it doesn't exist; create it and get it)
+    // get the checkin-docs that have updatedInReport = false
+    // update the count doc by getting information from checkin-docs
+    // set the checkins docs with merge
+    // return the updated meta count doc
+    await ensureMetaCountDocExists();
+    const checkinDocs = await getCheckinsDocsNotUpdatedInReportSnapshot();
+    await runTransaction(firestoreDb, async (transaction) => {
+      const metaCountDocSnapshot = await transaction.get(metaCountDocRef);
+      updateMetaCountDocTransaction(
+        checkinDocs,
+        metaCountDocSnapshot,
+        transaction
+      );
+      setCheckinDocsWithTransaction(checkinDocs, transaction);
     });
+    const metaCountData = await getMetaCountData();
+    return metaCountData;
+  };
 
 const reduceCheckinsToMetaData = reduce<
-  { type: CheckinTypesEnum; updatedInReportOnce?: boolean },
+  { type: CheckinTypesEnum; [UPDATED_IN_REPORT_ONCE]?: boolean },
   ICheckinsMetaData
 >((acc, doc) => {
-  if (doc.updatedInReportOnce) return acc;
+  if (doc[UPDATED_IN_REPORT_ONCE]) return acc;
   switch (doc.type) {
     case CheckinTypesEnum.AbhyasiId:
       return {
@@ -151,41 +147,6 @@ const reduceCheckinsToMetaData = reduce<
       };
   }
 });
-
-export const updateMetaCountDoc = async (
-  snapshot: DocumentSnapshot<ICheckinsMetaData>
-) => {
-  try {
-    const currentMetaCountData = snapshot.data()!;
-    const whereMetaIsNotUpdated = where(UPDATED_IN_REPORT, "!=", true);
-    const query_ = query(checkinsCollection, whereMetaIsNotUpdated);
-    const checkinDocsSnapshot = (await getDocs(query_)) as QuerySnapshot<{
-      type: CheckinTypesEnum;
-      [UPDATED_IN_REPORT]: boolean;
-      updatedInReportOnce: boolean;
-    }>;
-    const checkins = checkinDocsSnapshot.docs.map((doc) => doc.data());
-    const updatedCheckins =
-      reduceCheckinsToMetaData(currentMetaCountData)(checkins);
-    await updateDoc(snapshot.ref, updatedCheckins);
-
-    // Update the checkin docs
-    const promisesToUpdateCheckinDocs = checkinDocsSnapshot.docs.map(
-      async (doc) => {
-        await updateDoc(doc.ref, {
-          [UPDATED_IN_REPORT]: true,
-          [UPDATED_IN_REPORT_ONCE]: true,
-        });
-      }
-    );
-    await Promise.all(promisesToUpdateCheckinDocs);
-
-    return updatedCheckins;
-  } catch (error) {
-    console.log(error);
-    return {} as ICheckinsMetaData;
-  }
-};
 
 export const updateMetadata: BhandaraCheckinAPIs["updateMetadata"] =
   async () => {
