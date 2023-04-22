@@ -48,12 +48,12 @@ export const SectionCheckinSuccess = ({
       paddingX={1}
       maxWidth={maxWidth}
     >
+      <img
+        src={textStrings.hfn_logo_imgUrl}
+        alt={textStrings.hfn_logo_alt}
+        width="280"
+      />
       <Vertical alignItems={"center"}>
-        <img
-          src={textStrings.hfn_logo_imgUrl}
-          alt={textStrings.hfn_logo_alt}
-          width="200"
-        />
         <CheckCircleIcon color="success" sx={{ fontSize: 80 }} />
         <Typography variant="h5">{`Checked In`}</Typography>
       </Vertical>
