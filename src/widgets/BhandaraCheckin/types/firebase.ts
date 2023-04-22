@@ -1,7 +1,7 @@
-import { batchName } from "../constants";
+import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const FirestoreCollections = {
-  CHECKINS: `events/${batchName}/checkins`,
+  CHECKINS: textStrings.getCheckinsCollectionPath(),
   META: "meta",
 };
 
