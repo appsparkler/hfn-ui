@@ -1,8 +1,4 @@
-import {
-  ModeSwitchDispatchProps,
-  OptionValue,
-  SelectFieldOption,
-} from "components";
+import { ModeSwitchDispatchProps } from "components";
 import { ReturnVoid } from "types";
 import { Env } from "../env";
 
@@ -16,8 +12,6 @@ export interface SectionMainStateProps {
   isScannerOn?: boolean;
   scanBtnDisabled?: boolean;
   scanBtnProcessing?: boolean;
-  batches: SelectFieldOption[];
-  selectedBatch: OptionValue;
 }
 
 export interface SectionMainDispatchProps {
@@ -29,7 +23,6 @@ export interface SectionMainDispatchProps {
   onSwitchScanner?: (checked: boolean) => void;
   onMount?: () => void;
   onRefresh?: ReturnVoid;
-  onChangeBatch: (name: string, value: OptionValue) => void;
 }
 
 export type SectionMainProps = SectionMainStateProps & SectionMainDispatchProps;

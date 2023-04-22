@@ -49,14 +49,13 @@ export const CustomMenu = ({
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",
           },
         }}
       >
         {/* <MenuItem onClick={handleClose(onClickOfflineData)}>
           Offline Data
         </MenuItem> */}
-        <MenuItem onClick={handleClose(onClickDashboard)}>Dashboard</MenuItem>
+        {/* <MenuItem onClick={handleClose(onClickDashboard)}>Dashboard</MenuItem> */}
         <MenuItem onClick={handleClose(onRefreshApp)}>Refresh App</MenuItem>
       </Menu>
     </div>

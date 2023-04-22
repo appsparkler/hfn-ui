@@ -10,7 +10,7 @@ import { checkinWithAbhyasiId } from "../../api-async-thunks";
 import { mainSectionActions, snackbarActions } from "../../slices";
 import { abhyasiIdCheckinScreenActions } from "../../slices/abhyasiIdCheckinScreen";
 import { RootState } from "widgets/BhandaraCheckin/store";
-import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
+import { ErrorCodes, textStrings } from "widgets/BhandaraCheckin/constants";
 
 const handleCheckinWithAbhyasiId = createAsyncThunk<
   void,
@@ -20,12 +20,11 @@ const handleCheckinWithAbhyasiId = createAsyncThunk<
   const rootState = getState() as unknown as RootState;
   const { abhyasiId, dormAndBerthAllocation } =
     rootState.abhyasiIdCheckinScreen;
-  const { selectedBatch } = rootState.mainSection;
   const res = await dispatch<any>(
     checkinWithAbhyasiId({
       abhyasiId,
       dormAndBerthAllocation,
-      batch: String(selectedBatch),
+      batch: textStrings.batchName,
     })
   );
   if (res.meta.requestStatus === "fulfilled") {

@@ -6,7 +6,6 @@ import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { FormUserDetails, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
-import { RootState } from "../..";
 import {
   checkinWithEmailOrMobile,
   isUserCheckedIn,
@@ -17,6 +16,7 @@ import {
   updateDetailsActions,
 } from "../../slices";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
@@ -53,8 +53,6 @@ const onClickCheckinAction = createAsyncThunk<
       dormAndBerthAllocation,
     } = $userDetails;
 
-    const { selectedBatch } = (getState() as RootState).mainSection;
-
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
       email: String(email.value?.toLowerCase()),
@@ -65,7 +63,7 @@ const onClickCheckinAction = createAsyncThunk<
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
       dormAndBerthAllocation: String(dormAndBerthAllocation.value),
-      eventName: String(selectedBatch),
+      eventName: textStrings.batchName,
     };
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)
