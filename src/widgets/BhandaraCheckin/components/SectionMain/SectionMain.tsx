@@ -13,16 +13,14 @@ import {
   CenterOfViewport,
   Horizontal,
   Vertical,
-  SelectField,
 } from "components";
 import { ClickHandler, InputChangeHandler } from "types";
 import { isAbhyasiId, isEmail, isMobile } from "utils";
-import { maxWidth } from "widgets/BhandaraCheckin/constants";
+import { maxWidth, textStrings } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
 import { SectionMainProps } from "widgets/BhandaraCheckin/types";
 import { QrCode2 } from "@mui/icons-material";
-import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const SectionMain = ({
   env,
@@ -42,9 +40,6 @@ export const SectionMain = ({
   error,
   helperText,
   value = "",
-  batches,
-  selectedBatch,
-  onChangeBatch,
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
@@ -54,8 +49,8 @@ export const SectionMain = ({
   );
 
   const isStartButtonEnabled = useMemo(
-    () => isValidValue && !isProcessing && !!selectedBatch,
-    [isProcessing, isValidValue, selectedBatch]
+    () => isValidValue && !isProcessing,
+    [isProcessing, isValidValue]
   );
 
   const handleChange = useCallback<InputChangeHandler>(
@@ -85,24 +80,14 @@ export const SectionMain = ({
     <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} p={1}>
       <Vertical marginTop={1} display="flex" alignItems={"center"}>
         <img
-          src="150logo_gold.png"
-          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
-          width="200"
+          src={textStrings.hfn_logo_imgUrl}
+          alt={textStrings.hfn_logo_alt}
+          width="320"
         />
-        <Typography variant="h4" color="goldenrod" align="center">
-          Golden Book Registration
+        <Typography variant="h4" align="center">
+          Preceptor Seminar Checkin
         </Typography>
       </Vertical>
-      <SelectField
-        label="Batch"
-        labelId="bhandara-batch"
-        name="selectedBatch"
-        onChange={onChangeBatch}
-        value={selectedBatch}
-        required
-        options={batches}
-        fullWidth
-      />
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"

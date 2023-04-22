@@ -19,18 +19,4 @@ main.args = {
   isScannerOn: true,
   scanBtnDisabled: false,
   scanBtnProcessing: false,
-  batches: [
-    {
-      label: "Batch 1",
-      value: "batch-1",
-    },
-    {
-      label: "Batch 2",
-      value: "batch-2",
-    },
-    {
-      label: "Both Batches",
-      value: "both-batches",
-    },
-  ],
 };

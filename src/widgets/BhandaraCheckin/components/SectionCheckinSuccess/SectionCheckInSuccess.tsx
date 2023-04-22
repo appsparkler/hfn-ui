@@ -50,8 +50,8 @@ export const SectionCheckinSuccess = ({
     >
       <Vertical alignItems={"center"}>
         <img
-          src="150logo_gold.png"
-          alt={textStrings.LALAJI_LOGO_ALT_TEXT}
+          src={textStrings.hfn_logo_imgUrl}
+          alt={textStrings.hfn_logo_alt}
           width="200"
         />
         <CheckCircleIcon color="success" sx={{ fontSize: 80 }} />

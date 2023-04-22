@@ -1,5 +1,7 @@
+import { batchName } from "../constants";
+
 export const FirestoreCollections = {
-  CHECKINS: "checkins",
+  CHECKINS: `events/${batchName}/checkins`,
   META: "meta",
 };
 

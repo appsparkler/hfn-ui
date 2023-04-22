@@ -15,6 +15,7 @@ import { filter, map, pipe } from "lodash/fp";
 import { CheckinTypesEnum, IQRCheckinUser } from "@hfn-checkins/types";
 import { multiCheckinWithQRCode } from "../../api-async-thunks";
 import { CHECKIN_SUCCESS } from "widgets/BhandaraCheckin/routing/actions/page";
+import { batchName } from "widgets/BhandaraCheckin/constants";
 
 export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   MultiCheckinScreenDispatchProps,
@@ -36,10 +37,10 @@ const onClickCheckinAction =
   () => async (dispatch: Dispatch, getState: () => RootState) => {
     const rootState = getState();
     const { userData, eventInfo } = rootState.multiCheckinScreen;
-    const { selectedBatch } = rootState.mainSection;
+    // const { selectedBatch } = rootState.mainSection;
     const apiData = getAPIDataFromCheckinTileInfo(
       eventInfo,
-      String(selectedBatch)
+      batchName
     )(userData);
     dispatch<any>(multiCheckinWithQRCode(apiData));
     dispatch(CHECKIN_SUCCESS());
