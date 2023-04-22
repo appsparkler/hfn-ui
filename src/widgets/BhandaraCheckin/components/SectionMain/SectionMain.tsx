@@ -77,17 +77,15 @@ export const SectionMain = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport gap={3} width={"100%"} maxWidth={maxWidth} p={1}>
-      <Vertical marginTop={1} display="flex" alignItems={"center"}>
-        <img
-          src={textStrings.hfn_logo_imgUrl}
-          alt={textStrings.hfn_logo_alt}
-          width="320"
-        />
-        <Typography variant="h4" align="center">
-          Preceptor Seminar Checkin
-        </Typography>
-      </Vertical>
+    <CenterOfViewport gap={2} width={"100%"} maxWidth={maxWidth} p={1}>
+      <img
+        src={textStrings.hfn_logo_imgUrl}
+        alt={textStrings.hfn_logo_alt}
+        width="320"
+      />
+      <Typography variant="h4" align="center">
+        Preceptor Seminar Checkin
+      </Typography>
       <TextField
         type="text"
         label="Abhyasi ID / Mobile # / Email"
@@ -113,6 +111,7 @@ export const SectionMain = ({
           onClick={handleClickStart}
           disabled={!isStartButtonEnabled}
           isProcessing={isProcessing}
+          size="large"
         >
           START CHECK IN
         </AsyncButton>
@@ -122,7 +121,8 @@ export const SectionMain = ({
           disabled={scanBtnProcessing || scanBtnDisabled}
           isProcessing={scanBtnProcessing}
           onClick={onClickScan}
-          endIcon={<QrCode2 />}
+          size="large"
+          endIcon={<QrCode2 fontSize="medium" />}
         ></AsyncButton>
       </Horizontal>
 
@@ -154,8 +154,8 @@ export const SectionMain = ({
 const BarcodeSVG = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="24"
+    height="24"
     fill="currentColor"
     viewBox="0 0 16 16"
   >
