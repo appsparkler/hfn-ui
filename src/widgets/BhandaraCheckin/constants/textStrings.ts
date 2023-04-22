@@ -1,5 +1,3 @@
-export const batchName = "20230426_preceptor_seminar";
-
 export const textStrings = {
   batchName: "20230426_preceptor_seminar",
   hfn_logo_imgUrl: "heartfulness_blue.png",

@@ -16,7 +16,7 @@ import {
   updateDetailsActions,
 } from "../../slices";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { batchName } from "widgets/BhandaraCheckin/constants";
+import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
@@ -63,7 +63,7 @@ const onClickCheckinAction = createAsyncThunk<
       mobile: String(mobile.value),
       fullName: String(fullName.value?.toUpperCase()),
       dormAndBerthAllocation: String(dormAndBerthAllocation.value),
-      eventName: batchName,
+      eventName: textStrings.batchName,
     };
     const isUserCheckedInRes = await dispatch<any>(
       isUserCheckedIn(userDetails)
