@@ -6,7 +6,6 @@ import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { FormUserDetails, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
-import { RootState } from "../..";
 import {
   checkinWithEmailOrMobile,
   isUserCheckedIn,
