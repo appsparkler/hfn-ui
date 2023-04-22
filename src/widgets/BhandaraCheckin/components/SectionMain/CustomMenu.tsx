@@ -56,7 +56,7 @@ export const CustomMenu = ({
         {/* <MenuItem onClick={handleClose(onClickOfflineData)}>
           Offline Data
         </MenuItem> */}
-        <MenuItem onClick={handleClose(onClickDashboard)}>Dashboard</MenuItem>
+        {/* <MenuItem onClick={handleClose(onClickDashboard)}>Dashboard</MenuItem> */}
         <MenuItem onClick={handleClose(onRefreshApp)}>Refresh App</MenuItem>
       </Menu>
     </div>
