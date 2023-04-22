@@ -1,5 +1,7 @@
+import { textStrings } from "widgets/BhandaraCheckin/constants";
+
 export const FirestoreCollections = {
-  CHECKINS: "checkins",
+  CHECKINS: textStrings.getCheckinsCollectionPath(),
   META: "meta",
 };
 

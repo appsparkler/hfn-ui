@@ -57,9 +57,6 @@ export const mapDispatchToProps: MapDispatchToProps<
     }
   },
   onSwitchScanner: (checked) => dispatch<any>(handleSwitchScanner(checked)),
-  onChangeBatch: (_name, value) => {
-    dispatch(mainSectionActions.setBatch(String(value)));
-  },
   onClickDashboard: () => dispatch(DASHBOARD()),
 });
 

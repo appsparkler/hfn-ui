@@ -8,20 +8,6 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
   );
   const mode = localStorage.getItem(LocalStorageKeys.MODE);
   const isDarkMode = mode === "dark";
-  const batches = [
-    {
-      label: "Batch 1",
-      value: "batch-1",
-    },
-    {
-      label: "Batch 2",
-      value: "batch-2",
-    },
-    {
-      label: "Both Batches",
-      value: "both-batches",
-    },
-  ];
   return {
     value: "",
     helperText: "For mobile, please use country code.  For ex. +91868...",
@@ -31,8 +17,6 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
-    batches,
-    selectedBatch: batches[1].value,
   };
 };
 
@@ -42,9 +26,6 @@ const mainSectionSlice = createSlice({
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
-    },
-    setBatch: (state, { payload }: { payload: string }) => {
-      state.selectedBatch = payload;
     },
     setDarkMode: (state) => {
       state.isDarkMode = true;
