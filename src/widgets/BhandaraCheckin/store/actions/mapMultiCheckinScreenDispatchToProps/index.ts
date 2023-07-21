@@ -12,7 +12,7 @@ import {
 } from "widgets/BhandaraCheckin/store";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { filter, map, pipe } from "lodash/fp";
-import { CheckinTypesEnum, IQRCheckinUser } from "@hfn-checkins/types";
+import { CheckinTypesEnum, IQRCheckinUser } from "widgets/BhandaraCheckin/types";
 import { multiCheckinWithQRCode } from "../../api-async-thunks";
 import { CHECKIN_SUCCESS } from "widgets/BhandaraCheckin/routing/actions/page";
 import { textStrings } from "widgets/BhandaraCheckin/constants";

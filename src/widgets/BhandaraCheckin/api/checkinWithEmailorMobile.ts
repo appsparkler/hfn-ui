@@ -5,7 +5,7 @@ import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import {
   CheckinTypesEnum,
   CheckinWithEmailOrMobileApiStoreData,
-} from "@hfn-checkins/types";
+} from "widgets/BhandaraCheckin/types";
 
 export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
   attendee

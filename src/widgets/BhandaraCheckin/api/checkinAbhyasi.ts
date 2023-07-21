@@ -5,7 +5,7 @@ import { setDoc } from "firebase/firestore";
 import {
   CheckinTypesEnum,
   IAbhyasiCheckinApiStoreData,
-} from "@hfn-checkins/types";
+} from "widgets/BhandaraCheckin/types";
 
 let checkedInAbhyasis: string[] = [];
 

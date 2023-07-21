@@ -1,9 +1,8 @@
 import {
   CheckinEmailOrMobileUserDetails,
-  ICheckinsAggregateData,
   IAbhyasiCheckinApiStoreData,
   IQRCheckinUser,
-} from "@hfn-checkins/types";
+} from "widgets/BhandaraCheckin/types";
 import { noop } from "lodash/fp";
 import { ICheckinsMetaData } from "./firebase";
 
@@ -30,10 +29,6 @@ export interface IsAbhyasiCheckedInApi {
 
 export interface IsUserAlreadyCheckedInApi {
   (user: CheckinEmailOrMobileUserDetails): Promise<boolean>;
-}
-
-export interface GetDashboardDataApi {
-  (): Promise<ICheckinsAggregateData>;
 }
 
 export interface GetAppVersion {

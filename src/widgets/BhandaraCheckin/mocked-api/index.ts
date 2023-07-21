@@ -3,7 +3,7 @@ import {
   CheckinWithEmailOrMobileApiStoreData,
   IAbhyasiCheckinApiStoreData,
   IQRCheckinUser,
-} from "@hfn-checkins/types";
+} from "widgets/BhandaraCheckin/types";
 import { delay } from "lodash/fp";
 import { BhandaraCheckinAPIs, ICheckinsMetaData } from "../types";
 
