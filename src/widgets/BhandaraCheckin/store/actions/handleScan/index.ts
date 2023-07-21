@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId } from "utils";
 import { MULTI_CHECKIN_SCREEN } from "widgets/BhandaraCheckin/routing/actions/page";
-import { IQRUserInfo, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { IQRUserInfo, PNRType, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 import { IQREventInfo } from "widgets/BhandaraCheckin/types";
 import { RootState } from "../..";
 import {
@@ -11,12 +11,45 @@ import {
 } from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
 
+export const getPNRType = (str: string): PNRType | void => {
+  const [, part2, part3] = str.split("|");
+  if (part3.match(/[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/))
+    return PNRType.FREE_ACCOMODATION;
+  if (part2.match(/[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/))
+    return PNRType.PAID_ACCOMODATION;
+};
+
+export function getEventInfo(
+    scannedValue: string
+  ): IQREventInfo {
+    const [eventInfoRow] = scannedValue.split(";");
+    const pnrType = getPNRType(eventInfoRow);
+    if (pnrType === PNRType.FREE_ACCOMODATION) {
+      const [eventName, session, pnr] = eventInfoRow.split("|");
+      return {
+        eventName,
+        session: session.trim(),
+        pnr: pnr.trim(),
+        pnrType: PNRType.FREE_ACCOMODATION,
+      };
+    }
+    const [eventName, pnr, eventId] = eventInfoRow.split("|");
+    const eventInfo: IQREventInfo = {
+      eventName,
+      eventId,
+      pnr,
+      pnrType: PNRType.PAID_ACCOMODATION,
+    };
+    return eventInfo;
+  }
+
 const refineScannedValue = (value: string) => value.replace(/\n/g, "");
 
 const isValidQRCode = (scannedValue: string) => {
   try {
-    const users = getUsers(scannedValue);
     const eventInfo = getEventInfo(scannedValue);
+    const users = getUsers(scannedValue);
+    
     if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
       return true;
     }
@@ -35,6 +68,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     const refinedValue = scannedValue.trim();
     const isScannerShown = rootState.barcodeScanner.show;
     if (isScannerShown && isValidQRCode(refinedValue)) {
+      alert("qr is valid")
       dispatch(barcodeScannerActions.hide());
       dispatch(
         multiCheckinScreenActions.setData({
@@ -80,15 +114,4 @@ function getUsers(scannedValue: string): IQRUserInfo[] {
     (user) => !!user.abhyasiId || !!user.regId || !!user.fullName
   );
   return filteredUsers;
-}
-
-function getEventInfo(scannedValue: string): IQREventInfo {
-  const [eventInfoRow] = scannedValue.split(";");
-  const [eventName, pnr, eventId] = eventInfoRow.split("|");
-  const eventInfo: IQREventInfo = {
-    eventName,
-    eventId,
-    pnr,
-  };
-  return eventInfo;
 }
