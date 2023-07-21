@@ -7,7 +7,7 @@ import { QrCode2 } from "@mui/icons-material";
 
 export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
   userData,
-  eventInfo: { eventId, eventName, pnr },
+  eventInfo: { eventName, pnr },
   onClickCheckin,
   onClickCancel,
   onChangeData,

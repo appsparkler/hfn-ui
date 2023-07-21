@@ -33,11 +33,11 @@ export function getEventInfo(
         pnrType: PNRType.FREE_ACCOMODATION,
       };
     }
-    const [eventName, pnr, eventId] = eventInfoRow.split("|");
+    const [eventName, pnr, orderId] = eventInfoRow.split("|");
     const eventInfo: IQREventInfo = {
-      eventName,
-      eventId,
-      pnr,
+      eventName: eventName.trim(),
+      orderId: orderId.trim(),
+      pnr: pnr.trim(),
       pnrType: PNRType.PAID_ACCOMODATION,
     };
     return eventInfo;
@@ -68,7 +68,6 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     const refinedValue = scannedValue.trim();
     const isScannerShown = rootState.barcodeScanner.show;
     if (isScannerShown && isValidQRCode(refinedValue)) {
-      alert("qr is valid")
       dispatch(barcodeScannerActions.hide());
       dispatch(
         multiCheckinScreenActions.setData({

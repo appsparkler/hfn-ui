@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useCallback, useState } from "react";
-import { MultiCheckinScreenProps } from "widgets/BhandaraCheckin/types";
+import {
+  MultiCheckinScreenProps,
+  PNRType,
+} from "widgets/BhandaraCheckin/types";
 import { MultiCheckinScreen } from "./MultiCheckinScreen";
 
 const Story = {
@@ -34,9 +37,10 @@ export const multiCheckinScreen: ComponentStory<typeof MultiCheckinScreen> =
   Template.bind({});
 multiCheckinScreen.args = {
   eventInfo: {
-    eventId: "383821",
+    orderId: "383821",
     eventName: "Bhandara 2021",
     pnr: "AE-IDDK-IWQ",
+    pnrType: PNRType.PAID_ACCOMODATION,
   },
   userData: [
     {

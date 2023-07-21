@@ -19,7 +19,7 @@ describe("getEventInfo", () => {
   it("should return the eventInfo for PAID ACCOMODATION", () => {
     expect(getEventInfo(PAID_ACCOMODATION_TYPE_EXAMPLE)).toEqual({
       eventName: "96th Birth Anniversary of Pujya Shri Chariji Maharaj",
-      eventId: "4461",
+      orderId: "4461",
       pnr: "MA-ICJM-MGSX",
       pnrType: 1,
     });

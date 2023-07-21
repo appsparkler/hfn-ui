@@ -5,14 +5,16 @@ import {
   IQRUserInfo,
   MultiCheckinScreenStateProps,
   ICheckinTileInfo,
+  PNRType,
 } from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
   userData: [],
   eventInfo: {
-    eventId: "",
     eventName: "",
     pnr: "",
+    session: "Bhandara",
+    pnrType: PNRType.FREE_ACCOMODATION
   },
 });
 

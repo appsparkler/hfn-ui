@@ -13,7 +13,7 @@ export interface IFreeAccomodationQR {
 export interface IPaidAccomodationQR {
   eventName: string;
   pnr: string;
-  eventId: string;
+  orderId: string;
   pnrType: PNRType.PAID_ACCOMODATION
 }
 
