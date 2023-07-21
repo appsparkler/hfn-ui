@@ -8,11 +8,7 @@ import { CustomMenuProps } from "widgets/BhandaraCheckin/types";
 
 const ITEM_HEIGHT = 48;
 
-export const CustomMenu = ({
-  onRefreshApp = noop,
-  // onClickOfflineData = noop,
-  onClickDashboard = noop,
-}: CustomMenuProps) => {
+export const CustomMenu = ({ onRefreshApp = noop }: CustomMenuProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -52,10 +48,6 @@ export const CustomMenu = ({
           },
         }}
       >
-        {/* <MenuItem onClick={handleClose(onClickOfflineData)}>
-          Offline Data
-        </MenuItem> */}
-        {/* <MenuItem onClick={handleClose(onClickDashboard)}>Dashboard</MenuItem> */}
         <MenuItem onClick={handleClose(onRefreshApp)}>Refresh App</MenuItem>
       </Menu>
     </div>

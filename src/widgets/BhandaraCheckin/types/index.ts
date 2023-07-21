@@ -7,3 +7,4 @@ export * from "./env";
 export * from "./components";
 export * from "./screens";
 export * from "./QRData";
+export * from './hfn-checkins-types'

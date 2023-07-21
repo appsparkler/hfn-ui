@@ -1,4 +1,4 @@
-import { CheckinTypesEnum } from "@hfn-checkins/types";
+import { CheckinTypesEnum } from "widgets/BhandaraCheckin/types";
 import {
   doc,
   DocumentReference,

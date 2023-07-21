@@ -1,4 +1,4 @@
-import { CheckinEmailOrMobileUserDetails } from "@hfn-checkins/types";
+import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";

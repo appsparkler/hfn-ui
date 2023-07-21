@@ -1,4 +1,4 @@
-import { IQRCheckinUser } from "@hfn-checkins/types";
+import { IQRCheckinUser } from "widgets/BhandaraCheckin/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 

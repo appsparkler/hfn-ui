@@ -59,7 +59,7 @@ Copy paste `.env.development > .env.production.local` and run `yarn deploy --pro
 
 ## DEPLOYMENT REQUIREMENTS
 
-- [ ] Update Firebase Rules
+- [ ] Update Firebase Rules - ensure the event-key in codebase matches with that in the rules.
 - [ ] Ensure Environment Variables are set
 - [ ] Update `meta/app/version` in Firestore
 - [ ] Ensure `firebase apis` are used instead of `api-mocked`

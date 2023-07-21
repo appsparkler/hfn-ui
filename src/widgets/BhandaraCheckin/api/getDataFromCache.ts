@@ -4,7 +4,7 @@ import {
   GetDataFromCacheApi,
   OfflineCacheData,
 } from "widgets/BhandaraCheckin/types";
-import { IAbhyasiCheckinApiStoreData } from "@hfn-checkins/types";
+import { IAbhyasiCheckinApiStoreData } from "widgets/BhandaraCheckin/types";
 
 export const getDataFromCache: GetDataFromCacheApi = async () => {
   try {

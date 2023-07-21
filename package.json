@@ -12,7 +12,6 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@hfn-checkins/types": "^3.0.23",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
     "@reduxjs/toolkit": "^1.8.1",
@@ -36,7 +35,7 @@
     "build": "react-scripts build",
     "build:serve": "yarn build && yarn serve build -l 5000",
     "start-remote-app": "ngrok http 3000",
-    "test": "react-scripts test",
+    "test": "DOTENV_CONFIG_PATH=.env.test react-scripts test --setupFiles dotenv/config",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
@@ -110,7 +109,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "serve": "^14.0.1",
     "tsc-alias": "^1.6.5",
-    "typescript": "^4.6.2",
+    "typescript": "4.6.2",
     "web-vitals": "^2.1.4",
     "webpack": "^5.70.0"
   }

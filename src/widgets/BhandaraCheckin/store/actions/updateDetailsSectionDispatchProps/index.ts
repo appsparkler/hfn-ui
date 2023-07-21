@@ -1,7 +1,7 @@
 import {
   CheckinEmailOrMobileUserDetails,
   GenderType,
-} from "@hfn-checkins/types";
+} from "widgets/BhandaraCheckin/types";
 import { MapDispatchToProps } from "react-redux";
 import { SectionUpdateDetailsDispatchProps } from "widgets/BhandaraCheckin/components/SectionUpdateDetails/SectionUpdateDetails";
 import { pageActions } from "widgets/BhandaraCheckin/routing";

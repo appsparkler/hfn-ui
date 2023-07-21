@@ -5,7 +5,7 @@ import {
   CheckinTypesEnum,
   ICheckinWIthQRApiStoreData,
   IQRCheckinUser,
-} from "@hfn-checkins/types";
+} from "widgets/BhandaraCheckin/types";
 import { CheckinWithQRApi } from "../types/apis";
 import { forEach, map } from "lodash/fp";
 

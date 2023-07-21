@@ -23,7 +23,6 @@ import { SectionMainProps } from "widgets/BhandaraCheckin/types";
 import { QrCode2 } from "@mui/icons-material";
 
 export const SectionMain = ({
-  env,
   onClickStart,
   onChange,
   onSwitchMode,
@@ -84,7 +83,7 @@ export const SectionMain = ({
         width="320"
       />
       <Typography variant="h4" align="center">
-        Preceptor Seminar Checkin
+        {textStrings.eventTitle}
       </Typography>
       <TextField
         type="text"

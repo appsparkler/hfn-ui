@@ -4,6 +4,7 @@ import {
   ICheckinTileInfo,
   IQREventInfo,
   MultiCheckinScreenDispatchProps,
+  PNRType,
 } from "widgets/BhandaraCheckin/types";
 import {
   mainSectionActions,
@@ -12,10 +13,9 @@ import {
 } from "widgets/BhandaraCheckin/store";
 import { pageActions } from "widgets/BhandaraCheckin/routing";
 import { filter, map, pipe } from "lodash/fp";
-import { CheckinTypesEnum, IQRCheckinUser } from "@hfn-checkins/types";
+import { CheckinTypesEnum, IQRCheckinUser } from "widgets/BhandaraCheckin/types";
 import { multiCheckinWithQRCode } from "../../api-async-thunks";
 import { CHECKIN_SUCCESS } from "widgets/BhandaraCheckin/routing/actions/page";
-import { textStrings } from "widgets/BhandaraCheckin/constants";
 
 export const mapMultiCheckinScreenDispatchToProps: MapDispatchToProps<
   MultiCheckinScreenDispatchProps,
@@ -39,7 +39,6 @@ const onClickCheckinAction =
     const { userData, eventInfo } = rootState.multiCheckinScreen;
     const apiData = getAPIDataFromCheckinTileInfo(
       eventInfo,
-      textStrings.batchName
     )(userData);
     dispatch<any>(multiCheckinWithQRCode(apiData));
     dispatch(CHECKIN_SUCCESS());
@@ -49,9 +48,11 @@ const filterOutUnChecked = filter<ICheckinTileInfo>(
   (checkin) => checkin.checked
 );
 
-const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo, batch: string) =>
+const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo) =>
   map<ICheckinTileInfo, IQRCheckinUser>((tileInfo) => ({
     abhyasiId: tileInfo.abhyasiId,
+    orderId: eventInfo.pnrType === PNRType.PAID_ACCOMODATION ? Number(eventInfo.orderId) : undefined,
+    session: eventInfo.pnrType === PNRType.FREE_ACCOMODATION ? eventInfo.session : undefined,
     dormAndBerthAllocation: String(tileInfo.dormAllocation),
     fullName: tileInfo.fullName,
     berthPreference: String(tileInfo.berthPreference || ""),
@@ -65,9 +66,8 @@ const mapCheckinTileInfoToApiData = (eventInfo: IQREventInfo, batch: string) =>
 
 const getAPIDataFromCheckinTileInfo = (
   eventInfo: IQREventInfo,
-  batch: string
 ) =>
   pipe<[ICheckinTileInfo[]], ICheckinTileInfo[], IQRCheckinUser[]>(
     filterOutUnChecked,
-    mapCheckinTileInfoToApiData(eventInfo, batch)
+    mapCheckinTileInfoToApiData(eventInfo)
   );
