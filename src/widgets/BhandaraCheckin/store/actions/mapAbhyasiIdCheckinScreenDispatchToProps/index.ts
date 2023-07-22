@@ -24,7 +24,7 @@ const handleCheckinWithAbhyasiId = createAsyncThunk<
     checkinWithAbhyasiId({
       abhyasiId,
       dormAndBerthAllocation,
-      batch: textStrings.batchName,
+      batch: textStrings.eventTitle,
     })
   );
   if (res.meta.requestStatus === "fulfilled") {
