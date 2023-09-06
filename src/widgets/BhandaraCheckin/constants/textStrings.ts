@@ -3,7 +3,7 @@ export const textStrings = {
   hfn_logo_imgUrl: "heartfulness_blue.png",
 
   bgImage_light: "bg_light.jpg",
-  bgImage_dark: "bg_dark.png",
+  bgImage_dark: "bg_dark.jpg",
 
   hfn_logo_alt: "Heartfulness - Advancing in Love",
   eventTitle: "2023 Birth Anniversary Celebrations of Pujya Daaji",
