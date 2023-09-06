@@ -27,6 +27,9 @@ export const mapDispatchToProps: MapDispatchToProps<
   onRefresh: async () => {
     dispatch(REFRESH_APP());
   },
+  onChangeBatch: (batch) => {
+    dispatch(mainSectionActions.setBatch(batch));
+  },
   onMount: async () => {},
   onChange: (updatedValue) => {
     dispatch(
