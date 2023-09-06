@@ -79,7 +79,7 @@ export const SectionMain = ({
 
   return (
     <CenterOfViewport p={5}>
-      <Card sx={{ maxWidth: 420, opacity: 0.9 }}>
+      <Card sx={{ maxWidth: maxWidth, opacity: 0.86 }}>
         <CardContent>
           <Vertical alignItems={"center"} gap={2}>
             <img
