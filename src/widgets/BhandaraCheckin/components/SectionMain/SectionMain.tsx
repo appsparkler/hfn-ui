@@ -15,25 +15,19 @@ import {
   CenterOfViewport,
   Horizontal,
   Vertical,
+  SelectField,
+  OptionValue,
 } from "components";
 import { ClickHandler, InputChangeHandler } from "types";
 import { isAbhyasiId, isEmail, isMobile } from "utils";
 import { maxWidth, textStrings } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
-import { SectionMainProps } from "widgets/BhandaraCheckin/types";
+import { Batch, SectionMainProps } from "widgets/BhandaraCheckin/types";
 import { QrCode2 } from "@mui/icons-material";
 
 export const SectionMain = ({
-  onClickStart,
-  onChange,
-  onSwitchMode,
   isDarkMode,
-  onClickDashboard,
-  onClickScan,
-  onSwitchScanner = noop,
-  onMount = noop,
-  onRefresh = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -41,6 +35,16 @@ export const SectionMain = ({
   error,
   helperText,
   value = "",
+  batch,
+  onSwitchMode,
+  onRefresh = noop,
+  onClickScan,
+  onMount = noop,
+  onChange,
+  onChangeBatch,
+  onClickStart,
+  onClickDashboard,
+  onSwitchScanner = noop,
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
@@ -72,6 +76,13 @@ export const SectionMain = ({
     [onSwitchScanner]
   );
 
+  const handleChangeBatch = useCallback(
+    (_name: string, newValue: OptionValue) => {
+      onChangeBatch(newValue as Batch);
+    },
+    [onChangeBatch]
+  );
+
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
     onMount();
@@ -90,6 +101,31 @@ export const SectionMain = ({
             <Typography variant="h4" align="center">
               {textStrings.eventTitle}
             </Typography>
+            <SelectField
+              size="medium"
+              autoWidth
+              autoComplete="off"
+              label="Batch"
+              labelId="batch"
+              name="batch"
+              onChange={handleChangeBatch}
+              options={[
+                {
+                  label: "Batch 1",
+                  value: "batch-1",
+                },
+                {
+                  label: "Batch 2",
+                  value: "batch-2",
+                },
+                {
+                  label: "Batch 1,Batch 2",
+                  value: "batch-1,batch-2",
+                },
+              ]}
+              required
+              value={batch}
+            />
             <TextField
               type="text"
               label="Abhyasi ID / Mobile # / Email"

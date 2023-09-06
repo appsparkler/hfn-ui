@@ -1,6 +1,7 @@
 import { ModeSwitchDispatchProps } from "components";
 import { ReturnVoid } from "types";
 import { Env } from "../env";
+import { Batch } from "./Batch";
 
 export interface SectionMainStateProps {
   env?: Env;
@@ -12,9 +13,11 @@ export interface SectionMainStateProps {
   isScannerOn?: boolean;
   scanBtnDisabled?: boolean;
   scanBtnProcessing?: boolean;
+  batch: Batch;
 }
 
 export interface SectionMainDispatchProps {
+  onChangeBatch: (batch: Batch) => void;
   onChange: (updatedValue: string) => void;
   onClickStart: (userId: string) => void;
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];

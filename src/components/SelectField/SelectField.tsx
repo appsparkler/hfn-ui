@@ -40,6 +40,7 @@ export const SelectField = ({
   required,
   helperText,
   error,
+  size,
   name,
   onChange,
   ...restSelectProps
@@ -63,6 +64,7 @@ export const SelectField = ({
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select<OptionValue>
         error={error}
+        size={size}
         labelId={labelId}
         name={name}
         onChange={handleChange}
