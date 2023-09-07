@@ -16,12 +16,13 @@ import {
 } from "../../../../components";
 import { ClickHandler, InputChangeHandler } from "../../../../types";
 import { maxWidth } from "../../constants";
-import { FormUserDetails } from "../../types";
+import { Batch, FormUserDetails } from "../../types";
 import { isFieldValueValidV2 } from "../../utils";
 
 export type SectionUpdateDetailsStateProps = {
   isProcessing?: boolean;
   userDetails: FormUserDetails;
+  batch: Batch;
   ageGroupOptions: SelectFieldProps["options"];
   genderOptions: SelectFieldProps["options"];
 };
@@ -38,6 +39,7 @@ export type SectionUpdateDetailsProps = SectionUpdateDetailsStateProps &
 export const SectionUpdateDetails = ({
   isProcessing,
   userDetails,
+  batch,
   ageGroupOptions,
   genderOptions,
   onChange,
@@ -178,7 +180,7 @@ export const SectionUpdateDetails = ({
                 Update Details
               </Typography>
               <Typography>
-                <strong>Batch: </strong> batch-1
+                <strong>Batch: </strong> {batch}
               </Typography>
               <TextField
                 label="Full Name"
