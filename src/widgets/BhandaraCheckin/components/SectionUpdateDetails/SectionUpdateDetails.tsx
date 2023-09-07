@@ -1,7 +1,13 @@
-import { Alert, Button, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Card,
+  CardContent,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
-  CenterOfViewport,
   AsyncButton,
   Horizontal,
   Vertical,
@@ -155,159 +161,169 @@ export const SectionUpdateDetails = ({
   }, []);
 
   return (
-    <CenterOfViewport
-      gap={5}
+    <Horizontal
       width={"100%"}
       maxWidth={maxWidth}
+      mx="auto"
       paddingX={1}
       paddingY={1}
-      justifyContent="initial"
+      justifyContent="center"
+      alignItems={"center"}
     >
-      <Vertical gap={3} width={"100%"}>
-        <Typography variant="h4" color="goldenrod" align="center">
-          Update Details
-        </Typography>
-        <TextField
-          label="Full Name"
-          color="info"
-          required
-          autoComplete="off"
-          name="fullName"
-          type="text"
-          variant="outlined"
-          fullWidth
-          onChange={handleChangeInputField}
-          value={fullName.value}
-          inputRef={fullNameInputRef}
-          size="small"
-        />
-        <Horizontal gap={3}>
-          <SelectField
-            autoWidth
-            autoComplete="off"
-            label="Age Group"
-            labelId="age-group"
-            name="ageGroup"
-            onChange={handleChangeSelectField}
-            options={ageGroupOptions}
-            required
-            value={ageGroup.value}
-            size="small"
-          />
-          <SelectField
-            autoWidth
-            autoComplete="off"
-            label="Gender"
-            labelId="gender"
-            name="gender"
-            onChange={handleChangeSelectField}
-            options={genderOptions}
-            required
-            value={gender.value}
-            disabled={gender.disabled}
-            size="small"
-          />
-        </Horizontal>
-        <TextField
-          label="City"
-          color="info"
-          required
-          autoComplete="off"
-          name="city"
-          type="text"
-          variant="outlined"
-          fullWidth
-          onChange={handleChangeInputField}
-          value={city.value}
-          size="small"
-        />
-        <TextField
-          label="State"
-          color="info"
-          required
-          autoComplete="off"
-          name="state"
-          type="text"
-          variant="outlined"
-          fullWidth
-          onChange={handleChangeInputField}
-          value={state.value}
-          size="small"
-        />
-        <TextField
-          label="Country"
-          color="info"
-          required
-          autoComplete="off"
-          name="country"
-          type="text"
-          variant="outlined"
-          fullWidth
-          onChange={handleChangeInputField}
-          value={country.value}
-          size="small"
-        />
-        <Alert severity="info" variant="standard">
-          Please enter <strong>atleast one</strong> of <strong>Mobile</strong>{" "}
-          and <strong>Email</strong>
-        </Alert>
-        <TextField
-          label="Mobile"
-          name="mobile"
-          autoComplete="off"
-          type="tel"
-          variant="outlined"
-          fullWidth
-          helperText="Please include the country code - for ex. +9183392..."
-          value={mobile.value}
-          disabled={mobile.disabled}
-          onChange={handleChangeInputField}
-          size="small"
-        />
-        <TextField
-          label="Email"
-          autoComplete="off"
-          type="email"
-          name="email"
-          variant="outlined"
-          fullWidth
-          value={email.value}
-          disabled={email.disabled}
-          onChange={handleChangeInputField}
-          size="small"
-        />
-        <TextField
-          label="Comfort Dorm and Berth Allocation"
-          autoComplete="off"
-          type="text"
-          name="dormAndBerthAllocation"
-          variant="outlined"
-          fullWidth
-          value={dormAndBerthAllocation.value}
-          disabled={dormAndBerthAllocation.disabled}
-          onChange={handleChangeInputField}
-          size="small"
-        />
-      </Vertical>
-      <Horizontal gap={3}>
-        <Button
-          type="button"
-          variant="outlined"
-          onClick={onClickCancel}
-          disabled={isProcessing}
-        >
-          CANCEL
-        </Button>
-        <AsyncButton
-          type="button"
-          size="large"
-          onClick={handleClickCheckin}
-          isProcessing={isProcessing}
-          disabled={!isCheckinButtonEnabled}
-        >
-          CHECK IN
-        </AsyncButton>
-      </Horizontal>
-    </CenterOfViewport>
+      <Card sx={{ opacity: 0.86 }}>
+        <CardContent sx={{ overflow: "auto" }}>
+          <Vertical gap={2}>
+            <Vertical gap={3} width={"100%"}>
+              <Typography variant="h4" color="goldenrod" align="center">
+                Update Details
+              </Typography>
+              <Typography>
+                <strong>Batch: </strong> batch-1
+              </Typography>
+              <TextField
+                label="Full Name"
+                color="info"
+                required
+                autoComplete="off"
+                name="fullName"
+                type="text"
+                variant="outlined"
+                fullWidth
+                onChange={handleChangeInputField}
+                value={fullName.value}
+                inputRef={fullNameInputRef}
+                size="small"
+              />
+              <Horizontal gap={3}>
+                <SelectField
+                  autoWidth
+                  autoComplete="off"
+                  label="Age Group"
+                  labelId="age-group"
+                  name="ageGroup"
+                  onChange={handleChangeSelectField}
+                  options={ageGroupOptions}
+                  required
+                  value={ageGroup.value}
+                  size="small"
+                />
+                <SelectField
+                  autoWidth
+                  autoComplete="off"
+                  label="Gender"
+                  labelId="gender"
+                  name="gender"
+                  onChange={handleChangeSelectField}
+                  options={genderOptions}
+                  required
+                  value={gender.value}
+                  disabled={gender.disabled}
+                  size="small"
+                />
+              </Horizontal>
+              <TextField
+                label="City"
+                color="info"
+                required
+                autoComplete="off"
+                name="city"
+                type="text"
+                variant="outlined"
+                fullWidth
+                onChange={handleChangeInputField}
+                value={city.value}
+                size="small"
+              />
+              <TextField
+                label="State"
+                color="info"
+                required
+                autoComplete="off"
+                name="state"
+                type="text"
+                variant="outlined"
+                fullWidth
+                onChange={handleChangeInputField}
+                value={state.value}
+                size="small"
+              />
+              <TextField
+                label="Country"
+                color="info"
+                required
+                autoComplete="off"
+                name="country"
+                type="text"
+                variant="outlined"
+                fullWidth
+                onChange={handleChangeInputField}
+                value={country.value}
+                size="small"
+              />
+              <Alert severity="info" variant="standard">
+                Please enter <strong>atleast one</strong> of{" "}
+                <strong>Mobile</strong> and <strong>Email</strong>
+              </Alert>
+              <TextField
+                label="Mobile"
+                name="mobile"
+                autoComplete="off"
+                type="tel"
+                variant="outlined"
+                fullWidth
+                helperText="Please include the country code - for ex. +9183392..."
+                value={mobile.value}
+                disabled={mobile.disabled}
+                onChange={handleChangeInputField}
+                size="small"
+              />
+              <TextField
+                label="Email"
+                autoComplete="off"
+                type="email"
+                name="email"
+                variant="outlined"
+                fullWidth
+                value={email.value}
+                disabled={email.disabled}
+                onChange={handleChangeInputField}
+                size="small"
+              />
+              <TextField
+                label="Comfort Dorm and Berth Allocation"
+                autoComplete="off"
+                type="text"
+                name="dormAndBerthAllocation"
+                variant="outlined"
+                fullWidth
+                value={dormAndBerthAllocation.value}
+                disabled={dormAndBerthAllocation.disabled}
+                onChange={handleChangeInputField}
+                size="small"
+              />
+            </Vertical>
+            <Horizontal gap={3} alignItems={"center"} justifyContent={"center"}>
+              <Button
+                type="button"
+                variant="outlined"
+                onClick={onClickCancel}
+                disabled={isProcessing}
+              >
+                CANCEL
+              </Button>
+              <AsyncButton
+                type="button"
+                size="large"
+                onClick={handleClickCheckin}
+                isProcessing={isProcessing}
+                disabled={!isCheckinButtonEnabled}
+              >
+                CHECK IN
+              </AsyncButton>
+            </Horizontal>
+          </Vertical>
+        </CardContent>
+      </Card>
+    </Horizontal>
   );
 };
