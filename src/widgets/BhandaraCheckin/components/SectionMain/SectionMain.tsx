@@ -66,8 +66,8 @@ export const SectionMain = ({
   );
 
   const handleClickStart = useCallback<ClickHandler>(() => {
-    onClickStart(value.trim());
-  }, [onClickStart, value]);
+    onClickStart(value.trim(), batch);
+  }, [batch, onClickStart, value]);
 
   const handleSwitchScanner = useCallback<NonNullable<SwitchProps["onChange"]>>(
     (evt, checked) => {
