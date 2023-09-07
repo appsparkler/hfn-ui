@@ -77,27 +77,33 @@ const updateDetailsSectionSlice = createSlice({
     setDefaultGenderOptions: (state) => {
       state.genderOptions = { ...genderOptions };
     },
-    prepare: (state, { payload }: { payload: string }) => {
+    prepare: (
+      _state,
+      {
+        payload: { inputValue, batch },
+      }: { payload: { inputValue: string; batch: Batch } }
+    ) => {
       const updateDetailsInitialState = getInitialState();
       return {
         ...updateDetailsInitialState,
+        batch,
         userDetails: {
           ...updateDetailsInitialState.userDetails,
-          ...(isMobile(payload)
+          ...(isMobile(inputValue)
             ? {
                 mobile: {
                   ...updateDetailsInitialState.userDetails.mobile,
                   disabled: true,
-                  value: payload,
+                  value: inputValue,
                 },
               }
             : {}),
-          ...(isEmail(payload)
+          ...(isEmail(inputValue)
             ? {
                 email: {
                   ...updateDetailsInitialState.userDetails.email,
                   disabled: true,
-                  value: payload,
+                  value: inputValue,
                 },
               }
             : {}),

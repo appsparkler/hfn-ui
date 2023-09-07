@@ -42,7 +42,7 @@ export const mapDispatchToProps: MapDispatchToProps<
     }
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
-      dispatch(updateDetailsActions.prepare(inputValue));
+      dispatch(updateDetailsActions.prepare({ inputValue, batch }));
       dispatch(pageActions.UPDATE_DETAILS());
     }
   },
