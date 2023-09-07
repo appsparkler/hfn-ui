@@ -1,18 +1,18 @@
 const refineQR = (input: string): string => input.replace(/\n/g, "");
 
 interface QRCodeCheckin {
-  regId: string;
-  batch: string;
   abhyasiId: string;
-  fullName: string;
-  dormPreference: string;
+  batch: string;
   berthPreference: string;
   checkin: boolean;
-  timestamp: number;
   dormAndBerthAllocation: string;
-  pnr: string;
+  dormPreference: string;
   eventName: string;
+  fullName: string;
   orderId: string;
+  pnr: string;
+  regId: string;
+  timestamp: number;
   type: string;
 }
 
@@ -84,6 +84,12 @@ interface EventOrderGeneralDetails {
   orderId: string;
 }
 
+enum QRType {
+  PAID_ACCOMMODATION = "PAID_ACCOMMODATION",
+  OWN_ACCOMMODATION = "OWN_ACCOMMODATION",
+  NONE = "NONE",
+}
+
 function getGeneralDetails(value: string): EventOrderGeneralDetails {
   const rows = value.split(";");
   const qrType = getQRType(value);
@@ -103,12 +109,6 @@ function getGeneralDetails(value: string): EventOrderGeneralDetails {
     orderId: columnsInFirstRow[1],
     pnr: columnsInFirstRow[2],
   };
-}
-
-enum QRType {
-  PAID_ACCOMMODATION = "PAID_ACCOMMODATION",
-  OWN_ACCOMMODATION = "OWN_ACCOMMODATION",
-  NONE = "NONE",
 }
 
 function getQRType(code: string): QRType {
