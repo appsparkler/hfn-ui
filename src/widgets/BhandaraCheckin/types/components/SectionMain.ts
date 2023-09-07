@@ -19,7 +19,7 @@ export interface SectionMainStateProps {
 export interface SectionMainDispatchProps {
   onChangeBatch: (batch: Batch) => void;
   onChange: (updatedValue: string) => void;
-  onClickStart: (userId: string) => void;
+  onClickStart: (userId: string, batch: Batch) => void;
   onSwitchMode: ModeSwitchDispatchProps["onSwitch"];
   onClickDashboard: () => void;
   onClickScan: () => void;
