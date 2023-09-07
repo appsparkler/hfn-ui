@@ -1,7 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { isAbhyasiId } from "utils";
 import { MULTI_CHECKIN_SCREEN } from "widgets/BhandaraCheckin/routing/actions/page";
-import { IQRUserInfo, PNRType, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import {
+  IQRUserInfo,
+  PNRType,
+  ThunkApiConfig,
+} from "widgets/BhandaraCheckin/types";
 import { IQREventInfo } from "widgets/BhandaraCheckin/types";
 import { RootState } from "../..";
 import {
@@ -19,29 +23,27 @@ export const getPNRType = (str: string): PNRType | void => {
     return PNRType.PAID_ACCOMODATION;
 };
 
-export function getEventInfo(
-    scannedValue: string
-  ): IQREventInfo {
-    const [eventInfoRow] = scannedValue.split(";");
-    const pnrType = getPNRType(eventInfoRow);
-    if (pnrType === PNRType.FREE_ACCOMODATION) {
-      const [eventName, session, pnr] = eventInfoRow.split("|");
-      return {
-        eventName,
-        session: session.trim(),
-        pnr: pnr.trim(),
-        pnrType: PNRType.FREE_ACCOMODATION,
-      };
-    }
-    const [eventName, pnr, orderId] = eventInfoRow.split("|");
-    const eventInfo: IQREventInfo = {
-      eventName: eventName.trim(),
-      orderId: orderId.trim(),
+export function getEventInfo(scannedValue: string): IQREventInfo {
+  const [eventInfoRow] = scannedValue.split(";");
+  const pnrType = getPNRType(eventInfoRow);
+  if (pnrType === PNRType.FREE_ACCOMODATION) {
+    const [eventName, session, pnr] = eventInfoRow.split("|");
+    return {
+      eventName,
+      session: session.trim(),
       pnr: pnr.trim(),
-      pnrType: PNRType.PAID_ACCOMODATION,
+      pnrType: PNRType.FREE_ACCOMODATION,
     };
-    return eventInfo;
   }
+  const [eventName, pnr, orderId] = eventInfoRow.split("|");
+  const eventInfo: IQREventInfo = {
+    eventName: eventName.trim(),
+    orderId: orderId.trim(),
+    pnr: pnr.trim(),
+    pnrType: PNRType.PAID_ACCOMODATION,
+  };
+  return eventInfo;
+}
 
 const refineScannedValue = (value: string) => value.replace(/\n/g, "");
 
@@ -49,7 +51,7 @@ const isValidQRCode = (scannedValue: string) => {
   try {
     const eventInfo = getEventInfo(scannedValue);
     const users = getUsers(scannedValue);
-    
+
     if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
       return true;
     }
@@ -63,7 +65,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
   "handleScan",
   (scannedValue, { dispatch, getState }) => {
     const rootState = getState() as RootState;
-    const { isScannerOn } = rootState.mainSection;
+    const { isScannerOn, batch } = rootState.mainSection;
     if (!isScannerOn) return;
     const refinedValue = scannedValue.trim();
     const isScannerShown = rootState.barcodeScanner.show;
@@ -80,7 +82,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     if (isScannerShown && isAbhyasiId(refinedValue)) {
       dispatch(barcodeScannerActions.hide());
       dispatch(mainSectionActions.setValue(refinedValue));
-      checkinAbhyasi(dispatch, refinedValue);
+      checkinAbhyasi(dispatch, refinedValue, batch);
     }
   }
 );
