@@ -10,13 +10,17 @@ import { useCallback, useMemo } from "react";
 
 export const CheckinInfoTile: CheckinInfoTileComponent = ({
   checked,
+  eventName,
+  batch,
   fullName,
+  orderId,
+  regId,
   dormPreference,
   berthPreference,
   onCheck,
   onChangeDormAllocation,
   abhyasiId,
-  registrationId,
+  regId: registrationId,
 }) => {
   const handleChangeCheckinStatus = useCallback<TFormControlLabelPropsOnChange>(
     (_evt, checked) => onCheck(registrationId, checked),
@@ -30,9 +34,9 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
     [registrationId, onChangeDormAllocation]
   );
 
-  const showPreference = useMemo(() => {
-    return Boolean(dormPreference) && Boolean(berthPreference);
-  }, [berthPreference, dormPreference]);
+  // const showPreference = useMemo(() => {
+  //   return Boolean(dormPreference) && Boolean(berthPreference);
+  // }, [berthPreference, dormPreference]);
 
   return (
     <Card>
@@ -48,27 +52,35 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
             label={fullName}
           />
           <Box>
-            {abhyasiId ? (
-              <Typography variant="body2" color="text.secondary">
-                <strong>Abhyasi Id:&nbsp;</strong>
-                {abhyasiId}
-              </Typography>
-            ) : null}
             <Typography variant="body2" color="text.secondary">
-              <strong>Reg Id:&nbsp;</strong>
-              {registrationId}&nbsp;&nbsp;
+              <strong>Event Name:&nbsp;</strong>
+              {eventName}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Batch:&nbsp;</strong>
+              {batch}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Abhyasi Id:&nbsp;</strong>
+              {abhyasiId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Registration ID:&nbsp;</strong>
+              {regId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Order ID:&nbsp;</strong>
+              {orderId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Dorm Preference:&nbsp;</strong>
+              {dormPreference}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Berth Preference:&nbsp;</strong>
+              {berthPreference}
             </Typography>
           </Box>
-          {showPreference ? (
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                <strong>Dorm Preference:</strong>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {dormPreference}, {berthPreference}
-              </Typography>
-            </Box>
-          ) : null}
           <Box width="100%">
             <Typography variant="body2" color="text.secondary">
               <strong>Dorm Allocation:</strong>

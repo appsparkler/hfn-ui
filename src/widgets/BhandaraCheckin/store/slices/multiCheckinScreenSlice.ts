@@ -14,7 +14,7 @@ const getInitialState = (): MultiCheckinScreenStateProps => ({
     eventName: "",
     pnr: "",
     session: "Bhandara",
-    pnrType: PNRType.FREE_ACCOMODATION
+    pnrType: PNRType.FREE_ACCOMODATION,
   },
 });
 
@@ -24,6 +24,12 @@ const mapUserToCheckinTileData = (
   return users.map((user) => ({
     dormPreference: user.dormPrference,
     berthPreference: user.berthPreference,
+
+    batch: "batch-1",
+    eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
+    orderId: "Bhandara Sept 2023",
+    regId: "",
+    dormAllocation: "",
     checked: false,
     fullName: user.fullName,
     registrationId: user.regId,

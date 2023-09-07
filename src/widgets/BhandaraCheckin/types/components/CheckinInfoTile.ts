@@ -1,8 +1,13 @@
+import { Batch } from "./Batch";
+
 export interface ICheckinTileInfo {
+  batch: Batch;
   checked: boolean;
+  eventName: string;
   fullName: string;
   abhyasiId: string;
-  registrationId: string;
+  regId: string;
+  orderId: string;
   dormPreference?: string;
   berthPreference?: string;
   dormAllocation?: string;
