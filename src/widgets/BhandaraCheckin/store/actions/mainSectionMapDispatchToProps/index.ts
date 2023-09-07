@@ -1,7 +1,6 @@
 import { MapDispatchToProps } from "react-redux";
 import {
   mainSectionActions,
-  getMainSectionInitialState,
   handleSwitchScanner,
 } from "widgets/BhandaraCheckin/store";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
