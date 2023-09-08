@@ -1,11 +1,11 @@
-import { ICheckinTileInfo } from "./ICheckinTileInfo";
+import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 
 export interface ICheckinInfoTilesStateProps {
-  data: ICheckinTileInfo[];
+  data: QRCodeCheckin[];
 }
 
 export interface ICheckinInfoTilesDispatchProps {
-  onChange: (data: ICheckinTileInfo[]) => void;
+  onChange: (data: QRCodeCheckin[]) => void;
 }
 
 export interface ICheckinInfoTilesProps

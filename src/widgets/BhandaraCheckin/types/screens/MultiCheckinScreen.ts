@@ -1,8 +1,9 @@
+import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 import { IQREventInfo } from "..";
 import { ICheckinTileInfo } from "../components";
 
 export interface MultiCheckinScreenStateProps {
-  userData: ICheckinTileInfo[];
+  userData: QRCodeCheckin[];
   eventInfo: IQREventInfo;
 }
 

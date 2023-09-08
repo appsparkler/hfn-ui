@@ -1,6 +1,8 @@
+import { Batch } from "../types";
+
 export interface QRCodeCheckin {
   abhyasiId: string;
-  batch: string;
+  batch: Batch;
   berthPreference: string;
   checkin: boolean;
   dormAndBerthAllocation: string;
