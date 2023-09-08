@@ -23,10 +23,8 @@ export const checkinAbhyasi: CheckinAbhyasiApi = (
   try {
     const data: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
-      // deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
       type: CheckinTypesEnum.AbhyasiId,
-      // updatedInReport: false,
       dormAndBerthAllocation,
       eventName,
       batch,
