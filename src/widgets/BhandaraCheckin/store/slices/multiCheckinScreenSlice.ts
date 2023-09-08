@@ -4,9 +4,9 @@ import {
   IQREventInfo,
   IQRUserInfo,
   MultiCheckinScreenStateProps,
-  ICheckinTileInfo,
   PNRType,
 } from "widgets/BhandaraCheckin/types";
+import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
   userData: [],
@@ -22,8 +22,8 @@ const mapUserToCheckinTileData = (
   users: IQRUserInfo[]
 ): ICheckinInfoTilesStateProps["data"] => {
   return users.map((user) => ({
-    dormPreference: user.dormPrference,
-    berthPreference: user.berthPreference,
+    dormPreference: String(user.dormPrference),
+    berthPreference: String(user.berthPreference),
     checkin: false,
     dormAndBerthAllocation: "",
     pnr: "ABEU-JIW-JWWW",
@@ -53,7 +53,7 @@ export const multiCheckinScreenSlice = createSlice({
       state.userData = userData;
       state.eventInfo = payload.event;
     },
-    setUserData: (state, { payload }: { payload: ICheckinTileInfo[] }) => {
+    setUserData: (state, { payload }: { payload: QRCodeCheckin[] }) => {
       state.userData = payload;
     },
   },

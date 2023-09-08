@@ -1,3 +1,4 @@
+import { Batch } from "../types";
 import { EventOrderGeneralDetails } from "./EventOrderGeneralDetails";
 import { QRCheckinsAndMore } from "./QRCheckinsAndMore";
 import { QRCodeCheckin } from "./QRCodeCheckin";
@@ -45,7 +46,7 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
       const columns = row.split("|");
       return {
         regId: columns[0],
-        batch: columns[1],
+        batch: columns[1] as Batch,
         abhyasiId: columns[2],
         fullName: columns[3],
         dormPreference: columns[4] || "",

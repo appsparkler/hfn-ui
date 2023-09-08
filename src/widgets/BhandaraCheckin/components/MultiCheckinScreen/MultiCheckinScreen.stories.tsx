@@ -45,6 +45,7 @@ multiCheckinScreen.args = {
   userData: [
     {
       abhyasiId: "tile-1",
+      dormAndBerthAllocation: "",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
       type: "QR",
@@ -59,6 +60,7 @@ multiCheckinScreen.args = {
     },
     {
       abhyasiId: "tile-2",
+      dormAndBerthAllocation: "",
       batch: "batch-1",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
@@ -74,6 +76,7 @@ multiCheckinScreen.args = {
     {
       abhyasiId: "tile-3",
       batch: "batch-1",
+      dormAndBerthAllocation: "",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
       type: "QR",
