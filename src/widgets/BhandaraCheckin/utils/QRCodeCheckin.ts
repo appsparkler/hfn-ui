@@ -1,4 +1,4 @@
-import { Batch } from "../types";
+import { Batch, CheckinTypesEnum } from "../types";
 
 export interface QRCodeCheckin {
   abhyasiId: string;
@@ -13,5 +13,5 @@ export interface QRCodeCheckin {
   pnr: string;
   regId: string;
   timestamp: number;
-  type: string;
+  type: CheckinTypesEnum;
 }

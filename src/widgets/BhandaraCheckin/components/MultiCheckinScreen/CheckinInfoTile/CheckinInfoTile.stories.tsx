@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { CheckinInfoTile } from "./CheckinInfoTile";
+import { CheckinTypesEnum } from "widgets/BhandaraCheckin/types";
 
 const Story = {
   component: CheckinInfoTile,
@@ -20,8 +21,8 @@ const Template: ComponentStory<typeof CheckinInfoTile> = (args) => {
 export const checkinInfoTile: ComponentStory<typeof CheckinInfoTile> =
   Template.bind({});
 checkinInfoTile.args = {
+  type: CheckinTypesEnum.QR,
   abhyasiId: "tile-1",
-  type: "QR",
   timestamp: Date.now(),
   checkin: true,
   batch: "batch-1",

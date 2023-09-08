@@ -1,7 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { useCallback } from "react";
-import { ICheckinInfoTilesProps } from "widgets/BhandaraCheckin/types";
+import {
+  CheckinTypesEnum,
+  ICheckinInfoTilesProps,
+} from "widgets/BhandaraCheckin/types";
 import { CheckinInfoTiles } from "./CheckinInfoTiles";
 
 const Story = {
@@ -29,8 +32,8 @@ export const checkinInfoTiles: ComponentStory<typeof CheckinInfoTiles> =
 checkinInfoTiles.args = {
   data: [
     {
+      type: CheckinTypesEnum.QR,
       abhyasiId: "tile-1",
-      type: "QR",
       timestamp: Date.now(),
       dormAndBerthAllocation: "",
       checkin: false,
@@ -45,7 +48,7 @@ checkinInfoTiles.args = {
     },
     {
       abhyasiId: "tile-2",
-      type: "QR",
+      type: CheckinTypesEnum.QR,
       timestamp: Date.now(),
       dormAndBerthAllocation: "",
 
@@ -61,7 +64,7 @@ checkinInfoTiles.args = {
     },
     {
       abhyasiId: "tile-3",
-      type: "QR",
+      type: CheckinTypesEnum.QR,
       timestamp: Date.now(),
       dormAndBerthAllocation: "",
       checkin: false,

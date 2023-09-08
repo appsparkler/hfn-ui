@@ -1,4 +1,4 @@
-import { Batch } from "../types";
+import { Batch, CheckinTypesEnum } from "../types";
 import { EventOrderGeneralDetails } from "./EventOrderGeneralDetails";
 import { QRCheckinsAndMore } from "./QRCheckinsAndMore";
 import { QRCodeCheckin } from "./QRCodeCheckin";
@@ -57,7 +57,7 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
         pnr: generalDetails.pnr,
         eventName: generalDetails.eventTitle,
         orderId: generalDetails.orderId,
-        type: "QR",
+        type: CheckinTypesEnum.QR,
       };
     });
   return checkins;

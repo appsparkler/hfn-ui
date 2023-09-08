@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useCallback, useState } from "react";
 import {
+  CheckinTypesEnum,
   MultiCheckinScreenProps,
   PNRType,
 } from "widgets/BhandaraCheckin/types";
@@ -49,7 +50,7 @@ multiCheckinScreen.args = {
       dormAndBerthAllocation: "",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
-      type: "QR",
+      type: CheckinTypesEnum.QR,
       checkin: false,
       batch: "batch-1",
       eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
@@ -65,7 +66,7 @@ multiCheckinScreen.args = {
       batch: "batch-1",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
-      type: "QR",
+      type: CheckinTypesEnum.QR,
       eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
       orderId: "Bhandara Sept 2023",
       fullName: "Shekhar Kapoor",
@@ -80,7 +81,7 @@ multiCheckinScreen.args = {
       dormAndBerthAllocation: "",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
-      type: "QR",
+      type: CheckinTypesEnum.QR,
       eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
       orderId: "Bhandara Sept 2023",
       regId: "BCD1234",
