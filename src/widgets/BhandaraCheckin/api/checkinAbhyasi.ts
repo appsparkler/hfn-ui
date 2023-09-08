@@ -1,5 +1,4 @@
 import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
-import { LocalStorageKeys } from "../constants";
 import { getCheckinDocRef } from "widgets/BhandaraCheckin/firebase";
 import { setDoc } from "firebase/firestore";
 import {
