@@ -41,9 +41,9 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
   const rows = refinedValue.split(";");
   const checkinRows = rows.slice(1);
   const checkins = checkinRows
-    .filter((row) => row.length > 0)
-    .map((row) => {
-      const columns = row.split("|");
+    .filter((checkinRow) => checkinRow.split("|").length > 3)
+    .map((checkinRow) => {
+      const columns = checkinRow.split("|");
       return {
         regId: columns[0],
         batch: columns[1] as Batch,

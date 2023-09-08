@@ -55,6 +55,7 @@ export const multiCheckinScreenSlice = createSlice({
       }
     ) => {
       state.userData = payload.users;
+      state.more = payload.more;
       state.eventInfo = payload.event;
     },
     setUserData: (state, { payload }: { payload: QRCodeCheckin[] }) => {
