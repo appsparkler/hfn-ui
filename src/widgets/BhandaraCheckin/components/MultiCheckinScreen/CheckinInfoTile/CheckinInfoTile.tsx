@@ -6,32 +6,33 @@ import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 import { CheckinInfoTileComponent } from "widgets/BhandaraCheckin/types";
 import { TextFieldPropsOnChange, TFormControlLabelPropsOnChange } from "types";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 
 export const CheckinInfoTile: CheckinInfoTileComponent = ({
-  checked,
-  eventName,
+  abhyasiId,
   batch,
+  berthPreference,
+  checkin,
+  dormAndBerthAllocation,
+  dormPreference,
+  eventName,
   fullName,
   orderId,
+  pnr,
   regId,
-  dormPreference,
-  berthPreference,
   onCheck,
   onChangeDormAllocation,
-  abhyasiId,
-  regId: registrationId,
 }) => {
   const handleChangeCheckinStatus = useCallback<TFormControlLabelPropsOnChange>(
-    (_evt, checked) => onCheck(registrationId, checked),
-    [registrationId, onCheck]
+    (_evt, checked) => onCheck(regId, checked),
+    [regId, onCheck]
   );
 
   const handleChangeDormAllocation = useCallback<TextFieldPropsOnChange>(
     (evt) => {
-      onChangeDormAllocation(registrationId, evt.target.value);
+      onChangeDormAllocation(regId, evt.target.value);
     },
-    [registrationId, onChangeDormAllocation]
+    [regId, onChangeDormAllocation]
   );
 
   // const showPreference = useMemo(() => {
@@ -45,7 +46,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
           <FormControlLabel
             control={
               <Checkbox
-                checked={checked}
+                checked={checkin}
                 onChange={handleChangeCheckinStatus}
               />
             }
@@ -73,6 +74,10 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
               {orderId}
             </Typography>
             <Typography variant="body2" color="text.secondary">
+              <strong>PNR:&nbsp;</strong>
+              {pnr}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
               <strong>Dorm Preference:&nbsp;</strong>
               {dormPreference}
             </Typography>
@@ -87,6 +92,7 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
             </Typography>
             <TextField
               variant="outlined"
+              defaultValue={dormAndBerthAllocation}
               placeholder="Please enter allocated dorm and berth..."
               fullWidth
               onChange={handleChangeDormAllocation}

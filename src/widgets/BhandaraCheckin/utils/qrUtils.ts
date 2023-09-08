@@ -1,25 +1,9 @@
+import { EventOrderGeneralDetails } from "./EventOrderGeneralDetails";
+import { QRCheckinsAndMore } from "./QRCheckinsAndMore";
+import { QRCodeCheckin } from "./QRCodeCheckin";
+import { QRType } from "./QRType";
+
 const refineQR = (input: string): string => input.replace(/\n/g, "");
-
-interface QRCodeCheckin {
-  abhyasiId: string;
-  batch: string;
-  berthPreference: string;
-  checkin: boolean;
-  dormAndBerthAllocation: string;
-  dormPreference: string;
-  eventName: string;
-  fullName: string;
-  orderId: string;
-  pnr: string;
-  regId: string;
-  timestamp: number;
-  type: string;
-}
-
-interface QRCheckinsAndMore {
-  checkins: QRCodeCheckin[];
-  more: string;
-}
 
 function getQRCheckinsAndMore(rawValue: string): QRCheckinsAndMore {
   const moreRegex = /(\d+\s+more\.\.)/;
@@ -76,18 +60,6 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
       };
     });
   return checkins;
-}
-
-interface EventOrderGeneralDetails {
-  eventTitle: string;
-  pnr: string;
-  orderId: string;
-}
-
-enum QRType {
-  PAID_ACCOMMODATION = "PAID_ACCOMMODATION",
-  OWN_ACCOMMODATION = "OWN_ACCOMMODATION",
-  NONE = "NONE",
 }
 
 function getGeneralDetails(value: string): EventOrderGeneralDetails {

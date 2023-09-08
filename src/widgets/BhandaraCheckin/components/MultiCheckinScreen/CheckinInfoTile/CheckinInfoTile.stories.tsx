@@ -20,14 +20,18 @@ const Template: ComponentStory<typeof CheckinInfoTile> = (args) => {
 export const checkinInfoTile: ComponentStory<typeof CheckinInfoTile> =
   Template.bind({});
 checkinInfoTile.args = {
-  eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
+  abhyasiId: "tile-1",
+  type: "QR",
+  timestamp: Date.now(),
+  checkin: true,
   batch: "batch-1",
-  regId: "b366daa6-2960-4a8b-a300-29bb05ae4e46",
+  eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
+  pnr: "ABC-DEFH-HIJE",
   orderId: "Bhandara Sept 2023",
-  fullName: "Shekhar Kapoor",
-  abhyasiId: "INAAAE383",
-  berthPreference: "LB",
+  fullName: "Jane Mathew",
   dormPreference: "East Comform Dorm - B1",
+  berthPreference: "LB",
+  regId: "AAV1234",
 };
 
 export default Story;

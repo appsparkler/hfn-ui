@@ -1,16 +1,19 @@
 import { Batch } from "./Batch";
 
 export interface ICheckinTileInfo {
+  abhyasiId: string;
   batch: Batch;
-  checked: boolean;
+  berthPreference?: string;
+  checkin: boolean;
+  dormAndBerthAllocation?: string;
+  dormPreference?: string;
   eventName: string;
   fullName: string;
-  abhyasiId: string;
-  regId: string;
   orderId: string;
-  dormPreference?: string;
-  berthPreference?: string;
-  dormAllocation?: string;
+  pnr: string;
+  regId: string;
+  timestamp: number;
+  type: string;
 }
 
 export type ICheckinInfoTileStateProps = {} & ICheckinTileInfo;

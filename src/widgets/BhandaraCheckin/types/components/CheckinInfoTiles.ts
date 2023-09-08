@@ -1,4 +1,4 @@
-import { ICheckinTileInfo } from "./CheckinInfoTile";
+import { ICheckinTileInfo } from "./ICheckinTileInfo";
 
 export interface ICheckinInfoTilesStateProps {
   data: ICheckinTileInfo[];

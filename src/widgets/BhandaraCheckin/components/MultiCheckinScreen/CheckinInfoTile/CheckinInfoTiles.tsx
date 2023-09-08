@@ -14,7 +14,7 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
     (registrationId, checked) => {
       const newData = data.map((item) => {
         if (item.regId === registrationId) {
-          return { ...item, checked };
+          return { ...item, checkin: checked };
         }
         return item;
       });
@@ -29,7 +29,7 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
     (registrationId, dormAllocation) => {
       const newData = data.map((item) => {
         if (item.regId === registrationId) {
-          return { ...item, dormAllocation };
+          return { ...item, dormAndBerthAllocation: dormAllocation };
         }
         return item;
       });

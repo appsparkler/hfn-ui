@@ -24,7 +24,11 @@ const mapUserToCheckinTileData = (
   return users.map((user) => ({
     dormPreference: user.dormPrference,
     berthPreference: user.berthPreference,
-
+    checkin: false,
+    dormAndBerthAllocation: "",
+    pnr: "ABEU-JIW-JWWW",
+    timestamp: Date.now(),
+    type: "QR",
     batch: "batch-1",
     eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
     orderId: "Bhandara Sept 2023",
