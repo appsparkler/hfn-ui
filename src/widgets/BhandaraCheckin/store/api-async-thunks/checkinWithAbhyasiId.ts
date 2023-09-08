@@ -1,15 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
-import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
+import { Batch, ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 
 export const checkinWithAbhyasiId = createAsyncThunk<
   any,
-  { abhyasiId: string; dormAndBerthAllocation: string; batch: string },
+  {
+    abhyasiId: string;
+    dormAndBerthAllocation: string;
+    eventName: string;
+    batch: Batch;
+  },
   ThunkApiConfig
 >(
   "api/checkinWithAbhyasiId",
   (
-    { abhyasiId, dormAndBerthAllocation, batch },
+    { abhyasiId, dormAndBerthAllocation, eventName, batch },
     {
       extra: {
         apis: { checkinAbhyasi },
@@ -22,6 +27,7 @@ export const checkinWithAbhyasiId = createAsyncThunk<
       const checkInSuccess = checkinAbhyasi(
         abhyasiId,
         dormAndBerthAllocation,
+        eventName,
         batch
       );
       if (checkInSuccess) {

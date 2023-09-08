@@ -1,4 +1,5 @@
 import {
+  Batch,
   CheckinEmailOrMobileUserDetails,
   IAbhyasiCheckinApiStoreData,
   IQRCheckinUser,
@@ -11,7 +12,12 @@ export interface CheckinWithEmailOrMobileApi {
 }
 
 export interface CheckinAbhyasiApi {
-  (abhyasiId: string, dormAndBerthAllocation: string, batch: string): boolean;
+  (
+    abhyasiId: string,
+    dormAndBerthAllocation: string,
+    eventName: string,
+    batch: Batch
+  ): boolean;
 }
 
 export type OfflineCacheData =

@@ -1,3 +1,5 @@
+import { Batch } from "../components";
+
 export enum CheckinTypesEnum {
   AbhyasiId = "AbhyasiId",
   EmailOrMobile = "EmailOrMobile",
@@ -24,12 +26,13 @@ export type CheckinEmailOrMobileUserDetails = {
 
 export interface IAbhyasiCheckinApiStoreData {
   abhyasiId: string;
-  deviceId: string;
+  // deviceId: string;
   timestamp: number;
   type: CheckinTypesEnum.AbhyasiId;
-  updatedInReport: boolean;
+  // updatedInReport: boolean;
   dormAndBerthAllocation: string;
   eventName: string;
+  batch: Batch;
 }
 
 export type CheckinWithEmailOrMobileApiStoreData =

@@ -17,17 +17,19 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
 export const checkinAbhyasi: CheckinAbhyasiApi = (
   abhyasiId,
   dormAndBerthAllocation,
+  eventName,
   batch
 ) => {
   try {
     const data: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
-      deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
+      // deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
       type: CheckinTypesEnum.AbhyasiId,
-      updatedInReport: false,
+      // updatedInReport: false,
       dormAndBerthAllocation,
-      eventName: batch,
+      eventName,
+      batch,
     };
 
     const docRef = getCheckinDocRef(abhyasiId);
