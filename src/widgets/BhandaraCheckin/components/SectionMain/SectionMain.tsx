@@ -12,7 +12,6 @@ import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import {
   AsyncButton,
   ModeSwitch,
-  CenterOfViewport,
   Horizontal,
   Vertical,
   SelectField,
