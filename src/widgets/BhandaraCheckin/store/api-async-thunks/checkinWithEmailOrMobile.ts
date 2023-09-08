@@ -1,16 +1,19 @@
-import { CheckinEmailOrMobileUserDetails } from "widgets/BhandaraCheckin/types";
+import {
+  Batch,
+  CheckinEmailOrMobileUserDetails,
+} from "widgets/BhandaraCheckin/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ErrorCodes } from "widgets/BhandaraCheckin/constants";
 import { ThunkApiConfig } from "widgets/BhandaraCheckin/types";
 
 export const checkinWithEmailOrMobile = createAsyncThunk<
   any,
-  CheckinEmailOrMobileUserDetails,
+  { userDetails: CheckinEmailOrMobileUserDetails; batch: Batch },
   ThunkApiConfig
 >(
   "api/checkinWithEmailOrMobile",
   (
-    userDetails,
+    { userDetails, batch },
     {
       extra: {
         apis: { checkinWithEmailOrMobile },
@@ -20,7 +23,7 @@ export const checkinWithEmailOrMobile = createAsyncThunk<
     }
   ) => {
     try {
-      const checkInSuccess = checkinWithEmailOrMobile(userDetails);
+      const checkInSuccess = checkinWithEmailOrMobile(userDetails, batch);
       if (checkInSuccess) {
         return fulfillWithValue(true);
       }

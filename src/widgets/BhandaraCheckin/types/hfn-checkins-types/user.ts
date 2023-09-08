@@ -37,7 +37,7 @@ export interface IAbhyasiCheckinApiStoreData {
 
 export type CheckinWithEmailOrMobileApiStoreData =
   CheckinEmailOrMobileUserDetails & {
-    deviceId: string;
+    batch: Batch;
     timestamp: number;
     type: CheckinTypesEnum.EmailOrMobile;
     updatedInReport: boolean;
