@@ -1,22 +1,6 @@
-import { Batch } from "./Batch";
+import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 
-export interface ICheckinTileInfo {
-  abhyasiId: string;
-  batch: Batch;
-  berthPreference?: string;
-  checkin: boolean;
-  dormAndBerthAllocation?: string;
-  dormPreference?: string;
-  eventName: string;
-  fullName: string;
-  orderId: string;
-  pnr: string;
-  regId: string;
-  timestamp: number;
-  type: string;
-}
-
-export type ICheckinInfoTileStateProps = {} & ICheckinTileInfo;
+export type ICheckinInfoTileStateProps = {} & QRCodeCheckin;
 
 export interface ICheckinInfoTileDispatchProps {
   onCheck: (registrationId: string, checked: boolean) => void;

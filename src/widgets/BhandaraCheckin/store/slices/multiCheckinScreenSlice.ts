@@ -10,6 +10,7 @@ import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
   userData: [],
+  more: "",
   eventInfo: {
     eventName: "",
     pnr: "",
@@ -47,10 +48,13 @@ export const multiCheckinScreenSlice = createSlice({
   reducers: {
     setData: (
       state,
-      { payload }: { payload: { event: IQREventInfo; users: IQRUserInfo[] } }
+      {
+        payload,
+      }: {
+        payload: { event: IQREventInfo; more: string; users: QRCodeCheckin[] };
+      }
     ) => {
-      const userData = mapUserToCheckinTileData(payload.users);
-      state.userData = userData;
+      state.userData = payload.users;
       state.eventInfo = payload.event;
     },
     setUserData: (state, { payload }: { payload: QRCodeCheckin[] }) => {

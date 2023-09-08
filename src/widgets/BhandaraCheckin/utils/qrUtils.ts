@@ -6,7 +6,7 @@ import { QRType } from "./QRType";
 
 const refineQR = (input: string): string => input.replace(/\n/g, "");
 
-function getQRCheckinsAndMore(rawValue: string): QRCheckinsAndMore {
+export function getQRCheckinsAndMore(rawValue: string): QRCheckinsAndMore {
   const moreRegex = /(\d+\s+more\.\.)/;
   const moreMatch = rawValue.match(moreRegex);
   const more = moreMatch !== null ? moreMatch[1] : "";

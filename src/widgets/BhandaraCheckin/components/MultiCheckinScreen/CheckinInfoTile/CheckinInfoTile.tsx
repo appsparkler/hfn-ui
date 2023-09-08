@@ -77,14 +77,18 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
               <strong>PNR:&nbsp;</strong>
               {pnr}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Dorm Preference:&nbsp;</strong>
-              {dormPreference}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Berth Preference:&nbsp;</strong>
-              {berthPreference}
-            </Typography>
+            {dormPreference && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Dorm Preference:&nbsp;</strong>
+                {dormPreference}
+              </Typography>
+            )}
+            {berthPreference && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Berth Preference:&nbsp;</strong>
+                {berthPreference}
+              </Typography>
+            )}
           </Box>
           <Box width="100%">
             <Typography variant="body2" color="text.secondary">

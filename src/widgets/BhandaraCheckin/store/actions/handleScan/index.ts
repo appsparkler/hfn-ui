@@ -14,7 +14,7 @@ import {
   multiCheckinScreenActions,
 } from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
-import { isQRValid } from "widgets/BhandaraCheckin/utils";
+import { getQRCheckinsAndMore, isQRValid } from "widgets/BhandaraCheckin/utils";
 
 export const getPNRType = (str: string): PNRType | void => {
   const [, part2, part3] = str.split("|");
@@ -72,10 +72,12 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     const isScannerShown = rootState.barcodeScanner.show;
     if (isScannerShown && isQRValid(refinedValue)) {
       dispatch(barcodeScannerActions.hide());
+      const qrCheckins = getQRCheckinsAndMore(refinedValue);
       dispatch(
         multiCheckinScreenActions.setData({
           event: getEventInfo(refinedValue),
-          users: getUsers(refinedValue),
+          users: qrCheckins.checkins,
+          more: qrCheckins.more,
         })
       );
       dispatch(MULTI_CHECKIN_SCREEN());

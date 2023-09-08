@@ -42,6 +42,7 @@ multiCheckinScreen.args = {
     pnr: "AE-IDDK-IWQ",
     pnrType: PNRType.PAID_ACCOMODATION,
   },
+  more: "3 more..",
   userData: [
     {
       abhyasiId: "tile-1",

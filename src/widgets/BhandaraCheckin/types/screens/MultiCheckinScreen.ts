@@ -3,6 +3,7 @@ import { IQREventInfo } from "..";
 
 export interface MultiCheckinScreenStateProps {
   userData: QRCodeCheckin[];
+  more: string;
   eventInfo: IQREventInfo;
 }
 
