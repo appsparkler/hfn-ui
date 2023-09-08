@@ -14,6 +14,7 @@ import {
   multiCheckinScreenActions,
 } from "../../slices";
 import { checkinAbhyasi } from "../mainSectionMapDispatchToProps";
+import { isQRValid } from "widgets/BhandaraCheckin/utils";
 
 export const getPNRType = (str: string): PNRType | void => {
   const [, part2, part3] = str.split("|");
@@ -47,19 +48,19 @@ export function getEventInfo(scannedValue: string): IQREventInfo {
 
 const refineScannedValue = (value: string) => value.replace(/\n/g, "");
 
-const isValidQRCode = (scannedValue: string) => {
-  try {
-    const eventInfo = getEventInfo(scannedValue);
-    const users = getUsers(scannedValue);
+// const isValidQRCode = (scannedValue: string) => {
+//   try {
+//     const eventInfo = getEventInfo(scannedValue);
+//     const users = getUsers(scannedValue);
 
-    if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
-      return true;
-    }
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-};
+//     if (eventInfo.eventName && isValidPNR(eventInfo.pnr) && users.length > 0) {
+//       return true;
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return false;
+//   }
+// };
 
 export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
   "handleScan",
@@ -69,7 +70,7 @@ export const handleScan = createAsyncThunk<void, string, ThunkApiConfig>(
     if (!isScannerOn) return;
     const refinedValue = scannedValue.trim();
     const isScannerShown = rootState.barcodeScanner.show;
-    if (isScannerShown && isValidQRCode(refinedValue)) {
+    if (isScannerShown && isQRValid(refinedValue)) {
       dispatch(barcodeScannerActions.hide());
       dispatch(
         multiCheckinScreenActions.setData({

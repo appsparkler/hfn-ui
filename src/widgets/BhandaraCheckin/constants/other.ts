@@ -12,7 +12,7 @@ export const genderOptions: SelectFieldOption[] = [
   { label: "Unspecified", value: "U" },
 ];
 
-export const maxWidth = 350;
+export const maxWidth = 320;
 
 export const ageGroupOptions: SelectFieldOption[] = [
   {

@@ -89,16 +89,16 @@ export const SectionMain = ({
   }, [onMount]);
 
   return (
-    <CenterOfViewport p={5}>
-      <Card sx={{ maxWidth: maxWidth, opacity: 0.86 }}>
+    <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
+      <Card sx={{ mt: 6, maxWidth: maxWidth, opacity: 0.86 }}>
         <CardContent>
           <Vertical alignItems={"center"} gap={2}>
             <img
               src={textStrings.hfn_logo_imgUrl}
               alt={textStrings.hfn_logo_alt}
-              width="320"
+              width="230"
             />
-            <Typography variant="h4" align="center">
+            <Typography variant="h5" align="center">
               {textStrings.eventTitle}
             </Typography>
             <SelectField
@@ -145,7 +145,7 @@ export const SectionMain = ({
                 },
               }}
             />
-            <Horizontal gap={3}>
+            <Horizontal gap={1}>
               <AsyncButton
                 type="button"
                 onClick={handleClickStart}
@@ -190,7 +190,7 @@ export const SectionMain = ({
           </Vertical>
         </CardContent>
       </Card>
-    </CenterOfViewport>
+    </Vertical>
   );
 };
 
