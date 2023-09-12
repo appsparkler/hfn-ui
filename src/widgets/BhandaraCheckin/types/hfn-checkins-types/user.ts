@@ -26,10 +26,8 @@ export type CheckinEmailOrMobileUserDetails = {
 
 export interface IAbhyasiCheckinApiStoreData {
   abhyasiId: string;
-  // deviceId: string;
   timestamp: number;
   type: CheckinTypesEnum.AbhyasiId;
-  // updatedInReport: boolean;
   dormAndBerthAllocation: string;
   eventName: string;
   batch: Batch;
@@ -46,10 +44,8 @@ export type CheckinWithEmailOrMobileApiStoreData =
   };
 
 export type ICheckinWIthQRApiStoreData = {
-  deviceId: string;
   timestamp: number;
   regId: string;
-  updatedInReport: false;
   eventName: string;
   abhyasiId: string;
   pnr: string;
