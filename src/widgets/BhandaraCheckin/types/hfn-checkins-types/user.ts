@@ -1,8 +1,8 @@
 import { Batch } from "../components";
 
 export enum CheckinTypesEnum {
-  AbhyasiId = "AbhyasiId",
-  EmailOrMobile = "EmailOrMobile",
+  AbhyasiId = "ABHYASI_ID",
+  EmailOrMobile = "MOBILE_OR_EMAIL",
   QR = "QR",
 }
 
