@@ -15,6 +15,7 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
   onCheckin,
   onCancel,
   abhyasiId,
+  batch,
   onChangeDormAndBerthAllocation,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,14 +37,16 @@ export const AbhyasiIDCheckinScreen: TAbhyasiIDCheckinScreenComponentProps = ({
         <CardContent>
           <Vertical gap={1}>
             <Box>
-              <Typography variant="subtitle2">Abhyasi ID:</Typography>
-              <Typography variant="body2" color="text.secondary">
-                {abhyasiId}
+              <Typography variant="subtitle2">
+                <strong>Abhyasi ID:</strong> {abhyasiId}
+              </Typography>
+              <Typography variant="subtitle2">
+                <strong>Batch:</strong> {batch}
               </Typography>
             </Box>
             <Box width="100%">
               <Typography variant="subtitle2">
-                Dorm and Berth Allocation:
+                <strong>Dorm and Berth Allocation:</strong>
               </Typography>
               <TextField
                 variant="outlined"

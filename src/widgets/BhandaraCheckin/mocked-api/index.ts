@@ -1,4 +1,5 @@
 import {
+  Batch,
   CheckinTypesEnum,
   CheckinWithEmailOrMobileApiStoreData,
   IAbhyasiCheckinApiStoreData,
@@ -19,16 +20,16 @@ export const mockedApis: BhandaraCheckinAPIs = {
   checkinAbhyasi: (
     abhyasiId: string,
     dormAndBerthAllocation: string = "",
-    batch: string
+    eventName: string,
+    batch: Batch
   ) => {
     const $user: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
-      deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.AbhyasiId,
-      updatedInReport: false,
       dormAndBerthAllocation,
-      eventName: batch,
+      eventName,
+      batch,
     };
     checkedInPeople.push($user as any);
     setTimeout(() => {
@@ -39,7 +40,7 @@ export const mockedApis: BhandaraCheckinAPIs = {
   checkinWithEmailOrMobile: (userDetails) => {
     const $user = {
       ...userDetails,
-      deviceId: "mocked-device-id",
+      // deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.EmailOrMobile,
       updatedInReport: false,

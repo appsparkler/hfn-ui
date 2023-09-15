@@ -6,3 +6,4 @@ export * from "./BhandaraCheckinView";
 export * from "./CheckinInfoTile";
 export * from "./CheckinInfoTiles";
 export * from "./Dashboard";
+export * from "./Batch";

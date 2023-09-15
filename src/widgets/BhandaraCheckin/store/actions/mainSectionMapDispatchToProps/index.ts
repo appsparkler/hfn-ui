@@ -1,7 +1,6 @@
 import { MapDispatchToProps } from "react-redux";
 import {
   mainSectionActions,
-  getMainSectionInitialState,
   handleSwitchScanner,
 } from "widgets/BhandaraCheckin/store";
 import { isAbhyasiId, isMobileOrEmail } from "utils";
@@ -16,7 +15,7 @@ import {
   DASHBOARD,
   REFRESH_APP,
 } from "widgets/BhandaraCheckin/routing/actions/page";
-import { SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
+import { Batch, SectionMainDispatchProps } from "widgets/BhandaraCheckin/types";
 import { handleClickScan } from "./handleClickScan";
 import { abhyasiIdCheckinScreenActions } from "../../slices/abhyasiIdCheckinScreen";
 
@@ -27,25 +26,23 @@ export const mapDispatchToProps: MapDispatchToProps<
   onRefresh: async () => {
     dispatch(REFRESH_APP());
   },
+  onChangeBatch: (batch) => {
+    dispatch(mainSectionActions.setBatch(batch));
+  },
   onMount: async () => {},
   onChange: (updatedValue) => {
-    dispatch(
-      mainSectionActions.setState({
-        ...getMainSectionInitialState(),
-        value: updatedValue,
-      })
-    );
+    dispatch(mainSectionActions.setValue(updatedValue));
   },
-  onClickScan: () => handleClickScan()(dispatch),
-  onClickStart: async (inputValue) => {
+  onClickScan: () => handleClickScan(dispatch),
+  onClickStart: async (inputValue, batch) => {
     const $isAbhyasiId = isAbhyasiId(inputValue);
     if ($isAbhyasiId) {
       const refinedValue = inputValue.trim().toUpperCase();
-      await checkinAbhyasi(dispatch, refinedValue);
+      await checkinAbhyasi(dispatch, refinedValue, batch);
     }
     const $isMobileOrEmail = isMobileOrEmail(inputValue);
     if ($isMobileOrEmail) {
-      dispatch(updateDetailsActions.prepare(inputValue));
+      dispatch(updateDetailsActions.prepare({ inputValue, batch }));
       dispatch(pageActions.UPDATE_DETAILS());
     }
   },
@@ -72,9 +69,11 @@ function setDarkMode(dispatch: Dispatch<Action<any>>) {
 
 export async function checkinAbhyasi(
   dispatch: Dispatch<Action<any>>,
-  abhyasiId: string
+  abhyasiId: string,
+  batch: Batch
 ) {
   dispatch(abhyasiIdCheckinScreenActions.setAbhyasiId(abhyasiId));
+  dispatch(abhyasiIdCheckinScreenActions.setBatch(batch));
   dispatch(ABHYASI_ID_CHECKIN_SCREEN());
   // dispatch(mainSectionActions.startProcessing());
   // const isCheckedInRes = await dispatch<any>(isAbhyasiCheckedIn(abhyasiId));

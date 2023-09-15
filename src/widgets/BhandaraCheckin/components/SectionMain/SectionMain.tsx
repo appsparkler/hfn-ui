@@ -5,33 +5,28 @@ import {
   Typography,
   Box,
   SwitchProps,
+  Card,
+  CardContent,
 } from "@mui/material";
 import { RefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import {
   AsyncButton,
   ModeSwitch,
-  CenterOfViewport,
   Horizontal,
   Vertical,
+  SelectField,
+  OptionValue,
 } from "components";
 import { ClickHandler, InputChangeHandler } from "types";
 import { isAbhyasiId, isEmail, isMobile } from "utils";
 import { maxWidth, textStrings } from "widgets/BhandaraCheckin/constants";
 import { noop } from "lodash/fp";
 import { CustomMenu } from "./CustomMenu";
-import { SectionMainProps } from "widgets/BhandaraCheckin/types";
+import { Batch, SectionMainProps } from "widgets/BhandaraCheckin/types";
 import { QrCode2 } from "@mui/icons-material";
 
 export const SectionMain = ({
-  onClickStart,
-  onChange,
-  onSwitchMode,
   isDarkMode,
-  onClickDashboard,
-  onClickScan,
-  onSwitchScanner = noop,
-  onMount = noop,
-  onRefresh = noop,
   scanBtnDisabled,
   scanBtnProcessing,
   isScannerOn,
@@ -39,6 +34,16 @@ export const SectionMain = ({
   error,
   helperText,
   value = "",
+  batch,
+  onSwitchMode,
+  onRefresh = noop,
+  onClickScan,
+  onMount = noop,
+  onChange,
+  onChangeBatch,
+  onClickStart,
+  onClickDashboard,
+  onSwitchScanner = noop,
 }: SectionMainProps) => {
   const idFieldRef: RefObject<HTMLInputElement> | null = useRef(null);
 
@@ -60,8 +65,8 @@ export const SectionMain = ({
   );
 
   const handleClickStart = useCallback<ClickHandler>(() => {
-    onClickStart(value.trim());
-  }, [onClickStart, value]);
+    onClickStart(value.trim(), batch);
+  }, [batch, onClickStart, value]);
 
   const handleSwitchScanner = useCallback<NonNullable<SwitchProps["onChange"]>>(
     (evt, checked) => {
@@ -70,83 +75,121 @@ export const SectionMain = ({
     [onSwitchScanner]
   );
 
+  const handleChangeBatch = useCallback(
+    (_name: string, newValue: OptionValue) => {
+      onChangeBatch(newValue as Batch);
+    },
+    [onChangeBatch]
+  );
+
   useEffect(() => {
     if (idFieldRef.current) idFieldRef.current.focus();
     onMount();
   }, [onMount]);
 
   return (
-    <CenterOfViewport gap={2} width={"100%"} maxWidth={maxWidth} p={1}>
-      <img
-        src={textStrings.hfn_logo_imgUrl}
-        alt={textStrings.hfn_logo_alt}
-        width="320"
-      />
-      <Typography variant="h4" align="center">
-        {textStrings.eventTitle}
-      </Typography>
-      <TextField
-        type="text"
-        label="Abhyasi ID / Mobile # / Email"
-        variant="outlined"
-        required
-        autoComplete="off"
-        error={error}
-        value={value}
-        onChange={handleChange}
-        helperText={helperText}
-        inputRef={idFieldRef}
-        fullWidth
-        FormHelperTextProps={{
-          sx: {
-            maxHeight: 38,
-            height: 38,
-          },
-        }}
-      />
-      <Horizontal gap={3}>
-        <AsyncButton
-          type="button"
-          onClick={handleClickStart}
-          disabled={!isStartButtonEnabled}
-          isProcessing={isProcessing}
-          size="large"
-        >
-          START CHECK IN
-        </AsyncButton>
-        <AsyncButton
-          color="warning"
-          startIcon={<BarcodeSVG />}
-          disabled={scanBtnProcessing || scanBtnDisabled}
-          isProcessing={scanBtnProcessing}
-          onClick={onClickScan}
-          size="large"
-          endIcon={<QrCode2 fontSize="medium" />}
-        ></AsyncButton>
-      </Horizontal>
-
-      <Vertical>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={isScannerOn}
-              disabled={scanBtnProcessing}
-              onChange={handleSwitchScanner}
+    <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
+      <Card sx={{ mt: 6, maxWidth: maxWidth, opacity: 0.86 }}>
+        <CardContent>
+          <Vertical alignItems={"center"} gap={2}>
+            <img
+              src={textStrings.hfn_logo_imgUrl}
+              alt={textStrings.hfn_logo_alt}
+              width="230"
             />
-          }
-          label="Scanner"
-        />
-      </Vertical>
-      <Box position="fixed" right={0} top={0}>
-        <Horizontal alignItems={"center"}>
-          <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
-          <CustomMenu
-            onClickDashboard={onClickDashboard}
-            onRefreshApp={onRefresh}
-          />
-        </Horizontal>
-      </Box>
-    </CenterOfViewport>
+            <Typography variant="h5" align="center">
+              {textStrings.eventTitle}
+            </Typography>
+            <SelectField
+              size="medium"
+              autoWidth
+              autoComplete="off"
+              label="Batch"
+              labelId="batch"
+              name="batch"
+              onChange={handleChangeBatch}
+              options={[
+                {
+                  label: "Batch 1",
+                  value: "batch-1",
+                },
+                {
+                  label: "Batch 2",
+                  value: "batch-2",
+                },
+                {
+                  label: "Batch 1,Batch 2",
+                  value: "batch-1,batch-2",
+                },
+              ]}
+              required
+              value={batch}
+            />
+            <TextField
+              type="text"
+              label="Abhyasi ID / Mobile # / Email"
+              variant="outlined"
+              required
+              autoComplete="off"
+              error={error}
+              value={value}
+              onChange={handleChange}
+              helperText={helperText}
+              inputRef={idFieldRef}
+              fullWidth
+              FormHelperTextProps={{
+                sx: {
+                  maxHeight: 38,
+                  height: 38,
+                },
+              }}
+            />
+            <Horizontal gap={1}>
+              <AsyncButton
+                type="button"
+                onClick={handleClickStart}
+                disabled={!isStartButtonEnabled}
+                isProcessing={isProcessing}
+                size="large"
+              >
+                START CHECK IN
+              </AsyncButton>
+              <AsyncButton
+                color="warning"
+                startIcon={<BarcodeSVG />}
+                disabled={scanBtnProcessing || scanBtnDisabled}
+                isProcessing={scanBtnProcessing}
+                onClick={onClickScan}
+                size="large"
+                endIcon={<QrCode2 fontSize="medium" />}
+              ></AsyncButton>
+            </Horizontal>
+
+            <Vertical>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isScannerOn}
+                    disabled={scanBtnProcessing}
+                    onChange={handleSwitchScanner}
+                  />
+                }
+                label="Scanner"
+              />
+            </Vertical>
+            <Box position="fixed" right={0} top={0}>
+              <Horizontal alignItems={"center"}>
+                <ModeSwitch checked={isDarkMode} onSwitch={onSwitchMode} />
+                <CustomMenu
+                  onClickDashboard={onClickDashboard}
+                  onRefreshApp={onRefresh}
+                />
+              </Horizontal>
+            </Box>
+          </Vertical>
+        </CardContent>
+      </Card>
+    </Vertical>
   );
 };
 

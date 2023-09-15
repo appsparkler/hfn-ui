@@ -13,8 +13,8 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
   const handleCheck = useCallback<ICheckinInfoTileDispatchProps["onCheck"]>(
     (registrationId, checked) => {
       const newData = data.map((item) => {
-        if (item.registrationId === registrationId) {
-          return { ...item, checked };
+        if (item.regId === registrationId) {
+          return { ...item, checkin: checked };
         }
         return item;
       });
@@ -28,8 +28,8 @@ export const CheckinInfoTiles: TCheckinInfoTilesComponent = ({
   >(
     (registrationId, dormAllocation) => {
       const newData = data.map((item) => {
-        if (item.registrationId === registrationId) {
-          return { ...item, dormAllocation };
+        if (item.regId === registrationId) {
+          return { ...item, dormAndBerthAllocation: dormAllocation };
         }
         return item;
       });

@@ -1,6 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
-import { SectionMainStateProps } from "widgets/BhandaraCheckin/types";
+import { Batch, SectionMainStateProps } from "widgets/BhandaraCheckin/types";
+
+function getDefaultBatch(): Batch {
+  const today: Date = new Date();
+  const twentyFifthSeptember: Date = new Date(today.getFullYear(), 8, 25); // Month is 0-based, so 8 represents September
+
+  if (today < twentyFifthSeptember) {
+    return "batch-1";
+  } else {
+    return "batch-2";
+  }
+}
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
   const isScannerOn = Boolean(
@@ -17,6 +28,7 @@ export const getMainSectionInitialState = (): SectionMainStateProps => {
     isScannerOn,
     scanBtnDisabled: !isScannerOn,
     scanBtnProcessing: false,
+    batch: getDefaultBatch(),
   };
 };
 
@@ -26,6 +38,9 @@ const mainSectionSlice = createSlice({
   reducers: {
     setValue: (state, { payload }: { payload: string }) => {
       state.value = payload;
+    },
+    setBatch: (state, { payload }: { payload: Batch }) => {
+      state.batch = payload;
     },
     setDarkMode: (state) => {
       state.isDarkMode = true;

@@ -1,7 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { useCallback } from "react";
-import { ICheckinInfoTilesProps } from "widgets/BhandaraCheckin/types";
+import {
+  CheckinTypesEnum,
+  ICheckinInfoTilesProps,
+} from "widgets/BhandaraCheckin/types";
 import { CheckinInfoTiles } from "./CheckinInfoTiles";
 
 const Story = {
@@ -29,28 +32,50 @@ export const checkinInfoTiles: ComponentStory<typeof CheckinInfoTiles> =
 checkinInfoTiles.args = {
   data: [
     {
+      type: CheckinTypesEnum.QR,
       abhyasiId: "tile-1",
-      checked: false,
+      timestamp: Date.now(),
+      dormAndBerthAllocation: "",
+      checkin: false,
+      batch: "batch-1",
+      eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
+      pnr: "ABC-DEFH-HIJE",
+      orderId: "Bhandara Sept 2023",
       fullName: "Jane Mathew",
       dormPreference: "East Comform Dorm - B1",
       berthPreference: "LB",
-      registrationId: "AAV1234",
+      regId: "AAV1234",
     },
     {
       abhyasiId: "tile-2",
-      checked: false,
+      type: CheckinTypesEnum.QR,
+      timestamp: Date.now(),
+      dormAndBerthAllocation: "",
+
+      checkin: false,
+      batch: "batch-1",
+      eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
+      pnr: "ABC-DEFH-HIJE",
+      orderId: "Bhandara Sept 2023",
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       berthPreference: "LB",
-      registrationId: "AAV2314",
+      regId: "AAV2314",
     },
     {
       abhyasiId: "tile-3",
-      checked: false,
+      type: CheckinTypesEnum.QR,
+      timestamp: Date.now(),
+      dormAndBerthAllocation: "",
+      checkin: false,
+      pnr: "ABC-DEFH-HIJE",
+      batch: "batch-1",
+      eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
+      orderId: "Bhandara Sept 2023",
       fullName: "Shekhar Kapoor",
       dormPreference: "German Tent",
       berthPreference: "LB",
-      registrationId: "A32sde34",
+      regId: "A32sde34",
     },
   ],
 };

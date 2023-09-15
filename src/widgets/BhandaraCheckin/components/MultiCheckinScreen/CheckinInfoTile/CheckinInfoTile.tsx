@@ -6,33 +6,38 @@ import { Vertical } from "components/Boxes";
 import { Box } from "@mui/system";
 import { CheckinInfoTileComponent } from "widgets/BhandaraCheckin/types";
 import { TextFieldPropsOnChange, TFormControlLabelPropsOnChange } from "types";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 
 export const CheckinInfoTile: CheckinInfoTileComponent = ({
-  checked,
-  fullName,
-  dormPreference,
+  abhyasiId,
+  batch,
   berthPreference,
+  checkin,
+  dormAndBerthAllocation,
+  dormPreference,
+  eventName,
+  fullName,
+  orderId,
+  pnr,
+  regId,
   onCheck,
   onChangeDormAllocation,
-  abhyasiId,
-  registrationId,
 }) => {
   const handleChangeCheckinStatus = useCallback<TFormControlLabelPropsOnChange>(
-    (_evt, checked) => onCheck(registrationId, checked),
-    [registrationId, onCheck]
+    (_evt, checked) => onCheck(regId, checked),
+    [regId, onCheck]
   );
 
   const handleChangeDormAllocation = useCallback<TextFieldPropsOnChange>(
     (evt) => {
-      onChangeDormAllocation(registrationId, evt.target.value);
+      onChangeDormAllocation(regId, evt.target.value);
     },
-    [registrationId, onChangeDormAllocation]
+    [regId, onChangeDormAllocation]
   );
 
-  const showPreference = useMemo(() => {
-    return Boolean(dormPreference) && Boolean(berthPreference);
-  }, [berthPreference, dormPreference]);
+  // const showPreference = useMemo(() => {
+  //   return Boolean(dormPreference) && Boolean(berthPreference);
+  // }, [berthPreference, dormPreference]);
 
   return (
     <Card>
@@ -41,40 +46,57 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
           <FormControlLabel
             control={
               <Checkbox
-                checked={checked}
+                checked={checkin}
                 onChange={handleChangeCheckinStatus}
               />
             }
             label={fullName}
           />
           <Box>
-            {abhyasiId ? (
-              <Typography variant="body2" color="text.secondary">
-                <strong>Abhyasi Id:&nbsp;</strong>
-                {abhyasiId}
-              </Typography>
-            ) : null}
             <Typography variant="body2" color="text.secondary">
-              <strong>Reg Id:&nbsp;</strong>
-              {registrationId}&nbsp;&nbsp;
+              <strong>Event Name:&nbsp;</strong>
+              {eventName}
             </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Batch:&nbsp;</strong>
+              {batch}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Abhyasi Id:&nbsp;</strong>
+              {abhyasiId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Registration ID:&nbsp;</strong>
+              {regId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Order ID:&nbsp;</strong>
+              {orderId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>PNR:&nbsp;</strong>
+              {pnr}
+            </Typography>
+            {dormPreference && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Dorm Preference:&nbsp;</strong>
+                {dormPreference}
+              </Typography>
+            )}
+            {berthPreference && (
+              <Typography variant="body2" color="text.secondary">
+                <strong>Berth Preference:&nbsp;</strong>
+                {berthPreference}
+              </Typography>
+            )}
           </Box>
-          {showPreference ? (
-            <Box>
-              <Typography variant="body2" color="text.secondary">
-                <strong>Dorm Preference:</strong>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {dormPreference}, {berthPreference}
-              </Typography>
-            </Box>
-          ) : null}
           <Box width="100%">
             <Typography variant="body2" color="text.secondary">
               <strong>Dorm Allocation:</strong>
             </Typography>
             <TextField
               variant="outlined"
+              defaultValue={dormAndBerthAllocation}
               placeholder="Please enter allocated dorm and berth..."
               fullWidth
               onChange={handleChangeDormAllocation}

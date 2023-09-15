@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IAbhyasiIDCheckinScreenStateProps } from "widgets/BhandaraCheckin/types";
+import {
+  Batch,
+  IAbhyasiIDCheckinScreenStateProps,
+} from "widgets/BhandaraCheckin/types";
 
 const getInitialState = (): IAbhyasiIDCheckinScreenStateProps => ({
   abhyasiId: "",
   dormAndBerthAllocation: "",
+  batch: "batch-1",
 });
 
 const slice = createSlice({
@@ -12,6 +16,9 @@ const slice = createSlice({
   reducers: {
     setAbhyasiId: (state, action: PayloadAction<string>) => {
       state.abhyasiId = action.payload;
+    },
+    setBatch: (state, action: PayloadAction<Batch>) => {
+      state.batch = action.payload;
     },
     setDormAndBerthAllocation: (state, action: PayloadAction<string>) => {
       state.dormAndBerthAllocation = action.payload;

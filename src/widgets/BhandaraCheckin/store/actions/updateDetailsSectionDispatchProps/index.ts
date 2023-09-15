@@ -17,6 +17,7 @@ import {
 } from "../../slices";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { textStrings } from "widgets/BhandaraCheckin/constants";
+import { RootState } from "../..";
 
 export const updateDetailsSectionMapDispatchToProps: MapDispatchToProps<
   SectionUpdateDetailsDispatchProps,
@@ -53,9 +54,13 @@ const onClickCheckinAction = createAsyncThunk<
       dormAndBerthAllocation,
     } = $userDetails;
 
+    const {
+      updateDetailsV2Section: { batch },
+    } = getState() as RootState;
+
     const userDetails: CheckinEmailOrMobileUserDetails = {
       ageGroup: String(ageGroup.value),
-      email: String(email.value?.toLowerCase()),
+      email: String(email.value?.toUpperCase()),
       gender: String(gender.value) as GenderType,
       city: String(city.value?.toUpperCase()),
       state: String(state.value?.toUpperCase()),
@@ -75,7 +80,9 @@ const onClickCheckinAction = createAsyncThunk<
         })
       );
     } else {
-      const res = await dispatch<any>(checkinWithEmailOrMobile(userDetails));
+      const res = await dispatch<any>(
+        checkinWithEmailOrMobile({ userDetails, batch })
+      );
       if (res.meta.requestStatus === "fulfilled") {
         if (res.payload) {
           dispatch(pageActions.CHECKIN_SUCCESS());

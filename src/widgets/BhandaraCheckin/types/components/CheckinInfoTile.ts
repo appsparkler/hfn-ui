@@ -1,14 +1,6 @@
-export interface ICheckinTileInfo {
-  checked: boolean;
-  fullName: string;
-  abhyasiId: string;
-  registrationId: string;
-  dormPreference?: string;
-  berthPreference?: string;
-  dormAllocation?: string;
-}
+import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 
-export type ICheckinInfoTileStateProps = {} & ICheckinTileInfo;
+export type ICheckinInfoTileStateProps = {} & QRCodeCheckin;
 
 export interface ICheckinInfoTileDispatchProps {
   onCheck: (registrationId: string, checked: boolean) => void;

@@ -1,35 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  ICheckinInfoTilesStateProps,
   IQREventInfo,
-  IQRUserInfo,
   MultiCheckinScreenStateProps,
-  ICheckinTileInfo,
   PNRType,
 } from "widgets/BhandaraCheckin/types";
+import { QRCodeCheckin } from "widgets/BhandaraCheckin/utils/QRCodeCheckin";
 
 const getInitialState = (): MultiCheckinScreenStateProps => ({
   userData: [],
+  more: "",
   eventInfo: {
     eventName: "",
     pnr: "",
     session: "Bhandara",
-    pnrType: PNRType.FREE_ACCOMODATION
+    pnrType: PNRType.FREE_ACCOMODATION,
   },
 });
-
-const mapUserToCheckinTileData = (
-  users: IQRUserInfo[]
-): ICheckinInfoTilesStateProps["data"] => {
-  return users.map((user) => ({
-    dormPreference: user.dormPrference,
-    berthPreference: user.berthPreference,
-    checked: false,
-    fullName: user.fullName,
-    registrationId: user.regId,
-    abhyasiId: user.abhyasiId,
-  }));
-};
 
 export const multiCheckinScreenSlice = createSlice({
   name: "multiCheckinScreen",
@@ -37,13 +23,17 @@ export const multiCheckinScreenSlice = createSlice({
   reducers: {
     setData: (
       state,
-      { payload }: { payload: { event: IQREventInfo; users: IQRUserInfo[] } }
+      {
+        payload,
+      }: {
+        payload: { event: IQREventInfo; more: string; users: QRCodeCheckin[] };
+      }
     ) => {
-      const userData = mapUserToCheckinTileData(payload.users);
-      state.userData = userData;
+      state.userData = payload.users;
+      state.more = payload.more;
       state.eventInfo = payload.event;
     },
-    setUserData: (state, { payload }: { payload: ICheckinTileInfo[] }) => {
+    setUserData: (state, { payload }: { payload: QRCodeCheckin[] }) => {
       state.userData = payload;
     },
   },

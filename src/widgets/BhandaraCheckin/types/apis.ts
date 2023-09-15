@@ -1,4 +1,5 @@
 import {
+  Batch,
   CheckinEmailOrMobileUserDetails,
   IAbhyasiCheckinApiStoreData,
   IQRCheckinUser,
@@ -7,11 +8,16 @@ import { noop } from "lodash/fp";
 import { ICheckinsMetaData } from "./firebase";
 
 export interface CheckinWithEmailOrMobileApi {
-  (userDetails: CheckinEmailOrMobileUserDetails): boolean;
+  (userDetails: CheckinEmailOrMobileUserDetails, batch: Batch): boolean;
 }
 
 export interface CheckinAbhyasiApi {
-  (abhyasiId: string, dormAndBerthAllocation: string, batch: string): boolean;
+  (
+    abhyasiId: string,
+    dormAndBerthAllocation: string,
+    eventName: string,
+    batch: Batch
+  ): boolean;
 }
 
 export type OfflineCacheData =

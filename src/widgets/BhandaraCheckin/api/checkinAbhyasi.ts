@@ -1,5 +1,4 @@
 import { CheckinAbhyasiApi } from "widgets/BhandaraCheckin/types";
-import { LocalStorageKeys } from "../constants";
 import { getCheckinDocRef } from "widgets/BhandaraCheckin/firebase";
 import { setDoc } from "firebase/firestore";
 import {
@@ -17,17 +16,17 @@ export const mockedCheckinAbhyasi: CheckinAbhyasiApi = (abhyasiId) => {
 export const checkinAbhyasi: CheckinAbhyasiApi = (
   abhyasiId,
   dormAndBerthAllocation,
+  eventName,
   batch
 ) => {
   try {
     const data: IAbhyasiCheckinApiStoreData = {
       abhyasiId,
-      deviceId: String(localStorage.getItem(LocalStorageKeys.DEVICE_ID)),
       timestamp: Date.now(),
       type: CheckinTypesEnum.AbhyasiId,
-      updatedInReport: false,
       dormAndBerthAllocation,
-      eventName: batch,
+      eventName,
+      batch,
     };
 
     const docRef = getCheckinDocRef(abhyasiId);

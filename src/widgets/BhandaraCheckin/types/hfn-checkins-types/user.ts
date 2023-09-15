@@ -1,6 +1,8 @@
+import { Batch } from "../components";
+
 export enum CheckinTypesEnum {
-  AbhyasiId = "AbhyasiId",
-  EmailOrMobile = "EmailOrMobile",
+  AbhyasiId = "ABHYASI_ID",
+  EmailOrMobile = "MOBILE_OR_EMAIL",
   QR = "QR",
 }
 
@@ -24,17 +26,16 @@ export type CheckinEmailOrMobileUserDetails = {
 
 export interface IAbhyasiCheckinApiStoreData {
   abhyasiId: string;
-  deviceId: string;
   timestamp: number;
   type: CheckinTypesEnum.AbhyasiId;
-  updatedInReport: boolean;
   dormAndBerthAllocation: string;
   eventName: string;
+  batch: Batch;
 }
 
 export type CheckinWithEmailOrMobileApiStoreData =
   CheckinEmailOrMobileUserDetails & {
-    deviceId: string;
+    batch: Batch;
     timestamp: number;
     type: CheckinTypesEnum.EmailOrMobile;
     updatedInReport: boolean;
@@ -43,10 +44,8 @@ export type CheckinWithEmailOrMobileApiStoreData =
   };
 
 export type ICheckinWIthQRApiStoreData = {
-  deviceId: string;
   timestamp: number;
   regId: string;
-  updatedInReport: false;
   eventName: string;
   abhyasiId: string;
   pnr: string;
@@ -62,15 +61,24 @@ export type CheckinData =
   | CheckinWithEmailOrMobileApiStoreData;
 
 export interface IQRCheckinUser {
-  regId: string;
-  eventName: string;
   abhyasiId: string;
-  pnr: string;
-  fullName: string;
-  dormPreference: string;
+
+  batch: string;
+
   berthPreference: string;
   dormAndBerthAllocation: string;
+  dormPreference: string;
+  eventName: string;
+  fullName: string;
+
+  orderId: string;
+
+  pnr: string;
+  regId: string;
+
+  timestamp: number;
+
   type: CheckinTypesEnum.QR;
 }
 
-export type MyType = "hello"
+export type MyType = "hello";

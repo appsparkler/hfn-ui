@@ -7,6 +7,7 @@ import { QrCode2 } from "@mui/icons-material";
 
 export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
   userData,
+  more,
   eventInfo: { eventName, pnr },
   onClickCheckin,
   onClickCancel,
@@ -33,6 +34,17 @@ export const MultiCheckinScreen: TMultiCheckinScreenComponent = ({
         </CardContent>
       </Card>
       <CheckinInfoTiles data={userData} onChange={onChangeData} />
+
+      {more && (
+        <Card>
+          <CardContent>
+            <Typography variant="body1" textAlign={"center"}>
+              + {more}(please checkin separately)
+            </Typography>
+          </CardContent>
+        </Card>
+      )}
+
       <Horizontal
         sx={{
           justifyContent: "space-around",
