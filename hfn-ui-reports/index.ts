@@ -1,22 +1,22 @@
-import * as admin from "firebase-admin/app";
-import * as firestore from "firebase-admin/firestore";
-import adminCreds from "./hfn-checkins-firebase-adminsdk-uod1b-375d663d8e.json";
+// import * as admin from "firebase-admin/app";
+// import * as firestore from "firebase-admin/firestore";
+// import adminCreds from "./hfn-checkins-firebase-adminsdk-uod1b-375d663d8e.json";
 import * as xlsx from "xlsx";
 import * as fs from "fs";
 
 // xlsx.set_fs(fs);
-const { cert } = admin;
+// const { cert } = admin;
 
-const { getFirestore } = firestore;
+// const { getFirestore } = firestore;
 
-admin.initializeApp({
-  credential: cert(adminCreds as admin.ServiceAccount),
-});
+// admin.initializeApp({
+//   credential: cert(adminCreds as admin.ServiceAccount),
+// });
 
-const createJsonFile = (fileName: string, data: any[]) => {
-  fs.writeFileSync(fileName, JSON.stringify(data), "utf-8");
-  console.log(`${data.length} docs written to JSON file ${fileName}`);
-};
+// const createJsonFile = (fileName: string, data: any[]) => {
+//   fs.writeFileSync(fileName, JSON.stringify(data), "utf-8");
+//   console.log(`${data.length} docs written to JSON file ${fileName}`);
+// };
 
 const createXLSXFile = (fileName: string, data: any[]) => {
   const workSheet = xlsx.utils.json_to_sheet(data);
@@ -25,22 +25,22 @@ const createXLSXFile = (fileName: string, data: any[]) => {
   xlsx.writeFile(workBook, fileName);
 };
 
-const db = getFirestore();
+// const db = getFirestore();
 
-const getData = async (collectionPath: string) => {
-  const collection = db.collection(collectionPath);
-  const docRef = collection.where("type", "==", "EmailOrMobile");
-  const snapshot = await docRef.get();
-  if (snapshot.empty) {
-    console.log("no matching docs");
-    return;
-  }
-  const data: any[] = [];
-  snapshot.forEach((doc) => {
-    data.push(doc.data());
-  });
-  return data;
-};
+// const getData = async (collectionPath: string) => {
+//   const collection = db.collection(collectionPath);
+//   const docRef = collection.where("type", "==", "EmailOrMobile");
+//   const snapshot = await docRef.get();
+//   if (snapshot.empty) {
+//     console.log("no matching docs");
+//     return;
+//   }
+//   const data: any[] = [];
+//   snapshot.forEach((doc) => {
+//     data.push(doc.data());
+//   });
+//   return data;
+// };
 
 const init = () => {
   createXLSXFromJSON("./data.json", "./data.xlsx");
