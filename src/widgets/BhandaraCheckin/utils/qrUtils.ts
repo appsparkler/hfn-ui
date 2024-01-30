@@ -65,10 +65,10 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
       }
       return {
         regId: columns[0],
-        batch: columns[1] as Batch,
-        abhyasiId: columns[2],
-        fullName: `${columns[2]} - PAID`,
-        dormPreference: columns[4] || "",
+        batch: columns[4] as Batch,
+        abhyasiId: columns[1],
+        fullName: `${columns[2]}`,
+        dormPreference: columns[3] || "",
         berthPreference: columns[5] || "",
         checkin: false,
         timestamp: 0,
