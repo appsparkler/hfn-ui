@@ -1,8 +1,7 @@
 {
-  "zenMode.hideTabs": false,
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.editor.highlightModifiedTabs": true,
-  "workbench.editor.showTabs": true,
+  "workbench.editor.showTabs": "multiple",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true
 }

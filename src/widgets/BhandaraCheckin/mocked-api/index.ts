@@ -40,10 +40,8 @@ export const mockedApis: BhandaraCheckinAPIs = {
   checkinWithEmailOrMobile: (userDetails) => {
     const $user = {
       ...userDetails,
-      // deviceId: "mocked-device-id",
       timestamp: new Date().getTime(),
       type: CheckinTypesEnum.EmailOrMobile,
-      updatedInReport: false,
     };
     checkedInPeople.push(
       $user as

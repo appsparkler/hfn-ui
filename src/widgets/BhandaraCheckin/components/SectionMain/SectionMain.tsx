@@ -110,16 +110,12 @@ export const SectionMain = ({
               onChange={handleChangeBatch}
               options={[
                 {
-                  label: "Batch 1",
+                  label: "batch-1",
                   value: "batch-1",
                 },
                 {
-                  label: "Batch 2",
-                  value: "batch-2",
-                },
-                {
-                  label: "Batch 1,Batch 2",
-                  value: "batch-1,batch-2",
+                  label: "batch-2, batch-1",
+                  value: "batch-2, batch-1",
                 },
               ]}
               required

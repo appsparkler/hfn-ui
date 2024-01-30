@@ -39,7 +39,7 @@ updateDetails.args = {
   genderOptions: [...genderOptions],
   ageGroupOptions: [...ageGroupOptions],
   isProcessing: false,
-  batch: "batch-1,batch-2",
+  batch: "batch-2, batch-1",
   userDetails: {
     fullName: {
       value: "",

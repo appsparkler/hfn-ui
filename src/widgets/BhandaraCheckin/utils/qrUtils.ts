@@ -44,12 +44,30 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
     .filter((checkinRow) => checkinRow.split("|").length > 3)
     .map((checkinRow) => {
       const columns = checkinRow.split("|");
+      const rowType = getQRRowType(checkinRow);
+      if (rowType === QRType.OWN_ACCOMMODATION) {
+        return {
+          regId: columns[0],
+          batch: columns[1] as Batch,
+          abhyasiId: columns[2],
+          fullName: `${columns[3]}`,
+          dormPreference: columns[4] || "",
+          berthPreference: columns[5] || "",
+          checkin: false,
+          timestamp: 0,
+          dormAndBerthAllocation: "",
+          pnr: generalDetails.pnr,
+          eventName: generalDetails.eventTitle,
+          orderId: generalDetails.orderId,
+          type: CheckinTypesEnum.QR,
+        };
+      }
       return {
         regId: columns[0],
-        batch: columns[1] as Batch,
-        abhyasiId: columns[2],
-        fullName: columns[3],
-        dormPreference: columns[4] || "",
+        batch: columns[4] as Batch,
+        abhyasiId: columns[1],
+        fullName: `${columns[2]}`,
+        dormPreference: columns[3] || "",
         berthPreference: columns[5] || "",
         checkin: false,
         timestamp: 0,
@@ -65,17 +83,8 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
 
 function getGeneralDetails(value: string): EventOrderGeneralDetails {
   const rows = value.split(";");
-  const qrType = getQRType(value);
   const firstRow = rows[0];
   const columnsInFirstRow = firstRow.split("|").map((column) => column.trim());
-
-  if (qrType === QRType.PAID_ACCOMMODATION) {
-    return {
-      eventTitle: columnsInFirstRow[0],
-      pnr: columnsInFirstRow[1],
-      orderId: columnsInFirstRow[2],
-    };
-  }
 
   return {
     eventTitle: columnsInFirstRow[0],
@@ -84,22 +93,12 @@ function getGeneralDetails(value: string): EventOrderGeneralDetails {
   };
 }
 
-function getQRType(code: string): QRType {
-  const refinedValue = code.replace(/\n/g, "");
-  const rows = refinedValue.split(";");
-  const firstRow = rows[0];
-  const columnsInFirstRow = firstRow.split("|").map((column) => column.trim());
+function getQRRowType(row: string): QRType {
+  const columnsInRow:string[] = row.split("|").map((column) => column.trim());
 
-  const isPNR = (str: string): boolean =>
-    /[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/.test(str);
-
-  if (isPNR(columnsInFirstRow[1])) {
+  if (columnsInRow.length > 4) {
     return QRType.PAID_ACCOMMODATION;
+  } else {
+    return QRType.OWN_ACCOMMODATION
   }
-
-  if (isPNR(columnsInFirstRow[2])) {
-    return QRType.OWN_ACCOMMODATION;
-  }
-
-  return QRType.NONE;
 }
