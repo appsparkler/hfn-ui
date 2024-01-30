@@ -83,17 +83,8 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
 
 function getGeneralDetails(value: string): EventOrderGeneralDetails {
   const rows = value.split(";");
-  // const qrType = getQRType(value);
   const firstRow = rows[0];
   const columnsInFirstRow = firstRow.split("|").map((column) => column.trim());
-
-  // if (qrType === QRType.PAID_ACCOMMODATION) {
-  //   return {
-  //     eventTitle: columnsInFirstRow[0],
-  //     pnr: columnsInFirstRow[1],
-  //     orderId: columnsInFirstRow[2],
-  //   };
-  // }
 
   return {
     eventTitle: columnsInFirstRow[0],
@@ -101,10 +92,6 @@ function getGeneralDetails(value: string): EventOrderGeneralDetails {
     pnr: columnsInFirstRow[2],
   };
 }
-
-
-  // const isPNR = (str: string): boolean =>
-  //   /[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/.test(str);
 
 function getQRRowType(row: string): QRType {
   const columnsInRow:string[] = row.split("|").map((column) => column.trim());
@@ -115,20 +102,3 @@ function getQRRowType(row: string): QRType {
     return QRType.OWN_ACCOMMODATION
   }
 }
-
-// function getQRType(code: string): QRType {
-//   const refinedValue = code.replace(/\n/g, "");
-//   const rows = refinedValue.split(";");
-//   const firstRow = rows[0];
-//   const columnsInFirstRow = firstRow.split("|").map((column) => column.trim());
-
-//   if (isPNR(columnsInFirstRow[1])) {
-//     return QRType.PAID_ACCOMMODATION;
-//   }
-
-//   if (isPNR(columnsInFirstRow[2])) {
-//     return QRType.OWN_ACCOMMODATION;
-//   }
-
-//   return QRType.NONE;
-// }
