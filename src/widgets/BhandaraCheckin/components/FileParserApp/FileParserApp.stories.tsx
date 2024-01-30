@@ -36,7 +36,6 @@ const Template: ComponentStory<typeof FileParserApp> = (args) => {
             ...eachItem,
             timestamp: Date.now(),
             type: "FileUpload",
-            updatedInReport: false,
             deviceId: "admin",
           });
         });

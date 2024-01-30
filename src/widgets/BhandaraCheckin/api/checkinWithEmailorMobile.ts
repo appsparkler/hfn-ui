@@ -16,7 +16,6 @@ export const checkinWithEmailOrMobile: CheckinWithEmailOrMobileApi = (
       batch,
       timestamp: Date.now(),
       type: CheckinTypesEnum.EmailOrMobile,
-      updatedInReport: false,
       dormAndBerthAllocation: attendee.dormAndBerthAllocation,
     };
     const mobileOrEmail =

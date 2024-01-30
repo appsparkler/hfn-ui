@@ -38,7 +38,6 @@ export type CheckinWithEmailOrMobileApiStoreData =
     batch: Batch;
     timestamp: number;
     type: CheckinTypesEnum.EmailOrMobile;
-    updatedInReport: boolean;
     dormAndBerthAllocation: string;
     eventName: string;
   };
