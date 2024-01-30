@@ -58,24 +58,24 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
               {eventName}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              <strong>Batch:&nbsp;</strong>
-              {batch}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Abhyasi Id:&nbsp;</strong>
-              {abhyasiId}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <strong>Registration ID:&nbsp;</strong>
-              {regId}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
               <strong>Order ID:&nbsp;</strong>
               {orderId}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               <strong>PNR:&nbsp;</strong>
               {pnr}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Registration ID:&nbsp;</strong>
+              {regId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Abhyasi Id:&nbsp;</strong>
+              {abhyasiId}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              <strong>Batch:&nbsp;</strong>
+              {batch}
             </Typography>
             {dormPreference && (
               <Typography variant="body2" color="text.secondary">
