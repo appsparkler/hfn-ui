@@ -3,14 +3,7 @@ import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { Batch, SectionMainStateProps } from "widgets/BhandaraCheckin/types";
 
 function getDefaultBatch(): Batch {
-  const today: Date = new Date();
-  const twentyFifthSeptember: Date = new Date(today.getFullYear(), 8, 25); // Month is 0-based, so 8 represents September
-
-  if (today < twentyFifthSeptember) {
-    return "batch-1";
-  } else {
-    return "batch-2";
-  }
+  return "batch-1"
 }
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
