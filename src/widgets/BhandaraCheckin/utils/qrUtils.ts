@@ -44,11 +44,30 @@ function getQRCheckins(value: string): QRCodeCheckin[] {
     .filter((checkinRow) => checkinRow.split("|").length > 3)
     .map((checkinRow) => {
       const columns = checkinRow.split("|");
+      const rowType = getQRRowType(checkinRow);
+      if (rowType === QRType.OWN_ACCOMMODATION) {
+        return {
+          regId: columns[0],
+          batch: columns[1] as Batch,
+          abhyasiId: columns[2],
+          // fullName: columns[2],
+          fullName: `${columns[2]} - OWN/FREE`,
+          dormPreference: columns[4] || "",
+          berthPreference: columns[5] || "",
+          checkin: false,
+          timestamp: 0,
+          dormAndBerthAllocation: "",
+          pnr: generalDetails.pnr,
+          eventName: generalDetails.eventTitle,
+          orderId: generalDetails.orderId,
+          type: CheckinTypesEnum.QR,
+        };
+      }
       return {
         regId: columns[0],
         batch: columns[1] as Batch,
         abhyasiId: columns[2],
-        fullName: columns[3],
+        fullName: `${columns[2]} - PAID`,
         dormPreference: columns[4] || "",
         berthPreference: columns[5] || "",
         checkin: false,
@@ -84,14 +103,29 @@ function getGeneralDetails(value: string): EventOrderGeneralDetails {
   };
 }
 
+
+  const isPNR = (str: string): boolean =>
+    /[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/.test(str);
+
+function getQRRowType(row: string): QRType {
+  const columnsInRow:string[] = row.split("|").map((column) => column.trim());
+
+  if (isPNR(columnsInRow[1])) {
+    return QRType.PAID_ACCOMMODATION;
+  }
+
+  if (isPNR(columnsInRow[2])) {
+    return QRType.OWN_ACCOMMODATION;
+  }
+
+  return QRType.NONE;
+}
+
 function getQRType(code: string): QRType {
   const refinedValue = code.replace(/\n/g, "");
   const rows = refinedValue.split(";");
   const firstRow = rows[0];
   const columnsInFirstRow = firstRow.split("|").map((column) => column.trim());
-
-  const isPNR = (str: string): boolean =>
-    /[A-Z]{2}-[A-Z]{4}-[A-Z]{4}/.test(str);
 
   if (isPNR(columnsInFirstRow[1])) {
     return QRType.PAID_ACCOMMODATION;
