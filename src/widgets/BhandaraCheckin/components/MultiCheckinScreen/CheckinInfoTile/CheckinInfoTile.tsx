@@ -40,7 +40,9 @@ export const CheckinInfoTile: CheckinInfoTileComponent = ({
   // }, [berthPreference, dormPreference]);
 
   return (
-    <Card>
+    <Card variant="outlined" sx={{
+      borderColor: theme => checkin ? theme.palette.primary.light : undefined,
+    }}>
       <CardContent>
         <Vertical gap={1}>
           <FormControlLabel
