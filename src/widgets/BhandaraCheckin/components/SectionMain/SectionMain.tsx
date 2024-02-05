@@ -87,6 +87,20 @@ export const SectionMain = ({
     onMount();
   }, [onMount]);
 
+  const batchOptions: {label: string, value: Batch}[] = [
+    {
+      label: "batch-2",
+      value: "batch-2",
+    },
+    {
+      label: "batch-1",
+      value: "batch-1",
+    },
+    {
+      label: "batch-2, batch-1",
+      value: "batch-2, batch-1",
+    },
+  ];
   return (
     <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
       <Card sx={{ mt: 6, maxWidth: maxWidth, opacity: 0.86 }}>
@@ -108,16 +122,7 @@ export const SectionMain = ({
               labelId="batch"
               name="batch"
               onChange={handleChangeBatch}
-              options={[
-                {
-                  label: "batch-1",
-                  value: "batch-1",
-                },
-                {
-                  label: "batch-2, batch-1",
-                  value: "batch-2, batch-1",
-                },
-              ]}
+              options={batchOptions}
               required
               value={batch}
             />
