@@ -52,7 +52,7 @@ multiCheckinScreen.args = {
       timestamp: Date.now(),
       type: CheckinTypesEnum.QR,
       checkin: false,
-      batch: "batch-1",
+      batch: "batch-2",
       eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
       orderId: "Bhandara Sept 2023",
       fullName: "Jane Mathew",
@@ -63,7 +63,7 @@ multiCheckinScreen.args = {
     {
       abhyasiId: "tile-2",
       dormAndBerthAllocation: "",
-      batch: "batch-1",
+      batch: "batch-2",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),
       type: CheckinTypesEnum.QR,
@@ -77,7 +77,7 @@ multiCheckinScreen.args = {
     },
     {
       abhyasiId: "tile-3",
-      batch: "batch-1",
+      batch: "batch-2",
       dormAndBerthAllocation: "",
       pnr: "ABEU-JIW-JWWW",
       timestamp: Date.now(),

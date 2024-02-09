@@ -7,7 +7,7 @@ import {
 const getInitialState = (): IAbhyasiIDCheckinScreenStateProps => ({
   abhyasiId: "",
   dormAndBerthAllocation: "",
-  batch: "batch-1",
+  batch: "batch-2",
 });
 
 const slice = createSlice({

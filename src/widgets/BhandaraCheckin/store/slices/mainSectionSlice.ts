@@ -3,7 +3,7 @@ import { LocalStorageKeys } from "widgets/BhandaraCheckin/constants";
 import { Batch, SectionMainStateProps } from "widgets/BhandaraCheckin/types";
 
 function getDefaultBatch(): Batch {
-  return "batch-1"
+  return "batch-2";
 }
 
 export const getMainSectionInitialState = (): SectionMainStateProps => {
