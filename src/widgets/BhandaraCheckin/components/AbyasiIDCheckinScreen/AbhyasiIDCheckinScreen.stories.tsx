@@ -15,7 +15,7 @@ export const abhyasiIdCheckinScreen: ComponentStory<
 > = Template.bind({});
 abhyasiIdCheckinScreen.args = {
   abhyasiId: "INSAAE769",
-  batch: "batch-1",
+  batch: "batch-2",
 };
 
 export default Story;

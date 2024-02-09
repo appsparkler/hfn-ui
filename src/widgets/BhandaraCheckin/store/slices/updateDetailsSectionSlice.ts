@@ -8,7 +8,7 @@ const getInitialState = (): SectionUpdateDetailsStateProps => {
   return {
     genderOptions,
     ageGroupOptions,
-    batch: "batch-1",
+    batch: "batch-2",
     userDetails: {
       fullName: {
         show: true,

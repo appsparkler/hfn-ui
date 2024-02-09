@@ -25,7 +25,7 @@ checkinInfoTile.args = {
   abhyasiId: "tile-1",
   timestamp: Date.now(),
   checkin: true,
-  batch: "batch-1",
+  batch: "batch-2",
   eventName: "2023 Birth Anniversary Celebrations of Pujya Daaji",
   pnr: "ABC-DEFH-HIJE",
   orderId: "Bhandara Sept 2023",
