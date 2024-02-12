@@ -93,8 +93,8 @@ export const SectionMain = ({
       value: "batch-2",
     },
     {
-      label: "batch-2, batch-2",
-      value: "batch-2, batch-2",
+      label: "batch-2, batch-1",
+      value: "batch-2, batch-1",
     },
   ];
   return (
