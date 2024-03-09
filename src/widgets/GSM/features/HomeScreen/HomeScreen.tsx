@@ -11,9 +11,19 @@ import {
 import { Horizontal, Vertical } from "components";
 import { noop } from "lodash/fp";
 import React from "react";
+import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 
 const maxWidth = 420;
-export const HomeScreen: React.FC<{}> = () => {
+
+export const HomeScreen: React.FC<{
+  user: ManualEntryUser;
+  checkinButtonDisabled: boolean;
+  onClickCheckin: () => void;
+}> = ({
+  user,
+  checkinButtonDisabled = false,
+  onClickCheckin,
+}) => {
   return (
     <Vertical
       mx="auto"
@@ -44,6 +54,7 @@ export const HomeScreen: React.FC<{}> = () => {
               autoComplete="off"
               helperText={"Please enter name as displayed on the ID card"}
               fullWidth
+              value={user.name}
             />
             <TextField
               type="tel"
@@ -52,6 +63,7 @@ export const HomeScreen: React.FC<{}> = () => {
               variant="standard"
               fullWidth
               autoComplete="off"
+              value={user.mobileNo}
             />
             <TextField
               type="email"
@@ -60,6 +72,7 @@ export const HomeScreen: React.FC<{}> = () => {
               variant="standard"
               fullWidth
               autoComplete="off"
+              value={user.email}
             />
             <TextField
               type="text"
@@ -68,8 +81,14 @@ export const HomeScreen: React.FC<{}> = () => {
               variant="standard"
               fullWidth
               autoComplete="off"
+              value={user.organization}
             />
-            <Button type="button" variant="contained">
+            <Button
+              type="button"
+              variant="contained"
+              onClick={onClickCheckin}
+              disabled={checkinButtonDisabled}
+            >
               CHECK IN
             </Button>
             <Horizontal gap={1}></Horizontal>
