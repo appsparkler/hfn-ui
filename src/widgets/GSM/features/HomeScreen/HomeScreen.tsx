@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Horizontal, Vertical } from "components";
 import { noop } from "lodash/fp";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 
 const maxWidth = 420;
@@ -19,11 +19,21 @@ export const HomeScreen: React.FC<{
   user: ManualEntryUser;
   checkinButtonDisabled: boolean;
   onClickCheckin: () => void;
+  onChangeUserDetails: (user: ManualEntryUser) => void;
 }> = ({
   user,
   checkinButtonDisabled = false,
   onClickCheckin,
+  onChangeUserDetails
 }) => {
+  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+    const { name, value } = event.target;
+    onChangeUserDetails({
+      ...user,
+      [name]: value,
+    })
+  }
+
   return (
     <Vertical
       mx="auto"
@@ -55,6 +65,7 @@ export const HomeScreen: React.FC<{
               helperText={"Please enter name as displayed on the ID card"}
               fullWidth
               value={user.name}
+              onChange={handleChange}
             />
             <TextField
               type="tel"
@@ -64,6 +75,7 @@ export const HomeScreen: React.FC<{
               fullWidth
               autoComplete="off"
               value={user.mobileNo}
+              onChange={handleChange}
             />
             <TextField
               type="email"
@@ -73,6 +85,7 @@ export const HomeScreen: React.FC<{
               fullWidth
               autoComplete="off"
               value={user.email}
+              onChange={handleChange}
             />
             <TextField
               type="text"
@@ -82,6 +95,7 @@ export const HomeScreen: React.FC<{
               fullWidth
               autoComplete="off"
               value={user.organization}
+              onChange={handleChange}
             />
             <Button
               type="button"
