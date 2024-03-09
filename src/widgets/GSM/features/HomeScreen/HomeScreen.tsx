@@ -10,11 +10,7 @@ export const HomeScreen: React.FC<{}> = () => {
       <Card sx={{ mt: 6, maxWidth: maxWidth, opacity: 0.86 }}>
         <CardContent>
           <Vertical alignItems={"center"} gap={2}>
-            <img
-              src={""}
-              alt={""}
-              width="230"
-            />
+            <img src={""} alt={""} width="230" />
             <Typography variant="h5" align="center">
               Global Spirituality Mahotsav
             </Typography>
@@ -32,23 +28,39 @@ export const HomeScreen: React.FC<{}> = () => {
             /> */}
             <TextField
               type="text"
-              label="Abhyasi ID / Mobile # / Email"
-              variant="outlined"
+              label="Name"
+              name="name"
+              variant="standard"
               required
               autoComplete="off"
-              // error={error}
-              // value={value}
-              // onChange={handleChange}
-              // helperText={helperText}
-              // inputRef={idFieldRef}
+              helperText={"Please enter name as displayed on the ID card"}
               fullWidth
-              FormHelperTextProps={{
-                sx: {
-                  maxHeight: 38,
-                  height: 38,
-                },
-              }}
             />
+            <TextField
+              type="tel"
+              name="mobile"
+              label="Mobile No."
+              variant="standard"
+              fullWidth
+              autoComplete="off"
+            />
+            <TextField
+              type="email"
+              label="Email"
+              name="email"
+              variant="standard"
+              fullWidth
+              autoComplete="off"
+            />
+            <TextField
+              type="text"
+              label="Organization"
+              name="organization"
+              variant="standard"
+              fullWidth
+              autoComplete="off"
+            />
+
             <Horizontal gap={1}>
               {/* <AsyncButton
                 type="button"
@@ -73,11 +85,7 @@ export const HomeScreen: React.FC<{}> = () => {
             <Vertical>
               <FormControlLabel
                 control={
-                  <Switch
-                    checked={false}
-                    disabled={false}
-                    onChange={noop}
-                  />
+                  <Switch checked={false} disabled={false} onChange={noop} />
                 }
                 label="Scanner"
               />
