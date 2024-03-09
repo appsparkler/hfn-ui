@@ -1,31 +1,27 @@
-import { Box, Card, CardContent, FormControlLabel, Switch, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  FormControlLabel,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Horizontal, Vertical } from "components";
 import { noop } from "lodash/fp";
 import React from "react";
 
-const maxWidth = 420
+const maxWidth = 420;
 export const HomeScreen: React.FC<{}> = () => {
   return (
     <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
-      <Card sx={{ mt: 6, maxWidth: maxWidth, opacity: 0.86 }}>
+      <Card sx={{ m: 2, maxWidth: maxWidth, opacity: 0.86 }}>
         <CardContent>
           <Vertical alignItems={"center"} gap={2}>
-            <img src={""} alt={""} width="230" />
+            <img src={"image.webp"} alt={""} width="100%" />
             <Typography variant="h5" align="center">
               Global Spirituality Mahotsav
             </Typography>
-            {/* <SelectField
-              size="medium"
-              autoWidth
-              autoComplete="off"
-              label="Batch"
-              labelId="batch"
-              name="batch"
-              onChange={}
-              options={batchOptions}
-              required
-              value={batch}
-            /> */}
             <TextField
               type="text"
               label="Name"
