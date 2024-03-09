@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Card,
   CardContent,
   FormControlLabel,
@@ -14,8 +15,20 @@ import React from "react";
 const maxWidth = 420;
 export const HomeScreen: React.FC<{}> = () => {
   return (
-    <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
-      <Card sx={{ m: 2, maxWidth: maxWidth, opacity: 0.86 }}>
+    <Vertical
+      mx="auto"
+      justifyContent={"center"}
+      alignItems={"center"}
+      sx={{ bgcolor: (theme) => theme.palette.warning.light }}
+    >
+      <Card
+        sx={{
+          m: 2,
+          maxWidth: maxWidth,
+          opacity: 0.86,
+          bgcolor: (theme) => theme.palette.background.paper,
+        }}
+      >
         <CardContent>
           <Vertical alignItems={"center"} gap={2}>
             <img src={"image.webp"} alt={""} width="100%" />
@@ -34,7 +47,7 @@ export const HomeScreen: React.FC<{}> = () => {
             />
             <TextField
               type="tel"
-              name="mobile"
+              name="mobileNo"
               label="Mobile No."
               variant="standard"
               fullWidth
@@ -56,27 +69,10 @@ export const HomeScreen: React.FC<{}> = () => {
               fullWidth
               autoComplete="off"
             />
-
-            <Horizontal gap={1}>
-              {/* <AsyncButton
-                type="button"
-                onClick={handleClickStart}
-                disabled={!isStartButtonEnabled}
-                isProcessing={isProcessing}
-                size="large"
-              >
-                START CHECK IN
-              </AsyncButton> */}
-              {/* <AsyncButton
-                color="warning"
-                startIcon={<BarcodeSVG />}
-                disabled={scanBtnProcessing || scanBtnDisabled}
-                isProcessing={scanBtnProcessing}
-                onClick={onClickScan}
-                size="large"
-                endIcon={<QrCode2 fontSize="medium" />}
-              ></AsyncButton> */}
-            </Horizontal>
+            <Button type="button" variant="contained">
+              CHECK IN
+            </Button>
+            <Horizontal gap={1}></Horizontal>
 
             <Vertical>
               <FormControlLabel
