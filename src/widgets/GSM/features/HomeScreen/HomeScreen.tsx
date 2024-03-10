@@ -1,15 +1,15 @@
+import { QrCode2 } from "@mui/icons-material";
 import {
-  Box,
   Button,
   Card,
   CardContent,
+  Fab,
   FormControlLabel,
   Switch,
   TextField,
   Typography,
 } from "@mui/material";
 import { Horizontal, Vertical } from "components";
-import { noop } from "lodash/fp";
 import React, { ChangeEvent } from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 
@@ -18,20 +18,28 @@ const maxWidth = 420;
 export const HomeScreen: React.FC<{
   user: ManualEntryUser;
   checkinButtonDisabled: boolean;
+  isScannerOn: boolean;
+  onClickScannerSwitch: () => void;
   onClickCheckin: () => void;
+  onClickScan: () => void;
   onChangeUserDetails: (user: ManualEntryUser) => void;
 }> = ({
   user,
   checkinButtonDisabled = false,
+  isScannerOn = false,
+  onClickScannerSwitch,
   onClickCheckin,
-  onChangeUserDetails
+  onChangeUserDetails,
+  onClickScan,
 }) => {
-  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void {
+  function handleChange(
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void {
     const { name, value } = event.target;
     onChangeUserDetails({
       ...user,
       [name]: value,
-    })
+    });
   }
 
   return (
@@ -110,23 +118,29 @@ export const HomeScreen: React.FC<{
             <Vertical>
               <FormControlLabel
                 control={
-                  <Switch checked={false} disabled={false} onChange={noop} />
+                  <Switch checked={isScannerOn} disabled={!isScannerOn} />
                 }
                 label="Scanner"
+                onClick={onClickScannerSwitch}
               />
             </Vertical>
-            <Box position="fixed" right={0} top={0}>
-              <Horizontal alignItems={"center"}>
-                {/* <ModeSwitch checked={false} onSwitch={onSwitchMode} /> */}
-                {/* <CustomMenu
-                  onClickDashboard={onClickDashboard}
-                  onRefreshApp={onRefresh}
-                /> */}
-              </Horizontal>
-            </Box>
           </Vertical>
         </CardContent>
       </Card>
+      <Fab
+        type="button"
+        variant="circular"
+        color="secondary"
+        onClick={onClickScan}
+        disabled={!isScannerOn}
+        sx={{
+          position: "fixed",
+          bottom: 20,
+          right: 20,
+        }}
+      >
+        <QrCode2 />
+      </Fab>
     </Vertical>
   );
 };

@@ -22,7 +22,8 @@ HomeScreenStory.args = {
     platform: "WEB",
     uid: "1234-user",
   },
-  checkinButtonDisabled: false,
+  checkinButtonDisabled: true,
+  isScannerOn: true,
 };
 
 HomeScreenStory.storyName = "Home Screen";
