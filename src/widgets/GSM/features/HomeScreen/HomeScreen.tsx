@@ -15,6 +15,12 @@ import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 
 const maxWidth = 420;
 
+export interface IHomeScreenProps {
+  user: ManualEntryUser;
+  checkinButtonDisabled: boolean;
+  isScannerOn: boolean;
+}
+
 export const HomeScreen: React.FC<{
   user: ManualEntryUser;
   checkinButtonDisabled: boolean;
