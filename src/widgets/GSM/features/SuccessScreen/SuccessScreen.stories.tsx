@@ -13,7 +13,15 @@ export const SuccessScreenStory: ComponentStory<typeof SuccessScreen> = (args) =
   <SuccessScreen {...args} />
 );
 SuccessScreenStory.args = {
-  
+  manualEntryUser: {
+    name: "Abdul Rehman",
+    checkinTime: Date.now(),
+    email: "XV7pT@example.com",
+    mobileNo: "0300-1234567",
+    organization: "Global Spirituality Mahotsav",
+    platform: "WEB",
+    uid: "user-1234"
+  }
 };
 
 SuccessScreenStory.storyName = "Success Screen";
