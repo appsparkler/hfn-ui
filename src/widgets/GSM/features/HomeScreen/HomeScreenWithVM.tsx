@@ -1,20 +1,16 @@
 import React from "react";
 import { HomeScreen } from "./HomeScreen";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
+import { useAppDispatch, useAppSelector } from "../redux-app/hooks";
 
 export const HomeScreenWithVM: React.FC<{}> = () => {
-    
+  const state = useAppSelector((state) => state.homeScreen);
+
+  const dispatch = useAppDispatch();
+
   return (
     <HomeScreen
-      user={{
-        checkinTime: Date.now(),
-        email: "abc@def.com",
-        mobileNo: "+918888",
-        name: "Aakash",
-        organization: "Cognizant",
-        platform: "WEB",
-        uid: "1234-user",
-      }}
+      user={state.user}
       checkinButtonDisabled={false}
       isScannerOn={false}
       onClickScannerSwitch={function (): void {

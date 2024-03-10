@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IHomeScreenProps } from "./HomeScreen";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
+import { RootState } from "../redux-app/store";
 
 const homeScreenSlice = createSlice({
   name: "homeScreen",
@@ -29,6 +30,8 @@ const homeScreenSlice = createSlice({
 
 export const { actions: homeScreenActions, reducer: homeScreenReducer } =
   homeScreenSlice;
+
+export const selectHomeScreenState = (state: RootState) => state.homeScreen;
 
 function getInitialState(): IHomeScreenProps {
   return {
