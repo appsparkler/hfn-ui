@@ -24,4 +24,22 @@ SuccessScreenStory.args = {
   }
 };
 
-SuccessScreenStory.storyName = "Success Screen";
+SuccessScreenStory.storyName = "Manual Entry";
+
+export const QRUserSuccessScreen: ComponentStory<typeof SuccessScreen> = (
+  args
+) => <SuccessScreen {...args} />;
+QRUserSuccessScreen.args = {
+  qrUser: {
+    name: "Abdul Rehman",
+    eventName: "Global Spirituality Mahotsav",
+    sessionName: "Global Spirituality Mahotsav",
+    registrationId: "123456",
+    pnr: "123456",
+    checkinTime: Date.now(),
+    uid: "user-1234",
+    platform: "WEB",
+  },
+};
+
+QRUserSuccessScreen.storyName = "QR Entry";

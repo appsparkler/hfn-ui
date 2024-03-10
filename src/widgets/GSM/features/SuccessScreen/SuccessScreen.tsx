@@ -54,9 +54,15 @@ export const SuccessScreen: React.FC<{
         </Typography>
         <CardContent>
           {manualEntryUser != null && (
-            <ManualEntryUserContent user={manualEntryUser} />
+            <ManualEntryUserContent
+              user={manualEntryUser}
+            />
           )}
-          {qrUser != null && <QRUserContent user={qrUser} />}
+          {qrUser != null &&
+            <QRUserContent
+              user={qrUser}
+            />
+          }
         </CardContent>
       </Card>
       <ScreenshotInstruction />
