@@ -1,10 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IHomeScreenProps } from "./HomeScreen";
+import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 
 const homeScreenSlice = createSlice({
   name: "homeScreen",
   initialState: getInitialState,
-  reducers: {},
+    reducers: {
+      updateUserInfo: (state, {payload}: PayloadAction<ManualEntryUser>) => {
+        state.user = payload;
+      }
+  },
 });
 
 export const {
