@@ -1,5 +1,5 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { Card, CardContent } from "@mui/material";
+import { Button, Card, CardContent } from "@mui/material";
 import Typography from "@mui/material/Typography/Typography";
 import { Vertical } from "components";
 import { isEmpty } from "lodash/fp";
@@ -21,18 +21,23 @@ export const SuccessScreen: React.FC<{
       gap={2}
     >
       <img src="image.webp" width={"100%"} alt="minister" />
-      <CheckCircleIcon
-        color="success"
-        sx={{
-          fontSize: 80,
-        }}
-      />
-      <Typography variant="h5">Checked In</Typography>
+      <Vertical
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <CheckCircleIcon
+          color="success"
+          sx={{
+            fontSize: 80,
+          }}
+        />
+        <Typography variant="h5">Checked In</Typography>
+      </Vertical>
       <Card
         sx={{
           width: "100%",
           maxWidth: "420px",
-          mx: 1
+          mx: 1,
         }}
       >
         <Typography
@@ -52,6 +57,7 @@ export const SuccessScreen: React.FC<{
         </CardContent>
       </Card>
       <ScreenshotInstruction />
+      <Button variant="contained">RETURN TO MAIN SCREEN</Button>
     </Vertical>
   );
 };
@@ -60,7 +66,7 @@ const ScreenshotInstruction: React.FC<{}> = () => {
   return (
     <Card
       sx={{
-        color: theme => theme.palette.error.contrastText,
+        color: (theme) => theme.palette.error.contrastText,
         bgcolor: "error.light",
       }}
     >
