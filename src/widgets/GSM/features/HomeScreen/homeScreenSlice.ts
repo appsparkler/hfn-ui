@@ -5,17 +5,30 @@ import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 const homeScreenSlice = createSlice({
   name: "homeScreen",
   initialState: getInitialState,
-    reducers: {
-      updateUserInfo: (state, {payload}: PayloadAction<ManualEntryUser>) => {
-        state.user = payload;
-      }
+  reducers: {
+    updateUserInfo: (state, { payload }: PayloadAction<ManualEntryUser>) => {
+      state.user = payload;
+    },
+    resetUserInfo: (state) => {
+      state.user = getInitialState().user;
+    },
+    turnOffScanner: (state) => {
+      state.isScannerOn = false;
+    },
+    turnOnScanner: (state) => {
+      state.isScannerOn = true;
+    },
+    enableCheckinButton: (state) => {
+      state.checkinButtonDisabled = false;
+    },
+    disableCheckinButton: (state) => {
+      state.checkinButtonDisabled = true;
+    },
   },
 });
 
-export const {
-    actions: homeScreenActions,
-    reducer: homeScreenReducer,
-} = homeScreenSlice
+export const { actions: homeScreenActions, reducer: homeScreenReducer } =
+  homeScreenSlice;
 
 function getInitialState(): IHomeScreenProps {
   return {
