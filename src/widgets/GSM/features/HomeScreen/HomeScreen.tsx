@@ -6,6 +6,7 @@ import {
   Fab,
   FormControlLabel,
   Switch,
+  SwitchProps,
   TextField,
   Typography,
 } from "@mui/material";
@@ -25,7 +26,7 @@ export const HomeScreen: React.FC<{
   user: ManualEntryUser;
   checkinButtonDisabled: boolean;
   isScannerOn: boolean;
-  onClickScannerSwitch: () => void;
+  onClickScannerSwitch: (checked: boolean) => void;
   onClickCheckin: () => void;
   onClickScan: () => void;
   onChangeUserDetails: (user: ManualEntryUser) => void;
@@ -47,6 +48,13 @@ export const HomeScreen: React.FC<{
       [name]: value,
     });
   }
+
+  const handleClickScannerSwitch: NonNullable<SwitchProps["onChange"]> = (
+    _,
+    checked
+  ) => {
+    onClickScannerSwitch(checked);
+  };
 
   return (
     <Vertical
@@ -120,14 +128,15 @@ export const HomeScreen: React.FC<{
               CHECK IN
             </Button>
             <Horizontal gap={1}></Horizontal>
-
             <Vertical>
               <FormControlLabel
                 control={
-                  <Switch checked={isScannerOn} disabled={!isScannerOn} />
+                  <Switch
+                    checked={isScannerOn}
+                    onChange={handleClickScannerSwitch}
+                  />
                 }
                 label="Scanner"
-                onClick={onClickScannerSwitch}
               />
             </Vertical>
           </Vertical>

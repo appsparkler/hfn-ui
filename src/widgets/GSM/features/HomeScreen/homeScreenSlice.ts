@@ -7,11 +7,17 @@ const homeScreenSlice = createSlice({
   name: "homeScreen",
   initialState: getInitialState,
   reducers: {
+    //   User Info
     updateUserInfo: (state, { payload }: PayloadAction<ManualEntryUser>) => {
       state.user = payload;
     },
     resetUserInfo: (state) => {
       state.user = getInitialState().user;
+    },
+    // Scanner Switch
+    updateScannerSwitch: (state, action: PayloadAction<boolean>) => {
+      state.isScannerOn = action.payload;
+      return state;
     },
     turnOffScanner: (state) => {
       state.isScannerOn = false;
@@ -19,6 +25,7 @@ const homeScreenSlice = createSlice({
     turnOnScanner: (state) => {
       state.isScannerOn = true;
     },
+    // Checkin Button
     enableCheckinButton: (state) => {
       state.checkinButtonDisabled = false;
     },

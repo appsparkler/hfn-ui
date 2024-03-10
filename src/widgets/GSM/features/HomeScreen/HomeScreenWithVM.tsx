@@ -13,6 +13,10 @@ export const HomeScreenWithVM: React.FC<{}> = () => {
     dispatch(homeScreenActions.updateUserInfo(user));
   }
 
+  const handleClickScannerSwitch: (checked: boolean) => void = (checked) => {
+    dispatch(homeScreenActions.updateScannerSwitch(checked));
+  };
+
   useEffect(() => {
     dispatch(homeScreenActions.resetUserInfo());
   }, [dispatch]);
@@ -21,10 +25,8 @@ export const HomeScreenWithVM: React.FC<{}> = () => {
     <HomeScreen
       user={state.user}
       checkinButtonDisabled={false}
-      isScannerOn={false}
-      onClickScannerSwitch={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      isScannerOn={state.isScannerOn}
+      onClickScannerSwitch={handleClickScannerSwitch}
       onClickCheckin={function (): void {
         throw new Error("Function not implemented.");
       }}
