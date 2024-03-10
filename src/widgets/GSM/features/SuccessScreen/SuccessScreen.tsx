@@ -5,10 +5,12 @@ import { Vertical } from "components";
 import { isEmpty } from "lodash/fp";
 import React from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
+import { IQRUser } from "widgets/GSM/model/QRUser";
 
 export const SuccessScreen: React.FC<{
   manualEntryUser: ManualEntryUser | null;
-}> = ({ manualEntryUser }) => {
+  qrUser: IQRUser | null
+}> = ({ manualEntryUser, qrUser }) => {
   return (
     <Vertical
       alignItems={"center"}
@@ -54,6 +56,7 @@ export const SuccessScreen: React.FC<{
           {manualEntryUser != null && (
             <ManualEntryUserContent user={manualEntryUser} />
           )}
+          {qrUser != null && <QRUserContent user={qrUser} />}
         </CardContent>
       </Card>
       <ScreenshotInstruction />
@@ -93,7 +96,21 @@ const LabelledText: React.FC<{
       {value}
     </Typography>
   );
-};
+  };
+
+const QRUserContent: React.FC<{
+  user: IQRUser
+}> = ({user}) => {
+return (
+  <Vertical>
+    <LabelledText label="Name" value={user.name} />
+    <LabelledText label="Mobile No." value={user.eventName} />
+    <LabelledText label="Session Name" value={user.sessionName} />
+    <LabelledText label="PNR" value={user.pnr} />
+    <LabelledText label="Registration ID" value={user.registrationId} />
+  </Vertical>
+);
+}
 
 const ManualEntryUserContent: React.FC<{
   user: ManualEntryUser;

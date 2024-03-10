@@ -1,4 +1,4 @@
-interface IQRUser {
+export interface IQRUser {
   name: string;
   eventName: string;
   sessionName: string;
