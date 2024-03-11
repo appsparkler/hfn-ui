@@ -7,7 +7,6 @@ import {
 } from "firebase/firestore";
 import { isString } from "lodash/fp";
 
-// const NODE_ENV = process.env.NODE_ENV;
 const firebaseConfig = process.env.REACT_APP_FIREBASE;
 
 const firebaseApp =
