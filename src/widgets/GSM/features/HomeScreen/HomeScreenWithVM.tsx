@@ -3,8 +3,11 @@ import { HomeScreen } from "./HomeScreen";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 import { useAppDispatch, useAppSelector } from "../redux-app/hooks";
 import { homeScreenActions } from "./homeScreenSlice";
+import { successScreenActions } from "../SuccessScreen/successScreenSlice";
 
-export const HomeScreenWithVM: React.FC<{}> = () => {
+export const HomeScreenWithVM: React.FC<{
+  onCheckin: () => void;
+}> = ({ onCheckin }) => {
   const state = useAppSelector((state) => state.homeScreen);
 
   const dispatch = useAppDispatch();
@@ -17,6 +20,11 @@ export const HomeScreenWithVM: React.FC<{}> = () => {
     dispatch(homeScreenActions.updateScannerSwitch(checked));
   };
 
+  const handleClickCheckin = () => {
+    dispatch(successScreenActions.setManualEntryUser(state.user));
+    onCheckin();
+  };
+
   useEffect(() => {
     dispatch(homeScreenActions.resetUserInfo());
   }, [dispatch]);
@@ -27,9 +35,7 @@ export const HomeScreenWithVM: React.FC<{}> = () => {
       checkinButtonDisabled={false}
       isScannerOn={state.isScannerOn}
       onClickScannerSwitch={handleClickScannerSwitch}
-      onClickCheckin={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onClickCheckin={handleClickCheckin}
       onClickScan={function (): void {
         throw new Error("Function not implemented.");
       }}
