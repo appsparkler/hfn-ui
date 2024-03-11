@@ -8,9 +8,6 @@ export const router = createBrowserRouter([
     Component() {
       return <Outlet />;
     },
-    children: [
-      
-      homeScreenRoute, successScreenRoute
-    ],
+    children: [homeScreenRoute, successScreenRoute],
   },
 ]);
