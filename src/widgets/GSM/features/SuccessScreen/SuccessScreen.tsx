@@ -24,9 +24,10 @@ export const SuccessScreen: React.FC<
       alignItems={"center"}
       justifyContent={"center"}
       sx={{
-        width: "100%",
+        width: "auto",
         maxWidth: "420px",
         mx: "auto",
+        p: 1,
       }}
       gap={2}
     >
