@@ -10,13 +10,13 @@ export default {
   component: BarcodeScanner,
 } as ComponentMeta<typeof BarcodeScanner>;
 
-export const BarcodeScannerStory = () => {
+export const BarcodeScannerStory = (args: any) => {
   const [show, setShow] = useState(false);
 
   const handleScan = (text: string) => {
     alert(text);
   };
-  
+
   function handleChange(
     event: ChangeEvent<HTMLInputElement>,
     checked: boolean
@@ -31,9 +31,7 @@ export const BarcodeScannerStory = () => {
         <BarcodeScanner
           show={show}
           onScan={handleScan}
-          onCancel={function (): void {
-            throw new Error("Function not implemented.");
-          }}
+          onCancel={args.onCancel}
         />
       )}
     </Vertical>
