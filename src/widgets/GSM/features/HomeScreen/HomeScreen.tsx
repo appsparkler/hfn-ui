@@ -36,18 +36,12 @@ export const HomeScreen: React.FC<
   }
 
   return (
-    <Vertical
-      mx="auto"
-      justifyContent={"center"}
-      alignItems={"center"}
-      sx={{ bgcolor: (theme) => theme.palette.warning.light }}
-    >
+    <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
       <Card
         sx={{
           m: 2,
           maxWidth: maxWidth,
           opacity: 0.86,
-          bgcolor: (theme) => theme.palette.background.paper,
         }}
       >
         <CardContent>
