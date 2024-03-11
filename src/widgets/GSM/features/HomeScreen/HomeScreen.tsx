@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {  Vertical } from "components";
+import { Vertical } from "components";
 import React, { ChangeEvent } from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 import { isValidUser } from "./utils/isValidUser";
@@ -18,18 +18,13 @@ export interface IHomeScreenProps {
   user: ManualEntryUser;
 }
 
-export const HomeScreen: React.FC<{
-  user: ManualEntryUser;
-  onClickScannerSwitch: (checked: boolean) => void;
-  onClickCheckin: () => void;
-  onClickScan: () => void;
-  onChangeUserDetails: (user: ManualEntryUser) => void;
-}> = ({
-  user,
-  onClickCheckin,
-  onChangeUserDetails,
-  onClickScan,
-}) => {
+export const HomeScreen: React.FC<
+  {
+    onClickCheckin: () => void;
+    onClickScan: () => void;
+    onChangeUserDetails: (user: ManualEntryUser) => void;
+  } & IHomeScreenProps
+> = ({ user, onClickCheckin, onChangeUserDetails, onClickScan }) => {
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void {

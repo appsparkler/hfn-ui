@@ -1,6 +1,7 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import { homeScreenRoute } from "./homeScreenRoute";
 import { successScreenRoute } from "./successScreenRoute";
+import { scannerRoute } from "./scannerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -8,6 +9,6 @@ export const router = createBrowserRouter([
     Component() {
       return <Outlet />;
     },
-    children: [homeScreenRoute, successScreenRoute],
+    children: [homeScreenRoute, successScreenRoute, scannerRoute],
   },
 ]);

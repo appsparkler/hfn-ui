@@ -4,11 +4,15 @@ import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 import { useAppDispatch, useAppSelector } from "../redux-app/hooks";
 import { homeScreenActions } from "./homeScreenSlice";
 import { successScreenActions } from "../SuccessScreen/successScreenSlice";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "../router/AppRoutes";
 
 export const HomeScreenWithVM: React.FC<{
   onCheckin: () => void;
 }> = ({ onCheckin }) => {
   const state = useAppSelector((state) => state.homeScreen);
+
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -16,14 +20,14 @@ export const HomeScreenWithVM: React.FC<{
     dispatch(homeScreenActions.updateUserInfo(user));
   }
 
-  const handleClickScannerSwitch: (checked: boolean) => void = (checked) => {
-    dispatch(homeScreenActions.updateScannerSwitch(checked));
-  };
-
   const handleClickCheckin = () => {
     dispatch(successScreenActions.setManualEntryUser(state.user));
     dispatch(homeScreenActions.resetUserInfo());
     onCheckin();
+  };
+
+  const handleClickScan = () => {
+    navigate(AppRoutes.SCANNER_SCREEN);
   };
 
   useEffect(() => {
@@ -33,13 +37,8 @@ export const HomeScreenWithVM: React.FC<{
   return (
     <HomeScreen
       user={state.user}
-      checkinButtonDisabled={false}
-      isScannerOn={state.isScannerOn}
-      onClickScannerSwitch={handleClickScannerSwitch}
       onClickCheckin={handleClickCheckin}
-      onClickScan={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onClickScan={handleClickScan}
       onChangeUserDetails={handleChangeUserDetails}
     />
   );
