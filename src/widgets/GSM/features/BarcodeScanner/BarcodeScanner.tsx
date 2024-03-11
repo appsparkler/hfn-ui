@@ -8,18 +8,12 @@ export type BarcodeScannerDispatchProps = {
   onCancel: () => void;
 };
 
-export type BarcodeScannerStateProps = {
-  show?: boolean;
-};
+export type BarcodeScannerStateProps = {};
 
 export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
-export const BarcodeScanner = ({
-  show,
-  onScan,
-  onCancel,
-}: BarcodeScannerProps) => {
+export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
   const codeReader = useMemo<BrowserMultiFormatReader>(
     () => new BrowserMultiFormatReader(),
     []
