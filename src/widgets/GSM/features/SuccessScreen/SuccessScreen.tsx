@@ -27,7 +27,7 @@ export const SuccessScreen: React.FC<
         width: "auto",
         maxWidth: "420px",
         mx: "auto",
-        p: 1,
+        p: 2,
       }}
       gap={2}
     >
