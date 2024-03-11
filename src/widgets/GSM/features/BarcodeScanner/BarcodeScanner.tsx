@@ -1,7 +1,7 @@
 import { Button /**SelectProps */, Card, CardContent } from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { Vertical } from "components";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export type BarcodeScannerDispatchProps = {
   onScan: (result: string) => void;
@@ -14,6 +14,8 @@ export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
 export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
   const codeReader = useMemo<BrowserMultiFormatReader>(
     () => new BrowserMultiFormatReader(),
     []
@@ -22,16 +24,20 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      codeReader.decodeFromVideoDevice(
-        "",
-        videoRef.current,
-        (result, error) => {
-          if (!error) {
-            onScan(result.getText());
-          }
+    const videoElement = videoRef.current;
+    if (videoElement !== null) {
+      const intervalId = setInterval(() => {
+        const isPlaying = codeReader.isVideoPlaying(videoElement);
+        setIsVideoPlaying(isPlaying);
+        if (isPlaying) {
+          clearInterval(intervalId);
         }
-      );
+      }, 300);
+      codeReader.decodeFromVideoDevice("", videoElement, (result, error) => {
+        if (!error) {
+          onScan(result.getText());
+        }
+      });
     }
     return () => {
       codeReader.reset();
@@ -39,48 +45,28 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
   }, [codeReader, onScan]);
 
   return (
-    <Vertical mx="auto" p={1} justifyContent={"center"} alignItems={"center"}>
-      <Card sx={{ opacity: 0.87, maxWidth: 420, bgcolor: "background.paper" }}>
+    <Vertical mx="auto" p={2} justifyContent={"center"} alignItems={"center"}>
+      <Card
+        sx={{
+          opacity: 0.87,
+          maxWidth: 420,
+          bgcolor: "background.paper",
+        }}
+      >
         <CardContent>
           <video ref={videoRef} width="100%" />
           <Button
             variant="contained"
             type="button"
+            disabled={!isVideoPlaying}
             onClick={onCancel}
             sx={{ my: 2 }}
             color="warning"
           >
-            CANCEL
+            {isVideoPlaying ? "CANCEL" : "Loading..."}
           </Button>
         </CardContent>
       </Card>
     </Vertical>
   );
-
-  // return (
-  //   <Box
-  //     display="flex"
-  //     p={1}
-  //     position="fixed"
-  //     left={leftRightPosition}
-  //     right={leftRightPosition}
-  //     top={topBottomPosition}
-  //     bottom={topBottomPosition}
-  //     flexDirection={"column"}
-  //     justifyContent="space-between"
-  //     alignItems={"center"}
-  //     bgcolor="background.default"
-  //   >
-  //     <video ref={videoRef} width="100%" />
-  //     <Button
-  //       variant="contained"
-  //       type="button"
-  //       onClick={onCancel}
-  //       sx={{ my: 2 }}
-  //       color="warning"
-  //     >
-  //       CANCEL
-  //     </Button>
-  //   </Box>
-  // );
 };
