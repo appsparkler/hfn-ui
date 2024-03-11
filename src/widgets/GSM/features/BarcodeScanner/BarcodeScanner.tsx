@@ -29,7 +29,7 @@ export const BarcodeScanner = ({
   const topBottomPosition = useMemo<number>(() => (show ? 0 : 10000), [show]);
 
   const leftRightPosition = useMemo<string | number>(
-    () => (show ? "calc(50% - 200px)" : 10000),
+    () => (show ? "calc(50% - 220px)" : 10000),
     [show]
   );
 
@@ -53,6 +53,7 @@ export const BarcodeScanner = ({
   return (
     <Box
       display="flex"
+      p={1}
       position="fixed"
       left={leftRightPosition}
       right={leftRightPosition}

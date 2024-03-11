@@ -14,6 +14,7 @@ import { Horizontal, Vertical } from "components";
 import React, { ChangeEvent } from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 import { isValidUser } from "./utils/isValidUser";
+import { BarcodeScanner } from "../BarcodeScanner/BarcodeScanner";
 
 const maxWidth = 420;
 
@@ -55,6 +56,10 @@ export const HomeScreen: React.FC<{
     checked
   ) => {
     onClickScannerSwitch(checked);
+  };
+
+  const handleCancelScan = () => {
+    onClickScannerSwitch(false);
   };
 
   return (
@@ -157,6 +162,15 @@ export const HomeScreen: React.FC<{
       >
         <QrCode2 />
       </Fab>
+      {isScannerOn && (
+        <BarcodeScanner
+          show
+          onScan={function (result: string): void {
+            throw new Error("Function not implemented.");
+          }}
+          onCancel={handleCancelScan}
+        />
+      )}
     </Vertical>
   );
 };
