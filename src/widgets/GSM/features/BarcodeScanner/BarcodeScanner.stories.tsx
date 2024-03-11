@@ -16,6 +16,7 @@ export const BarcodeScannerStory = () => {
   const handleScan = (text: string) => {
     alert(text);
   };
+  
   function handleChange(
     event: ChangeEvent<HTMLInputElement>,
     checked: boolean
