@@ -4,39 +4,28 @@ import {
   Card,
   CardContent,
   Fab,
-  FormControlLabel,
-  Switch,
-  SwitchProps,
   TextField,
   Typography,
 } from "@mui/material";
-import { Horizontal, Vertical } from "components";
+import {  Vertical } from "components";
 import React, { ChangeEvent } from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 import { isValidUser } from "./utils/isValidUser";
-import { BarcodeScanner } from "../BarcodeScanner/BarcodeScanner";
 
 const maxWidth = 420;
 
 export interface IHomeScreenProps {
   user: ManualEntryUser;
-  checkinButtonDisabled: boolean;
-  isScannerOn: boolean;
 }
 
 export const HomeScreen: React.FC<{
   user: ManualEntryUser;
-  checkinButtonDisabled: boolean;
-  isScannerOn: boolean;
   onClickScannerSwitch: (checked: boolean) => void;
   onClickCheckin: () => void;
   onClickScan: () => void;
   onChangeUserDetails: (user: ManualEntryUser) => void;
 }> = ({
   user,
-  checkinButtonDisabled = false,
-  isScannerOn = false,
-  onClickScannerSwitch,
   onClickCheckin,
   onChangeUserDetails,
   onClickScan,
@@ -50,17 +39,6 @@ export const HomeScreen: React.FC<{
       [name]: value,
     });
   }
-
-  const handleClickScannerSwitch: NonNullable<SwitchProps["onChange"]> = (
-    _,
-    checked
-  ) => {
-    onClickScannerSwitch(checked);
-  };
-
-  const handleCancelScan = () => {
-    onClickScannerSwitch(false);
-  };
 
   return (
     <Vertical
@@ -133,18 +111,6 @@ export const HomeScreen: React.FC<{
             >
               CHECK IN
             </Button>
-            <Horizontal gap={1}></Horizontal>
-            <Vertical>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={isScannerOn}
-                    onChange={handleClickScannerSwitch}
-                  />
-                }
-                label="Scanner"
-              />
-            </Vertical>
           </Vertical>
         </CardContent>
       </Card>
@@ -153,7 +119,6 @@ export const HomeScreen: React.FC<{
         variant="circular"
         color="secondary"
         onClick={onClickScan}
-        disabled={!isScannerOn}
         sx={{
           position: "fixed",
           bottom: 20,
@@ -162,15 +127,6 @@ export const HomeScreen: React.FC<{
       >
         <QrCode2 />
       </Fab>
-      {/* {isScannerOn && (
-        <BarcodeScanner
-          show
-          onScan={function (result: string): void {
-            throw new Error("Function not implemented.");
-          }}
-          onCancel={handleCancelScan}
-        />
-      )} */}
     </Vertical>
   );
 };
