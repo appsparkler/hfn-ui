@@ -7,10 +7,18 @@ import React from "react";
 import { ManualEntryUser } from "widgets/GSM/model/ManualEntryUser";
 import { IQRUser } from "widgets/GSM/model/QRUser";
 
-export const SuccessScreen: React.FC<{
+export interface ISuccessScreenProps {
   manualEntryUser: ManualEntryUser | null;
-  qrUser: IQRUser | null
-}> = ({ manualEntryUser, qrUser }) => {
+  qrUser: IQRUser | null;
+}
+
+export interface ISuccessScreenActions {
+  onClickGoToMainScreen: () => void;
+}
+
+export const SuccessScreen: React.FC<
+  ISuccessScreenProps & ISuccessScreenActions
+> = ({ manualEntryUser, qrUser, onClickGoToMainScreen }) => {
   return (
     <Vertical
       alignItems={"center"}
@@ -23,10 +31,7 @@ export const SuccessScreen: React.FC<{
       gap={2}
     >
       <img src="image.webp" width={"100%"} alt="minister" />
-      <Vertical
-        justifyContent={"center"}
-        alignItems={"center"}
-      >
+      <Vertical justifyContent={"center"} alignItems={"center"}>
         <CheckCircleIcon
           color="success"
           sx={{
@@ -54,19 +59,15 @@ export const SuccessScreen: React.FC<{
         </Typography>
         <CardContent>
           {manualEntryUser != null && (
-            <ManualEntryUserContent
-              user={manualEntryUser}
-            />
+            <ManualEntryUserContent user={manualEntryUser} />
           )}
-          {qrUser != null &&
-            <QRUserContent
-              user={qrUser}
-            />
-          }
+          {qrUser != null && <QRUserContent user={qrUser} />}
         </CardContent>
       </Card>
       <ScreenshotInstruction />
-      <Button variant="contained">RETURN TO MAIN SCREEN</Button>
+      <Button type="button" onClick={onClickGoToMainScreen} variant="contained">
+        RETURN TO MAIN SCREEN
+      </Button>
     </Vertical>
   );
 };
@@ -102,21 +103,21 @@ const LabelledText: React.FC<{
       {value}
     </Typography>
   );
-  };
+};
 
 const QRUserContent: React.FC<{
-  user: IQRUser
-}> = ({user}) => {
-return (
-  <Vertical>
-    <LabelledText label="Name" value={user.name} />
-    <LabelledText label="Mobile No." value={user.eventName} />
-    <LabelledText label="Session Name" value={user.sessionName} />
-    <LabelledText label="PNR" value={user.pnr} />
-    <LabelledText label="Registration ID" value={user.registrationId} />
-  </Vertical>
-);
-}
+  user: IQRUser;
+}> = ({ user }) => {
+  return (
+    <Vertical>
+      <LabelledText label="Name" value={user.name} />
+      <LabelledText label="Mobile No." value={user.eventName} />
+      <LabelledText label="Session Name" value={user.sessionName} />
+      <LabelledText label="PNR" value={user.pnr} />
+      <LabelledText label="Registration ID" value={user.registrationId} />
+    </Vertical>
+  );
+};
 
 const ManualEntryUserContent: React.FC<{
   user: ManualEntryUser;

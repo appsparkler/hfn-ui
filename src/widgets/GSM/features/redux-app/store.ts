@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { homeScreenReducer } from "../HomeScreen/homeScreenSlice";
+import { successScreenReducer } from "../SuccessScreen/successScreenSlice";
 
 const store = configureStore({
   reducer: {
     homeScreen: homeScreenReducer,
+    successScreen: successScreenReducer,
   },
 });
 

@@ -1,5 +1,17 @@
 import React from "react";
 import { SuccessScreen } from "./SuccessScreen";
-export const SuccessScreenWithVM: React.FC<{}> = () => {
-  return <SuccessScreen manualEntryUser={null} qrUser={null} />;
+import { useAppSelector } from "../redux-app/hooks";
+import { selectSuccessScreen } from "./successScreenSlice";
+
+export const SuccessScreenWithVM: React.FC<{
+  onClickGoToMainScreen: () => void;
+}> = ({ onClickGoToMainScreen }) => {
+  const state = useAppSelector(selectSuccessScreen);
+  return (
+    <SuccessScreen
+      manualEntryUser={state.manualEntryUser}
+      qrUser={state.qrUser}
+      onClickGoToMainScreen={onClickGoToMainScreen}
+    />
+  );
 };
