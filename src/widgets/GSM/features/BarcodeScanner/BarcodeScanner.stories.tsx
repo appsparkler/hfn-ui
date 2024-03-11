@@ -66,7 +66,6 @@ export const BarcodeScannerSimple = () => {
         "",
         videoRef.current,
         (result, error) => {
-          // await codeReader.tryPlayVideo()
           if (!error) {
             alert(result.getText());
           }
@@ -79,7 +78,7 @@ export const BarcodeScannerSimple = () => {
     event: ChangeEvent<HTMLInputElement>,
     checked: boolean
   ): void {
-    setShow(checked)
+    setShow(checked);
   }
 
   return (
