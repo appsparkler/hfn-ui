@@ -1,5 +1,6 @@
-import { Box, Button /**SelectProps */ } from "@mui/material";
+import { Button /**SelectProps */, Card, CardContent } from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
+import { Vertical } from "components";
 import { useEffect, useMemo, useRef } from "react";
 
 export type BarcodeScannerDispatchProps = {
@@ -26,13 +27,6 @@ export const BarcodeScanner = ({
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const topBottomPosition = useMemo<number>(() => (show ? 0 : 10000), [show]);
-
-  const leftRightPosition = useMemo<string | number>(
-    () => (show ? "calc(50% - 220px)" : 10000),
-    [show]
-  );
-
   useEffect(() => {
     if (videoRef.current) {
       codeReader.decodeFromVideoDevice(
@@ -51,29 +45,54 @@ export const BarcodeScanner = ({
   }, [codeReader, onScan]);
 
   return (
-    <Box
-      display="flex"
+    <Vertical
+      mx="auto"
       p={1}
-      position="fixed"
-      left={leftRightPosition}
-      right={leftRightPosition}
-      top={topBottomPosition}
-      bottom={topBottomPosition}
-      flexDirection={"column"}
-      justifyContent="space-between"
+      justifyContent={"center"}
       alignItems={"center"}
-      bgcolor="background.default"
+      sx={{ bgcolor: (theme) => theme.palette.warning.light }}
     >
-      <video ref={videoRef} width="100%" />
-      <Button
-        variant="contained"
-        type="button"
-        onClick={onCancel}
-        sx={{ my: 2 }}
-        color="warning"
-      >
-        CANCEL
-      </Button>
-    </Box>
+      <Card sx={{ opacity: 0.87, maxWidth: 420 }}>
+        <CardContent>
+          <video ref={videoRef} width="100%" />
+          <Button
+            variant="contained"
+            type="button"
+            onClick={onCancel}
+            sx={{ my: 2 }}
+            color="warning"
+          >
+            CANCEL
+          </Button>
+        </CardContent>
+      </Card>
+    </Vertical>
   );
+
+  // return (
+  //   <Box
+  //     display="flex"
+  //     p={1}
+  //     position="fixed"
+  //     left={leftRightPosition}
+  //     right={leftRightPosition}
+  //     top={topBottomPosition}
+  //     bottom={topBottomPosition}
+  //     flexDirection={"column"}
+  //     justifyContent="space-between"
+  //     alignItems={"center"}
+  //     bgcolor="background.default"
+  //   >
+  //     <video ref={videoRef} width="100%" />
+  //     <Button
+  //       variant="contained"
+  //       type="button"
+  //       onClick={onCancel}
+  //       sx={{ my: 2 }}
+  //       color="warning"
+  //     >
+  //       CANCEL
+  //     </Button>
+  //   </Box>
+  // );
 };

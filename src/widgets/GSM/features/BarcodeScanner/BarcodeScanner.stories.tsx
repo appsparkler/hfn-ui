@@ -38,3 +38,4 @@ export const BarcodeScannerStory = () => {
     </Vertical>
   );
 };
+BarcodeScannerStory.storyName = "Barcode Scanner";

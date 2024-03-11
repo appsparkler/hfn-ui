@@ -162,7 +162,7 @@ export const HomeScreen: React.FC<{
       >
         <QrCode2 />
       </Fab>
-      {isScannerOn && (
+      {/* {isScannerOn && (
         <BarcodeScanner
           show
           onScan={function (result: string): void {
@@ -170,7 +170,7 @@ export const HomeScreen: React.FC<{
           }}
           onCancel={handleCancelScan}
         />
-      )}
+      )} */}
     </Vertical>
   );
 };
