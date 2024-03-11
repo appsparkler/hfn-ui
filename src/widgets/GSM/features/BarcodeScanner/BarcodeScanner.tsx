@@ -45,14 +45,8 @@ export const BarcodeScanner = ({
   }, [codeReader, onScan]);
 
   return (
-    <Vertical
-      mx="auto"
-      p={1}
-      justifyContent={"center"}
-      alignItems={"center"}
-      sx={{ bgcolor: (theme) => theme.palette.warning.light }}
-    >
-      <Card sx={{ opacity: 0.87, maxWidth: 420 }}>
+    <Vertical mx="auto" p={1} justifyContent={"center"} alignItems={"center"}>
+      <Card sx={{ opacity: 0.87, maxWidth: 420, bgcolor: "background.paper" }}>
         <CardContent>
           <video ref={videoRef} width="100%" />
           <Button
