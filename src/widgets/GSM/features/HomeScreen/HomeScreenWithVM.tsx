@@ -22,6 +22,7 @@ export const HomeScreenWithVM: React.FC<{
 
   const handleClickCheckin = () => {
     dispatch(successScreenActions.setManualEntryUser(state.user));
+    dispatch(homeScreenActions.resetUserInfo());
     onCheckin();
   };
 
