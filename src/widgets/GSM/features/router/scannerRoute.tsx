@@ -11,7 +11,9 @@ export const scannerRoute: RouteObject = {
       navigate(AppRoutes.HOME_SCREEN, { replace: true });
     };
 
-    const handleScan = () => {};
+    const handleScan = () => {
+      navigate(AppRoutes.SUCCESS_SCREEN, { replace: true });
+    };
 
     return <BarcodeScannerWithVM onCancel={handleCancel} onScan={handleScan} />;
   },

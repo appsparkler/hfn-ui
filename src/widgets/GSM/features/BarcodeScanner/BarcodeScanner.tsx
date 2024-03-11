@@ -70,3 +70,5 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
     </Vertical>
   );
 };
+
+
