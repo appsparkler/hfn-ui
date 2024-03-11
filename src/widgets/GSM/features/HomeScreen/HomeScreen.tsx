@@ -59,7 +59,6 @@ export const HomeScreen: React.FC<
               autoComplete="off"
               helperText={"Please enter name as displayed on the ID card"}
               fullWidth
-              value={user.name}
               onChange={handleChange}
             />
             <TextField
@@ -69,7 +68,6 @@ export const HomeScreen: React.FC<
               variant="standard"
               fullWidth
               autoComplete="off"
-              value={user.mobileNo}
               onChange={handleChange}
             />
             <TextField
@@ -79,7 +77,6 @@ export const HomeScreen: React.FC<
               variant="standard"
               fullWidth
               autoComplete="off"
-              value={user.email}
               onChange={handleChange}
             />
             <TextField
@@ -89,7 +86,6 @@ export const HomeScreen: React.FC<
               variant="standard"
               fullWidth
               autoComplete="off"
-              value={user.organization}
               onChange={handleChange}
             />
             <Button
