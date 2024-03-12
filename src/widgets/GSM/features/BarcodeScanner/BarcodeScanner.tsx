@@ -1,4 +1,4 @@
-import { Button /**SelectProps */, Card, CardContent } from "@mui/material";
+import { Button, Card, CardContent } from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { Vertical } from "components";
 import { useEffect, useMemo, useRef, useState } from "react";
