@@ -66,6 +66,7 @@ export const HomeScreen: React.FC<
               type="tel"
               name="mobileNo"
               label="Mobile No."
+              helperText={"Please enter country code, for ex. +91744..."}
               variant="standard"
               fullWidth
               autoComplete="off"
