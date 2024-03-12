@@ -23,6 +23,7 @@ export const HomeScreenWithVM: React.FC<{
   const handleClickCheckin = () => {
     dispatch(successScreenActions.setManualEntryUser(state.user));
     dispatch(homeScreenActions.resetUserInfo());
+
     onCheckin();
   };
 
@@ -31,7 +32,9 @@ export const HomeScreenWithVM: React.FC<{
   };
 
   useEffect(() => {
+    // reset all user info to start afresh
     dispatch(homeScreenActions.resetUserInfo());
+    dispatch(successScreenActions.reset());
   }, [dispatch]);
 
   return (
