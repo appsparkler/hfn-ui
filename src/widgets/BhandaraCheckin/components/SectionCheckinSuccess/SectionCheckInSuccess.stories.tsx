@@ -10,4 +10,6 @@ const Template: ComponentStory<typeof SectionCheckinSuccess> = (args) => (
   <SectionCheckinSuccess {...args} />
 );
 export const checkInSuccess = Template.bind({});
-checkInSuccess.args = {};
+checkInSuccess.args = {
+  
+};
