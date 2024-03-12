@@ -40,7 +40,11 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
       });
     }
     return () => {
-      codeReader.reset();
+      if (videoElement !== null) {
+        codeReader.reset();
+        videoElement.src = "";
+        videoRef.current = null;
+      }
     };
   }, [codeReader, onScan]);
 
