@@ -47,6 +47,7 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
   return (
     <Vertical mx="auto" p={2} justifyContent={"center"} alignItems={"center"}>
       <Card
+        variant="outlined"
         sx={{
           opacity: 0.87,
           maxWidth: 420,
@@ -70,5 +71,3 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
     </Vertical>
   );
 };
-
-

@@ -42,6 +42,7 @@ export const SuccessScreen: React.FC<
         <Typography variant="h5">Checked In</Typography>
       </Vertical>
       <Card
+        variant="outlined"
         sx={{
           width: "100%",
           maxWidth: "420px",
@@ -76,9 +77,11 @@ export const SuccessScreen: React.FC<
 const ScreenshotInstruction: React.FC<{}> = () => {
   return (
     <Card
+      variant="outlined"
       sx={{
         color: (theme) => theme.palette.error.contrastText,
         bgcolor: "error.light",
+        borderColor: "error.dark",
       }}
     >
       <CardContent>

@@ -38,9 +38,10 @@ export const HomeScreen: React.FC<
   return (
     <Vertical mx="auto" justifyContent={"center"} alignItems={"center"}>
       <Card
+        variant="outlined"
         sx={{
           m: 2,
-          maxWidth: maxWidth,
+          maxWidth,
           opacity: 0.86,
         }}
       >
