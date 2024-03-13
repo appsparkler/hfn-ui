@@ -115,7 +115,7 @@ const QRUserContent: React.FC<{
   return (
     <Vertical>
       <LabelledText label="Name" value={user.name} />
-      <LabelledText label="Mobile No." value={user.eventName} />
+      <LabelledText label="Event Name" value={user.eventName} />
       <LabelledText label="Session Name" value={user.sessionName} />
       <LabelledText label="PNR" value={user.pnr} />
       <LabelledText label="Registration ID" value={user.registrationId} />
