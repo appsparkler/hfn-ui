@@ -71,6 +71,7 @@ export const HomeScreen: React.FC<
               fullWidth
               autoComplete="off"
               onChange={handleChange}
+              defaultValue={"+91"}
             />
             <TextField
               type="email"
