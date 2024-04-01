@@ -1,11 +1,11 @@
 import { render } from "react-dom";
-// import { BhandaraCheckinWidgetDemo } from "./widgets/BhandaraCheckin";
+import { BhandaraCheckinWidgetDemo } from "./widgets/BhandaraCheckin";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import { GSMApp } from "widgets/GSM/features/App";
+// import { GSMApp } from "widgets/GSM/features/App";
 
 const root = document.getElementById("root");
 
-render(<GSMApp />, root);
+render(<BhandaraCheckinWidgetDemo />, root);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
