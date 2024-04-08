@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BarcodeScanner } from "./BarcodeScanner";
 import { IQRUser } from "widgets/GSM/model/QRUser";
 import { useAppDispatch } from "../redux-app/hooks";
 import { successScreenActions } from "../SuccessScreen/successScreenSlice";
+import { homeScreenActions } from "../HomeScreen/homeScreenSlice";
 
 export const BarcodeScannerWithVM: React.FC<{
   onCancel: () => void;
   onScan: () => void;
 }> = ({ onCancel, onScan }) => {
   const dispatch = useAppDispatch();
+  
   const handleScan = (result: string) => {
     const { isValid, user } = isQRValid(result);
     if (isValid && user !== null) {
@@ -21,6 +23,12 @@ export const BarcodeScannerWithVM: React.FC<{
   const handleCancel = () => {
     onCancel();
   };
+
+  useEffect(() => {
+    dispatch(homeScreenActions.resetUserInfo());
+    dispatch(successScreenActions.reset());
+  }, [dispatch]);
+
   return <BarcodeScanner onScan={handleScan} onCancel={handleCancel} />;
 };
 
@@ -39,7 +47,8 @@ function isQRValid(scanResult: string): {
     const eventName: string = firstRowColumns[0].trim();
     const sessionName: string = firstRowColumns[1].trim();
     const pnr: string = firstRowColumns[2].trim();
-    const pnrMatchesPattern: boolean = /^[A-Z,0-9]{2}-[A-Z,0-9]{4}-[A-Z,0-9]{4}$/.test(pnr);
+    const pnrMatchesPattern: boolean =
+      /^[A-Z,0-9]{2}-[A-Z,0-9]{4}-[A-Z,0-9]{4}$/.test(pnr);
 
     // Second Row Validations
     const secondRowColumns: string[] = rows[1].split("|");
