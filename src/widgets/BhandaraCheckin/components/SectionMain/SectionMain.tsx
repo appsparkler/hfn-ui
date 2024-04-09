@@ -89,6 +89,10 @@ export const SectionMain = ({
 
   const batchOptions: { label: string; value: Batch }[] = [
     {
+      label: "batch-1",
+      value: "batch-1",
+    },
+    {
       label: "batch-2",
       value: "batch-2",
     },
