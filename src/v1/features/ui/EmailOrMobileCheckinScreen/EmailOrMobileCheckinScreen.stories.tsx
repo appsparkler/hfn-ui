@@ -13,7 +13,9 @@ const Template: ComponentStory<typeof EmailOrMobileCheckinScreen> = (args) => (
 export const EmailOrMobileCheckinScreenStory: ComponentStory<
   typeof EmailOrMobileCheckinScreen
 > = Template.bind({});
-EmailOrMobileCheckinScreenStory.args = {};
+EmailOrMobileCheckinScreenStory.args = {
+  isMobileCheckin: false,
+};
 EmailOrMobileCheckinScreenStory.storyName = "Email Or Mobile Checkin Screen";
 
 export default Story;
