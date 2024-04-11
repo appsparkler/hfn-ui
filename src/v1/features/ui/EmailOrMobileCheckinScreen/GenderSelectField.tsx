@@ -5,27 +5,27 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { ageGroupOptions } from "v1/model/data";
+import { genderOptions } from "v1/model/data";
 
-export const AgeSelectField: React.FC<{
+export const GenderSelectField: React.FC<{
   onChange: (name: string, value: string) => void;
 }> = ({ onChange }) => {
   const handleChange: (
     event: SelectChangeEvent<string>,
     child: React.ReactNode
   ) => void = (evt) => {
-    onChange("age", evt.target.value);
+    onChange("gender", evt.target.value);
   };
   return (
     <FormControl variant="standard" sx={{ flex: 1 }}>
-      <InputLabel id="age-selection">Age</InputLabel>
+      <InputLabel id="gender-selection">Gender</InputLabel>
       <Select<string>
-        name="age"
-        labelId="age-selection"
+        name="gender"
+        labelId="gender-selection"
         onChange={handleChange}
       >
-        {ageGroupOptions.map(({ value, label }) => (
-          <MenuItem key={value} value={value}>
+        {genderOptions.map(({ value, label }) => (
+          <MenuItem key={value} value={label}>
             {label}
           </MenuItem>
         ))}

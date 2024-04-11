@@ -2,8 +2,9 @@ import { TextField } from "@mui/material";
 import { BatchSelectField } from "../components/BatchSelectField/BatchSelectField";
 import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
 import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
-import { Vertical } from "components";
+import { Horizontal, Vertical } from "components";
 import { AgeSelectField } from "./AgeSelectField";
+import { GenderSelectField } from "./GenderSelectField";
 
 export const EmailOrMobileCheckinScreen = () => {
   return (
@@ -17,7 +18,10 @@ export const EmailOrMobileCheckinScreen = () => {
             label={"Full Name"}
             fullWidth
           />
-          <AgeSelectField onChange={() => {}} />
+          <Horizontal gap={3}>
+            <AgeSelectField onChange={() => {}} />
+            <GenderSelectField onChange={() => {}} />
+          </Horizontal>
           <TextField
             type="text"
             name="city"
