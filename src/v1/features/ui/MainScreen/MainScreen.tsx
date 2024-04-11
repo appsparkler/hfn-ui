@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 
 export const UserInfoCard: React.FC<{
   eventTitle: string;
@@ -24,6 +24,7 @@ export const UserInfoCard: React.FC<{
   onChange,
   onClickCheckin,
 }) => {
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
   const handleChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = useCallback(
@@ -34,7 +35,10 @@ export const UserInfoCard: React.FC<{
   );
 
   const handleClickClose = () => {
-    onChange("");
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -55,6 +59,7 @@ export const UserInfoCard: React.FC<{
             label="Abhyasi ID / Email / Mobile #"
             fullWidth
             variant="standard"
+            inputRef={inputRef}
             InputProps={{
               endAdornment: (
                 <IconButton type="button" onClick={handleClickClose}>
