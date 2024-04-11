@@ -16,6 +16,7 @@ export const GenderSelectField: React.FC<{
   ) => void = (evt) => {
     onChange("gender", evt.target.value);
   };
+
   return (
     <FormControl variant="standard" sx={{ flex: 1 }}>
       <InputLabel id="gender-selection">Gender</InputLabel>
