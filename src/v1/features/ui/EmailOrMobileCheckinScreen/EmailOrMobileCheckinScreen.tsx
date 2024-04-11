@@ -19,7 +19,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
     <ScreenWrapper>
       <CardWithHeader heading="Email Or Mobile Checkin">
         <Vertical gap={1}>
-          <BatchSelectField defaultValue="batch-1" onChange={() => {}} />
+          <BatchSelectField defaultValue="batch-1" onChange={onChange} />
           <TextField
             type="text"
             name="fullName"
