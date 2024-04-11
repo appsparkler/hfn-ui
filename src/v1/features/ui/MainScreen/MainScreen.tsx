@@ -10,9 +10,10 @@ import {
 import { Horizontal, Vertical } from "components/Boxes";
 
 export const UserInfoCard: React.FC<{
+  value: string;
   onClickCheckin: () => void;
   onClickPlusNineOne: () => void;
-}> = ({ onClickCheckin, onClickPlusNineOne }) => {
+}> = ({ value, onClickCheckin, onClickPlusNineOne }) => {
   return (
     <Card elevation={1}>
       <CardMedia>
@@ -32,6 +33,7 @@ export const UserInfoCard: React.FC<{
             fullWidth
             variant="standard"
             helperText="Please ensure mobile number begins with country code.  For ex. +9138383...."
+            value={value}
           />
           <Horizontal gap={1}>
             <Button
@@ -76,13 +78,15 @@ const ScanButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 };
 
 export const MainScreen: React.FC<{
+  value: string;
   onClickScan: () => void;
   onClickCheckin: () => void;
   onClickPlusNineOne: () => void;
-}> = ({ onClickScan, onClickCheckin, onClickPlusNineOne }) => {
+}> = ({ value, onClickScan, onClickCheckin, onClickPlusNineOne }) => {
   return (
     <Vertical p={2} sx={{ maxWidth: 400 }} mr="auto" ml="auto">
       <UserInfoCard
+        value={value}
         onClickCheckin={onClickCheckin}
         onClickPlusNineOne={onClickPlusNineOne}
       />
