@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
 import { useCallback, useRef } from "react";
-
+import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
 
 const BatchSelectField: React.FC<{
   onChange: (selectedBatch: string) => void;
@@ -75,55 +75,43 @@ export const UserInfoCard: React.FC<{
   };
 
   return (
-    <Card elevation={1}>
-      <CardMedia>
-        <Typography
-          p={2}
-          bgcolor={"primary.main"}
-          color="primary.contrastText"
-          variant="h5"
-        >
-          {eventTitle}
-        </Typography>
-      </CardMedia>
-      <CardContent>
-        <Vertical gap={1}>
-          <BatchSelectField onChange={onChangeBatch} />
-          <TextField
-            label="Abhyasi ID / Email / Mobile #"
-            fullWidth
-            variant="standard"
-            inputRef={inputRef}
-            InputProps={{
-              endAdornment: (
-                <IconButton type="button" onClick={handleClickClose}>
-                  <Close />
-                </IconButton>
-              ),
+    <CardWithHeader heading={eventTitle}>
+      <Vertical gap={1}>
+        <BatchSelectField onChange={onChangeBatch} />
+        <TextField
+          label="Abhyasi ID / Email / Mobile #"
+          fullWidth
+          variant="standard"
+          inputRef={inputRef}
+          InputProps={{
+            endAdornment: (
+              <IconButton type="button" onClick={handleClickClose}>
+                <Close />
+              </IconButton>
+            ),
+          }}
+          helperText="Please ensure mobile number begins with country code.  For ex. +9138383...."
+          onChange={handleChange}
+          defaultValue={"+91"}
+        />
+        <Horizontal gap={1}>
+          <Button
+            disableElevation
+            sx={{
+              display: "flex",
+              flexBasis: "100%",
             }}
-            helperText="Please ensure mobile number begins with country code.  For ex. +9138383...."
-            onChange={handleChange}
-            defaultValue={"+91"}
-          />
-          <Horizontal gap={1}>
-            <Button
-              disableElevation
-              sx={{
-                display: "flex",
-                flexBasis: "100%",
-              }}
-              type="button"
-              variant="contained"
-              size={"large"}
-              onClick={onClickCheckin}
-              disabled={isCheckinEnabled}
-            >
-              Checkin
-            </Button>
-          </Horizontal>
-        </Vertical>
-      </CardContent>
-    </Card>
+            type="button"
+            variant="contained"
+            size={"large"}
+            onClick={onClickCheckin}
+            disabled={isCheckinEnabled}
+          >
+            Checkin
+          </Button>
+        </Horizontal>
+      </Vertical>
+    </CardWithHeader>
   );
 };
 
