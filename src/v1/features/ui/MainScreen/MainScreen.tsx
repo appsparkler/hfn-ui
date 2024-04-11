@@ -5,12 +5,28 @@ import {
   CardContent,
   CardMedia,
   Fab,
+  FormControl,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
 import { useCallback, useRef } from "react";
+
+const BatchSelectField = () => {
+  return (
+    <FormControl variant="standard">
+      <InputLabel id="batch-label">Batch</InputLabel>
+      <Select labelId="batch-label" defaultValue="batch-1">
+        <MenuItem value="batch-1">batch-1</MenuItem>
+        <MenuItem value="batch-2, batch-1">batch-2, batch-1</MenuItem>
+      </Select>
+    </FormControl>
+  );
+};
 
 export const UserInfoCard: React.FC<{
   eventTitle: string;
@@ -55,6 +71,7 @@ export const UserInfoCard: React.FC<{
       </CardMedia>
       <CardContent>
         <Vertical gap={1}>
+          <BatchSelectField />
           <TextField
             label="Abhyasi ID / Email / Mobile #"
             fullWidth
