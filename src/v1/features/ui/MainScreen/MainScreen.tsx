@@ -11,7 +11,7 @@ const UserInfoCard: React.FC<{
   eventTitle: string;
   defaultBatchValue: string;
   value: string;
-  onChangeBatch: (selectedBatch: string) => void;
+  onChangeBatch: (name: string, selectedBatch: string) => void;
   isCheckinDisabled: boolean;
   onClickCheckin: () => void;
   onChange: (updatedValue: string) => void;
@@ -64,7 +64,10 @@ const UserInfoCard: React.FC<{
           defaultValue={"+91"}
         />
         <Horizontal gap={1} justifyContent={"center"}>
-          <ContainedButton disabled={isCheckinDisabled}>
+          <ContainedButton
+            disabled={isCheckinDisabled}
+            onClick={onClickCheckin}
+          >
             Checkin
           </ContainedButton>
         </Horizontal>

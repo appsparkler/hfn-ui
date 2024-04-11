@@ -8,19 +8,20 @@ import {
 
 export const BatchSelectField: React.FC<{
   defaultValue: string;
-  onChange: (selectedBatch: string) => void;
+  onChange: (name: string, selectedBatch: string) => void;
 }> = ({ defaultValue, onChange }) => {
   const handleChange: (
     event: SelectChangeEvent<string>,
     child: React.ReactNode
   ) => void = (evt) => {
     const batch = evt.target.value;
-    onChange(batch);
+    onChange("batch", batch);
   };
   return (
     <FormControl variant="standard" fullWidth>
       <InputLabel id="batch-label">Batch</InputLabel>
       <Select
+        name="batch"
         labelId="batch-label"
         defaultValue={defaultValue}
         onChange={handleChange}
