@@ -5,6 +5,7 @@ import { useCallback, useRef } from "react";
 import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
 import { BatchSelectField } from "../components/BatchSelectField/BatchSelectField";
 import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
+import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 
 const UserInfoCard: React.FC<{
   eventTitle: string;
@@ -105,7 +106,7 @@ export const MainScreen: React.FC<{
   onChangeValue,
 }) => {
   return (
-    <Vertical p={2} sx={{ maxWidth: 400 }} mr="auto" ml="auto">
+    <ScreenWrapper>
       <UserInfoCard
         defaultBatchValue={defaultBatchValue}
         eventTitle={eventTitle}
@@ -116,6 +117,6 @@ export const MainScreen: React.FC<{
         onChangeBatch={onChangeBatch}
       />
       <ScanButton onClick={onClickScan} />
-    </Vertical>
+    </ScreenWrapper>
   );
 };
