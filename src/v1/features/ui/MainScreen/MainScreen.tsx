@@ -1,11 +1,12 @@
 import { Close } from "@mui/icons-material";
-import { Button, Fab, IconButton, TextField } from "@mui/material";
+import { Fab, IconButton, TextField } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
 import { useCallback, useRef } from "react";
 import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
 import { BatchSelectField } from "../components/BatchSelectField/BatchSelectField";
+import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
 
-export const UserInfoCard: React.FC<{
+const UserInfoCard: React.FC<{
   eventTitle: string;
   defaultBatchValue: string;
   value: string;
@@ -61,21 +62,10 @@ export const UserInfoCard: React.FC<{
           onChange={handleChange}
           defaultValue={"+91"}
         />
-        <Horizontal gap={1}>
-          <Button
-            disableElevation
-            sx={{
-              display: "flex",
-              flexBasis: "100%",
-            }}
-            type="button"
-            variant="contained"
-            size={"large"}
-            onClick={onClickCheckin}
-            disabled={isCheckinDisabled}
-          >
+        <Horizontal gap={1} justifyContent={"center"}>
+          <ContainedButton disabled={isCheckinDisabled}>
             Checkin
-          </Button>
+          </ContainedButton>
         </Horizontal>
       </Vertical>
     </CardWithHeader>

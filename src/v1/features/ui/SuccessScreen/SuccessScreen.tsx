@@ -1,7 +1,7 @@
 import { CheckCircle } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography/Typography";
 import { Vertical } from "components";
+import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
 
 export const SuccessScreen: React.FC<{
   onClickGoToMainScreen: () => void;
@@ -27,15 +27,9 @@ export const SuccessScreen: React.FC<{
         />
         <Typography variant="h5">Checked In</Typography>
       </Vertical>
-      <Button
-        type="button"
-        variant="contained"
-        size="large"
-        disableElevation
-        onClick={onClickGoToMainScreen}
-      >
+      <ContainedButton onClick={onClickGoToMainScreen}>
         Return to Main Screen
-      </Button>
+      </ContainedButton>
     </Vertical>
   );
 };

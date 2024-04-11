@@ -6,8 +6,8 @@ const Story = {
   title: "features/ui/Abhyasi Id Checkin Screen",
 } as ComponentMeta<typeof AbhyasiIdCheckinScreen>;
 
-const Template: ComponentStory<typeof AbhyasiIdCheckinScreen> = () => (
-  <AbhyasiIdCheckinScreen />
+const Template: ComponentStory<typeof AbhyasiIdCheckinScreen> = (args) => (
+  <AbhyasiIdCheckinScreen {...args} />
 );
 
 export const AbhyasiIdCheckinScreenStory: ComponentStory<
