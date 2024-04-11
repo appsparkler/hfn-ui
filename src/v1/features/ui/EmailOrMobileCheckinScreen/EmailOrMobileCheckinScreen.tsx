@@ -77,7 +77,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             name="mobile"
             variant="standard"
             label={"Mobile"}
-            disabled={isMobileCheckin}
+            disabled={!isMobileCheckin === true}
             fullWidth
             defaultValue={initialMobileNumber}
             onChange={handleChangeTextField}
@@ -87,7 +87,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             name="email"
             variant="standard"
             label={"Email"}
-            disabled={!isMobileCheckin}
+            disabled={isMobileCheckin}
             defaultValue={initialEmailAddress}
             fullWidth
             onChange={handleChangeTextField}

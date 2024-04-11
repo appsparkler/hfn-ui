@@ -15,6 +15,8 @@ export const EmailOrMobileCheckinScreenStory: ComponentStory<
 > = Template.bind({});
 EmailOrMobileCheckinScreenStory.args = {
   isMobileCheckin: false,
+  initialEmailAddress: "abc@def.com",
+  initialMobileNumber: "",
 };
 EmailOrMobileCheckinScreenStory.storyName = "Email Or Mobile Checkin Screen";
 
