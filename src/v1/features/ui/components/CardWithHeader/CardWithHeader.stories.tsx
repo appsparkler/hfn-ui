@@ -1,15 +1,21 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { CardWithHeader } from "./CardWithHeader";
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta: Meta<typeof CardWithHeader> = {
-  title: "features/ui/components/Card With Header",
+import { Typography } from "@mui/material";
+
+const Story = {
   component: CardWithHeader,
-  argTypes: {},
+  title: "features/ui/components/CardWithHeader",
+} as ComponentMeta<typeof CardWithHeader>;
+
+const Template: ComponentStory<typeof CardWithHeader> = (args) => (
+  <CardWithHeader {...args} />
+);
+
+export const CardWithHeaderStory: ComponentStory<typeof CardWithHeader> =
+  Template.bind({});
+CardWithHeaderStory.args = {
+  heading: "Abhyasi ID Checkin",
+  children: <Typography>Children...</Typography>,
 };
-export default meta;
-type Story = StoryObj<typeof CardWithHeader>;
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const CardWithHeaderStory: Story = {
-  args: {},
-};
-CardWithHeaderStory.storyName = "Card With Header";
+
+export default Story;
