@@ -3,7 +3,9 @@ import { Button } from "@mui/material";
 import Typography from "@mui/material/Typography/Typography";
 import { Vertical } from "components";
 
-export const SuccessScreen = () => {
+export const SuccessScreen: React.FC<{
+  onClickGoToMainScreen: () => void;
+}> = ({ onClickGoToMainScreen }) => {
   return (
     <Vertical
       alignItems={"center"}
@@ -25,7 +27,13 @@ export const SuccessScreen = () => {
         />
         <Typography variant="h5">Checked In</Typography>
       </Vertical>
-      <Button type="button" variant="contained" size="large" disableElevation>
+      <Button
+        type="button"
+        variant="contained"
+        size="large"
+        disableElevation
+        onClick={onClickGoToMainScreen}
+      >
         Return to Main Screen
       </Button>
     </Vertical>
