@@ -15,10 +15,15 @@ import { useCallback } from "react";
 export const UserInfoCard: React.FC<{
   eventTitle: string;
   value: string;
+  isCheckinDisabled: boolean;
   onClickCheckin: () => void;
-  onClickPlusNineOne: () => void;
   onChange: (updatedValue: string) => void;
-}> = ({ value, eventTitle, onChange, onClickCheckin, onClickPlusNineOne }) => {
+}> = ({
+  isCheckinDisabled: isCheckinEnabled,
+  eventTitle,
+  onChange,
+  onClickCheckin,
+}) => {
   const handleChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = useCallback(
@@ -72,6 +77,7 @@ export const UserInfoCard: React.FC<{
               variant="contained"
               size={"large"}
               onClick={onClickCheckin}
+              disabled={isCheckinEnabled}
             >
               Checkin
             </Button>
@@ -98,17 +104,17 @@ const ScanButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 export const MainScreen: React.FC<{
   value: string;
   eventTitle: string;
+  isCheckinDisabled: boolean;
   onChangeValue: (updatedValue: string) => void;
   onClickScan: () => void;
   onClickCheckin: () => void;
-  onClickPlusNineOne: () => void;
 }> = ({
   value,
   eventTitle,
   onClickScan,
   onClickCheckin,
-  onClickPlusNineOne,
   onChangeValue,
+  isCheckinDisabled,
 }) => {
   return (
     <Vertical p={2} sx={{ maxWidth: 400 }} mr="auto" ml="auto">
@@ -117,7 +123,7 @@ export const MainScreen: React.FC<{
         value={value}
         onChange={onChangeValue}
         onClickCheckin={onClickCheckin}
-        onClickPlusNineOne={onClickPlusNineOne}
+        isCheckinDisabled={isCheckinDisabled}
       />
       <ScanButton onClick={onClickScan} />
     </Vertical>
