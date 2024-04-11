@@ -37,6 +37,27 @@ export const EmailOrMobileCheckinScreen = () => {
             label={"Country"}
             fullWidth
           />
+          <TextField
+            type="tel"
+            name="mobile"
+            variant="standard"
+            label={"Mobile"}
+            fullWidth
+          />
+          <TextField
+            type="email"
+            name="email"
+            variant="standard"
+            label={"Email"}
+            fullWidth
+          />
+          <TextField
+            type="text"
+            name="dormAndBerthAllocation"
+            variant="standard"
+            label={"Dorm And Berth Allocation"}
+            fullWidth
+          />
         </Vertical>
       </CardWithHeader>
     </ScreenWrapper>
