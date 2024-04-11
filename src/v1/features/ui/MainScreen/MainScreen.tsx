@@ -10,17 +10,31 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
 import { useCallback, useRef } from "react";
 
-const BatchSelectField = () => {
+const BatchSelectField: React.FC<{
+  onChange: (selectedBatch: string) => void;
+}> = ({ onChange }) => {
+  const handleChange: (
+    event: SelectChangeEvent<string>,
+    child: React.ReactNode
+  ) => void = (evt) => {
+    const batch = evt.target.value;
+    onChange(batch);
+  };
   return (
     <FormControl variant="standard">
       <InputLabel id="batch-label">Batch</InputLabel>
-      <Select labelId="batch-label" defaultValue="batch-1">
+      <Select
+        labelId="batch-label"
+        defaultValue="batch-1"
+        onChange={handleChange}
+      >
         <MenuItem value="batch-1">batch-1</MenuItem>
         <MenuItem value="batch-2, batch-1">batch-2, batch-1</MenuItem>
       </Select>
@@ -31,12 +45,14 @@ const BatchSelectField = () => {
 export const UserInfoCard: React.FC<{
   eventTitle: string;
   value: string;
+  onChangeBatch: (selectedBatch: string) => void;
   isCheckinDisabled: boolean;
   onClickCheckin: () => void;
   onChange: (updatedValue: string) => void;
 }> = ({
   isCheckinDisabled: isCheckinEnabled,
   eventTitle,
+  onChangeBatch,
   onChange,
   onClickCheckin,
 }) => {
@@ -71,7 +87,7 @@ export const UserInfoCard: React.FC<{
       </CardMedia>
       <CardContent>
         <Vertical gap={1}>
-          <BatchSelectField />
+          <BatchSelectField onChange={onChangeBatch} />
           <TextField
             label="Abhyasi ID / Email / Mobile #"
             fullWidth
@@ -127,16 +143,18 @@ export const MainScreen: React.FC<{
   value: string;
   eventTitle: string;
   isCheckinDisabled: boolean;
+  onChangeBatch: (selectedBatch: string) => void;
   onChangeValue: (updatedValue: string) => void;
   onClickScan: () => void;
   onClickCheckin: () => void;
 }> = ({
   value,
   eventTitle,
+  isCheckinDisabled,
   onClickScan,
   onClickCheckin,
+  onChangeBatch,
   onChangeValue,
-  isCheckinDisabled,
 }) => {
   return (
     <Vertical p={2} sx={{ maxWidth: 400 }} mr="auto" ml="auto">
@@ -146,6 +164,7 @@ export const MainScreen: React.FC<{
         onChange={onChangeValue}
         onClickCheckin={onClickCheckin}
         isCheckinDisabled={isCheckinDisabled}
+        onChangeBatch={onChangeBatch}
       />
       <ScanButton onClick={onClickScan} />
     </Vertical>
