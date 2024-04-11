@@ -9,6 +9,12 @@ import { GenderSelectField } from "./GenderSelectField";
 export const EmailOrMobileCheckinScreen: React.FC<{
   onChange: (name: string, value: string) => void;
 }> = ({ onChange }) => {
+  const handleChangeTextField: React.ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = (evt) => {
+    const { name, value } = evt.target;
+    onChange(name, value);
+  };
   return (
     <ScreenWrapper>
       <CardWithHeader heading="Email Or Mobile Checkin">
@@ -16,13 +22,15 @@ export const EmailOrMobileCheckinScreen: React.FC<{
           <BatchSelectField defaultValue="batch-1" onChange={() => {}} />
           <TextField
             type="text"
+            name="fullName"
             variant="standard"
             label={"Full Name"}
             fullWidth
+            onChange={handleChangeTextField}
           />
           <Horizontal gap={3}>
-            <AgeSelectField onChange={() => {}} />
-            <GenderSelectField onChange={() => {}} />
+            <AgeSelectField onChange={onChange} />
+            <GenderSelectField onChange={onChange} />
           </Horizontal>
           <TextField
             type="text"
