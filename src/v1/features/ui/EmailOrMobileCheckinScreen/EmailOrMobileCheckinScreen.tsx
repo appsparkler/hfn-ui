@@ -16,6 +16,27 @@ export const EmailOrMobileCheckinScreen = () => {
             label={"Full Name"}
             fullWidth
           />
+          <TextField
+            type="text"
+            name="city"
+            variant="standard"
+            label={"City"}
+            fullWidth
+          />
+          <TextField
+            type="text"
+            name="state"
+            variant="standard"
+            label={"State"}
+            fullWidth
+          />
+          <TextField
+            type="text"
+            name="country"
+            variant="standard"
+            label={"Country"}
+            fullWidth
+          />
         </Vertical>
       </CardWithHeader>
     </ScreenWrapper>
