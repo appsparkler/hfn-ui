@@ -6,7 +6,9 @@ import { Horizontal, Vertical } from "components";
 import { AgeSelectField } from "./AgeSelectField";
 import { GenderSelectField } from "./GenderSelectField";
 
-export const EmailOrMobileCheckinScreen = () => {
+export const EmailOrMobileCheckinScreen: React.FC<{
+  onChange: (name: string, value: string) => void;
+}> = ({ onChange }) => {
   return (
     <ScreenWrapper>
       <CardWithHeader heading="Email Or Mobile Checkin">

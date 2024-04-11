@@ -7,7 +7,7 @@ const Story = {
 } as ComponentMeta<typeof EmailOrMobileCheckinScreen>;
 
 const Template: ComponentStory<typeof EmailOrMobileCheckinScreen> = (args) => (
-  <EmailOrMobileCheckinScreen />
+  <EmailOrMobileCheckinScreen {...args} />
 );
 
 export const EmailOrMobileCheckinScreenStory: ComponentStory<
