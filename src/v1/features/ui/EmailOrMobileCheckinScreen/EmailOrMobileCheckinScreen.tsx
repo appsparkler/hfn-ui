@@ -5,10 +5,15 @@ import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { Horizontal, Vertical } from "components";
 import { AgeSelectField } from "./AgeSelectField";
 import { GenderSelectField } from "./GenderSelectField";
+import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
+import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
 
 export const EmailOrMobileCheckinScreen: React.FC<{
+  isCheckinDisabled: boolean;
+  onClickCheckin: () => void;
+  onClickCancel: () => void;
   onChange: (name: string, value: string) => void;
-}> = ({ onChange }) => {
+}> = ({ isCheckinDisabled, onChange, onClickCancel, onClickCheckin }) => {
   const handleChangeTextField: React.ChangeEventHandler<
     HTMLTextAreaElement | HTMLInputElement
   > = (evt) => {
@@ -80,6 +85,15 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             fullWidth
             onChange={handleChangeTextField}
           />
+          <Horizontal justifyContent={"space-evenly"}>
+            <OutlinedButton onClick={onClickCancel}>Cancel</OutlinedButton>
+            <ContainedButton
+              disabled={isCheckinDisabled}
+              onClick={onClickCheckin}
+            >
+              Checkin
+            </ContainedButton>
+          </Horizontal>
         </Vertical>
       </CardWithHeader>
     </ScreenWrapper>
