@@ -4,7 +4,6 @@ import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { TextField } from "@mui/material";
 import { isEmpty } from "lodash/fp";
 import { Vertical } from "components";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
 const FieldValue: React.FC<{
   name: string;
@@ -33,10 +32,26 @@ interface IQRCheckinCardState {
 }
 const QRCheckinCard: React.FC<{
   state: IQRCheckinCardState;
-}> = ({ state }) => {
+  onChange: (updatedState: IQRCheckinCardState) => void;
+}> = ({ state, onChange }) => {
+  const handleClickHeader = () => {
+    onChange({
+      ...state,
+      isSelected: !state.isSelected,
+    });
+  };
+  const handleChangeDormAndBertAllocation: React.ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = (evt) => {
+    onChange({
+      ...state,
+      dormAndBerthAllocation: evt.target.value,
+    });
+  };
+
   return (
     <CardWithClickableHeader
-      onClickHeader={() => {}}
+      onClickHeader={handleClickHeader}
       heading={state.fullName}
       isSelected={state.isSelected}
     >
@@ -54,6 +69,7 @@ const QRCheckinCard: React.FC<{
         label="Dorm & Berth Allocation"
         variant="standard"
         sx={{ mt: 1 }}
+        onChange={handleChangeDormAndBertAllocation}
       />
     </CardWithClickableHeader>
   );
@@ -61,12 +77,13 @@ const QRCheckinCard: React.FC<{
 
 export const QRCheckinScreen: React.FC<{
   checkins: IQRCheckinCardState[];
-}> = ({ checkins }) => {
+  onChange: (updatedState: IQRCheckinCardState) => void;
+}> = ({ checkins, onChange }) => {
   return (
     <ScreenWrapper>
       <Vertical gap={1}>
         {checkins.map((checkin) => (
-          <QRCheckinCard state={checkin} />
+          <QRCheckinCard state={checkin} onChange={onChange} />
         ))}
       </Vertical>
     </ScreenWrapper>
