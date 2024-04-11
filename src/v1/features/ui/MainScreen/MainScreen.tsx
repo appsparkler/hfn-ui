@@ -1,9 +1,11 @@
+import { Close } from "@mui/icons-material";
 import {
   Button,
   Card,
   CardContent,
   CardMedia,
   Fab,
+  IconButton,
   TextField,
   Typography,
 } from "@mui/material";
@@ -11,11 +13,12 @@ import { Horizontal, Vertical } from "components/Boxes";
 import { useCallback } from "react";
 
 export const UserInfoCard: React.FC<{
+  eventTitle: string;
   value: string;
   onClickCheckin: () => void;
   onClickPlusNineOne: () => void;
   onChange: (updatedValue: string) => void;
-}> = ({ value, onChange, onClickCheckin, onClickPlusNineOne }) => {
+}> = ({ value, eventTitle, onChange, onClickCheckin, onClickPlusNineOne }) => {
   const handleChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement
   > = useCallback(
@@ -24,6 +27,10 @@ export const UserInfoCard: React.FC<{
     },
     [onChange]
   );
+
+  const handleClickClose = () => {
+    onChange("");
+  };
 
   return (
     <Card elevation={1}>
@@ -34,7 +41,7 @@ export const UserInfoCard: React.FC<{
           color="primary.contrastText"
           variant="h5"
         >
-          Bhandara
+          {eventTitle}
         </Typography>
       </CardMedia>
       <CardContent>
@@ -43,19 +50,18 @@ export const UserInfoCard: React.FC<{
             label="Abhyasi ID / Email / Mobile #"
             fullWidth
             variant="standard"
+            InputProps={{
+              endAdornment: (
+                <IconButton type="button" onClick={handleClickClose}>
+                  <Close />
+                </IconButton>
+              ),
+            }}
             helperText="Please ensure mobile number begins with country code.  For ex. +9138383...."
             onChange={handleChange}
-            defaultValue={""}
+            defaultValue={"+91"}
           />
           <Horizontal gap={1}>
-            <Button
-              type="button"
-              variant="outlined"
-              size="large"
-              onClick={onClickPlusNineOne}
-            >
-              +91
-            </Button>
             <Button
               disableElevation
               sx={{
@@ -91,12 +97,14 @@ const ScanButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
 export const MainScreen: React.FC<{
   value: string;
+  eventTitle: string;
   onChangeValue: (updatedValue: string) => void;
   onClickScan: () => void;
   onClickCheckin: () => void;
   onClickPlusNineOne: () => void;
 }> = ({
   value,
+  eventTitle,
   onClickScan,
   onClickCheckin,
   onClickPlusNineOne,
@@ -105,6 +113,7 @@ export const MainScreen: React.FC<{
   return (
     <Vertical p={2} sx={{ maxWidth: 400 }} mr="auto" ml="auto">
       <UserInfoCard
+        eventTitle={eventTitle}
         value={value}
         onChange={onChangeValue}
         onClickCheckin={onClickCheckin}
