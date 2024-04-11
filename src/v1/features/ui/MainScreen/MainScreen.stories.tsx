@@ -14,4 +14,5 @@ export const MainScreenStory: ComponentStory<typeof MainScreen> = (args) => (
 MainScreenStory.storyName = "Main Screen";
 MainScreenStory.args = {
   eventTitle: "125th Birth Anniversary of Pujya Babuji Maharaj - 2024",
+  defaultBatchValue: "batch-1",
 };

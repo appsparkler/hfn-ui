@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 
 const Story = {
   component: CardWithHeader,
-  title: "features/ui/components/CardWithHeader",
+  title: "features/ui/components/Card With Header",
 } as ComponentMeta<typeof CardWithHeader>;
 
 const Template: ComponentStory<typeof CardWithHeader> = (args) => (
@@ -17,5 +17,6 @@ CardWithHeaderStory.args = {
   heading: "Abhyasi ID Checkin",
   children: <Typography>Children...</Typography>,
 };
+CardWithHeaderStory.storyName = "Card With Header";
 
 export default Story;
