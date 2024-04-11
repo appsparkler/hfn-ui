@@ -3,7 +3,9 @@ import { CardWithClickableHeader } from "./CardWithClickableHeader";
 import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { TextField } from "@mui/material";
 import { isEmpty } from "lodash/fp";
-import { Vertical } from "components";
+import { Horizontal, Vertical } from "components";
+import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
+import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
 
 const FieldValue: React.FC<{
   name: string;
@@ -77,14 +79,23 @@ const QRCheckinCard: React.FC<{
 
 export const QRCheckinScreen: React.FC<{
   checkins: IQRCheckinCardState[];
+  isCheckinDisabled: boolean;
   onChange: (updatedState: IQRCheckinCardState) => void;
-}> = ({ checkins, onChange }) => {
+  onCheckin: () => void;
+  onCancel: () => void;
+}> = ({ checkins, isCheckinDisabled, onChange }) => {
   return (
     <ScreenWrapper>
       <Vertical gap={1}>
         {checkins.map((checkin) => (
           <QRCheckinCard state={checkin} onChange={onChange} />
         ))}
+        <Horizontal justifyContent={"space-evenly"}>
+          <OutlinedButton>cancel</OutlinedButton>
+          <ContainedButton disabled={isCheckinDisabled}>
+            checkin
+          </ContainedButton>
+        </Horizontal>
       </Vertical>
     </ScreenWrapper>
   );

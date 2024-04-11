@@ -39,6 +39,7 @@ QRCheckinScreenStory.args = {
       registrationId: "29292-2323-2323-21111",
     },
   ],
+  isCheckinDisabled: false,
 };
 QRCheckinScreenStory.storyName = "QR Checkin Screen";
 
