@@ -3,6 +3,7 @@ import { BatchSelectField } from "../components/BatchSelectField/BatchSelectFiel
 import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
 import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { Vertical } from "components";
+import { AgeSelectField } from "./AgeSelectField";
 
 export const EmailOrMobileCheckinScreen = () => {
   return (
@@ -16,6 +17,7 @@ export const EmailOrMobileCheckinScreen = () => {
             label={"Full Name"}
             fullWidth
           />
+          <AgeSelectField onChange={() => {}} />
           <TextField
             type="text"
             name="city"

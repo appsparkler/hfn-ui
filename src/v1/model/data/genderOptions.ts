@@ -1,7 +1,7 @@
 import { IKeyValue } from "./IKeyValue";
 
 export const genderOptions: IKeyValue[] = [
-  { key: "Female", value: "F" },
-  { key: "Male", value: "M" },
-  { key: "Unspecified", value: "U" },
+  { label: "Female", value: "F" },
+  { label: "Male", value: "M" },
+  { label: "Unspecified", value: "U" },
 ];
