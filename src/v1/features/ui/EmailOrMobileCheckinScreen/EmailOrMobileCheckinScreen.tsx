@@ -11,12 +11,16 @@ import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedBut
 export const EmailOrMobileCheckinScreen: React.FC<{
   isCheckinDisabled: boolean;
   isMobileCheckin: boolean;
+  initialMobileNumber: string;
+  initialEmailAddress: string;
   onClickCheckin: () => void;
   onClickCancel: () => void;
   onChange: (name: string, value: string) => void;
 }> = ({
   isCheckinDisabled,
   isMobileCheckin,
+  initialEmailAddress,
+  initialMobileNumber,
   onChange,
   onClickCancel,
   onClickCheckin,
@@ -75,6 +79,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             label={"Mobile"}
             disabled={isMobileCheckin}
             fullWidth
+            defaultValue={initialMobileNumber}
             onChange={handleChangeTextField}
           />
           <TextField
@@ -83,6 +88,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"Email"}
             disabled={!isMobileCheckin}
+            defaultValue={initialEmailAddress}
             fullWidth
             onChange={handleChangeTextField}
           />
