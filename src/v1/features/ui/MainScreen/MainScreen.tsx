@@ -37,6 +37,7 @@ const UserInfoCard: React.FC<{
     if (inputRef.current) {
       inputRef.current.value = "";
       inputRef.current.focus();
+      onChange("");
     }
   };
 
