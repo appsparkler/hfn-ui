@@ -1,5 +1,5 @@
 import Typography from "@mui/material/Typography/Typography";
-import { CardWithClickableHeader } from "../components/CardWithHeader/CardWithHeader";
+import { CardWithClickableHeader } from "../components/CardWithHeader/CardWithClickableHeader";
 import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { TextField } from "@mui/material";
 import { isEmpty } from "lodash/fp";
