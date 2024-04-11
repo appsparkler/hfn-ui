@@ -38,6 +38,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"City"}
             fullWidth
+            onChange={handleChangeTextField}
           />
           <TextField
             type="text"
@@ -45,6 +46,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"State"}
             fullWidth
+            onChange={handleChangeTextField}
           />
           <TextField
             type="text"
@@ -52,6 +54,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"Country"}
             fullWidth
+            onChange={handleChangeTextField}
           />
           <TextField
             type="tel"
@@ -59,6 +62,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"Mobile"}
             fullWidth
+            onChange={handleChangeTextField}
           />
           <TextField
             type="email"
@@ -66,6 +70,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"Email"}
             fullWidth
+            onChange={handleChangeTextField}
           />
           <TextField
             type="text"
@@ -73,6 +78,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             variant="standard"
             label={"Dorm And Berth Allocation"}
             fullWidth
+            onChange={handleChangeTextField}
           />
         </Vertical>
       </CardWithHeader>
