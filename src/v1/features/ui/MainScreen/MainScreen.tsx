@@ -8,12 +8,23 @@ import {
   Typography,
 } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
+import { useCallback } from "react";
 
 export const UserInfoCard: React.FC<{
   value: string;
   onClickCheckin: () => void;
   onClickPlusNineOne: () => void;
-}> = ({ value, onClickCheckin, onClickPlusNineOne }) => {
+  onChange: (updatedValue: string) => void;
+}> = ({ value, onChange, onClickCheckin, onClickPlusNineOne }) => {
+  const handleChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = useCallback(
+    (evt) => {
+      onChange(evt.target.value);
+    },
+    [onChange]
+  );
+
   return (
     <Card elevation={1}>
       <CardMedia>
@@ -33,7 +44,8 @@ export const UserInfoCard: React.FC<{
             fullWidth
             variant="standard"
             helperText="Please ensure mobile number begins with country code.  For ex. +9138383...."
-            value={value}
+            onChange={handleChange}
+            defaultValue={""}
           />
           <Horizontal gap={1}>
             <Button
@@ -79,14 +91,22 @@ const ScanButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
 export const MainScreen: React.FC<{
   value: string;
+  onChangeValue: (updatedValue: string) => void;
   onClickScan: () => void;
   onClickCheckin: () => void;
   onClickPlusNineOne: () => void;
-}> = ({ value, onClickScan, onClickCheckin, onClickPlusNineOne }) => {
+}> = ({
+  value,
+  onClickScan,
+  onClickCheckin,
+  onClickPlusNineOne,
+  onChangeValue,
+}) => {
   return (
     <Vertical p={2} sx={{ maxWidth: 400 }} mr="auto" ml="auto">
       <UserInfoCard
         value={value}
+        onChange={onChangeValue}
         onClickCheckin={onClickCheckin}
         onClickPlusNineOne={onClickPlusNineOne}
       />
