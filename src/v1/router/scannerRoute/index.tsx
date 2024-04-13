@@ -10,7 +10,7 @@ const Component = () => {
   const handleScan = (rawValue: string) => {
     if (qrUtils.isQRValid(rawValue)) {
       const checkinsAndMore = qrUtils.getQRCheckinsAndMore(rawValue);
-      navigate(appRoutes.SUCCESS_SCREEN, {
+      navigate(appRoutes.QR_CHECKIN, {
         state: checkinsAndMore.checkins,
       });
     }
