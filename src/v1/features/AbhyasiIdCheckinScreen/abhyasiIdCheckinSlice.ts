@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "v1/app/store";
+import { CheckinType } from "v1/model/data/checkinTypes";
 
 const initialState = {
   selectedBatch: "",
@@ -12,11 +13,14 @@ interface IAbhyasiIdCheckinAPIPayload {
   batch: string;
   dormAndBerthAllocation: string;
   eventName: string;
+  type: CheckinType;
 }
 
 export const checkinWithAbhyasiId = createAsyncThunk(
   "abhyasiIdCheckinScreen/checkin",
-  (abhyasiIdCheckin: IAbhyasiIdCheckinAPIPayload) => {}
+  (abhyasiIdCheckin: IAbhyasiIdCheckinAPIPayload) => {
+    debugger;
+  }
 );
 
 const abhyasiIdSlice = createSlice({

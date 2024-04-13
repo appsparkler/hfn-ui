@@ -7,6 +7,8 @@ import {
 import { AbhyasiIdCheckinScreen } from "./AbhyasiIdCheckinScreen";
 import { useEffect } from "react";
 import { event } from "v1/model/data/event";
+import { CheckinType } from "v1/model/data/checkinTypes";
+import { toUpper } from "lodash/fp";
 
 const { updateDormAndBerthAllocation, updatedSelectedBatch } =
   abhyasiIdCheckinScreenActions;
@@ -33,11 +35,12 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
   const handleClickCheckin = async () => {
     await dispatch(
       checkinWithAbhyasiId({
-        abhyasiId,
+        abhyasiId: toUpper(abhyasiId),
         batch: state.selectedBatch,
         dormAndBerthAllocation: state.dormAndBerthAllocation,
         eventName: event.title,
         timestamp: Date.now(),
+        type: CheckinType.ABHYASI_ID,
       })
     );
     onCheckin();
