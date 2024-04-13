@@ -1,3 +1,5 @@
+import { CheckinTypeEnum } from "../interfaces/CheckinTypeEnum";
+
 interface QRCheckinsAndMore {
   checkins: QRCodeCheckin[];
   more: string;
@@ -22,10 +24,6 @@ interface EventOrderGeneralDetails {
   eventTitle: string;
   pnr: string;
   orderId: string;
-}
-
-enum CheckinType {
-  QR = "QR",
 }
 
 export enum QRType {
@@ -90,7 +88,7 @@ export class QRUtils {
           pnr: generalDetails.pnr,
           eventName: generalDetails.eventTitle,
           orderId: generalDetails.orderId,
-          type: CheckinType.QR,
+          type: CheckinTypeEnum.QR,
         };
       });
     return checkins;
