@@ -3,6 +3,7 @@ import { mainScreenRouteObject } from "./mainScreenRoute";
 import { abhyasiIdCheckinRouteObject } from "./abhyasiIdCheckinRoute";
 import { ErrorElement } from "./errorRoute";
 import { successScreenRoute } from "./successScreenRoute";
+import { emailOrMobileCheckinRoute } from "./emailOrMobileCheckinRoute";
 
 export const rootRoute: RouteObject = {
   path: "/",
@@ -12,5 +13,6 @@ export const rootRoute: RouteObject = {
     mainScreenRouteObject,
     abhyasiIdCheckinRouteObject,
     successScreenRoute,
+    emailOrMobileCheckinRoute,
   ],
 };
