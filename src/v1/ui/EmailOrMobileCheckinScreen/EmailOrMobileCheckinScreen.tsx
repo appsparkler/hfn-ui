@@ -9,6 +9,7 @@ import { ContainedButton } from "../components/buttons/ContainedButton/Contained
 import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
 
 export const EmailOrMobileCheckinScreen: React.FC<{
+  initialBatch: string;
   isCheckinDisabled: boolean;
   isMobileCheckin: boolean;
   initialMobileNumber: string;
@@ -17,6 +18,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
   onClickCancel: () => void;
   onChange: (name: string, value: string) => void;
 }> = ({
+  initialBatch,
   isCheckinDisabled,
   isMobileCheckin,
   initialEmailAddress,
@@ -35,7 +37,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
     <ScreenWrapper>
       <CardWithHeader heading="Email Or Mobile Checkin">
         <Vertical gap={1}>
-          <BatchSelectField defaultValue="batch-1" onChange={onChange} />
+          <BatchSelectField defaultValue={initialBatch} onChange={onChange} />
           <TextField
             type="text"
             name="fullName"

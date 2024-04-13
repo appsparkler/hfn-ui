@@ -5,7 +5,8 @@ import { MainScreenConnected } from "v1/features/MainScreen/MainScreenConnected"
 import { mainScreenActions } from "v1/features/MainScreen/mainScreenSlice";
 import { appRoutes } from "v1/model/data/routes";
 import { ILocationState } from "v1/model/interfaces/ILocationState";
-import { isValidAbhyasiId } from "v1/model/utils/validations";
+import { IEmailOrMobileCheckinLocationState } from "v1/model/interfaces/IMobileCheckinLocationState";
+import { isValidAbhyasiId, isValidEmail } from "v1/model/utils/validations";
 
 const loader: LoaderFunction = () => {
   store.dispatch(mainScreenActions.resetState());
@@ -20,12 +21,23 @@ const Component = () => {
     batch,
     inputValue,
   }) => {
-    if (isValidAbhyasiId(inputValue) && !isEmpty(batch)) {
+    if (isEmpty(batch)) return;
+    if (isValidAbhyasiId(inputValue)) {
       navigate(appRoutes.ABHYASI_ID_CHECKIN, {
         state: {
           batch,
           inputValue,
         },
+      });
+    } else if (isValidEmail(inputValue)) {
+      const state: IEmailOrMobileCheckinLocationState = {
+        initialEmailAddress: inputValue,
+        initialMobileNumber: "",
+        isEmailCheckin: true,
+        initialBatch: batch,
+      };
+      navigate(appRoutes.EMAIL_OR_MOBILE_CHECKIN, {
+        state,
       });
     }
   };
