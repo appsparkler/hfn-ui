@@ -1,14 +1,4 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom";
-import { mainScreenRouteObject } from "./mainScreenRoute";
-import { abhyasiIdCheckinRouteObject } from "./abhyasiIdCheckinRoute";
-import { ErrorElement } from "./errorRoute";
-import { TheOutlet } from "./ErrorElement";
+import { createBrowserRouter } from "react-router-dom";
+import { rootRoute } from "./rootRoute";
 
-export const browserRouter = createBrowserRouter([
-  {
-    path: "/",
-    ErrorBoundary: ErrorElement,
-    Component: TheOutlet,
-    children: [mainScreenRouteObject, abhyasiIdCheckinRouteObject],
-  } as RouteObject,
-]);
+export const browserRouter = createBrowserRouter([rootRoute]);
