@@ -14,7 +14,7 @@ export const GenderSelectField: React.FC<{
     event: SelectChangeEvent<string>,
     child: React.ReactNode
   ) => void = (evt) => {
-    onChange("gender", evt.target.value);
+    onChange(evt.target.name, evt.target.value);
   };
 
   return (

@@ -6,7 +6,7 @@ import {
   emailOrMobileCheckinScreenActions,
   selectEmailOrMobileCheckinScreen,
 } from "./emailOrMobileCheckinScreenSlice";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { isEmpty } from "lodash/fp";
 import { isValidEmail, isValidMobileNumber } from "v1/model/utils/validations";
 
@@ -16,12 +16,14 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
   initialEmailAddress: string;
   isEmailCheckin: boolean;
   onClickCancel: () => void;
+  onCheckin: () => void;
 }> = ({
   initialBatch,
   initialMobileNumber,
   initialEmailAddress,
   isEmailCheckin,
   onClickCancel,
+  onCheckin
 }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(selectEmailOrMobileCheckinScreen);
@@ -41,10 +43,26 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
   );
 
   const handleClickCheckin = () => {
+    const checkinPayload = {
+      ...state.apiPayload,
+      timestamp: Date.now(),
+    };
     if (isValid) {
-      dispatch(checkinWithEmailOrMobile(state.apiPayload));
+      dispatch(checkinWithEmailOrMobile(checkinPayload));
+      onCheckin()
     }
   };
+
+  useEffect(() => {
+    dispatch(
+      emailOrMobileCheckinScreenActions.updateInitialData({
+        batch: initialBatch,
+        mobile: initialMobileNumber,
+        email: initialEmailAddress,
+      })
+    );
+  }, [dispatch, initialBatch, initialEmailAddress, initialMobileNumber]);
+
   return (
     <EmailOrMobileCheckinScreen
       initialBatch={initialBatch}
@@ -70,7 +88,8 @@ function isValidEmailOrMobileCheckinPayload({
   email,
   mobile,
 }: IEmailOrMobileCheckinAPIPayload) {
-  return (
+  const isValidEmailMobile = isValidEmailAndMobile(email, mobile);
+  const isValid =
     !isEmpty(batch) &&
     !isEmpty(fullName) &&
     !isEmpty(ageGroup) &&
@@ -78,8 +97,8 @@ function isValidEmailOrMobileCheckinPayload({
     !isEmpty(state) &&
     !isEmpty(city) &&
     !isEmpty(country) &&
-    isValidEmailAndMobile(email, mobile)
-  );
+    isValidEmailMobile;
+  return isValid;
 }
 
 function isValidEmailAndMobile(email: string, mobile: string) {

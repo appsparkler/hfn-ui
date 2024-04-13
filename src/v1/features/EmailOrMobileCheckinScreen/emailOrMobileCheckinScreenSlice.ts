@@ -37,6 +37,21 @@ const emailOrMobileCheckinScreenSlice = createSlice({
     ) {
       state.apiPayload = action.payload;
     },
+    updateInitialData(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        batch: string;
+        email: string;
+        mobile: string;
+      }>
+    ) {
+      state.apiPayload = {
+        ...state.apiPayload,
+        ...payload,
+      };
+    },
   },
 });
 

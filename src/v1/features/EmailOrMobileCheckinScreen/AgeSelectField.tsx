@@ -14,7 +14,7 @@ export const AgeSelectField: React.FC<{
     event: SelectChangeEvent<string>,
     child: React.ReactNode
   ) => void = (evt) => {
-    onChange("age", evt.target.value);
+    onChange(evt.target.name, evt.target.value);
   };
   return (
     <FormControl variant="standard" sx={{ flex: 1 }}>

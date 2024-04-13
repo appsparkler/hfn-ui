@@ -1,6 +1,5 @@
 import { RouteObject, useLocation, useNavigate } from "react-router-dom";
 import { appRoutes } from "v1/model/data/routes";
-import { EmailOrMobileCheckinScreen } from "v1/features/EmailOrMobileCheckinScreen/EmailOrMobileCheckinScreen";
 import { IEmailOrMobileCheckinLocationState } from "../model/interfaces/IMobileCheckinLocationState";
 import { EmailOrMobileCheckinScreenConnected } from "v1/features/EmailOrMobileCheckinScreen/EmailOrMobileCheckinScreenConnected";
 
@@ -10,7 +9,6 @@ const Component = () => {
   };
   const navigate = useNavigate();
 
-  const handleChange = (name: string, value: string) => {};
   const handleCancel = () => {
     navigate(appRoutes.MAIN_SCREEN);
   };
@@ -25,6 +23,7 @@ const Component = () => {
       initialEmailAddress={state.initialEmailAddress}
       isEmailCheckin={state.isEmailCheckin}
       onClickCancel={handleCancel}
+      onCheckin={handleCheckin}
     />
   );
   // return (
