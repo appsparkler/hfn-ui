@@ -24,6 +24,7 @@ export const GenderSelectField: React.FC<{
         name="gender"
         labelId="gender-selection"
         onChange={handleChange}
+        defaultValue=""
       >
         {genderOptions.map(({ value, label }) => (
           <MenuItem key={value} value={label}>

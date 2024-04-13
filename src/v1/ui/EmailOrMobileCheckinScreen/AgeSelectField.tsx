@@ -23,6 +23,7 @@ export const AgeSelectField: React.FC<{
         name="age"
         labelId="age-selection"
         onChange={handleChange}
+        defaultValue=""
       >
         {ageGroupOptions.map(({ value, label }) => (
           <MenuItem key={value} value={value}>
