@@ -5,6 +5,7 @@ import { ErrorElement } from "./errorRoute";
 import { successScreenRoute } from "./successScreenRoute";
 import { emailOrMobileCheckinRoute } from "./emailOrMobileCheckinRoute";
 import { scannerRoute } from "./scannerRoute";
+import { qrCheckinRoute } from "./qrCheckinRoute";
 
 export const rootRoute: RouteObject = {
   path: "/",
@@ -16,5 +17,6 @@ export const rootRoute: RouteObject = {
     successScreenRoute,
     emailOrMobileCheckinRoute,
     scannerRoute,
+    qrCheckinRoute,
   ],
 };
