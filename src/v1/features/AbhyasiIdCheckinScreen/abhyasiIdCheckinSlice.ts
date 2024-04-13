@@ -1,14 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IAbhyasiIdCheckinScreenStateProps } from "./AbhyasiIdCheckinScreen";
-import { event } from "v1/model/data/event";
 import { RootState } from "v1/app/store";
 
-const initialState: IAbhyasiIdCheckinScreenStateProps & {
-  selectedBatch: string;
-} = {
-  abhyasiId: "",
-  batchInitialValue: event.defaultBatch,
-  selectedBatch: event.defaultBatch,
+const initialState = {
+  selectedBatch: "",
+  dormAndBerthAllocation: "",
 };
 
 const abhyasiIdSlice = createSlice({
@@ -18,11 +13,14 @@ const abhyasiIdSlice = createSlice({
     updatedSelectedBatch: (state, action: PayloadAction<string>) => {
       state.selectedBatch = action.payload;
     },
+    updateDormAndBerthAllocation: (state, action: PayloadAction<string>) => {
+      state.dormAndBerthAllocation = action.payload;
+    },
   },
 });
 
 export const {
-  actions: abhyasiIdActions,
+  actions: abhyasiIdCheckinScreenActions,
   reducer: abhyasiIdCheckinScreenReducer,
 } = abhyasiIdSlice;
 
