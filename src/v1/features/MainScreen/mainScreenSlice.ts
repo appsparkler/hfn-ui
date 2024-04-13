@@ -18,11 +18,12 @@ const mainScreenSlice = createSlice({
   name: "mainScreenSlice",
   initialState: initialState,
   reducers: {
-    setIsCheckinDisabled: (state, action: PayloadAction<string>) => {
+    updateValue: (state, action: PayloadAction<string>) => {
       const isValid =
         isValidAbhyasiId(action.payload) ||
         isValidMobileNumber(action.payload) ||
         isValidEmail(action.payload);
+      state.value = action.payload;
       state.isCheckinDisabled = !isValid;
     },
   },

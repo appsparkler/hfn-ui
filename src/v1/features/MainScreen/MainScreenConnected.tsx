@@ -9,7 +9,7 @@ export const MainScreenConnected = () => {
   const handleChangeBatch = () => {};
 
   const handleChangeValue = (updatedValue: string) => {
-    dispatch(mainScreenActions.setIsCheckinDisabled(updatedValue));
+    dispatch(mainScreenActions.updateValue(updatedValue));
   };
 
   const handleClickScan = () => {};
