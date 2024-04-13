@@ -5,12 +5,13 @@ import {
   isValidEmail,
   isValidMobileNumber,
 } from "v1/model/utils/validations";
+import { event } from "v1/model/data/event";
 
 const initialState: IMainScreenStateProps = {
-  eventTitle: "",
-  defaultBatchValue: "",
+  eventTitle: event.title,
+  defaultBatchValue: event.defaultBatch,
   value: "",
-  isCheckinDisabled: false,
+  isCheckinDisabled: true,
 };
 
 const mainScreenSlice = createSlice({
@@ -27,7 +28,5 @@ const mainScreenSlice = createSlice({
   },
 });
 
-export const {
-    actions: mainScreenActions,
-    reducer: mainScreenReducer
-} = mainScreenSlice;
+export const { actions: mainScreenActions, reducer: mainScreenReducer } =
+  mainScreenSlice;
