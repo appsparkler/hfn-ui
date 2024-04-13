@@ -2,9 +2,6 @@ import { Button, Card, CardContent } from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { Vertical } from "components";
 import { useEffect, useMemo, useRef, useState } from "react";
-// import { useAppDispatch } from "../redux-app/hooks";
-// import { homeScreenActions } from "../HomeScreen/homeScreenSlice";
-// import { successScreenActions } from "../SuccessScreen/successScreenSlice";
 
 export type BarcodeScannerDispatchProps = {
   onScan: (result: string) => void;
@@ -17,8 +14,6 @@ export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
 export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
-  // const dispatch = useAppDispatch();
-
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const codeReader = useMemo<BrowserMultiFormatReader>(
