@@ -49,7 +49,16 @@ const Component = () => {
     }
   };
 
-  return <MainScreenConnected onClickCheckin={handleClickCheckin} />;
+  const handleClickScan = () => {
+    navigate(appRoutes.SCANNER);
+  };
+
+  return (
+    <MainScreenConnected
+      onClickCheckin={handleClickCheckin}
+      onClickScan={handleClickScan}
+    />
+  );
 };
 
 export const mainScreenRouteObject: RouteObject = {

@@ -4,6 +4,7 @@ import { abhyasiIdCheckinRouteObject } from "./abhyasiIdCheckinRoute";
 import { ErrorElement } from "./errorRoute";
 import { successScreenRoute } from "./successScreenRoute";
 import { emailOrMobileCheckinRoute } from "./emailOrMobileCheckinRoute";
+import { scannerRoute } from "widgets/GSM/features/router/scannerRoute";
 
 export const rootRoute: RouteObject = {
   path: "/",
@@ -14,6 +15,6 @@ export const rootRoute: RouteObject = {
     abhyasiIdCheckinRouteObject,
     successScreenRoute,
     emailOrMobileCheckinRoute,
-    
+    scannerRoute
   ],
 };

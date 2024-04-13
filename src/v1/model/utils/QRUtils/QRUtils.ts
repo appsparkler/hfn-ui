@@ -75,7 +75,7 @@ export class QRUtils {
       .filter((row) => row.trim() !== "")
       .map((row) => {
         const columns = row.split("|").map((col) => col.trim());
-        const hasBatchAndIsPaid = columns.length === 6;
+        // const hasBatchAndIsPaid = columns.length === 6;
         return {
           registrationId: columns[0],
           batch: columns[1],
@@ -128,33 +128,33 @@ export class QRUtils {
     return QRType.NONE;
   }
 
-  mapQRCheckinsToQRCheckinsCardState(
-    checkinsAndMore: QRCheckinsAndMore
-  ): QRCheckinCardState[] {
-    return checkinsAndMore.checkins.map((checkin) => ({
-      isSelected: false,
-      fullName: checkin.fullName,
-      eventName: checkin.eventName,
-      abhyasiId: checkin.abhyasiId,
-      pnr: checkin.pnr,
-      registrationId: checkin.registrationId,
-      batch: checkin.batch,
-      berthPreference: checkin.berthPreference,
-      dormPreference: checkin.dormPreference,
-      dormAndBerthAllocation: checkin.dormAndBerthAllocation,
-    }));
-  }
+  // mapQRCheckinsToQRCheckinsCardState(
+  //   checkinsAndMore: QRCheckinsAndMore
+  // ): QRCheckinCardState[] {
+  //   return checkinsAndMore.checkins.map((checkin) => ({
+  //     isSelected: false,
+  //     fullName: checkin.fullName,
+  //     eventName: checkin.eventName,
+  //     abhyasiId: checkin.abhyasiId,
+  //     pnr: checkin.pnr,
+  //     registrationId: checkin.registrationId,
+  //     batch: checkin.batch,
+  //     berthPreference: checkin.berthPreference,
+  //     dormPreference: checkin.dormPreference,
+  //     dormAndBerthAllocation: checkin.dormAndBerthAllocation,
+  //   }));
+  // }
 }
 
-interface QRCheckinCardState {
-  isSelected: boolean;
-  fullName: string;
-  eventName: string;
-  abhyasiId: string;
-  pnr: string;
-  registrationId: string;
-  batch: string;
-  berthPreference: string;
-  dormPreference: string;
-  dormAndBerthAllocation: string;
-}
+// interface QRCheckinCardState {
+//   isSelected: boolean;
+//   fullName: string;
+//   eventName: string;
+//   abhyasiId: string;
+//   pnr: string;
+//   registrationId: string;
+//   batch: string;
+//   berthPreference: string;
+//   dormPreference: string;
+//   dormAndBerthAllocation: string;
+// }
