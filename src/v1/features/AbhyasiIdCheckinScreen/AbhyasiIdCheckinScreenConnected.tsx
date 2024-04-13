@@ -7,7 +7,7 @@ import {
 import { AbhyasiIdCheckinScreen } from "./AbhyasiIdCheckinScreen";
 import { useEffect } from "react";
 import { event } from "v1/model/data/event";
-import { CheckinType } from "v1/model/interfaces/CheckinTypess";
+import { CheckinType } from "v1/model/interfaces/CheckinTypeEnum";
 import { toUpper } from "lodash/fp";
 
 const { updateDormAndBerthAllocation, updatedSelectedBatch } =
