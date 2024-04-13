@@ -15,6 +15,7 @@ const loader: LoaderFunction = () => {
 
 const Component = () => {
   const navigate = useNavigate();
+
   const handleClickCheckin: (locationState: ILocationState) => void = ({
     batch,
     inputValue,
@@ -28,11 +29,13 @@ const Component = () => {
       });
     }
   };
+
   return <MainScreenConnected onClickCheckin={handleClickCheckin} />;
 };
 
 export const mainScreenRouteObject: RouteObject = {
-  path: appRoutes.MAIN_SCREEN,
+  index: true,
+  // path: appRoutes.MAIN_SCREEN,
   Component,
   loader,
 };
