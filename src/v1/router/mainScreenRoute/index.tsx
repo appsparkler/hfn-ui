@@ -5,10 +5,10 @@ import { isValidAbhyasiId } from "v1/model/utils/validations";
 
 const Component = () => {
   const navigate = useNavigate();
-  const handleClickCheckin: (batch: string, inputValue: string) => void = (
+  const handleClickCheckin: (locationState: ILocationState) => void = ({
     batch,
-    inputValue
-  ) => {
+    inputValue,
+  }) => {
     if (isValidAbhyasiId(inputValue)) {
       navigate(appRoutes.ABHYASI_ID_CHECKIN, {
         state: {

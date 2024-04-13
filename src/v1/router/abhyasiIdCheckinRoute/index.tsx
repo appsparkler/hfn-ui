@@ -1,11 +1,9 @@
 import { RouteObject, useLocation } from "react-router-dom";
 import { appRoutes } from "../../model/data/routes";
 import { AbhyasiIdCheckinScreen } from "v1/features/AbhyasiIdCheckinScreen/AbhyasiIdCheckinScreen";
-import { useEffect } from "react";
 
 const Component = () => {
-  const { state } = useLocation();
-  useEffect(() => {}, [state]);
+  const { state } = useLocation() as { state: ILocationState };
   return (
     <AbhyasiIdCheckinScreen
       abhyasiId={state.inputValue}

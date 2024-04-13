@@ -2,12 +2,8 @@ import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import { MainScreen } from "./MainScreen";
 import { mainScreenActions } from "./mainScreenSlice";
 
-interface ILocationState {
-  // inputValue
-}
-
 export const MainScreenConnected: React.FC<{
-  onClickCheckin: (batch: string, inputValue: string) => void;
+  onClickCheckin: (locationState: ILocationState) => void;
 }> = ({ onClickCheckin }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.mainScreen);
@@ -23,7 +19,10 @@ export const MainScreenConnected: React.FC<{
   const handleClickScan = () => {};
 
   const handleClickCheckin = () => {
-    onClickCheckin(state.selectedBatch, state.value);
+    onClickCheckin({
+      batch: state.selectedBatch,
+      inputValue: state.value,
+    });
   };
 
   return (
