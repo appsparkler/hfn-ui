@@ -23,7 +23,7 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
   initialEmailAddress,
   isEmailCheckin,
   onClickCancel,
-  onCheckin
+  onCheckin,
 }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(selectEmailOrMobileCheckinScreen);
@@ -49,11 +49,12 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
     };
     if (isValid) {
       dispatch(checkinWithEmailOrMobile(checkinPayload));
-      onCheckin()
+      onCheckin();
     }
   };
 
   useEffect(() => {
+    dispatch(emailOrMobileCheckinScreenActions.resetState());
     dispatch(
       emailOrMobileCheckinScreenActions.updateInitialData({
         batch: initialBatch,

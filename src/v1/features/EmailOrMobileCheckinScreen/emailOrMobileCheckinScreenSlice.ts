@@ -31,6 +31,9 @@ const emailOrMobileCheckinScreenSlice = createSlice({
   name: "emailOrMobileCheckinScreenSlice",
   initialState,
   reducers: {
+    resetState() {
+      return initialState;
+    },
     updateAPIPayload(
       state,
       action: PayloadAction<IEmailOrMobileCheckinAPIPayload>
