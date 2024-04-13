@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CheckinType } from "v1/model/interfaces/checkinTypes";
+import { CheckinType } from "v1/model/interfaces/CheckinTypess";
 import { IEmailOrMobileCheckinAPIPayload } from "../../model/interfaces/api/IEmailOrMobileCheckinAPIPayload";
 import { RootState } from "v1/app/store";
 

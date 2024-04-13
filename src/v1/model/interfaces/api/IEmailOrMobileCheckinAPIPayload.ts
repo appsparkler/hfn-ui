@@ -1,4 +1,4 @@
-import { CheckinType } from "v1/model/interfaces/checkinTypes";
+import { CheckinType } from "v1/model/interfaces/CheckinTypess";
 
 export interface IEmailOrMobileCheckinAPIPayload {
   batch: string;
