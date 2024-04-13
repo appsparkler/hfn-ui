@@ -6,7 +6,9 @@ export const MainScreenConnected = () => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.mainScreen);
 
-  const handleChangeBatch = () => {};
+  const handleChangeBatch = (_: string, updatedBatch: string) => {
+    dispatch(mainScreenActions.updateBatch(updatedBatch));
+  };
 
   const handleChangeValue = (updatedValue: string) => {
     dispatch(mainScreenActions.updateValue(updatedValue));

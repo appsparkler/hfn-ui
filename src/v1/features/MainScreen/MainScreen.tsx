@@ -101,7 +101,7 @@ export const MainScreen: React.FC<{
   eventTitle: string;
   defaultBatchValue: string;
   isCheckinDisabled: boolean;
-  onChangeBatch: (selectedBatch: string) => void;
+  onChangeBatch: (name: string, selectedBatch: string) => void;
   onChangeValue: (updatedValue: string) => void;
   onClickScan: () => void;
   onClickCheckin: () => void;

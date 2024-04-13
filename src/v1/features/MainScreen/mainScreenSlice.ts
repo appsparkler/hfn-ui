@@ -7,10 +7,11 @@ import {
 } from "v1/model/utils/validations";
 import { event } from "v1/model/data/event";
 
-const initialState: IMainScreenStateProps = {
+const initialState: IMainScreenStateProps & { selectedBatch: string } = {
   eventTitle: event.title,
   defaultBatchValue: event.defaultBatch,
   value: "",
+  selectedBatch: event.defaultBatch,
   isCheckinDisabled: true,
 };
 
@@ -18,6 +19,9 @@ const mainScreenSlice = createSlice({
   name: "mainScreenSlice",
   initialState: initialState,
   reducers: {
+    updateBatch: (state, action: PayloadAction<string>) => {
+      state.selectedBatch = action.payload;
+    },
     updateValue: (state, action: PayloadAction<string>) => {
       const isValid =
         isValidAbhyasiId(action.payload) ||
