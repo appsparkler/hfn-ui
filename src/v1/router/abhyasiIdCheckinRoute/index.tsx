@@ -1,7 +1,8 @@
-import { RouteObject, useLocation } from "react-router-dom";
+import {  RouteObject, useLocation } from "react-router-dom";
 import { appRoutes } from "../../model/data/routes";
 import { AbhyasiIdCheckinScreen } from "v1/features/AbhyasiIdCheckinScreen/AbhyasiIdCheckinScreen";
 import { ILocationState } from "v1/model/interfaces/ILocationState";
+// import { store } from "v1/app/store";
 
 const Component = () => {
   const { state } = useLocation() as { state: ILocationState };
@@ -27,7 +28,12 @@ const Component = () => {
   );
 };
 
+// const loader: LoaderFunction = async () => {
+//   // store.dispatch(abhyasiIdCheckinR)
+// };
+
 export const abhyasiIdCheckinRouteObject: RouteObject = {
   path: appRoutes.ABHYASI_ID_CHECKIN,
   Component,
+  // loader
 };

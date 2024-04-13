@@ -19,6 +19,9 @@ const mainScreenSlice = createSlice({
   name: "mainScreenSlice",
   initialState: initialState,
   reducers: {
+    resetState() {
+      return initialState;
+    },
     updateBatch: (state, action: PayloadAction<string>) => {
       state.selectedBatch = action.payload;
     },
