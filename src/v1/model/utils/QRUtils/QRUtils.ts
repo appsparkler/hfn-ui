@@ -1,11 +1,11 @@
 import { CheckinTypeEnum } from "../../interfaces/CheckinTypeEnum";
 
 interface QRCheckinsAndMore {
-  checkins: QRCodeCheckin[];
+  checkins: IQRCodeCheckinAPIPayload[];
   more: string;
 }
 
-interface QRCodeCheckin {
+interface IQRCodeCheckinAPIPayload {
   eventName: string;
   registrationId: string;
   abhyasiId: string;
@@ -66,7 +66,7 @@ export class QRUtils {
     }
   }
 
-  getQRCheckins(value: string): QRCodeCheckin[] {
+  getQRCheckins(value: string): IQRCodeCheckinAPIPayload[] {
     const refinedValue = value.replace(/\n/g, "");
     const generalDetails = this.getGeneralDetails(refinedValue);
     const rows = refinedValue.split(";");
