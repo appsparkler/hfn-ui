@@ -1,6 +1,7 @@
 import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { abhyasiIdCheckinScreenReducer } from "v1/features/AbhyasiIdCheckinScreen/abhyasiIdCheckinSlice";
 import { appReducer } from "v1/features/App/appSlice";
+import { emailOrMobileCheckinScreenReducer } from "v1/features/EmailOrMobileCheckinScreen/emailOrMobileCheckinScreenSlice";
 import { mainScreenReducer } from "v1/features/MainScreen/mainScreenSlice";
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     app: appReducer,
     mainScreen: mainScreenReducer,
     abhyasiIdCheckinScreen: abhyasiIdCheckinScreenReducer,
+    emailOrMobileCheckinScreen: emailOrMobileCheckinScreenReducer,
   },
 });
 
