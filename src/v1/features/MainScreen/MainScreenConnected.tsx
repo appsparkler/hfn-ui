@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import { MainScreen } from "./MainScreen";
 import { mainScreenActions } from "./mainScreenSlice";
+import { ILocationState } from "v1/model/interfaces/ILocationState";
 
 export const MainScreenConnected: React.FC<{
   onClickCheckin: (locationState: ILocationState) => void;

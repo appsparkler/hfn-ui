@@ -1,6 +1,7 @@
 import { RouteObject, useLocation } from "react-router-dom";
 import { appRoutes } from "../../model/data/routes";
 import { AbhyasiIdCheckinScreen } from "v1/features/AbhyasiIdCheckinScreen/AbhyasiIdCheckinScreen";
+import { ILocationState } from "v1/model/interfaces/ILocationState";
 
 const Component = () => {
   const { state } = useLocation() as { state: ILocationState };

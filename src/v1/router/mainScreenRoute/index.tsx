@@ -1,6 +1,7 @@
 import { RouteObject, useNavigate } from "react-router-dom";
 import { MainScreenConnected } from "v1/features/MainScreen/MainScreenConnected";
 import { appRoutes } from "v1/model/data/routes";
+import { ILocationState } from "v1/model/interfaces/ILocationState";
 import { isValidAbhyasiId } from "v1/model/utils/validations";
 
 const Component = () => {
