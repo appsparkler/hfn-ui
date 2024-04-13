@@ -7,7 +7,7 @@ import {
 import { AbhyasiIdCheckinScreen } from "./AbhyasiIdCheckinScreen";
 import { useEffect } from "react";
 import { event } from "v1/model/data/event";
-import { CheckinType } from "v1/model/interfaces/CheckinTypeEnum";
+import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
 import { toUpper } from "lodash/fp";
 
 const { updateDormAndBerthAllocation, updatedSelectedBatch } =
@@ -40,7 +40,7 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
         dormAndBerthAllocation: state.dormAndBerthAllocation,
         eventName: event.title,
         timestamp: Date.now(),
-        type: CheckinType.ABHYASI_ID,
+        type: CheckinTypeEnum.ABHYASI_ID,
       })
     );
     onCheckin();

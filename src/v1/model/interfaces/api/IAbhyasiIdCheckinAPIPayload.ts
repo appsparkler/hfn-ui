@@ -1,4 +1,4 @@
-import { CheckinType } from "v1/model/interfaces/CheckinTypeEnum";
+import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
 
 export interface IAbhyasiIdCheckinAPIPayload {
   timestamp: number;
@@ -6,5 +6,5 @@ export interface IAbhyasiIdCheckinAPIPayload {
   batch: string;
   dormAndBerthAllocation: string;
   eventName: string;
-  type: CheckinType;
+  type: CheckinTypeEnum;
 }

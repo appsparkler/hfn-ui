@@ -1,4 +1,4 @@
-import { CheckinType } from "v1/model/interfaces/CheckinTypeEnum";
+import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
 
 export interface IEmailOrMobileCheckinAPIPayload {
   batch: string;
@@ -12,6 +12,6 @@ export interface IEmailOrMobileCheckinAPIPayload {
   email: string;
   dormAndBerthAllocation: string;
 
-  type: CheckinType;
+  type: CheckinTypeEnum;
   timestamp: number;
 }
