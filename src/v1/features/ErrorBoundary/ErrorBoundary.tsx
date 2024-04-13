@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { Vertical } from "components";
-import { ScreenWrapper } from "v1/ui/components/ScreenWrapper/ScreenWrapper";
-import { ContainedButton } from "v1/ui/components/buttons/ContainedButton/ContainedButton";
+import { ScreenWrapper } from "v1/features/components/ScreenWrapper/ScreenWrapper";
+import { ContainedButton } from "v1/features/components/buttons/ContainedButton/ContainedButton";
 
 export const ErrorBoundary: React.FC<{
   onClickGoToMainScreen: () => void;

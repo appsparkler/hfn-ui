@@ -1,12 +1,12 @@
 import { TextField } from "@mui/material";
-import { BatchSelectField } from "../../ui/components/BatchSelectField/BatchSelectField";
-import { CardWithHeader } from "../../ui/components/CardWithHeader/CardWithHeader";
-import { ScreenWrapper } from "../../ui/components/ScreenWrapper/ScreenWrapper";
+import { BatchSelectField } from "../components/BatchSelectField/BatchSelectField";
+import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
+import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { Horizontal, Vertical } from "components";
 import { AgeSelectField } from "./AgeSelectField";
 import { GenderSelectField } from "./GenderSelectField";
-import { ContainedButton } from "../../ui/components/buttons/ContainedButton/ContainedButton";
-import { OutlinedButton } from "../../ui/components/buttons/OutlinedButton/OutlinedButton";
+import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
+import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
 
 export const EmailOrMobileCheckinScreen: React.FC<{
   initialBatch: string;
