@@ -7,6 +7,7 @@ import { AgeSelectField } from "./AgeSelectField";
 import { GenderSelectField } from "./GenderSelectField";
 import { ContainedButton } from "../../ui/components/buttons/ContainedButton/ContainedButton";
 import { OutlinedButton } from "../../ui/components/buttons/OutlinedButton/OutlinedButton";
+import { IEmailOrMobileCheckinAPIPayload } from "v1/model/interfaces/api/IEmailOrMobileCheckinAPIPayload";
 
 export const EmailOrMobileCheckinScreen: React.FC<{
   initialBatch: string;
@@ -16,7 +17,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
   initialEmailAddress: string;
   onClickCheckin: () => void;
   onClickCancel: () => void;
-  onChange: (name: string, value: string) => void;
+  onChange: (updatedValue: Partial<IEmailOrMobileCheckinAPIPayload>) => void;
 }> = ({
   initialBatch,
   isCheckinDisabled,
@@ -31,13 +32,19 @@ export const EmailOrMobileCheckinScreen: React.FC<{
     HTMLTextAreaElement | HTMLInputElement
   > = (evt) => {
     const { name, value } = evt.target;
-    onChange(name, value);
+    onChange({ [name]: value });
+  };
+  const handleChangeSelectField = (name: string, value: string) => {
+    onChange({ [name]: value });
   };
   return (
     <ScreenWrapper>
       <CardWithHeader heading="Email Or Mobile Checkin">
         <Vertical gap={1}>
-          <BatchSelectField defaultValue={initialBatch} onChange={onChange} />
+          <BatchSelectField
+            defaultValue={initialBatch}
+            onChange={handleChangeSelectField}
+          />
           <TextField
             type="text"
             name="fullName"
@@ -47,8 +54,8 @@ export const EmailOrMobileCheckinScreen: React.FC<{
             onChange={handleChangeTextField}
           />
           <Horizontal gap={3}>
-            <AgeSelectField onChange={onChange} />
-            <GenderSelectField onChange={onChange} />
+            <AgeSelectField onChange={handleChangeSelectField} />
+            <GenderSelectField onChange={handleChangeSelectField} />
           </Horizontal>
           <TextField
             type="text"
