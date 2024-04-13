@@ -20,7 +20,7 @@ export const AgeSelectField: React.FC<{
     <FormControl variant="standard" sx={{ flex: 1 }}>
       <InputLabel id="age-selection">Age</InputLabel>
       <Select<string>
-        name="age"
+        name="ageGroup"
         labelId="age-selection"
         onChange={handleChange}
         defaultValue=""
