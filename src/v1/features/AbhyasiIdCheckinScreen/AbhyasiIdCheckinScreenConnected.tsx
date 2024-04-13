@@ -6,6 +6,9 @@ import {
 import { AbhyasiIdCheckinScreen } from "./AbhyasiIdCheckinScreen";
 import { useEffect } from "react";
 
+const { updateDormAndBerthAllocation, updatedSelectedBatch } =
+  abhyasiIdCheckinScreenActions;
+
 export const AbhyasiIdCheckinScreenConnected: React.FC<{
   abhyasiId: string;
   batchInitialValue: string;
@@ -14,23 +17,25 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
   const state = useAppSelector(selectAbhyasiIdCheckinScreen);
 
   const handleChangeBatch = (_: string, updatedBatch: string) => {
-    dispatch(abhyasiIdCheckinScreenActions.updatedSelectedBatch(updatedBatch));
+    dispatch(updatedSelectedBatch(updatedBatch));
+  };
+
+  const handleChangeDormAndBerthAllocation = (
+    dormAndBerthAllocation: string
+  ) => {
+    dispatch(updateDormAndBerthAllocation(dormAndBerthAllocation));
   };
 
   useEffect(() => {
-    dispatch(abhyasiIdCheckinScreenActions.updatedSelectedBatch(abhyasiId));
-  }, [abhyasiId, dispatch]);
+    dispatch(updatedSelectedBatch(batchInitialValue));
+  }, [abhyasiId, batchInitialValue, dispatch]);
 
   return (
     <AbhyasiIdCheckinScreen
       abhyasiId={abhyasiId}
       batchInitialValue={batchInitialValue}
       onChangeBatch={handleChangeBatch}
-      onChangeDormAndBerthAllocation={function (
-        dormAndBerthAllocation: string
-      ): void {
-        throw new Error("Function not implemented.");
-      }}
+      onChangeDormAndBerthAllocation={handleChangeDormAndBerthAllocation}
       onClickCancel={function (): void {
         throw new Error("Function not implemented.");
       }}
