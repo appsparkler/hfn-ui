@@ -2,6 +2,7 @@ import { RouteObject, useLocation, useNavigate } from "react-router-dom";
 import { appRoutes } from "v1/model/data/routes";
 import { EmailOrMobileCheckinScreen } from "v1/features/EmailOrMobileCheckinScreen/EmailOrMobileCheckinScreen";
 import { IEmailOrMobileCheckinLocationState } from "../model/interfaces/IMobileCheckinLocationState";
+import { EmailOrMobileCheckinScreenConnected } from "v1/features/EmailOrMobileCheckinScreen/EmailOrMobileCheckinScreenConnected";
 
 const Component = () => {
   const { state } = useLocation() as {
@@ -16,18 +17,28 @@ const Component = () => {
   const handleCheckin = () => {
     navigate(appRoutes.SUCCESS_SCREEN);
   };
+
   return (
-    <EmailOrMobileCheckinScreen
+    <EmailOrMobileCheckinScreenConnected
       initialBatch={state.initialBatch}
-      isCheckinDisabled={false}
-      isMobileCheckin={state.isEmailCheckin}
       initialMobileNumber={state.initialMobileNumber}
       initialEmailAddress={state.initialEmailAddress}
-      onClickCheckin={handleCheckin}
+      isEmailCheckin={state.isEmailCheckin}
       onClickCancel={handleCancel}
-      onChange={handleChange}
     />
   );
+  // return (
+  //   <EmailOrMobileCheckinScreen
+  //     initialBatch={state.initialBatch}
+  //     isCheckinDisabled={false}
+  //     isMobileCheckin={state.isEmailCheckin}
+  //     initialMobileNumber={state.initialMobileNumber}
+  //     initialEmailAddress={state.initialEmailAddress}
+  //     onClickCheckin={handleCheckin}
+  //     onClickCancel={handleCancel}
+  //     onChange={handleChange}
+  //   />
+  // );
 };
 
 export const emailOrMobileCheckinRoute: RouteObject = {

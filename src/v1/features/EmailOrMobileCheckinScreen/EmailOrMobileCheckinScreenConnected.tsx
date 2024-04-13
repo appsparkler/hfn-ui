@@ -2,6 +2,7 @@ import { IEmailOrMobileCheckinAPIPayload } from "v1/model/interfaces/api/IEmailO
 import { EmailOrMobileCheckinScreen } from "./EmailOrMobileCheckinScreen";
 import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import {
+  checkinWithEmailOrMobile,
   emailOrMobileCheckinScreenActions,
   selectEmailOrMobileCheckinScreen,
 } from "./emailOrMobileCheckinScreenSlice";
@@ -24,18 +25,26 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
 }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(selectEmailOrMobileCheckinScreen);
-  const handleChange = (
-    updatedValue: Partial<IEmailOrMobileCheckinAPIPayload>
-  ) => {
-    dispatch(emailOrMobileCheckinScreenActions.updateAPIPayload(updatedValue));
+  const handleChange = (name: string, value: string) => {
+    const updatedPayload = {
+      ...state.apiPayload,
+      [name]: value,
+    };
+    dispatch(
+      emailOrMobileCheckinScreenActions.updateAPIPayload(updatedPayload)
+    );
   };
 
   const isValid = useMemo(
-    () => isValidEmailOrMobileCheckinPayload(state),
+    () => isValidEmailOrMobileCheckinPayload(state.apiPayload),
     [state]
   );
 
-  const handleClickCheckin = () => {};
+  const handleClickCheckin = () => {
+    if (isValid) {
+      dispatch(checkinWithEmailOrMobile(state.apiPayload));
+    }
+  };
   return (
     <EmailOrMobileCheckinScreen
       initialBatch={initialBatch}
