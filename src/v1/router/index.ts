@@ -1,7 +1,8 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { mainScreenRouteObject } from "./mainScreenRoute";
 import { abhyasiIdCheckinRouteObject } from "./abhyasiIdCheckinRoute";
-import { ErrorElement, TheOutlet } from "./ErrorElement";
+import { ErrorElement } from "./errorRoute";
+import { TheOutlet } from "./ErrorElement";
 
 export const browserRouter = createBrowserRouter([
   {
