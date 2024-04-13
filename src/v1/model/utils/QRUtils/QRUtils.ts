@@ -1,4 +1,4 @@
-import { CheckinTypeEnum } from "../interfaces/CheckinTypeEnum";
+import { CheckinTypeEnum } from "../../interfaces/CheckinTypeEnum";
 
 interface QRCheckinsAndMore {
   checkins: QRCodeCheckin[];

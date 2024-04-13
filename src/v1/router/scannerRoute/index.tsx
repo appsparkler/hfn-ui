@@ -1,7 +1,7 @@
 import { RouteObject, useNavigate } from "react-router-dom";
 import { BarcodeScanner } from "v1/features/BarcodeScanner/BarcodeScanner";
 import { appRoutes } from "v1/model/data/routes";
-import { QRUtils } from "v1/model/utils/QRUtils";
+import { QRUtils } from "v1/model/utils/QRUtils/QRUtils";
 
 const qrUtils = new QRUtils();
 const Component = () => {
