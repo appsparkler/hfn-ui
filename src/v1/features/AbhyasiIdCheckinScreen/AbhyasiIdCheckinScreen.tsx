@@ -6,14 +6,21 @@ import { ContainedButton } from "../../ui/components/buttons/ContainedButton/Con
 import { BatchSelectField } from "../../ui/components/BatchSelectField/BatchSelectField";
 import { ScreenWrapper } from "../../ui/components/ScreenWrapper/ScreenWrapper";
 
-export const AbhyasiIdCheckinScreen: React.FC<{
+export interface IAbhyasiIdCheckinScreenStateProps {
   abhyasiId: string;
   batchInitialValue: string;
-  onChangeBatch: (selectedBatch: string) => void;
+}
+
+export interface IAbhyasiIdCheckinScreenDispatchProps {
+  onChangeBatch: (name: string, selectedBatch: string) => void;
   onChangeDormAndBerthAllocation: (dormAndBerthAllocation: string) => void;
   onClickCancel: () => void;
   onClickCheckin: () => void;
-}> = ({
+}
+
+export const AbhyasiIdCheckinScreen: React.FC<
+  IAbhyasiIdCheckinScreenStateProps & IAbhyasiIdCheckinScreenDispatchProps
+> = ({
   abhyasiId,
   batchInitialValue,
   onChangeDormAndBerthAllocation,
