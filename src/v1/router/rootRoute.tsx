@@ -14,5 +14,6 @@ export const rootRoute: RouteObject = {
     abhyasiIdCheckinRouteObject,
     successScreenRoute,
     emailOrMobileCheckinRoute,
+    
   ],
 };

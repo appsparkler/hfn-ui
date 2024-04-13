@@ -1,4 +1,4 @@
-import { CheckinType } from "v1/model/data/checkinTypes";
+import { CheckinType } from "v1/model/interfaces/checkinTypes";
 
 export interface IAbhyasiIdCheckinAPIPayload {
   timestamp: number;
