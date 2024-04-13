@@ -1,4 +1,4 @@
-import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
+import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { mainScreenRouteObject } from "./mainScreenRoute";
 import { abhyasiIdCheckinRouteObject } from "./abhyasiIdCheckinRoute";
 import { ErrorElement, TheOutlet } from "./ErrorElement";
