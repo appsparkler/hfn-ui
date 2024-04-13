@@ -1,10 +1,10 @@
 import { TextField } from "@mui/material";
-import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
+import { CardWithHeader } from "../../ui/components/CardWithHeader/CardWithHeader";
 import { Horizontal, Vertical } from "components";
-import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
-import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
-import { BatchSelectField } from "../components/BatchSelectField/BatchSelectField";
-import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
+import { OutlinedButton } from "../../ui/components/buttons/OutlinedButton/OutlinedButton";
+import { ContainedButton } from "../../ui/components/buttons/ContainedButton/ContainedButton";
+import { BatchSelectField } from "../../ui/components/BatchSelectField/BatchSelectField";
+import { ScreenWrapper } from "../../ui/components/ScreenWrapper/ScreenWrapper";
 
 export const AbhyasiIdCheckinScreen: React.FC<{
   batchInitialValue: string;
