@@ -5,13 +5,11 @@ import { useEffect } from "react";
 
 const Component = () => {
   const { state } = useLocation();
-  useEffect(() => {
-    alert(state);
-  }, [state]);
+  useEffect(() => {}, [state]);
   return (
     <AbhyasiIdCheckinScreen
-      abhyasiId=""
-      batchInitialValue={""}
+      abhyasiId={state.inputValue}
+      batchInitialValue={state.batch}
       onChangeBatch={function (selectedBatch: string): void {
         throw new Error("Function not implemented.");
       }}
