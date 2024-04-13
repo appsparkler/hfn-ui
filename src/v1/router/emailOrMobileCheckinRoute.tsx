@@ -1,6 +1,6 @@
 import { RouteObject, useLocation, useNavigate } from "react-router-dom";
 import { appRoutes } from "v1/model/data/routes";
-import { EmailOrMobileCheckinScreen } from "v1/ui/EmailOrMobileCheckinScreen/EmailOrMobileCheckinScreen";
+import { EmailOrMobileCheckinScreen } from "v1/features/EmailOrMobileCheckinScreen/EmailOrMobileCheckinScreen";
 import { IEmailOrMobileCheckinLocationState } from "../model/interfaces/IMobileCheckinLocationState";
 
 const Component = () => {
