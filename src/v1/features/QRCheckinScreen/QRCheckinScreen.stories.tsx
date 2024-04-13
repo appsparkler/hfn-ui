@@ -25,6 +25,7 @@ QRCheckinScreenStory.args = {
       isSelected: false,
       pnr: "33-333-3333",
       registrationId: "29292-2323-2323-21111",
+      orderId: "Bhandara Apr 2024",
     },
     {
       fullName: "Arun Solanki",
@@ -37,6 +38,7 @@ QRCheckinScreenStory.args = {
       isSelected: true,
       pnr: "33-333-3333",
       registrationId: "29292-2323-2323-21111",
+      orderId: "Bhandara Apr 2024",
     },
   ],
   isCheckinDisabled: false,

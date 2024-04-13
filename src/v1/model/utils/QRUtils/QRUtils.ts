@@ -1,4 +1,6 @@
+import { map } from "lodash/fp";
 import { CheckinTypeEnum } from "../../interfaces/CheckinTypeEnum";
+import { IQRCheckinCardState } from "v1/model/interfaces/IQRCheckinCardState";
 
 interface QRCheckinsAndMore {
   checkins: IQRCodeCheckinAPIPayload[];
@@ -6,16 +8,17 @@ interface QRCheckinsAndMore {
 }
 
 interface IQRCodeCheckinAPIPayload {
-  eventName: string;
-  registrationId: string;
   abhyasiId: string;
   batch: string;
-  orderId: string;
-  pnr: string;
-  fullName: string;
-  dormPreference: string;
   berthPreference: string;
   dormAndBerthAllocation: string;
+  dormPreference: string;
+  eventName: string;
+  fullName: string;
+  orderId: string;
+  pnr: string;
+  registrationId: string;
+  //
   timestamp: number;
   type: string;
 }
@@ -126,6 +129,17 @@ export class QRUtils {
       return QRType.OWN_ACCOMMODATION;
     }
     return QRType.NONE;
+  }
+
+  mapQRCheckinsToQRCheckinsCardState(checkinsAndMore: QRCheckinsAndMore) {
+    map<IQRCodeCheckinAPIPayload, IQRCheckinCardState>(
+      ({ timestamp, type, ...rest }) => {
+        return {
+          ...rest,
+          isSelected: false,
+        };
+      }
+    );
   }
 
   // mapQRCheckinsToQRCheckinsCardState(

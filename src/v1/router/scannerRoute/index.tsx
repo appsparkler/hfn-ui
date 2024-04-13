@@ -9,7 +9,10 @@ const Component = () => {
 
   const handleScan = (rawValue: string) => {
     if (qrUtils.isQRValid(rawValue)) {
-      navigate(appRoutes.SUCCESS_SCREEN);
+      const checkinsAndMore = qrUtils.getQRCheckinsAndMore(rawValue);
+      navigate(appRoutes.SUCCESS_SCREEN, {
+        state: checkinsAndMore.checkins,
+      });
     }
   };
 

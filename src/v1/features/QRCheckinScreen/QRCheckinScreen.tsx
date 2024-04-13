@@ -6,6 +6,7 @@ import { isEmpty } from "lodash/fp";
 import { Horizontal, Vertical } from "components";
 import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
 import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
+import { IQRCheckinCardState } from "../../model/interfaces/IQRCheckinCardState";
 
 const FieldValue: React.FC<{
   name: string;
@@ -19,19 +20,6 @@ const FieldValue: React.FC<{
     </Typography>
   );
 };
-interface IQRCheckinCardState {
-  fullName: string;
-  eventName: string;
-  abhyasiId: string;
-  pnr: string;
-  registrationId: string;
-  batch: string;
-  // dorm and berth
-  dormPreference: string;
-  berthPreference: string;
-  dormAndBerthAllocation: string;
-  isSelected: boolean;
-}
 const QRCheckinCard: React.FC<{
   state: IQRCheckinCardState;
   onChange: (updatedState: IQRCheckinCardState) => void;
