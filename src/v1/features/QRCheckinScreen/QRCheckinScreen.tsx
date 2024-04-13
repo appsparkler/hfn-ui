@@ -1,11 +1,11 @@
 import Typography from "@mui/material/Typography/Typography";
 import { CardWithClickableHeader } from "./CardWithClickableHeader";
-import { ScreenWrapper } from "../../features/components/ScreenWrapper/ScreenWrapper";
+import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 import { TextField } from "@mui/material";
 import { isEmpty } from "lodash/fp";
 import { Horizontal, Vertical } from "components";
-import { ContainedButton } from "../../features/components/buttons/ContainedButton/ContainedButton";
-import { OutlinedButton } from "../../features/components/buttons/OutlinedButton/OutlinedButton";
+import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
+import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
 
 const FieldValue: React.FC<{
   name: string;
