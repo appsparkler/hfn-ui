@@ -7,12 +7,14 @@ import { BatchSelectField } from "../../ui/components/BatchSelectField/BatchSele
 import { ScreenWrapper } from "../../ui/components/ScreenWrapper/ScreenWrapper";
 
 export const AbhyasiIdCheckinScreen: React.FC<{
+  abhyasiId: string;
   batchInitialValue: string;
   onChangeBatch: (selectedBatch: string) => void;
   onChangeDormAndBerthAllocation: (dormAndBerthAllocation: string) => void;
   onClickCancel: () => void;
   onClickCheckin: () => void;
 }> = ({
+  abhyasiId,
   batchInitialValue,
   onChangeDormAndBerthAllocation,
   onChangeBatch,
@@ -26,7 +28,7 @@ export const AbhyasiIdCheckinScreen: React.FC<{
   };
   return (
     <ScreenWrapper>
-      <CardWithHeader heading="ABCDEF888">
+      <CardWithHeader heading={abhyasiId}>
         <Vertical gap={1}>
           <BatchSelectField
             defaultValue={batchInitialValue}

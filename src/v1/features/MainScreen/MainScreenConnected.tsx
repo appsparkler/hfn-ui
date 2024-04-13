@@ -2,7 +2,9 @@ import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import { MainScreen } from "./MainScreen";
 import { mainScreenActions } from "./mainScreenSlice";
 
-export const MainScreenConnected = () => {
+export const MainScreenConnected: React.FC<{
+  onClickCheckin: () => void;
+}> = ({ onClickCheckin }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.mainScreen);
 
@@ -16,8 +18,6 @@ export const MainScreenConnected = () => {
 
   const handleClickScan = () => {};
 
-  const handleClickCheckin = () => {};
-
   return (
     <MainScreen
       value={state.value}
@@ -27,7 +27,7 @@ export const MainScreenConnected = () => {
       onChangeBatch={handleChangeBatch}
       onChangeValue={handleChangeValue}
       onClickScan={handleClickScan}
-      onClickCheckin={handleClickCheckin}
+      onClickCheckin={onClickCheckin}
     />
   );
 };

@@ -1,4 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { mainScreenRouteObject } from "./mainScreenRouteObject";
+import { mainScreenRouteObject } from "./mainScreenRoute";
+import { abhyasiIdCheckinRouteObject } from "./abhyasiIdCheckinRoute";
 
-export const browserRouter = createBrowserRouter([mainScreenRouteObject]);
+export const browserRouter = createBrowserRouter([
+  mainScreenRouteObject,
+  abhyasiIdCheckinRouteObject,
+]);
