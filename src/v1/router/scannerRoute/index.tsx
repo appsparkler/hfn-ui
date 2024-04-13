@@ -13,12 +13,15 @@ const Component = () => {
     }
   };
 
+  const handleDenyPermission = () => {
+    navigate(appRoutes.MAIN_SCREEN);
+  };
+
   return (
     <BarcodeScanner
       onScan={handleScan}
-      onCancel={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onCancel={handleDenyPermission}
+      onDenyPermission={handleDenyPermission}
     />
   );
 };

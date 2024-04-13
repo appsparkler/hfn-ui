@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export type BarcodeScannerDispatchProps = {
   onScan: (result: string) => void;
+  onDenyPermission: () => void;
   onCancel: () => void;
 };
 
@@ -13,7 +14,11 @@ export type BarcodeScannerStateProps = {};
 export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
-export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
+export const BarcodeScanner = ({
+  onScan,
+  onCancel,
+  onDenyPermission,
+}: BarcodeScannerProps) => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const codeReader = useMemo<BrowserMultiFormatReader>(
@@ -33,11 +38,15 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
           clearInterval(intervalId);
         }
       }, 300);
-      codeReader.decodeFromVideoDevice("", videoElement, (result, error) => {
-        if (!error) {
-          onScan(result.getText());
-        }
-      });
+      codeReader
+        .decodeFromVideoDevice("", videoElement, (result, error) => {
+          if (!error) {
+            onScan(result.getText());
+          }
+        })
+        .catch(() => {
+          onDenyPermission();
+        });
     }
     return () => {
       if (videoElement !== null) {
@@ -46,12 +55,7 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
         videoRef.current = null;
       }
     };
-  }, [codeReader, onScan]);
-
-  // useEffect(() => {
-  //   // reset all user info to start afresh
-
-  // }, [dispatch]);
+  }, [codeReader, onDenyPermission, onScan]);
 
   return (
     <Vertical mx="auto" p={2} justifyContent={"center"} alignItems={"center"}>

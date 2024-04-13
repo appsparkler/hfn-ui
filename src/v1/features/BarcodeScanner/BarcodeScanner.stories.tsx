@@ -27,7 +27,13 @@ export const BarcodeScannerStory = (args: any) => {
   return (
     <Vertical>
       <Switch onChange={handleChange} />
-      {show && <BarcodeScanner onScan={handleScan} onCancel={args.onCancel} />}
+      {show && (
+        <BarcodeScanner
+          onScan={handleScan}
+          onCancel={args.onCancel}
+          onDenyPermission={args.onDenyPermission}
+        />
+      )}
     </Vertical>
   );
 };
