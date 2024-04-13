@@ -1,10 +1,12 @@
 import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import {
   abhyasiIdCheckinScreenActions,
+  checkinWithAbhyasiId,
   selectAbhyasiIdCheckinScreen,
 } from "./abhyasiIdCheckinSlice";
 import { AbhyasiIdCheckinScreen } from "./AbhyasiIdCheckinScreen";
 import { useEffect } from "react";
+import { event } from "v1/model/data/event";
 
 const { updateDormAndBerthAllocation, updatedSelectedBatch } =
   abhyasiIdCheckinScreenActions;
@@ -12,7 +14,9 @@ const { updateDormAndBerthAllocation, updatedSelectedBatch } =
 export const AbhyasiIdCheckinScreenConnected: React.FC<{
   abhyasiId: string;
   batchInitialValue: string;
-}> = ({ abhyasiId, batchInitialValue }) => {
+  onClickCancel: () => void;
+  onCheckin: () => void;
+}> = ({ abhyasiId, batchInitialValue, onClickCancel, onCheckin }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(selectAbhyasiIdCheckinScreen);
 
@@ -26,6 +30,19 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
     dispatch(updateDormAndBerthAllocation(dormAndBerthAllocation));
   };
 
+  const handleClickCheckin = async () => {
+    await dispatch(
+      checkinWithAbhyasiId({
+        abhyasiId,
+        batch: state.selectedBatch,
+        dormAndBerthAllocation: state.dormAndBerthAllocation,
+        eventName: event.title,
+        timestamp: Date.now(),
+      })
+    );
+    onCheckin();
+  };
+
   useEffect(() => {
     dispatch(updatedSelectedBatch(batchInitialValue));
   }, [abhyasiId, batchInitialValue, dispatch]);
@@ -36,12 +53,8 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
       batchInitialValue={batchInitialValue}
       onChangeBatch={handleChangeBatch}
       onChangeDormAndBerthAllocation={handleChangeDormAndBerthAllocation}
-      onClickCancel={function (): void {
-        throw new Error("Function not implemented.");
-      }}
-      onClickCheckin={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onClickCancel={onClickCancel}
+      onClickCheckin={handleClickCheckin}
     />
   );
 };

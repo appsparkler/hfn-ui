@@ -1,10 +1,23 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "v1/app/store";
 
 const initialState = {
   selectedBatch: "",
   dormAndBerthAllocation: "",
 };
+
+interface IAbhyasiIdCheckinAPIPayload {
+  timestamp: number;
+  abhyasiId: string;
+  batch: string;
+  dormAndBerthAllocation: string;
+  eventName: string;
+}
+
+export const checkinWithAbhyasiId = createAsyncThunk(
+  "abhyasiIdCheckinScreen/checkin",
+  (abhyasiIdCheckin: IAbhyasiIdCheckinAPIPayload) => {}
+);
 
 const abhyasiIdSlice = createSlice({
   name: "abhyasiIdSlice",
@@ -24,5 +37,5 @@ export const {
   reducer: abhyasiIdCheckinScreenReducer,
 } = abhyasiIdSlice;
 
-export const selectAbhyasiIdCheckinScreen = () => (state: RootState) =>
+export const selectAbhyasiIdCheckinScreen = (state: RootState) =>
   state.abhyasiIdCheckinScreen;
