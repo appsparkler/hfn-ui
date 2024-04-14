@@ -5,10 +5,7 @@ import {
   enableIndexedDbPersistence,
   initializeFirestore,
   CACHE_SIZE_UNLIMITED,
-  collection,
-  doc,
 } from "firebase/firestore";
-import { FirestoreCollections } from "widgets/BhandaraCheckin/types";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -38,17 +35,3 @@ enableIndexedDbPersistence(firestoreDb).catch((err) => {
     // ...
   }
 });
-
-export const checkinsCollection = collection(
-  firestoreDb,
-  FirestoreCollections.CHECKINS
-);
-
-export const metaCollection = collection(
-  firestoreDb,
-  FirestoreCollections.META
-);
-
-export function getCheckinDocRef(id: string) {
-  return doc(firestoreDb, FirestoreCollections.CHECKINS, id);
-}
