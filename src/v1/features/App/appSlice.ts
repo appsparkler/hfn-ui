@@ -6,6 +6,7 @@ const initialState = {
   user: {
     uid: "",
   },
+  status: "pending",
 };
 
 export const signInAnonymously = createAsyncThunk("app/signIn", async () => {
@@ -18,9 +19,17 @@ const appSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(signInAnonymously.fulfilled, (state, action) => {
-      state.user = action.payload;
-    });
+    builder
+      .addCase(signInAnonymously.pending, (state, action) => {
+        state.status = "pending";
+      })
+      .addCase(signInAnonymously.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.status = "fulfilled";
+      })
+      .addCase(signInAnonymously.rejected, (state, action) => {
+        state.status = "rejected";
+      });
   },
 });
 
