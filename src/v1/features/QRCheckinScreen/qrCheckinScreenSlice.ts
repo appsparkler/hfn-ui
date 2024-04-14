@@ -12,6 +12,9 @@ const qrCheckinScreenSlice = createSlice({
   name: "qrCheckinScreen",
   initialState: initialState,
   reducers: {
+    setupCheckins: (state, action: PayloadAction<IQRCheckinCardState[]>) => {
+      state.checkins = action.payload;
+    },
     updateCheckins: (state, action: PayloadAction<IQRCheckinCardState>) => {
       state.checkins.map((checkin) => {
         if (
