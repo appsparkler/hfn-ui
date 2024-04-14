@@ -1,19 +1,24 @@
+import { isNull } from "lodash/fp";
 import "./firebase";
-import {
-  getAuth,
-  onAuthStateChanged as fbGetAuthStateChange,
-  NextOrObserver,
-  User,
-  ErrorFn,
-  CompleteFn,
-  Unsubscribe,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 
-export const onAuthStateChanged = (
-  n: NextOrObserver<User>,
-  errorFunction: ErrorFn | undefined,
-  completed?: CompleteFn | undefined
-): Unsubscribe => fbGetAuthStateChange(getAuth(), n, errorFunction, completed);
-
-// export const apiService = {};
-// NextOrObserver<User>, error?: ErrorFn | undefined, completed?: CompleteFn | undefined
+export const getAnonymousUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      getAuth(),
+      async (user) => {
+        if (isNull(user)) {
+          await signInAnonymously(getAuth());
+          unsubscribe();
+          resolve(user);
+        } else {
+          unsubscribe();
+          resolve(user);
+        }
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+};

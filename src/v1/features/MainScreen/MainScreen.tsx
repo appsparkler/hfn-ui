@@ -1,11 +1,12 @@
 import { Close } from "@mui/icons-material";
 import { Fab, IconButton, TextField } from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
 import { BatchSelectField } from "../components/BatchSelectField/BatchSelectField";
 import { ContainedButton } from "../components/buttons/ContainedButton/ContainedButton";
 import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
+import { getAnonymousUser } from "v1/model/apiService";
 
 export interface IMainScreenStateProps {
   eventTitle: string;
@@ -115,6 +116,11 @@ export const MainScreen: React.FC<{
   onChangeBatch,
   onChangeValue,
 }) => {
+  useEffect(() => {
+    getAnonymousUser().then((user) => {
+      debugger;
+    });
+  }, []);
   return (
     <ScreenWrapper>
       <UserInfoCard
