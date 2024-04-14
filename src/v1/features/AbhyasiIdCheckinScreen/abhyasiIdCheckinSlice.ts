@@ -1,18 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "v1/app/store";
-import { IAbhyasiIdCheckinAPIPayload } from "../../model/interfaces/api/IAbhyasiIdCheckinAPIPayload";
 
 const initialState = {
   selectedBatch: "",
   dormAndBerthAllocation: "",
 };
-
-export const checkinWithAbhyasiId = createAsyncThunk(
-  "abhyasiIdCheckinScreen/checkin",
-  (abhyasiIdCheckin: IAbhyasiIdCheckinAPIPayload) => {
-    debugger;
-  }
-);
 
 const abhyasiIdSlice = createSlice({
   name: "abhyasiIdSlice",

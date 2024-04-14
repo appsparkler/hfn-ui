@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { firestoreDb } from "./firebase";
 import { IEmailOrMobileCheckinAPIPayload } from "../interfaces/api/IEmailOrMobileCheckinAPIPayload";
 
-export const checkinWithAbhyasiId: (
+export const checkinWithEmailOrMobile: (
   payload: IEmailOrMobileCheckinAPIPayload
 ) => void = (payload) => {
   const ref = doc(

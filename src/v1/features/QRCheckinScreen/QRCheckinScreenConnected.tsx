@@ -3,13 +3,13 @@ import { QRCheckinScreen } from "./QRCheckinScreen";
 import { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import {
-  checkinWithQR,
   qrCheckinScreenActions,
   selectQRCheckinScreen,
 } from "./qrCheckinScreenSlice";
 import { every, filter, map } from "lodash/fp";
 import { IQRCodeCheckinAPIPayload } from "v1/model/interfaces/api/IQRCodeCheckinAPIPayload";
 import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
+import { checkinWithQRCode } from "v1/model/apiService/checkinWithQRCode";
 
 const updateQRCheckins = (updatedQRCheckin: IQRCheckinCardState) =>
   map<IQRCheckinCardState, IQRCheckinCardState>((checkin) => {
@@ -58,7 +58,9 @@ export const QRCheckinScreenConnected: React.FC<{
 
   const handleCheckin = () => {
     const selectedCheckins = filterSelectedCheckins(state.checkins);
-    dispatch(checkinWithQR(mapCheckinCardsToCheckins(selectedCheckins)));
+    mapCheckinCardsToCheckins(selectedCheckins).forEach((checkin) => {
+      checkinWithQRCode(checkin);
+    });
     onCheckin();
   };
 

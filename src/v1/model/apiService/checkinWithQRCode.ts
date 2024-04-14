@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { firestoreDb } from "./firebase";
 import { IQRCodeCheckinAPIPayload } from "../interfaces/api/IQRCodeCheckinAPIPayload";
 
-export const checkinWithAbhyasiId: (payload: IQRCodeCheckinAPIPayload) => void =
+export const checkinWithQRCode: (payload: IQRCodeCheckinAPIPayload) => void =
   (payload) => {
     const ref = doc(
       firestoreDb,
