@@ -2,6 +2,8 @@ import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import { MainScreen } from "./MainScreen";
 import { mainScreenActions } from "./mainScreenSlice";
 import { ILocationState } from "v1/model/interfaces/ILocationState";
+import { selectAppReducer } from "../App/appSlice";
+import { useMemo } from "react";
 
 export const MainScreenConnected: React.FC<{
   onClickCheckin: (locationState: ILocationState) => void;
@@ -9,6 +11,7 @@ export const MainScreenConnected: React.FC<{
 }> = ({ onClickCheckin, onClickScan }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.mainScreen);
+  const app = useAppSelector(selectAppReducer);
 
   const handleChangeBatch = (_: string, updatedBatch: string) => {
     dispatch(mainScreenActions.updateBatch(updatedBatch));
@@ -29,12 +32,18 @@ export const MainScreenConnected: React.FC<{
     onClickScan(state.selectedBatch);
   };
 
+  const isRegisteringDevice = useMemo(
+    () => app.status === "pending",
+    [app.status]
+  );
+
   return (
     <MainScreen
+      isRegisteringDevice={isRegisteringDevice}
       value={state.value}
       eventTitle={state.eventTitle}
       defaultBatchValue={state.defaultBatchValue}
-      isCheckinDisabled={state.isCheckinDisabled}
+      isCheckinDisabled={state.isCheckinDisabled || isRegisteringDevice}
       onChangeBatch={handleChangeBatch}
       onChangeValue={handleChangeValue}
       onClickScan={handleClickScan}

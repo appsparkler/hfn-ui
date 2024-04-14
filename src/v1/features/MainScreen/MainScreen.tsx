@@ -1,5 +1,11 @@
 import { Close } from "@mui/icons-material";
-import { Fab, IconButton, TextField } from "@mui/material";
+import {
+  Fab,
+  IconButton,
+  LinearProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Horizontal, Vertical } from "components/Boxes";
 import { useCallback, useRef } from "react";
 import { CardWithHeader } from "../components/CardWithHeader/CardWithHeader";
@@ -83,9 +89,13 @@ const UserInfoCard: React.FC<IMainScreenStateProps & IMainScreenActionProps> =
     );
   };
 
-const ScanButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+const ScanButton: React.FC<{ disabled: boolean; onClick: () => void }> = ({
+  disabled,
+  onClick,
+}) => {
   return (
     <Fab
+      disabled={disabled}
       type="button"
       sx={{ position: "absolute", bottom: 16, right: 16 }}
       color="secondary"
@@ -98,6 +108,7 @@ const ScanButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
 export const MainScreen: React.FC<{
   value: string;
+  isRegisteringDevice: boolean;
   eventTitle: string;
   defaultBatchValue: string;
   isCheckinDisabled: boolean;
@@ -106,6 +117,7 @@ export const MainScreen: React.FC<{
   onClickScan: () => void;
   onClickCheckin: () => void;
 }> = ({
+  isRegisteringDevice,
   value,
   eventTitle,
   defaultBatchValue,
@@ -116,7 +128,7 @@ export const MainScreen: React.FC<{
   onChangeValue,
 }) => {
   return (
-    <ScreenWrapper>
+    <ScreenWrapper alignItems={"center"} justifyContent={"center"} gap={1}>
       <UserInfoCard
         defaultBatchValue={defaultBatchValue}
         eventTitle={eventTitle}
@@ -126,7 +138,13 @@ export const MainScreen: React.FC<{
         isCheckinDisabled={isCheckinDisabled}
         onChangeBatch={onChangeBatch}
       />
-      <ScanButton onClick={onClickScan} />
+      {isRegisteringDevice && (
+        <Vertical alignItems={"center"}>
+          <LinearProgress sx={{ width: 100 }} />
+          <Typography>Setting up</Typography>
+        </Vertical>
+      )}
+      <ScanButton disabled={isRegisteringDevice} onClick={onClickScan} />
     </ScreenWrapper>
   );
 };
