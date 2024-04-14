@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import {
   abhyasiIdCheckinScreenActions,
-  checkinWithAbhyasiId,
   selectAbhyasiIdCheckinScreen,
 } from "./abhyasiIdCheckinSlice";
 import { AbhyasiIdCheckinScreen } from "./AbhyasiIdCheckinScreen";
@@ -9,6 +8,7 @@ import { useEffect } from "react";
 import { event } from "v1/model/data/event";
 import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
 import { toUpper } from "lodash/fp";
+import { checkinWithAbhyasiId } from "v1/model/apiService/checkinWithEmailOrMobile";
 
 const { updateDormAndBerthAllocation, updatedSelectedBatch } =
   abhyasiIdCheckinScreenActions;
@@ -33,16 +33,14 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
   };
 
   const handleClickCheckin = async () => {
-    await dispatch(
-      checkinWithAbhyasiId({
-        abhyasiId: toUpper(abhyasiId),
-        batch: state.selectedBatch,
-        dormAndBerthAllocation: state.dormAndBerthAllocation,
-        eventName: event.title,
-        timestamp: Date.now(),
-        type: CheckinTypeEnum.ABHYASI_ID,
-      })
-    );
+    checkinWithAbhyasiId({
+      abhyasiId: toUpper(abhyasiId),
+      batch: state.selectedBatch,
+      dormAndBerthAllocation: state.dormAndBerthAllocation,
+      eventName: event.title,
+      timestamp: Date.now(),
+      type: CheckinTypeEnum.ABHYASI_ID,
+    });
     onCheckin();
   };
 
