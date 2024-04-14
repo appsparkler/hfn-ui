@@ -6,16 +6,31 @@ import {
   qrCheckinScreenActions,
   selectQRCheckinScreen,
 } from "./qrCheckinScreenSlice";
-import { every } from "lodash/fp";
+import { every, map } from "lodash/fp";
+
+const updateQRCheckins = (updatedQRCheckin: IQRCheckinCardState) =>
+  map<IQRCheckinCardState, IQRCheckinCardState>((checkin) => {
+    if (
+      updatedQRCheckin.registrationId === checkin.registrationId &&
+      updatedQRCheckin.dormPreference === checkin.dormPreference
+    ) {
+      return updatedQRCheckin;
+    } else {
+      return checkin;
+    }
+  });
 
 export const QRCheckinScreenConnected: React.FC<{
   checkinsFromQR: IQRCheckinCardState[];
-}> = ({ checkinsFromQR }) => {
+  onCancel: () => void;
+  onCheckin: () => void;
+}> = ({ checkinsFromQR, onCheckin, onCancel }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(selectQRCheckinScreen);
 
   const handleChangeCheckin = (updatedState: IQRCheckinCardState) => {
-    dispatch(qrCheckinScreenActions.updateCheckins(updatedState));
+    const udpatedQRCheckins = updateQRCheckins(updatedState)(state.checkins);
+    dispatch(qrCheckinScreenActions.updateCheckins(udpatedQRCheckins));
   };
 
   const isCheckinDisabled = useMemo(() => {
@@ -23,6 +38,10 @@ export const QRCheckinScreenConnected: React.FC<{
       state.checkins
     );
   }, [state.checkins]);
+
+  const handleCheckin = () => {
+    onCheckin();
+  };
 
   useEffect(() => {
     dispatch(qrCheckinScreenActions.setupCheckins(checkinsFromQR));
@@ -33,12 +52,8 @@ export const QRCheckinScreenConnected: React.FC<{
       checkins={state.checkins}
       isCheckinDisabled={isCheckinDisabled}
       onChange={handleChangeCheckin}
-      onCheckin={function (): void {
-        throw new Error("Function not implemented.");
-      }}
-      onCancel={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onCheckin={handleCheckin}
+      onCancel={onCancel}
     />
   );
 };

@@ -15,17 +15,8 @@ const qrCheckinScreenSlice = createSlice({
     setupCheckins: (state, action: PayloadAction<IQRCheckinCardState[]>) => {
       state.checkins = action.payload;
     },
-    updateCheckins: (state, action: PayloadAction<IQRCheckinCardState>) => {
-      state.checkins.map((checkin) => {
-        if (
-          checkin.registrationId === action.payload.registrationId &&
-          checkin.dormPreference === action.payload.dormPreference
-        ) {
-          return action.payload;
-        } else {
-          return checkin;
-        }
-      });
+    updateCheckins: (state, action: PayloadAction<IQRCheckinCardState[]>) => {
+      state.checkins = action.payload;
     },
   },
 });

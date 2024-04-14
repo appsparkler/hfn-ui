@@ -76,7 +76,11 @@ export const QRCheckinScreen: React.FC<{
     <ScreenWrapper>
       <Vertical gap={1}>
         {checkins.map((checkin) => (
-          <QRCheckinCard state={checkin} onChange={onChange} />
+          <QRCheckinCard
+            key={checkin.registrationId + checkin.dormPreference}
+            state={checkin}
+            onChange={onChange}
+          />
         ))}
         <Horizontal justifyContent={"space-evenly"}>
           <OutlinedButton>cancel</OutlinedButton>
