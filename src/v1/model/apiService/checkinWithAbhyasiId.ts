@@ -1,17 +1,18 @@
 import { doc, setDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+
+import { IAbhyasiIdCheckinAPIPayload } from "../interfaces/api/IAbhyasiIdCheckinAPIPayload";
 import { firestoreDb } from "./firebase";
-import { IEmailOrMobileCheckinAPIPayload } from "../interfaces/api/IEmailOrMobileCheckinAPIPayload";
 
 export const checkinWithAbhyasiId: (
-  payload: IEmailOrMobileCheckinAPIPayload
+  payload: IAbhyasiIdCheckinAPIPayload
 ) => void = (payload) => {
   const ref = doc(
     firestoreDb,
     "events",
     "202404_Bhandara",
     "checkins",
-    `${payload.mobile}-${payload.fullName}-${payload.email}`
+    payload.abhyasiId
   );
   setDoc(ref, {
     ...payload,

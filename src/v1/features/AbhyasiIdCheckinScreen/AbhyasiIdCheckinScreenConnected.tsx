@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { event } from "v1/model/data/event";
 import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
 import { toUpper } from "lodash/fp";
-import { checkinWithAbhyasiId } from "v1/model/apiService/checkinWithEmailOrMobile";
+import { checkinWithAbhyasiId } from "v1/model/apiService/checkinWithAbhyasiId";
 
 const { updateDormAndBerthAllocation, updatedSelectedBatch } =
   abhyasiIdCheckinScreenActions;
