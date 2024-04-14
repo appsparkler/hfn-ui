@@ -11,7 +11,6 @@ const Component = () => {
   const { state } = useLocation() as { state: { batch: string } };
 
   const handleScan = (rawValue: string) => {
-    console.log({ rawValue });
     if (qrUtils.isQRValid(rawValue)) {
       const checkinsAndMore = qrUtils.getQRCheckinsAndMore(rawValue);
       navigate(appRoutes.QR_CHECKIN, {
