@@ -24,7 +24,6 @@ const QRCheckinCard: React.FC<{
   state: IQRCheckinCardState;
   onChange: (updatedState: IQRCheckinCardState) => void;
 }> = ({ state, onChange }) => {
-  
   const handleClickHeader = () => {
     onChange({
       ...state,
@@ -49,6 +48,7 @@ const QRCheckinCard: React.FC<{
       <FieldValue name="Event Name" value={state.eventName} />
       <FieldValue name="Abhyasi ID" value={state.abhyasiId} />
       <FieldValue name="PNR" value={state.pnr} />
+      <FieldValue name="Order ID" value={state.orderId} />
       <FieldValue name="Registration ID" value={state.registrationId} />
       <FieldValue name="Batch" value={state.batch} />
       <FieldValue name="Dorm Preference" value={state.dormPreference} />
