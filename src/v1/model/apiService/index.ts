@@ -2,22 +2,27 @@ import { isNull } from "lodash/fp";
 import "./firebase";
 import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 
-export const getAnonymousUser = () => {
+export const getAnonymousUser = (): Promise<{ uid: string }> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       getAuth(),
       async (user) => {
         if (isNull(user)) {
-          await signInAnonymously(getAuth());
+          const creds = await signInAnonymously(getAuth());
           unsubscribe();
-          resolve(user);
+          resolve({
+            uid: creds.user.uid,
+          });
         } else {
           unsubscribe();
-          resolve(user);
+          resolve({
+            uid: user.uid,
+          });
         }
       },
       (error) => {
         reject(error);
+        unsubscribe();
       }
     );
   });
