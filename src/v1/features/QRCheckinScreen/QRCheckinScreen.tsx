@@ -24,6 +24,7 @@ const QRCheckinCard: React.FC<{
   state: IQRCheckinCardState;
   onChange: (updatedState: IQRCheckinCardState) => void;
 }> = ({ state, onChange }) => {
+  
   const handleClickHeader = () => {
     onChange({
       ...state,
