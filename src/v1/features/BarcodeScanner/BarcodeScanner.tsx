@@ -1,7 +1,13 @@
-import { Button, Card, CardContent } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
-import { Vertical } from "components";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 
 export type BarcodeScannerDispatchProps = {
   onScan: (result: string) => void;
@@ -58,17 +64,27 @@ export const BarcodeScanner = ({
   }, [codeReader, onDenyPermission, onScan]);
 
   return (
-    <Vertical mx="auto" p={2} justifyContent={"center"} alignItems={"center"}>
-      <Card
-        variant="outlined"
-        sx={{
-          opacity: 0.87,
-          maxWidth: 420,
-          bgcolor: "background.paper",
-        }}
-      >
-        <CardContent>
+    <ScreenWrapper
+      mx="auto"
+      p={2}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      <Card sx={{ width: "100%" }}>
+        <CardMedia>
+          <Typography
+            p={2}
+            bgcolor={"primary.main"}
+            color="primary.contrastText"
+            variant="h5"
+          >
+            Scan QR or Barcode
+          </Typography>
+        </CardMedia>
+        <CardMedia>
           <video ref={videoRef} width="100%" />
+        </CardMedia>
+        <CardContent>
           <Button
             variant="contained"
             type="button"
@@ -81,6 +97,6 @@ export const BarcodeScanner = ({
           </Button>
         </CardContent>
       </Card>
-    </Vertical>
+    </ScreenWrapper>
   );
 };
