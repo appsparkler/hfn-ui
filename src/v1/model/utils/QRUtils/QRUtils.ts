@@ -1,26 +1,11 @@
 import { map } from "lodash/fp";
 import { CheckinTypeEnum } from "../../interfaces/CheckinTypeEnum";
 import { IQRCheckinCardState } from "v1/model/interfaces/IQRCheckinCardState";
+import { IQRCodeCheckinAPIPayload } from "../../interfaces/api/IQRCodeCheckinAPIPayload";
 
 interface QRCheckinsAndMore {
   checkins: IQRCodeCheckinAPIPayload[];
   more: string;
-}
-
-interface IQRCodeCheckinAPIPayload {
-  abhyasiId: string;
-  batch: string;
-  berthPreference: string;
-  dormAndBerthAllocation: string;
-  dormPreference: string;
-  eventName: string;
-  fullName: string;
-  orderId: string;
-  pnr: string;
-  registrationId: string;
-  //
-  timestamp: number;
-  type: string;
 }
 
 interface EventOrderGeneralDetails {

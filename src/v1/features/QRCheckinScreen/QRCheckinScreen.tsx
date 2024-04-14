@@ -71,7 +71,7 @@ export const QRCheckinScreen: React.FC<{
   onChange: (updatedState: IQRCheckinCardState) => void;
   onCheckin: () => void;
   onCancel: () => void;
-}> = ({ checkins, isCheckinDisabled, onChange }) => {
+}> = ({ checkins, isCheckinDisabled, onCancel, onCheckin, onChange }) => {
   return (
     <ScreenWrapper>
       <Vertical gap={1}>
@@ -83,8 +83,8 @@ export const QRCheckinScreen: React.FC<{
           />
         ))}
         <Horizontal justifyContent={"space-evenly"}>
-          <OutlinedButton>cancel</OutlinedButton>
-          <ContainedButton disabled={isCheckinDisabled}>
+          <OutlinedButton onClick={onCancel}>cancel</OutlinedButton>
+          <ContainedButton disabled={isCheckinDisabled} onClick={onCheckin}>
             checkin
           </ContainedButton>
         </Horizontal>
