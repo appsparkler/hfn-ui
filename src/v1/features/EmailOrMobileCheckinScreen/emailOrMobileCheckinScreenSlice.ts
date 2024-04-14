@@ -1,14 +1,7 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CheckinTypeEnum } from "v1/model/interfaces/CheckinTypeEnum";
 import { IEmailOrMobileCheckinAPIPayload } from "../../model/interfaces/api/IEmailOrMobileCheckinAPIPayload";
 import { RootState } from "v1/app/store";
-
-export const checkinWithEmailOrMobile = createAsyncThunk(
-  "emailOrMobileCheckinScreen/checkinWithEmailOrMobile",
-  (payload: IEmailOrMobileCheckinAPIPayload) => {
-    debugger;
-  }
-);
 
 const initialState: { apiPayload: IEmailOrMobileCheckinAPIPayload } = {
   apiPayload: {

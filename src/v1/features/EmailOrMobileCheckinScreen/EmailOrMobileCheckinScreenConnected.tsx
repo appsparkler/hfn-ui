@@ -2,13 +2,13 @@ import { IEmailOrMobileCheckinAPIPayload } from "v1/model/interfaces/api/IEmailO
 import { EmailOrMobileCheckinScreen } from "./EmailOrMobileCheckinScreen";
 import { useAppDispatch, useAppSelector } from "v1/app/hooks";
 import {
-  checkinWithEmailOrMobile,
   emailOrMobileCheckinScreenActions,
   selectEmailOrMobileCheckinScreen,
 } from "./emailOrMobileCheckinScreenSlice";
 import { useEffect, useMemo } from "react";
 import { isEmpty } from "lodash/fp";
 import { isValidEmail, isValidMobileNumber } from "v1/model/utils/validations";
+import { checkinWithEmailOrMobile } from "v1/model/apiService/checkinWithEmailOrMobile";
 
 export const EmailOrMobileCheckinScreenConnected: React.FC<{
   initialBatch: string;
@@ -47,8 +47,9 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
       ...state.apiPayload,
       timestamp: Date.now(),
     };
+
     if (isValid) {
-      dispatch(checkinWithEmailOrMobile(checkinPayload));
+      checkinWithEmailOrMobile(checkinPayload);
       onCheckin();
     }
   };
