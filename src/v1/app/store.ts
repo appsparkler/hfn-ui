@@ -3,6 +3,7 @@ import { abhyasiIdCheckinScreenReducer } from "v1/features/AbhyasiIdCheckinScree
 import { appReducer } from "v1/features/App/appSlice";
 import { emailOrMobileCheckinScreenReducer } from "v1/features/EmailOrMobileCheckinScreen/emailOrMobileCheckinScreenSlice";
 import { mainScreenReducer } from "v1/features/MainScreen/mainScreenSlice";
+import { qrCheckinScreenReducer } from "v1/features/QRCheckinScreen/qrCheckinScreenSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     mainScreen: mainScreenReducer,
     abhyasiIdCheckinScreen: abhyasiIdCheckinScreenReducer,
     emailOrMobileCheckinScreen: emailOrMobileCheckinScreenReducer,
+    qrCheckinScreen: qrCheckinScreenReducer,
   },
 });
 
