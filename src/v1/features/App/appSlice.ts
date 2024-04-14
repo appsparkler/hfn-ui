@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "v1/app/store";
-import { getAnonymousUser } from "v1/model/apiService";
+import { getAnonymousUser } from "v1/model/apiService/getAnonymousUser";
 
 const initialState = {
   user: {
