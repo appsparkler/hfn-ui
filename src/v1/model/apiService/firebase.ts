@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { FirebaseOptions, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
   enableIndexedDbPersistence,
@@ -12,10 +12,10 @@ import {
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = process.env.REACT_APP_FIREBASE as FirebaseOptions;
+const firebaseConfig = process.env.REACT_APP_FIREBASE as string;
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(JSON.parse(firebaseConfig));
 
 export const firestoreDb = initializeFirestore(app, {
   cacheSizeBytes: CACHE_SIZE_UNLIMITED,

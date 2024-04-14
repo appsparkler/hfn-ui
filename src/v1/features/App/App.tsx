@@ -2,10 +2,9 @@ import { Provider } from "react-redux";
 import { store } from "v1/app/store";
 import { RouterProvider } from "react-router-dom";
 import { browserRouter } from "v1/router";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "v1/model/apiService";
 
 onAuthStateChanged(
-  getAuth(),
   (user) => {
     debugger;
   },
