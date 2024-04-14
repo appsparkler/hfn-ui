@@ -49,8 +49,12 @@ const Component = () => {
     }
   };
 
-  const handleClickScan = () => {
-    navigate(appRoutes.SCANNER);
+  const handleClickScan = (batch: string) => {
+    navigate(appRoutes.SCANNER, {
+      state: {
+        batch,
+      },
+    });
   };
 
   return (

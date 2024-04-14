@@ -5,7 +5,7 @@ import { ILocationState } from "v1/model/interfaces/ILocationState";
 
 export const MainScreenConnected: React.FC<{
   onClickCheckin: (locationState: ILocationState) => void;
-  onClickScan: () => void;
+  onClickScan: (batch: string) => void;
 }> = ({ onClickCheckin, onClickScan }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.mainScreen);
@@ -25,6 +25,10 @@ export const MainScreenConnected: React.FC<{
     });
   };
 
+  const handleClickScan = () => {
+    onClickScan(state.selectedBatch);
+  };
+
   return (
     <MainScreen
       value={state.value}
@@ -33,7 +37,7 @@ export const MainScreenConnected: React.FC<{
       isCheckinDisabled={state.isCheckinDisabled}
       onChangeBatch={handleChangeBatch}
       onChangeValue={handleChangeValue}
-      onClickScan={onClickScan}
+      onClickScan={handleClickScan}
       onClickCheckin={handleClickCheckin}
     />
   );
