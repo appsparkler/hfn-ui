@@ -100,6 +100,7 @@ const ScanButton: React.FC<{ disabled: boolean; onClick: () => void }> = ({
       sx={{ position: "absolute", bottom: 16, right: 16 }}
       color="secondary"
       onClick={onClick}
+      size="large"
     >
       SCAN
     </Fab>
