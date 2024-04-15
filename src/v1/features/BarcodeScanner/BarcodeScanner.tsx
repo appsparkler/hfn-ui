@@ -1,13 +1,8 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
+import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedButton";
 
 export type BarcodeScannerDispatchProps = {
   onScan: (result: string) => void;
@@ -85,16 +80,13 @@ export const BarcodeScanner = ({
           <video ref={videoRef} width="100%" />
         </CardMedia>
         <CardContent>
-          <Button
-            variant="contained"
-            type="button"
+          <OutlinedButton
             disabled={!isVideoPlaying}
             onClick={onCancel}
             sx={{ my: 2 }}
-            color="warning"
           >
             {isVideoPlaying ? "CANCEL" : "Loading..."}
-          </Button>
+          </OutlinedButton>
         </CardContent>
       </Card>
     </ScreenWrapper>
