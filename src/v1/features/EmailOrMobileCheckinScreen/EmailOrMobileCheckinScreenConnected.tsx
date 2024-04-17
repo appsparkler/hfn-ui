@@ -52,7 +52,7 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
         ...state.apiPayload,
         email: state.apiPayload.email.toUpperCase(),
         fullName: state.apiPayload.fullName.toUpperCase(),
-        ageGroup: state.apiPayload.ageGroup.split("-")[1].trim(),
+        ageGroup: state.apiPayload.ageGroup,
         gender: genderMapV2.get(state.apiPayload.gender),
         timestamp: Date.now(),
       };
