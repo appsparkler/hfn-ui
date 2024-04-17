@@ -24,7 +24,7 @@ export const MainScreenConnected: React.FC<{
   const handleClickCheckin = () => {
     onClickCheckin({
       batch: state.selectedBatch,
-      inputValue: state.value,
+      inputValue: state.value.toUpperCase(),
     });
   };
 
