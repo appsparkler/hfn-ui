@@ -1,3 +1,5 @@
+import { CheckinTypeEnum } from "../CheckinTypeEnum";
+
 export interface IQRCodeCheckinAPIPayload {
   abhyasiId: string;
   batch: string;
@@ -11,5 +13,5 @@ export interface IQRCodeCheckinAPIPayload {
   registrationId: string;
   //
   timestamp: number;
-  type: string;
+  type: CheckinTypeEnum;
 }
