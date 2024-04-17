@@ -43,12 +43,19 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
   );
 
   const handleClickCheckin = () => {
-    const checkinPayload = {
-      ...state.apiPayload,
-      timestamp: Date.now(),
-    };
-
     if (isValid) {
+      const genderMapV2 = new Map()
+        .set("Male", "M")
+        .set("Female", "F")
+        .set("Unspecified", "U");
+      const checkinPayload: IEmailOrMobileCheckinAPIPayload = {
+        ...state.apiPayload,
+        email: state.apiPayload.email.toUpperCase(),
+        fullName: state.apiPayload.fullName.toUpperCase(),
+        ageGroup: state.apiPayload.ageGroup.split("-")[1].trim(),
+        gender: genderMapV2.get(state.apiPayload.gender),
+        timestamp: Date.now(),
+      };
       checkinWithEmailOrMobile(checkinPayload);
       onCheckin();
     }
