@@ -2,9 +2,9 @@ import { Button, Card, CardContent } from "@mui/material";
 import { BrowserMultiFormatReader } from "@zxing/library";
 import { Vertical } from "components";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useAppDispatch } from "../redux-app/hooks";
-import { homeScreenActions } from "../HomeScreen/homeScreenSlice";
-import { successScreenActions } from "../SuccessScreen/successScreenSlice";
+// import { useAppDispatch } from "../redux-app/hooks";
+// import { homeScreenActions } from "../HomeScreen/homeScreenSlice";
+// import { successScreenActions } from "../SuccessScreen/successScreenSlice";
 
 export type BarcodeScannerDispatchProps = {
   onScan: (result: string) => void;
@@ -17,7 +17,7 @@ export type BarcodeScannerProps = BarcodeScannerStateProps &
   BarcodeScannerDispatchProps;
 
 export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
@@ -53,11 +53,10 @@ export const BarcodeScanner = ({ onScan, onCancel }: BarcodeScannerProps) => {
     };
   }, [codeReader, onScan]);
 
-  useEffect(() => {
-    // reset all user info to start afresh
-    dispatch(homeScreenActions.resetUserInfo());
-    dispatch(successScreenActions.reset());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   // reset all user info to start afresh
+
+  // }, [dispatch]);
 
   return (
     <Vertical mx="auto" p={2} justifyContent={"center"} alignItems={"center"}>
