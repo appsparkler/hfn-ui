@@ -8,8 +8,9 @@ import {
 
 export const BatchSelectField: React.FC<{
   defaultValue: string;
+  batches: string[];
   onChange: (name: string, selectedBatch: string) => void;
-}> = ({ defaultValue, onChange }) => {
+}> = ({ defaultValue, batches, onChange }) => {
   const handleChange: (
     event: SelectChangeEvent<string>,
     child: React.ReactNode
@@ -26,8 +27,13 @@ export const BatchSelectField: React.FC<{
         defaultValue={defaultValue}
         onChange={handleChange}
       >
-        <MenuItem value="batch-1">batch-1</MenuItem>
-        <MenuItem value="batch-2, batch-1">batch-2, batch-1</MenuItem>
+        {batches.map((batch) => {
+          return (
+            <MenuItem key={batch} value={batch}>
+              {batch}
+            </MenuItem>
+          );
+        })}
       </Select>
     </FormControl>
   );

@@ -9,6 +9,7 @@ import { ScreenWrapper } from "../components/ScreenWrapper/ScreenWrapper";
 export interface IAbhyasiIdCheckinScreenStateProps {
   abhyasiId: string;
   batchInitialValue: string;
+  batches: string[];
 }
 
 export interface IAbhyasiIdCheckinScreenDispatchProps {
@@ -22,6 +23,7 @@ export const AbhyasiIdCheckinScreen: React.FC<
   IAbhyasiIdCheckinScreenStateProps & IAbhyasiIdCheckinScreenDispatchProps
 > = ({
   abhyasiId,
+  batches,
   batchInitialValue,
   onChangeDormAndBerthAllocation,
   onChangeBatch,
@@ -40,6 +42,7 @@ export const AbhyasiIdCheckinScreen: React.FC<
           <BatchSelectField
             defaultValue={batchInitialValue}
             onChange={onChangeBatch}
+            batches={batches}
           />
           <TextField
             label={"Dorm & Berth Allocation"}

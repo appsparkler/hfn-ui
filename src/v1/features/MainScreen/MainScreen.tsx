@@ -17,6 +17,7 @@ export interface IMainScreenStateProps {
   eventTitle: string;
   defaultBatchValue: string;
   value: string;
+  batches: string[];
   isCheckinDisabled: boolean;
 }
 
@@ -31,6 +32,7 @@ const UserInfoCard: React.FC<IMainScreenStateProps & IMainScreenActionProps> =
     isCheckinDisabled,
     defaultBatchValue,
     eventTitle,
+    batches,
     onChangeBatch,
     onChange,
     onClickCheckin,
@@ -58,6 +60,7 @@ const UserInfoCard: React.FC<IMainScreenStateProps & IMainScreenActionProps> =
         <Vertical gap={1}>
           <BatchSelectField
             defaultValue={defaultBatchValue}
+            batches={batches}
             onChange={onChangeBatch}
           />
           <TextField
@@ -111,6 +114,7 @@ export const MainScreen: React.FC<{
   value: string;
   isRegisteringDevice: boolean;
   eventTitle: string;
+  batches: string[];
   defaultBatchValue: string;
   isCheckinDisabled: boolean;
   onChangeBatch: (name: string, selectedBatch: string) => void;
@@ -120,6 +124,7 @@ export const MainScreen: React.FC<{
 }> = ({
   isRegisteringDevice,
   value,
+  batches,
   eventTitle,
   defaultBatchValue,
   isCheckinDisabled,
@@ -131,6 +136,7 @@ export const MainScreen: React.FC<{
   return (
     <ScreenWrapper alignItems={"center"} justifyContent={"center"} gap={1}>
       <UserInfoCard
+        batches={batches}
         defaultBatchValue={defaultBatchValue}
         eventTitle={eventTitle}
         value={value}

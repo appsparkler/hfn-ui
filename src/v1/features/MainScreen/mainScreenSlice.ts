@@ -13,6 +13,7 @@ const initialState: IMainScreenStateProps & { selectedBatch: string } = {
   value: "",
   selectedBatch: event.defaultBatch,
   isCheckinDisabled: true,
+  batches: event.batches,
 };
 
 const mainScreenSlice = createSlice({

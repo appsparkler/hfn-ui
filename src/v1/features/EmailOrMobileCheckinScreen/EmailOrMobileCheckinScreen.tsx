@@ -10,6 +10,7 @@ import { OutlinedButton } from "../components/buttons/OutlinedButton/OutlinedBut
 
 export const EmailOrMobileCheckinScreen: React.FC<{
   initialBatch: string;
+  batches: string[],
   isCheckinDisabled: boolean;
   isMobileCheckin: boolean;
   initialMobileNumber: string;
@@ -19,6 +20,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
   onChange: (name: string, value: string) => void;
 }> = ({
   initialBatch,
+  batches,
   isCheckinDisabled,
   isMobileCheckin,
   initialEmailAddress,
@@ -43,6 +45,7 @@ export const EmailOrMobileCheckinScreen: React.FC<{
           <BatchSelectField
             defaultValue={initialBatch}
             onChange={handleChangeSelectField}
+            batches={batches}
           />
           <TextField
             type="text"

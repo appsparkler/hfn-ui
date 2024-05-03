@@ -9,6 +9,7 @@ import { useEffect, useMemo } from "react";
 import { isEmpty } from "lodash/fp";
 import { isValidEmail, isValidMobileNumber } from "v1/model/utils/validations";
 import { checkinWithEmailOrMobile } from "v1/model/apiService/checkinWithEmailOrMobile";
+import { event } from "v1/model/data/event";
 
 export const EmailOrMobileCheckinScreenConnected: React.FC<{
   initialBatch: string;
@@ -74,6 +75,7 @@ export const EmailOrMobileCheckinScreenConnected: React.FC<{
 
   return (
     <EmailOrMobileCheckinScreen
+      batches={event.batches}
       initialBatch={initialBatch}
       isMobileCheckin={isEmailCheckin}
       initialMobileNumber={initialMobileNumber}

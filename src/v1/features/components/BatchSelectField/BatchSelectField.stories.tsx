@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { BatchSelectField } from "./BatchSelectField";
+import { event } from "v1/model/data/event";
 
 const Story = {
   component: BatchSelectField,
@@ -13,7 +14,8 @@ const Template: ComponentStory<typeof BatchSelectField> = (args) => (
 export const BatchSelectFieldStory: ComponentStory<typeof BatchSelectField> =
   Template.bind({});
 BatchSelectFieldStory.args = {
-  defaultValue: "batch-1",
+  defaultValue: event.defaultBatch,
+  batches: event.batches,
 };
 BatchSelectFieldStory.storyName = "Batch Select Field";
 
