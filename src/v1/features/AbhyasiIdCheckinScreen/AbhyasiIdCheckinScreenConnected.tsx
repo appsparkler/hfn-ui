@@ -50,6 +50,7 @@ export const AbhyasiIdCheckinScreenConnected: React.FC<{
 
   return (
     <AbhyasiIdCheckinScreen
+      batches={event.batches}
       abhyasiId={abhyasiId}
       batchInitialValue={batchInitialValue}
       onChangeBatch={handleChangeBatch}

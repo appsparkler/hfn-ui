@@ -4,6 +4,7 @@ import { mainScreenActions } from "./mainScreenSlice";
 import { ILocationState } from "v1/model/interfaces/ILocationState";
 import { selectAppReducer } from "../App/appSlice";
 import { useMemo } from "react";
+import { event } from "v1/model/data/event";
 
 export const MainScreenConnected: React.FC<{
   onClickCheckin: (locationState: ILocationState) => void;
@@ -39,6 +40,7 @@ export const MainScreenConnected: React.FC<{
 
   return (
     <MainScreen
+      batches={event.batches}
       isRegisteringDevice={isRegisteringDevice}
       value={state.value}
       eventTitle={state.eventTitle}
